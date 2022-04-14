@@ -17,7 +17,7 @@
 
 #if defined _DEBUG && 1
 #define MIN_FPS 4
-#define MAX_FPS 100
+#define MAX_FPS 200
 #else
 #define MIN_FPS 4             //we don't accept less than this
 #define MAX_FPS 100           //we don't accept more than this (the rest of time we're Sleeping)
@@ -741,7 +741,7 @@ static const struct S_controller_item{
    CS_INV_SCROLL_RIGHT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_RBRACKET, 0, C_controller::ID_MOUSE_AXIS, 0x80000002},
    CS_INV_HIDE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_BACKSPACE},
    //CS_INV_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_ENTER, 0},
-   CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_F},//, 0, C_controller::ID_MOUSE_BUTTON, 2},
+   CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_F, 0, C_controller::ID_MOUSE_BUTTON, 2},
    //CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_SPACE, 0, C_controller::ID_JOY_BUTTON, 4},
    //CS_SHIELD, C_controller::VM_BOOL,{C_controller::ID_KEYBOARD, K_LALT},
 

@@ -1218,8 +1218,10 @@ void C_game_mission_imp::GameEnd(){
 #ifdef EDITOR
       if(editor){
          PC_editor_item_MouseEdit me = (PC_editor_item_MouseEdit)editor->FindPlugin("MouseEdit");
-         PI3D_camera cam = me->GetEditCam();
-         scene->SetActiveCamera(cam);
+         if (me) {
+             PI3D_camera cam = me->GetEditCam();
+             scene->SetActiveCamera(cam);
+         }
       }
 #endif
    }

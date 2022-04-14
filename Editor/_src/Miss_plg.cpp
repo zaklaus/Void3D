@@ -1487,7 +1487,7 @@ public:
 
 #define MENU_BASE "%0 &File\\"
       ed->AddShortcut(this, E_MISSION_OPEN, MENU_BASE"%0 &Open mission\tO", K_O, 0);
-      ed->AddShortcut(this, E_MISSION_SAVE, MENU_BASE"%0 &Save mission\tS", K_S, 0);
+      ed->AddShortcut(this, E_MISSION_SAVE, MENU_BASE"%0 &Save mission\tCtrl+S", K_S, SKEY_CTRL);
       ed->AddShortcut(this, E_MISSION_MERGE, MENU_BASE"%0 &Merge mission", K_NOKEY, 0);
       ed->AddShortcut(this, E_MISSION_RELOAD, MENU_BASE"%0 &Reload mission\tL", K_L, 0);
       ed->AddShortcut(this, E_MISSION_SAVE_ASK_TOGGLE, MENU_BASE"%0 As&k to save", K_NOKEY, 0);
