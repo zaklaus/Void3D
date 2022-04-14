@@ -1,12 +1,14 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3D_tools", "Tools\I3D_tools.vcproj", "{F68CD662-9653-43D9-8CB1-3FE48B5023CE}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32408.312
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3D_tools", "Tools\I3D_tools.vcxproj", "{F68CD662-9653-43D9-8CB1-3FE48B5023CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3Dexp", "Export\I3Dexp.vcproj", "{5310EF87-E5DA-4E71-88B1-A4A8FEB6209B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3Dexp", "Export\I3Dexp.vcxproj", "{5310EF87-E5DA-4E71-88B1-A4A8FEB6209B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3Dimp", "Import\I3Dimp.vcproj", "{8AF1C553-42C1-4FCE-8A1A-AA1B827765B6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "I3Dimp", "Import\I3Dimp.vcxproj", "{8AF1C553-42C1-4FCE-8A1A-AA1B827765B6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "joints", "Joints\Joints.vcproj", "{892367B1-EB8C-4844-B953-FD8A04BD7797}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "joints", "Joints\Joints.vcxproj", "{892367B1-EB8C-4844-B953-FD8A04BD7797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,5 +53,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4CF42BE-2CF4-43F3-8314-44B4838AFBFC}
 	EndGlobalSection
 EndGlobal

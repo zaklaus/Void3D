@@ -184,7 +184,8 @@ public:
                               //allocate the keys in the table
       ikeys->SetNumKeys(count);
 
-      for(int i=0; i<count; i++){
+      int i;
+      for(i=0; i<count; i++){
 
          const S_I3D_position_key &key = keys[i];
 
@@ -232,7 +233,8 @@ public:
                               //allocate the keys in the table
       ikeys->SetNumKeys(count);
 
-      for(int i=0; i<count; i++){
+      int i;
+      for(i=0; i<count; i++){
 
          const S_I3D_scale_key &key = keys[i];
                               //set the common values
@@ -279,7 +281,8 @@ public:
                               //allocate the keys in the table
       ikeys->SetNumKeys(count);
 
-      for(int i=0; i<count; i++){
+      int i;
+      for(i=0; i<count; i++){
 
          const S_I3D_rotation_key &key = keys[i];
                               //set the common values
@@ -325,7 +328,8 @@ public:
                               //allocate the keys in the table
       ikeys->SetNumKeys(count);
 
-      for(int i=0; i<count; i++){
+      int i;
+      for(i=0; i<count; i++){
 
          const S_I3D_color_key &key = keys[i];
                               //set the common values
@@ -390,7 +394,8 @@ public:
       typedef map<int, int> t_map;
       t_map mat_id_to_loc_id;
                               //count materials and make conversion map
-      for(int i =0; i<mesh->numFaces; i++){
+      int i;
+      for(i =0; i<mesh->numFaces; i++){
          int mat_id = mesh->faces[i].getMatID();
          if(mat_id_to_loc_id.find(mat_id) == mat_id_to_loc_id.end())
             mat_id_to_loc_id[mat_id] = mat_id_to_loc_id.size();
@@ -452,7 +457,8 @@ public:
       m->SetWireUnits(smtl.flags&MF_WIREABS);
 
 
-      for(int i=0; i<MAP_LAST; i++){
+      int i;
+      for(i=0; i<MAP_LAST; i++){
          if(!smtl.maps[i].use)
             continue;
 
@@ -866,7 +872,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                               return false;
 
                            S_vector v;
-                           for(int i=0; i<count; ++i){
+                           int i;
+                           for(i=0; i<count; ++i){
                               C_chunk::Read(&v, sizeof(S_vector));
                               mesh->setVert(i, v.x, v.z, v.y);
                            }
@@ -888,7 +895,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                            I3D_triface *faces = new I3D_triface[count];
                            C_chunk::Read(faces, count*sizeof(I3D_triface));
 
-                           for(int i=0; i<count; ++i){
+                           int i;
+                           for(i=0; i<count; ++i){
                               const I3D_triface &fc = faces[i];
                               Face &f = mesh->faces[i];
 
@@ -903,7 +911,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                         {
                            byte *flags = new byte[num_faces];
                            C_chunk::Read(flags, num_faces*sizeof(byte));
-                           for(int i=num_faces; i--; ){
+                           int i;
+                           for(i=num_faces; i--; ){
                               Face &f = mesh->faces[i];
                               f.flags &= ~(EDGE_A|EDGE_B|EDGE_C);
                               f.flags |= flags[i] & (EDGE_A|EDGE_B|EDGE_C);
@@ -921,7 +930,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                            C_chunk::Read(&mat_id, sizeof(word));
                            C_chunk::Read(&first_face, sizeof(word));
                            C_chunk::Read(&num_faces, sizeof(word));
-                           for(int i=0; i<num_faces; i++)
+                           int i;
+                           for(i=0; i<num_faces; i++)
                               mesh->faces[first_face+i].setMatID(mat_id);
                            C_chunk::Descend();
                         }
@@ -931,7 +941,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                         {
                            dword *sgl = new dword[num_faces];
                            C_chunk::Read(sgl, sizeof(dword)*num_faces);
-                           for(int i=num_faces; i--; ){
+                           int i;
+                           for(i=num_faces; i--; ){
                               Face &f = mesh->faces[i];
                               f.setSmGroup(sgl[i]);
                            }
@@ -950,7 +961,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                                        //read map vertices
                            C_chunk::Read(&num_uv_verts, sizeof(word));
                            UVVert *uvverts = new UVVert[num_uv_verts];
-                           for(int i=0; i<num_uv_verts; i++){
+                           int i;
+                           for(i=0; i<num_uv_verts; i++){
                               C_chunk::Read(&uvverts[i].x, sizeof(float));
                               C_chunk::Read(&uvverts[i].y, sizeof(float));
                               uvverts[i].z = 0.0f;
@@ -1065,7 +1077,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                   case CT_TRACK_POS:
                      {
                         vector<S_I3D_position_key> keys(read_keys);
-                        for(int i=0; i<read_keys; i++){
+                        int i;
+                        for(i=0; i<read_keys; i++){
                            keys[i].Read(C_chunk::GetHandle());
                            S_vector &v = keys[i].data;
                            swap(v.y, v.z);
@@ -1076,7 +1089,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                   case CT_TRACK_ROT:
                      {
                         vector<S_I3D_rotation_key> keys(read_keys);
-                        for(int i=0; i<read_keys; i++)
+                        int i;
+                        for(i=0; i<read_keys; i++)
                            keys[i].Read(C_chunk::GetHandle());
                         SetRotationKeys(control->GetRotationController(), keys);
                      }
@@ -1084,7 +1098,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                   case CT_TRACK_SCL:
                      {
                         vector<S_I3D_scale_key> keys(read_keys);
-                        for(int i=0; i<read_keys; i++){
+                        int i;
+                        for(i=0; i<read_keys; i++){
                            keys[i].Read(C_chunk::GetHandle());
                            S_vector &v = keys[i].data;
                            swap(v.y, v.z);
@@ -1100,7 +1115,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
                         lt->SetColorControl(cont);
 
                         vector<S_I3D_color_key> keys(read_keys);
-                        for(int i=0; i<read_keys; i++)
+                        int i;
+                        for(i=0; i<read_keys; i++)
                            keys[i].Read(C_chunk::GetHandle());
                         SetColorKeys(cont, keys);
                      }
@@ -1294,7 +1310,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
          cc->SetNumUKnots(numuknots);
          cc->SetNumVKnots(numvknots);
          double knot;
-         for(int i=0;i<numuknots;i++){
+         int i;
+         for(i=0;i<numuknots;i++){
             C_chunk::Read(&knot,sizeof(double));
             cc->SetUKnot(i, knot);            
          }
@@ -1327,7 +1344,8 @@ bool C_import::GetChunk(CK_TYPE ck_t, void *data){
          cc->SetName(_T("CV Surface"));
          NURBSControlVertex cv;
 
-         for(int i=0;i<ix;i++){
+         int i;
+         for(i=0;i<ix;i++){
             for(int j=0;j<iy;j++){
                C_chunk::Read(&x,sizeof(float));
                C_chunk::Read(&y,sizeof(float));
@@ -1366,14 +1384,15 @@ static BOOL CALLBACK dlgStatus(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
          int len = strlen(cp);
          vector<char> buf;
          buf.reserve(len*2);
-         for(int i=0; i<len; i++){
+         int i;
+         for(i=0; i<len; i++){
             char c = cp[i];
             if(c=='\n')
                buf.push_back('\r');
             buf.push_back(c);
          }
          buf.push_back(0);
-         SetDlgItemText(hwnd, IDC_EDIT1, buf.begin());
+         SetDlgItemText(hwnd, IDC_EDIT1, (LPCSTR)buf.data());
       }
       return 1;
    case WM_COMMAND:

@@ -26,7 +26,8 @@ void MakeVertexMapping(const S_vector *vp, dword pitch, dword numv, dword *v_map
       return;
                               //sort vertices by one axis
    C_sort_list<int> sorted_vertes(numv);
-   for(dword i=numv; i--; ){
+   dword i;
+   for(i=numv; i--; ){
       const S_vector &v = *(S_vector*)(((byte*)vp)+pitch*i);
       sorted_vertes.Add(i, int(v.x * 1000.0f));
    }

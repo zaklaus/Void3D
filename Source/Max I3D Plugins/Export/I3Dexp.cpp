@@ -146,8 +146,8 @@ class C_material_list: public vector<S_material_entry>{
          case TRANSP_SUBTRACTIVE: break;
          case TRANSP_ADDITIVE: s->flags |= MF_ADDITIVE;
          }
-
-         for(int i=0; i<MAP_LAST; i++){
+int i;
+         for(i=0; i<MAP_LAST; i++){
             int n = MAXMapIndex(i);
             if(!std->MapEnabled(n))
                continue;
@@ -264,8 +264,8 @@ public:
          return;
       Interval v;
       m->Update(0, v);
-      if(IsMultiMaterial(m)){
-         for(int i=0; i<m->NumSubMtls(); i++){
+      if(IsMultiMaterial(m)){int i;
+         for(i=0; i<m->NumSubMtls(); i++){
             Mtl *sub = m->GetSubMtl(i);
             if(sub)
                AddMtlInternal(sub);
@@ -278,8 +278,8 @@ public:
 // Find index of specified MAX material.
 // Return -1 if material couldn't be found.
    int FindMaterial(Mtl *m){
-
-      for(int i=0; i<size(); i++){
+int i;
+      for(i=0; i<size(); i++){
          const S_material_entry &me = (*this)[i];
          if(me.m == m){
                               //check if it is reference to other material
@@ -498,8 +498,8 @@ public:
 
       num_unique_materials = materials.size();
       dword num_redundant = 0;
-
-      for(int i=0; i<materials.size(); i++){
+      int i;
+      for(i=0; i<materials.size(); i++){
          S_material_entry &me = materials[i];
                               //unique have positive index
          me.identical_index = i;
@@ -532,7 +532,8 @@ public:
             break;
          }
          int find_index = -me.identical_index - 1;
-         for(int j=0; j<i; j++){
+         int j;
+         for(j=0; j<i; j++){
             if(materials[j].identical_index==find_index){
                me.identical_index = j;
                break;
@@ -702,8 +703,8 @@ struct S_dump_context{
          return false;
 
       WriteTCBTrackHeader(num);
-
-      for(int i=0; i<num; i++){
+int i;
+      for(i=0; i<num; i++){
          ITCBPoint3Key key;
          ikeys->GetKey(i, &key);
 
@@ -732,8 +733,8 @@ struct S_dump_context{
          return false;
 
       WriteTCBTrackHeader(num);
-
-      for(int i=0; i<num; i++){
+int i;
+      for(i=0; i<num; i++){
          ITCBRotKey key;
          ikeys->GetKey(i, &key);
 
@@ -761,8 +762,8 @@ struct S_dump_context{
          return false;
 
       WriteTCBTrackHeader(num);
-
-      for(int i=0; i<num; i++){
+int i;
+      for(i=0; i<num; i++){
          ITCBScaleKey key;
          ikeys->GetKey(i, &key);
 
@@ -930,8 +931,8 @@ struct S_dump_context{
                      if(num>0){
                         ck <<= CT_TRACK_POS;
                         WriteTCBTrackHeader(num);
-
-                        for(int i=0; i<num; i++){
+int i;
+                        for(i=0; i<num; i++){
                            dword key_time = cc_pos->GetKeyTime(i);
                                     //write key time
                            {
@@ -996,8 +997,8 @@ struct S_dump_context{
                         ck <<= CT_TRACK_ROT;
                         WriteTCBTrackHeader(num);
 
-                        Quat q_last1;
-                        for(int i=0; i<num; i++){
+                        Quat q_last1;int i;
+                        for(i=0; i<num; i++){
                            dword key_time = cc_rot->GetKeyTime(i);
                                     //write key time
                            {
@@ -1152,8 +1153,8 @@ struct S_dump_context{
                                  //make a table that maps sub-mtl number to the proper index
                                  // into dc.materials
          num_sub_mats = mat->NumSubMtls();
-         mat_num_map.assign(num_sub_mats);
-         for(int i=0; i<num_sub_mats; i++){
+         mat_num_map.reserve(num_sub_mats);int i;
+         for(i=0; i<num_sub_mats; i++){
             int mat_i = -1;
             Mtl *sub  = mat->GetSubMtl(i);
             if(sub){
@@ -1176,8 +1177,8 @@ struct S_dump_context{
 
       vector<Face> face_list(m->faces, m->faces+num_faces);
       vector<dword> order(num_faces);
-
-      for(int i=num_faces; i--; ){
+int i;
+      for(i=num_faces; i--; ){
          dword sort_val = i;
          if(is_multi){
             int face_mat_index = m->getFaceMtlIndex(i);
@@ -1292,7 +1293,8 @@ struct S_dump_context{
          vector<I3D_triface> tmp_uv_faces(num_faces);
          vector<bool> vertex_used(num_uv_verts, false);
 
-         for(dword fi=num_faces; fi--; ){
+         dword fi;
+         for(fi=num_faces; fi--; ){
             const TVFace &f = uvfaces[order[fi]&0xffff];
             I3D_triface &fc = tmp_uv_faces[fi];
             fc[0] = f.t[0];
@@ -1311,7 +1313,8 @@ struct S_dump_context{
          vector<word> vertex_remap(num_uv_verts, 0xffff);
                                  //copy used vertices
          dword v_dst_i = 0;
-         for(dword vi=num_uv_verts; vi--; ){
+         dword vi;
+         for(vi=num_uv_verts; vi--; ){
             if(vertex_used[vi]){
                S_vector2 &v = tmp_uv_verts[v_dst_i];
                v.x = uvverts[vi].x;
@@ -1338,12 +1341,12 @@ struct S_dump_context{
                                  //remap uv faces
          for(fi=num_faces; fi--; ){
             I3D_triface &fc = tmp_uv_faces[fi];
-            fc.Remap(vertex_remap.begin());
+            fc.Remap(vertex_remap.data());
          }
 
                               //save map vertices
          ck.Write(&num_uv_verts, sizeof(word));
-         ck.Write(tmp_uv_verts.begin(), sizeof(S_vector2)*num_uv_verts);
+         ck.Write(tmp_uv_verts.data(), sizeof(S_vector2)*num_uv_verts);
          /*
          for(int j=0; j<num_uv_verts; j++){
             ck.Write(&uvverts[j].x, sizeof(float));
@@ -1352,7 +1355,7 @@ struct S_dump_context{
          */
                               //save map faces
          ck.Write(&num_faces, sizeof(word));
-         ck.Write(tmp_uv_faces.begin(), sizeof(I3D_triface)*num_faces);
+         ck.Write(tmp_uv_faces.data(), sizeof(I3D_triface)*num_faces);
          /*
          for(j=0; j<num_faces; j++){
             const TVFace &f = uvfaces[order[j]&0xffff];
@@ -1622,8 +1625,8 @@ static bool KFWriteMain(S_dump_context &dc){
                         scale_correct.y = -1.0f;
                      if(scl.z < 0.0f)
                         scale_correct.z = -1.0f;
-
-                     for(int i=0; i<count; ++i){
+int i;
+                     for(i=0; i<count; ++i){
                         Point3 v = mesh.verts[i];
                         v = v * delta_tm;
                         S_vector vv(v.x, v.z, v.y);
@@ -1648,8 +1651,8 @@ static bool KFWriteMain(S_dump_context &dc){
                      int num_verts = mesh.getNumVerts();
                      int num_faces = mesh.getNumFaces();
                      vector<S_vector> v_color(num_verts, S_vector(0, 0, 0));
-                     vector<bool> v_used(num_verts, false);
-                     for(int i=num_faces; i--; ){
+                     vector<bool> v_used(num_verts, false);int i;
+                     for(i=num_faces; i--; ){
                         const Face &f = mesh.faces[i];
                         const TVFace &cf = uvfaces[i];
                         for(int j=3; j--; ){

@@ -96,8 +96,8 @@ class C_I3D_tools: public UtilityObj{
                               //collect vertices into pool
       dword num_v = m.getNumVerts();
       C_buffer<S_vector> verts(num_v);
-      
-      for(dword i=num_v; i--; ){
+      dword i, di;
+      for(i=num_v; i--; ){
          verts[i] = (S_vector&)m.getVert(i);
       }
       C_buffer<dword> v_map(num_v);
@@ -162,8 +162,8 @@ class C_I3D_tools: public UtilityObj{
 
    void SnapMeshVertices(Mesh &m, float thresh){
 
-      dword num_v = m.getNumVerts();
-      for(dword i=num_v; i--; ){
+      dword num_v = m.getNumVerts();dword i;
+      for(i=num_v; i--; ){
          S_vector &v = (S_vector&)m.getVert(i);
          for(int j=0; j<3; j++){
             float &val = v[j];
@@ -237,7 +237,7 @@ class C_I3D_tools: public UtilityObj{
 //----------------------------
 
    BOOL CALLBACK dlgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam){
-
+       dword i;
       switch(msg){
       case WM_INITDIALOG:
          Init(hwnd);
@@ -289,9 +289,10 @@ class C_I3D_tools: public UtilityObj{
 
                   INode *root = ip->GetRootNode();
                   int n = root->GetXRefFileCount();
+                  int ni;
                   for(int i=n; i--; ){
                      TSTR fn = root->GetXRefFileName(i);
-                     for(int ni=strlen(fn); ni--; ){
+                     for(ni=strlen(fn); ni--; ){
                         if(fn[ni]=='\\')
                            break;
                      }
@@ -316,8 +317,8 @@ class C_I3D_tools: public UtilityObj{
 
                   CreateXrefPoint();
 
-                              //link to xref point
-                  for(dword i=n; i--; )
+                              //link to xref pointdword i;
+                  for(i=n; i--; )
                      root->SetXRefParent(i, NULL);
 
                   INode *xrf = root->GetXRefTree(sel);
@@ -427,9 +428,9 @@ class C_I3D_tools: public UtilityObj{
                                     assert(fsel.GetSize()==(int)num_faces);
                                     fsel.ClearAll();
                                     dword num_dup = 0;
-                                                //traverse all faces
-                                    for(dword i=num_faces; i--; ){
-                                       const Face &fc = faces[i];
+                                                //traverse all facesdword i;
+                                    for(i=num_faces; i--; ){
+                                       const Face &fc = (const Face &)faces[i];
                                                 //compare with all other faces
                                        for(dword j=i; j--; ){
                                           const Face &fc1 = faces[j];
@@ -480,8 +481,8 @@ class C_I3D_tools: public UtilityObj{
                   if(msg.Size())
                      MessageBox(hwnd, msg, "I3D Tools", MB_ICONINFORMATION);
 
-                  ip->ClearNodeSelection();
-                  for(dword i=new_sel.size(); i--; )
+                  ip->ClearNodeSelection();dword i;
+                  for(i=new_sel.size(); i--; )
                      ip->SelectNode(new_sel[i], false);
 
                   ip->ForceCompleteRedraw();

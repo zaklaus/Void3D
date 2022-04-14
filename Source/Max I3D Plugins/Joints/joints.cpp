@@ -84,7 +84,7 @@ class JointObj: public SimpleObject2{
                               //save start vert index
       int sv = curVert;
    
-      // We'll need edge vectors to taper the end of the fin
+      // We'll need edge vectors to taper the tend of the fin
       Point3 topEdge = bv2-bv1;
       Point3 botEdge = bv3-bv0;
    
@@ -167,7 +167,8 @@ private:
       DbgAssert(TestAFlag(A_WORK1));
    
       DependentIterator iter(this);
-      for (ReferenceMaker* mk = iter.Next(); mk != NULL; mk = iter.Next()) {
+      ReferenceMaker* mk;
+      for (mk = iter.Next(); mk != NULL; mk = iter.Next()) {
          if (mk->SuperClassID() == BASENODE_CLASS_ID) break;
       }
       if(mk != NULL){
@@ -425,7 +426,7 @@ class C_JointsCreateMode: public CommandMode{
             // Position the construction plane at the average position of children
             constTM.SetTrans(averageChildBonePos/float(ct));
          } else {    
-            // No children. Position the construction plane at the end of the last bone.
+            // No children. Position the construction plane at the tend of the last bone.
             Matrix3 potm = parNode->GetObjectTM(t);      
             Object *obj = parNode->GetObjectRef();
             if(obj->ClassID()==JOINT_CLASSID){
@@ -958,7 +959,7 @@ class C_JointsCreateMode: public CommandMode{
             // right click while between creations
             createInterface->RemoveMode(NULL);
             break;
-            // mjm - end
+            // mjm - tend
       
          case MOUSE_ABORT:
             if(curNode){
@@ -1149,7 +1150,7 @@ static C_BoneFunctionPublish theBoneFunctionPublish(
    _T("startPos"), -1, TYPE_POINT3,
    _T("endPos"), -1, TYPE_POINT3,
    _T("zAxis"), -1, TYPE_POINT3,
-   end);
+   tend);
    
 //----------------------------
 //----------------------------
@@ -1167,16 +1168,16 @@ ParamBlockDesc2 jointobj_param_blk(
   p_ms_default,  .1f,
   p_range,       0.0f, float(1.0E30), 
   p_ui,          TYPE_SPINNER, EDITTYPE_UNIVERSE, IDC_BONE_WIDTH, IDC_BONE_WIDTHSPIN, SPIN_AUTOSCALE, 
-  end, 
+  tend, 
   
   jointobj_length, _T("length"), TYPE_FLOAT, P_RESET_DEFAULT, IDS_BONE_LENGTH,
   p_default,     .5f,
   p_ms_default,  .5f,
   p_range,       0.0, float(1.0E30),
   p_ui,          TYPE_SPINNER, EDITTYPE_FLOAT, IDC_BONE_LENGTH, IDC_BONE_LENGTHSPIN, 0.01,
-  end, 
+  tend, 
   
-  end
+  tend
   );
                                          
 //----------------------------

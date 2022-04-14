@@ -159,7 +159,8 @@ struct S_material{
          selfipct==m.selfipct
          ){
 
-         for(int i=MAP_LAST; i--; ){
+          int i;
+         for(i=MAP_LAST; i--; ){
             if(!(maps[i] == m.maps[i]))
                break;
          }

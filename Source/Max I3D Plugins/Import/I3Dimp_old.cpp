@@ -1402,7 +1402,7 @@ public:
       }
       /*
       t_obj_map::const_iterator it;
-      for(it=_obj_map.begin(); it!=_obj_map.end(); it++){
+      for(it=_obj_map.begin(); it!=_obj_map.tend(); it++){
          const _C_work_object &wobj = (*it).second;
 
          if(!wobj.used){

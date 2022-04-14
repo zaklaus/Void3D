@@ -110,7 +110,7 @@ class IBipedExport
 		// call this from any IBipedExport instance to remove or restore non uniform scaling
 		BIPExport virtual void RemoveNonUniformScale(BOOL onOFF) {};
 
-        // call these to begin and end figure mode
+        // call these to begin and tend figure mode
 		BIPExport virtual void BeginFigureMode(int redraw) {};
 		BIPExport virtual void EndFigureMode(int redraw) {};
 };
