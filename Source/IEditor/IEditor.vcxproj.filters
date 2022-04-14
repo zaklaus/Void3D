@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{06af15ba-a272-4e1e-8817-849ac5fe1ea3}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{a730e5fe-6d1b-42dc-965e-3bca3da4b4fb}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{7b709bb0-f70c-4717-a4d1-ef156a5731e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Access.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BspTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CamPath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Create.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gravitation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Help.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hide.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LightMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modify.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Properties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenShot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Seed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Selection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderStudio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeScale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Undo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Usability.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Validity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoGrab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="View.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="all.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\I3D\Editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\I3D\PoseAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Properties.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Usability.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\arrow.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00001.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00002.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00003.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00004.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00005.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00006.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00007.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00008.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00009.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00010.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00011.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00012.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00013.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00014.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00015.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00016.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cur00017.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor1.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor_c.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor_h.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor_l.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor_o.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\cursor_t.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\font.bin">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\mesh_inf.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\occluder.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\SEEDPICK.CUR">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="res\SEEDPUT.CUR">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\axes.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\bmp12.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\bmp13.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\bone.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\camera.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Checkpoint.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\dummy.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\envmap.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Font1.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Font1_a.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\Game.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\I3d2.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\icon_config.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\iduck.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\letters.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\light_a.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\light_d.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\light_f.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\light_p.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\light_s.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\sample.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\sound_a.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\sound_p.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\sphere.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\target.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_bsp.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_create.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_debug.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_file.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_light.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_lmap.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_undo.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_validity.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\font.txt">
+      <Filter>Resources</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="main.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{9138BBB5-83D6-4BDB-840F-7935F442D15C}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>17.0.32408.312</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\Lib\</OutDir>
+    <IntDir>_Release\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\Lib\</OutDir>
+    <IntDir>_Debug\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\_Output/IEditor.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\Include; ..\..\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>all.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)IEditor.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(OutDir)IEditor.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\_Output/IEditor.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\Include; ..\..\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>all.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)IEditor.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(OutDir)IEditor_d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Access.cpp" />
+    <ClCompile Include="AnimEdit.cpp" />
+    <ClCompile Include="BspTool.cpp" />
+    <ClCompile Include="CamPath.cpp" />
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="Create.cpp" />
+    <ClCompile Include="DebugConsole.cpp" />
+    <ClCompile Include="DebugLine.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="Gravitation.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Help.cpp" />
+    <ClCompile Include="Hide.cpp" />
+    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightMap.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MeshInfo.cpp" />
+    <ClCompile Include="Modify.cpp" />
+    <ClCompile Include="MouseEdit.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ProcEdit.cpp" />
+    <ClCompile Include="Properties.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="ScreenShot.cpp" />
+    <ClCompile Include="Seed.cpp" />
+    <ClCompile Include="Selection.cpp" />
+    <ClCompile Include="ShaderStudio.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="SubEdit.cpp" />
+    <ClCompile Include="Tape.cpp" />
+    <ClCompile Include="TimeScale.cpp" />
+    <ClCompile Include="Toolbar.cpp" />
+    <ClCompile Include="Undo.cpp" />
+    <ClCompile Include="Usability.cpp" />
+    <ClCompile Include="Validity.cpp" />
+    <ClCompile Include="VideoGrab.cpp" />
+    <ClCompile Include="View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\I3D\Editor.h" />
+    <ClInclude Include="..\..\Include\I3D\PoseAnim.h" />
+    <ClInclude Include="all.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Properties.h" />
+    <ClInclude Include="Toolbar.h" />
+    <ClInclude Include="Usability.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\arrow.cur" />
+    <None Include="res\cur00001.cur" />
+    <None Include="res\cur00002.cur" />
+    <None Include="res\cur00003.cur" />
+    <None Include="res\cur00004.cur" />
+    <None Include="res\cur00005.cur" />
+    <None Include="res\cur00006.cur" />
+    <None Include="res\cur00007.cur" />
+    <None Include="res\cur00008.cur" />
+    <None Include="res\cur00009.cur" />
+    <None Include="res\cur00010.cur" />
+    <None Include="res\cur00011.cur" />
+    <None Include="res\cur00012.cur" />
+    <None Include="res\cur00013.cur" />
+    <None Include="res\cur00014.cur" />
+    <None Include="res\cur00015.cur" />
+    <None Include="res\cur00016.cur" />
+    <None Include="res\cur00017.cur" />
+    <None Include="res\cursor1.cur" />
+    <None Include="res\cursor_c.cur" />
+    <None Include="res\cursor_h.cur" />
+    <None Include="res\cursor_l.cur" />
+    <None Include="res\cursor_o.cur" />
+    <None Include="res\cursor_t.cur" />
+    <None Include="res\font.bin" />
+    <None Include="res\mesh_inf.cur" />
+    <None Include="res\occluder.cur" />
+    <None Include="res\SEEDPICK.CUR" />
+    <None Include="res\SEEDPUT.CUR" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\axes.png" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bmp12.png" />
+    <Image Include="res\bmp13.png" />
+    <Image Include="res\bone.png" />
+    <Image Include="res\camera.png" />
+    <Image Include="res\Checkpoint.png" />
+    <Image Include="res\dummy.png" />
+    <Image Include="res\envmap.png" />
+    <Image Include="res\Font1.png" />
+    <Image Include="res\Font1_a.png" />
+    <Image Include="res\Game.ico" />
+    <Image Include="res\I3d2.bmp" />
+    <Image Include="res\icon1.ico" />
+    <Image Include="res\icon_config.ico" />
+    <Image Include="res\iduck.bmp" />
+    <Image Include="res\letters.png" />
+    <Image Include="res\light_a.png" />
+    <Image Include="res\light_d.png" />
+    <Image Include="res\light_f.png" />
+    <Image Include="res\light_p.png" />
+    <Image Include="res\light_s.png" />
+    <Image Include="res\sample.png" />
+    <Image Include="res\sound_a.png" />
+    <Image Include="res\sound_p.png" />
+    <Image Include="res\sphere.png" />
+    <Image Include="res\target.png" />
+    <Image Include="res\tb_bsp.bmp" />
+    <Image Include="res\tb_create.bmp" />
+    <Image Include="res\tb_debug.bmp" />
+    <Image Include="res\tb_file.bmp" />
+    <Image Include="res\tb_light.bmp" />
+    <Image Include="res\tb_lmap.bmp" />
+    <Image Include="res\tb_undo.bmp" />
+    <Image Include="res\tb_validity.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\font.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="main.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\I3D2\i3d_2.vcxproj">
+      <Project>{09640ee2-1600-4e8a-a03a-2faca4079e8d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

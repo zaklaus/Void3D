@@ -55,7 +55,10 @@ private:
 
    template<class T>
    struct S_RB_block_less{
-      bool operator ()(const T &bl1, const T &bl2){
+       bool operator ()(const T& bl1, const T& bl2) {
+           return ((bl1->status == S_RB_block::S_FREE ? bl1->size : 0) < (bl2->status == S_RB_block::S_FREE ? bl2->size : 0));
+       }
+      bool operator ()(const T &bl1, const T &bl2) const {
          return ((bl1->status==S_RB_block::S_FREE ? bl1->size : 0) < (bl2->status==S_RB_block::S_FREE ? bl2->size : 0));
       }
    };

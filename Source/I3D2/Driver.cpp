@@ -1662,8 +1662,8 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
                               // uses base's operator< for comparing
    vs_set::iterator it = vs_cache.find(*(const S_vs_shader_entry*)&se);
    if(it != vs_cache.end()){
-      (*it).last_render_time = render_time;
-      return &(*it);
+      ((S_vs_shader_entry*)&(*it))->last_render_time = render_time;
+      return (I3D_driver::S_vs_shader_entry * )&(*it);
    }
 
    assert(se.num_fragments <= MAX_VS_FRAGMENTS);
@@ -1826,7 +1826,7 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
    pair<vs_set::iterator, bool> pit = vs_cache.insert(se);
    assert(pit.second);
                               //save values
-   S_vs_shader_entry &se_out = (*pit.first);
+   S_vs_shader_entry &se_out = (S_vs_shader_entry&)(*pit.first);
    se_out.vs = vs;
    se_out.last_render_time = render_time;
 
@@ -1984,8 +1984,9 @@ I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se)
                               // uses base's operator< for comparing
    ps_set::iterator it = ps_cache.find(*(const S_ps_shader_entry*)&se);
    if(it != ps_cache.end()){
-      (*it).last_render_time = render_time;
-      return &(*it);
+       auto pica = *it;
+      ((S_ps_shader_entry*)&(*it))->last_render_time = render_time;
+      return &pica;
    }
 
    assert(se.num_fragments <= 8);
@@ -2054,7 +2055,7 @@ I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se)
    pair<ps_set::iterator, bool> pit = ps_cache.insert(se);
    assert(pit.second);
                               //save values
-   S_ps_shader_entry &se_out = (*pit.first);
+   S_ps_shader_entry &se_out = (S_ps_shader_entry&)(*pit.first);
    se_out.ps = ps;
    se_out.last_render_time = render_time;
    ps->Release();

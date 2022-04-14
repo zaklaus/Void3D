@@ -1,11 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Config_dll", "Config_dll.vcproj", "{A5347006-0153-4BA5-8750-49975A12F765}"
-	ProjectSection(ProjectDependencies) = postProject
-		{52E9DD7C-ACAF-4C38-978D-9036475C314B} = {52E9DD7C-ACAF-4C38-978D-9036475C314B}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32408.312
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Config_dll", "Config_dll.vcxproj", "{A5347006-0153-4BA5-8750-49975A12F765}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Config_static", "Config_static.vcproj", "{52E9DD7C-ACAF-4C38-978D-9036475C314B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Config_static", "Config_static.vcxproj", "{52E9DD7C-ACAF-4C38-978D-9036475C314B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {462F80C1-2D06-4A35-B9CE-9E54CE4BA18D}
 	EndGlobalSection
 EndGlobal

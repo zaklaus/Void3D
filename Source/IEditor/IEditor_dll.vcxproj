@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectName>IEditor DLL</ProjectName>
+    <ProjectGuid>{16DB4E3C-4213-435A-9513-866C3F44DDCF}</ProjectGuid>
+    <RootNamespace>IEditor DLL</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v143</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>17.0.32408.312</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\_Output\</OutDir>
+    <IntDir>.\_Release\</IntDir>
+    <GenerateManifest>false</GenerateManifest>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <BuildLog>
+      <Path />
+    </BuildLog>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\_Output/IEditor.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\Include; ..\..\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>all.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\_Release/IEditor.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\_Release/</AssemblerListingLocation>
+      <ObjectFileName>.\_Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\_Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /NOENTRY %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>..\..\Editor\bin\IEditor.dll</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="ilib_res.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Insanity.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\axes.png" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bmp12.png" />
+    <Image Include="res\bmp13.png" />
+    <Image Include="res\bone.png" />
+    <Image Include="res\camera.png" />
+    <Image Include="res\dummy.png" />
+    <Image Include="res\envmap.png" />
+    <Image Include="res\Font1.png" />
+    <Image Include="res\Font1_a.png" />
+    <Image Include="res\I3d2.bmp" />
+    <Image Include="res\icon1.ico" />
+    <Image Include="res\IDUCK.BMP" />
+    <Image Include="res\letters.png" />
+    <Image Include="res\Light_a.png" />
+    <Image Include="res\light_d.png" />
+    <Image Include="res\Light_f.png" />
+    <Image Include="res\Light_p.png" />
+    <Image Include="res\Light_s.png" />
+    <Image Include="res\sample.png" />
+    <Image Include="res\sound.png" />
+    <Image Include="res\sound_a.png" />
+    <Image Include="res\sound_p.png" />
+    <Image Include="res\sphere.png" />
+    <Image Include="res\target.png" />
+    <Image Include="res\tb_bsp.bmp" />
+    <Image Include="res\tb_create.bmp" />
+    <Image Include="res\tb_debug.bmp" />
+    <Image Include="res\tb_file.bmp" />
+    <Image Include="res\tb_light.bmp" />
+    <Image Include="res\tb_lmap.bmp" />
+    <Image Include="res\tb_undo.bmp" />
+    <Image Include="res\tb_validity.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\font.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ARROW.CUR" />
+    <None Include="res\CUR00001.CUR" />
+    <None Include="res\CUR00002.CUR" />
+    <None Include="res\CUR00003.CUR" />
+    <None Include="res\CUR00004.CUR" />
+    <None Include="res\CUR00005.CUR" />
+    <None Include="res\CUR00006.CUR" />
+    <None Include="res\CUR00007.CUR" />
+    <None Include="res\cur00008.cur" />
+    <None Include="res\cur00009.cur" />
+    <None Include="res\cur00010.cur" />
+    <None Include="res\cur00011.cur" />
+    <None Include="res\cur00012.cur" />
+    <None Include="res\cur00013.cur" />
+    <None Include="res\cur00014.cur" />
+    <None Include="res\cur00015.cur" />
+    <None Include="res\cur00016.cur" />
+    <None Include="res\cur00017.cur" />
+    <None Include="res\CURSOR_C.CUR" />
+    <None Include="res\cursor_h.cur" />
+    <None Include="res\CURSOR_L.CUR" />
+    <None Include="res\cursor_o.cur" />
+    <None Include="res\cursor_t.cur" />
+    <None Include="res\mesh_inf.cur" />
+    <None Include="res\occluder.cur" />
+    <None Include="res\SEEDPICK.CUR" />
+    <None Include="res\SEEDPUT.CUR" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

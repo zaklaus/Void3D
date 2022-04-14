@@ -1,0 +1,10 @@
+prefix=C:/Program Files (x86)/qhull
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: qhullstatic
+Description: Qhull static library
+Version: 8.0.2
+Libs: -L${libdir} -lqhullstatic
+Cflags: -I${includedir}
+

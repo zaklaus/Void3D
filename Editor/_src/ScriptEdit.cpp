@@ -14,7 +14,6 @@
 
 const char SCRIPT_DIR[] = "Missions";
 
-
 #ifdef EDITOR                 //script editor plugin - only in edit mode
 
 extern const char SCRIPT_CMDLINE[];
@@ -125,7 +124,8 @@ class C_edit_Script: public C_editor_item{
             S_frame_info *fi = GetFrameInfo(frm);
             if(fi && fi->vm){
                S_hlp *hp = (S_hlp*)c;
-               for(int i=hp->scripted_frames->size(); i--; )
+               int i;
+               for(i=hp->scripted_frames->size(); i--; )
                   if(frm==(*hp->scripted_frames)[i])
                      break;
                if(i==-1){
@@ -190,7 +190,7 @@ class C_edit_Script: public C_editor_item{
                }
                         //remove from script list
                const C_str &name = fi->vm->GetName();
-               for(i=hp->scr_list->size(); i--; ){
+               for(int i=hp->scr_list->size(); i--; ){
                   if((*hp->scr_list)[i]->full_name.Matchi(name)){
                      if(!--(*hp->scr_list)[i]->use_count){
                         (*hp->scr_list)[i] = hp->scr_list->back();

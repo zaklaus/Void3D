@@ -11,8 +11,6 @@
 
 //----------------------------
 
-#define ACTION_SOUND_DIR "Action\\"
-
                               //debugging:
 
 //#define DEBUG_LISTEN_SHOW  //draw listening
@@ -53,41 +51,41 @@ class C_game_mission_imp: public C_game_mission{
             PC_dta_stream dta = NULL;
             {
                C_str s1;
-               s1 = C_fstr("%s"ACTION_SOUND_DIR"%s_%d.ogg", (const char*)sound_cache.GetDir(), snd_name, i);
+               s1 = C_fstr("%sAction\\%s_%d.ogg", (const char*)sound_cache.GetDir(), snd_name, i);
                dta = DtaCreateStream(s1);
-               if(!dta){
-                  s1 = C_fstr("%s"ACTION_SOUND_DIR"%s_%d.wav", (const char*)sound_cache.GetDir(), snd_name, i);
-                  dta = DtaCreateStream(s1);
+               if (!dta) {
+                   s1 = C_fstr("%sAction\\%s_%d.wav", (const char*)sound_cache.GetDir(), snd_name, i);
+                   dta = DtaCreateStream(s1);
                }
-               if(dta)
-                  dta->Release();
+               if (dta)
+                   dta->Release();
             }
-            if(!dta)
-               break;
+            if (!dta)
+                break;
          }
-         return (i-1);
+         return (i - 1);
       }
    public:
-   //----------------------------
-   // Return number of variations of given sound.
-      dword CountOf(const char *snd_name){
+       //----------------------------
+       // Return number of variations of given sound.
+       dword CountOf(const char* snd_name) {
 
-         C_str sn = snd_name;
- 
-         t_snd_count_map::iterator it = snd_count_map.find(sn);
-         if(it!=snd_count_map.end())
-            return (*it).second;
-         int c = GetFileCount(snd_name);
+           C_str sn = snd_name;
+
+           t_snd_count_map::iterator it = snd_count_map.find(sn);
+           if (it != snd_count_map.end())
+               return (*it).second;
+           int c = GetFileCount(snd_name);
 #ifdef EDITOR
-         if(c)                //in edit mode, if zero count, so store into map (allow designers to possibly add sound)
+           if (c)                //in edit mode, if zero count, so store into map (allow designers to possibly add sound)
 #endif
-            snd_count_map[sn] = c;
-         return c;
-      }
+               snd_count_map[sn] = c;
+           return c;
+       }
    };
 
-//----------------------------
-                              //init data:
+   //----------------------------
+                                 //init data:
 
    C_vector<C_smart_ptr<C_checkpoint> > checkpoints;
 
@@ -111,391 +109,396 @@ class C_game_mission_imp: public C_game_mission{
    C_smart_ptr<IPH_world> phys_world;
 
 
-//----------------------------
-                              //run-time:
+   //----------------------------
+                                 //run-time:
    E_MISSION_RESULT mission_over_result; //result of game, set by MissionOver call
    C_str mission_over_msg_id;
 
 
-//----------------------------
+   //----------------------------
    typedef map<C_str, C_smart_ptr<I3D_frame> > t_frm_map;
 
-// Function creating mapping of frame name to its pointer, enumerating scene.
-   void CreateFrameMap(t_frm_map &frm_map) const{
+   // Function creating mapping of frame name to its pointer, enumerating scene.
+   void CreateFrameMap(t_frm_map& frm_map) const {
 
-      struct S_hlp{
-         t_frm_map *frm_map;
-         static I3DENUMRET I3DAPI cbE(PI3D_frame frm, dword c){
-            typedef map<C_str, C_smart_ptr<I3D_frame> > t_frm_map;
-            t_frm_map &frm_map = *(t_frm_map*)c;
-            frm_map[frm->GetName()] = frm;
-            return I3DENUMRET_OK;
-         }
-      };
-      scene->EnumFrames(S_hlp::cbE, (dword)&frm_map);
-      frm_map[scene->GetPrimarySector()->GetName()] = scene->GetPrimarySector();
-      frm_map[scene->GetBackdropSector()->GetName()] = scene->GetBackdropSector();
+       struct S_hlp {
+           t_frm_map* frm_map;
+           static I3DENUMRET I3DAPI cbE(PI3D_frame frm, dword c) {
+               typedef map<C_str, C_smart_ptr<I3D_frame> > t_frm_map;
+               t_frm_map& frm_map = *(t_frm_map*)c;
+               frm_map[frm->GetName()] = frm;
+               return I3DENUMRET_OK;
+           }
+       };
+       scene->EnumFrames(S_hlp::cbE, (dword)&frm_map);
+       frm_map[scene->GetPrimarySector()->GetName()] = scene->GetPrimarySector();
+       frm_map[scene->GetBackdropSector()->GetName()] = scene->GetBackdropSector();
    }
 
-//----------------------------
+   //----------------------------
 
-   static bool PhysContactQuery(CPI3D_volume src_vol, PIPH_body src_body, CPI3D_frame dst_frm, PIPH_body dst_body, void *context){
-      return true;
+   static bool PhysContactQuery(CPI3D_volume src_vol, PIPH_body src_body, CPI3D_frame dst_frm, PIPH_body dst_body, void* context) {
+       return true;
    }
 
    static bool PhysContactReport(CPI3D_volume src_vol, PIPH_body src_body, CPI3D_frame dst_frm, PIPH_body dst_body,
-      const S_vector &pos, const S_vector &normal, float depth, void *context){
-      return true;
+       const S_vector& pos, const S_vector& normal, float depth, void* context) {
+       return true;
    }
 
-//----------------------------
-// Tick actors depending on current mission state.
-   void TickActors(const S_tick_context &tc){
+   //----------------------------
+   // Tick actors depending on current mission state.
+   void TickActors(const S_tick_context& tc) {
 
-      assert(IsInGame());
-                              //tick actors
-      for(dword i=0; i<actors.size(); i++){
-         PC_actor ap = actors[i];
+       assert(IsInGame());
+       //tick actors
+       for (dword i = 0; i < actors.size(); i++) {
+           PC_actor ap = actors[i];
 
-         ap->Tick(tc);
-                              //check if actor's not deleted 
-         if(ap!=actors[i]) i--;
-      }     
+           ap->Tick(tc);
+           //check if actor's not deleted 
+           if (ap != actors[i]) i--;
+       }
    }
 
-//----------------------------
+   //----------------------------
 
    virtual bool LoadChunk(CK_TYPE, S_load_context&);
 
-//----------------------------
+   //----------------------------
 
-   void InitWeather(){
+   void InitWeather() {
 
-      if(!tab_config->ItemE(TAB_E_WEATHER_EFFECT))
-         return;
+       if (!tab_config->ItemE(TAB_E_WEATHER_EFFECT))
+           return;
 
-      PI3D_model mod = I3DCAST_MODEL(scene->CreateFrame(FRAME_MODEL));
+       PI3D_model mod = I3DCAST_MODEL(scene->CreateFrame(FRAME_MODEL));
 
-      const char *fname;
-      switch(tab_config->ItemE(TAB_E_WEATHER_EFFECT)){
-      case 1: fname = "system\\atmo rain"; break;
-      case 2: fname = "system\\atmo snow"; break;
-      default: assert(0); fname = NULL;
-      }
-      model_cache.Open(mod, fname, scene, 0, ErrReport, editor);
-      PI3D_visual vis = I3DCAST_VISUAL(mod->FindChildFrame(NULL, ENUMF_VISUAL));
-      if(vis && vis->GetVisualType()==I3D_VISUAL_ATMOS){
-         weather_effect = mod;
-         mod->LinkTo(scene->GetPrimarySector());
+       const char* fname;
+       switch (tab_config->ItemE(TAB_E_WEATHER_EFFECT)) {
+       case 1: fname = "system\\atmo rain"; break;
+       case 2: fname = "system\\atmo snow"; break;
+       default: assert(0); fname = NULL;
+       }
+       model_cache.Open(mod, fname, scene, 0, ErrReport, editor);
+       PI3D_visual vis = I3DCAST_VISUAL(mod->FindChildFrame(NULL, ENUMF_VISUAL));
+       if (vis && vis->GetVisualType() == I3D_VISUAL_ATMOS) {
+           weather_effect = mod;
+           mod->LinkTo(scene->GetPrimarySector());
 
-         S_vector dir;
-         S_vector2 scl;
-         float depth;
-         switch(tab_config->ItemE(TAB_E_WEATHER_EFFECT)){
-         case 1: dir = S_vector(0, -20, 4); scl = S_vector2(.02f, .8f); depth = 10; break;
-         case 2: dir = S_vector(0, -1.4f, .5f); scl = S_vector2(.035f, .035f); depth = 10; break;
-         default: dir.Zero(); scl.Zero(); assert(0);
-         }
+           S_vector dir;
+           S_vector2 scl;
+           float depth;
+           switch (tab_config->ItemE(TAB_E_WEATHER_EFFECT)) {
+           case 1: dir = S_vector(0, -20, 4); scl = S_vector2(.02f, .8f); depth = 10; break;
+           case 2: dir = S_vector(0, -1.4f, .5f); scl = S_vector2(.035f, .035f); depth = 10; break;
+           default: dir.Zero(); scl.Zero(); assert(0);
+           }
 
-         vis->SetProperty(I3DPROP_ATMO_F_DIR_X, I3DFloatAsInt(dir.x));
-         vis->SetProperty(I3DPROP_ATMO_F_DIR_Y, I3DFloatAsInt(dir.y));
-         vis->SetProperty(I3DPROP_ATMO_F_DIR_Z, I3DFloatAsInt(dir.z));
-         vis->SetProperty(I3DPROP_ATMO_I_NUM_ELEMS, tab_config->ItemI(TAB_I_WEATHER_DENSITY));
-         vis->SetProperty(I3DPROP_ATMO_F_DEPTH, I3DFloatAsInt(15.0f));
-         vis->SetProperty(I3DPROP_ATMO_F_SCALE_X, I3DFloatAsInt(scl.x));
-         vis->SetProperty(I3DPROP_ATMO_F_SCALE_Y, I3DFloatAsInt(scl.y));
-      }
-      mod->Release();
+           vis->SetProperty(I3DPROP_ATMO_F_DIR_X, I3DFloatAsInt(dir.x));
+           vis->SetProperty(I3DPROP_ATMO_F_DIR_Y, I3DFloatAsInt(dir.y));
+           vis->SetProperty(I3DPROP_ATMO_F_DIR_Z, I3DFloatAsInt(dir.z));
+           vis->SetProperty(I3DPROP_ATMO_I_NUM_ELEMS, tab_config->ItemI(TAB_I_WEATHER_DENSITY));
+           vis->SetProperty(I3DPROP_ATMO_F_DEPTH, I3DFloatAsInt(15.0f));
+           vis->SetProperty(I3DPROP_ATMO_F_SCALE_X, I3DFloatAsInt(scl.x));
+           vis->SetProperty(I3DPROP_ATMO_F_SCALE_Y, I3DFloatAsInt(scl.y));
+       }
+       mod->Release();
    }
 
-//----------------------------
+   //----------------------------
 
-   void InitTerrainDetail(){
+   void InitTerrainDetail() {
 
-      if(!tab_config->ItemB(TAB_B_TERRDET_USE))
-         return;
+       if (!tab_config->ItemB(TAB_B_TERRDET_USE))
+           return;
 
-      const char *mask = tab_config->ItemS(TAB_S20_TERRDET_MASK);
-      if(*mask){
-         S_terrdetail_init tdi; 
+       const char* mask = tab_config->ItemS(TAB_S20_TERRDET_MASK);
+       if (*mask) {
+           S_terrdetail_init tdi;
 
-         tdi.visible_distance = tab_config->ItemF(TAB_F_TERRDET_VISIBILITY);
-         C_vector<dword> set_map;
-         for(int i=tab_config->ArrayLen(TAB_S20_TERRDET_MATMASK); i--; ){
-            const char *mat_name = tab_config->ItemS(TAB_S20_TERRDET_MATMASK, i);
-            if(*mat_name){
-               dword set_i = tab_config->ItemE(TAB_E_TERRDET_MODELSET, i);
-               assert(set_i < (tab_materials->ArrayLen(TAB_S24_MAT_MODELSET_NAME)/TAB_MAT_NUM_MODELS_IN_SET));
-                              //check if we have already this one created
-               for(int ii=tdi.model_sets.size(); ii--; ){
-                  if(set_map[ii]==set_i)
-                     break;
-               }
-               if(ii==-1){
-                  set_map.push_back(set_i);
-                              //store the model set
-                  ii = tdi.model_sets.size();
-                  tdi.model_sets.push_back(S_terrdetail_init::S_model_set());
-                  S_terrdetail_init::S_model_set &ms = tdi.model_sets.back();
+           tdi.visible_distance = tab_config->ItemF(TAB_F_TERRDET_VISIBILITY);
+           C_vector<dword> set_map;
+           for (int i = tab_config->ArrayLen(TAB_S20_TERRDET_MATMASK); i--; ) {
+               const char* mat_name = tab_config->ItemS(TAB_S20_TERRDET_MATMASK, i);
+               if (*mat_name) {
+                   dword set_i = tab_config->ItemE(TAB_E_TERRDET_MODELSET, i);
+                   assert(set_i < (tab_materials->ArrayLen(TAB_S24_MAT_MODELSET_NAME) / TAB_MAT_NUM_MODELS_IN_SET));
+                   //check if we have already this one created
+                   for (int ii = tdi.model_sets.size(); ii--; ) {
+                       if (set_map[ii] == set_i)
+                           break;
+                   }
+                   if (ii == -1) {
+                       set_map.push_back(set_i);
+                       //store the model set
+                       ii = tdi.model_sets.size();
+                       tdi.model_sets.push_back(S_terrdetail_init::S_model_set());
+                       S_terrdetail_init::S_model_set& ms = tdi.model_sets.back();
 
-                  bool set_align = tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, set_i*TAB_MAT_NUM_MODELS_IN_SET);
-                              //insert all models
-                  for(dword i=1; i<TAB_MAT_NUM_MODELS_IN_SET; i++){
-                     int indx = set_i*TAB_MAT_NUM_MODELS_IN_SET + i;
-                     const char *mname = tab_materials->ItemS(TAB_S24_MAT_MODELSET_NAME, indx);
-                     if(*mname){
-                        float ratio = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, indx);
-                        bool align = (set_align || tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, indx));
-                        if(mname[0]!='#'){
-                           ms.model_sources.push_back(S_terrdetail_init::S_model_set::S_model_source(mname, ratio, align));
-                        }else{
-                           dword set_i = atoi(mname+1);
-                           if(set_i>=(tab_materials->ArrayLen(TAB_S24_MAT_MODELSET_NAME)/TAB_MAT_NUM_MODELS_IN_SET)){
-                              ErrReport("Invalid terraindetail set number!", editor);
-                              continue;
+                       bool set_align = tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, set_i * TAB_MAT_NUM_MODELS_IN_SET);
+                       //insert all models
+                       for (dword i = 1; i < TAB_MAT_NUM_MODELS_IN_SET; i++) {
+                           int indx = set_i * TAB_MAT_NUM_MODELS_IN_SET + i;
+                           const char* mname = tab_materials->ItemS(TAB_S24_MAT_MODELSET_NAME, indx);
+                           if (*mname) {
+                               float ratio = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, indx);
+                               bool align = (set_align || tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, indx));
+                               if (mname[0] != '#') {
+                                   ms.model_sources.push_back(S_terrdetail_init::S_model_set::S_model_source(mname, ratio, align));
+                               }
+                               else {
+                                   dword set_i = atoi(mname + 1);
+                                   if (set_i >= (tab_materials->ArrayLen(TAB_S24_MAT_MODELSET_NAME) / TAB_MAT_NUM_MODELS_IN_SET)) {
+                                       ErrReport("Invalid terraindetail set number!", editor);
+                                       continue;
+                                   }
+                                   bool set_align = tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, set_i * TAB_MAT_NUM_MODELS_IN_SET);
+                                   for (dword i = 1; i < TAB_MAT_NUM_MODELS_IN_SET; i++) {
+                                       int indx = set_i * TAB_MAT_NUM_MODELS_IN_SET + i;
+                                       const char* mname = tab_materials->ItemS(TAB_S24_MAT_MODELSET_NAME, indx);
+                                       if (*mname) {
+                                           float r = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, indx) * ratio;
+                                           bool al = (set_align || tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, indx));
+                                           ms.model_sources.push_back(S_terrdetail_init::S_model_set::S_model_source(
+                                               mname, r, (al || align)));
+                                       }
+                                   }
+                               }
                            }
-                           bool set_align = tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, set_i*TAB_MAT_NUM_MODELS_IN_SET);
-                           for(dword i=1; i<TAB_MAT_NUM_MODELS_IN_SET; i++){
-                              int indx = set_i*TAB_MAT_NUM_MODELS_IN_SET + i;
-                              const char *mname = tab_materials->ItemS(TAB_S24_MAT_MODELSET_NAME, indx);
-                              if(*mname){
-                                 float r = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, indx) * ratio;
-                                 bool al = (set_align || tab_materials->ItemB(TAB_B_MAT_MODELSET_ALIGN, indx));
-                                 ms.model_sources.push_back(S_terrdetail_init::S_model_set::S_model_source(
-                                    mname, r, (al || align)));
-                              }
-                           }
-                        }
-                     }
-                  }
-                  ms.density = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, set_i*TAB_MAT_NUM_MODELS_IN_SET);
+                       }
+                       ms.density = tab_materials->ItemF(TAB_F_MAT_MODELSET_RATIO, set_i * TAB_MAT_NUM_MODELS_IN_SET);
+                   }
+                   if (tdi.model_sets[ii].model_sources.size())
+                       tdi.model_sets[ii].material_dests.push_back(mat_name);
+                   else
+                       ErrReport("Used empty terraindetail set!", editor);
                }
-               if(tdi.model_sets[ii].model_sources.size())
-                  tdi.model_sets[ii].material_dests.push_back(mat_name);
-               else
-                  ErrReport("Used empty terraindetail set!", editor);
-            }
-         }
+           }
 
-         tdi.terrain_name_base = mask;
+           tdi.terrain_name_base = mask;
 
-         terrain_detail = CreateTerrainDetail(scene, tdi);
-         terrain_detail->Release();
-      }
+           terrain_detail = CreateTerrainDetail(scene, tdi);
+           terrain_detail->Release();
+       }
    }
 
-//----------------------------
-// Enumeration function called by GameBegin on all frames - used to initialize frames, actors, scripts, etc.
-   static I3DENUMRET I3DAPI cbGameBegin(PI3D_frame frm, dword c){
+   //----------------------------
+   // Enumeration function called by GameBegin on all frames - used to initialize frames, actors, scripts, etc.
+   static I3DENUMRET I3DAPI cbGameBegin(PI3D_frame frm, dword c) {
 
-      C_game_mission_imp &mission = *(C_game_mission_imp*)c;
+       C_game_mission_imp& mission = *(C_game_mission_imp*)c;
 
-      S_frame_info *fi = GetFrameInfo(frm);
-      if(fi && fi->vm){
-                        //call script's GameBegin function
-         script_man->RunFunction(frm, "GameBegin", &mission);
-      }
-      return I3DENUMRET_OK;
+       S_frame_info* fi = GetFrameInfo(frm);
+       if (fi && fi->vm) {
+           //call script's GameBegin function
+           script_man->RunFunction(frm, "GameBegin", &mission);
+       }
+       return I3DENUMRET_OK;
    }
 
-//----------------------------
+   //----------------------------
 
-   PC_actor CreatePlayer(){
+   PC_actor CreatePlayer() {
 
-      PC_actor hero = NULL;
-                              //initialize hero
-      PI3D_frame hero_loc = scene->FindFrame("hero", ENUMF_DUMMY);
-      if(hero_loc){
-         hero = CreateActor(hero_loc, ACTOR_PLAYER);
-      }
-      return hero;
+       PC_actor hero = NULL;
+       //initialize hero
+       PI3D_frame hero_loc = scene->FindFrame("hero", ENUMF_DUMMY);
+       if (hero_loc) {
+           hero = CreateActor(hero_loc, ACTOR_PLAYER);
+       }
+       return hero;
    }
 
-//----------------------------
+   //----------------------------
 
 public:
-   C_game_mission_imp()
-   {
-   }
+    C_game_mission_imp()
+    {
+    }
 
-   virtual ~C_game_mission_imp(){
-      Close();
-      tab_config->Release();
-   }
+    virtual ~C_game_mission_imp() {
+        Close();
+        tab_config->Release();
+    }
 
-//----------------------------
+    //----------------------------
 
-   virtual dword GetID() const{ return TICK_CLASS_ID_GAME_MISSION; }
+    virtual dword GetID() const { return TICK_CLASS_ID_GAME_MISSION; }
 
-//----------------------------
+    //----------------------------
 
-   virtual C_game_camera *GetGameCamera(){ return game_cam; }
-   virtual const C_game_camera *GetGameCamera() const{ return game_cam; }
+    virtual C_game_camera* GetGameCamera() { return game_cam; }
+    virtual const C_game_camera* GetGameCamera() const { return game_cam; }
 
-//----------------------------
+    //----------------------------
 
-   virtual E_MISSION_IO Open(const char *dir, dword open_flags,
-      I3D_LOAD_CB_PROC *cb_proc = NULL, void *load_cb_context = 0){
+    virtual E_MISSION_IO Open(const char* dir, dword open_flags,
+        I3D_LOAD_CB_PROC* cb_proc = NULL, void* load_cb_context = 0) {
 
-      if(open_flags&OPEN_MERGE_MODE){
-      }else{
-         tab_config->Load(&templ_mission_cfg, TABOPEN_TEMPLATE);
-      }
-      E_MISSION_IO mio = C_mission::Open(dir, open_flags, cb_proc, load_cb_context);
+        if (open_flags & OPEN_MERGE_MODE) {
+        }
+        else {
+            tab_config->Load(&templ_mission_cfg, TABOPEN_TEMPLATE);
+        }
+        E_MISSION_IO mio = C_mission::Open(dir, open_flags, cb_proc, load_cb_context);
 
-      return mio;
-   }
+        return mio;
+    }
 
-//----------------------------
+    //----------------------------
 
-   virtual void Close(dword close_flags = 0);
+    virtual void Close(dword close_flags = 0);
 
-   virtual void GameBegin();
-   virtual void GameEnd();
-   virtual void Tick(const S_tick_context &tc);
-   virtual void Render();
+    virtual void GameBegin();
+    virtual void GameEnd();
+    virtual void Tick(const S_tick_context& tc);
+    virtual void Render();
 
-//----------------------------
+    //----------------------------
 
-   virtual PC_actor CreateActor(PI3D_frame frm, E_ACTOR_TYPE, const void *data = NULL);
+    virtual PC_actor CreateActor(PI3D_frame frm, E_ACTOR_TYPE, const void* data = NULL);
 
-//----------------------------
-// Destroy specified actor.
-   virtual void DestroyActor(PC_actor);
+    //----------------------------
+    // Destroy specified actor.
+    virtual void DestroyActor(PC_actor);
 
-//----------------------------
+    //----------------------------
 
-   virtual bool MissionOver(E_MISSION_RESULT gr, const char *msg_id){
+    virtual bool MissionOver(E_MISSION_RESULT gr, const char* msg_id) {
 
-      switch(mission_state){
-      case MS_IN_GAME:
-         {
+        switch (mission_state) {
+        case MS_IN_GAME:
+        {
             mission_state = MS_QUIT_REQUEST;
             mission_over_result = gr;
             mission_over_msg_id = msg_id;
             return true;
-         }
-         break;
-      default:
-         {
-                              //valid state, it is possible to re-enter; just ignore
-            //assert(0);
-         }
-      }
-      return false;
-   }
+        }
+        break;
+        default:
+        {
+            //valid state, it is possible to re-enter; just ignore
+//assert(0);
+        }
+        }
+        return false;
+    }
 
-//----------------------------
+    //----------------------------
 
-   virtual CPC_actor FindActor(const char *name) const{
+    virtual CPC_actor FindActor(const char* name) const {
 
-      for(dword i=0; i<actors.size(); i++){
-         if(!strcmp(actors[i]->GetName(), name))
-            return actors[i];
-      }
-      return NULL;
-   }
+        for (dword i = 0; i < actors.size(); i++) {
+            if (!strcmp(actors[i]->GetName(), name))
+                return actors[i];
+        }
+        return NULL;
+    }
 
-   virtual PC_actor FindActor(const char *name){
-      return (PC_actor)((const C_game_mission_imp*)this)->FindActor(name);
-   }
+    virtual PC_actor FindActor(const char* name) {
+        return (PC_actor)((const C_game_mission_imp*)this)->FindActor(name);
+    }
 
-//----------------------------
+    //----------------------------
 
-   virtual PI3D_sound PlaySound(const char *snd_name, float min_dist, float max_dist,
-      PI3D_frame link_to = NULL, const S_vector &pos = S_vector(0.0f, 0.0f, 0.0f), float volume = 1.0f){
+    virtual PI3D_sound PlaySound(const char* snd_name, float min_dist, float max_dist,
+        PI3D_frame link_to = NULL, const S_vector& pos = S_vector(0.0f, 0.0f, 0.0f), float volume = 1.0f) {
 
-      if(!isound)
-         return NULL;
+        if (!isound)
+            return NULL;
 
-      if(volume<0.0f || volume> 1.001f){
-         ErrReport(C_fstr("C_game_mission::PlaySound: invalid volume: %.3f", volume), editor);
-      }
+        if (volume < 0.0f || volume> 1.001f) {
+            ErrReport(C_fstr("C_game_mission::PlaySound: invalid volume: %.3f", volume), editor);
+        }
 
-      PI3D_sound snd = I3DCAST_SOUND(scene->CreateFrame(FRAME_SOUND));
-      I3D_RESULT ir = sound_cache.Open(snd, snd_name, scene, 0, ErrReport, editor);
-      if(I3D_SUCCESS(ir)){
-         snd->SetSoundType(I3DSOUND_POINT);
-         snd->SetVolume(volume);
-         snd->SetLoop(false);
+        PI3D_sound snd = I3DCAST_SOUND(scene->CreateFrame(FRAME_SOUND));
+        I3D_RESULT ir = sound_cache.Open(snd, snd_name, scene, 0, ErrReport, editor);
+        if (I3D_SUCCESS(ir)) {
+            snd->SetSoundType(I3DSOUND_POINT);
+            snd->SetVolume(volume);
+            snd->SetLoop(false);
 
-         S_effect_init ei;
-         ei.pos = pos;
+            S_effect_init ei;
+            ei.pos = pos;
 
-         if(!link_to){
-            link_to = scene->GetPrimarySector();
-         }else{
-            float r_scl = 1.0f / link_to->GetMatrix()(0).Magnitude();
-            min_dist *= r_scl;
-            max_dist *= r_scl;
-         }
-         ei.link_to = link_to;
-         snd->SetRange(min_dist, max_dist);
-         snd->SetOn(true);
-         //snd->LinkTo(scene->GetPrimarySector());
+            if (!link_to) {
+                link_to = scene->GetPrimarySector();
+            }
+            else {
+                float r_scl = 1.0f / link_to->GetMatrix()(0).Magnitude();
+                min_dist *= r_scl;
+                max_dist *= r_scl;
+            }
+            ei.link_to = link_to;
+            snd->SetRange(min_dist, max_dist);
+            snd->SetOn(true);
+            //snd->LinkTo(scene->GetPrimarySector());
 
-         ei.mode_flags = EFFECT_AUTO_DESTROY;
-         CreateActor(snd, ACTOR_EFFECT, &ei);
+            ei.mode_flags = EFFECT_AUTO_DESTROY;
+            CreateActor(snd, ACTOR_EFFECT, &ei);
 
-         snd->Release();
-         return snd;
-      }else{
-         snd->Release();
-         return NULL;
-      }
-   }
+            snd->Release();
+            return snd;
+        }
+        else {
+            snd->Release();
+            return NULL;
+        }
+    }
 
-//----------------------------
+    //----------------------------
 
-   virtual I3D_RESULT PlayAmbientSound(const char *snd_name, float volume = 1.0f){
-   
-      if(!isound)
-         return I3D_OK;
+    virtual I3D_RESULT PlayAmbientSound(const char* snd_name, float volume = 1.0f) {
 
-      PI3D_sound snd = I3DCAST_SOUND(scene->CreateFrame(FRAME_SOUND));
-      I3D_RESULT ir = sound_cache.Open(snd, snd_name, scene, I3DLOAD_SOUND_SOFTWARE, ErrReport, editor);
-      if(I3D_SUCCESS(ir)){
-         snd->SetSoundType(I3DSOUND_AMBIENT);
-         snd->SetVolume(volume);
-         snd->SetLoop(false);
-         snd->SetOn(true);
+        if (!isound)
+            return I3D_OK;
 
-         S_effect_init ei;
-         ei.mode_flags = EFFECT_AUTO_DESTROY;
-         CreateActor(snd, ACTOR_EFFECT, &ei);
-      }else{
-         ErrReport(C_fstr("Can't load sound: '%s'", snd_name), editor);
-      }
-      snd->Release();
-      return ir;
-   }
+        PI3D_sound snd = I3DCAST_SOUND(scene->CreateFrame(FRAME_SOUND));
+        I3D_RESULT ir = sound_cache.Open(snd, snd_name, scene, I3DLOAD_SOUND_SOFTWARE, ErrReport, editor);
+        if (I3D_SUCCESS(ir)) {
+            snd->SetSoundType(I3DSOUND_AMBIENT);
+            snd->SetVolume(volume);
+            snd->SetLoop(false);
+            snd->SetOn(true);
 
-//----------------------------
-                              //actions sounds mapping
-                              // key: first is 1st material, second is 2nd material
-                              // value: base sound name, plus number of variations
-                              //key.second: value E_ACTION_ID_HIT means hit group,
-                              // value E_ACTION_ID_STEP means step group
-   struct S_action_snd_entry{
-      C_str name_base;
-      mutable dword num_vars;
-      float volume;
+            S_effect_init ei;
+            ei.mode_flags = EFFECT_AUTO_DESTROY;
+            CreateActor(snd, ACTOR_EFFECT, &ei);
+        }
+        else {
+            ErrReport(C_fstr("Can't load sound: '%s'", snd_name), editor);
+        }
+        snd->Release();
+        return ir;
+    }
 
-      S_action_snd_entry():
-         num_vars(0),
-         volume(1.0f)
-      {}
+    //----------------------------
+                                  //actions sounds mapping
+                                  // key: first is 1st material, second is 2nd material
+                                  // value: base sound name, plus number of variations
+                                  //key.second: value E_ACTION_ID_HIT means hit group,
+                                  // value E_ACTION_ID_STEP means step group
+    struct S_action_snd_entry {
+        C_str name_base;
+        mutable dword num_vars;
+        float volume;
 
-      void MakeCount() const{
+        S_action_snd_entry() :
+            num_vars(0),
+            volume(1.0f)
+        {}
 
-         for(dword i = 1; i < 10; i++){
-            PC_dta_stream dta = NULL;
-            {
-               C_str s1;
-               s1 = C_str(C_xstr("%"ACTION_SOUND_DIR"%_%.ogg") %sound_cache.GetDir() %name_base %i);
-               dta = DtaCreateStream(s1);
-               if(!dta){
-                  s1 = C_str(C_xstr("%"ACTION_SOUND_DIR"%_%.wav") %sound_cache.GetDir() %name_base %i);
+        void MakeCount() const {
+
+            for (dword i = 1; i < 10; i++) {
+                PC_dta_stream dta = NULL;
+                {
+                    C_str s1;
+                    s1 = C_str(C_xstr("%Action\\%_%.ogg") % sound_cache.GetDir() % name_base % i);
+                    dta = DtaCreateStream(s1);
+                    if (!dta) {
+                        s1 = C_str(C_xstr("%Action\\%_%.wav") %sound_cache.GetDir() %name_base %i);
                   dta = DtaCreateStream(s1);
                }
                if(dta)

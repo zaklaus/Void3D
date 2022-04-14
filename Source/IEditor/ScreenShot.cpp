@@ -1,10 +1,10 @@
 #include "all.h"
 #include "common.h"
+#define SCREENSHOT_TYPE "png"
 
 //----------------------------
 
 //#define SCREENSHOT_TYPE "png"
-#define SCREENSHOT_TYPE "png"
 
 //----------------------------
 
@@ -45,7 +45,7 @@ public:
                               //make unique number
             {
                for(int i=0; i<1000; i++){
-                  C_fstr s("%s [%.3i]."SCREENSHOT_TYPE, (const char*)name, i);
+                  C_fstr s("%s [%.3i].png", (const char*)name, i);
                   PC_dta_stream dta = DtaCreateStream(s);
                   if(!dta){
                      name = s;

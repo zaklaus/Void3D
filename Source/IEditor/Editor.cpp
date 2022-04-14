@@ -97,7 +97,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, dword fdwReason, void *lpvReserved){
    case DLL_PROCESS_ATTACH:
       {
                               //this func switches to MSVC mem allocation, instead of system allocation
-         _set_sbh_threshold(1016);
+         //_set_sbh_threshold(1016);
 #if defined _MSC_VER && defined _DEBUe && !defined DEBUG_NO_LEAK_WARNING
                               //report memory leaks at exit
          _CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
@@ -382,9 +382,9 @@ private:
       virtual void Tick(byte skeys, int time, int mouse_rx, int mouse_ry, int mouse_rz, byte mouse_butt){
 
          for(t_dirty_toolbars::iterator it = dirty_toolbars.begin(); it!=dirty_toolbars.end(); it++){
-            C_toolbar_special *tb = *it;
+            const C_toolbar_special *tb = *it;
             S_toolbar_info &ti = toolbar_info[tb->GetName()];
-            HWND hwnd_tb = (HWND)tb->GetHWND();
+            HWND hwnd_tb = (HWND)((C_toolbar_special *)tb)->GetHWND();
             dword df = ti.dirty_flags;
             assert(df);
             ti.dirty_flags = 0;
@@ -394,14 +394,14 @@ private:
             }
             if(df&S_toolbar_info::DIRTY_SIZE){
                               //adjust pos
-               tb->Resize(ti.wnd_size.x, ti.wnd_size.y);
+                ((C_toolbar_special*)tb)->Resize(ti.wnd_size.x, ti.wnd_size.y);
             }
             if(df&S_toolbar_info::DIRTY_ON){
                ShowWindow(hwnd_tb, ti.on ? SW_SHOWNOACTIVATE : SW_HIDE);
                ed->CheckMenu(this, ti.action_id, ti.on);
             }
             if(df&S_toolbar_info::DIRTY_HEIGHT){
-               tb->SetNumLines(ti.height);
+               ((C_toolbar_special*)tb)->SetNumLines(ti.height);
             }
          }
          dirty_toolbars.clear();

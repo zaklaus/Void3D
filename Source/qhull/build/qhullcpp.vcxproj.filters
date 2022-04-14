@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\Coordinates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\PointCoordinates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\Qhull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacetList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacetSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullHyperplane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPointSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPoints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullQh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullRidge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullStat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullVertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullVertexSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RboxPoints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RoadError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RoadLogEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\Coordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\functionObjects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\PointCoordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\Qhull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacetList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullFacetSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullHyperplane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPoints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullPointSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullQh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullRidge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullStat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\QhullVertexSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RboxPoints.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RoadError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhullcpp\RoadLogEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\qhulltest\RoadTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{50A9A7F9-3191-3B46-9CB0-85882F6FE167}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E3E97D5C-0A3F-350E-9D3E-B31865F747B8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,17 +1,14 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ISound_Thunk", "Thunk\ISound_thunk.vcproj", "{41249001-F34D-4D64-A3EA-515937BB36A5}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32408.312
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ISound_Thunk", "Thunk\ISound_thunk.vcxproj", "{41249001-F34D-4D64-A3EA-515937BB36A5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isnd2", "isnd2.vcproj", "{103B845A-5EC7-4C70-9957-4D97CE49797B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7F4D8623-718E-4ADA-9B3A-A372371F0B20} = {7F4D8623-718E-4ADA-9B3A-A372371F0B20}
-		{886A42A5-4D9B-4592-A0E2-C547E4E3014F} = {886A42A5-4D9B-4592-A0E2-C547E4E3014F}
-		{41249001-F34D-4D64-A3EA-515937BB36A5} = {41249001-F34D-4D64-A3EA-515937BB36A5}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "isnd2", "isnd2.vcxproj", "{103B845A-5EC7-4C70-9957-4D97CE49797B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ogg", "OggVorbis\Lib\Ogg\ogg.vcproj", "{886A42A5-4D9B-4592-A0E2-C547E4E3014F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ogg", "OggVorbis\Lib\Ogg\ogg.vcxproj", "{886A42A5-4D9B-4592-A0E2-C547E4E3014F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vorbis", "OggVorbis\Lib\Vorbis\vorbis.vcproj", "{7F4D8623-718E-4ADA-9B3A-A372371F0B20}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vorbis", "OggVorbis\Lib\Vorbis\vorbis.vcxproj", "{7F4D8623-718E-4ADA-9B3A-A372371F0B20}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wav_conv", "Convertor\snd_conv.vcproj", "{9DCE49C6-2688-4847-8AA1-F1565308AC12}"
 EndProject
@@ -43,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F9E4CFF-5A53-4E1E-822A-D2595AE717A3}
 	EndGlobalSection
 EndGlobal

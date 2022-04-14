@@ -659,7 +659,7 @@ bool C_bsp_tree::FaceListItersection_S(const S_bsp_node &node, I3D_collision_dat
          continue;
       face_cache.SetOn(face_index);
 
-      const S_bsp_triface &tf = pfaces[face_index];
+      S_bsp_triface &tf = (S_bsp_triface)pfaces[face_index];
 
                               //check if frame was tested before
       if(frame_cache.IsOn(tf.origin.frm_id))

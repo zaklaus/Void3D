@@ -787,7 +787,7 @@ void I3D_mesh_base::CreateLODs(dword min_num_faces, dword num_lods_requested, fl
                   break;
                }
             }
-            assert(j!=-1);
+            assert(i!=-1);
          }
          edge_verts.clear();
          used = false;

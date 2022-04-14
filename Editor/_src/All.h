@@ -26,3 +26,7 @@
 #pragma warning(pop)
 
 #include "Common.h"
+
+// hovna
+#define ACTION_SOUND_DIR "Action\\"
+#define SCREENSHOT_TYPE "png"

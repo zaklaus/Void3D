@@ -23,7 +23,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, dword fdwReason, void *lpvReserved){
    case DLL_PROCESS_ATTACH:
       {
                               //this func switches to MSVC mem allocation, instead of system allocation
-         _set_sbh_threshold(1016);
+         //_set_sbh_threshold(1016);
       }
       break;
 

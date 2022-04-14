@@ -679,7 +679,8 @@ public:
 
 //----------------------------
 
-   virtual void *GetHWND(){ return hwnd; }
+   virtual void* GetHWND() { return hwnd; }
+   virtual void* GetHWND() const { return hwnd; }
 
 //----------------------------
 

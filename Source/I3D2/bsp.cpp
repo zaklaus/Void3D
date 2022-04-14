@@ -1315,7 +1315,7 @@ bool C_bsp_tree::FaceListItersection(const S_bsp_node &node, const float part_di
       //++scene->col_stats[I3D_scene::COL_STATS_L_F];
 #endif
       BSP_index curr_face_id = p_flist[i];
-      const S_bsp_triface &tf = p_faces[curr_face_id];
+      S_bsp_triface &tf = (S_bsp_triface)p_faces[curr_face_id];
 
       CPI3D_frame origin_frm = frames.GetFrame(tf.origin.frm_id);
       assert(origin_frm);
@@ -1689,7 +1689,7 @@ bool C_bsp_tree::FaceListItersection_MS(const S_bsp_node &node, float near_dist,
 
    bool ret = false;
    const BSP_index *pflist = node.GetFaces();
-   const S_bsp_triface *pfaces = &faces.front();
+   S_bsp_triface *pfaces = (S_bsp_triface*)&faces.front();
                               //FIXME: from and to are tested as entire original
                               //segmet due risc that zero length dir could accure.
                               //this require recomputing sphere/plane move line clip
@@ -1705,7 +1705,7 @@ bool C_bsp_tree::FaceListItersection_MS(const S_bsp_node &node, float near_dist,
 #endif
 
       BSP_index curr_face_id = pflist[i];
-      const S_bsp_triface &tf = pfaces[curr_face_id];
+      S_bsp_triface &tf = (S_bsp_triface)pfaces[curr_face_id];
                               //todo: pass info from header to CheckCol_MS_F, avoid recomputation.
 //PR_BEG;
       bool b = CheckCol_MS_F(tf, th, curr_face_id);
@@ -2306,7 +2306,7 @@ void C_bsp_tree::DebugHighlight(const S_preprocess_context &pc) const{
    const S_bsp_triface *p_faces = faces.size() ? &faces.front() : NULL;
 
    for(int i = faces.size(); i--;){
-      const S_bsp_triface &tf = p_faces[i];
+      S_bsp_triface &tf = (S_bsp_triface)p_faces[i];
 
       if(!tf.highlight)
          continue;

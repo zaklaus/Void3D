@@ -1059,6 +1059,8 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
       //----------------------------
 
          bool CheckVertexCollision(const S_matrix &m, PI3D_visual vis){
+             int i;
+             int pi;
 
             PI3D_mesh_base mb = vis->GetMesh();
             if(!mb)
@@ -1067,7 +1069,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
             S_matrix m_inv = ~m;
                               //transform planes to local space
             S_plane vf_loc[5];
-            for(int i=5; i--; )
+            for(i=5; i--; )
                vf_loc[i] = vf[i] * m_inv;
 
             const void *verts = mb->LockVertices();
@@ -1077,7 +1079,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
             if(full_in){
                for(i=numv; i--; ){
                   const S_vector *v = (const S_vector*)(((byte*)verts) + i * vstride);
-                  for(int pi=5; pi--; ){
+                  for(pi=5; pi--; ){
                      float d = v->DistanceToPlane(vf_loc[pi]);
                      if(d >= 0.0f)
                         break;
@@ -1090,7 +1092,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
                   is_in = true;
             }else{
                S_vector hull_pts_loc[4];
-               for(int i=4; i--; )
+               for(i=4; i--; )
                   hull_pts_loc[i] = hull_pts[i] * m_inv;
 
                S_vector cpos_loc = cpos * m_inv;

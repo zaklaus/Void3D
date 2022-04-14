@@ -112,7 +112,8 @@ class C_edit_Validity: public C_editor_item{
          for(i=num_faces; i--; ){
                               //copy face, it's accessed in loop
             const I3D_triface f0 = faces[i];
-            for(int j=i; j--; ){
+            int j;
+            for(j=i; j--; ){
                               //access by reference, it's faster
                const I3D_triface &f1 = faces[j];
 
@@ -228,11 +229,13 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbEnum, (dword)&v, ENUMF_MODEL);
 
-      for(int i=v.size(); i-- ; ){
+      int i;
+      for(i=v.size(); i-- ; ){
          PI3D_model model = v[i];
          const S_vector &pos = model->GetWorldPos();
          const S_quat &rot = model->GetRot();
-         for(int j=i; j-- ; ){
+         int j;
+         for(j=i; j-- ; ){
             PI3D_model model1 = v[j];
             const S_vector &pos1 = model1->GetWorldPos();
             const S_quat &rot1 = model1->GetRot();
@@ -284,7 +287,8 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbEnum, (dword)&v, ENUMF_VISUAL);
 
-      for(int i=v.size(); i-- ; ){
+      int i;
+      for(i=v.size(); i-- ; ){
          PI3D_visual vis = v[i];
          if(vis->GetVisualType()==I3D_VISUAL_LIT_OBJECT){
             CPI3D_mesh_base mb = vis->GetMesh();
@@ -292,7 +296,8 @@ class C_edit_Validity: public C_editor_item{
                continue;
             /*
             C_str str;
-            for(int i=mb->NumFGroups(); i--; ){
+            int i;
+            for(i=mb->NumFGroups(); i--; ){
                PI3D_face_group fg = (PI3D_face_group)&mb->GetFGroups()[i];
                CPI3D_material mat = fg->GetMaterial();
                if(mat){
@@ -353,7 +358,8 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbAdd, (dword)&list, ENUMF_LIGHT);
 
-      for(int i=list.size(); i--; ){
+      int i;
+      for(i=list.size(); i--; ){
          PI3D_light lp = list[i];
          if(!lp->NumLightSectors()){
             e_log->AddText(C_fstr("Light in no sector: '%s'", (const char*)lp->GetName()));
@@ -385,7 +391,8 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbAdd, (dword)&list, ENUMF_SOUND);
 
-      for(int i=list.size(); i--; ){
+      int i;
+      for(i=list.size(); i--; ){
          PI3D_sound sp = list[i];
          PISND_source src = sp->GetSoundSource();
          if(src){
@@ -431,10 +438,12 @@ class C_edit_Validity: public C_editor_item{
       S_hlp::cbAdd(ed->GetScene()->GetBackdropSector(), (dword)&sectors);
 
                               //check lights
-      for(int i=sectors.size(); i--; ){
+      int i;
+      for(i=sectors.size(); i--; ){
          PI3D_sector sct = sectors[i];
          C_vector<PI3D_light> fog_lights;
-         for(int j=sct->NumLights(); j--; ){
+         int j;
+         for(j=sct->NumLights(); j--; ){
             PI3D_light lp = sct->GetLight(j);
             switch(lp->GetLightType()){
             case I3DLIGHT_FOG:
@@ -445,7 +454,8 @@ class C_edit_Validity: public C_editor_item{
          if(fog_lights.size()>1){
             C_str light_names;
             const C_vector<PI3D_light> &list = fog_lights;
-            for(int i=list.size(); i--; ){
+            int i;
+            for(i=list.size(); i--; ){
                if(light_names.Size())
                   light_names += "; ";
                light_names = C_fstr("%s\"%s\"", (const char*)light_names, (const char*)list[i]->GetName());
@@ -472,7 +482,8 @@ class C_edit_Validity: public C_editor_item{
          const S_plane *pls = sct->GetBoundPlanes();
 
          const PI3D_portal *prts = sct->GetPortals();
-         for(int pi=sct->NumPortals(); pi--; ){
+         int pi;
+         for(pi=sct->NumPortals(); pi--; ){
             PI3D_portal prt = *prts++;
 
                               //check if all points of portal are on edge of sector
@@ -481,7 +492,8 @@ class C_edit_Validity: public C_editor_item{
 
             dword numv = prt->NumVertices();
             const S_vector *verts = prt->GetVertices();
-            for(int vi=numv; vi--; ){
+            int vi;
+            for(vi=numv; vi--; ){
                const S_vector &v = verts[vi];
                               //check if there's such plane on which we lie
                for(dword pli=num_pl; pli--; ){
@@ -541,7 +553,8 @@ class C_edit_Validity: public C_editor_item{
             S_vector bb_center_world = bb_center * m;
                               //check using thresh
             const float thresh = .05f;
-            for(int i=6; i--; ){
+            int i;
+            for(i=6; i--; ){
                S_vector pt_check = bb_center_world;
                pt_check[i/2] += (i&1) ? thresh : -thresh;
                bool is_inside = sct->CheckPoint(pt_check);
@@ -569,10 +582,12 @@ class C_edit_Validity: public C_editor_item{
             S_vector bb_center_world = bb_center * m;
                               //check using thresh
             const float thresh = .05f;
-            for(int i=6; i--; ){
+            int i;
+            for (i = 6; i--; ) {
                S_vector pt_check = bb_center_world;
                pt_check[i/2] += (i&1) ? thresh : -thresh;
-               for(int j=sectors.size(); j--; ){
+               int j;
+               for(j=sectors.size(); j--; ){
                   if(sectors[j]->CheckPoint(pt_check))
                      break;
                }
@@ -586,7 +601,8 @@ class C_edit_Validity: public C_editor_item{
             bbox.Expand(bbox_full);
             for(i=8; i--; ){
                S_vector check_point = bbox_full[i] * m;
-               for(int j=sectors.size(); j--; ){
+               int j;
+               for(j=sectors.size(); j--; ){
                   if(sectors[j]->CheckPoint(check_point))
                      break;
                }
@@ -673,12 +689,14 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbAdd, (dword)&sectors, ENUMF_SECTOR);
 
-      for(int i=sectors.size(); i--; ){
+      int i;
+      for(i=sectors.size(); i--; ){
          PI3D_sector sct = sectors[i];
                               //check all frames (visuals and models)
          C_vector<PI3D_frame> frm_list;
          sct->EnumFrames(S_hlp::cbAdd1, (dword)&frm_list, ENUMF_MODEL);
-         for(int j=frm_list.size(); j--; ){
+         int j;
+         for(j=frm_list.size(); j--; ){
             PI3D_frame frm = frm_list[j];
             I3D_bound_volume bvol;
             frm->GetHRBoundVolume(&bvol);
@@ -717,7 +735,8 @@ class C_edit_Validity: public C_editor_item{
       };
       ed->GetScene()->EnumFrames(S_hlp::cbAdd, (dword)&list, ENUMF_VOLUME);
 
-      for(int i=list.size(); i--; ){
+      int i;
+      for(i=list.size(); i--; ){
          PI3D_volume vol = list[i];
          switch(vol->GetVolumeType()){
          case I3DVOLUME_SPHERE:
@@ -737,7 +756,8 @@ class C_edit_Validity: public C_editor_item{
          float scale = vol->GetScale();
          const S_vector &nu_scale = vol->GetNUScale();
          const S_quat &rot = vol->GetRot();
-         for(int j=i; j-- ; ){
+         int j;
+         for(j=i; j-- ; ){
             PI3D_volume vol1 = list[j];
             if(vol->GetVolumeType()!=vol1->GetVolumeType())
                continue;
@@ -765,7 +785,8 @@ class C_edit_Validity: public C_editor_item{
 
       C_buffer<C_str> files;
       OsCollectFiles(dir, "*.*", files, false, true);
-      for(int i=files.size(); i--; ){
+      int i;
+      for(i=files.size(); i--; ){
          C_str f = files[i];
          f.ToLower();
          for(dword ei=f.Size(); ei--; ){
@@ -807,7 +828,8 @@ class C_edit_Validity: public C_editor_item{
       PI3D_driver drv = ed->GetDriver();
 
       map<C_str, C_str> map_map;
-      for(int i=drv->NumDirs(I3DDIR_MAPS); i--; ){
+      int i;
+      for(i=drv->NumDirs(I3DDIR_MAPS); i--; ){
          const C_str &dir = drv->GetDir(I3DDIR_MAPS, i);
          ok = ValidateMapsDir(dir, map_map, e_log) && ok;
       }
@@ -1124,7 +1146,8 @@ public:
                               //collect unique materials
             for(set<PI3D_mesh_base>::const_iterator it=mb_list.begin(); it!=mb_list.end(); it++){
                PI3D_mesh_base mb = *it;
-               for(int j=mb->NumFGroups(); j--; ){
+               int j;
+               for(j=mb->NumFGroups(); j--; ){
                   mat_list.insert(((PI3D_face_group)&mb->GetFGroups()[j])->GetMaterial());
                }
             }
@@ -1134,7 +1157,8 @@ public:
             set<CPI3D_material>::const_iterator mat_it;
             for(mat_it=mat_list.begin(); mat_it!=mat_list.end(); mat_it++){
                CPI3D_material mat = *mat_it;
-               for(int mti=0; mti<MTI_LAST; mti++){
+               int mti;
+               for(mti=0; mti<MTI_LAST; mti++){
                   CPI3D_texture tp = ((PI3D_material)mat)->GetTexture((I3D_MATERIAL_TEXTURE_INDEX)mti);
                   if(tp){
                               //23-04-2003 jv: changed to 2, because we have only 2 filenames in tp
@@ -1182,7 +1206,8 @@ public:
                         const char *mat_name = "<unknown>";
                         for(mat_it=mat_list.begin(); mat_it!=mat_list.end(); mat_it++){
                            CPI3D_material mat = *mat_it;
-                           for(int mti=MTI_LAST; mti--; ){
+                           int mti;
+                           for(mti=MTI_LAST; mti--; ){
                               CPI3D_texture tp = ((PI3D_material)mat)->GetTexture((I3D_MATERIAL_TEXTURE_INDEX)mti);
                               if(tp){
                                  for(i=0; i<3; i++){

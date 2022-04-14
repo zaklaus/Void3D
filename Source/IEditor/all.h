@@ -31,3 +31,5 @@
 #ifdef _DEBUG                 //allow unused variables in design mode
 #pragma warning(disable: 4189)
 #endif
+
+#define SCREENSHOT_TYPE "png"

@@ -335,7 +335,8 @@ void I3D_light::Draw1(PI3D_scene scene, const S_view_frustum *vf, bool strong) c
    static struct S_auto_init{
       S_auto_init(){
                                  //init volume sphere
-         for(int i=0; i<SPHERE_NUM_VERTS; i++){
+          int i = 0;
+         for(i=0; i<SPHERE_NUM_VERTS; i++){
             sphere_c_list[i*2+0] = word(i + 0);
             sphere_c_list[i*2+1] = word(i + 1);
          }

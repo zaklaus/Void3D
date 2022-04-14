@@ -197,8 +197,8 @@ class C_editor_item_Stats_imp: public C_editor_item_Stats{
             S_hlp *hp = (S_hlp*)c;
             ++hp->num_models;
             PI3D_model mod = I3DCAST_MODEL(frm);
-
-            for(int i=hp->uni_mod_list.size(); i--; ){
+            int i;
+            for(i=hp->uni_mod_list.size(); i--; ){
                if(hp->uni_mod_list[i]->GetFileName() == mod->GetFileName())
                   break;
             }
@@ -235,7 +235,8 @@ class C_editor_item_Stats_imp: public C_editor_item_Stats{
             PI3D_sound snd = I3DCAST_SOUND(frm);
 
             C_vector<PI3D_sound> &uni_snd_list = *(C_vector<PI3D_sound>*)c;
-            for(int i=uni_snd_list.size(); i--; ){
+            int i;
+            for(i=uni_snd_list.size(); i--; ){
                if(uni_snd_list[i]->GetFileName() == snd->GetFileName())
                   break;
             }

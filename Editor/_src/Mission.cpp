@@ -786,7 +786,7 @@ E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB
       if(ok){
          t_model_frames::iterator it;
          for(it=lc.model_frames.begin(); it!=lc.model_frames.end(); it++){
-            PI3D_frame frm = (*it);
+            PI3D_frame frm = *(PI3D_frame*)&(*it);
             mod->AddFrame(frm);
          }
       }

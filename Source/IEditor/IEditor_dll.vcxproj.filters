@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{fa7a6839-7765-48d4-98de-e97d0ad4fd90}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\images">
+      <UniqueIdentifier>{5af8afbf-5343-421f-af1d-578fef952441}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\Cursors">
+      <UniqueIdentifier>{9f28eac5-f51e-4ee8-970d-a2c716be4e14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ilib_res.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Insanity.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\axes.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\bmp12.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\bmp13.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\bone.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\camera.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\dummy.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\envmap.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Font1.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Font1_a.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\I3d2.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\icon1.ico">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\IDUCK.BMP">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\letters.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Light_a.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\light_d.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Light_f.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Light_p.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\Light_s.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\sample.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\sound.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\sound_a.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\sound_p.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\sphere.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\target.png">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_bsp.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_create.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_debug.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_file.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_light.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_lmap.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_undo.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+    <Image Include="res\tb_validity.bmp">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="res\font.txt">
+      <Filter>Resource Files\images</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ARROW.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00001.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00002.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00003.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00004.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00005.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00006.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CUR00007.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00008.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00009.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00010.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00011.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00012.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00013.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00014.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00015.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00016.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cur00017.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CURSOR_C.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cursor_h.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\CURSOR_L.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cursor_o.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\cursor_t.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\mesh_inf.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\occluder.cur">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\SEEDPICK.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+    <None Include="res\SEEDPUT.CUR">
+      <Filter>Resource Files\images\Cursors</Filter>
+    </None>
+  </ItemGroup>
+</Project>

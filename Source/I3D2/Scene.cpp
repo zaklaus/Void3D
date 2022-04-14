@@ -1191,7 +1191,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
 
    IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
    HRESULT hr;
-
    dword fvf = ConvertFlags(vc_flags);
    if(fvf==-1)
       return I3DERR_INVALIDPARAMS;

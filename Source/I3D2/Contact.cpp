@@ -1200,7 +1200,7 @@ struct S_bsp_contact_context{
       for(const S_bsp_triface *f=marked_faces, *ff; f; ){
          ff = f;
          f = f->tag;
-         ff->tag = NULL;
+         ((S_bsp_triface * )ff)->tag = NULL;
       }
    }
 };
@@ -1229,7 +1229,7 @@ void C_bsp_tree::GenContactsOnNode(const S_bsp_node &node, const I3D_contact_dat
                               //check if we tested it before (by using linked list)
       if(tf.tag)
          continue;
-      tf.tag = cc.marked_faces;
+      ((S_bsp_triface*)&(tf))->tag = cc.marked_faces;
       cc.marked_faces = &tf;
 
       CPI3D_frame col_frm = frames.GetFrameInfo(tf.origin.GetFrameIndex()).frm;
@@ -1995,7 +1995,7 @@ void C_bsp_tree::GenerateContacts(const I3D_contact_data &cd, PI3D_driver drv) c
       const S_bsp_contact &c = cc.contacts[i];
       CPI3D_frame col_frm = frames.GetFrameInfo(c.tf->origin.GetFrameIndex()).frm;
       cd.cb_report(col_frm, c.pos, c.normal, c.depth, cd.context);
-      c.tf->highlight = true;
+      ((S_bsp_triface * )(c.tf))->highlight = true;
    }
 }
 

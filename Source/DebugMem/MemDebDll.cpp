@@ -150,7 +150,7 @@ BOOL WINAPI DllMain(
 #ifdef USE_SYNCHRONIZATION
       InitializeCriticalSection(&csect);
 #endif
-      _set_sbh_threshold(1016);
+      //_set_sbh_threshold(1016);
       break;
 
    case DLL_PROCESS_DETACH:

@@ -1,7 +1,7 @@
 #ifndef _IPH_COMMON_H_
 #define _IPH_COMMON_H_
 
-#include "error.h"
+//#include "error.h"
 #include <insanity\assert.h>
 #include <I3D\I3D_math.h>
 

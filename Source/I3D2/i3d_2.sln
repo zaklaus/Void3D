@@ -1,11 +1,10 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QH2002", "qhull2002\src\QH2002.vcproj", "{2037C7B3-75C5-4E0C-A01C-3F078A1AFB06}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32408.312
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QH2002", "qhull2002\src\QH2002.vcxproj", "{2037C7B3-75C5-4E0C-A01C-3F078A1AFB06}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i3d_2", "i3d_2.vcproj", "{09640EE2-1600-4E8A-A03A-2FACA4079E8D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2037C7B3-75C5-4E0C-A01C-3F078A1AFB06} = {2037C7B3-75C5-4E0C-A01C-3F078A1AFB06}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "i3d_2", "i3d_2.vcxproj", "{09640EE2-1600-4E8A-A03A-2FACA4079E8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DDC7100-C5DE-4DA7-AAA2-5655D552673B}
 	EndGlobalSection
 EndGlobal

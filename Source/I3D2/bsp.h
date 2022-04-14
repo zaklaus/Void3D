@@ -193,10 +193,10 @@ struct S_bsp_triface{
 
    S_plane edge_planes[3];    //edge planes (pointing out of triangle)
 
-   mutable const S_bsp_triface *tag;//help used in collision testing, to mark that this face was already tested
+   const S_bsp_triface *tag;//help used in collision testing, to mark that this face was already tested
 
    //bool plane_side;          //set if the normal is parallel to the plane normal
-   mutable bool highlight;
+   bool highlight;
    byte slide_flags;          //which edges may modify collision normal in sphere tests
    S_bsp_triface() :
       highlight(false),
@@ -344,7 +344,7 @@ struct S_trace_help{
       space_computed = true;
    }
    */
-   mutable C_vector<S_collision_info> &collision_list;
+   C_vector<S_collision_info> &collision_list;
    S_trace_help(C_vector<S_collision_info> &col_list_buf):
       collision_list(col_list_buf),
       frm_ignore(NULL),

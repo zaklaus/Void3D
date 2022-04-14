@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{24a3fa73-5e06-4c4b-89c3-78792f236465}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{0b8b1271-f426-4fac-b8ff-9f916ad02f2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4803680d-97f1-4e8f-8513-6d6f0b1171d8}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\JPG">
+      <UniqueIdentifier>{ce8755c3-2ff9-41a7-a5b6-273c1314c615}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Conv_rgb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Igraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iimage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveShot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Startup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Jpg_load\Jpg_load.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Load_bmp.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Load_jpg.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Load_pcx.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Load_png.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Load_tga.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="SavePNG.cpp">
+      <Filter>Source Files\IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="All.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Conv_rgb.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Igraph2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Igraph_i.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jconfig.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jdct.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jdhuff.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jerror.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jinclude.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jmemsys.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jmorecfg.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jpegint.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+    <ClInclude Include="Jpg_load\Jpeglib.h">
+      <Filter>Header Files\JPG</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
