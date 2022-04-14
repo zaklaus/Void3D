@@ -199,8 +199,8 @@ class C_edit_Usability_imp: public C_edit_Usability{
          ck.open(&mem, &sz, CACHE_WRITE_MEM);
          num = all_days.size();
          ck.write((char*)&num, sizeof(num));
-         for(i=0; i<num; i++)
-            all_days[i].Save(ck);
+         //for(i=0; i<num; i++)
+         //   all_days[i].Save(ck);
          ck.close();
          RegkeyWdata(h, REG_KEY_NAME_DAYS, mem, sz);
          ck.FreeMem(mem);

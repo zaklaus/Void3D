@@ -414,3 +414,19 @@ Source/ISnd2/_Debug/
 Source/ISnd2/Thunk/_Release/
 
 lib/
+
+Source/Insanity/_Debug/
+
+Source/Physics/_Debug/
+
+Source/Base_lib/_Debug/
+
+Source/Config/_Debug_dll/
+
+Source/Config/_Debug_static/
+
+Source/Editctrl/_Debug/
+
+Editor/Bin/pixel.shd
+
+Editor/Bin/vertex.shd

@@ -23,7 +23,7 @@ I3D_frame::I3D_frame(PI3D_driver d):
    enum_mask(0),
    pos(0.0f, 0.0f, 0.0f),
    q_rot(0.0f, 0.0f, 0.0f, 1.0f),
-   uniform_scale(1.0f),
+   scale(1.0f,1.0f,1.0f),
    num_hr_vis(0), num_hr_occl(0), num_hr_sct(0), num_hr_jnt(0),
    user_data(0),
    frm_flags(FRMFLAGS_ON | FRMFLAGS_CHANGE_MAT | FRMFLAGS_ROT_QUAT_DIRTY |
@@ -55,7 +55,7 @@ I3D_RESULT I3D_frame::Duplicate(CPI3D_frame frm){
    m_rot = frm->m_rot;
    q_rot = frm->q_rot;
    pos = frm->pos;
-   uniform_scale = frm->uniform_scale;
+   scale = frm->scale;
 
    frm_flags = frm->frm_flags&(FRMFLAGS_ON | FRMFLAGS_ROT_QUAT_DIRTY | FRMFLAGS_SUBMODEL | FRMFLAGS_USER_MASK);
    //frm_flags |= FRMFLAGS_UPDATE_NEEDED;
@@ -413,7 +413,7 @@ I3D_RESULT I3D_frame::SetScale(float f){
                               //we don't support negative scales or too big scales
    if(f < 0.0f || f>I3D_MAX_FRAME_SCALE)
       return I3DERR_INVALIDPARAMS;
-   uniform_scale = f;
+   scale = S_vector(f,f,f);
    PropagateDirty();
    return I3D_OK;
 }

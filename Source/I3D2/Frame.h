@@ -57,7 +57,7 @@ protected:
    mutable S_matrix f_matrix;         //resulting local matrix = scale * rot * transl.
    mutable S_matrix inv_matrix;  //inversed world matrix
    S_vector pos;              //translation
-   float uniform_scale;
+   S_vector scale;
    PI3D_driver drv;
 
    dword enum_mask;           //mask for enumeration - one of ENUMF_??? flags
@@ -71,9 +71,9 @@ protected:
                               //resulting matrix is
                               // - scaled rotation matrix
                               // - translated to object position
-      f_matrix(0) = m_rot(0) * uniform_scale;
-      f_matrix(1) = m_rot(1) * uniform_scale;
-      f_matrix(2) = m_rot(2) * uniform_scale;
+      f_matrix(0) = m_rot(0) * scale.x;
+      f_matrix(1) = m_rot(1) * scale.y;
+      f_matrix(2) = m_rot(2) * scale.z;
 
       f_matrix(3) = pos;
       UpdateMatrixInternal();
@@ -136,7 +136,7 @@ public:
 
    I3DMETHOD_(const S_vector&,GetPos)() const{ return pos; }
    I3DMETHOD_(const S_vector&,GetWorldPos)() const;
-   I3DMETHOD_(float,GetScale)() const{ return uniform_scale; }
+   I3DMETHOD_(float,GetScale)() const{ return scale.x; }
    I3DMETHOD_(float,GetWorldScale)() const;   
    I3DMETHOD_(const S_quat&,GetRot)() const;
    I3DMETHOD_(S_quat,GetWorldRot)() const;
