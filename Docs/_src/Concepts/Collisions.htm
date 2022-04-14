@@ -1,0 +1,1121 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./Collisions_files/filelist.xml">
+<link rel=Edit-Time-Data href="./Collisions_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Collisions</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>83</o:Revision>
+  <o:TotalTime>676</o:TotalTime>
+  <o:Created>2002-05-30T07:47:00Z</o:Created>
+  <o:LastSaved>2003-10-27T11:31:00Z</o:LastSaved>
+  <o:Pages>4</o:Pages>
+  <o:Words>1725</o:Words>
+  <o:Characters>9833</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>81</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>12075</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-font-kerning:0pt;
+	font-weight:normal;}
+h2
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h3
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h4
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h5
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h6
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:6;
+	font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:7;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:8;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:9;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 65.95pt 72.0pt 65.95pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:709112647;
+	mso-list-type:hybrid;
+	mso-list-template-ids:144181708 1545792316 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+ol
+	{margin-bottom:0pt;}
+ul
+	{margin-bottom:0pt;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1045"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+  <o:rules v:ext="edit">
+   <o:r id="V:Rule1" type="arc" idref="#_x0000_s1037"/>
+   <o:r id="V:Rule2" type="arc" idref="#_x0000_s1038"/>
+  </o:rules>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>Collision
+testing in Insanity engine</span></strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p class=MsoNormal><strong><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<h4><strong>Introduction</strong><strong><span style='font-weight:normal'><o:p></o:p></span></strong></h4>
+
+<p class=MsoNormal><strong><span style='font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Collision testing in Insanity is
+handled by </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>I3D_scene</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface. The class contains information about entire scene, thus it
+has sufficient information about environment. By collision information we mean some
+information, which describes boundaries of visual objects in scene, and allows
+detection of collision with this boundary.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>An optimal way to describe
+collision in a complex scene is difficult task. In Insanity, this is solved by
+two approaches. BSP tree is used for non-moving (or static) objects, which may
+be described by triangles. Moving collisions are described using helper 3D
+objects called volumes, implemented as </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_volume</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface, which represents one of basic geometric objects, such as
+sphere, box, etc. Volume objects are also used for approximation of volume of
+complex objects, which would be difficult and error prone to describe by BSP
+triangles.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>By combination of these two
+techniques, we get accuracy for complex objects (terrain, etc), as well as
+performance for other objects (e.g. tree may be approximated by one or more
+volumes), and possibility to define collisions for moving complex objects, such
+as characters.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>By collision test we mean a way to
+determine, if, and where, collision with colliding object in the scene happens,
+and optionally perform action, such as sliding along the boundary. More about
+it in following paragraphs.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p class=MsoNormal><strong><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<h5><strong>BSP tree<o:p></o:p></strong></h5>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>BSP (binary space partition) tree
+is practically sorted list of all triangles stored in the tree, which allows
+optimal traversal of the tree and collision detection.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>The information for BSP tree comes
+directly from specially marked geometry. The BSP tree is computed in final
+stages of mission design, and saved into mission binary file. Anytime the
+geometry marked as static is moved or changed, the BSP tree becomes invalid and
+must be recomputed. Insanity Editor takes care of all these tasks, and informs
+designers about when tree is invalidated, or when it should be computed. The
+BSP tree is computed relatively fast (in several seconds), so re-computation is
+not a problem.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Two types of 3D objects may be
+included in BSP tree: visual frames (having geometry), and volumes (whose
+geometrical shape may be described by triangles). Not all geometry is put into
+BSP tree, objects need to be specially marked for that purpose. The marking is
+done in the Properties sheet, using the “Static collision” check. To set this
+flag programmatically, call </span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_frame::SetFlags</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> method, setting the I3D_FRMF_STATIC_COLLISION flag.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Special behavior is applied on
+visuals with level-of-detail, marked as static. The BSP tree uses their lower
+level of detail representation, in order to ad as few faces as possible into
+the tree. This way, even complex visuals with good level of detail, may add
+just few more triangles into the BSP tree.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p class=MsoNormal><strong><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Collision volumes<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Collision volume is a term used in
+Insanity to describe helper 3D object </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_volume</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>, which is an approximation of real shape of an object. Often, it would
+be difficult to represent shape of an object by its real geometry, and
+collision volumes are used instead. Following basic geometric primitives are
+supported by I3D_volume class:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Sphere<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><!--[if gte vml 1]><v:shapetype id="_x0000_t19"
+ coordsize="21600,21600" o:spt="19" adj="-5898240,,,21600,21600" path="wr-21600,,21600,43200,,,21600,21600nfewr-21600,,21600,43200,,,21600,21600l0,21600nsxe"
+ filled="f">
+ <v:formulas>
+  <v:f eqn="val #2"/>
+  <v:f eqn="val #3"/>
+  <v:f eqn="val #4"/>
+ </v:formulas>
+ <v:path arrowok="t" o:extrusionok="f" gradientshapeok="t" o:connecttype="custom"
+  o:connectlocs="0,0;21600,21600;0,21600"/>
+ <v:handles>
+  <v:h position="@2,#0" polar="@0,@1"/>
+  <v:h position="@2,#1" polar="@0,@1"/>
+ </v:handles>
+</v:shapetype><v:shape id="_x0000_s1037" type="#_x0000_t19" style='position:absolute;
+ left:0;text-align:left;margin-left:429.8pt;margin-top:6.2pt;width:18.05pt;
+ height:10.15pt;z-index:6;mso-position-horizontal:absolute;
+ mso-position-vertical:absolute' coordsize="43200,26611" adj="10917374,634600,21600"
+ path="wr0,,43200,43200,589,26611,42892,25233nfewr0,,43200,43200,589,26611,42892,25233l21600,21600nsxe">
+ <v:path o:connectlocs="589,26611;42892,25233;21600,21600"/>
+ <w:wrap anchorx="page"/>
+</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:5;left:0px;margin-left:572px;margin-top:7px;width:28px;
+height:18px'><img width=28 height=18 src="./Collisions_files/image001.gif"
+v:shapes="_x0000_s1037"></span><![endif]><!--[if gte vml 1]><v:shapetype id="_x0000_t22"
+ coordsize="21600,21600" o:spt="22" adj="5400" path="m10800,0qx0@1l0@2qy10800,21600,21600@2l21600@1qy10800,0xem0@1qy10800@0,21600@1nfe">
+ <v:formulas>
+  <v:f eqn="val #0"/>
+  <v:f eqn="prod #0 1 2"/>
+  <v:f eqn="sum height 0 @1"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="custom"
+  o:connectlocs="10800,@0;10800,0;0,10800;10800,21600;21600,10800"
+  o:connectangles="270,270,180,90,0" textboxrect="0,@0,21600,@2"/>
+ <v:handles>
+  <v:h position="center,#0" yrange="0,10800"/>
+ </v:handles>
+ <o:complex v:ext="view"/>
+</v:shapetype><v:shape id="_x0000_s1035" type="#_x0000_t22" style='position:absolute;
+ left:0;text-align:left;margin-left:375.8pt;margin-top:3pt;width:27pt;height:27pt;
+ z-index:4;mso-position-horizontal:absolute;mso-position-vertical:absolute'>
+ <w:wrap anchorx="page"/>
+</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:3;left:0px;margin-left:501px;margin-top:4px;width:37px;
+height:37px'><img width=37 height=37 src="./Collisions_files/image002.gif"
+v:shapes="_x0000_s1035"></span><![endif]><!--[if gte vml 1]><v:shapetype id="_x0000_t16"
+ coordsize="21600,21600" o:spt="16" adj="5400" path="m@0,0l0@0,,21600@1,21600,21600@2,21600,0xem0@0nfl@1@0,21600,0em@1@0nfl@1,21600e">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="val #0"/>
+  <v:f eqn="sum width 0 #0"/>
+  <v:f eqn="sum height 0 #0"/>
+  <v:f eqn="mid height #0"/>
+  <v:f eqn="prod @1 1 2"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="mid width #0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" limo="10800,10800"
+  o:connecttype="custom" o:connectlocs="@6,0;@4,@0;0,@3;@4,21600;@1,@3;21600,@5"
+  o:connectangles="270,270,180,90,0,0" textboxrect="0,@0,@1,21600"/>
+ <v:handles>
+  <v:h position="topLeft,#0" switch="" yrange="0,21600"/>
+ </v:handles>
+ <o:complex v:ext="view"/>
+</v:shapetype><v:shape id="_x0000_s1034" type="#_x0000_t16" style='position:absolute;
+ left:0;text-align:left;margin-left:258.8pt;margin-top:3pt;width:36pt;height:27pt;
+ z-index:3;mso-position-horizontal:absolute;mso-position-vertical:absolute'>
+ <w:wrap anchorx="page"/>
+</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:2;left:0px;margin-left:345px;margin-top:4px;width:49px;
+height:37px'><img width=49 height=37 src="./Collisions_files/image003.gif"
+v:shapes="_x0000_s1034"></span><![endif]><!--[if gte vml 1]><v:oval id="_x0000_s1026"
+ style='position:absolute;left:0;text-align:left;margin-left:213.8pt;
+ margin-top:2.95pt;width:27pt;height:27pt;z-index:1'>
+ <w:wrap anchorx="page"/>
+</v:oval><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:0;left:0px;margin-left:285px;margin-top:4px;width:37px;
+height:37px'><img width=37 height=37 src="./Collisions_files/image004.gif"
+v:shapes="_x0000_s1026"></span><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Rectange<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><!--[if gte vml 1]><v:shape id="_x0000_s1036"
+ type="#_x0000_t22" style='position:absolute;left:0;text-align:left;
+ margin-left:429.8pt;margin-top:.9pt;width:18pt;height:18pt;z-index:5;
+ mso-position-horizontal:absolute;mso-position-vertical:absolute'>
+ <w:wrap anchorx="page"/>
+</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:4;left:0px;margin-left:573px;margin-top:1px;width:25px;
+height:25px'><img width=25 height=25 src="./Collisions_files/image005.gif"
+v:shapes="_x0000_s1036"></span><![endif]><!--[if gte vml 1]><v:rect id="_x0000_s1032"
+ style='position:absolute;left:0;text-align:left;margin-left:312.8pt;
+ margin-top:.9pt;width:36pt;height:18pt;z-index:2;mso-position-horizontal:absolute;
+ mso-position-vertical:absolute'>
+ <w:wrap anchorx="page"/>
+</v:rect><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:1;left:0px;margin-left:417px;margin-top:1px;width:49px;
+height:25px'><img width=49 height=25 src="./Collisions_files/image006.gif"
+v:shapes="_x0000_s1032"></span><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Box<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><!--[if gte vml 1]><v:shape id="_x0000_s1038"
+ type="#_x0000_t19" style='position:absolute;left:0;text-align:left;
+ margin-left:429.75pt;margin-top:4.85pt;width:18.05pt;height:8.95pt;flip:y;
+ z-index:7;mso-position-horizontal:absolute;mso-position-vertical:absolute'
+ coordsize="43200,26522" adj="10933270,634600,21600" path="wr0,,43200,43200,568,26522,42892,25233nfewr0,,43200,43200,568,26522,42892,25233l21600,21600nsxe">
+ <v:path o:connectlocs="568,26522;42892,25233;21600,21600"/>
+ <w:wrap anchorx="page"/>
+</v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:6;left:0px;margin-left:572px;margin-top:5px;width:28px;
+height:16px'><img width=28 height=16 src="./Collisions_files/image007.gif"
+v:shapes="_x0000_s1038"></span><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Capped cylinder<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Cylinder<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>These primitives may be arbitrary
+scaled, some primitives also non-uniformly (e.g. Box may have each side differently
+scaled).<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Although the shape of such
+geometric primitive is always only an approximation of real geometry which it
+approximates, the use of helper geometric objects helps saving memory, allows
+complex objects to move, and often yields better results during collision
+detection, mainly when sliding is computed for moving sphere. When collision
+test is performed, the engine internally performs specialized computation based
+on shape of particular primitive. These computations are highly optimized for
+each case.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>The volume objects may be created
+programmatically, or in the editor using the <i>Create </i>menu. The editor
+offers comfortable creation, automatically adjusting the size and orientation of
+created volume for best describing of geometry, above which it is created. It
+also links newly created volume to current selection, so that the volume moves
+with the objects it describes.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>It is also possible to mark
+collision volume to be added into the BSP tree. It is usable in cases, where
+volume approximates complex non-moving object, or if there’s no geometry in the
+scene, but there should be collision (such as boundary of mission where player
+is allowed to move). Such volumes may be added into BSP tree, which improves
+performance. Note that BSP tree works with triangles, so only those volumes are
+added into BSP tree, which may be described by triangles – for example box may
+be added, sphere cannot be.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>If a volume is not marked as
+static, it is considered to be dynamic, and may freely move during game play.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoHeading7><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt'>Dynamic octal tree<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>All volumes in the scene may cause
+collision when collision test is performed. Since there may be hundreds or
+thousands of such volumes, it is vital that the collision test is performed
+optimally, since there’re many collision tests made during each game tick.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>For that reason, all volume objects
+in a scene are put into an octal tree, which is a system dividing 3D space into
+a grid of equal-sided boxes of certain size. Each box holds information about
+all volumes, which are physically located in it. Some boxes are split into
+smaller eight boxes (hence the name octal), and this is done recursively until
+divided box reaches some minimal size. This is basically how the system works.
+It is a complex system, fully managed by </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_scene</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> without need of any additional programming.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Volumes appear in the octal tree
+if:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>they are
+created by the same scene, which maintains the tree<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>they are
+enabled (See </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>I3D_frame::SetOn</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>they are in
+scene hierarchy – in other words, they are directly or indirectly linked to
+scene’s Primary sector<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>they are not
+marked as static (in which case they’re put into BSP tree instead)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>The octal tree is managed and used
+internally by the scene for performing collision testing. It is not directly
+accessible by any method of I3D_scene, or other class.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Further, when it is referred to <i>dynamic
+volumes</i>, we assume all volumes in the dynamic octal tree.<o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<h6><strong><span style='font-size:11.0pt;mso-bidi-font-size:12.0pt'>Testing
+modes<o:p></o:p></span></strong></h6>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Actual collision testing is
+performed by one function </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_scene::TestCollision</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>. This function handles various types of detection, depending on input
+parameters. The input parameter is reference to I3D_collision_data structure,
+which contains data about requested collision test, and upon return, it
+contains details about detected collision.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Following testing modes are
+possible:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Line tested against BSP + dynamic
+volumes (used for watching, shooting, etc)<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Moving sphere tested against BSP +
+dynamic volumes<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Test a group of
+sphere volumes linked to some root frame<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Static sphere against BSP tree
+(collecting BSP triangles which intersect a sphere)<o:p></o:p></span></em></p>
+
+<p class=MsoNormal><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;font-style:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></em></p>
+
+<p class=MsoNormal><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;font-style:normal'>Additionally, following modes are available
+for editing purposes:<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Dynamic test on all scene volumes
+regardless on static flag (no BSP usage)<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Test line against currently
+visualized edit frames (lights, sounds, etc.)<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-style:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Line test against bounding boxes of
+mesh-less visuals (particles, flares, etc)<o:p></o:p></span></em></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Line test against all scene
+geometry, ignoring BSP tree</span></em><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>The mode and parameters of test
+are described in I3D_collision_data structure. See information about this
+structure for details.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoHeading8><strong>Advanced testing possibilities<o:p></o:p></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Collisions may be used for various
+purposes in the scene, not only describing boundaries of possible player’s
+movement. For example, you may defined collision, which collides for certain
+test modes, and ignores others. As an example, take fence with thin wire.
+Although it prevents player’s movement, it is possible to see through the
+fence, and even possibly fire through it. For this purpose, there’s are two
+concepts:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoHeading9><strong>Callbacks</strong><strong><span style='font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>During each collision test, you
+may provide a callback function, which will be called with information about
+collided object right before it is accepted as being collided with. In the
+callback, the application may decide, if it will accept the collision, or
+completely ignore it as if it was not exist. You may use various provided
+information in the callback, such as collision normal, distance, object type,
+its material or other information, in order to make the decision.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Category and collide bits</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Each volume may have assigned <i>category
+bits</i>, which is basically a bitmask of user-defined collision category,
+where the volume falls into. For example, you may assign bit 0 to represent
+fencing, bit 1 for bodies, bit 2 for ground, etc. During collision test, you
+provide collide bits - a bitmask of a all bits which are acceptable during the
+test. Only those volumes, whose category bits match in at least one bit with
+provided collide bits, are accepted by the test. This serves as a fast
+rejection of non-matching volumes, without even examining eventual collision
+with them. This is a more optimal way of filtering of unwanted collisions.<o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Contact generation<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>The engine includes possibility to
+generate collision contact information for use by contact physics package. Most
+basic volume types are capable to generate contact information with each other,
+or with the BSP tree. The functionality is accessible using </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_scene::GenerateContacts</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> method.<o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Character movement collision testing<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Character is usually a complex
+object (single-mesh with joints). Its shape must be approximated. We will focus
+on approximation of volumes used as source of collision tests (i.e. those, which
+are used for character movement, not those which are used for detection in
+character was shot).<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Character’s shape for movement may
+be best approximated using two or three spheres linked to the character:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<div align=center>
+
+<table border=0 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=62 valign=top style='width:46.6pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><!--[if gte vml 1]><v:oval id="_x0000_s1041" style='position:absolute;
+   margin-left:2.75pt;margin-top:11.85pt;width:27pt;height:27pt;z-index:10;
+   mso-wrap-edited:f;mso-position-horizontal:absolute;mso-position-vertical:absolute;
+   mso-position-vertical-relative:line' wrapcoords="6600 0 3000 1800 -600 6600 -600 14400 2400 19200 6000 21600 6600 21600 14400 21600 15600 21600 20400 19200 22200 13200 22200 6600 17400 600 14400 0 6600 0"
+   filled="f" strokecolor="red" strokeweight="1.5pt"/><![endif]--><![if !vml]><span
+  style='mso-ignore:vglayout;position:absolute;z-index:9;margin-left:3px;
+  margin-top:15px;width:38px;height:38px'><img width=38 height=38
+  src="./Collisions_files/image008.gif" v:shapes="_x0000_s1041"></span><![endif]><!--[if gte vml 1]><v:oval
+   id="_x0000_s1039" style='position:absolute;margin-left:-.35pt;margin-top:68.15pt;
+   width:27pt;height:27pt;z-index:8;mso-wrap-edited:f;
+   mso-position-horizontal:absolute;mso-position-vertical:absolute;
+   mso-position-vertical-relative:line' wrapcoords="6600 0 3000 1800 -600 6600 -600 14400 2400 19200 6000 21600 6600 21600 14400 21600 15600 21600 20400 19200 22200 13200 22200 6600 17400 600 14400 0 6600 0"
+   filled="f" strokecolor="red" strokeweight="1.5pt"/><![endif]--><![if !vml]><span
+  style='mso-ignore:vglayout;position:absolute;z-index:7;margin-left:-1px;
+  margin-top:90px;width:38px;height:38px'><img width=38 height=38
+  src="./Collisions_files/image009.gif" v:shapes="_x0000_s1039"></span><![endif]><!--[if gte vml 1]><v:oval
+   id="_x0000_s1040" style='position:absolute;margin-left:2.05pt;margin-top:39.9pt;
+   width:27pt;height:27pt;z-index:9;mso-wrap-edited:f;
+   mso-position-horizontal:absolute;mso-position-vertical:absolute;
+   mso-position-vertical-relative:line' wrapcoords="6600 0 3000 1800 -600 6600 -600 14400 2400 19200 6000 21600 6600 21600 14400 21600 15600 21600 20400 19200 22200 13200 22200 6600 17400 600 14400 0 6600 0"
+   filled="f" strokecolor="red" strokeweight="1.5pt"/><![endif]--><![if !vml]><span
+  style='mso-ignore:vglayout;position:absolute;z-index:8;margin-left:2px;
+  margin-top:52px;width:38px;height:38px'><img width=38 height=38
+  src="./Collisions_files/image010.gif" v:shapes="_x0000_s1040"></span><![endif]><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><!--[if gte vml 1]><v:shapetype
+   id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+   path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1033" type="#_x0000_t75" style='width:30pt;
+   height:96.75pt'>
+   <v:imagedata src="./Collisions_files/image011.gif" o:title="human"/>
+  </v:shape><![endif]--><![if !vml]><img width=40 height=129
+  src="./Collisions_files/image011.gif" v:shapes="_x0000_i1033"><![endif]><strong><o:p></o:p></strong></span></b></p>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+<p class=MsoNormal align=center style='text-align:center'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Character movement is best solved
+by performing collision of all spheres roughly representing character’s shape,
+and letting the system to compute new position, including sliding along
+collided objects. This is accomplished by using the I3DCOL_SOLVE_SLIDE in the
+collision test.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>You may compute collision of all
+spheres individually, or using the I3DCOL_MOVING_GROUP flag, which computes
+collision on a group of volumes in one call.<o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Debugging collisions</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>There’re various ways how you may debug
+collision system. Most of them are by visualizing scene in various modes, which
+allows you to see various parts of collision system.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>You may visualize:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>objects marked
+as static (draws all marked visuals and volumes in special color)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>volume objects
+(draws shapes of all volumes)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>computed BSP
+tree (draws geometry of computed BSP tree)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>octal tree
+(draws color lines representing boxes of octal tree)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>collision
+testing (draws lines of all collision tests)<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>You may access the debugging modes
+in <i>View-&gt;Debug</i> menu in the Insanity editor.<o:p></o:p></span></strong></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=1 width="49%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt'><strong><span style='font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Performance tips<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Following are performance tips for
+using the collision system:<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Keep size of
+BSP tree small. The greater the BSP tree grows, the lower performance you get.
+Do not add every stone with tens faces into the BSP, rather approximate complex
+visuals by volumes, if possible.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Do not use very
+large dynamic volumes. If you need large volume, for example a rectangle below
+entire mission, mark it as static in order to put it into BSP tree instead.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Check as few
+collisions as possible. If character doesn’t move in current frame, do not
+detect its collisions. If you implement AI vision, check collisions last after
+all other tests. If you can check collisions only time to time, use it, instead
+of checking them in every tick.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-weight:normal'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></strong><![endif]><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Line collision
+test is cheaper than sphere test. If testing thin line is sufficient, do not
+use thick line (i.e. moving sphere) test.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>By smart utilizing of collision
+testing, the CPU time used by all collision testing should not be greater than
+about 2-5 % of total CPU time, even on complex scene.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+</div>
+
+</body>
+
+</html>

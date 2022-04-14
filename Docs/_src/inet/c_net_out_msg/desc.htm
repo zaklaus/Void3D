@@ -1,0 +1,669 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>C_net_out_msg</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>25</o:Revision>
+  <o:TotalTime>321</o:TotalTime>
+  <o:Created>2002-02-22T11:44:00Z</o:Created>
+  <o:LastSaved>2003-01-08T16:15:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>444</o:Words>
+  <o:Characters>2532</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>21</o:Lines>
+  <o:Paragraphs>5</o:Paragraphs>
+  <o:CharactersWithSpaces>3109</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>C_net_out_msg</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>C_net_out_msg</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> is an interface for constructing
+outgoing (compacted) message. The message consists of guaranteed and
+non-guaranteed sub-messages, which are sent independently, using different
+network options.<br>
+Messages are constructed from bit parts of various bit depth, from 1 to 32 bits
+per element. This is due to saving bandwidth.<br>
+User is also responsible for creating contents of outgoing message and sending
+it out in appropriate time.<o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Methods: <o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:9.85pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:9.85pt'>
+  <p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>Adding Data:<em><o:p></o:p></em></span></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:9.85pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#AddByte"><b>AddByte</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><b><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span></i></b><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#AddWord"><b>AddWord</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#AddDword"><b>AddDword</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#AddFloat"><b>AddFloat</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#AddVector"><b>AddVector</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#AddID"><b>AddID</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#AddBits"><b>AddBits</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#AddString"><b>AddString</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><em><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'>Chunks</span></b></em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>:<i><o:p></o:p></i></span></b></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#Ascend"><b>Ascend</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#Descend"><b>Descend</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><a href="#Clear"><b>Clear</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:4.9pt'>
+  <td width=191 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:4.9pt'>
+  <p style='mso-line-height-alt:4.9pt'><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 valign=top style='width:297.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:4.9pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetSize"><b>GetSize</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Descriptions:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;border:none;mso-border-alt:solid windowtext .25pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddByte(<a name=AddByte></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>byte
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>b</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add byte value <strong><i><span
+  style='font-weight:normal'>b</span></i> </strong>to message. The parameter <strong><i><span
+  style='font-weight:normal'>g</span></i></strong> specifies which sub-message,
+  guaranteed (<b>true</b>) or non-guaranteed (<b>false</b>) is used.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddWord(<a name=AddWord></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>word
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>w</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add word value <strong>w </strong>to
+  message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddDword(<a name=AddDword></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>dw</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add dword value <strong><i><span
+  style='font-weight:normal'>dw</span></i> </strong>to message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddFloat(<a name=AddFloat></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>f</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add float value <strong><i><span
+  style='font-weight:normal'>f</span></i> </strong>to message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddVector(<a name=AddVector></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>const
+  S_vector &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+  style="mso-spacerun: yes">&nbsp;</span>bool </span></strong><strong><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>g</span></i></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add vector value <strong><i><span
+  style='font-weight:normal'>v</span></i> </strong>to message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddID(<a name=AddID></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>word
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>id</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add identification value <strong><i><span
+  style='font-weight:normal'>id</span></i> </strong>to message. The
+  identificator is a special-purpose value, which helps to identify message
+  chunks. The use of these values is up to user.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddBits(<a name=AddBits></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>dw</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>num_bits</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g<o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add bits from <strong><i><span
+  style='font-weight:normal'>dw</span></i> </strong>to message. Value <strong><i><span
+  style='font-weight:normal'>num_bits</span></i></strong> specifies how many
+  bits (starting from lowest bit) from <strong><i><span style='font-weight:
+  normal'>dw</span></i></strong> are stored in message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void AddString(<a name=AddString></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>string</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Add null-terminated
+  string to message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Ascend();</span></strong><a name=Ascend></a><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Ascend - create new
+  chunk. This creates chunks in both guaranteed and non-guaranteed
+  sub-messages. Parameter <strong><i><span style='font-weight:normal'>id</span></i></strong>
+  specifies identification of chunk, which is always a word value.<br>
+  Chunks may be nested.<o:p></o:p></span></p>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>If chunk with the same ID is
+  already on tail of the message, the chunks are concatenated into one single
+  chunk, in order to save bytes associated with chunk management. Each chunk
+  consumes 4 bytes of message (2 bytes for chunk ID and 2 bytes for chunk
+  size).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Descend();<a name=Descend></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='margin-left:30.2pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Descend - close chunk. This
+  determines chunk size and writes it into chunk header. If chunk size is zero,
+  chunk is discarded; so empty chunks are not sent over network. This way user
+  may open and close chunks without knowing if any information will be written
+  into it.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Clear();<a name=Clear></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='margin-left:30.2pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Clear the contents of message.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword GetSize(<a name=GetSize></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>g</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p style='margin-right:36.0pt;margin-left:36.0pt'><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Get current size of
+  message, in bits. The parameter <strong><i><span style='font-weight:normal'>g</span></i></strong>
+  specifies which sub-message guaranteed (true) or non-guaranteed (false) is
+  queried.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\desc.htm">Other Inet Interfaces</a></span></b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<u><span style='color:
+blue'> <b><a href="..\..\I3D_math\S_vector\desc.htm">S_vector</a></b></span></u><b><o:p></o:p></b></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

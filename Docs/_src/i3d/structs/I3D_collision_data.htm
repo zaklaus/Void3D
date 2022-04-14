@@ -1,0 +1,623 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./I3D_collision_data_files/filelist.xml">
+<link rel=Edit-Time-Data href="./I3D_collision_data_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>I3D_collision_data</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>37</o:Revision>
+  <o:TotalTime>477</o:TotalTime>
+  <o:Created>2002-04-11T11:15:00Z</o:Created>
+  <o:LastSaved>2003-05-07T13:23:00Z</o:LastSaved>
+  <o:Pages>4</o:Pages>
+  <o:Words>860</o:Words>
+  <o:Characters>4907</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>40</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>6026</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Lucida Console";
+	panose-1:2 11 6 9 4 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-2147482993 6144 0 0 31 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>I3D_collision_data</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>I3D_collision_data</span></b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> structure is used for
+specifying input parameters for collision testing, and for determining
+information after collision testing has completed.<br>
+This structure is used for any kind of collision testing supported by the
+engine.<o:p></o:p></span></p>
+
+<p style='margin-top:12.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>The structure is declared as follows:<o:p></o:p></span></p>
+
+<pre><span style='font-family:"Lucida Console";mso-bidi-font-family:Arial'>struct I3D_collision_data{<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>S_vector </b><i>from</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>S_vector </b><i>dir</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>dword </b><i>flags</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>PI3D_collision_response </b><i>callback, texel_callback</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>void </b>*<i>cresp_context</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>CPI3D_frame </b><i>frm_ignore</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>float </b><i>radius</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>PI3D_frame </b><i>frm_root</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const PI3D_volume </b>*<i>vol_group</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>dword </b><i>num_vols</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>dword </b><i>collide_bits</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console";mso-bidi-font-family:Arial'>};<o:p></o:p></span></pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Members:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-family:"Times New Roman";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>from<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Start position, from which collision will be tested.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>dir<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Direction, at which collision test will be performed. This value is used
+only for tests which test movement (i.e. it is ignored for tests detecting
+static collisions).</span></em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><br>
+<em><span style='font-style:normal'>The magnitude of this vector determinates
+length, until which testing will occur. This may be overridden by specifying
+I3DCOL_RAY flag.<o:p></o:p></span></em></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>flags<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Flags specifying how the test will be performed. Lower 16 bits are
+reserved for mode, while higher 16 bits are reserved for additional flags,
+which may be combined with the mode.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Collision test mode (the modes cannot be combined in one call):<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_LINE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Line tested against BSP + dynamic volumes.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_MOVING_SPHERE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Moving sphere tested against BSP + dynamic volumes.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_MOVING_GROUP<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test all owner's sphere volumes as bounded group. </span></em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>In this
+mode, each face if tested for entire group only ones. Thus if you reject collision
+for one <i style='mso-bidi-font-style:normal'>vol_source</i>, do not expect
+response it for other one in the same test.<em><span style='font-style:normal'><o:p></o:p></span></em></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_STATIC_SPHERE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Static sphere against BSP tree.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_VOLUMES<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Dynamic test on all scene volumes regardless on static flag. (no BSP
+usage).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_EDIT_FRAMES<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test line against currently visualized edit frames (lights, sounds,
+...).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_NOMESH_VISUALS<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Line test against bounding boxes of mesh-less visuals (particles,
+flares, etc).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_STATIC_BOX<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test if box collide with other dynamic volumes. Currently only test
+against dynamic spheres supported.(no boxes, no BSP, no static spheres).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_EXACT_GEOMETRY<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Line test against all geometry, ignoring BSP tree. Slow test, suitable
+for editing purposes.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Following additional flags may be combined with the mode flag:<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_RAY<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test ray instead of line segment (ignore length of input direction
+vector). Valid for moving tests only.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_COLORKEY<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>When checking geometry, inspect texel on collided position, ignore
+transparent (color-keyed) textels.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_INVISIBLE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test also invisible frames.<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_FORCE2SIDE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Always consider faces to be 2-sided, regardless of material (also
+volumes).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_SOLVE_SLIDE<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Compute sphere slide along collision planes (moving sphere tests only).<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>I3DCOL_JOINT_VOLUMES<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:45.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Test also joint volumes on single-mesh. Valid only for moving test
+modes.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>callback<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Called after every collision with face. See <b style='mso-bidi-font-weight:
+normal'>I3D_collision_response</b> and <b style='mso-bidi-font-weight:normal'>I3D_cresp_data
+</b>for more details.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>texel_callback<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Called after every line-texel test. Internally used for ligthmapping.
+Line test only when <b style='mso-bidi-font-weight:normal'>I3DCOL_TEXTURE</b>
+is specified.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>cresp_context<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>User collision context. Passed from collision function to callback
+functions (<b style='mso-bidi-font-weight:normal'>I3D_collision_response</b>). <o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>frm_ignore<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>This frame and all it's children are skipped in tests. Currently used
+only in Line tests.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>radius<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Radius of tested sphere. Used only in modes <b style='mso-bidi-font-weight:
+normal'>I3DCOL_MOVING_SPHERE</b> or <b style='mso-bidi-font-weight:normal'>I3DCOL_STATIC_SPHERE</b>.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>frm_root<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Frame, which will be enumerated for all sphere volumes and those will
+be tested as group. Used only with <b style='mso-bidi-font-weight:normal'>I3DCOL_MOVING_GROUP</b>.
+<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>vol_group<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Alternative to frm_root. Instead specify frame with which has volumes,
+it allow direct pass array of volumes, which will be tested as group. Used only
+with <b style='mso-bidi-font-weight:normal'>I3DCOL_MOVING_GROUP</b>.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>num_vols<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Number of volumes in the array pointed to by </span></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-style:
+normal'>vol_group</span></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>collide_bits<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Category collision bits. These bits are checked agains category bits in
+tested collision volume during tests (by logical AND), and if at leas bit
+matches, the collision with particular volume is accepted. Otherwise the tested
+volume is ignored.<o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Methods:</span><o:p></o:p></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Constructors:</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_collision_data();<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Default
+  constructor. This method resets all members of the class to zero.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_collision_data(const
+  S_vector &amp;from, const S_vector &amp;dir, dword flags, PI3D_frame
+  frm_ignore = NULL);<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Constructor
+  setting up internal variables of the class.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Retrieving
+  values:<o:p></o:p></span></i></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>float
+  GetHitDistance() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+  distance of closest collision point. Collision distance is normalized (you
+  need normalize dir to compute correct hit position).This method returns valid
+  result only if collision was detected. When <em><b style='mso-bidi-font-weight:
+  normal'><span style='font-style:normal'>I3DCOL_SOLVE_SLIDE </span></b></em><em><span
+  style='mso-bidi-font-weight:bold;font-style:normal'>is specified, result is
+  undefined.</span></em><span style='mso-bidi-font-weight:bold'><o:p></o:p></span></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>S_vector
+  ComputeHitPos() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Compute
+  and return collision point. It uses formula <i style='mso-bidi-font-style:
+  normal'>from + dir*GetHitDistance() / dir.Magnitude()</i>, just make
+  computation instead user. This method returns valid result only if collision
+  was detected.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>PI3D_frame
+  GetHitFrm() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+  method returns closest frame, which was hit.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>const
+  S_vector &amp;GetHitNormal() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+  normal of collision. This method returns valid result only if collision was
+  detected.<b><o:p></o:p></b></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>const
+  S_vector &amp;GetDestination() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+  solved position after collision response (user or default sliding). Calling
+  this method is applicable only after <em><b style='mso-bidi-font-weight:normal'><span
+  style='font-style:normal'>I3DCOL_SPHERE </span></b></em>or <em><b
+  style='mso-bidi-font-weight:normal'><span style='font-style:normal'>I3DCOL_SPHERE_GROUP</span></b></em>
+  collision tests.<b><o:p></o:p></b></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7;mso-yfti-lastrow:yes'>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+  style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>int GetFaceIndex() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Index of
+  collision face into frame&#8217;s mesh or (&#8211;1) if collision frame has no mesh. It can
+  be used for obtain more information like face, facegroup or material.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+  style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const S_vector &amp;GetNormalizedDir() const;<o:p></o:p></span></b></p>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-bidi-font-weight:bold'>Get unit-length version of direction vector passed
+  in <i>dir</i> member. This method returns valid vector only after
+  TestCollision was called &#8211; this means either when the function returned, or
+  in callback function.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'><a
+href="..\i3d_scene\desc.htm#TestCollision">I3D_scene::TestCollision</a></span></b></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-weight:
+bold;font-style:normal'>, </span></em><em><b style='mso-bidi-font-weight:normal'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'><a href="..\I3D_collision_response.htm">I3D_collision_response</a></span></b></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-weight:
+bold;font-style:normal'>, </span></em><em><b style='mso-bidi-font-weight:normal'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'><a href="I3D_cresp_data.htm">I3D_cresp_data</a></span></b></em><em><span
+style='font-style:normal'><o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

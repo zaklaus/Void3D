@@ -1,0 +1,3113 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./~manual_files/filelist.xml">
+<link rel=Edit-Time-Data href="./~manual_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IEditor</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>5</o:Revision>
+  <o:TotalTime>836</o:TotalTime>
+  <o:Created>2003-10-27T11:56:00Z</o:Created>
+  <o:LastSaved>2003-10-27T11:58:00Z</o:LastSaved>
+  <o:Pages>15</o:Pages>
+  <o:Words>5898</o:Words>
+  <o:Characters>33619</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>280</o:Lines>
+  <o:Paragraphs>67</o:Paragraphs>
+  <o:CharactersWithSpaces>41286</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h2
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:13.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	color:white;
+	font-weight:bold;}
+h3
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	color:white;
+	font-weight:bold;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h5
+	{mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:5;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc4, li.MsoToc4, div.MsoToc4
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc5, li.MsoToc5, div.MsoToc5
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:48.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc6, li.MsoToc6, div.MsoToc6
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:60.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc7, li.MsoToc7, div.MsoToc7
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:72.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc8, li.MsoToc8, div.MsoToc8
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:84.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoToc9, li.MsoToc9, div.MsoToc9
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:96.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0pt;
+	margin-bottom:6.0pt;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+span.MsoCommentReference
+	{mso-ansi-font-size:8.0pt;
+	mso-bidi-font-size:8.0pt;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:white;}
+p.MsoBodyText2, li.MsoBodyText2, div.MsoBodyText2
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:18.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	background:navy;
+	font-size:12.0pt;
+	font-family:Tahoma;
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:286816370;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1529323486 10750876 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@list l1
+	{mso-list-id:1341348183;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1474582796 10750876 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l1:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+ol
+	{margin-bottom:0pt;}
+ul
+	{margin-bottom:0pt;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p align=center style='text-align:center;mso-outline-level:1'><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>Insanity Editor reference
+manual</span></strong><span style='font-size:11.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='text-indent:36.0pt'><a name="Controlling_editor"></a><strong><span
+style='font-size:14.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Controlling
+the editor</span></strong><strong><span style='font-size:13.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+MouseEdit plugin provides main interface for managing the scene. This paragraph
+discusses modes how user may navigate in the scene and perform basic
+modificatons.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+work in Editor is performed in two editing modes – a <b>View</b> mode and an <b>Edit</b>
+mode. By switching between these two modes, a designer may navigate freely
+through the mission and simultaneously edit objects in the scene.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Following
+is description of mouse and keys behavior in these modes.<o:p></o:p></span></p>
+
+<p><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Both
+<u>View </u>and <u>Edit </u>modes<o:p></o:p></span></i></p>
+
+<table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;mso-padding-alt:0pt 0pt 0pt 0pt'>
+ <tr>
+  <td colspan=2 style='background:#FFE1FF;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Space<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#FFE1FF;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Toggle </span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>between Edit and View <strong>Mode</strong>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="29%" colspan=2 style='width:29.32%;background:#FFE1FF;padding:
+  .75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>0 .. 9<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#FFE1FF;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Select <strong>Speed </strong>of camera movement,
+  translation, rotation, scale, and other actions.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="10%" style='width:10.6%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Shift<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.72%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse X/Y move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Move</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> selected objects in <strong>X/Z</strong>
+  axes.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="10%" style='width:10.6%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Alt<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.72%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse Y move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Move</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> selected objects in <strong>Y</strong>
+  axis.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="10%" style='width:10.6%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl + Alt<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.72%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse X move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Scale</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> selected objects - uniform or
+  non-uniform (dependent on current scale mode).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="10%" style='width:10.6%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoToc1><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Shift + Alt<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.72%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse X move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Rotate</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> selected objects around current
+  axe, in world or local coordinates (dependent on current rotate mode), around
+  pivot point.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="10%" style='width:10.6%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoToc1><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl + Shift + Alt<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.72%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse X move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Move</span></strong><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>
+  selected objects along their currently selected local axis.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="29%" colspan=2 style='width:29.32%;background:#E7F1E7;padding:
+  .75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Mouse wheel<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#E7F1E7;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Change movement </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>speed</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p><i><u><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>View</span></u></i><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'> mode only:<o:p></o:p></span></i></p>
+
+<table border=0 cellspacing=0 cellpadding=0 width="100%" bgcolor="#f0e7e6"
+ style='width:100.0%;background:#F0E7E6;border-collapse:collapse;mso-padding-alt:
+ 0pt 0pt 0pt 0pt'>
+ <tr>
+  <td width="15%" style='width:15.22%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl, or Middle mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="14%" style='width:14.24%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.54%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Orbit</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> camera around an object at
+  center of screen.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=2 style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Left mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.54%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Move camera <strong>Forward </strong>in current speed.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=2 style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Right mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.54%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Move camera <strong>Backward </strong>in current speed.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="15%" style='width:15.22%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Left + Right mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="14%" style='width:14.24%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ mouse move<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.54%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Move</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> camera in its local <strong>XY</strong>
+  axes, in current speed.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><em><u><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>Edit </span></u></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>mode only:</span></em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;mso-padding-alt:0pt 0pt 0pt 0pt'>
+ <tr>
+  <td colspan=2 style='background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Left mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Select model</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> or object, or clear
+  selection if clicked on background.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="29%" colspan=2 style='width:29.32%;background:#DCD8E9;padding:
+  .75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Right mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Select object</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, or
+  clear selection if clicked on background.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="29%" colspan=2 style='width:29.32%;background:#DCD8E9;padding:
+  .75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Double-click (left or right button)<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Select unpick-able</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'> visuals, like particles, flares, etc.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="29%" colspan=2 style='width:29.32%;background:#DCD8E9;padding:
+  .75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Middle mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Select </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>collision </span></strong><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>volumes</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>, or geometry.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="13%" style='width:13.02%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl<o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.3%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ left mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Add/Remove</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> model or object to/from
+  current <strong>Selection</strong>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="13%" style='width:13.02%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl<o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.3%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ right mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Add/Remove</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> object to/from current <strong>Selection</strong>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="13%" style='width:13.02%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl + Shift<o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.3%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ left mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Link </span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>current selection to model or
+  object, or primary sector, if clicked on background.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="13%" style='width:13.02%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Ctrl + Shift<o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.3%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>+ right mouse button<o:p></o:p></span></p>
+  </td>
+  <td width="70%" style='width:70.68%;background:#DCD8E9;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Link </span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>current selection to object.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="82%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Insanity Editor is a library build on top of all
+lower-level libraries. It uses other libraries in similar way as an application
+does, and provides helping hand for game application during development. The
+editor DLL is intended to be linked to game executable only at development
+time, and not to be shipped on final CD.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Thanks to this approach, most editing code may be
+away of main game executable, not consuming resources of final product. Also,
+the level of testing and maintaining is lower than for final game, because the
+editor is usually used only by development team. Besides all this said, the
+editor is quire mature program, providing many useful tasks, without which the
+development of the game would become practically impossible.<o:p></o:p></span></strong></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Library:
+<b>IEditor.dll, IEditor_d.dll<br>
+</b>Header file: <b>I3D\Editor.h<br>
+</b>Creation function: <b>CreateEditor</b><o:p></o:p></span></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-family:Arial'>Editor architecture</span></strong><strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The editor is based on a master interface </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>C_editor</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>, which performs bookkeeping and overall management, but little of
+actual work. It is used for initialization of plug-ins, dispatching of
+messages, managing shortcuts, menus, and similar tasks. Around this master interface
+is built a system of plug-in modules, which is very extensible. The interface
+defines base class for all plugins, which provides basic communication
+interface among the plugins, and way how plugins may receive information.
+Specialized plugins, performing their specific tasks, provide other methods for
+their controlling. The editor is designed a single DLL, where most built-in
+plug-ins reside. Anyway, plug-ins from other modules (e.g. from main game
+module) may be used too.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Each plugin is uniquely identified by its name.
+Although it seems that each plug-in is independent entity in the system,
+there’s certain dependence, mainly on core plug-ins. For example, most plugins
+require information about current selection. Thus the “Selection” plugin is essential
+for work of any other plugin which requires selection. It is assumed that
+several core plug-ins are always present. Anyway the suggested behavior of
+plugins is not to assume that particular plugin exists. Usually, plugins search
+for dependent plugins they use during their initialization, and if they fail to
+find essential plugins, they return fail code, telling the master interface
+that they were not initialized correctly, and will not be used.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The plugin system allows adding new plugins or
+removing unnecessary ones (but not in run-time). Game programmers may develope
+new plugins performing specific tasks, such as animations, scripting, etc.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-family:Arial'>Interfaces</span></strong><strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>There’re two main interfaces used in the system:<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>C_editor</span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> – is one and only
+for entire game. It is the editor itself, using plugins to do the work.</span></strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+<strong>C_editor_item</strong><strong><span style='font-weight:normal'> – base
+class of single plugin. Plugins usually specialize this class, and may provide
+public interface so that other plugins or parts of game may use them. Anyway, for
+many plugins, the interface of the base class is enough for complete
+communication with the rest of the system. The communication is done by
+installing keyboard shortcuts, menu items, and processing Tick and Render
+functions, by which plugin may perform animated tasks, or specially render its
+output.</span></strong><br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><strong><o:p></o:p></strong></span></p>
+
+<p><strong><span style='font-family:Arial'>Plugins</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The plugins are identified by their name (string).
+Knowing name of a plugin, you may search for its specialized interface in the
+editor header file. To find particular plugin, use </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>C_editor::FindPlugin</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> method, using the name of searched plugin. Once you find desired
+plugin, you may downcast it to its real interface in order to use special
+methods it provides.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><a href="plugins.htm"><b>Detailed description of
+editor plugins</b></a><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="82%" align=center>
+
+</div>
+
+
+<p class=MsoNormal align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Arial;color:red'>[ Note: this documentation is in progress
+and may differ from current editor state ]<o:p></o:p></span></p>
+
+<h1 style='text-indent:36.0pt'><span style='font-size:14.0pt;mso-bidi-font-size:
+24.0pt;font-family:Arial'>Building blocks<o:p></o:p></span></h1>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>A
+typical 3D scene is built from following elements, which make up the scene.
+These include visual objects and helping objects. Figure1 shows the object
+selection menu found in the Editor.<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="51%" valign=top style='width:51.58%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='page-break-after:avoid'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Description of the elements follows:<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Visual</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – visible object – this is
+  anything which is actually rendered Various types of visual objects are
+  available<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Light</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – helper object which
+  represents a source of a light<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Sound </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– helper object which represents
+  a sound source<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Model </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– group of other elements,
+  typically loaded from disk file.<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Camera </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– source of viewing<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Volume </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– helper object which roughly
+  estimates shape of a visual object and represents its collision volume<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Sectors</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – helper object which, along
+  with portals, helps in visibility optimizations<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Target </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– helper, which is used to aim
+  other object at it. Used mainly for camera animations<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dummy </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– helper object. Its only
+  meaning is specifying position and rotation for various purposes of the game<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Occluder </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– object used for optimization
+  purposes, capable of hiding geometry behind it<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Joint </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– object used together with
+  single-mesh visuals for definition of rotational joints<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>User </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– undefined type of object. In
+  H&amp;D it is used for checkpoint editing<o:p></o:p></span></p>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width="48%" colspan=3 valign=top style='width:48.42%;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p align=center style='text-align:center;page-break-after:avoid'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><img
+  border=0 width=456 height=380 id="_x0000_i1058" src="img\image001.gif"><o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'>Figure <span
+  style='mso-field-code:"SEQ Figure \\* ARABIC"'>1</span> – object selection.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>3D object properties<o:p></o:p></span></h3>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>All
+  these objects have these common properties:<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>position in 3D space<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>rotation<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>scale<o:p></o:p></span></p>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See
+  Figure2, which shows common properties of selected object(s).<br>
+  Note that Insanity Editor works with multi-selection, so the bars displayed
+  in the property window are selected depending on types of objects being
+  selected.<o:p></o:p></span></p>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=174 height=483 id="_x0000_i1066" src="img\image002.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>2</span> – common
+  properties<br>
+  of all objects.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:18.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Visual<a name="_Visual"></a><a
+  name="_Visual_1"></a><o:p></o:p></span></h3>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Type</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – here user may see or modify
+  the type of visual object. Note that it is also possible to set this property
+  directly in modeling package (MAX).<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Flags </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– following flags are present:<br>
+  <i>No shadow</i> – object doesn’t cast shadows on lightmaps<br>
+  <i>No collision</i> – object can’t be detected by collision testing<br>
+  <i>Receive shadow</i> – object receives dynamic shadow<br>
+  <i>Static collision</i> – object is static (not moving) and its geometry will
+  be included in static (BSP) collision group<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Mat </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– type of material used when
+  object has static collision<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Properties </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– visual’s properties. The
+  contents of this are is dependent on type of visual being edited<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Pick props, Browse props </span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>–
+  buttons used for copying Properties from other visual<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=175 height=484 id="_x0000_i1064" src="img\image003.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>3</span> –
+  properties of visual object.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:18.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Light<o:p></o:p></span></h3>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Type</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – here user may see or modify
+  the type of light object. The light types are:<br>
+  <i>Ambient</i> – this light type illuminates all geometry by the same intensity,
+  regardless of distance or direction to destination<br>
+  <i>Point </i>– point light source, using near and far range to linearly fade
+  intensity by distance to destination<br>
+  <i>Directional</i> – considering only direction to destination to compute
+  light intensity<br>
+  <i>PointAmbient</i> – similar like Point, but not considering angle against
+  destination<br>
+  <i>Fog</i> – height fog; there should be maximally one height fog set to each
+  sector<br>
+  <i>LayeredFog</i> – special type making local layered fog<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Color </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– the color of light<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Power </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– multiplier for color; utilize
+  this to change intensity of the light<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Range </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– range of some types of light,
+  in meters; except of fog light, where near range is ratio from 0.0 to 1.0
+  where fog starts, and far range may be zero, in which case range of current
+  camera is used as far range of fog<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Mode </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– following flags are present:<br>
+  <i>Vertex</i> – the light illuminates vertices (except of light-mapped
+  objects)<br>
+  <i>Light-map</i> – the light is considered during lightmap computation<br>
+  <i>Shadow cast</i> – this light is used as source for dynamic shadows<br>
+  <i>Dynamic on LM</i> – this light dynamically illuminates lightmaps (adds to
+  them)<o:p></o:p></span></p>
+  <p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>Light sectors</span></b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'> – this sheet is used for assigning selected
+  light(s) to operate in particular sector(s).<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=175 height=484 id="_x0000_i1068" src="img\image004.gif"><span
+  style="mso-spacerun: yes">  </span><span style="mso-spacerun: yes">  </span><img
+  border=0 width=175 height=484 id="_x0000_i1070" src="img\image005.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>4</span>
+  –Properties of Light.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:18.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Sound<o:p></o:p></span></h3>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Type</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> - here user may see or modify
+  the type of sound object. The sound types are:<br>
+  <i>Ambient</i> – this type has the same volume everywhere in sectors in which
+  it is set to be audible<br>
+  <i>Point</i> – the volume of this type linearly fades out from near range
+  (full volume) to far range (zero volume)<br>
+  <i>Spot</i> – this light type has range like Point type, and additionally it
+  has cone aligned with its local Z axis<br>
+  <i>PointAmbient</i> – light similar to Point, except it is not 3D positioned,
+  and sounds from “everywhere” around listener<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Browse </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– button for replacing the
+  source of the sound<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Range </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- range of some types of sounds,
+  in meters<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Cone </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– cone of Spot sound type, in
+  degrees; volume linearly fade from full intensity inside of inner cone to <i>Outside
+  volume</i> intensity beyond outer cone<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Volume Main </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– volume multiplier of sound,
+  value from 0.0 to 1.0<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Volume Outside </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– volume applied outside
+  the Spot’s cone, value from 0.0 to 1.0<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Mode</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – following flags are present:<br>
+  <i>Enabled</i> – flag for enable/disable current light<br>
+  <i>Loop</i> – flag specifying if sound should play looped or one time only<br>
+  <i>Streaming</i> – when this flag is set, sound is played directly from disk,
+  not occupying system or hardware memory<o:p></o:p></span></p>
+  <p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>Sound sectors</span></b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'> – this sheet is used for assigning selected
+  sound(s) to operate in particular sector(s).<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=175 height=484 id="_x0000_i1072" src="img\image006.gif"><span
+  style="mso-spacerun: yes">   </span><img border=0 width=175 height=484
+  id="_x0000_i1074" src="img\image007.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>5</span> –
+  Properties of Sound<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:18.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Model<a name="_Model"></a><o:p></o:p></span></h3>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Browse disk</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – button for replacing selected
+  model(s) by model from disk<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Reload </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– reload model, forget changes<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Same As </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– make selected model(s) to use
+  the same file as desired model<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Flags </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– following flags are currently
+  present:<br>
+  <i>No LM shadow</i> – do not cast shadows into lightmaps; this flag is used
+  on models which may move in game, so that they do not have hard shadows under
+  them<br>
+  <i>Dynamic shadow</i> – this model will cast dynamic shadow, which will be
+  drawn over specially marked geometry<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=175 height=351 id="_x0000_i1076" src="img\image008.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>6</span> –
+  Properties of Model<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='mso-row-margin-right:6.2%'>
+  <td width="54%" colspan=2 valign=top style='width:54.3%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:18.0pt'><a name="Volume_Properties"><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  color:windowtext'>Volume</span></a><a name="_Volume"></a><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  color:windowtext'><o:p></o:p></span></h3>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Type</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> - here user may see or modify
+  the type of volume object. The shape of collision volume roughly approximates
+  a shape of visual object(s), but it’s mathematical object is much more
+  simpler; valid types are:<br>
+  <i>Sphere</i> – spherical shape of volume, object’s scale is used as sphere’s
+  radius<br>
+  <i>Rectangle</i> – rectangular shape of volume; additional scale for X and Y
+  sides may be specified<br>
+  <i>Box</i> – box shape, scale of all 3 sides of box may be specified<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Material </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- type of material assigned to
+  this volume<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Non-uniform scale</span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> – scale of some types of
+  volume<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Static collision </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– when checked, this
+  collision is included into static (BSP) collision group; usable for objects
+  which will never move<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center;page-break-after:
+  avoid'><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+  Arial'><img border=0 width=175 height=294 id="_x0000_i1078"
+  src="img\image009.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>7</span> –
+  Properties of Volume<o:p></o:p></span></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width="6%"><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <![if !supportMisalignedColumns]>
+ <tr height=0>
+  <td width=501 style='border:none'></td>
+  <td width=26 style='border:none'></td>
+  <td width=384 style='border:none'></td>
+  <td width=60 style='border:none'></td>
+ </tr>
+ <![endif]>
+</table>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Object names<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Object placed in
+the scene are identified by their names. For this reason, any objects which
+user creates must have unique name. Anytime a new object is created, user is
+prompted for a new name, given a hint to a name, which is not used yet. The
+Editor strictly checks for the possibility of name collision.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>The names of objects are case-sensitive.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Sectors and portals<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Insanity
+Engine utilized sectors and portals for various purposes. One of most important
+purpose is optimization of rendering. Sectors are connected together by small
+openings – portals. Each sector has assigned some number of lights, which
+illuminate only visuals linked to this sector. Also, each sector has assigned
+some number of sounds, which are audible only when active camera is in the
+sector. Any sound or light may be assigned to any sector in the scene.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Actual building of sector is discussed later.<o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext 1.5pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p style='border:none;mso-border-bottom-alt:solid windowtext 1.5pt;padding:
+0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<h1 style='text-indent:36.0pt'><a name="_Editor_commands"></a><span
+style='font-size:14.0pt;mso-bidi-font-size:24.0pt;font-family:Arial'>Working
+with Editor<o:p></o:p></span></h1>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes">   </span><a name="Mission_files">Missions are </a>stored
+under <i>Missions\</i> directory. Each mission is placed in separate directory,
+and consists of two files - <b>Scene.i3d</b> (file exported from 3D package -
+3DS MAX) and <b>Scene.bin</b> (file created by Editor). The file created by
+editor holds all changes made on original exported scene file, like created
+objects, their positions, lightmaps, game parameters, etc. You can do many
+modifications on loaded scene in the Editor.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes">   </span>Now we’ll step through all commands which
+Editor offers, describing possibility of each. Each command is described by its
+location in the menu, but many commands have shortcuts, so may use these
+shortcuts once you’re familiar with them. The shortcuts for all menu items are
+written next to menu item, for example “Undo&nbsp;&nbsp;&nbsp;&nbsp;Ctrl+Z”.<o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p style='border:none;mso-border-bottom-alt:solid windowtext .75pt;padding:
+0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Opening scene<o:p></o:p></span></h2>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes">   </span>Current scene is opened by Selecting <i>File-&gt;Open
+mission</i> command from menu. A dialog box, which appears, allows user to
+navigate through available missions. The Editor scans entire directory tree in
+Missions\ directory, and offers those directories, where <b>Scene.i3d</b> file
+is present.<br>
+Prior to opening new scene, user is prompted to save changes on currently
+edited scene.<o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Saving scene<o:p></o:p></span></h2>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes">   </span>Save mission by selecting <i>File-&gt;Save
+mission</i>. This command rewrites current <i>Scene.bin</i> in edited mission.
+But before doing so, it saves previous <i>Scene.bin</i> into <i>Missions\_backup\</i>
+directory, so that the last save may be restored.<o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Scene properties<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="57%" valign=top style='width:57.44%;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+  style="mso-spacerun: yes">   </span>Invoke scene properties menu by selecting
+  <i>File-&gt;Scene properties</i> menu item.<o:p></o:p></span></p>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Following
+  items are present in Scene Properties table:<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Background color</span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> – color to which screen
+  is cleared screen before rendering<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Backdrop range </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– near and far camera
+  range in Backdrop Sector<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Camera FOV </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– horizontal field of view of
+  cameras in the scene<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Camera Range </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– far range of camera<o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Orthogonal </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– flag specifying if orthogonal
+  projection is used in scene; this flag is usually set to <i>False</i><o:p></o:p></span></p>
+  <p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+  tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Orthogonal scale </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– scale for orthogonal
+  projection<o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.56%;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center;page-break-after:
+  avoid'><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+  Arial'><img border=0 width=300 height=204 id="_x0000_i1080"
+  src="img\image010.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>8</span> – Scene
+  Properties<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Editing game tables<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Editing any of
+game tables is not recommended; they make up the game itself. Modifying values
+can make the game unplayable.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Saving screen shot<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>You may save
+screenshot from current camera by selecting <i>File-&gt;Save shot</i>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Exiting Editor<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Exit the Editor by
+selecting <i>File-&gt;Exit</i> menu item. Prior to exiting, user is prompted to
+save scene, if it was modified.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Undo and Redo<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Editor has
+virtually unlimited number of <i>Undo</i> and <i>Redo</i> steps, so you may
+experiment with your settings without fear of making un-returnable change. The
+Undo and Redo operation are under <i>Edit-&gt;Undo</i> and <i>Edit-&gt;Redo</i>
+menu items.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Working with Selection<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Editor is
+designed to work with multiple selected objects. There are several ways to work
+with selections. You may use <i>selection dialog</i> as seen on <i>Figure1</i>,
+for browsing objects. In this dialog, you may browse by displaying only
+particular object types, or in <i>Quick search</i> field select using
+wild-masks (? character to replace letter, * character for ignoring name to the
+end.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Choose <i>Edit-&gt;Select by name</i> menu item to invoke
+the object browse dialog.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>To clear the selection, choose <i>File-&gt;Clear selection</i>,
+for inverting selection, choose <i>File-&gt;Inver selection</i>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>You may also traverse the selection by selecting parent
+object of current selection, or child objects of current selection. Use <i>Edit-&gt;Select
+parent</i> or <i>Edit-&gt;Select children</i>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Choosing <i>Edit-&gt;Draw links</i> menu item switches on or
+off a feature, which draws links of currently selected object to its parent.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Selected objects
+are specially marked, depending on their type. Selected visuals have bounding
+box rendered around them, while non-visual objects are drawn in various ways,
+depending on their type and usage. You may select drawing of the non-visual
+objects in the scene in <i>View-&gt;Debug</i> menu.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc1><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Manipulating Selection<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Most commands,
+which change properties of objects, operate on entire selection. See paragraph <i><a
+href="#Controlling_editor">Controlling the Editor</a></i> for details how to
+manipulate objects using mouse and combination of <i>Ctrl</i>, <i>Alt</i> and <i>Shift</i>
+keys.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Other modifying commands include:<o:p></o:p></span></p>
+
+<p class=MsoNormal><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Edit-&gt;Rotate 45 degrees</span></i><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, which rotates selected
+objects by one eight of circle along active rotation axis.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>In <i>Edit-&gt;Gravitation</i>, you may find commands for
+falling the selection to ground, or link the to ground.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="54%" valign=top style='width:54.3%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Selecting rotation and scale axes<o:p></o:p></span></h2>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>You may rotate selected
+  object(s) by an axis. To choose rotation axis, use the <i>Axis</i> sub-menu.
+  You may select here the rotation axis used for rotation. Actual rotation is
+  done by mouse – see <i><a href="#Controlling_editor">Controlling the Editor</a></i>
+  for details.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>You may work
+  either in object’s local coordinates (default method), or in world
+  coordinates. To switch between modes, use <i>Axis-&gt;Local</i> switch.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Selected axis
+  mode also controls scale axis when non-uniform scale mode is selected. Use
+  the switch <i>Axis-&gt;Uniform scale</i> for toggling between uniform and
+  non-uniform scale mode. Note that the only objects that support non-uniform
+  scales are collision volumes (rectangle and box).<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>In the <i>Axis</i>
+  menu, you’ll also find two align methods - <i>Axis-&gt;Align by Y</i> to
+  align object’s local Y axis with world Y axis, and <i>Axis-&gt;Align to
+  normal</i> to align object’s Y axis with user-picked surface normal.<o:p></o:p></span></p>
+  </td>
+  <td width="39%" valign=top style='width:39.5%;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=215 height=165 id="_x0000_i1082" src="img\image011.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>9</span> – axis
+  selection<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Modifications to objects<o:p></o:p></span></h2>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Any modification
+  you make to a 3D object is remembered – also on objects originally imported
+  from scene (loaded from <i>Scene.i3d</i> file). So for example if you move a
+  box contained in scene, this movement will be saved and applied when the
+  scene is loaded again.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>You may dismiss
+  one or more such flags from selected object(s) by choosing <i>Edit-&gt;Reset
+  modify</i> command, and choose which properties you want to reset. <i>Figure10</i>
+  shows how this dialog may look like – you may “forget” your changes to
+  position, rotation, scale or link. Note that you will not be able to Reset
+  changes to implicitly created objects, because there is no original position
+  to revert to, and all properties of created objects must be saved.<o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center;page-break-after:
+  avoid'><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+  Arial'><img border=0 width=260 height=162 id="_x0000_i1084"
+  src="img\image012.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>10</span> –
+  editable tables<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Collisions during editing<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>You may want to
+enable or disable collision testing during the editing. This is done by
+toggling <i>Edit-&gt;Collisions</i> switch in the menu. When collisions are
+enabled, editing camera collides with geometry, as well as moved object
+containing collision sphere volumes do collide against other geometry.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>This is useful for
+checking the collisions in scene, as well as for placing some objects exactly.
+Other time you may want to fly through walls, so you’ll want to disable this
+switch.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Linking selection<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>All objects in
+scene are <i>linked</i> to other objects, and make up a scene hierarchy. The
+root of scene hierarchy is <i>Primary sector</i> and <i>Backdrop sector</i>;
+objects of type SECTOR that has no parents. Linking is critical to proper and
+optimal work of scene. You may also need to use linking for making some object
+to move or rotate with other object, because linking object to other object
+causes the object to inherit parent’s position, rotation and scale. This is the
+same principle as used in most of modeling packages.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>You may link
+selection to new parent either by holding <i>Ctrl+Shift</i> and clicking <i>mouse
+button</i>, or by invoking the object browser by <i>Edit-&gt;Link to</i> and
+browse for new parent directly.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Object visibility<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>By default, visual
+objects are rendered and visible, but in some cases, they may be hidden (for
+editing purposes, or for game purposes). Visibility is inherited to children,
+so if object is hidden, all linked child objects are hidden too.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Editor keeps
+track of hidden objects. You may hide selected objects and later unhide hidden
+by name, or unhide all. Hide commands are found in the <i>Edit</i> submenu of
+the Editor menu.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Object creation<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>A designer may
+create several types of objects within the editor. Usually, any created object
+is placed in front of camera, but there are exceptions to this rule for some
+objects.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Creating model<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>By creating
+  model, you must specify file, which will be used to open the model. A dialog
+  that appears displays files with preview of currently selected model. Files
+  in <i>Models\</i> directory are available for selection.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Note that
+  loading models from sub-directories is possible, because Editor keeps also
+  directory names for loaded models (relative to Models\ directory).<o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center;page-break-after:
+  avoid'><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+  Arial'><img border=0 width=213 height=222 id="_x0000_i1086"
+  src="img\image013.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>11</span> –
+  dialog for browsing model<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Creating collision volume<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>A collision
+  volume requires active selection. Created volume is scaled to best enclose
+  the selection. In this dialog, you may choose which type of volume you want
+  to create.<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Single volume</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> specifies (if multiple objects
+  are selected) if one volume is to be created, considering entire selection,
+  or one volume is to be created for each selected object.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>When <b>Static collision</b> is checked, created volume is
+  automatically made static (see <a href="#Volume_Properties">Volume Properties</a>
+  for details).<o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center;page-break-after:
+  avoid'><span style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:
+  Arial'><img border=0 width=260 height=155 id="_x0000_i1088"
+  src="img\image014.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>12</span> –
+  creation of volume box<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Creating occluders<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>To create an
+  occluder, you must select which kind you want to create. There are two
+  choices – <i>Mesh</i> occluder and <i>Sphere</i> occluder. When you choose
+  type, it depends if you have some objects selected or not. If objects are
+  selected, occluder tries to match best current selection; otherwise an
+  occluder in front of camera is created.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Note that newly
+  created occluder sometimes needs adjusting – see Editing occluders for
+  details.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=260 height=155 id="_x0000_i1092" src="img\image015.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>13</span> –
+  creation of occluder<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Seed plug-in<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>A good utility
+  for placing objects into scene is available when you invoke the <i>Create-&gt;Seed</i>
+  command. This utility allows you to create sets of objects, which are then
+  randomly placed into the scene on position where user clicks cursor.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Each set may contain one or more objects, so you may
+  create various sets for various objects. Each time you click on terrain, on
+  of objects from selected sets is placed into the scene.<o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=175 height=484 id="_x0000_i1094" src="img\image016.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>14</span> – Seed
+  Plug in interface<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Object duplication<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Additionally, it
+  is convenient to duplicate already created object with the same parameters.
+  To do so, choose <i>Create-&gt;Duplicate</i> menu item.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Deleting objects<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Objects may be
+  deleted from scene – but only those created in the editor. This means you
+  can’t delete object contained in <i>Scene.i3d</i> file.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p style='border:none;mso-border-bottom-alt:solid windowtext .75pt;padding:
+0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:16.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Visualization and debugging<o:p></o:p></span></h2>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Editor
+supports many ways of visualizing your scene. You may select drawing of objects
+that are usually not visible to player – like light and sounds, collision volumes,
+occluders, etc.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Grid<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>You may toggle
+  grid during editing by selecting <i>View-&gt;Grid</i> menu. Here you’ll also
+  find configuration tools for the grid.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Cameras<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>If there’re multiple
+  cameras in the scene, you may navigate between them. A handful of navigation
+  commands are found in the <i>View-&gt;Camera</i> submenu.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Note that only the default Editing camera is intended for
+  editing. When you’re switched to another camera, and move around the scene in
+  the <i>View Mode</i>, you actually modify the properties (position or
+  rotation) of the camera, which is written into the <i>UNDO</i> buffer.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>A useful
+  feature, mainly in very large scene, is navigating the camera to currently selected
+  object(s). This command is invoked by choosing <i>View-&gt;Camera-&gt;Find
+  selected objects</i>, and it places camera to look at the selected objects,
+  so that you can easily find them.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Debugging scene<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>The submenu <i>View-&gt;Debug</i>
+  offers a lot of debugging switches:<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Hierarchy boxes, Bounding boxes</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> –
+  display hierarchy bounds<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Wire-frame</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – toggle wire-frame rendering<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Occluders </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle drawing of occluders
+  (green spheres or meshes)<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dummies</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – toggle drawing of dummy
+  objects<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Sectors </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle drawing of sector
+  skeletons<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Portals </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of portals<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Volumes </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of collision
+  volumes<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Cameras </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of cameras
+  (except of default editing camera)<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Lights</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> - toggle drawing of lights<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Sounds </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of sounds<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>LM textures </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of
+  light-mapping texture cache<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Joints </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle drawing of joint
+  objects<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dynamic shadow casters </span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>- toggle
+  drawing of dynamic shadow textures and helper objects<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-bidi-font-weight:bold'>-<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dynamic shadow receivers</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> -
+  toggle drawing of dynamic shadow receivers<b><o:p></o:p></b></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-bidi-font-weight:bold'>-<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>BSP tree - </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>toggle drawing of BSP collision
+  tree<b><o:p></o:p></b></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-bidi-font-weight:bold'>-<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dynamic collision hierarchy - </span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>toggle
+  drawing of dynamic collision tree<b><o:p></o:p></b></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-bidi-font-weight:bold'>-<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Static collision frames - </span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>toggle
+  drawing of objects (visuals and volumes) which has <i>Static collision</i>
+  flag set<b><o:p></o:p></b></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-bidi-font-weight:bold'>-<span
+  style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>LOD</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – submenu offering change of
+  current level-of-detail on objects; the default value is –1, when automatic
+  LOD is used<b><o:p></o:p></b></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=334 height=336 id="_x0000_i1097" src="img\image017.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>15</span> – debug
+  submenu menu<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="57%" valign=top style='width:57.88%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Selecting rendering features<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>The submenu <i>View-&gt;Quality</i>
+  Allow user to disable some rendering features:<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Clear background</span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> – toggle erasing of
+  background before rendering<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Draw visuals </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle rendering of
+  visual objects<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Filtering </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– texture filtering switch<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>MipMapping </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– texture mipmapping switch<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Dithering </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– dithering switch<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Fog </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle fog<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Light-maps</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – toggle using lightmapping<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Textures </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle using textures<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Environment mapping </span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle
+  environment-mapping<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Bump mapping </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle bump-mapping<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Mirrors </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle mirror rendering<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Shadows </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle dynamic shadows<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>Use occlusion </span></b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>– toggle occlusion
+  testing<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width="42%" valign=top style='width:42.12%;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoCaption align=center style='text-align:center'><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><img
+  border=0 width=312 height=227 id="_x0000_i1100" src="img\image018.gif"><br>
+  Figure <span style='mso-field-code:"SEQ Figure \\* ARABIC"'>16</span> –
+  rendering quality selection<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Selecting window resolution<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>It is possible
+  to select one of resolutions available by adapter, by using the <i>View-&gt;Screen</i>
+  submenu. Note that it is also possible to resize the Editor window by
+  dragging its border.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Helping light<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Helping light is
+  a light, which may be toggled on or off and remains in scene also when Editor
+  restarts. This switch is found at <i>Debug-&gt;Helping light</i> submenu.
+  Helping light command actually creates two lights (ambient and directional)
+  and sets them to all existing sectors. This helping light is invisible to
+  user, and cannot be edited.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" colspan=2 valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Scene validation<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>In some point
+  during editing, scene can be validated. During the validation, Editor checks
+  for most common errors during editing, and reports them to user. The validity
+  check is invoked by choosing <i>Debug-&gt;Scene validity check</i> menu item.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>All errors will appear in the Log window, which pops up
+  when editor is finished with validation, or writes a message into the status
+  window: <b>Scene is OK</b>.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Validation check includes following:<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>models </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– check duplication of model on
+  the same position and with same rotation<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>lights</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – check if there are not
+  redundant lights<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>sounds</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>sectors</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>volumes</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> – check volume duplication<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>links </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– check if all visuals and
+  models are properly linked to correct sectors<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>checkpoints </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– consistency check<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:
+  l0 level1 lfo2;tab-stops:list 36.0pt'><![if !supportLists]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>geometry </span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>– detection of duplicated faces<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>When an error is reported, appropriate object is put into
+  selection, so that user can find and fix it quickly.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Note that validation is made in several phases, and if
+  some phase reports errors, further phases are not executed until existing
+  problems are fixed. So if you encounter some problem, it doesn’t mean these
+  are the only problems, more errors may show up when you fix reported ones.<o:p></o:p></span></p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><span style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:18.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Statistics</span><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:windowtext'><o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>The Editor gives
+valuable feedback in form of run-time statistic. This way you may learn a lot
+about your scene and available resources. The statistics are available in the <i>Stats</i>
+menu. Following items are available:<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>FPS</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> – frames per second; this
+information is displayed in left top corner and informs about current rendering
+speed<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Video</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> – stats about available video
+memory and textures<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>System memory </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– stats about system memory usage
+(currently not implemented)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Collision </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– stats about number of tested
+collisions (per frame) and their type<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Scene </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– stats about number of rendered
+triangles and vertices, and number of visible objects<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Selection </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– stats about current selection
+(vertices and faces)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Sounds </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– stats about sounds in scene<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l1 level1 lfo4;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>BSP</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> – statistics about BSP collision
+tree<o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p style='border:none;mso-border-bottom-alt:solid windowtext .75pt;padding:
+0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:19.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Light-mapping<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Light-mapping
+offers a significant improvement of scene look by applying pre-computed
+detailed lightmap textures on selected geometry. Note that lightmaps consume
+system resources – memory and textures, so the number of light-mapped objects
+in scene is limited.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Lightmaps are suitable for:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>large planar areas (walls, ground, boxes)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Lightmaps are not suitable for:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>highly tessellated objects or very curved surfaces<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Light-mapping
+makes illusion of realistic shadows in the scene. Note that light-mapped
+objects are supposed to be static, as well as objects casting shadows are
+supposed not to move. If an object casting shadow moves, its shadow in lightmap
+does not. To disable object (and its children) from casting shadows on
+lightmaps, see <i><a href="#_Visual">Visual</a> </i>and <i><a href="#_Model">Model</a>
+</i>properties.<o:p></o:p></span></p>
+
+<p class=MsoToc1><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="98%" style='width:98.54%;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Creating light-mapped object<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Light-mapped object
+  is created from normal visual object by modifying its properties in <i><a
+  href="#_Visual">Visual Properties</a></i> window. To do so, select one or
+  more visual objects, and change the <i>type</i> to <b>Lit-object</b>. You can
+  anytime later change the properties back to standard vertex-lit object by
+  selecting <b>Object</b> type again.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>When you change the type of the object to light-mapped, it
+  is initially un-computed. Such an object is drawn with original texture in a
+  dark green color.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Computing light-maps<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>To compute
+  light-maps, you must first add some light-mapping light to scene. Then you
+  choose the resolution of lightmaps – each lightmap object may have different
+  resolution. The resolution of lightmaps (quality) is found in the <a
+  href="#_Visual">Visual</a> property menu. The default value is 1.0. This
+  value means number of lightmap pixels per meter. The greater this number is,
+  the more detailed lightmap will be computed, but also more resources are
+  consumed.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>When you’re done
+  with this setup, you may compute lightmaps on selected objects by choosing <i>Lightmap-&gt;Construct
+  selection</i> or <i>Lightmap-&gt;Construct all</i>. The lightmaps on selected
+  objects will be computed.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Quality of lightmaps<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>The quality of computed
+  lightmaps is determined also by used algorithm. Currently user may adjust
+  antialiasing mode used during lightmap computation, which can be found in <i>Lightmap-&gt;Antialiasing</i>
+  submenu. During designing the scene, the preferable value is 1x1 to fast see
+  the results of lights. When scene is finalized, lightmaps may be recomputed
+  by selecting 2x2 or 3x3 mode, which removes “steps” in computed lightmaps and
+  improve quality.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="100%" valign=top style='width:100.0%;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;color:windowtext'>Saving lightmaps<o:p></o:p></span></h3>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><span style="mso-spacerun: yes">   </span>Computed
+  lightmaps are saved into the <i>Scene.bin</i> file, when scene is saved. Note
+  that when you modify the geometry of light-mapped object, its lightmap will
+  not be loaded, and you’ll have to re-compute it.<o:p></o:p></span></p>
+  <p class=MsoCaption align=center style='text-align:center'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:8.0pt;mso-bidi-font-size:10.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p style='border:none;mso-border-bottom-alt:solid windowtext .75pt;padding:
+0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:19.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Collisions<o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>In order to make game
+function properly, the scene must have set collisions – properties on visual
+objects and helper collision volume objects. From this information, a BPS
+collision tree is computed. Each collision object (<i><a href="#_Visual_1">Visual</a></i>
+or <i><a href="#_Volume">Volume</a></i>) may have set material, which further
+defines game behavior when collision with this object is detected.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>This means that we
+can set up collisions either by considering all object’s faces, or we can
+simplify its shape by collision volume (sphere, rectangle or box). It is up to
+designer to select appropriate mode for particular object, but in general,
+objects with few large faces are suitable for face collision testing (for
+these, you may set the <i>Static collision</i> flag in the properties. You may
+also visualize all currently marked objects and volumes, which will cause
+static collisions by selecting the <i>View-&gt;Debug-&gt;Static collision
+frames</i>. This will draw all <i>static</i> collisions by yellow. Note that
+you may (and should) mark all non-moving volume boxes <i>static</i>; otherwise
+they’ll be considered dynamic, which affects game performance. When you don’t
+check the <i>Static collision</i> on a visual, this visual won’t cause
+collisions with game elements.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Some collision
+volumes should be left with <i>Static collision</i> checkbox unchecked – these
+are those, which will move; for example when you load a model of human player,
+you’ll see it has two collision volumes on it. To visualize collision volumes,
+select the <i>View-&gt;Debug-&gt;Volumes</i> – this will draw all collision
+volumes in scene, where yellow are the static ones and red are non-static ones.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Building the collision tree<o:p></o:p></span></h3>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>In order to make
+static collisions work, you must build a BSP collision tree. Use the <i>BSP-tree-&gt;Create</i>
+menu item to compute the BSP tree. This may take a while, if scene contains lot
+of collision objects. When you save your mission, the BSP tree is saved into
+the <i>Scene.bin</i> file. Note that if geometry participating in the BSP tree
+is modified, the BSP tree becomes invalid and needs to be recomputed.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>You cannot test and run the game without computed BSP tree.<o:p></o:p></span></p>
+
+<div style='border:none;border-bottom:solid windowtext .75pt;padding:0pt 0pt 1.0pt 0pt'>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .75pt;
+padding:0pt;mso-padding-alt:0pt 0pt 1.0pt 0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1 style='text-indent:36.0pt'><a name="_Game_elements"></a><span
+style='font-size:16.0pt;mso-bidi-font-size:24.0pt;font-family:Arial'>Game
+elements<o:p></o:p></span></h1>
+
+<h2 style='margin-left:36.0pt'><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Game elements are
+those elements in the scene, which directly contribute to the game. The most
+important elements are <i>Actors</i> and <i>Checkpoints</i>.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h3 style='margin-left:36.0pt'><a name="_Checkpoints"></a><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:windowtext'>Checkpoints<o:p></o:p></span></h3>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Checkpoints and
+their connection grid is a system of AI navigation in the scene. AI doesn’t
+know as much about scene as human can know, at it’s very hard to teach AI to
+know the environment – for this reason there’s a helping navigation web in each
+scene, which defines where AI can move to. Designer is responsible for placing
+checkpoints in the scene, and to make appropriate connections.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Note that the AI doesn’t follow the checkpoint grid exactly,
+it makes shortcuts to reach its destination.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Checkpoint grid
+may be visualized by selecting the <i>CheckPoint-&gt;Show</i> menu item. This
+will display existing checkpoints in the scene and their connections.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h4><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Editing
+checkpoints<o:p></o:p></span></h4>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>When checkpoints
+are visible, they may be picked by cursor like other objects in scene, may be
+moved around (scaling and rotation doesn’t make sense), and may be deleted.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>To create and edit checkpoints, jump to checkpoint editing
+tool by selecting <i>CheckPoint-&gt;Edit</i>. In this mode, you may create and
+destroy checkpoints and their connections by simple mouse click. When clicking
+on existing checkpoint connection, it gets erased. To create a new connection,
+click on a checkpoint and drag cursor to another checkpoint. To create a new
+checkpoint, simply click anywhere on terrain, and new checkpoint will be
+created. The Editor will auto-connect new checkpoint with neighbor ones, and
+automatically reorganize connections. You may want manually re-connect those
+connections which seems to be not correct.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>When you click on existing checkpoint, drag cursor and
+release it over a terrain, a new checkpoint will be created, connected with
+existing one.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Checkpoint types<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>There’re three
+types of checkpoints:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>AI navigation (yellow)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>destination and helper (green)<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>vehicle navigation (red)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Note that the first type must always form a connected grid –
+each checkpoint must be somehow connected to the entire grid. This is for AI to
+find its way anywhere in mission, and if you leave one or more checkpoints
+unconnected with the rest, AI will not behave as expected.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>To change the checkpoint type, use <i>CheckPoint-&gt;Type</i>
+command. This commands affects selected ckeckpoint, as well as all connected
+checkpoints.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h5><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Checkpoint
+names<o:p></o:p></span></h5>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>It is possible and
+desirable to give some checkpoints a name. This is for later AI setup and
+behavior. You may set AI to use the location of some checkpoint as destination
+of their action. To edit the name of checkpoint, select a checkpoint, and
+choose <i>CheckPoint-&gt;Rename</i> menu command. The name of checkpoint
+appears as text above the checkpoint.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h5><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Checkpoint
+connections<o:p></o:p></span></h5>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Standard
+connections between checkpoints define standard path. Some specialized
+connections may be defined though. To define such a specialized connection,
+click on existing connection holding down the <i>Ctrl</i> key. A table will
+appear, which allows designer to enter parameters for connection. Following
+possibilities are available:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Use ladder</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> – this connection is between two
+ladder entries (on top and bottom of ladder), so AI knows it should use the
+ladder<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo2;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Use door </span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>– this connection is passing door,
+so AI knows it should open the door if it is closed<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>The type of connection is drawn above the connection line.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="82%" align=center>
+
+</div>
+
+
+<h1 style='text-indent:36.0pt'><span style='font-size:16.0pt;mso-bidi-font-size:
+24.0pt;font-family:Arial'>Tips and tricks<o:p></o:p></span></h1>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h3>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Measuring units<o:p></o:p></span></h3>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Both the editor
+and the game work with meters as measure units. So when you model in 3<sup>rd</sup>-party
+graphics package, make sure your objects are in reasonable resolution.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Cameras<o:p></o:p></span></h3>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes">   </span>Designers do not need to worry about
+cameras. There is one editing camera always present in the editor. Game manages
+cameras on its own. So there is no need to explicitly put cameras into scenes.
+The only setting that is necessary is camera field-of-view (FOV) and visibility
+range. We recommend setting FOV to 80 degrees. Setting visibility range is
+dependent on scene, but the smaller range, the faster the scene is rendered.<o:p></o:p></span></p>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h3>
+
+<h3 style='margin-left:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:windowtext'>Occluders<o:p></o:p></span></h3>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Occlusion testing
+is a powerful feature for hidden surface removal, but it requires some
+experience. It is useful to see what occluder actually hides by switching to wire-frame
+rendering, and optionally switch occluder visualization.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Occluder always hides only objects in the same sector where
+it is linked, and it may cause some problems when assigning occluders on
+buildings. Usually occluder is (like other created objects) is linked to the
+sector where it is created, so you should re-link it to the sector where you
+want to make it work (Primary sector for example).<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><span style="mso-spacerun: yes">   </span>Finally, when
+you’ve selected an occluder, you may switch to sub-object edit mode by choosing
+<i>Edit-&gt;Sub-object edit</i> menu item. In this mode, you’ll be able to
+fine-tune occluder’s vertices, erase vertices and create new ones. This gives a
+great possibilities in building occluder with exactly the shape you like. When
+you hold down <i>Ctrl+Shift</i> keys in this mode, you may create new occluder
+vertex by clicking anywhere on geometry. It is also recommended to put bottom
+occluder’s vertices below terrain, so that the occluder has greater chances for
+hiding objects behind it.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="82%" align=center>
+
+</div>
+
+
+<p align=center style='text-align:center'><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>Copyright ©
+Lonely Cat Games<o:p></o:p></span></strong></p>
+
+</div>
+
+</body>
+
+</html>

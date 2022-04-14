@@ -1,0 +1,3025 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IImage interface</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>35</o:Revision>
+  <o:TotalTime>151</o:TotalTime>
+  <o:Created>2002-02-20T13:21:00Z</o:Created>
+  <o:LastSaved>2003-07-18T14:42:00Z</o:LastSaved>
+  <o:Pages>12</o:Pages>
+  <o:Words>2283</o:Words>
+  <o:Characters>13014</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>108</o:Lines>
+  <o:Paragraphs>26</o:Paragraphs>
+  <o:CharactersWithSpaces>15982</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Arial Unicode MS";
+	panose-1:2 11 6 4 2 2 2 2 2 4;
+	mso-font-charset:128;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-1 -369098753 63 0 4129279 0;}
+@font-face
+	{font-family:"\@Arial Unicode MS";
+	panose-1:2 11 6 4 2 2 2 2 2 4;
+	mso-font-charset:128;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-1 -369098753 63 0 4129279 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:36.0pt;
+	margin-bottom:0pt;
+	margin-left:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Arial Unicode MS";
+	font-weight:bold;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:22.5pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><b><span style='font-size:24.0pt;mso-bidi-font-size:
+12.0pt'>IImage interface</span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt;margin-right:0pt;margin-bottom:12.0pt;margin-left:
+0pt'><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IImage
+- interface holding 2D data - system-memory images or textures.<strong><span
+style='font-weight:normal'><o:p></o:p></span></strong></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Methods:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:13.25pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:13.25pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Initialization<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:13.25pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#Open">Open</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:6.25pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:6.25pt'>
+  <p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>&nbsp;<em><span style='font-style:normal'><o:p></o:p></span></em></span></b></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:6.25pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#Close">Close</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#IsInit">IsInit</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Palette<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#SetPal">SetPal</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#GetPal">GetPal</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Rendering<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#Draw">Draw</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Access to surfaces<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#Lock">Lock</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#Unlock">Unlock</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Direct X Support<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#GetDirectXTexture">GetDirectXTexture</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#GetDirectXTexture">GetDirectXCubeTexture</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#GetDirectXSurface">GetDirectXSurface</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Conversions<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#ConvertBumpMap">ConvertBumpMap</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#ConvertToNormalMap"><b>ConvertToNormalMap</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#AlphaBlend">AlphaBlend</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#MixMipmap">MixMipmap</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#CopyColorkeyInfo">CopyColorkeyInfo</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#ApplyFunction"><b>ApplyFunction</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Information<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#GetPixelFormat">GetPixelFormat</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetColorkeyInfo"><b>GetColorkeyInfo</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#SetColorkeyInfo"><b>SetColorkeyInfo</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#SizeX">SizeX</a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#SizeY">SizeY</a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetIGraph"><b>GetIGraph</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Screen<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#SaveShot">SaveShot</a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=432 valign=top style='width:324.0pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><a href="#CopyStretched">CopyStretched</a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See
+Also:<o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\igraph\desc.htm">IGraph</a><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=Open></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>Open</span></strong><strong><span style='mso-bidi-font-size:
+13.5pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>This method initializes the content of <b>IImage</b>
+interface. This means allocation of surface in requested pixel format and
+dimensions, and filling it with data.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool Open(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>filename</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>flags</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>sx</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>sy</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_pixelformat *</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>pf</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = NULL,
+  <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>num_mip_levels</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Parameteres:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt'><strong><i><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>filename<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoBodyTextIndent>Pointer to null-terminated filename, which is used
+to initialize the interface. It may be NULL if empty image is requested.<br>
+The filename must specify valid image in one of formats supported by IGraph
+library.<strong><span style='mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>&nbsp;</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:7.5pt'><strong><i><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>flags</span></i></strong><b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The initialization flags. This may
+be combination of following flags:<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_TEXTURE<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The created surface is intended
+for use as a D3D texture.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_NOREMAP<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>When specified, no conversion of
+source pixel format is performed. The format of input data is used.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_DITHER<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Dithering may be applied during
+image conversion to destination pixel format, for enhancing of quality.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_SYSMEM<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The surface is requested in system
+memory. If this kind of memory is unavailable, the creation may fail.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_VIDMEM<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The surface is requested in video
+memory. If this kind of memory is unavailable, the creation may fail.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_EMPTY<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Empty surface will be created.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_MIPMAP<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Request for creation of mipmap
+chain. This flag is used with IMGOPEN_TEXTURE.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_COLORKEY<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Implicitly encodes color-key
+information into surface. This flags is used with compressed pixel formats
+supporting color-keying in pixels.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_HINTDYNAMIC<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Specifies that the texture will be
+often locked and modified.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_HINTSTATIC<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Specifies that the texture will be
+seldom locked (ideally once during filling of data).<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_MEM_PTR<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Map specified by memory pointer,
+rather than by filename - used to read bitmaps from resources - currently
+Windows BMP format is supported.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_RENDERTARGET<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The created surface will be
+possible to use as a render target.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt'><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGOPEN_INIT_CKEY<o:p></o:p></span></b></p>
+
+<p style='margin-right:72.0pt;margin-left:37.5pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This method initializes color-key
+information from pixel on position 0 (palletized source), or black color (RGB
+source). Also RLE transparency mask is created.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>sx, sy<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The size
+of surface. These parameters are used only if <b>IMGOPEN_EMPTY</b> flag is
+specified. If this flag is not specified, dimensions of surface are determined
+from format of opened bitmap.<strong><o:p></o:p></strong></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>pf</span></i></strong><b><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+requested pixel format of surface. This parameter is used if <b>IMGOPEN_TEXTURE</b>
+flag is specified. See <strong>S_pixelformat</strong><strong><span
+style='font-weight:normal'> for details.</span></strong><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:7.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>num_mip_levels<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The number
+of mipmap levels being created, not including the first level. This parameter
+is used if <b>IMGOPEN_MIPMAP</b> flag is specified.<strong><o:p></o:p></strong></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style='mso-tab-count:1'>            </span><o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='tab-stops:36.0pt'>If the call succeeds, the
+returned value is true.<br>
+If the call fails due to low-memory conditions, file open fail, or other
+reason, the returned value is false.</p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><a href="#Close"><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style='mso-field-code:span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/a&gt;, &lt;strong&gt;&lt;span&#13;&#10;style='
+font-size:10.0pt; font-size:24.0pt;mso-bidi-font-size: font-size:24.0pt;
+font-size: font-size:10.0pt; font-size:10.0pt; background:
+#DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt
+width:442.8pt;padding:0pt 5.4pt 0pt font-size:10.0pt;mso-bidi-font-size:
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt
+458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt
+font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt
+458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt
+font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+font-size:24.0pt;mso-bidi-font-size: font-size:24.0pt;
+font-size:10.0pt;mso-bidi-font-size: background:
+#DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt
+width:442.8pt;padding:0pt 5.4pt 0pt font-size:10.0pt;mso-bidi-font-size:
+font-size:10.0pt; font-size:10.0pt;mso-bidi-font-size: tab-stops:45.8pt 91.6pt
+137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt
+595.4pt 641.2pt 687.0pt
+font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt
+458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt
+font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:>Close</span></span></strong></a><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='margin-right:36.0pt;text-align:center;
+tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=Close></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>Close</span></strong><strong><span style='font-size:
+24.0pt;mso-bidi-font-size:13.5pt;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Release surface and image data. By
+calling this method, the <b>IImage</b> interface will be put into
+un-initialized state, containing no data.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Close();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><a href="#Open"><b>Open</b></a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><a href="#IsInit"><b>IsInit</b></a></span></strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=IsInit></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>IsInit</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>This method is used for determination if the
+interface is successfully initialized by <strong><a href="D:VSStempopen.htm"><span
+style='color:windowtext;text-decoration:none;text-underline:none'>Open</span></a>
+</strong>method.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool IsInit() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+returned value is true if the interface contains valid surface.<o:p></o:p></span></p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<pre><strong><span style='mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"Times New Roman";font-weight:normal'>&nbsp;<o:p></o:p></span></strong></pre>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><u><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:blue;
+font-weight:normal'><a href="#Close"><b>Clos</b><b>e</b></a></span></span></u></strong><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> <strong><span
+style='font-weight:normal'><a href="#Open"><b>Ope</b><b>n</span></b><span
+style='color:windowtext;text-decoration:none;text-underline:none'></span></span></a></span><o:p></o:p></strong></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SizeX></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>SizeX</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><br>
+</span></b><a name=SizeY></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>SizeY</span></strong><strong><span style='mso-bidi-font-size:
+13.5pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return width
+and height of image's surface.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword SizeX() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Width
+or height of image’s surface, if it was initialized, or zero otherwise. The
+returned value is in pixels.</p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=Lock></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>Lock</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p class=MsoNormal style='tab-stops:36.0pt'>&nbsp;</p>
+
+<pre><span style='font-family:Arial'>This method is used for obtaining access to area of IImage interface. The surfaces remains locked until calling the <strong>Unlock</strong><strong><span
+style='font-weight:normal'> method</span></strong>.<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool Lock(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void
+  **</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>area</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>pitch,</span></i></strong><strong><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>bool
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>read_only </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= true<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Parameteres:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>area<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoBodyTextIndent style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>The
+pointed variable will contain pointer to surface data. The memory may be read
+from or written to.</p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>pitch</span></i></strong><b><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+pointed variable will contain pitch of single scan-line of buffer, in bytes.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>read_only</span></i></strong><b><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>When true,
+read-only access to surface is requested, otherwise read/write access is
+requested.<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>The
+method returns true if the call succeeds, or false, if the surface cannot be
+locked for some reason.</p>
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Remarks:</span></b></em><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The image
+memory is allocated as rectangular block, the width of single scan-line must be
+determined by <i>pitch</i> parameter.<br>
+If surface is in compressed pixel format, the function returns the pitch of one
+line of 4x4-pixel compressed blocks.<o:p></o:p></span></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="#Unlock">Unlock</a><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+
+<div class=MsoNormal align=center style='margin-right:36.0pt;text-align:center;
+tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=Unlock></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>Unlock</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This method unlocks image's
+surface. The surfaces may be unlocked only after successful call to <strong>Lock</strong>
+method.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool Unlock();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+Value:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<pre style='margin-left:22.5pt'><span style='mso-bidi-font-size:12.0pt;
+font-family:Arial;mso-fareast-font-family:"Times New Roman"'>If the call succeeds, the returned value is true.<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="#Lock">Lock</a><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=Draw></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>Draw</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p class=MsoNormal style='tab-stops:36.0pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This method draws image into
+back-buffer of <b>IGraph</b> interface, by which this interface was created.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool Draw(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>left</span></i><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'> = 0, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>t<strong><span style='font-weight:normal'>op</span></strong></span></i><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>sx</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>sy</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>left</span></i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <i>t<strong><span
+style='font-weight:normal'>op<o:p></o:p></span></strong></i></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Position
+of left top corner of image on screen.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>sx, sy</span></i></strong><b><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Size of
+destination rectangle, which is drawn. If either value is zero, the
+width/height is used instead of passed value.<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p style='margin:0pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\IGraph\desc.htm">IGraph</a><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=AlphaBlend></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>AlphaBlend</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for conversion of RGB image data into alpha channel of the
+surface data. The conversion is made from specified source IImage interface
+into this interface.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool AlphaBlend(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  IImage *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>lp_IImage</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>flags</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>lp_IImage</span></i></strong><strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-weight:normal'><o:p></o:p></span></i></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>Pointer to </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>IImage </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>interface which holds RGB data used as source of conversion.</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>flags</span></i></strong><strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-weight:normal'><o:p></o:p></span></i></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+parameter may be combination of following flags:<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGBLEND_DITHER<o:p></o:p></span></b></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Perform dithering
+during conversion. This improves quality of alpha channel during conversion to
+lower bit-depth.<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGBLEND_INVALPHA<o:p></o:p></span></b></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The alpha
+value is inverted prior to writing it into the surface.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Return value:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+IImage interface must be already initialized and its pixel format must contain
+alpha channel. The dimensions of source and destination images must match.<br>
+The conversion is performed using the weighted sum of RGB values of each pixel
+and storing it into the alpha channel of destination surface.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=ApplyFunction></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>ApplyFunction</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for user-defined conversion of image data. The method applies a
+function onto every pixel in the image, in one or more passes (this way, caller
+may use one pass for retrieving data, and other passes for modifying data.<br>
+All pixel-format conversions are handles inside of the function, and caller
+deals only with pixels in ARGB format.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool ApplyFunction(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>t_ApplyFunc
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>func</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>num_passes </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= 1</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>func</span></i></strong><strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-weight:normal'><o:p></o:p></span></i></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>Pointer to callback function, which will be called for each pixel in
+the image. The function prototype is declared as:</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>typedef </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>dword </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>I2DAPI t_ApplyFunc(</span></strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+<strong><span style='font-weight:normal'><span style='mso-tab-count:1'>        </span></span>dword
+</strong><strong><i><span style='font-weight:normal'>argb</span></i></strong><strong><span
+style='font-weight:normal'>,</span></strong><br>
+<strong><span style='font-weight:normal'><span style='mso-tab-count:1'>        </span></span>dword
+</strong><strong><i><span style='font-weight:normal'>x</span></i></strong><strong><span
+style='font-weight:normal'>,</span></strong><br>
+<strong><span style='font-weight:normal'><span style='mso-tab-count:1'>        </span></span>dword
+</strong><strong><i><span style='font-weight:normal'>y</span></i></strong><strong><span
+style='font-weight:normal'>,</span></strong><br>
+<strong><span style='font-weight:normal'><span style='mso-tab-count:1'>        </span></span>dword
+</strong><strong><i><span style='font-weight:normal'>pass_index</span></i></strong><br>
+<strong><span style='font-weight:normal'>);</span></strong></span><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>argb</span></i></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> … current pixel
+in ARGB format</span></strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><br>
+<strong><i><span style='font-weight:normal'>x, y</span></i></strong><strong><span
+style='font-weight:normal'> … coordinates of the current pixel</span></strong><br>
+<strong><i><span style='font-weight:normal'>pass_index</span></i></strong><strong><span
+style='font-weight:normal'> … index of current pass</span></strong></span><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>The returned value must be new pixel value stored in the image.</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+<p style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>num_passes</span></i></strong><strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-weight:normal'><o:p></o:p></span></i></strong></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Number of
+passes. For each pass, the <i>func</i> will be called for all pixels in the
+image.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Return value:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=ConvertBumpMap></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>ConvertBumpMap</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for conversion of RGB image data into UV offsets used for
+bump-mapping. The conversion is made from specified source IImage interface into
+this interface.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool ConvertBumpMap(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  Iimage *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>lp_IImage</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>flags</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>lp_IImage<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>Pointer to </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>IImage </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>interface, which holds RGB data used as source of conversion.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>flags<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This parameter
+is reserved for future use and must be zero.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This IImage interface must be
+already initialized using one of bump-mapping pixel formats. The dimensions of
+source and destination images must match.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=ConvertToNormalMap></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>ConvertToNormalMap</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for conversion of RGB image data into normal map used for
+bump-mapping. The conversion is made from specified source IImage interface
+into this interface.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool ConvertToNormalMap(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  Iimage *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>lp_IImage</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>scale</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>1.0</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>lp_IImage<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>Pointer to </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>IImage </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>interface which holds RGB data used as source of conversion.<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>scale<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Parameter specifying
+how height values are scaled prior to building 3D normal data.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This IImage interface must be
+already initialized using one of RGB pixel formats. The dimensions of source
+and destination images must match.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=MixMipmap></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>MixMipmap</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for creation of mipmap chain from current <b>RGB</b> or <b>ARGB</b>
+surface data. The image must be opened with <b>IMGOPEN_MIPMAP</b> and <b>IMGOPEN_TEXTURE
+</b>flags, so that mipmap levels are created.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool<span style="mso-spacerun: yes"> 
+  </span>MixMipmap(</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>flags</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> = 0</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>flags</span></i></strong><b><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+parameter may be combination of following flags:<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IMGMIPMAP_DITHER<o:p></o:p></span></b></p>
+
+<p class=MsoBodyTextIndent style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Perform
+dithering during conversion. This improves quality of mipmap levels during
+conversion of filtered pixels into destination pixel format.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;<span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetIGraph></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetIGraph</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method returns pointer to <b>IGraph </b>interface, which was used to create
+this interface.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const IGraph *GetIGraph() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoBodyTextIndent style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>The
+returned value is a pointer to <b>IGraph </b>interface.</p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\IGraph\desc.htm">IGraph</a><strong><o:p></o:p></strong></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetPal></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>GetPal</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This method returns pointer to
+palette associated with surface of the <b>IImage</b> interface.<o:p></o:p></span></p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:6.75pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:6.75pt'>
+  <p class=MsoNormal style='mso-line-height-alt:6.75pt'><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>dword
+  *GetPal() const;</span></strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If pixel
+format of the surface is palletized, the returned value is pointer to array of
+256 entries of color palette associated with the surface, in ARGB format.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If surface
+is not initialized, or pixel format is not palletized, the returned value is
+NULL.<o:p></o:p></span></p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="#SetPal"><!--[if supportFields]><span style='mso-element:field-begin'></span><span
+style="mso-spacerun: yes"> </span>SetPal.htm' <span style='mso-element:field-separator'></span><![endif]-->SetPal<!--[if supportFields]><span
+style='font-size:12.0pt;font-family:"Times New Roman";font-weight:normal'><span
+style='mso-element:field-end'></span></span><![endif]--></a>, </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><a href="#GetPixelFormat"><b>GetPixelFormat</b></a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SetPal></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>SetPal</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>This method is used for setting
+palette entries of image, if its surface is initialized in palletized pixel
+format.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:6.75pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:6.75pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool SetPal(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword*
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>palette</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='mso-line-height-alt:6.75pt'><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>);</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style='mso-tab-count:1'>            </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:7.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>p<strong><span
+style='font-weight:normal'>alette<o:p></o:p></span></strong></span></i></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+array of 256 <b>dword</b> values, where each value specifies ARGB palette
+entry.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If surface
+is initialized, and pixel format of IImage interface is palletized, the
+returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Otherwise
+the returned value is false.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="#GetPal">GetPal</a>, </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><a
+href="#GetPixelFormat"><b>GetPixelFormat</b></a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetColorkeyInfo></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetColorkeyInfo</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Using this
+method, applications can get access to RLE-compressed colorkey information
+stored with IImage interface, if it was opened using the <b>IMGOPEN_INIT_CKEY</b>
+flag.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword GetColorKeyInfo(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>size </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= NULL</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>size</span></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";font-style:
+normal'><o:p></o:p></span></em></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Pointer where size of the colorkey information will be written to. You
+may pass NULL if you do not wish to receive this information.</span></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-style:normal'><o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Return value:</span></b></em><em><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></b></em></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The returned
+value is a pointer to a RLE-compressed colorkey information, associated with
+pixels in image’s surface.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a href="#CopyColorkeyInfo">CopyColorkeyInfo</a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>, <a href="#Open"><b>Open</b></a>, <a href="#SetColorkeyInfo"><b>SetColorkeyInfo</b></a></span></strong><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SetColorkeyInfo></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>SetColorkeyInfo</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Using this
+method, applications can setup RLE-compressed colorkey information associated
+with the IImage interface’s contents.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void SetColorKeyInfo(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>data</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>size</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>data</span></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";font-style:
+normal'><o:p></o:p></span></em></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Pointer to </span></em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>a pointer to a RLE-compressed colorkey information,
+associated with pixels in image’s surface. This must be valid format of RLE
+colorkey information, matching the resolution of the image.</span><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-style:normal'><o:p></o:p></span></em></p>
+
+<p style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>size</span></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";font-style:
+normal'><o:p></o:p></span></em></p>
+
+<p style='margin-left:37.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Size of the data.</span></em><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS";
+font-style:normal'><o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a href="#CopyColorkeyInfo">CopyColorkeyInfo</a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>, <a href="#Open"><b>Open</b></a>, <a href="#GetColorkeyInfo"><b>GetColorkeyInfo</b></a></span></strong><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=CopyColorkeyInfo></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>CopyColorkeyInfo</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for copying RLE-compressed colorkey information from one image
+to another.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool CopyColorkeyInfo(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  IImage *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>src</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>src</span></i></strong><b><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'>&nbsp;<o:p></o:p></span></pre>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+source IImage interface, from which colorkey data will be copied.<strong><span
+style='font-weight:normal'><o:p></o:p></span></strong></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style='mso-tab-count:1'>            </span><o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><a href="#GetColorkeyInfo">GetColorkeyInfo</a><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=CopyStretched></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>CopyStretched</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method is used for copying contents of source image surface into this image’s
+surface. The pixel formats of both images must match.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:21.6pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:21.6pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool CopyStretched(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  IImage *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>src_img</span></i></strong><strong><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>src_img<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='text-indent:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+<b>IImage </b>interface, whose data will be copied to this interface.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Dimensions of both images doesn’t need
+to match. The surface data from source image are copied into destination image
+stretched, which means that the image is rescaled to fill entire contents of
+destination surface.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetDirectXSurface></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetDirectXSurface</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This
+method returns pointer to <b>IDirect3DSurface8</b> interface, if the surface
+was initialized without using the <b>IMGOPEN_TEXTURE</b> flag.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>struct IDirect3DSurface8 *GetDirecXSurface();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+Value:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If call is
+successful, the returned value is a pointer to <strong>IDirect3DSurface8</strong><strong><span
+style='font-weight:normal'> interafce.</span></strong><br>
+<strong><span style='font-weight:normal'>If surface is not a Direct3D surface,
+or IImage interface wasn’t initialized, the returned value is NULL.</span></strong><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><a href="#GetDirectXTexture"><b>GetDirectXTexture</b></a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS";font-weight:normal'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='margin-right:36.0pt;text-align:center;
+tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetDirectXTexture></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetDirectXTexture</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><br>
+</span></b><a name=GetDirectXCubeTexture></a><strong><span style='font-size:
+24.0pt;mso-bidi-font-size:13.5pt'>IImage::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>GetDirectXCubeTexture</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This method
+returns pointer to <b>IDirect3DTexture8</b> interface, if the surface was
+initialized using the <b>IMGOPEN_TEXTURE</b>.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>IDirect3DTexture8 *GetDirectXTexture();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>IDirect3DCubeTexture8 *GetDirectXCubeTexture();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+Value:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&nbsp;<o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If call is
+successful, the returned value is a pointer to <strong>IDirect3DTexture8</strong><strong><span
+style='font-weight:normal'> interafce (or to </span>IDirect3DTexture8</strong><strong><span
+style='font-weight:normal'> interface respectively).</span></strong><br>
+<strong><span style='font-weight:normal'>If surface is not a texture surface,
+or IImage interface wasn’t initialized, the returned value is NULL.</span></strong><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:</span></b><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><o:p></o:p></span></strong></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="#GetDirectXSurface">GetDirectXSurface</a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=GetPixelFormat></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetPixelFormat</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>This method is used for retrieving the pixel format of image’s surface
+data.</span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'><o:p></o:p></span></b></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:19.35pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:19.35pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const S_pixelformat *GetPixelFormat() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The returned
+value is a pointer to structure of type <strong>S_pixelformat</strong> , or
+NULL if image is not initialized.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>See also:<o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><u><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\structs\s_pixelformat.htm"><strong>S_pixelformat</strong></a></span></u><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SaveShot></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IImage::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>SaveShot</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial;mso-fareast-font-family:
+"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+
+<p style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>This method
+is used for saving the contents of image’s surface into a file.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool SaveShot(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>class
+  C_cache *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>cache</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>ext</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> =
+  &quot;pcx&quot;</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Parameters:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>cache<o:p></o:p></span></i></strong></p>
+
+<p class=MsoNormal style='text-indent:36.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+<b>C_cache</b> class, which is used for storing the image information.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:7.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>ext</span></i></strong><b><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Desired
+image format, in which data should be saved. This must be extension one of
+supported image formats.<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>&nbsp;<o:p></o:p></span></em></h2>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Return value:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If the
+call succeeds, the returned value is true.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;tab-stops:36.0pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<h2 style='tab-stops:36.0pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>See Also:<o:p></o:p></span></em></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>C_cache</span><o:p></o:p></b></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+</div>
+
+</body>
+
+</html>

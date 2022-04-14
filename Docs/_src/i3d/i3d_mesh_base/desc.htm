@@ -1,0 +1,763 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>I3D_mesh_base</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>52</o:Revision>
+  <o:TotalTime>45</o:TotalTime>
+  <o:Created>2002-02-05T15:04:00Z</o:Created>
+  <o:LastSaved>2003-05-01T13:11:00Z</o:LastSaved>
+  <o:Pages>4</o:Pages>
+  <o:Words>428</o:Words>
+  <o:Characters>2440</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>20</o:Lines>
+  <o:Paragraphs>4</o:Paragraphs>
+  <o:CharactersWithSpaces>2996</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>I3D_mesh_base</span></strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+<b>I3D_mesh_base</b> interface physically contains vertices and faces
+describing geometry. It also contains definition of used material(s). Because
+of one mesh may have multiple materials, there is one or more groups of faces using
+the same material. <strong>I3D_mesh_base </strong>keeps list of face groups.<br
+style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'><span style="mso-spacerun: yes"> </span>Methods:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>Vertices:<o:p></o:p></span></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#NumVertices"><b>NumVertices</b></a></span></strong><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'><a href="#LockVertices">LockVertices</a><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='text-align:justify'><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><a
+  href="#UnlockVertices"><b>UnlockVertices</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetSizeOfVertex"><b>GetSizeOfVertex</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial'>Faces and groups:<o:p></o:p></span></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#NumFGroups"><b>NumFGroups</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#NumFaces"><b>NumFaces</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetFGroups"><b>GetFGroups</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetFaces"><b>GetFaces</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=NumVertices></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>NumVertices</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Get number of vertices in the
+mesh.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword NumVertices();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Number of vertices.<o:p></o:p></span></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=LockVertices></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>LockVertices</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Obtain access to vertices. To get the
+access, vertices must get locked. After finishing operation with vertices, user
+must call <strong>UnlockVertices</strong>.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const S_vector *LockVertices();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is a constant
+pointer to array of <b>S_vector</b> structures.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Remarks:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>The returned pointer points to the position component
+of the first vertex. To get access to subsequent position components of next
+vertices, you must use vertex stride for computing proper pointer of the
+vertex, not using the returned pointer as array. To get vertex stride, use <b>GetSizeOfVertex</b>
+method.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><a href="#UnlockVertices">UnlockVertices</a></span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <b><a
+href="#GetSizeOfVertex">GetSizeOfVertex</a></b>, <b><a
+href="..\..\i3d_math\S_vector\desc.htm">S_vector</a><o:p></o:p></b></span></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=UnlockVertices></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>UnlockVertices</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Unlocks access to vertices. See <strong>LockVertices</strong>
+for details.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>viod UnlockVertices();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><a href="#LockVertices">LockVertices</a><o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=GetSizeOfVertex></a><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>I3D_mesh_base::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>GetSizeOfVertex</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Return size of vertex.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword GetSizeOfVertex();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is the size of
+vertex, in bytes.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=NumFGroups></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>NumFGroups</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Get number of face groups in mesh.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword NumFGroups();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is number of
+face groups in the mesh.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=NumFaces></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>NumFaces</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Get number of faces in the mesh.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>dword NumFaces();</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is number of
+faces in the mesh.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=GetFGroups></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetFGroups</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Get pointer to array of <strong>I3D_face_group</strong>
+structures containing information about material and faces.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>CPI3D_face_group GetFGroups() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to array of <b>I3D_face_groups</b>
+classes.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><a
+href="..\structs\I3D_face_group.htm"><b>I3D_face_group</b></a><o:p></o:p></span></strong></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=GetFaces></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>I3D_mesh_base::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetFaces</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="41%" align=left>
+
+</div>
+
+<pre><span style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"Times New Roman"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Get copy of mesh’s faces.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>I3D_RESULT GetFaces(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>I3D_triface
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>buf<o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:22.5pt;tab-stops:36.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>buf<o:p></o:p></span></i></p>
+
+<p style='margin-left:37.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to array of faces, where
+faces will be stored. The size of the array must be minimally <b>NumFaces</b>
+elements.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return Value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is a constant
+pointer to array of <b>I3D_triface</b> structures.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><a href="#NumFaces">NumFaces</a></span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <b><a
+href="..\structs\I3D_triface.htm">I3D_triface</a><o:p></o:p></b></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+
+<div align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p class=MsoNormal><span style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;display:none;mso-hide:all'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h4>
+
+</div>
+
+</body>
+
+</html>

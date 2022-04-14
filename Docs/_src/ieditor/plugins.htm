@@ -1,0 +1,2564 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./plugins_files/filelist.xml">
+<link rel=Edit-Time-Data href="./plugins_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IEditor Plugins</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>123</o:Revision>
+  <o:TotalTime>916</o:TotalTime>
+  <o:Created>2003-05-02T07:54:00Z</o:Created>
+  <o:LastSaved>2003-05-12T20:23:00Z</o:LastSaved>
+  <o:Pages>5</o:Pages>
+  <o:Words>1697</o:Words>
+  <o:Characters>9674</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>80</o:Lines>
+  <o:Paragraphs>19</o:Paragraphs>
+  <o:CharactersWithSpaces>11880</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h2
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	background:navy;
+	font-size:12.0pt;
+	font-family:Tahoma;
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:400446995;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1546505212 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0pt;}
+ul
+	{margin-bottom:0pt;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>IEditor plugins</span></strong><span style='font-size:11.0pt;
+mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Following is a list of plugins
+located in the IEditor and usable either directly by editor users, or
+programmatically by programmers.<o:p></o:p></span></strong></p>
+
+<pre><strong><span style='mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"Times New Roman";font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></pre>
+
+<ul style='margin-top:0pt' type=disc>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#AnimEdit">AnimEdit</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#BSPTool">BSPTool</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#CamPath">CamPath</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Console">Console</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Create">Create</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#DebugLine">DebugLine</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Exit">Exit</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Gravitation">Gravitation</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Grid">Grid</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Help">Help</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#HelpLight">HelpLight</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Hide">Hide</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Lightmap">Lightmap</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Log">Log</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#MeshInfo">MeshInfo</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Mission">Mission</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Modify">Modify</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#MouseEdit">MouseEdit</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#ProcEdit">ProcEdit</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Properties">Properties</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Screen">Screen</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#ScreenShot">ScreenShot</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Seed">Seed</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Selection">Selection</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Stats">Stats</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#SubEdit">SubEdit</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Tape">Tape</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#TimeScale">TimeScale</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Undo">Undo</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Usability">Usability</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#Validity">Validity</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#VideoGrab">VideoGrab</a><o:p></o:p></span></strong></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo3;tab-stops:list 36.0pt'><strong><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+     href="#View">View</a><o:p></o:p></span></strong></li>
+</ul>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Undo</strong><a name=Undo></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Undo/redo functionality. Very simple,
+  but essential plugin for saving undo and redo information, and recalling it.
+  It works without knowing any information about other plugins.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>The undo plugin is usable
+  directly only by two shortcuts which it exposes – Undo and Redo. These two
+  simple operations should traverse through scene modification actions
+  performed by user, and allow user to return to any previous point in editing.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Modifying scene (writing into
+  undo buffer) clears the redo buffer.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>When a plugin modifies something
+  in the scene, it opens a record in the Undo buffer, utilizing C_chunk cache
+  interface, and writes any information which is to be saved. Careful should be
+  taken when saving pointers (which may not be valid when action is undone).<o:p></o:p></span></strong></p>
+  <p class=MsoBodyText><strong><span style='font-weight:normal'>Each undo entry
+  may be associated with one I3D_frame interface, which is passed to Open
+  method, and Undo plugin keeps reference of it.<o:p></o:p></span></strong></p>
+  <p class=MsoBodyText><strong><span style='font-weight:normal'>When user
+  selects Undo/Redo, the registering plugin’s Undo method is passed, with the
+  data in the chunk which it created, and pointer to I3D_frame, which is
+  associated with the action.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>After each scene Tick, a special
+  mark is written to the internal undo buffer, which marks an end of frame.
+  When undo is performed, multiple actions are undone/redone, until next such
+  mark. This way, other plugins may create multiple entries, which will be
+  undone at one user’s click.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Selection</strong><a name=Selection></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Keeping current selection of objects in
+  the scene, displaying selection dialog, sending notifications when selection
+  changes.</span></strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><br>
+  <strong><span style='font-weight:normal'>Additionally, this plugin displays
+  flashed frames – objects which bounding box flashes for various reasons – to
+  mark error, to notify user that something happened with the object, etc.<o:p></o:p></span></strong></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>For user, this plugin provides
+  logical selection of one or more I3D_frame objects in the scene. The
+  selection is marked by rendering bounding boxes around selected objects, and
+  optionally link to parent’s frame. This plugin also provides the selection
+  dialog, where objects may be selected using various categories or by name.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Other plugins may retrieve
+  vector containing current selection. They may also install notification
+  callbacks, which are called when selection changes.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Modify</strong><a name=Modify></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Keeping modification info associated
+  with each frame. It also stores initial values of modified parameters, so
+  that the parameters may be reset to original ‘after load’ state.</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+  <strong><span style='font-weight:normal'>This plugin is responsible for
+  saving modification information of mission.<o:p></o:p></span></strong></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin is used mainly by
+  other plugins, in order to store modification information in one place.
+  There’re several flags named E_MODIFY_FLG_XXX (where XXX is replaced by
+  actual flag name), which define type of modification made on frame, for
+  example position. Each modification on a frame may be added or reset. When
+  adding modify flag, the plugin saves original “non-modified” value of the
+  modification, so that the value may be reset later to original state.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin also saves current
+  modification into mission binary file. The loading is done by game itself,
+  which must add methods of this plugin during loading in order to allow
+  editing of scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Create</strong><a name=Create></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Creation and deletion of frames. This
+  plugin also provides browse dialogs for selecting sounds and models.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Through Create menu, or keyboard
+  shortcuts, user may create various types of frames. For particular types,
+  user is asked for additional parameters during creation.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin also offers deletion and
+  duplication of frames.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Possibility to use plugin’s
+  browser dialogs for selecting model or sound, and deletion of particular
+  frame (letting the plugin saving undo information).<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>MouseEdit</strong><a name=MouseEdit></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Editing and flying around the scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin is the main
+  interface between user and scene, translating keyboard and mouse actions into
+  commands manipulating the scene (moving, rotating, scaling, flying, etc).
+  Interface provides mainly methods for comfortable navigation through scene,
+  and modification of scene objects using the mouse.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Other plugins may utilize this
+  plugin for interaction-based tasks. They may hook the mouse, change cursor,
+  install callback for user’s click, etc.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Properties</strong><a name=Properties></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin managing the Properties dialog
+  window.<o:p></o:p></span></strong></p>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>It also allows other plugins to install
+  their tabs in the Properties window.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin provides additional
+  Properties dialog window, typically always displayed in editor, which
+  provides interactive information about current actions. This plugin provides
+  information about current selection (tabs for frame, and specialized frames
+  such as sounds, lights, etc). Using this plugin, user may modify scene by
+  typing numerical values into the dialog.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin itself provides sheets
+  for displaying and modifying basic parameters of all frame types.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Various plugins also use the
+  property window for installing its own dialog windows. The properties window
+  may also be made the activate window.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Mission<a name=Mission></a><o:p></o:p></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Manager of mission loader and browser.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Mission manager. Allows browsing
+  through scenes, using source control, starting/ending game mode, etc.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>The editor provides just base
+  class, not implementation. Must be implemented by game application.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Log<a name=Log></a><o:p></o:p></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Managing the Log output.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>The plugin works using its sheet
+  in the Properties window. It provides output only, and allows saving the
+  contents of the log window into a file.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Many plugins use the possibility
+  of this plugin to output many kinds of information, which should be displayed
+  to user. The Log window supports colored texts, as well as rich-text.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>DebugLine<a name=DebugLine></a><o:p></o:p></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Displaying lines and points for
+  debugging purposes. More modes available – one-time, permanent or fading out
+  line and point.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may decide to clear all
+  permanently drawn lines or points.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Used for various debugging
+  purposes, anytime when 3D lines or points may show users or programmers hints
+  about some problem or help debugging the game.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Exit</strong><a name=Exit></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Exit plugin, managing leaving of the
+  editor.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Exit shortcut and menu item.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Stats</strong><a name=Stats></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin collecting various statistics,
+  and displaying them on the screen.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may choose which statistics
+  (if any) are to be displayed.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>BSPTool</strong><a name=BSPTool></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Tool for creation of BSP tree.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin allows user to
+  select computation of the tree, or destroy it.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Simple methods are used for
+  loading or saving the tree into a chunk.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>TimeScale</strong><a name=TimeScale></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Scaling of time. Used for time morphing
+  for debugging purposes.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may change the time scale
+  either in edit mode, or game mode.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugins may read current time
+  scale for scaling their own time, because Tick into editor and plugins is not
+  scaled, only Tick to game classes is affected by this plugin.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Console</strong><a name=Console></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Console window on screen, showing
+  simple text lines. Used for debugging output. Not to be mislead with Log
+  plugin, which is for displaying persistent information. The console displays
+  short-lasting informative texts.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programs may send output to one
+  of two console types.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>AnimEdit</strong><a name=AnimEdit></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Animation editor, allowing creating and
+  editing of animations on loaded models, and the using the animation in other
+  places.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>When active, the editor displays
+  specialized dialog with various controls related to edited animation.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>A class loading the animation
+  from binary file is provided.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>CamPath</strong><a name=CamPath></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Camera path animator. Plugin for
+  animating camera path movement on bezier curves. Used for creation of camera
+  movement directly in 3D scenes, with settings of times, delays, notify keys.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Animation tools for creating
+  camera path movement, using specialized dialog, and visualization of camera
+  path and keys. Plugin allows playback of edited path.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>A class loading the camera path from
+  binary file is provided.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Gravitation</strong><a name=Gravitation></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Gravitation plugin, used for editing
+  purposes. Allows falling selected objects onto floor, either using collision
+  tests, or utilizing physics.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Shortcuts are available for
+  falling selected objects. Plugin smoothly animates the falling, so that user
+  better understands where objects ended in the scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Grid</strong><a name=Grid></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Grid plugin displays grid in viewport.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may select if grid is
+  displayed, and axes on which it is displayed (X, Y, Z). Using configuration
+  dialog, user may select colors, spacing, and other parameters.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Help</strong><a name=Help></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Help plugin provides ways of putting
+  help entries into the Help sub-menu.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>About dialog box accessible
+  through help menu.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Hide</strong><a name=Hide></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin managing hiding and un-hiding of
+  frames.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may choose hiding of
+  selected objects, unhide all, or browse which objects to unhide.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>HelpLight</strong><a name=HelpLight></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Helping light put into scene, not
+  considered to be editing light. This plugin is usable for shining on light when
+  scene itself is too dark.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Light is turned on or off by
+  user.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Lightmap</strong><a name=Lightmap></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Lightmap generation plugin.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin allows lightmap
+  generation on selected, or all lightmapped visuals, and cares about saving
+  this information into binary file.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>MeshInfo</strong><a name=MeshInfo></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Development tool, displaying detailed information
+  about mesh – vertex numbers, face numbers and vertex normals. This
+  information is usable for programmers working on mesh-based tasks.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may select if selected
+  object, or clicked object is to be visualized, or turn off the visualization.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>ProcEdit</strong><a name=ProcEdit></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Editor of procedural textures.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin displays a dialog
+  which allow editing of procedural textures, and displays preview of the editing.
+  The result of editing is saved in a file, usable later in mission.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Screen</strong><a name=Screen></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin allowing change of screen
+  resolution. It detects allowable display modes, and manages actual mode
+  change.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User selects one of detected
+  screen mode, or moves through them sequentially.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Screen<a name=ScreenShot></a>Shot</strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin managing capturing of
+  screenshots.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>By choosing shortcut, the plugin
+  captures screenshot into game’s root directory. It manages automatic name
+  increasing.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Seed</strong><a name=Seed></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Seed plugin allows comfortable seeding
+  of models into scene from predefined sets. It allows definition of sets of
+  various object types, and random selection of one of models placed into scene
+  on each mouse click. The sets are saved into shared disk file.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User manages set through a
+  dialog box, and uses the seed dialog by placing the objects into scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>SubEdit</strong><a name=SubEdit></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin managing sub-object editing.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may enter into sub-object
+  edit on particular types of frames. This plugin managing actual editing.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Tape</strong><a name=Tape></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Tape plugin implements a tool for
+  measuring distances in scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User may by pressing shortcut
+  start measuring from current location to new mouse location. Absolute
+  distance and height are displayed.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>Validity</strong><a name=Validity></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Validation of scene. This plugin checks
+  for common errors, calls other plugins for performing their checks, and
+  displays problems to the Log window.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Simple shortcut for performing
+  the check.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugins may perform their own validity
+  tests.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>VideoGrab</strong><a name=VideoGrab></a><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin used for grabbing video from
+  scene.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>User starts video grabbing,
+  selects video size and playback rate, and plugin takes care about simulating
+  constant time step among rendered screens, and finally writes the captured
+  screens onto disk in selected format.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 width="100%" style='width:100.0%;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Plugin:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <h2><strong>View</strong><a name=View></a><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></strong></h2>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Description:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>Plugin used for switching variety of
+  visualization modes.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Editor Interface:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>This plugin maintains shortcuts
+  changing various visualization modes – debugging and quality aspects of
+  rendering. User may choose either menu items, or keyboard shortcuts.<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Programming API:<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=636 valign=top style='width:477.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>-<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p class=MsoNormal style='tab-stops:36.0pt'><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+</div>
+
+</body>
+
+</html>

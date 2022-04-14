@@ -1,0 +1,1045 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IGraph library</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>65</o:Revision>
+  <o:TotalTime>153</o:TotalTime>
+  <o:Created>2002-02-18T17:17:00Z</o:Created>
+  <o:LastSaved>2002-07-30T11:27:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>400</o:Words>
+  <o:Characters>2285</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>19</o:Lines>
+  <o:Paragraphs>4</o:Paragraphs>
+  <o:CharactersWithSpaces>2806</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><b><span style='font-size:24.0pt;mso-bidi-font-size:
+12.0pt'>IGraph library<o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt;margin-right:0pt;margin-bottom:12.0pt;margin-left:
+0pt'><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Master
+interface, used for basic tasks related with graphics window, simple input
+methods of keyboard and mouse, and creation of other related interfaces.<strong><span
+style='font-weight:normal'><o:p></o:p></span></strong></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Methods:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:13.25pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:13.25pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Callback<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:13.25pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="AddCallback.htm"><b>AddCallback</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:15.75pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:15.75pt'>
+  <p><span style='font-family:Arial'>&nbsp;</span><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:15.75pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="RemoveCallback.htm"><b>RemoveCallback</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:15.75pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:15.75pt'>
+  <p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<b>Visual
+  Interface<em><span style='font-style:normal'><o:p></o:p></span></em></b></span></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:15.75pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Window<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetAppName.htm"><b>GetAppName</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetAppName.htm"><b>SetAppName</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetHWND.htm"><b>GetHWND</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetMenu.htm"><b>GetMenu</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetMenu.htm"><b>SetMenu</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>ViewPort<a name=ViewPort></a><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetViewport.htm"><b>SetViewport</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="ClearViewport.htm"><b>ClearViewport</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Dialog Box Support<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="AddDlgHWND.htm"><b>AddDlgHWND</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="RemoveDlgHWND.htm"><b>RemoveDlgHWND</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Screen<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Scrn_sx.htm"><b>Scrn_sx</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Scrn_sy.htm"><b>Scrn_sy</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt;mso-row-margin-right:
+  35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=349 valign=top style='width:261.4pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetPixelFormat.htm"><b>GetPixelFormat</b></a><o:p></o:p></span></strong></p>
+  </td>
+  <td style='mso-cell-special:placeholder;border:none;border-bottom:solid silver .5pt;
+  padding:0pt 0pt 0pt 0pt' width=47><p class='MsoNormal'>&nbsp;</td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Desktop<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetDesktopResolution.htm"><b>GetDesktopResolution</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="NumDisplayModes.htm"><b>NumDisplayModes</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetDisplayMode.htm"><b>GetDisplayMode</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetBrightness.htm"><b>SetBrightness</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>DirectX Support<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetD3DInterface.htm"><b>GetD3DInterface</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetD3DDevice.htm"><b>GetD3DDevice</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetRGBConv.htm"><b>GetRGBConv</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Parameters<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetFlags.htm"><b>GetFlags</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="UpdateParams.htm"><b>UpdateParams</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Back Buffer<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="CreateBackbufferCopy.htm"><b>CreateBackbufferCopy</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetBackbufferCount.htm"><span
+  style='mso-field-code:"HYPERLINK \0022GetBackbufferCount\.htm\0022"'><b>GetBackbufferCount</b></span></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;border-bottom:solid silver .5pt;
+  padding:0pt 0pt 0pt 0pt' width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="UpdateScreen.htm"><b>UpdateScreen</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:15.75pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:15.75pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Input Interface<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:15.75pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Keyboard<a name=Keyboard></a><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="DefineKeys.htm"><b>DefineKeys</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="ReadKey.htm"><b>ReadKey</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="ReadKeys.htm"><b>ReadKeys</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetShiftKeys.htm"><b>GetShiftKeys</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetAscii.htm"><b>GetAscii</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetKeyboardMap.htm"><b>GetKeyboardMap</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetKeyName.htm"><b>GetKeyName</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Mouse<a name=Mouse></a><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="MouseInit.htm"><b>MouseInit</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="MouseClose.htm"><b>MouseClose</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="MouseUpdate.htm"><b>MouseUpdate</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Mouse_x.htm"><b>Mouse_x</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Mouse_y.htm"><b>Mouse_y</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Mouse_rx.htm"><b>Mouse_rx</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Mouse_ry.htm"><b>Mouse_ry</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Mouse_rz.htm"><b>Mouse_rz</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetMousePos.htm"><b>SetMousePos</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;border-bottom:solid silver .5pt;
+  padding:0pt 0pt 0pt 0pt' width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetMouseButtons.htm"><b>GetMouseButtons</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:15.75pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:15.75pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>System methods<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:15.75pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="ProcessWinMessages.htm"><b>ProcessWinMessages</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetWindowCloseStatus.htm"><b>GetWindowCloseStatus</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Timer<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="NullTimer.htm"><b>NullTimer</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;padding:0pt 0pt 0pt 0pt'
+  width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetTimer.htm"><b>GetTimer</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt;mso-row-margin-left:35.6pt'>
+  <td style='mso-cell-special:placeholder;border:none;border-bottom:solid silver .5pt;
+  padding:0pt 0pt 0pt 0pt' width=47><p class='MsoNormal'>&nbsp;</td>
+  <td width=144 valign=top style='width:108.0pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="ReadTimer.htm"><b>ReadTimer</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Creation<a name=Creation></a><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="CreateImage.htm"><b>CreateImage</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="CreateRGBConv.htm"><b>CreateRGBConv</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:11.95pt'>
+  <td width=191 colspan=2 valign=top style='width:143.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.95pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=396 colspan=2 valign=top style='width:297.0pt;border-top:none;
+  border-left:none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:11.95pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetImageInfo.htm"><b>GetImageInfo</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <![if !supportMisalignedColumns]>
+ <tr height=0>
+  <td width=47 style='border:none'></td>
+  <td width=144 style='border:none'></td>
+  <td width=349 style='border:none'></td>
+  <td width=47 style='border:none'></td>
+ </tr>
+ <![endif]>
+</table>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See
+Also:<o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\iimage\desc.htm">IImage</a><o:p></o:p></span></b></p>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_animation_set"> <param name="Local" value="I3D\i3d_animation_set\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="I3D\i3d_animation_set\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetTime"> <param name="Local" value="I3D\i3d_animation_set\GetTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddAnimation"> <param name="Local" value="I3D\i3d_animation_set\AddAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveAnimation"> <param name="Local" value="I3D\i3d_animation_set\RemoveAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumAnimations"> <param name="Local" value="I3D\i3d_animation_set\NumAnimations.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimation"> <param name="Local" value="I3D\i3d_animation_set\GetAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimLink"> <param name="Local" value="I3D\i3d_animation_set\GetAnimLink.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_keyframe_anim"> <param name="Local" value="I3D\i3d_keyframe_anim\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Clear"> <param name="Local" value="I3D\i3d_keyframe_anim\Clear.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPositionKeys"> <param name="Local" value="I3D\i3d_keyframe_anim\SetPositionKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRotationKeys"> <param name="Local" value="I3D\i3d_keyframe_anim\SetRotationKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetNoteKeys"> <param name="Local" value="I3D\i3d_keyframe_anim\SetNoteKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVisibilityKeys"> <param name="Local" value="I3D\i3d_keyframe_anim\SetVisibilityKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPowerKeys"> <param name="Local" value="I3D\i3d_keyframe_anim\SetPowerKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetEndTime"> <param name="Local" value="I3D\i3d_keyframe_anim\SetEndTime.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_animation_base"> <param name="Local" value="I3D\i3d_animation_base\desc.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_pose"> <param name="Local" value="I3D\i3d_anim_pose\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Clear"> <param name="Local" value="I3D\i3d_anim_pose\Clear.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPos"> <param name="Local" value="I3D\i3d_anim_pose\SetPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPower"> <param name="Local" value="I3D\i3d_anim_pose\SetPower.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRot"> <param name="Local" value="I3D\i3d_anim_pose\SetRot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPos"> <param name="Local" value="I3D\i3d_anim_pose\GetPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRot"> <param name="Local" value="I3D\i3d_anim_pose\GetRot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPower"> <param name="Local" value="I3D\i3d_anim_pose\GetPower.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_camera"> <param name="Local" value="I3D\i3d_camera\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFOV"> <param name="Local" value="i3d\i3d_camera\GetFOV.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOrthogonal"> <param name="Local" value="i3d\i3d_camera\GetOrthogonal.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOrthoScale"> <param name="Local" value="i3d\i3d_camera\GetOrthoScale.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetProjectionMatrix"> <param name="Local" value="i3d\i3d_camera\GetProjectionMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRange"> <param name="Local" value="i3d\i3d_camera\GetRange.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSector"> <param name="Name" value="CamCam"> <param name="Local" value="i3d\i3d_camera\GetSector.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetViewMatrix"> <param name="Local" value="i3d\i3d_camera\GetViewMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFOV"> <param name="Local" value="I3D\I3D_camera\SetFOV.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOrthogonal"> <param name="Local" value="i3d\i3d_camera\SetOrthogonal.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOrthoScale"> <param name="Local" value="i3d\i3d_camera\SetOrthoScale.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRange"> <param name="Local" value="i3d\i3d_camera\SetRange.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_container"> <param name="Local" value="i3d\i3d_container\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddFrame"> <param name="Local" value="i3d\i3d_container\AddFrame.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddInterpolator"> <param name="Local" value="i3d\i3d_container\AddInterpolator.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Close"> <param name="Local" value="i3d\i3d_container\Close.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFileName"> <param name="Local" value="i3d\i3d_container\GetFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFrames"> <param name="Local" value="i3d\i3d_container\GetFrames.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetInterpolators"> <param name="Local" value="i3d\i3d_container\GetInterpolators.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFrames"> <param name="Local" value="i3d\i3d_container\NumFrames.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumInterpolators"> <param name="Local" value="i3d\i3d_container\NumInterpolators.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="i3d\i3d_container\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveFrame"> <param name="Local" value="i3d\i3d_container\RemoveFrame.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveInterpolator"> <param name="Local" value="i3d\i3d_container\RemoveInterpolator.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="StoreFileName"> <param name="Local" value="i3d\i3d_container\StoreFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Tick"> <param name="Local" value="i3d\i3d_container\Tick.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_driver"> <param name="Local" value="i3d\i3d_driver\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddDir"> <param name="Local" value="i3d\i3d_driver\AddDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="BeginScene"> <param name="Local" value="i3d\i3d_driver\BeginScene.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Clear"> <param name="Local" value="i3d\i3d_driver\Clear.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ClearDirs"> <param name="Local" value="i3d\i3d_driver\ClearDirs.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateAnimation"> <param name="Local" value="i3d\i3d_driver\CreateAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateAnimationSet"> <param name="Local" value="i3d\i3d_driver\CreateAnimationSet.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateInterpolator"> <param name="Local" value="i3d\i3d_driver\CreateInterpolator.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateMaterial"> <param name="Local" value="i3d\i3d_driver\CreateMaterial.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateMesh"> <param name="Local" value="i3d\i3d_driver\CreateMesh.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateScene"> <param name="Local" value="i3d\i3d_driver\CreateScene.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateTexture"> <param name="Local" value="i3d\i3d_driver\CreateTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="EndScene"> <param name="Local" value="i3d\i3d_driver\EndScene.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="EnumVisualTypes"> <param name="Local" value="i3d\i3d_driver\EnumVisualTypes.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="FindTextureFormat"> <param name="Local" value="i3d\i3d_driver\FindTextureFormat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="FlushDataBase"> <param name="Local" value="i3d\i3d_driver\FlushDataBase.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDir"> <param name="Local" value="i3d\i3d_driver\GetDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetGraphInterface"> <param name="Local" value="i3d\i3d_driver\GetGraphInterface.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPropertyName"> <param name="Local" value="i3d\i3d_driver\GetPropertyName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPropertyHelp"> <param name="Local" value="i3d\i3d_driver\GetPropertyHelp.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPropertyType"> <param name="Local" value="i3d\i3d_driver\GetPropertyType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSoundEnvData"> <param name="Local" value="i3d\i3d_driver\GetSoundEnvData.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSoundInterface"> <param name="Local" value="i3d\i3d_driver\GetSoundInterface.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetState"> <param name="Local" value="i3d\i3d_driver\GetState.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetStats"> <param name="Local" value="i3d\i3d_driver\GetStats.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumDirs"> <param name="Local" value="i3d\i3d_driver\NumDirs.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumProperties"> <param name="Local" value="i3d\i3d_driver\NumProperties.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveDir"> <param name="Local" value="i3d\i3d_driver\RemoveDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCallback"> <param name="Local" value="i3d\i3d_driver\SetCallback.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDataBase"> <param name="Local" value="i3d\i3d_driver\SetDataBase.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetSoundEnvData"> <param name="Local" value="i3d\i3d_driver\SetSoundEnvData.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetState"> <param name="Local" value="i3d\i3d_driver\SetState.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetTexture"> <param name="Local" value="i3d\i3d_driver\SetTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetViewport"> <param name="Local" value="i3d\i3d_driver\SetViewport.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCollisionMaterial"> <param name="Local" value="i3d\i3d_driver\SetCollisionMaterial.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ClearCollisionMaterials"> <param name="Local" value="i3d\i3d_driver\ClearCollisionMaterials.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_dummy"> <param name="Local" value="i3d\i3d_dummy\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBBox"> <param name="Local" value="i3d\i3d_dummy\GetBBox.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetBBox"> <param name="Local" value="i3d\i3d_dummy\SetBBox.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_frame"> <param name="Local" value="i3d\i3d_frame\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ComputeHRBoundVolume"> <param name="Local" value="i3d\i3d_frame\ComputeHRBoundVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DebugDraw"> <param name="Local" value="i3d\i3d_frame\DebugDraw.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Duplicate"> <param name="Local" value="i3d\i3d_frame\Duplicate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="EnumFrames"> <param name="Local" value="i3d\i3d_frame\EnumFrames.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="FindChildFrame"> <param name="Local" value="i3d\i3d_frame\FindChildFrame.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetChildren"> <param name="Local" value="i3d\i3d_frame\GetChildren.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetData"> <param name="Local" value="i3d\i3d_frame\GetData.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDir"> <param name="Local" value="i3d\i3d_frame\GetDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFlags"> <param name="Local" value="i3d\i3d_frame\GetFlags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetInvMatrix"> <param name="Local" value="i3d\i3d_frame\GetInvMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLocalMatrix"> <param name="Local" value="i3d\i3d_frame\GetLocalMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMatrix"> <param name="Local" value="i3d\i3d_frame\GetMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetName"> <param name="Local" value="i3d\i3d_frame\GetName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOrigName"> <param name="Local" value="i3d\i3d_frame\GetOrigName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetParent"> <param name="Local" value="i3d\i3d_frame\GetParent.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPos"> <param name="Local" value="i3d\i3d_frame\GetPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRot"> <param name="Local" value="i3d\i3d_frame\GetRot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetScale"> <param name="Local" value="i3d\i3d_frame\GetScale.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetType"> <param name="Local" value="i3d\i3d_frame\GetType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetWorldDir"> <param name="Local" value="i3d\i3d_frame\GetWorldDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetWorldPos"> <param name="Local" value="i3d\i3d_frame\GetWorldPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetWorldRot"> <param name="Local" value="i3d\i3d_frame\GetWorldRot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetWorldScale"> <param name="Local" value="i3d\i3d_frame\GetWorldScale.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsOn"> <param name="Local" value="i3d\i3d_frame\IsOn.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="LinkTo"> <param name="Local" value="i3d\i3d_frame\LinkTo.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumChildren"> <param name="Local" value="i3d\i3d_frame\NumChildren.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetData"> <param name="Local" value="i3d\i3d_frame\SetData.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDir"> <param name="Local" value="i3d\i3d_frame\SetDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDir1"> <param name="Local" value="i3d\i3d_frame\SetDir1.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFlags"> <param name="Local" value="i3d\i3d_frame\SetFlags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetName"> <param name="Local" value="i3d\i3d_frame\SetName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOn"> <param name="Local" value="i3d\i3d_frame\SetOn.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPos"> <param name="Local" value="i3d\i3d_frame\SetPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRot"> <param name="Local" value="i3d\i3d_frame\SetRot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetScale"> <param name="Local" value="i3d\i3d_frame\SetScale.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_interpolator"> <param name="Local" value="i3d\i3d_interpolator\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFrame"> <param name="Local" value="i3d\i3d_interpolator\SetFrame.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFrame"> <param name="Local" value="i3d\i3d_interpolator\GetFrame.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetEndTime"> <param name="Local" value="i3d\i3d_interpolator\GetEndTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCurrTime"> <param name="Local" value="i3d\i3d_interpolator\SetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCurrTime"> <param name="Local" value="i3d\i3d_interpolator\GetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Tick"> <param name="Local" value="i3d\i3d_interpolator\Tick.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimation"> <param name="Local" value="i3d\i3d_interpolator\SetAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimation"> <param name="Local" value="i3d\i3d_interpolator\GetAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOptions"> <param name="Local" value="i3d\i3d_interpolator\GetOptions.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_joint"> <param name="Local" value="i3d\i3d_joint\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBBox"> <param name="Local" value="i3d\i3d_joint\GetBBox.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBBoxMatrix"> <param name="Local" value="i3d\i3d_joint\GetBBoxMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVolume"> <param name="Local" value="i3d\i3d_joint\GetVolume.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_light"> <param name="Local" value="i3d\i3d_light\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetLightType"> <param name="Local" value="i3d\i3d_light\desc.htm#SetLightType"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetColor"> <param name="Local" value="i3d\i3d_light\desc.htm#SetColor"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPower"> <param name="Local" value="i3d\i3d_light\desc.htm#SetPower"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRange"> <param name="Local" value="i3d\i3d_light\desc.htm#SetRange"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetMode"> <param name="Local" value="i3d\i3d_light\desc.htm#SetMode"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCone"> <param name="Local" value="i3d\i3d_light\desc.htm#SetCone"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLightType"> <param name="Local" value="i3d\i3d_light\desc.htm#GetLightType"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetColor"> <param name="Local" value="i3d\i3d_light\desc.htm#GetColor"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPower"> <param name="Local" value="i3d\i3d_light\desc.htm#GetPower"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRange"> <param name="Local" value="i3d\i3d_light\desc.htm#GetRange"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMode"> <param name="Local" value="i3d\i3d_light\desc.htm#GetMode"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCone"> <param name="Local" value="i3d\i3d_light\desc.htm#GetCone"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumLightSectors"> <param name="Local" value="i3d\i3d_light\desc.htm#NumLightSectors"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLightSectors"> <param name="Local" value="i3d\i3d_light\desc.htm#GetLightSectors"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_lit_object"> <param name="Local" value="i3d\I3D_lit_object\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Construct"> <param name="Local" value="i3d\I3D_lit_object\Construct.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Destruct"> <param name="Local" value="i3d\I3D_lit_object\Destruct.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Load"> <param name="Local" value="i3d\I3D_lit_object\Load.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Save"> <param name="Local" value="i3d\I3D_lit_object\Save.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsConstructed"> <param name="Local" value="i3d\I3D_lit_object\IsConstructed.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLMPixel"> <param name="Local" value="i3d\I3D_lit_object\GetLMPixel.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_object_singlemesh"> <param name="Local" value="i3d\I3D_object_singlemesh\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVolume"> <param name="Local" value="i3d\I3D_object_singlemesh\GetVolume.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_material"> <param name="Local" value="i3d\i3d_material\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAmbient"> <param name="Local" value="i3d\i3d_material\SetAmbient.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDiffuse"> <param name="Local" value="i3d\i3d_material\SetDiffuse.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetEmissive"> <param name="Local" value="i3d\i3d_material\SetEmissive.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAlpha"> <param name="Local" value="i3d\i3d_material\SetAlpha.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetTexture"> <param name="Local" value="i3d\i3d_material\SetTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetEMBMOpacity"> <param name="Local" value="i3d\i3d_material\SetEMBMOpacity.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Duplicate"> <param name="Local" value="i3d\i3d_material\Duplicate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Set2Sided"> <param name="Local" value="i3d\i3d_material\Set2Sided.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Is2Sided"> <param name="Local" value="i3d\i3d_material\Is2Sided.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAmbient"> <param name="Local" value="i3d\i3d_material\GetAmbient.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDiffuse"> <param name="Local" value="i3d\i3d_material\GetDiffuse.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetEmissive"> <param name="Local" value="i3d\i3d_material\GetEmissive.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAlpha"> <param name="Local" value="i3d\i3d_material\GetAlpha.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetTexture"> <param name="Local" value="i3d\i3d_material\GetTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsCkey"> <param name="Local" value="i3d\i3d_material\IsCkey.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetEMBMOpacity"> <param name="Local" value="i3d\i3d_material\GetEMBMOpacity.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMirrorID"> <param name="Local" value="i3d\i3d_material\GetMirrorID.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_mesh_base"> <param name="Local" value="i3d\i3d_mesh_base\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumVertices"> <param name="Local" value="i3d\i3d_mesh_base\NumVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="LockVertices"> <param name="Local" value="i3d\i3d_mesh_base\LockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UnlockVertices"> <param name="Local" value="i3d\i3d_mesh_base\UnlockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSizeOfVertex"> <param name="Local" value="i3d\i3d_mesh_base\GetSizeOfVertex.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFGroups"> <param name="Local" value="i3d\i3d_mesh_base\NumFGroups.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFaces"> <param name="Local" value="i3d\i3d_mesh_base\NumFaces.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFGroups"> <param name="Local" value="i3d\i3d_mesh_base\GetFGroups.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFaces"> <param name="Local" value="i3d\i3d_mesh_base\GetFaces.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_model"> <param name="Local" value="i3d\i3d_model\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetHRBoundVolume"> <param name="Local" value="i3d\i3d_model\GetHRBoundVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimation"> <param name="Local" value="i3d\i3d_model\SetAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPose"> <param name="Local" value="i3d\i3d_model\SetPose.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimScaleFactor"> <param name="Local" value="i3d\i3d_model\SetAnimScaleFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimScaleFactor"> <param name="Local" value="i3d\i3d_model\GetAnimScaleFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimBlendFactor"> <param name="Local" value="i3d\i3d_model\SetAnimBlendFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimBlendFactor"> <param name="Local" value="i3d\i3d_model\GetAnimBlendFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimSpeed"> <param name="Local" value="i3d\i3d_model\SetAnimSpeed.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimSpeed"> <param name="Local" value="i3d\i3d_model\GetAnimSpeed.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimEndTime"> <param name="Local" value="i3d\i3d_model\GetAnimEndTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimCurrTime"> <param name="Local" value="i3d\i3d_model\GetAnimCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimCurrTime"> <param name="Local" value="i3d\i3d_model\SetAnimCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="MoveAnimStage"> <param name="Local" value="i3d\i3d_model\MoveAnimStage.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="StopAnimation"> <param name="Local" value="i3d\i3d_model\StopAnimation.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimationSet"> <param name="Local" value="i3d\i3d_model\GetAnimationSet.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimBasePos"> <param name="Local" value="i3d\i3d_model\SetAnimBasePos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAnimBaseScale"> <param name="Local" value="i3d\i3d_model\SetAnimBaseScale.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimScaleFactor"> <param name="Local" value="i3d\i3d_model\GetAnimScaleFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimBlendFactor"> <param name="Local" value="i3d\i3d_model\GetAnimBlendFactor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAnimSpeed"> <param name="Local" value="i3d\i3d_model\GetAnimSpeed.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_object"> <param name="Local" value="i3d\I3D_object\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetMesh"> <param name="Local" value="i3d\I3D_object\SetMesh.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetUpdate"> <param name="Local" value="i3d\I3D_object\SetUpdate.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_occluder"> <param name="Local" value="i3d\i3d_occluder\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Build"> <param name="Local" value="i3d\i3d_occluder\Build.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumVertices"> <param name="Local" value="i3d\i3d_occluder\NumVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="LockVertices"> <param name="Local" value="i3d\i3d_occluder\LockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UnlockVertices"> <param name="Local" value="i3d\i3d_occluder\UnlockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOccluderType"> <param name="Local" value="i3d\i3d_occluder\SetOccluderType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOccluderType"> <param name="Local" value="i3d\i3d_occluder\GetOccluderType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFaces"> <param name="Local" value="i3d\i3d_occluder\NumFaces.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFaces"> <param name="Local" value="i3d\i3d_occluder\GetFaces.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_portal"> <param name="Local" value="i3d\i3d_portal\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumVertices"> <param name="Local" value="i3d\i3d_portal\NumVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVertices"> <param name="Local" value="i3d\i3d_portal\GetVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPlane"> <param name="Local" value="i3d\i3d_portal\GetPlane.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSector"> <param name="Local" value="i3d\i3d_portal\GetSector.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetConnectSector"> <param name="Local" value="i3d\i3d_portal\GetConnectSector.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOn"> <param name="Local" value="i3d\i3d_portal\SetOn.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsOn"> <param name="Local" value="i3d\i3d_portal\IsOn.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_scene"> <param name="Local" value="i3d\i3d_scene\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDriver"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetDriver"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Render"> <param name="Local" value="i3d\i3d_scene\desc.htm#Render"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetViewport"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetViewport"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetViewport"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetViewport"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="EnumFrames"> <param name="Local" value="i3d\i3d_scene\desc.htm#EnumFrames"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="FindFrame"> <param name="Local" value="i3d\i3d_scene\desc.htm#FindFrame"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetActiveCamera"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetActiveCamera"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetActiveCamera"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetActiveCamera"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UnmapScreenPoint"> <param name="Local" value="i3d\i3d_scene\desc.htm#UnmapScreenPoint"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="TransformPoints"> <param name="Local" value="i3d\i3d_scene\desc.htm#TransformPoints"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateFrame"> <param name="Local" value="i3d\i3d_scene\desc.htm#CreateFrame"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSector"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetSector"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPrimarySector"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetPrimarySector"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBackdropSector"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetBackdropSector"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetBackdropRange"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetBackdropRange"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBackdropRange"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetBackdropRange"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFrameSector"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetFrameSector"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFrameSectorPos"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetFrameSectorPos"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetBgndColor"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetBgndColor"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBgndColor"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetBgndColor"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ResetDynamicVolTreeEx"> <param name="Local" value="i3d\i3d_scene\desc.htm#ResetDynamicVolTreeEx"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="TestCollision"> <param name="Local" value="i3d\i3d_scene\desc.htm#TestCollision"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GenerateContacts"> <param name="Local" value="i3d\i3d_scene\desc.htm#GenerateContacts"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AttenuateSounds"> <param name="Local" value="i3d\i3d_scene\desc.htm#AttenuateSounds"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLastRenderTime"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetLastRenderTime"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRenderMatrix"> <param name="Local" value="i3d\i3d_scene\desc.htm#SetRenderMatrix"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLightness"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetLightness"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DrawLine"> <param name="Local" value="i3d\i3d_scene\desc.htm#DrawLine"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DrawLines"> <param name="Local" value="i3d\i3d_scene\desc.htm#DrawLines"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DrawTriangles"> <param name="Local" value="i3d\i3d_scene\desc.htm#DrawTriangles"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DrawSprite"> <param name="Local" value="i3d\i3d_scene\desc.htm#DrawSprite"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateBspTree"> <param name="Local" value="i3d\i3d_scene\desc.htm#CreateBspTree"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DestroyBspTree"> <param name="Local" value="i3d\i3d_scene\desc.htm#DestroyBspTree"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SaveBsp"> <param name="Local" value="i3d\i3d_scene\desc.htm#SaveBsp"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="LoadBsp"> <param name="Local" value="i3d\i3d_scene\desc.htm#LoadBsp> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsBspBuild"> <param name="Local" value="i3d\i3d_scene\desc.htm#IsBspBuild"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetStats"> <param name="Local" value="i3d\i3d_scene\desc.htm#GetStats"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_sector"> <param name="Local" value="i3d\i3d_sector\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CheckPoint"> <param name="Local" value="i3d\i3d_sector\CheckPoint.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsPrimary"> <param name="Local" value="i3d\i3d_sector\IsPrimary.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumPortals"> <param name="Local" value="i3d\i3d_sector\NumPortals.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPortals"> <param name="Local" value="i3d\i3d_sector\GetPortals.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumConnectPortals"> <param name="Local" value="i3d\i3d_sector\NumConnectPortals.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetConnectPortals"> <param name="Local" value="i3d\i3d_sector\GetConnectPortals.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddLight"> <param name="Local" value="i3d\i3d_sector\AddLight.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveLight"> <param name="Local" value="i3d\i3d_sector\RemoveLight.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumLights"> <param name="Local" value="i3d\i3d_sector\NumLights.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLight"> <param name="Local" value="i3d\i3d_sector\GetLight.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddSound"> <param name="Local" value="i3d\i3d_sector\AddSound.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveSound"> <param name="Local" value="i3d\i3d_sector\RemoveSound.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumSounds"> <param name="Local" value="i3d\i3d_sector\NumSounds.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSounds"> <param name="Local" value="i3d\i3d_sector\GetSounds.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetEnvironmentID"> <param name="Local" value="i3d\i3d_sector\SetEnvironmentID.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetEnvironmentID"> <param name="Local" value="i3d\i3d_sector\GetEnvironmentID.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumBoundPlanes"> <param name="Local" value="i3d\i3d_sector\NumBoundPlanes.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBoundPlanes"> <param name="Local" value="i3d\i3d_sector\GetBoundPlanes.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetTemperature"> <param name="Local" value="i3d\i3d_sector\SetTemperature.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetTemperature"> <param name="Local" value="i3d\i3d_sector\GetTemperature.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_sound"> <param name="Local" value="i3d\i3d_sound\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="i3d\i3d_sound\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsPlaying"> <param name="Local" value="i3d\i3d_sound\IsPlaying.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetSoundType"> <param name="Local" value="i3d\i3d_sound\SetSoundType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetRange"> <param name="Local" value="i3d\i3d_sound\SetRange.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCone"> <param name="Local" value="i3d\i3d_sound\SetCone.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOutVol"> <param name="Local" value="i3d\i3d_sound\SetOutVol.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVolume"> <param name="Local" value="i3d\i3d_sound\SetVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetLoop"> <param name="Local" value="i3d\i3d_sound\SetLoop.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCurrTime"> <param name="Local" value="i3d\i3d_sound\SetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFrequency"> <param name="Local" value="i3d\i3d_sound\SetFrequency.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSoundType"> <param name="Local" value="i3d\i3d_sound\GetSoundType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRange"> <param name="Local" value="i3d\i3d_sound\GetRange.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCone"> <param name="Local" value="i3d\i3d_sound\GetCone.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOutVol"> <param name="Local" value="i3d\i3d_sound\GetOutVol.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVolume"> <param name="Local" value="i3d\i3d_sound\GetVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsLoop"> <param name="Local" value="i3d\i3d_sound\IsLoop.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCurrTime"> <param name="Local" value="i3d\i3d_sound\GetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPlayTime"> <param name="Local" value="i3d\i3d_sound\GetPlayTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFrequency"> <param name="Local" value="i3d\i3d_sound\GetFrequency.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFileName"> <param name="Local" value="i3d\i3d_sound\GetFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="StoreFileName"> <param name="Local" value="i3d\i3d_sound\StoreFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOpenFlags"> <param name="Local" value="i3d\i3d_sound\GetOpenFlags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSoundSource"> <param name="Local" value="i3d\i3d_sound\GetSoundSource.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumSoundSectors"> <param name="Local" value="i3d\i3d_sound\NumSoundSectors.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSoundSectors"> <param name="Local" value="i3d\i3d_sound\GetSoundSectors.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_texture"> <param name="Local" value="i3d\i3d_texture\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDriver"> <param name="Local" value="i3d\i3d_texture\GetDriver.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFileName"> <param name="Local" value="i3d\i3d_texture\GetFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SizeX"> <param name="Local" value="i3d\i3d_texture\SizeX.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SizeY"> <param name="Local" value="i3d\i3d_texture\SizeY.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetSysmemImage"> <param name="Local" value="i3d\i3d_texture\GetSysmemImage.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_user"> <param name="Local" value="i3d\i3d_user\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetData2"> <param name="Local" value="i3d\i3d_user\SetData2.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetData2"> <param name="Local" value="i3d\i3d_user\GetData2.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_visual"> <param name="Local" value="i3d\i3d_visual\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVisualType"> <param name="Local" value="i3d\i3d_visual\GetVisualType.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBoundVolume"> <param name="Local" value="i3d\i3d_visual\GetBoundVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetHRBoundVolume"> <param name="Local" value="i3d\i3d_visual\GetHRBoundVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetLastRenderTime"> <param name="Local" value="i3d\i3d_visual\GetLastRenderTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMesh"> <param name="Local" value="i3d\i3d_visual\GetMesh.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetProperty"> <param name="Local" value="i3d\i3d_visual\SetProperty.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetProperty"> <param name="Local" value="i3d\i3d_visual\GetProperty.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCollisionMaterial"> <param name="Local" value="i3d\i3d_visual\GetCollisionMaterial.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCollisionMaterial"> <param name="Local" value="i3d\i3d_visual\SetCollisionMaterial.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVisualAlpha"> <param name="Local" value="i3d\i3d_visual\GetVisualAlpha.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVisualAlpha"> <param name="Local" value="i3d\i3d_visual\SetVisualAlpha.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetBrightness"> <param name="Local" value="i3d\i3d_visual\SetBrightness.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBrightness"> <param name="Local" value="i3d\i3d_visual\GetBrightness.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetMaterial"> <param name="Local" value="i3d\i3d_visual\SetMaterial.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMaterial"> <param name="Local" value="i3d\i3d_visual\GetMaterial.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_visual_dynamic"> <param name="Local" value="i3d\i3d_visual_dynamic\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Build"> <param name="Local" value="i3d\i3d_visual_dynamic\Build.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="BuildAutoLODs"> <param name="Local" value="i3d\i3d_visual_dynamic\BuildAutoLODs.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DuplicateMesh"> <param name="Local" value="i3d\i3d_visual_dynamic\DuplicateMesh.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ResetLightInfo"> <param name="Local" value="i3d\i3d_visual_dynamic\ResetLightInfo.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="LockVertices"> <param name="Local" value="i3d\i3d_visual_dynamic\LockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UnlockVertices"> <param name="Local" value="i3d\i3d_visual_dynamic\UnlockVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumVertices"> <param name="Local" value="i3d\i3d_visual_dynamic\NumVertices.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Render"> <param name="Local" value="i3d\i3d_visual_dynamic\Render.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFGroups"> <param name="Local" value="i3d\i3d_visual_dynamic\NumFGroups.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumFaces"> <param name="Local" value="i3d\i3d_visual_dynamic\NumFaces.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFGroups"> <param name="Local" value="i3d\i3d_visual_dynamic\GetFGroups.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_volume"> <param name="Local" value="i3d\i3d_volume\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetNUScale"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetNUScale"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVolumeType"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetVolumeType"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOwner"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetOwner"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCollisionMaterial"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetCollisionMaterial"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetForceDynamic"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetForceDynamic"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetNUScale"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetNUScale"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVolumeType"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetVolumeType"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetOwner"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetOwner"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCollisionMaterial"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetCollisionMaterial"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCategoryBits"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetCategoryBits"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCategoryBits"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetCategoryBits"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCollideBits"> <param name="Local" value="i3d\i3d_volume\desc.htm#SetCollideBits"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCollideBits"> <param name="Local" value="i3d\i3d_volume\desc.htm#GetCollideBits"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D return codes"> <param name="Local" value="i3d\enums\I3D - results.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_ANIMATION_TYPE"> <param name="Local" value="i3d\enums\I3D_ANIMATION_TYPE.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_DIRECTORY_TYPE"> <param name="Local" value="i3d\enums\I3D_DIRECTORY_TYPE.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_FRAME_TYPE"> <param name="Local" value="i3d\enums\I3D_FRAME_TYPE.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_RENDERSTATE"> <param name="Local" value="i3d\enums\I3D_RENDERSTATE.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_SOUND_ENV_DATA_INDEX"> <param name="Local" value="i3d\enums\I3D_SOUND_ENV_DATA_INDEX.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_collision_mat"> <param name="Local" value="i3d\structs\I3D_collision_mat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DENUMRET"> <param name="Local" value="i3d\enums\I3DENUMRET.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DSTATSINDEX"> <param name="Local" value="i3d\enums\I3DSTATSINDEX.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Vertex Component Flags"> <param name="Local" value="i3d\flags\vc_flags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D Lock Flags"> <param name="Local" value="i3d\flags\lock_flags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_note"> <param name="Local" value="i3d\structs\I3D_anim_note.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_power"> <param name="Local" value="i3d\structs\I3D_anim_power.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_rot"> <param name="Local" value="i3d\structs\I3D_anim_rot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_vector_bezier"> <param name="Local" value="i3d\structs\I3D_anim_vector_bezier.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_quat_bezier"> <param name="Local" value="i3d\structs\I3D_anim_quat_bezier.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_quat"> <param name="Local" value="i3d\structs\I3D_anim_quat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_vector_tcb"> <param name="Local" value="i3d\structs\I3D_anim_vector_tcb.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_anim_visibility"> <param name="Local" value="i3d\structs\I3D_anim_visibility.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_bbox"> <param name="Local" value="i3d\structs\I3D_bbox.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_bezier"> <param name="Local" value="i3d\structs\I3D_bezier.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_bound_volume"> <param name="Local" value="i3d\structs\I3D_bound_volume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_bsphere"> <param name="Local" value="i3d\structs\I3D_bsphere.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_collision_data"> <param name="Local" value="i3d\structs\I3D_collision_data.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_cresp_data"> <param name="Local" value="i3d\structs\I3D_cresp_data.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_texel_collision"> <param name="Local" value="i3d\structs\I3D_texel_collision.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="i3d_createtexture"> <param name="Local" value="i3d\structs\i3d_createtexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_easiness"> <param name="Local" value="i3d\structs\I3D_easiness.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_edge"> <param name="Local" value="i3d\structs\I3D_edge.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_face_group"> <param name="Local" value="i3d\structs\I3D_face_group.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_note_callback"> <param name="Local" value="i3d\structs\I3D_note_callback.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_rectangle"> <param name="Local" value="i3d\structs\I3D_rectangle.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_tcb"> <param name="Local" value="i3d\structs\I3D_tcb.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_text_coor"> <param name="Local" value="i3d\structs\I3D_text_coor.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_triface"> <param name="Local" value="i3d\structs\I3D_triface.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DINIT"> <param name="Local" value="i3d\structs\I3DINIT.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DCreate"> <param name="Local" value="i3d\I3DCreate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D Visual types"> <param name="Local" value="i3d\VisualsTypes.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_CALLBACK"> <param name="Local" value="i3d\I3D_CALLBACK.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_ENUMPROC"> <param name="Local" value="i3d\I3D_ENUMPROC.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3D_LOAD_CB_PROC"> <param name="Local" value="i3d\I3D_LOAD_CB_PROC.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraph"> <param name="Local" value="igraph\igraph\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddCallback"> <param name="Local" value="igraph\igraph\AddCallback.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveCallback"> <param name="Local" value="igraph\igraph\RemoveCallback.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAppName"> <param name="Local" value="igraph\igraph\GetAppName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetAppName"> <param name="Local" value="igraph\igraph\SetAppName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetHWND"> <param name="Local" value="igraph\igraph\GetHWND.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMenu"> <param name="Local" value="igraph\igraph\GetMenu.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetMenu"> <param name="Local" value="igraph\igraph\SetMenu.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetViewport"> <param name="Local" value="igraph\igraph\SetViewport.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ClearViewport"> <param name="Local" value="igraph\igraph\ClearViewport.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AddDlgHWND"> <param name="Local" value="igraph\igraph\AddDlgHWND.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="RemoveDlgHWND"> <param name="Local" value="igraph\igraph\RemoveDlgHWND.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Scrn_sx"> <param name="Local" value="igraph\igraph\Scrn_sx.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Scrn_sy"> <param name="Local" value="igraph\igraph\Scrn_sy.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPixelFormat"> <param name="Local" value="igraph\igraph\GetPixelFormat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDesktopResolution"> <param name="Local" value="igraph\igraph\GetDesktopResolution.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NumDisplayModes"> <param name="Local" value="igraph\igraph\NumDisplayModes.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDisplayMode"> <param name="Local" value="igraph\igraph\GetDisplayMode.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetBrightness"> <param name="Local" value="igraph\igraph\SetBrightness.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetD3DInterface"> <param name="Local" value="igraph\igraph\GetD3DInterface.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetD3DDevice"> <param name="Local" value="igraph\igraph\GetD3DDevice.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetRGBConv"> <param name="Local" value="igraph\igraph\GetRGBConv.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFlags"> <param name="Local" value="igraph\igraph\GetFlags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UpdateParams"> <param name="Local" value="igraph\igraph\UpdateParams.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateBackbufferCopy"> <param name="Local" value="igraph\igraph\CreateBackbufferCopy.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetBackbufferCount"> <param name="Local" value="igraph\igraph\GetBackbufferCount.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UpdateScreen"> <param name="Local" value="igraph\igraph\UpdateScreen.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DefineKeys"> <param name="Local" value="igraph\igraph\DefineKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ReadKey"> <param name="Local" value="igraph\igraph\ReadKey.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ReadKeys"> <param name="Local" value="igraph\igraph\ReadKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetShiftKeys"> <param name="Local" value="igraph\igraph\GetShiftKeys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetAscii"> <param name="Local" value="igraph\igraph\GetAscii.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetKeyboardMap"> <param name="Local" value="igraph\igraph\GetKeyboardMap.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetKeyName"> <param name="Local" value="igraph\igraph\GetKeyName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="MouseInit"> <param name="Local" value="igraph\igraph\MouseInit.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="MouseClose"> <param name="Local" value="igraph\igraph\MouseClose.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="MouseUpdate"> <param name="Local" value="igraph\igraph\MouseUpdate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Mouse_x"> <param name="Local" value="igraph\igraph\Mouse_x.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Mouse_y"> <param name="Local" value="igraph\igraph\Mouse_y.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Mouse_rx"> <param name="Local" value="igraph\igraph\Mouse_rx.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Mouse_ry"> <param name="Local" value="igraph\igraph\Mouse_ry.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Mouse_rz"> <param name="Local" value="igraph\igraph\Mouse_rz.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetMousePos"> <param name="Local" value="igraph\igraph\SetMousePos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetMouseButtons"> <param name="Local" value="igraph\igraph\GetMouseButtons.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ProcessWinMessages"> <param name="Local" value="igraph\igraph\ProcessWinMessages.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetWindowCloseStatus"> <param name="Local" value="igraph\igraph\GetWindowCloseStatus.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="NullTimer"> <param name="Local" value="igraph\igraph\NullTimer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetTimer"> <param name="Local" value="igraph\igraph\GetTimer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ReadTimer"> <param name="Local" value="igraph\igraph\ReadTimer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateImage"> <param name="Local" value="igraph\igraph\CreateImage.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateRGBConv"> <param name="Local" value="igraph\igraph\CreateRGBConv.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetImageInfo"> <param name="Local" value="igraph\igraph\GetImageInfo.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IImage"> <param name="Local" value="igraph\iimage\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="igraph\iimage\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Close"> <param name="Local" value="igraph\iimage\Close.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsInit"> <param name="Local" value="igraph\iimage\IsInit.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPal"> <param name="Local" value="igraph\iimage\SetPal.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPal"> <param name="Local" value="igraph\iimage\GetPal.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Draw"> <param name="Local" value="igraph\iimage\Draw.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Lock"> <param name="Local" value="igraph\iimage\Lock.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Unlock"> <param name="Local" value=          "igraph\iimage\Unlock.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDirectXTexture"> <param name="Local" value="igraph\iimage\GetDirectXTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDirectXCubeTexture"> <param name="Local" value="igraph\iimage\GetDirectXTexture.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDirectXSurface"> <param name="Local" value="igraph\iimage\GetDirectXSurface.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ConvertBumpMap"> <param name="Local" value="igraph\iimage\ConvertBumpMap.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ConvertToNormalMap"> <param name="Local" value="igraph\iimage\ConvertToNormalMap.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="AlphaBlend"> <param name="Local" value="igraph\iimage\AlphaBlend.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="MixMipmap"> <param name="Local" value="igraph\iimage\MixMipmap.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CopyColorkeyInfo"> <param name="Local" value="igraph\iimage\CopyColorkeyInfo.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPixelFormat"> <param name="Local" value="igraph\iimage\GetPixelFormat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetColorkeyInfo"> <param name="Local" value="igraph\iimage\GetColorkeyInfo.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetColorkeyInfo"> <param name="Local" value="igraph\iimage\SetColorkeyInfo.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SizeX"> <param name="Local" value="igraph\iimage\SizeX.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SizeY"> <param name="Local" value="igraph\iimage\SizeY.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetIGraph"> <param name="Local" value="igraph\iimage\GetIGraph.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SaveShot"> <param name="Local" value="igraph\iimage\SaveShot.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CopyStretched"> <param name="Local" value="igraph\iimage\CopyStretched.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ApplyFunction"> <param name="Local" value="igraph\iimage\ApplyFunction.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Image opening flags"> <param name="Local" value="igraph\enum\imgopen_flags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraph initialization flags"> <param name="Local" value="igraph\enum\init_flags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraph keyboard constants"> <param name="Local" value="igraph\enum\keys.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IG_INIT"> <param name="Local" value="igraph\structs\ig_init.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_pixelformat"> <param name="Local" value="igraph\structs\S_pixelformat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraph Callback function"> <param name="Local" value="igraph\graphcallback.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraphCreate"> <param name="Local" value="igraph\igraphcreate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IGraph library"> <param name="Local" value="igraph\desc.htm"> </OBJECT>
+
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_float_random"> <param name="Local" value="i3d_math\S_float_random\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_int_random"> <param name="Local" value="i3d_math\S_int_random\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_matrix"> <param name="Local" value="i3d_math\S_matrix\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_matrix2"> <param name="Local" value="i3d_math\S_matrix2\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_normal"> <param name="Local" value="i3d_math\S_normal\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_plane"> <param name="Local" value="i3d_math\S_plane\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_quat"> <param name="Local" value="i3d_math\S_quat\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_vector"> <param name="Local" value="i3d_math\S_vector\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_vector2"> <param name="Local" value="i3d_math\S_vector2\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_vectorw"> <param name="Local" value="i3d_math\S_vectorw\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DgetIdentityMatrix"> <param name="Local" value="i3d_math\I3DgetIdentityMatrix.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="I3DLineIntersection"> <param name="Local" value="i3d_math\I3DLineIntersection.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISound library"> <param name="Local" value="isound\desc.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISND_3dsound"> <param name="Local" value="isound\isnd_3dsound\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPos"> <param name="Local" value="isound\isnd_3dsound\SetPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDir"> <param name="Local" value="isound\isnd_3dsound\SetDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVelocity"> <param name="Local" value="isound\isnd_3dsound\SetVelocity.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetDistances"> <param name="Local" value="isound\isnd_3dsound\SetDistances.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCone"> <param name="Local" value="isound\isnd_3dsound\SetCone.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetOutVolume"> <param name="Local" value="isound\isnd_3dsound\SetOutVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDS3Dbuffer"> <param name="Local" value="isound\isnd_3dsound\GetDS3Dbuffer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Is3Dinit"> <param name="Local" value="isound\isnd_3dsound\Is3Dinit.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISND_driver"> <param name="Local" value="isound\isnd_driver\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="InitBuffer"> <param name="Local" value="isound\isnd_driver\InitBuffer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVolume"> <param name="Local" value="isound\isnd_driver\SetVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetVolume"> <param name="Local" value="isound\isnd_driver\GetVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCaps"> <param name="Local" value="isound\isnd_driver\GetCaps.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDS"> <param name="Local" value="isound\isnd_driver\GetDS.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDSPrimaryBuffer"> <param name="Local" value="isound\isnd_driver\GetDSPrimaryBuffer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateSource"> <param name="Local" value="isound\isnd_driver\CreateSource.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="CreateSound"> <param name="Local" value="isound\isnd_driver\CreateSound.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Create3Dsound"> <param name="Local" value="isound\isnd_driver\Create3Dsound.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetListenerPos"> <param name="Local" value="isound\isnd_driver\SetListenerPos.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetListenerDir"> <param name="Local" value="isound\isnd_driver\SetListenerDir.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetListenerVelocity"> <param name="Local" value="isound\isnd_driver\SetListenerVelocity.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="UpdateListener"> <param name="Local" value="isound\isnd_driver\UpdateListener.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISND_sound"> <param name="Local" value="isound\isnd_sound\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="isound\isnd_sound\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Close"> <param name="Local" value="isound\isnd_sound\Close.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Play"> <param name="Local" value="isound\isnd_sound\Play.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Stop"> <param name="Local" value="isound\isnd_sound\Stop.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetCurrTime"> <param name="Local" value="isound\isnd_sound\SetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetVolume"> <param name="Local" value="isound\isnd_sound\SetVolume.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetFrequency"> <param name="Local" value="isound\isnd_sound\SetFrequency.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetPanning"> <param name="Local" value="isound\isnd_sound\SetPanning.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsPlaying"> <param name="Local" value="isound\isnd_sound\IsPlaying.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetDSBuffer"> <param name="Local" value="isound\isnd_sound\GetDSBuffer.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetCurrTime"> <param name="Local" value="isound\isnd_sound\GetCurrTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="SetEAXProperty"> <param name="Local" value="isound\isnd_sound\SetEAXProperty.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISND_source"> <param name="Local" value="isound\isnd_source\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Open"> <param name="Local" value="isound\isnd_source\Open.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Close"> <param name="Local" value="isound\isnd_source\Close.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="IsOpen"> <param name="Local" value="isound\isnd_source\IsOpen.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetPlayTime"> <param name="Local" value="isound\isnd_source\GetPlayTime.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFormat"> <param name="Local" value="isound\isnd_source\GetFormat.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="GetFileName"> <param name="Local" value="isound\isnd_source\GetFileName.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Lock"> <param name="Local" value="isound\isnd_source\Lock.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Unlock"> <param name="Local" value="isound\isnd_source\Unlock.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="E_ISNDCAPS"> <param name="Local" value="isound\enum\e_isndcaps.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISound flags"> <param name="Local" value="isound\enum\flags.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISound return codes"> <param name="Local" value="isound\enum\return_val.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISND_INIT"> <param name="Local" value="isound\structs\ISND_INIT.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="S_wave_format"> <param name="Local" value="isound\structs\S_wave_format.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="ISoundCreate"> <param name="Local" value="isound\ISoundCreate.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="C_dta_read"> <param name="Local" value="dta_read\C_dta_read.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="C_dta_stream"> <param name="Local" value="dta_read\C_dta_stream.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Data File Access"> <param name="Local" value="dta_read\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="dtaCreate"> <param name="Local" value="dta_read\dtaCreate.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="DtaCreateStream"> <param name="Local" value="dta_read\DtaCreateStream.htm"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Reference counting"> <param name="Local" value="principles\ref_count.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Smart pointer"> <param name="Local" value="principles\smart_ptr.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="Insanity3D basic types"> <param name="Local" value="principles\rules.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="C_unknown"> <param name="Local" value="principles\ref_count.htm#C_unknown"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="C_str"> <param name="Local" value="principles\C_str.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="C_fstr"> <param name="Local" value="principles\C_str.htm#C_fstr"> </OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="I_net"><param name="Local" value="inet\i_net\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IsHost"> <param name="Local" value="inet\i_net\IsHost.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetStatus"><param name="Local" value="inet\i_net\GetStatus.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetPlayerName"><param name="Local" value="inet\i_net\GetPlayerName.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetPlayers"><param name="Local" value="inet\i_net\GetPlayers.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetPID"><param name="Local" value="inet\i_net\GetPID.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetHostPID"><param name="Local" value="inet\i_net\GetHostPID.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="JoinSession"><param name="Local" value="inet\i_net\JoinSession.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="EnumSessions"><param name="Local" value="inet\i_net\EnumSessions.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="HostSession"><param name="Local" value="inet\i_net\HostSession.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Log"><param name="Local" value="inet\i_net\Log.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ProcessMessages"><param name="Local" value="inet\i_net\ProcessMessages.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetStats"><param name="Local" value="inet\i_net\GetStats.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Close"><param name="Local" value="inet\i_net\Close.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Send"><param name="Local" value="inet\i_net\Send.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="CreateOutMsg"><param name="Local" value="inet\i_net\CreateOutMsg.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="InitVoice"><param name="Local" value="inet\i_net\InitVoice.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="CloseVoice"><param name="Local" value="inet\i_net\CloseVoice.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="TestVoice"><param name="Local" value="inet\i_net\TestVoice.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetOpen"><param name="Local" value="inet\i_net\SetOpen.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetDPInterface"><param name="Local" value="inet\i_net\GetDPInterface.htm"></OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="INetCreate"> <param name="Local" value="inet\inet - create.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="INET_INIT"> <param name="Local" value="inet\structs\INET_INIT.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="INET_SYSTEM_MESSAGE"> <param name="Local" value="inet\enums\INET_SYSTEM_MESSAGE.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="E_NET_STATUS (structure)"><param name="Local" value="inet\enums\E_NET_STATUS.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"> <param name="Name" value="INET_MESSAGECALLBACK"> <param name="Local" value="inet\i_net\INET_MESSAGECALLBACK.htm"> </OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="INET_session_address"> <param name="Local" value="inet\inet_session_address\desc.htm"> </OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetName"><param name="Local" value="inet\inet_session_address\GetName.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetNumPlayers"><param name="Local" value="inet\inet_session_address\GetNumPlayers.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetPingTime"><param name="Local" value="inet\inet_session_address\GetPingTime.htm"></OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_net_out_msg"><param name="Local" value="inet\c_net_out_msg\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddBits"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddBits"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddByte"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddByte"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddDword"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddDword"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddFloat"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddFloat"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddID"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddID"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddString"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddString"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddVector"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddVector"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="AddWord"><param name="Local" value="inet\c_net_out_msg\desc.htm#AddWord"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Ascend"><param name="Local" value="inet\c_net_out_msg\desc.htm#Ascend"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Clear"><param name="Local" value="inet\c_net_out_msg\desc.htm#Clear"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Descend"><param name="Local" value="inet\c_net_out_msg\desc.htm#Descend"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetSize"><param name="Local" value="inet\c_net_out_msg\desc.htm#GetSize"></OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_net_in_msg"><param name="Local" value="inet\c_net_in_msg\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Ascend"><param name="Local" value="inet\c_net_in_msg\desc.htm#Ascend"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ChunkEnd"><param name="Local" value="inet\c_net_in_msg\desc.htm#ChunkEnd"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Descend"><param name="Local" value="inet\c_net_in_msg\desc.htm#Descend"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetBits"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetBits"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetBuf"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetBuf"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetByte"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetByte"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetDword"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetDword"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetFloat"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetFloat"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetID"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetID"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetPos"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetPos"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetSenderPID"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetSenderPID"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetSize"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetSize"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetString"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetString"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetVector"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetVector"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetWord"><param name="Local" value="inet\c_net_in_msg\desc.htm#GetWord"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Skip"><param name="Local" value="inet\c_net_in_msg\desc.htm#Skip"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SkipChunk"><param name="Local" value="inet\c_net_in_msg\desc.htm#SkipChunk"></OBJECT>
+
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="VM_LOAD_SYMBOL"><param name="Local" value="iscript\structs\VM_LOAD_SYMBOL"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IScript"><param name="Local" value="iscript\desc.htm"></OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_script"><param name="Local" value="iscript\C_script\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="CreateScript"><param name="Local" value="iscript\Creation\CreateScript.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Compile"><param name="Local" value="iscript\C_script\desc.htm#Compile"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Free"><param name="Local" value="iscript\C_script\desc.htm#Free"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetStatus"><param name="Local" value="iscript\C_script\desc.htm#GetStatus"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetName"><param name="Local" value="iscript\C_script\desc.htm#SetName"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetName"><param name="Local" value="iscript\C_script\desc.htm#GetName"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetAddress"><param name="Local" value="iscript\C_script\desc.htm#GetAddress"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetTableTemplate"><param name="Local" value="iscript\C_script\desc.htm#GetTableTemplate"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Dump"><param name="Local" value="iscript\C_script\desc.htm#Dump"></OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_v_machine"><param name="Local" value="iscript\C_v_machine\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="CreateVM"><param name="Local" value="iscript\Creation\CreateVM.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Load"><param name="Local" value="iscript\C_v_machine\desc.htm#Load"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ReloadData"><param name="Local" value="iscript\C_v_machine\desc.htm#ReloadData"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Unload"><param name="Local" value="iscript\C_v_machine\desc.htm#Unload"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetStatus"><param name="Local" value="iscript\C_v_machine\desc.htm#GetStatus"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Run"><param name="Local" value="iscript\C_v_machine\desc.htm#Run"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetAddress"><param name="Local" value="iscript\C_v_machine\desc.htm#GetAddress"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="EnumSymbols"><param name="Local" value="iscript\C_v_machine\desc.htm#EnumSymbols"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetName"><param name="Local" value="iscript\C_v_machine\desc.htm#GetName"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetScript"><param name="Local" value="iscript\C_v_machine\desc.htm#GetScript"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetData"><param name="Local" value="iscript\C_v_machine\desc.htm#SetData"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetData"><param name="Local" value="iscript\C_v_machine\desc.htm#GetData"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SaveContext"><param name="Local" value="iscript\C_v_machine\desc.htm#SaveContext"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ClearSavedContext"><param name="Local" value="iscript\C_v_machine\desc.htm#ClearSavedContext"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetSavedContext"><param name="Local" value="iscript\C_v_machine\desc.htm#GetSavedContext"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetSavedContext"><param name="Local" value="iscript\C_v_machine\desc.htm#SetSavedContext"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetGlobalVariables"><param name="Local" value="iscript\C_v_machine\desc.htm#GetGlobalVariables"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetGlobalVariables"><param name="Local" value="iscript\C_v_machine\desc.htm#SetGlobalVariables"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetTable"><param name="Local" value="iscript\C_v_machine\desc.htm#GetTable"></OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="E_TABLE_ELEMENT_TYPE"><param name="Local" value="tabler\enum\E_TABLE_ELEMENT_TYPE.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="CreateTable"><param name="Local" value="tabler\Creation\CreateTable.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_table_template"><param name="Local" value="tabler\structs\C_table_template.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_table_element"><param name="Local" value="tabler\structs\C_table_element.htm"></OBJECT>
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="C_table"><param name="Local" value="tabler\C_table\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Load"><param name="Local" value="tabler\C_table\desc.htm#Load"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Save"><param name="Local" value="tabler\C_table\desc.htm#Save"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IsLoaded"><param name="Local" value="tabler\C_table\desc.htm#IsLoaded"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="NumItems"><param name="Local" value="tabler\C_table\desc.htm#NumItems"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ArrayLen"><param name="Local" value="tabler\C_table\desc.htm#ArrayLen"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="StringSize"><param name="Local" value="tabler\C_table\desc.htm#StringSize"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SizeOf"><param name="Local" value="tabler\C_table\desc.htm#SizeOf"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetItemType"><param name="Local" value="tabler\C_table\desc.htm#GetItemType"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IsModified"><param name="Local" value="tabler\C_table\desc.htm#IsModified"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Edit"><param name="Local" value="tabler\C_table\desc.htm#Edit"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="Item"><param name="Local" value="tabler\C_table\desc.htm#Item"></OBJECT>
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="InitializeExceptions"><param name="Local" value="tabler\IExcept\InitializeExceptions.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetExceptionCallback"><param name="Local" value="tabler\IExcept\SetExceptionCallback.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="SetExceptionSendFunc"><param name="Local" value="tabler\IExcept\SetExceptionSendFunc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="UserException"><param name="Local" value="tabler\IExcept\UserException.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="GetCallStack"><param name="Local" value="tabler\IExcept\GetCallStack.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="ShowCallStackDialog"><param name="Local" value="tabler\IExcept\ShowCallStackDialog.htm"></OBJECT>
+
+
+
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IPhysics"><param name="Local" value="IPhysics\desc.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IPH_body"><param name="Local" value="IPhysics\IPH_body.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IPH_world"><param name="Local" value="IPhysics\IPH_world.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IPH_joint"><param name="Local" value="IPhysics\IPH_joint.htm"></OBJECT>
+<LI> <OBJECT type="text/sitemap"><param name="Name" value="IPHCreateWorld"><param name="Local" value="IPhysics\IPHCreateWorld.htm"></OBJECT>
+
+
+
+</UL>
+</BODY></HTML>

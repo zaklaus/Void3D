@@ -1,0 +1,682 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./architecture_files/filelist.xml">
+<link rel=Edit-Time-Data href="./architecture_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Insanity architecture</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Michal</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>149</o:Revision>
+  <o:TotalTime>233</o:TotalTime>
+  <o:Created>2003-05-03T08:20:00Z</o:Created>
+  <o:LastSaved>2003-05-09T15:50:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>77</o:Words>
+  <o:Characters>442</o:Characters>
+  <o:Lines>3</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>542</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:DrawingGridHorizontalSpacing>7 pt</w:DrawingGridHorizontalSpacing>
+  <w:DrawingGridVerticalSpacing>7 pt</w:DrawingGridVerticalSpacing>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;
+	font-weight:bold;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:11.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 65.95pt 72.0pt 65.95pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1115" fill="f">
+  <v:fill on="f"/>
+  <v:stroke endarrow="block" endarrowlength="long" weight="1.5pt"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+  <o:regrouptable v:ext="edit">
+   <o:entry new="1" old="0"/>
+   <o:entry new="2" old="0"/>
+   <o:entry new="3" old="2"/>
+   <o:entry new="4" old="1"/>
+   <o:entry new="5" old="0"/>
+   <o:entry new="6" old="0"/>
+   <o:entry new="7" old="0"/>
+   <o:entry new="8" old="0"/>
+   <o:entry new="9" old="0"/>
+   <o:entry new="10" old="0"/>
+   <o:entry new="11" old="0"/>
+   <o:entry new="12" old="0"/>
+  </o:regrouptable>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><b><span style='font-size:24.0pt;mso-bidi-font-size:12.0pt;mso-fareast-font-family:
+"MS Mincho"'>Insanity library architecture </span></b><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-fareast-font-family:"MS Mincho"'><o:p></o:p></span></b></p>
+
+<p><!--[if gte vml 1]><v:group id="_x0000_s1110" style='position:absolute;
+ margin-left:28pt;margin-top:22pt;width:329.75pt;height:224pt;z-index:3'
+ coordorigin="1879,2712" coordsize="6595,4480">
+ <v:shape id="_x0000_s1029" style='position:absolute;left:2579;top:4252;
+  width:560;height:700;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:rect id="_x0000_s1031" style='position:absolute;left:3139;top:4672;
+  width:1120;height:555;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1031' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <h1><a name="_I3D"></a><a name="_!"></a><a href="i3d/desc.htm"
+     title="I3D library is responsible for 3D tasks, such as managing scene, frames, mesh interfaces, animations, and all the other task associated with 3D.">I3D</a></h1>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1026" style='position:absolute;left:1879;top:3692;
+  width:1260;height:560;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="1" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1026' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><b><a
+     href="isound/desc.htm"
+     title="ISound library is responsible for complete sound management – loading of sounds and their conversion into appropriate format, and actual playback using DirectSound.">ISound</a><o:p></o:p></b></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1030" style='position:absolute;left:4399;top:3680;
+  width:1120;height:560;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="1" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1030' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <h1><a href="igraph/desc.htm"
+     title="IGraph library is used for basic graphics-related tasks, which are necessary for running application. This includes all window function, graphics format conversions, and additionally timers and input functions.">IGraph</a></h1>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1033" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="2439,3132" to="2439,3692" o:regroupid="4"
+  strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:rect id="_x0000_s1034" style='position:absolute;left:1879;top:2712;
+  width:1125;height:420;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="4" strokecolor="gray">
+  <v:textbox style='mso-next-textbox:#_x0000_s1034' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;color:gray'>DSound</span><span
+     style='color:gray'><o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1035" style='position:absolute;left:3419;top:2712;
+  width:1120;height:420;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="1" strokecolor="gray">
+  <v:textbox style='mso-next-textbox:#_x0000_s1035' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;color:gray'>D3D<o:p></o:p></span></p>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='color:gray'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;color:gray'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='color:gray'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1036" style='position:absolute;left:5099;top:2712;
+  width:1120;height:420;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="1" strokecolor="gray">
+  <v:textbox style='mso-next-textbox:#_x0000_s1036' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;color:gray'>DInput</span><span
+     style='color:gray'><o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:shape id="_x0000_s1037" style='position:absolute;left:4119;top:3132;
+  width:280;height:840;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" o:regroupid="1" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:shape id="_x0000_s1038" style='position:absolute;left:5519;top:3132;
+  width:140;height:840;flip:x;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" o:regroupid="1" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:rect id="_x0000_s1041" style='position:absolute;left:7339;top:5792;
+  width:1120;height:560;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1041' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><b><a
+     href="IScript/desc.htm"
+     title="The scripting library is a powerful tool for implementing scripts performing particular tasks. The scripting language is a C-like language, which is precompiled using script compiler, and run in a virtual processor.">IScript</a><o:p></o:p></b></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:shape id="_x0000_s1045" style='position:absolute;left:2999;top:6212;
+  width:1400;height:700;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:line id="_x0000_s1046" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="5379,4240" to="5379,6620" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:shape id="_x0000_s1047" style='position:absolute;left:2016;top:4224;
+  width:2383;height:2803;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="2383,2803" path="m2383,2786l0,2803hel3,0hae"
+  filled="f" strokecolor="#969696" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:rect id="_x0000_s1053" style='position:absolute;left:7339;top:6632;
+  width:1120;height:560;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1053' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><b><a
+     href="tabler/desc.htm"
+     title="Tabler library is a database system, which is capable of holding certain amount of data and easy access that data using user-friendly programming interface.">ITabler</a><o:p></o:p></b></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:rect id="_x0000_s1051" alt="Text Box: OS I/O&#13;&#10;" style='position:absolute;
+  left:7349;top:2722;width:1125;height:420;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="3" strokecolor="gray">
+  <v:textbox style='mso-next-textbox:#_x0000_s1051' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt;color:gray'>OS I/O</span><span
+     style='color:gray'><o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1052" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="7899,3123" to="7899,3531" o:regroupid="3"
+  strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:rect id="_x0000_s1043" style='position:absolute;left:7349;top:3577;
+  width:1125;height:555;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="9" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1043' inset="0,3.75pt,0,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoBodyText><span style='font-size:12.0pt'><a
+     href="dta_read/desc.htm"
+     title="Unified data-access system. This library provides OS-independent access to files, either using standard OS services, or accessing huge data files containing compressed individual files. This library is used by many oth ">DTAread</a><o:p></o:p></span></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1057" style='position:absolute;mso-wrap-style:square;
+  mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text;v-text-anchor:top' from="6919,3551" to="7349,3703"
+  o:regroupid="9" strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1058" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,3815" to="7349,3831" o:regroupid="9"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1059" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,3971" to="7339,4111" o:regroupid="9"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:rect id="_x0000_s1042" style='position:absolute;left:7349;top:4972;
+  width:1125;height:555;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="10" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1042' inset="1.5pt,3.75pt,1.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><b><a
+     href="i3d_math/desc.htm"
+     title="Insanity3D math library contains collection of classes, which perform basic math operations.">Math
+     lib</a></b><b><span style='font-size:13.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></b></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1063" style='position:absolute;mso-wrap-style:square;
+  mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text;v-text-anchor:top' from="6919,4957" to="7339,5097"
+  o:regroupid="10" strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1064" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,5237" to="7349,5237" o:regroupid="10"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1065" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,5377" to="7349,5517" o:regroupid="10"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:rect id="_x0000_s1070" style='position:absolute;left:2299;top:5652;
+  width:1260;height:555;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1070' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <h1><a href="ieditor/desc.htm"
+     title="Insanity Editor is a library used for content creation. It ides helping hand for game designing during development. Usually it is not shipped with the application.">IEditor</a></h1>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1071" style='position:absolute;mso-wrap-style:square;
+  mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text;v-text-anchor:top' from="5659,6912" to="7339,6912"
+  strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:line id="_x0000_s1072" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="5659,6072" to="7339,6772" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:shape id="_x0000_s1075" style='position:absolute;left:3699;top:5232;
+  width:700;height:1540;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:line id="_x0000_s1076" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="3699,3132" to="3699,4672" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:rect id="_x0000_s1085" style='position:absolute;left:7349;top:4260;
+  width:1125;height:555;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="11" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1085' inset="1.5pt,3.75pt,1.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <p class=MsoNormal align=center style='text-align:center'><b><a
+     href="iexcept/desc.htm"
+     title="IExcept library is a system for trapping exceptional situations in application, and working with call stack due to debugging purposes.">IExcept</a><o:p></o:p></b></p>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:line id="_x0000_s1086" style='position:absolute;mso-wrap-style:square;
+  mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+  mso-position-vertical-relative:text;v-text-anchor:top' from="6919,4235" to="7339,4375"
+  o:regroupid="11" strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1087" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,4515" to="7349,4515" o:regroupid="11"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1088" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="6919,4655" to="7349,4795" o:regroupid="11"
+  strokeweight="1.5pt">
+  <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+ </v:line><v:line id="_x0000_s1094" style='position:absolute;flip:y;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' from="3279,5220" to="3279,5640" strokeweight="1.5pt">
+  <v:stroke endarrow="block" endarrowlength="long"/>
+ </v:line><v:rect id="_x0000_s1044" style='position:absolute;left:4399;top:6632;
+  width:1257;height:560;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' o:regroupid="12" strokeweight="1.5pt">
+  <v:textbox style='mso-next-textbox:#_x0000_s1044' inset="7.5pt,3.75pt,7.5pt,3.75pt">
+   <![if !mso]>
+   <table cellpadding=0 cellspacing=0 width="100%">
+    <tr>
+     <td><![endif]>
+     <div>
+     <h1>Game</h1>
+     </div>
+     <![if !mso]></td>
+    </tr>
+   </table>
+   <![endif]></v:textbox>
+ </v:rect><v:group id="_x0000_s1108" style='position:absolute;left:4119;top:5640;
+  width:1125;height:981' coordorigin="4119,5640" coordsize="1125,981"
+  o:regroupid="12">
+  <v:line id="_x0000_s1093" style='position:absolute;flip:y;mso-wrap-style:square;
+   mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+   mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+   mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+   mso-position-vertical:absolute;mso-position-vertical-relative:text;
+   v-text-anchor:top' from="4679,6200" to="4679,6621" o:regroupid="8"
+   strokeweight="1.5pt">
+   <v:stroke endarrow="block" endarrowlength="long"/>
+  </v:line><v:rect id="_x0000_s1095" style='position:absolute;left:4119;top:5640;
+   width:1125;height:556;mso-position-horizontal:absolute;
+   mso-position-vertical:absolute' o:regroupid="8" strokeweight="1.5pt">
+   <v:textbox style='mso-next-textbox:#_x0000_s1095' inset="1.5pt,3.75pt,1.5pt,3.75pt">
+    <![if !mso]>
+    <table cellpadding=0 cellspacing=0 width="100%">
+     <tr>
+      <td><![endif]>
+      <div>
+      <h1><a href="iphysics/desc.htm"
+      title="IPhysics is a rigid-body physics library working closely with I3D library. It allows simulation of rigid bodies, whose visual shape may be any Insanity visual object.">IPhysics</a><span
+      style='font-size:13.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></h1>
+      </div>
+      <![if !mso]></td>
+     </tr>
+    </table>
+    <![endif]></v:textbox>
+  </v:rect></v:group><v:shape id="_x0000_s1097" style='position:absolute;
+  left:4259;top:5017;width:555;height:623;flip:x y;mso-position-horizontal:absolute;
+  mso-position-vertical:absolute' coordsize="754,1315" o:regroupid="8" path="m754,1309l0,1315hel6,0hae"
+  filled="f" strokeweight="1.5pt">
+  <v:stroke startarrow="block" startarrowlength="long" endarrowlength="long"/>
+  <v:path arrowok="t"/>
+ </v:shape><w:anchorlock/>
+</v:group><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+
+<table cellpadding=0 cellspacing=0 align=left>
+ <tr>
+  <td width=36 height=29></td>
+ </tr>
+ <tr>
+  <td></td>
+  <td><img width=444 height=302 src="./architecture_files/image001.gif" v:shapes="_x0000_s1110 _x0000_s1029 _x0000_s1031 _x0000_s1026 _x0000_s1030 _x0000_s1033 _x0000_s1034 _x0000_s1035 _x0000_s1036 _x0000_s1037 _x0000_s1038 _x0000_s1041 _x0000_s1045 _x0000_s1046 _x0000_s1047 _x0000_s1053 _x0000_s1051 _x0000_s1052 _x0000_s1043 _x0000_s1057 _x0000_s1058 _x0000_s1059 _x0000_s1042 _x0000_s1063 _x0000_s1064 _x0000_s1065 _x0000_s1070 _x0000_s1071 _x0000_s1072 _x0000_s1075 _x0000_s1076 _x0000_s1085 _x0000_s1086 _x0000_s1087 _x0000_s1088 _x0000_s1094 _x0000_s1044 _x0000_s1108 _x0000_s1093 _x0000_s1095 _x0000_s1097"></td>
+ </tr>
+</table>
+
+</span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><v:line id="_x0000_s1077" style='position:absolute;
+ flip:y;z-index:1;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+ mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+ mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+ mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+ mso-position-vertical-relative:text;v-text-anchor:top' from="44.9pt,4.35pt"
+ to="66.15pt,6.5pt" strokeweight="1.5pt">
+ <v:stroke endarrow="block" endarrowlength="long"/>
+</v:line><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:41;margin-left:58px;margin-top:0px;width:33px;height:18px'><img
+width=33 height=18 src="./architecture_files/image002.gif" v:shapes="_x0000_s1077"></span><![endif]><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'>The lines<span style="mso-spacerun: yes">           
+</span>specify the way and direction, how each module controls other module(s).
+They lead from higher-level modules towards lower-level modules.<br>
+This means that particular module is dependent on all modules, which it
+controls, directly or indirectly using other modules.<o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><v:line id="_x0000_s1078" style='position:absolute;
+ flip:y;z-index:2;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+ mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+ mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+ mso-position-horizontal-relative:text;mso-position-vertical:absolute;
+ mso-position-vertical-relative:text;v-text-anchor:top' from="56pt,2.5pt" to="73.25pt,7.1pt"
+ strokeweight="1.5pt">
+ <v:stroke dashstyle="1 1" endarrow="block" endarrowwidth="narrow"/>
+</v:line><![endif]--><![if !vml]><span style='mso-ignore:vglayout;position:
+absolute;z-index:42;margin-left:73px;margin-top:0px;width:28px;height:13px'><img
+width=28 height=13 src="./architecture_files/image003.gif" v:shapes="_x0000_s1078"></span><![endif]><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'>Dotted lines<span style="mso-spacerun: yes">        
+</span>represent connections with many other modules (if not all), so
+practically the modules towards which multiple dotted lines lead are essential
+for proper work of the rest of the system.<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

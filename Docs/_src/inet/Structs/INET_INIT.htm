@@ -1,0 +1,345 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./INET_INIT_files/filelist.xml">
+<link rel=Edit-Time-Data href="./INET_INIT_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>INet - INET_INIT</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Michal</o:LastAuthor>
+  <o:Revision>16</o:Revision>
+  <o:TotalTime>17</o:TotalTime>
+  <o:Created>2003-01-08T09:23:00Z</o:Created>
+  <o:LastSaved>2003-05-07T21:40:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>342</o:Words>
+  <o:Characters>1955</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>16</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2400</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Lucida Console";
+	panose-1:2 11 6 9 4 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-2147482993 6144 0 0 31 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>INET_INIT</span></strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>INET_INIT structure is used when creating the </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I_net</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface. The structure is defined as follows:<o:p></o:p></span></strong></p>
+
+<pre><span style='font-family:"Lucida Console"'>struct INET_INIT{<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>dword </b><strong><i><span
+style='font-weight:normal'>flags</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const void *</b><strong><i><span
+style='font-weight:normal'>app_guid</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const char *</b><strong><i><span
+style='font-weight:normal'>session_name</span></i></strong>, <b>*</b><strong><i><span
+style='font-weight:normal'>player_name</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>IN_CONNECTION </b><strong><i><span
+style='font-weight:normal'>connection</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>dword </b><strong><i><span
+style='font-weight:normal'>max_players</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const char *</b><strong><i><span
+style='font-weight:normal'>modem_phone_number</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const char *</b><strong><i><span
+style='font-weight:normal'>ip_host_name</span></i></strong>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>const char *</b><i>port</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>int </b><i>drop_timeout</i>; <o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;</span>typedef void __stdcall t_log_func(<b>const char *</b><i>msg</i>);<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>t_log_func *</b><i>log_func</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>enum </b>E_VOICE_COMPRESSION{<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_NULL,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_1_2,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_3_2,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_6_4,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_8,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_13,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_32,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>VS_64,<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'><span style="mso-spacerun: yes">&nbsp;&nbsp; </span>} <i>voice_compression</i>;<o:p></o:p></span></pre><pre><span
+style='font-family:"Lucida Console"'>};<o:p></o:p></span></pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Lucida Console";
+mso-bidi-font-family:Arial;font-weight:normal'>typedef INET_INIT *PINET_INIT;</span></strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Lucida Console";
+mso-bidi-font-family:Arial'><o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Members:<o:p></o:p></span></b></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>flags</span></i></strong><span style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Initialization
+flags. Following flags are defined:<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>ININIT_CLIENTSERVER<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Use client-server
+model, rather than peer-to-peer model. This mode is currently not implemented.<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>ININIT_MIGRATE_HOST<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Allow
+migration of session host. If this flag is not specified, and host machine
+terminates session, the session is lost.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>app_guid</span></i></strong><span style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Unique
+identifier of application - buffer containing 16 bytes.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>session_name</span></i></strong><span style='font-family:
+Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Name of
+the session, if session will be hosted by this interface.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>player_name</span></i></strong><span style='font-family:
+Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Name of
+local player, when connection will be established.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>connection</span></i></strong><span style='font-family:
+Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>ID of
+connection provider. Available providers are following:<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>INCON_TCPIP<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>TCP/IP
+connection<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>INCON_IPX<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>IPX
+connection<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>INCON_MODEM<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>modem
+connection<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>INCON_SERIAL<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>serial
+cable connection<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>INCON_SIM<o:p></o:p></span></p>
+
+<p style='margin-right:108.0pt;margin-left:108.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>simulated
+TCP-IP connection<o:p></o:p></span></p>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Currently,
+only TCP/IP connection is implemented.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>max_players</span></i></strong><span style='font-family:
+Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Maximal number
+of players allowed to join the session. Specify 0 for unlimited amount.<br>
+This parameter is used only if session is hosted.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>modem_phone_number</span></i></strong><span
+style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+string specifying telephone number, may be NULL if hosting session (waiting to
+be dialed).<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><strong><i><span style='font-family:Arial;
+font-weight:normal'>ip_host_name</span></i></strong><span style='font-family:
+Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+string specifying IP address of hosting machine, may be NULL for LAN.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><i><span style='font-family:Arial'>port</span></i><span
+style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+string specifying port number, may be NULL if default port is being used.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><i><span style='font-family:Arial'>drop_timeout</span></i><span
+style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Time-out
+value, after which we discover a player is dropped<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><i><span style='font-family:Arial'>log_func</span></i><span
+style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to
+logging callback function, which will be called whenever a log is being sent.<o:p></o:p></span></p>
+
+<pre style='margin-top:0pt;margin-right:36.0pt;margin-bottom:0pt;margin-left:
+36.0pt;margin-bottom:.0001pt'><i><span style='font-family:Arial'>voice_compression</span></i><span
+style='font-family:Arial'><o:p></o:p></span></pre>
+
+<p style='margin-right:72.0pt;margin-left:72.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Enumerated
+type, specifying bit-rate of voice chat session. The voice chat session is
+initialized later by special methods of I_net interface.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also<br>
+<a href="..\INetCreate.htm">InetCreate</a></span></b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <b><a
+href="..\i_net\desc.htm">I_net</a><o:p></o:p></b></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-family:Arial;display:none;mso-hide:all'>&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

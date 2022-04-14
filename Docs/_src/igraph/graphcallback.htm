@@ -1,0 +1,349 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./graphcallback_files/filelist.xml">
+<link rel=Edit-Time-Data href="./graphcallback_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IGraph Callback function</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>12</o:Revision>
+  <o:TotalTime>17</o:TotalTime>
+  <o:Created>2002-02-21T17:39:00Z</o:Created>
+  <o:LastSaved>2002-05-22T16:23:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>309</o:Words>
+  <o:Characters>1766</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>14</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2168</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 65.95pt 72.0pt 65.95pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IGraph
+Callback function<o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'>The callback function is used when registering callback to <b>IGraph
+</b>interface. This type is a definition of callback function.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'>Registered callback functions are called in certain system circumstances
+– see description of msg parameter to learn which messages may be sent to
+callback functions.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>typedef dword GRAPHCALLBACK(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>msg</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>,</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>par1</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>,</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>par2</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>,</span></strong><strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>context</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:7.5pt;tab-stops:18.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>msg<o:p></o:p></span></i></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Message
+sent to callback function. This may be one of following:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>CM_ACTIVATE<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Message
+sent when application widow is activated or deactivated. Parameter <i>prm1</i>
+is a boolean status, representing if application was activated (true) or
+deactivated (false).<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>CM_COMMAND<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>User has
+selected a command from Windows menu. Parameter <i>prm1</i> specifies ID of
+selected menu item.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>CM_RECREATE<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Window is
+being re-created as result of changing IGraph parameters (<b>IGraph::UpdateParams</b>),
+re-sizing the window, or reset on DirectX device.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Meaning of
+parameters:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>prm1</span></i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>New IGraph
+flags. See <b>IGraph initialization flags</b> for details.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>prm2</span></i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Phase of
+re-creation. This may be one of following:<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>0 …
+Message sent before destroying DirectX devices. All hardware resources must be
+released.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>1 …
+Message sent after creating new DirectX devices. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>2 …
+Message sent to notify registered functions about applying changes.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:45.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>CM_PAINT<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:22.5pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-top:0pt;margin-right:36.0pt;margin-bottom:
+0pt;margin-left:30.0pt;margin-bottom:.0001pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>A Windows
+message WM_PAINT is being processed, so by this message IGraph informs registered
+callbacks that window contents should be painted.<br>
+This message is typically sent when main window is suspended, and area of
+application window must be updated in such suspended state.<o:p></o:p></span></p>
+
+<p style='margin-left:7.5pt;tab-stops:18.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>par1, par2<o:p></o:p></span></i></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters
+to callback function. For meaning of these parameters, see <i>msg</i>
+parameter.<o:p></o:p></span></p>
+
+<p style='margin-left:7.5pt;tab-stops:18.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>context<o:p></o:p></span></i></p>
+
+<p style='margin-right:72.0pt;margin-left:22.5pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Context value
+which was specified in call to </span><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:"MS Mincho"'>IGraph::AddCallback.</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:22.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is true, if
+function was registered successfully.<br>
+If the function already is registered by the IGraph interface, the returned
+value is false.<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'>See also:<o:p></o:p></span></p>
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoPlainText><b><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'><a href="igraph\AddCallback.htm">IGraph::AddCallback</a>, </span></b><b><span
+style='font-family:Arial'><a href="igraph\UpdateParams.htm">IGraph::UpdateParams</a>,
+<a href="enum\init_flags.htm">IGraph initialization flags</a><o:p></o:p></span></b></p>
+
+<p class=MsoPlainText><span style='font-family:Arial;mso-fareast-font-family:
+"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

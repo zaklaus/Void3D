@@ -1,0 +1,343 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./rules_files/filelist.xml">
+<link rel=Edit-Time-Data href="./rules_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Reference counting</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>11</o:Revision>
+  <o:TotalTime>19</o:TotalTime>
+  <o:Created>2002-03-05T10:49:00Z</o:Created>
+  <o:LastSaved>2002-04-18T12:03:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>209</o:Words>
+  <o:Characters>1194</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>9</o:Lines>
+  <o:Paragraphs>2</o:Paragraphs>
+  <o:CharactersWithSpaces>1466</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 65.95pt 72.0pt 65.95pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:216359479;
+	mso-list-type:hybrid;
+	mso-list-template-ids:954999786 67698689 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0pt;}
+ul
+	{margin-bottom:0pt;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>Insanity3D
+basic types</span></strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Header file: rules.h<o:p></o:p></span></b></em></p>
+
+<p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Insanity3D library uses following basic types in all its
+libraries:<o:p></o:p></span></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  background:#A6A6A6;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Type<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;background:#A6A6A6;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Defined as:<o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>byte<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned char<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>schar<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>signed char<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>word<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned short<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>dword<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned long<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>ulong<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned long<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>size_t<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned int<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=131 valign=top style='width:98.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>NULL<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>0<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+</table>
+
+<p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Additionally, following inline template functions are
+declared:<o:p></o:p></span></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=275 valign=top style='width:206.55pt;border:solid windowtext .5pt;
+  background:#A6A6A6;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Function<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;background:#A6A6A6;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Description:<o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=275 valign=top style='width:206.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>&lt;class T&gt;<br>
+  const T &amp;Max(const T &amp;t1, const T &amp;t2);<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Return greater of two input values.<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=275 valign=top style='width:206.55pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>template&lt;class T&gt;<br>
+  const T &amp;Min(const T &amp;t1, const T &amp;t2);<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=252 valign=top style='width:189.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext .5pt;border-right:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Return smaller of two input values.<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+</table>
+
+<p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Insanity3D assumes following:<o:p></o:p></span></em></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo1;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-bidi-font-family:Arial;
+font-style:normal'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>int </span></em><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'>and </span></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>long </span></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>are 32-bits wide<o:p></o:p></span></em></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo1;
+tab-stops:list 36.0pt'><![if !supportLists]><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Symbol;mso-bidi-font-family:Arial;
+font-style:normal'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></em><![endif]><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>char</span></em><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'> is signed<o:p></o:p></span></em></p>
+
+</div>
+
+</body>
+
+</html>

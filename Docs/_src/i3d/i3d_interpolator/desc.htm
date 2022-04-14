@@ -1,0 +1,337 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>I3D_interpolator</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>36</o:Revision>
+  <o:TotalTime>29</o:TotalTime>
+  <o:Created>2002-02-05T15:04:00Z</o:Created>
+  <o:LastSaved>2002-07-21T08:25:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>347</o:Words>
+  <o:Characters>1982</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>16</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2434</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>I3D_interpolator</span></strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>I3D_interpolator</span></strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> is an interface, which is
+responsible for interpolation between animation keys stored in <strong>I3D_animation_base</strong>
+and apply result to frame. It keeps references to both <strong>I3D_animation_base</strong>
+and <strong>I3D_frame</strong> during its lifetime. The <strong>I3D_animation_base</strong>
+is used as a read-only resource, so it is possible to use the same <strong>I3D_animation_base</strong>
+with multiple interpolators. All variables needed to interpolate are property
+of concrete <strong>I3D_interpolator</strong>.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Each
+interpolator can interpolate one or more animations (<strong>I3D_animation_base</strong>).
+If multiple animations are interpolated, they may be <em>blended</em> together
+before their result is applied to frame. Each animation is processed in
+separate <em>stage</em>, each stage having its own animation and a unique blend
+value.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Animations
+are processed from stage with lowest index upwards. Each two stages with
+non-zero animation are blended by blend value of higher stage in following
+ratio:<br>
+<em>resulting_animation = animation[n-1] * (1.0 - blend_ratio[n]) +
+animation[n] * blend_ratio[n]</em><em><span style='font-style:normal'>.</span></em><i><br>
+</i>This implies that blend ratio of very first non-zero stage is ignored. The
+result of two stages is then blended with next stage using the same formula,
+until all stages are processed. The result is applied to <b>I3D_frame</b>. The
+result may be position, rotation, scale or other frame-specific value, such as
+color for lights, or volume for sounds, etc.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Limitations:
+only position, rotation and scale is processed in multiple stages and blended
+together. Other tracks are processed only on animation set to stage 0.<o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Methods:</span></b></em><em><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Frame:<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetFrame.htm"><b>SetFrame</b></a></span></strong><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetFrame.htm"><b>GetFrame</b></a></span></strong><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Time:<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetEndTime.htm"><b>GetEndTime</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetCurrTime.htm"><b>SetCurrTime</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetCurrTime.htm"><b>GetCurrTime</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="Tick.htm"><b>Tick</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Animation:<o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="SetAnimation.htm"><b>SetAnimation</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetAnimation.htm"><b>GetAnimation</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="GetOptions.htm"><b>GetOptions</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>Remarks:</span></strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>When
+<strong>Tick</strong> is called, the interface processes all non-empty tracks
+in the animation. The computed values (which are values dependent on type of
+animation track) are applied to frame by methods of <a
+href="..\I3D_frame\desc.htm"><strong><span style='color:windowtext;text-decoration:
+none;text-underline:none'>I3D_frame</span></strong></a>, such as for example <strong>I3D_frame::SetPos</strong>
+to set new position.<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><span
+style="mso-spacerun: yes"> </span>See also:<o:p></o:p></span></b></p>
+
+<p><u><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\I3D_animation_base\desc.htm"><strong>I3D_animation_base</strong></a></span></u><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <u><a
+href="..\I3D_frame\desc.htm"><strong>I3D_frame</strong></a></u><b><o:p></o:p></b></span></p>
+
+<p class=MsoNormal><span style='font-family:Arial;display:none;mso-hide:all'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h4>
+
+</div>
+
+</body>
+
+</html>

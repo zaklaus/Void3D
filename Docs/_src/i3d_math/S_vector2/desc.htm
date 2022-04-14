@@ -1,0 +1,1264 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./~desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./~desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>S_vector2</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>270</o:TotalTime>
+  <o:Created>2002-07-16T08:20:00Z</o:Created>
+  <o:LastSaved>2002-07-16T08:20:00Z</o:LastSaved>
+  <o:Pages>6</o:Pages>
+  <o:Words>985</o:Words>
+  <o:Characters>5617</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>46</o:Lines>
+  <o:Paragraphs>11</o:Paragraphs>
+  <o:CharactersWithSpaces>6898</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><b><span style='font-size:24.0pt;mso-bidi-font-size:
+12.0pt'>S_vector2<o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>S_vector2</span></strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> is a 2D counterpart of <b><a
+href="..\s_vector\desc.htm"><span style='color:windowtext;text-decoration:none;
+text-underline:none'>S_vector</span></a></b>. Most functions of <strong>S_vector</strong>
+are also implemented for <strong>S_vector2</strong>, and their meaning is the
+same, but limited to 2 dimensions.<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=constructors></a><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Construtors:<em><span style='font-style:normal'><o:p></o:p></span></em></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#svector"><b>S_vector2();</b></a>
+  </span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#svector2"><b>S_vector2(float
+  x, float y);</b></a></span></strong><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=accessing></a><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Accessing data mebers:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_zavorky"><b>float
+  &amp;operator [](int </b><b><i>index</i></b><b>);</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_zavorky2"><b>const float
+  &amp;operator [](int </b><b><i>index</i></b><b>) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=operators></a><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Operators:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_porovnani"><b>bool
+  operator<span style="mso-spacerun: yes">  </span>==(const S_vector2 &amp;v)
+  const;</b></a></span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_negace"><b>bool
+  operator<span style="mso-spacerun: yes">  </span>!=(const S_vector2 &amp;v)
+  const;</b></a></span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_souctu"><b>S_vector2
+  operator +(const S_vector &amp;v) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:5.35pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:5.35pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_souctu2"><b>S_vector2
+  &amp;operator +=(const S_vector &amp;v);</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_rozdilu"><b>S_vector2
+  operator -(const S_vector &amp;v) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:11.65pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.65pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_rozdilu2"><b>S_vector2 &amp;operator
+  -=(const S_vector &amp;v);</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:7.6pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:7.6pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_soucinu"><b>S_vector2
+  operator *(float f) const;</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_soucinu2"><b>S_vector2
+  &amp;operator *=(float f);</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:3.5pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_deleni"><b>S_vector2
+  operator /(float f) const;</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:3.5pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_deleni2"><b>S_vector2
+  &amp;operator /=(float f);</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:3.5pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_soucinumatici"><b>S_vector2
+  operator *(const struct S_matrix2 &amp;m) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='height:3.5pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_mult_m_ass"><b>S_vector2
+  &amp;operator *=(const struct S_matrix2&amp;);</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr style='height:3.5pt'>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_unarninegace"><b>S_vector2
+  operator -() const;</b></a></span></strong><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Methods:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Dot"><b>float Dot(const
+  S_vector2 &amp;v) const;</b></a></span></strong><b><i><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Inverse"><b>void Invert();</b></a></span></strong><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Magnitude"><b>float Magnitude()
+  const;</b></a></span></strong><b><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Normalize"><b>void
+  Normalize();</b></a></span></strong><b><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Sum"><b>float Sum() const;</b></a></span></strong><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_disttol"><b>float
+  DistanceToLine(const S_vector2 &amp;point, const S_vector2 &amp;dir) const;</b></a></span></strong><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Zero"><b>void Zero();</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_angleto"><b>float
+  AngleTo(const S_vector2&amp;) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_IsNull"><b>bool IsNull()
+  const;</b></a></span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_getxpt"><b>bool
+  GetIntersection(const S_vector2 &amp;p1, const S_vector2 &amp;d1, const
+  S_vector2 &amp;p2, const S_vector2 &amp;d2);</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_getbrightness"><b>float
+  GetBrightness() const;</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Description:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;border:none;mso-border-alt:solid windowtext .25pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector();<a name=svector></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Default constructor.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector(<a name=svector2></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>x</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>y</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Constructor initializing members of vector by provided
+  values.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float &amp;operator[](<a name="op_zavorky"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>index</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const float &amp;<a name="op_zavorky2"></a>operator
+  [](<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>index</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Access data members as array members.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>index</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Index of member, whose reference
+  is to be retrieved. This value must be in range 0 - 1.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is reference to
+  desired member of S_vector2.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool operator ==(<a name="op_porovnani"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Check if two vectors are equal.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is true if
+  all members of both vectors match.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool operator !=(<a name="op_negace"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Check if two vectors are unequal.<strong><o:p></o:p></strong></span></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is true if
+  any members of both vectors do not match.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator +(<a name="op_souctu"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 &amp;operator +=(<a name="op_souctu2"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Add&nbsp; two vectors.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>v</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Vector which will be added with
+  this vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is resulting
+  vector (first version), or reference to this resulting vector (second
+  version).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator -(<a name="op_rozdilu"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 &amp;operator -=(<a name="op_rozdilu2"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Subtract vectors.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>v</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Vector which will be subtracted
+  with this vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is resulting
+  vector (first version), or reference to this resulting vector (second
+  version).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator *(<a name="op_soucinu"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>f</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 &amp;operator *=(<a name="op_soucinu2"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>f</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Scale vector by factor. All members are multiplied by
+  factor.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>f</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Scale, by which all members of
+  this vector will be multiplied.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is resulting
+  vector (first version), or reference to this resulting vector (second
+  version).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator /(<a name="op_deleni"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>f</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 &amp;operator /=(<a name="op_deleni2"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>f</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Divide vector by factor.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>f</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Scale, by which all members of
+  this vector will be divided.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is resulting
+  vector (first version), or reference to this resulting vector (second
+  version).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator *(<a name="op_soucinumatici"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  struct S_matrix2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>m</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <h2><strong>S_vector2 &amp;operator *=(<a name="op_mult_m_ass"></a><o:p></o:p></strong></h2>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  struct S_matrix2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>m</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Multiply vector by matrix.<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></b></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>m</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Matrix by which this vector will
+  be multiplied.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Return value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is resulting
+  vector (first version), or reference to this resulting vector (second
+  version).<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 operator -() const;<a
+  name="op_unarninegace"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Unary negation of vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is vector, which contains negated values of this vector.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Zero();<a name="f_Zero"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Set all members of vector to zero value.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float Dot(<a name="f_Dot"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Compute the dot product of two
+  vectors.<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>v</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Second
+  parameter of dot operation.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is the dot-product of the two vectors.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float Magnitude() const;<a name="f_Magnitude"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Compute length of vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is the magnitude of this vector.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Normalize();<a name="f_Normalize"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Normalize vector - convert to
+  unit-length vector of same direction as original. If vector has zero
+  magnitude, the result is zero vector.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float Sum() const;<a name="f_Sum"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Get sum of all data members of
+  vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is the sum of all three members of the vector.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Invert();<a name="f_Inverse"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Invert all members of vector.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool IsNull() const;<a name="f_IsNull"></a><a
+  name="f_DistanceToLine"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Check if length of vector is
+  near-zero value.<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is true if all members of vector are near-zero.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float AngleTo(<a name="f_angleto"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>v<o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Get angle among 2 vectors.<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>v</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Second
+  parameter of the operation.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is angle between the vectors, in range from zero to PI.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float DistanceToLine(<a name="f_disttol"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>p</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>dir</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='margin-left:30.2pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Compute distance of this vector
+  to line.<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>p, dir</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  line, to which distance is computed, represented as a point on line and a
+  direction vector.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+  returned value is distance of this vector to line.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool GetIntersection(</span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+  <strong><span style='mso-tab-count:1'>            </span><a name="f_getxpt"></a>const
+  S_vector2 &amp;</strong></span></b><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>p1</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>dir1</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>p2</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_vector2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>dir2</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>Get intersection point of 2
+  lines, both specified by a starting point and a direction vector.<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>p1, dir1</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>First
+  line.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt;tab-stops:36.0pt'><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>p2, dir2</span></i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Second
+  line.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt;tab-stops:36.0pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>If
+  point is found, the returned value is true.</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+  <strong><span style='font-weight:normal'>If lines are parallel or coincident,
+  the returned value is false.<o:p></o:p></span></strong></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float GetBrightness() const;<a
+  name="f_getbrightness"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <pre style='tab-stops:36.0pt'><strong><span style='mso-bidi-font-size:12.0pt;
+  font-family:Arial;mso-fareast-font-family:"Times New Roman";font-weight:normal'>Get brightness value from RGB. This function is intended for cases when S_vector holds RGB information.<o:p></o:p></span></strong></pre>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Return value:</span></b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal style='tab-stops:36.0pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <pre style='margin-left:22.5pt;tab-stops:36.0pt'><strong><span
+  style='mso-bidi-font-size:12.0pt;font-family:Arial;mso-fareast-font-family:
+  "Times New Roman";font-weight:normal'>Brightness computed from RGB information by following formula:<br>
+  <i>brightness = x * .3f + y * .6f + z * .1f</i><o:p></o:p></span></strong></pre></td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\s_vector\desc.htm">S_vector</a>, <a href="..\S_matrix2\desc.htm">S_matrix2</a><o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=..\Insanity3d.chm
+Contents file=Insanity3d.hhc
+Default Window=Main
+Default topic=main_i3d.htm
+Display compile progress=No
+Full-text search=Yes
+Language=0x409 English (United States)
+Title=Insanity3D help
+
+[WINDOWS]
+Main="Insanity3D","Insanity3d.hhc","","main_i3d.htm",,,,,,0x23520,,0x380e,,0x1030000,,,,,,0
+
+
+[INFOTYPES]
+

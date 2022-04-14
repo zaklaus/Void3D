@@ -1,0 +1,517 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>S_matrix2</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>30</o:Revision>
+  <o:TotalTime>281</o:TotalTime>
+  <o:Created>2002-02-21T19:07:00Z</o:Created>
+  <o:LastSaved>2002-03-04T18:26:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>324</o:Words>
+  <o:Characters>1847</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>15</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2268</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><b><span style='font-size:24.0pt;mso-bidi-font-size:
+12.0pt'>S_matrix2<o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>S_matrix2</span></strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'> is a 2x2 matrix for simple 2D
+transforms. It contains only rotation and scale parts.<o:p></o:p></span></p>
+
+<p style='margin-top:12.0pt'><em><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Methods:<o:p></o:p></span></b></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=accessing></a><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Accessing data:<em><span style='font-style:normal'><o:p></o:p></span></em></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_ref"><b>float
+  &amp;operator()(int </b><b><i>y</i></b><b>, int </b><b><i>x</i></b><b>);</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_ref2"><b>const float
+  &amp;operator()(int </b><b><i>y</i></b><b>, int </b><b><i>x</i></b><b>)
+  const;</b></a></span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_vecref"><b>S_vector2
+  &amp;operator()(int row);</b></a></span></strong><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_vecref2"><b>const
+  S_vector2 &amp;operator()(int r) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=operators></a><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>Operators:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#op_soucin"><b>S_matrix2
+  operator *(const S_matrix &amp;m) const;</b></a></span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Matrix
+functions:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:44.6pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Identity"><b>void
+  Identity();</b></a></span></strong><b><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_Zero"><b>void Zero();</b></a></span></strong><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=531 valign=top style='width:398.2pt;border:solid windowtext .5pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#f_SetDir"><b>void
+  SetDir(float </b><b><i>angle</i></b><b>);</b></a></span></strong><b><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></b></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Descriptions:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;border:none;mso-border-alt:solid windowtext .25pt;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>float &amp;operator()(<a name="op_ref"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>y</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>x</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const float &amp;operator()(<a name="op_ref2"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>y</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>x</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Get reference to y-th row and x-th column of matrix.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>y<o:p></o:p></span></i></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Index of row, valid values are 0
+  to 1.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>x<o:p></o:p></span></i></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Index of column, valid values
+  are 0 to 1.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Returned value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is a reference
+  to member on the desired position.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_vector2 &amp;operator()(<a name="op_vecref"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>row</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const S_vector2 <a name="op_vecref2"></a>&amp;operator()(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>int
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>row</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Get reference to row of <strong>S_matrix2</strong>, which
+  is returned as reference to <b>S_vector2</b>.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>row<o:p></o:p></span></i></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Index of row, valid values are 0
+  to 1.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Returned value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is a
+  reference to row on the desired position, interpreted as S_vector2.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Identity();<a name="f_Identity"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Create identity matrix. This method sets all members of
+  matrix to zero, except of diagonal, which is set to ones.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void Zero();<a name="f_Zero"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Set all data members to value zero.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>void SetDir(<a name="f_SetDir"></a><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>float<span
+  style="mso-spacerun: yes">  </span></span></strong><strong><i><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>angle<o:p></o:p></span></i></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Set unit direction vector. The rotation is left-turning.
+  Angle 0.0 produces vector (0, 1), angle PI/2 produces vector (-1, 0).<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>angle<o:p></o:p></span></i></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Angle of rotation, in radians.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:36.0pt'>
+  <td width=590 valign=top style='width:442.8pt;border:solid windowtext .25pt;
+  border-top:none;mso-border-top-alt:solid windowtext .25pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:36.0pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>S_matrix2 operator *<a name="op_soucin"></a>(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  S_matrix2 &amp;</span></strong><strong><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>m</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Multiply two 2x2 matrices.<o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><i><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>m<o:p></o:p></span></i></p>
+  <p class=MsoNormal style='margin-left:7.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>Matrix, by which this matrix
+  will be multiplied.<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Returned value:</span></b><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>&nbsp;<o:p></o:p></span></p>
+  <p class=MsoNormal style='margin-left:22.5pt'><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is a
+  resulting matrix.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See Also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\s_matrix\desc.htm">S_matrix</a> , <u><span style='color:blue'><a
+href="..\s_vector\desc.htm"><span style='color:windowtext;text-decoration:none;
+text-underline:none'><span style="mso-spacerun: yes"> </span><span
+style='mso-field-code:"HYPERLINK \0022\.\.\\\\s_vector\\\\desc\.htm\0022"'><u><span
+style='color:blue'>S_vector</span></u></span></span></a></span></u> , <a
+href="..\s_plane\desc.htm">S_plane</a> , <a href="..\s_vector2\desc.htm">S_vector2</a><o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

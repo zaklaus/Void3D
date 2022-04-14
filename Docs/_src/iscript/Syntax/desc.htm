@@ -1,0 +1,756 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>IScript language syntax</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>63</o:Revision>
+  <o:TotalTime>142</o:TotalTime>
+  <o:Created>2002-02-05T15:04:00Z</o:Created>
+  <o:LastSaved>2003-05-01T20:15:00Z</o:LastSaved>
+  <o:Pages>3</o:Pages>
+  <o:Words>536</o:Words>
+  <o:Characters>3060</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>25</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>3757</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:678850026;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-2074178516 -1727507892 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l0:level1
+	{mso-level-number-format:alpha-upper;
+	mso-level-text:"%1\)";
+	mso-level-tab-stop:33.0pt;
+	mso-level-number-position:left;
+	margin-left:33.0pt;
+	text-indent:-18.0pt;}
+ol
+	{margin-bottom:0pt;}
+ul
+	{margin-bottom:0pt;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>IScript language
+syntax and usage</span></strong><span style='font-size:11.0pt;mso-bidi-font-size:
+12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>This page deals about syntax of IScript scripting
+language. Entire language originates at C, so only changes against C will be
+discussed.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>Changes against ANSI-C</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>New types</span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Following new types were added to the language:<o:p></o:p></span></strong></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid white .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Type<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border:solid white .5pt;
+  border-left:none;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>C equivalent<o:p></o:p></span></i></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border:solid white .5pt;
+  border-left:none;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial'>Size of<o:p></o:p></span></i></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><span style="mso-spacerun:
+  yes"> </span>byte<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>unsigned char<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>1<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>word<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>unsigned short<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>2<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>dword<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>unsigned long<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>4<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>string<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>const char *<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>n/a<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>bool<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>boolean type<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>1<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>true<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>(const char)1<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>1<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=83 valign=top style='width:62.55pt;border:solid white .5pt;
+  border-top:none;mso-border-top-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>false<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>(const char)0<o:p></o:p></span></strong></p>
+  </td>
+  <td width=156 valign=top style='width:117.0pt;border-top:none;border-left:
+  none;border-bottom:solid white .5pt;border-right:solid white .5pt;mso-border-top-alt:
+  solid white .5pt;mso-border-left-alt:solid white .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'>1<o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Enhanced function parameters</span></strong><strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Functions are defined the same way as in C – list of
+parameters is in () braces. What changed is that:<br>
+1. default parameters may be supplied on function declaration<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>2. default parameters may be specified for any
+parameters, not only continuous last parameters (as in C++)<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>3. when calling function, two modes are possible:<o:p></o:p></span></strong></p>
+
+<p style='margin-left:33.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo1;
+tab-stops:list 33.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>A)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></strong><![endif]><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>classic way – specifying parameters in order as they appear in
+declaration<o:p></o:p></span></strong></p>
+
+<p style='margin-left:33.0pt;text-indent:-18.0pt;mso-list:l0 level1 lfo1;
+tab-stops:list 33.0pt'><![if !supportLists]><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>B)<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></strong><![endif]><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>pass parameters by specifying parameter name, followed by ‘:’ and value,
+for example:<o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Function declared as:<br>
+void MyFunc(int speed = 20, float length, byte code = 9);<o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Function call with parameter
+naming:<br>
+MyFunc(length: 14.2, code: 7);<o:p></o:p></span></strong></p>
+
+<p style='margin-left:22.5pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Note that order of parameters
+doesn’t matter in this mode, but all parameters which don’t have default values
+specified must be listed.<br>
+There’s no run-time penalty for choosing first or second parameter passing
+mode.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Tables<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Tables are an enhancement in script language,
+allowing to specify table template used with </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>ITabler</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface. There may be always maximally one table specified in each
+script. The syntax of table template is as follows:<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>table </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>”quoted_table_name”</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>{<br>
+<span style='mso-tab-count:1'>            </span></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>table_element</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; [ </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>table_element</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; ]<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>}<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>table_element</span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> is one of
+following:<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>1. &lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>variable_type</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; <span style="mso-spacerun: yes"> </span>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>variable_name</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; <span style="mso-spacerun: yes"> </span>[ </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>[ </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>array_size</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'> ]</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> ]<span
+style="mso-spacerun: yes">  </span>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>”quoted_variable_name”</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; [ </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>(</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> &lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>default_value</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; <span style="mso-spacerun: yes"> </span>[ </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,
+&lt;min_range&gt;, &lt;max_range&gt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><span style="mso-spacerun: yes">  </span>]<span style="mso-spacerun:
+yes">  </span><span style="mso-spacerun: yes"> </span></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>)</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> ] </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>;<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;font-weight:normal'>2. </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>string </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>variable_name</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; <span style="mso-spacerun: yes"> </span>[ </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>[ </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>array_size</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'> ]</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> ]<span
+style="mso-spacerun: yes">  </span>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>”quoted_variable_name”</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>( </span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>max_string_size</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'> );<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Additionally, several elements may be enclosed in
+logical branch, for easier editing in table editor, using following construct:<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>branch </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>&lt;</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>”quoted_name”</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>{<br>
+<span style='mso-tab-count:1'>            </span></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>table_element</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; [ </span></strong><strong><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>, </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&lt;</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>table_element</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>&gt; ]</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><br>
+}<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;font-weight:normal'>The </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>branch </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>block may be used anywhere inside of </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>table </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>construct, and may be nested as desired.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The items in [] braces are optional.<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>quoted_table_name</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> … user-friendly name of table shown in table editor<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>variable_type </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>… type (char, int, etc)<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>array_size</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> … size
+of array<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>variable_name</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> … unique
+name of variable accessed from within script code<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>quoted_variable_name</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'><span style="mso-spacerun: yes">  </span>… user-friendly name of
+variable shown in table editor<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>default_value</span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'> …
+number specifying default value assigned to table element<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>min_range, max_range</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> … editable range, used in table editor<br>
+</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>max_string_size</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> … integer specifying maximal size a string may have, including
+terminating null character<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The </span></strong><strong><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>table </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>construct is used for creation of table template in </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>C_script</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface. Additionally, if script contains table template, a virtual
+machine (</span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>C_v_machine</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>) loading the script creates a table using the template, and
+initializes it into default values.<br>
+Application may access members of the table externally using virtual machine’s
+table. Script code may access all script variables as read-only variables.
+Writing into table using script code is not allowed.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>No pointers<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The language doesn’t support pointers.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Natural string type<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>To support strings, the language introduces </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>string </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>keyword. Strings may be declared either as table elements, global variables,
+or string literals (passed into functions as parameters). Strings are always
+read-only, and are only usable as parameters into function calls.<br>
+For function externally linked to script code, the string variable appears as pointer
+to null-terminated char array.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Limited arrays<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Arrays are not supported on variables, except of
+table elements. If script code attempts to read out-of-array variable from
+table, the running of script code is stopped, and error code is returned to
+calling application.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>No cast operator<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Casting operator is unsupported.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Number syntax<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Octal numbers are not supported.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Typedef changes<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>typedef keyword is more strict than in C. Assignment
+into type declared using typedef is allowed only from exactly the same type.
+Anyway, assignment from typedef’d type into other compatible type is allowed.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-family:Arial'>Removed keywords<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Following keywords are removed from the language:<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>static, auto, register, sizeof, volatile, signed,
+unsigned, double, union, goto<o:p></o:p></span></strong></p>
+
+
+<div align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:14.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial'>Linking script program with external functions<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>For linking script code with external functions,
+which are called from within the script, before using such function, it must be
+declared (unlike in C, where parameters are deduced if declaration was not
+seen). Declare function the same way like in C, using function return type,
+name and parameter list, terminated by semicolon.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The difference against C is that once a function has
+been declared without body, it is assumed to be extern, so body cannot be
+provided later in script. When function declared as external is used in script,
+the </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>C_v_machine</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'> interface tries to link with it during loading the script, so its
+address and name must be provided in array if link symbols. Once script is
+loaded in virtual machine, the call of external function is performed normally.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>Note that there’s no mechanism for assuring that
+actual number and types of parameters passed to external function match the
+declaration (like name mangling in C++), so it’s programmer’s responsibility to
+assure that function declaration seen by script code matches actual function defined
+in application.<o:p></o:p></span></strong></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>The script library uses </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>stdcall </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>calling convention when calling external function, so external function
+must be defined with __stdcall keyword in order to match the order of
+parameters and way how stack is cleaned after function call.<o:p></o:p></span></strong></p>
+
+
+<div>
+
+<hr size=2 width="48%" align=left>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><span style="mso-spacerun: yes"> </span></span></strong><span
+style='display:none;mso-hide:all'><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

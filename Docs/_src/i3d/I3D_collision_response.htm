@@ -1,0 +1,218 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./I3D_collision_response_files/filelist.xml">
+<link rel=Edit-Time-Data href="./I3D_collision_response_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>I3D_collision_response</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>13</o:Revision>
+  <o:TotalTime>51</o:TotalTime>
+  <o:Created>2002-04-12T11:19:00Z</o:Created>
+  <o:LastSaved>2003-05-07T13:19:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>144</o:Words>
+  <o:Characters>821</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>6</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>1008</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-style-next:Normal;
+	margin-top:0pt;
+	margin-right:36.0pt;
+	margin-bottom:0pt;
+	margin-left:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0pt;
+	margin-right:0pt;
+	margin-bottom:0pt;
+	margin-left:22.5pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>I3D_collision_response</span></strong><strong><span
+style='mso-bidi-font-size:13.5pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-right:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>This function is called from <b style='mso-bidi-font-weight:
+normal'>TestCollision</b> function when collision with face or texel was
+detected. <o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:12.6pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:12.6pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool I3DAPI I3D_collision_response(</span></strong><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+  <strong><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>I3D_cresp_data
+  &amp;</strong></span></b><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>rd</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal style='margin-right:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>&nbsp;<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-right:36.0pt'><em><b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'>Parameters:<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:22.5pt'><strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:normal'>rd<o:p></o:p></span></i></strong></p>
+
+<p style='margin-left:37.5pt'><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-weight:normal'>Reference to structure </span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>I3D_cresp_data</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>, which contain collision information and provide some methods for
+modify them.</span></strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Return value:<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:22.5pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>If user returns <i style='mso-bidi-font-style:normal'>true</i>,
+current collision is accepted with modified values and test ends.<br>
+If user returns <i style='mso-bidi-font-style:normal'>false</i>, current collision
+is ignored and test continues with next one. <o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Remarks:<o:p></o:p></span></b></em></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>If
+<b style='mso-bidi-font-weight:normal'>I3DCOL_SOLVE_SLIDE</b> was specified in
+collision test and user return <i style='mso-bidi-font-style:normal'>true</i>,
+default slide collision response is called after this one, and set <i
+style='mso-bidi-font-style:normal'>destination </i>appropriate to slide along
+collision normal. New <i style='mso-bidi-font-style:normal'>dir</i> is
+generated and tested again until entire length of segment pass successfully
+without collision or rest of segment is blocked.<o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>See Also:<o:p></o:p></span></b></em></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal;mso-bidi-font-style:italic'><a
+href="i3d_scene\desc.htm#TestCollision"><b style='mso-bidi-font-weight:normal'>I3D_scene::TestCollision</b></a>,
+<a href="structs\I3D_cresp_data.htm"><b style='mso-bidi-font-weight:normal'>I3D_cresp_data</b></a></span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso-bidi-font-weight:
+normal;mso-bidi-font-style:italic'><o:p></o:p></span></strong></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&nbsp;</span><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:13.5pt;font-family:Arial'><o:p></o:p></span></strong></p>
+
+</div>
+
+</body>
+
+</html>

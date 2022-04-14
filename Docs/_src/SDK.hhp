@@ -1,0 +1,21 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=..\I3D_SDK.chm
+Contents file=SDK.hhc
+Default Window=Main
+Default topic=main_sdk.htm
+Display compile progress=No
+Full-text search=Yes
+Index file=SDK.hhk
+Language=0x409 English (United States)
+Title=Insanity3D SDK help
+
+[WINDOWS]
+Main="Insanity3D","SDK.hhc","SDK.hhk","main_sdk.htm",,,,,,0x23520,,0x380e,,0x1030000,,,,,,0
+
+
+[MERGE FILES]
+
+
+[INFOTYPES]
+

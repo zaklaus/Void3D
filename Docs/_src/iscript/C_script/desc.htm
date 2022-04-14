@@ -1,0 +1,886 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>C_script</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>79</o:Revision>
+  <o:TotalTime>85</o:TotalTime>
+  <o:Created>2002-02-05T15:04:00Z</o:Created>
+  <o:LastSaved>2003-05-01T18:37:00Z</o:LastSaved>
+  <o:Pages>5</o:Pages>
+  <o:Words>801</o:Words>
+  <o:Characters>4568</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>38</o:Lines>
+  <o:Paragraphs>9</o:Paragraphs>
+  <o:CharactersWithSpaces>5609</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h3
+	{mso-style-next:Normal;
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:10.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:Arial;
+	font-weight:normal;}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>C_script</span></strong><span
+style='font-size:11.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'>This interface is used for compilation of script in
+text form, and keeping it in memory. The script may be loaded into virtual
+machine </span></strong><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>C_v_machine</span></strong><strong><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>.</span></strong><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Methods:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border:solid silver .5pt;
+  border-left:none;mso-border-left-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'><a href="#Compile">Compile</a><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'><a href="#Free">Free</a><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetStatus"><b>GetStatus</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#SetName"><b>SetName</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetName"><b>GetName</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetAddress"><b>GetAddress</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#GetTableTemplate"><b>GetTableTemplate</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=155 valign=top style='width:116.6pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><![if !supportEmptyParas]>&nbsp;<![endif]><em><b><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+  <td width=435 valign=top style='width:326.2pt;border-top:none;border-left:
+  none;border-bottom:solid silver .5pt;border-right:solid silver .5pt;
+  mso-border-top-alt:solid silver .5pt;mso-border-left-alt:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="#Dump"><b>Dump</b></a><o:p></o:p></span></strong></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Following
+pointer types are declared for use with this interface:<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>typedef
+C_script <b>*PC_script;</b><br>
+typedef <b>const </b>C_script <b>*CPC_script;</b><o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See
+also:<o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="..\C_v_machine\desc.htm">C_v_machine</a></span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>, <b><a
+href="..\Creation\CreateScript.htm">CreateScript</a></b><o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=Compile></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>Compile</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Compile
+script from source text file.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <h3><strong>ISL_RESULT Compile(<o:p></o:p></strong></h3>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>fname</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>dword
+  </span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>flags </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= 0,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'> cmd_line<strong><span style='font-weight:normal'> </span></strong></span></i><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= NULL,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>T_report_err
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>cb_err </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= NULL,<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>cb_context </span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>= NULL<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>fname<o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>File name of script, which is to
+be compiled.<o:p></o:p></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>flags<o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Compilation flags. Following flags
+are defined:<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>ISLCOMP_VERBOSE<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Dump debug information during
+compilation.<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>ISLCOMP_PRECOMPILE<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Save precompiled file, or use if
+available and dates match (see Remarks for details).<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>ISLCOMP_FORCE_PRECOMPILED<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Force use of precompiled files
+(see Remarks for details).<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>ISLCOMP_PRECOMPILE_HIDDEN<o:p></o:p></span></p>
+
+<p style='margin-left:37.5pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Set hidden file flag on generated
+.pcp precompiled files.<o:p></o:p></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>cmd_line<o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>String specifying command-line
+switches. Following switches are defined:<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>/i</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&lt;path&gt;<span
+style="mso-spacerun: yes">   </span>add path into include-files search paths<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>/I</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>&lt;filename&gt;<span
+style="mso-spacerun: yes">   </span>force processing of include file (the
+include files on command-line are parsed before the script is compiled, and in
+the order in which they appear in the line)<o:p></o:p></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>cb_err</span></i></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to callback function,
+which will receive error and warning messages encountered during compilation.
+The function is defined as:<o:p></o:p></span></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>void ISLAPI ErrReport(<br>
+<span style='mso-tab-count:1'>  </span>const char *</span></b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>msg</span></i><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<br>
+<span style='mso-tab-count:1'>  </span>void *</span></b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>context</span></i><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<br>
+<span style='mso-tab-count:1'>  </span>int </span></b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>line</span></i><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<br>
+<span style='mso-tab-count:1'>  </span>int </span></b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>col</span></i><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>,<br>
+<span style='mso-tab-count:1'>  </span>bool </span></b><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>warn</span></i><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+);<o:p></o:p></span></b></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Parameters:<br>
+</span></b><i><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial'>msg </span></i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>… error message<br>
+<i>context </i>… context value passed into Compile method<br>
+<i>line, col</i> … line and column indices specifying position, where the error
+occurred<br>
+<i>warn </i>… true if the message is warning, false if error<b><o:p></o:p></b></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>cb_context</span></i></strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>User-defined context value, which
+is passed into the error-reporting callback function.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is <b>I3D_OK</b>
+if the call was successful, or other error return code marking an error.<br>
+Additionally, the returned value may be ISL_UPTODATE if script was loaded from
+precompiled .pcp file.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Remarks:</span></b><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Precompiled scripts are used, when user specifies
+ISLCOMP_PRECOMPILE or ISLCOMP_FORCE_PRECOMPILED flags. The files containing
+precompiled scripts are stored on disk with original name, but with .pcp
+extension instead of file extension passed to the Compile method. They may be
+created first time when script is compiled, and loaded from dist next times
+when the same script is compiled. This saves compilation times, and also allows
+delivery of compiled scripts to target audience.<br>
+The Compile method automatically checks the date-time of script file and all
+include files it references. If any of them is newer than date-time stored in
+the .pcp file, the script is compiled from text source, and .pcp file is
+recreated.<br>
+When ISLCOMP_FORCE_PRECOMPILED flag is specified, only precompiled version
+(with .pcp extension) is loaded. This is suitable for shipping version of
+application, where only precompiled script versions may be shipped.<strong><span
+style='font-weight:normal'><o:p></o:p></span></strong></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=Free></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>Free</span></strong><strong><span style='font-size:
+24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Release
+current program.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <h3><strong>void Free();</strong><span style='color:black'><o:p></o:p></span></h3>
+  </td>
+ </tr>
+</table>
+
+
+<h4 align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</h4>
+
+
+<p><a name=GetStatus></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetStatus</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Get
+current status of the interface<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <h3><strong>ISL_RESULT GetStatus () const;</strong><span style='color:black'><o:p></o:p></span></h3>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The compilation status of the
+script. The returned value is ISL_OK if interface contains compiled script
+program, or ISLERR_NOPRG otherwise.<o:p></o:p></span></p>
+
+
+<h4 align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</h4>
+
+
+<p><a name=SetName></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>SetName</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Set
+name of the script. The meaning and use of the name is fully user-defined, and
+is intended mainly for identification purposes.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <h3><strong>void SetName (<o:p></o:p></strong></h3>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>name</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>);</span></strong><span style='font-size:10.0pt;
+  mso-bidi-font-size:12.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>name<o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Name of the script.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><a href="#GetName">GetName</a><o:p></o:p></span></b></p>
+
+
+<h4 align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</h4>
+
+
+<p><a name=GetName></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetName</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Get
+name of this script.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <h3><strong>const char *GetName() const;</strong><span style='color:black'><o:p></o:p></span></h3>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Current name of script, set by <b>SetName</b>
+method.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><a href="#SetName">SetName</a><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=GetAddress></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>GetAddress</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+address of script’s symbol in global scope. The symbol may be either variable
+name, or function name.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const void *GetAddress(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>const
+  char *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>sym_name</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>sym_name</span></i></strong><i><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Name of symbol, whose value is
+queried.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is const
+pointer to memory, where function/variable begins. If the symbol was not found,
+the returned value is NULL.<br>
+Note that it is not allowed to write into provided pointer.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=GetTableTemplate></a><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>C_script::</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'>GetTableTemplate</span></strong><strong><span
+style='font-size:24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Return
+pointer to compiled table template.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>const C_table_template *GetTableTemplate() const;</span></strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is const
+pointer to template representing the table stored inside the compiled script.
+If script has no table, the returned value is NULL.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><a name=Dump></a><strong><span style='font-size:24.0pt;mso-bidi-font-size:
+13.5pt'>C_script::</span></strong><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:12.0pt'>Dump</span></strong><strong><span style='font-size:
+24.0pt;mso-bidi-font-size:13.5pt'><o:p></o:p></span></strong></p>
+
+
+<div class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>
+
+<hr size=2 width="41%" align=left>
+
+</span></div>
+
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Dump
+listing of assembled code (in pseudo-instructions). The dumping is done by
+calling provided callback function with each dumped text line.<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='background:
+ #DDDDDD;border-collapse:collapse;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:11.25pt'>
+  <td width=590 valign=top style='width:442.8pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:11.25pt'>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>bool Dump(<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void(</span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-weight:normal'>ISLAPI *<i>func</i></span></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>)(const
+  char*, void *context),<o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'><span style='mso-tab-count:1'>            </span>void
+  *</span></strong><strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-weight:normal'>context</span></i></strong><strong><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></strong></p>
+  <p class=MsoNormal><strong><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial'>) const;</span></strong><span style='font-size:
+  10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:black'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Parameters:<o:p></o:p></span></b></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>func</span></i></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Pointer to callback function,
+which will be called with each line of dumped code.<o:p></o:p></span></p>
+
+<p style='margin-left:10.0pt;tab-stops:36.0pt'><strong><i><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-weight:
+normal'>context</span></i></strong><i><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><o:p></o:p></span></i></p>
+
+<p style='margin-left:30.0pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>Context value passed to the
+callback function.<o:p></o:p></span></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Return value:<o:p></o:p></span></b></p>
+
+<p style='margin-left:21.6pt;tab-stops:36.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>The returned value is true if code
+was dumped correctly, or false if some error occurred (e.g. invalid opcode, or
+other problem in compiled script).<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:36.0pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p style='tab-stops:36.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+</div>
+
+</body>
+
+</html>

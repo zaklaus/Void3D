@@ -1,0 +1,187 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./desc_files/filelist.xml">
+<link rel=Edit-Time-Data href="./desc_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Data File Access</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Michal</o:LastAuthor>
+  <o:Revision>83</o:Revision>
+  <o:TotalTime>205</o:TotalTime>
+  <o:Created>2002-02-18T17:17:00Z</o:Created>
+  <o:LastSaved>2003-05-05T08:38:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>173</o:Words>
+  <o:Characters>987</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>8</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>1212</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>Data File Access</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt;margin-right:0pt;margin-bottom:12.0pt;margin-left:
+0pt'><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>All
+access to data files in Insanity3D system is made through simple set of functions,
+which perform open, close, read, write and position functions on files. The
+system-specific access to files is hidden by implementation, so files may be
+stored on remote path (CD-ROM), cartridge, compressed in one huge data-file, or
+stored on hard-disk in a directory structure.<o:p></o:p></span></p>
+
+<p style='margin-top:12.0pt;margin-right:0pt;margin-bottom:12.0pt;margin-left:
+0pt'><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+stream is accessible through <b>C_dta_stream</b> interface.<br>
+There’re two possibilities to link with the library – either using dynamic-link
+library (DLL), which provides access to same DTA files for all modules, or to
+use static-link library, which links directly to current module, and removes
+the need to link with DLL. The second option is suitable for stand-alone
+modules consisting of single executable file. User chooses the static-link
+version by defining DTA_READ_STATIC symbol before including the <i>dta_read.h</i>
+header file.<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Library:
+<b>Dta_read.dll</b>, <b>dta_read_static.lib<br>
+</b>Header file: <b>dta_read.h</b><o:p></o:p></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Functions:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:41.15pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:3.5pt'>
+  <td width=451 valign=top style='width:282.45pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:3.5pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="dtaCreate.htm"><b>dtaCreate</b></a></span></strong><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+ <tr style='height:7.15pt'>
+  <td width=451 valign=top style='width:282.45pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt;
+  height:7.15pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="DtaCreateStream.htm"><b>DtaCreateStream</b></a></span></strong><em><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></em></p>
+  </td>
+ </tr>
+</table>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Interface.<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='margin-left:41.15pt;
+ border-collapse:collapse;border:none;mso-border-alt:solid silver .5pt;
+ mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr style='height:7.15pt'>
+  <td width=451 valign=top style='width:282.45pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt;height:7.15pt'>
+  <p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:Arial;font-weight:normal'><a href="C_dta_stream.htm"><b>C_dta_stream</b></a></span></strong><em><b><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;
+  font-style:normal'><o:p></o:p></span></b></em></p>
+  </td>
+ </tr>
+</table>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>See also:<o:p></o:p></span></b></em></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><a
+href="C_dta_read.htm">C_dta_read</a> <o:p></o:p></span></b></p>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+</div>
+
+</body>
+
+</html>

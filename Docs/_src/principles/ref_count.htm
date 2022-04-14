@@ -1,0 +1,246 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./ref_count_files/filelist.xml">
+<link rel=Edit-Time-Data href="./ref_count_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Reference counting</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Mike</o:Author>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>11</o:Revision>
+  <o:TotalTime>60</o:TotalTime>
+  <o:Created>2002-03-05T10:49:00Z</o:Created>
+  <o:LastSaved>2002-04-18T15:01:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>230</o:Words>
+  <o:Characters>1314</o:Characters>
+  <o:Company>Lonely Cat Games</o:Company>
+  <o:Lines>10</o:Lines>
+  <o:Paragraphs>2</o:Paragraphs>
+  <o:CharactersWithSpaces>1613</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h4
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:4;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 65.95pt 72.0pt 65.95pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p><strong><span style='font-size:24.0pt;mso-bidi-font-size:13.5pt'>Reference
+counting</span></strong><span style='font-size:11.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Most interfaces in Instanity3D library use reference
+counting method for keeping life-time of the interface. When an interface is
+created, its reference counter is set to one.</span></em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><br>
+<em><span style='font-style:normal'>Each time application calls <b>AddRef</b> method
+of reference-counted interface, the counter is increased by one.</span></em><br>
+<em><span style='font-style:normal'>When application call <b>Release</b> on
+interface, the counter is decreased by one. When counter reached zero in call
+to <b>Release</b>, the interface is destroyed.<o:p></o:p></span></em></span></p>
+
+<p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Note that if your program calls <b>Release</b> on
+interface, which it hasn’t created, or on which it hasn’t called <b>AddRef</b>,
+the interface may be unexpectedly destroyed while some other parts of code are
+still using it.</span></em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><br>
+<em><span style='font-style:normal'>Similarly, if program calls <b>AddRef</b>
+without matching <b>Release</b> during its run-time, the interface may never be
+destroyed, resulting in memory leaks.<o:p></o:p></span></em></span></p>
+
+<p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-style:normal'>Common methods of reference-counted interfaces:<o:p></o:p></span></b></em></p>
+
+<table border=1 cellspacing=0 cellpadding=0 bgcolor="#dddddd" style='margin-left:
+ 30.2pt;background:#DDDDDD;border-collapse:collapse;border:none;mso-border-alt:
+ solid silver .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=435 valign=top style='width:326.2pt;border:solid silver .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned long AddRef();<o:p></o:p></span></b></em></p>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>This method increases reference counter of interface
+  by one.<o:p></o:p></span></em></p>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Return value:<o:p></o:p></span></b></em></p>
+  <p style='margin-left:22.5pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-style:normal'>The returned value is new
+  reference counter.<o:p></o:p></span></em></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=435 valign=top style='width:326.2pt;border:solid silver .5pt;
+  border-top:none;mso-border-top-alt:solid silver .5pt;padding:0pt 5.4pt 0pt 5.4pt'>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>unsigned long Release();<o:p></o:p></span></b></em></p>
+  <p><em><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>This method decreases reference counter of interface
+  by one. When the counter reaches zero during this call, the interface is
+  destroyed.<o:p></o:p></span></em></p>
+  <p><em><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+  Arial;font-style:normal'>Return value:<o:p></o:p></span></b></em></p>
+  <p style='margin-left:22.5pt'><em><span style='font-size:10.0pt;mso-bidi-font-size:
+  12.0pt;font-family:Arial;font-style:normal'>The returned value is new
+  reference counter.<b><o:p></o:p></b></span></em></p>
+  </td>
+ </tr>
+</table>
+
+
+<div class=MsoNormal align=center style='text-align:center'>
+
+<hr size=2 width="82%" align=center>
+
+</div>
+
+
+<p><a name="C_unknown"></a><b><span style='font-size:24.0pt;mso-bidi-font-size:
+12.0pt'>C_unknown</span></b></p>
+
+
+<div class=MsoNormal>
+
+<hr size=2 width="15%" align=left>
+
+</div>
+
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>C_unknown</span></b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> is a base
+class with implemented <b>AddRef</b> and <b>Release</b> methods, and a
+protected virtual destructor. This class may be used by application classes to
+implement reference-counting classes.<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Header
+file: C_unknwn.hpp<o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></b></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Remarks:<o:p></o:p></span></b></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>The
+reference counting is also designed for use by <b>smart pointers</b>.<o:p></o:p></span></p>
+
+<p><b><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>See
+Also<o:p></o:p></span></b></p>
+
+<p><strong><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+Arial;font-weight:normal'><a href="smart_ptr.htm"><b>Smart pointer</b></a></span></strong><b><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-family:Arial;display:none;mso-hide:all'>&nbsp;<o:p></o:p></span></p>
+
+<h4 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-fareast-font-family:"MS Mincho"'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></h4>
+
+</div>
+
+</body>
+
+</html>

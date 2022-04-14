@@ -1,0 +1,245 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./I3D_texel_collision_files/filelist.xml">
+<link rel=Edit-Time-Data href="./I3D_texel_collision_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>I3D_texel_collision</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>lcg</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Mike</o:LastAuthor>
+  <o:Revision>28</o:Revision>
+  <o:TotalTime>625</o:TotalTime>
+  <o:Created>2002-04-11T11:15:00Z</o:Created>
+  <o:LastSaved>2003-05-07T13:23:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>178</o:Words>
+  <o:Characters>1016</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>8</o:Lines>
+  <o:Paragraphs>2</o:Paragraphs>
+  <o:CharactersWithSpaces>1247</o:CharactersWithSpaces>
+  <o:Version>9.3821</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>90</w:Zoom>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Lucida Console";
+	panose-1:2 11 6 9 4 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:modern;
+	mso-font-pitch:fixed;
+	mso-font-signature:-2147482993 6144 0 0 31 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0pt;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+pre
+	{margin:0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta name="Microsoft Border" content="b, default">
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p style='margin-bottom:12.0pt'><strong><span style='font-size:24.0pt;
+mso-bidi-font-size:13.5pt'>I3D_texel_collision</span></strong><b><span
+style='font-size:24.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></b></p>
+
+
+<div class=MsoNormal align=center style='margin-bottom:12.0pt;text-align:center'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+
+<p style='margin-top:12.0pt'><b><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>I3D_texel_collision</span></b><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'> structure is used for
+providing information about currently tested texel in collision testing
+callback.<br>
+<span style="mso-spacerun: yes">&nbsp;</span>The structure is declared as
+follows:<o:p></o:p></span></p>
+
+<p><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Lucida Console"'>class
+I3D_texel_collision{<br>
+public:<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>I3D_text_coor </b>tex;<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>bool </b>loc_pos;<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>const <b>S_vector </b>*v[3];<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>word </b>face_index;<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><b>S_vector </b>point_on_plane;<br>
+<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>const <b>I3D_material *</b>mat;<br>
+};<o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'>Members:<o:p></o:p></span></b></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>tex<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>UV coordinates computed at the collision point from default uv
+channel..<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>loc_pos<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Value specifying if </span></em><em><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial'>v</span></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'> and </span></em><em><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>point_on_line</span></em><em><span style='font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:normal'> values
+are in world coordinates (false) or local visual&#8217;s coordinates (true).<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>v<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Pointer to three points of collided face.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>face_index<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Index of collided faces.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>point_on_plane<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Point lying on collided face.<o:p></o:p></span></em></p>
+
+<p style='margin-left:10.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>mat<o:p></o:p></span></em></p>
+
+<p style='margin-left:30.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'>Material set on collided face.<o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>Methods:<o:p></o:p></span></b></p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ border:none;mso-border-alt:solid windowtext .5pt;mso-padding-alt:0pt 5.4pt 0pt 5.4pt'>
+ <tr>
+  <td width=119 valign=top style='width:89.55pt;border:solid windowtext .5pt;
+  padding:0pt 5.4pt 0pt 5.4pt'>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><o:p></o:p></span></p>
+  </td>
+  <td width=648 valign=top style='width:486.0pt;border:solid windowtext .5pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;padding:0pt 5.4pt 0pt 5.4pt'><pre><b><span
+  style='font-family:Arial'>bool ComputeUVFromPoint(const I3D_text_coor &amp;uv0, const I3D_text_coor &amp;uv1, const I3D_text_coor &amp;uv2);<o:p></o:p></span></b></pre><pre><span
+  style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre><pre><span
+  style='font-family:Arial'>Compute uv coordinates on triangle, using provided uv coordinates on triangle's vertices.<o:p></o:p></span></pre><pre><span
+  style='font-family:Arial'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></pre><pre><b><span
+  style='font-family:Arial'>Parameters:<o:p></o:p></span></b></pre><pre
+  style='margin-left:7.5pt'><span style='font-family:Arial'>uv0, uv1, uv2<o:p></o:p></span></pre><pre
+  style='margin-left:22.5pt'><span style='font-family:Arial'>uv coordinates on corners of triangle<o:p></o:p></span></pre><pre><b><span
+  style='font-family:Arial'>Return value:<o:p></o:p></span></b></pre><pre
+  style='margin-left:22.5pt'><span style='font-family:Arial'>true if computation succeeded<o:p></o:p></span></pre>
+  <p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'>Function
+  works with inputs set in 'v[3]', 'point_on_plane', and stores result into
+  variable 'tex'.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'>See also:<o:p></o:p></span></b></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><em><b
+style='mso-bidi-font-weight:normal'><span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;font-style:normal'><a
+href="..\i3d_scene\desc.htm#TestCollision">I3D_scene::TestCollision</a></span></b></em><em><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;font-style:
+normal'><o:p></o:p></span></em></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+style='mso-bidi-font-weight:normal'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></b></p>
+
+</div>
+
+</body>
+
+</html>
