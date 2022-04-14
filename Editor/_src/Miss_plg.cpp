@@ -2164,6 +2164,7 @@ public:
             mission->GameEnd();
             SetupCameraRange();
          }
+         EditLock(false); 
          ed->SetActive(true);
          ed->Message("Edit mode");
          SetTickClass(mission);
