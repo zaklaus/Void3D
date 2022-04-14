@@ -400,3 +400,15 @@ FodyWeavers.xsd
 Source/ISnd2/Thunk/_Release/ISound_Thunk.idb
 Source/ISnd2/_Debug/vc143.idb
 lib/ISound2_thunk_d.lib
+
+Editor/_src/_Debug/
+
+Tools/Plugins.max/
+
+Source/IGraph2/_Debug/
+
+Source/IGraph2/PNG/_Debug/
+
+Source/ISnd2/_Debug/
+
+Source/ISnd2/Thunk/_Release/

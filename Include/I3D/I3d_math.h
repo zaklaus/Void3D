@@ -504,7 +504,6 @@ struct S_projection_matrix{
    bool orthogonal;
 };
 
-const S_matrix &I3DGetIdentityMatrix();
                               //matrix 4x4
 struct S_matrix{
    float m[4][4];
@@ -589,6 +588,8 @@ struct S_matrix{
 // Same as Make4X4, but transpose matrix after transformations.
    S_matrix &Make4X4Transposed(const S_matrix&, const S_matrix&);
 };
+
+const S_matrix& I3DGetIdentityMatrix();
 
 typedef S_matrix *PS_matrix;
 typedef const S_matrix *CPS_matrix;

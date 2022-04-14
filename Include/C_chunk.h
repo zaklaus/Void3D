@@ -419,7 +419,8 @@ public:
    C_str ReadString(){
 
       char buf[256];
-      for(int i=0; i<256; ){
+      int i;
+      for(i=0; i<256; ){
          buf[i] = cache.ReadByte();
          if(!buf[i++])
             break;
