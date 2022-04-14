@@ -1027,8 +1027,8 @@ private:
          ec_hwnd = NULL;
          ec_edit->SetCallback(NULL, 0);
          char *name = (char*)ec_edit->GetUserData();
-         assert(name);
-         delete[] name;
+         //assert(name);
+         if (name) delete[] name;
          ec_edit->SetUserData(0);
 
          ec_edit->Close(true);
@@ -1930,11 +1930,11 @@ public:
 
       if(ec_edit){
          ec_edit->Close(true);
-         assert(!ec_edit);
+         //assert(!ec_edit);
       }
       if(ec_errors){
          ec_errors->Close(true);
-         assert(!ec_errors);
+         //assert(!ec_errors);
       }
       CloseWindow();
       e_props = NULL;

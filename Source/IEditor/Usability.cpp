@@ -151,6 +151,7 @@ class C_edit_Usability_imp: public C_edit_Usability{
       if(plugin)
          ui.plugin_name = plugin->GetName();
       dword num = ++day->one_day_stats[ui];
+#if 0
       if(type==US_MENUHIT && num==3 && key!=K_NOKEY){
          char key_name[32];
          ed->GetIGraph()->GetKeyName(key, key_name, sizeof(key_name));
@@ -167,7 +168,7 @@ class C_edit_Usability_imp: public C_edit_Usability{
             "Editor information",
             MB_OK);
       }
-
+#endif
                         //try to send older day's info each hour
       if(all_days.size() > 1){
          if(last_try_send_hour != st.wHour){

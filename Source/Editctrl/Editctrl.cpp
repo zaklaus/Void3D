@@ -1236,7 +1236,7 @@ ECTRL_RESULT C_edit_control::Init(const char *macro_file, const char *cfg_file1)
 
       C_cache ck;
       if(!ck.open(cfg_file, CACHE_READ))
-         return ECTRLERR_CONFIGOPENFAIL;
+         return ECTRL_OK;
                               //config
       ck.read((char*)&config, sizeof(config));
                               //font log
