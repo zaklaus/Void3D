@@ -1659,6 +1659,11 @@ BEGIN
     0
 END
 
+OPEN_MODEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
