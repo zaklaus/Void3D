@@ -10,8 +10,8 @@
 #include <I3D\i3d_math.h>
 
 
-#define USE_ASM               //use inline assembly
-//#define USE_D3DX
+//#define USE_ASM               //use inline assembly
+#define USE_D3DX
 
 #ifdef USE_D3DX
 #include <D3dx9math.h>

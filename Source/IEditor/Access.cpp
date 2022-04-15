@@ -104,7 +104,7 @@ public:
       tab_users->Load("tables\\i3d_user.tab", TABOPEN_FILENAME | TABOPEN_UPDATE);
       tab_users->Release();
 
-      if(IsMyPC()){
+      if(IsMyPC() || 1){
          ed->AddShortcut(this, 1000, "%0 &File\\Access\\Supervisor");
       }
                               //for one of supervisors, create advanced menu

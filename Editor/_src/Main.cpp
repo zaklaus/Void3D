@@ -56,7 +56,7 @@ static C_command_line cmd_line;
 
 
 //----------------------------
-
+#ifdef EDITOR
 static void LogFunc(const char *cp){
 
    static FILE *f_os_log;
@@ -71,7 +71,7 @@ static void LogFunc(const char *cp){
       f_os_log = fopen(log_name, "at");
    }
 };
-
+#endif
 //----------------------------
 
 #if defined EDITOR
@@ -321,8 +321,10 @@ bool InitSystem(const C_command_line &cmd_line){
 void CloseSystem(){
 
    if(editor){
+#ifdef EDITOR
       editor->Release();
       editor = NULL;
+#endif
    }
 
    if(isound){
@@ -883,7 +885,7 @@ bool AppInit(PI3D_driver drv){
 #ifndef EDITOR
 static FILE *f_os_log;
 
-void __stdcall LogFunc(const char *cp){
+void LogFunc(const char *cp){
    C_fstr log_name("%s.log", init_data.app_name);
    if(!f_os_log)
       f_os_log = fopen(log_name, "wt");

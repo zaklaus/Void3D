@@ -263,10 +263,40 @@
     <ResourceCompile Include="..\..\Source\IEditor\main.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\Source\IEditor\res\font.txt" />
     <Text Include="..\TEXT\English\SYSTEM.TXT" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\Config\Config_dll.vcproj" />
+    <None Include="..\..\Source\IEditor\res\arrow.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00001.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00002.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00003.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00004.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00005.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00006.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00007.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00008.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00009.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00010.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00011.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00012.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00013.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00014.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00015.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00016.cur" />
+    <None Include="..\..\Source\IEditor\res\cur00017.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor1.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor_c.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor_h.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor_l.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor_o.cur" />
+    <None Include="..\..\Source\IEditor\res\cursor_t.cur" />
+    <None Include="..\..\Source\IEditor\res\font.bin" />
+    <None Include="..\..\Source\IEditor\res\mesh_inf.cur" />
+    <None Include="..\..\Source\IEditor\res\occluder.cur" />
+    <None Include="..\..\Source\IEditor\res\SEEDPICK.CUR" />
+    <None Include="..\..\Source\IEditor\res\SEEDPUT.CUR" />
     <None Include="..\MISSIONS\Common.i" />
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +308,43 @@
       <Project>{9138bbb5-83d6-4bdb-840f-7935f442d15c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Source\IEditor\res\axes.png" />
+    <Image Include="..\..\Source\IEditor\res\bitmap1.bmp" />
+    <Image Include="..\..\Source\IEditor\res\bmp12.png" />
+    <Image Include="..\..\Source\IEditor\res\bmp13.png" />
+    <Image Include="..\..\Source\IEditor\res\bone.png" />
+    <Image Include="..\..\Source\IEditor\res\camera.png" />
+    <Image Include="..\..\Source\IEditor\res\Checkpoint.png" />
+    <Image Include="..\..\Source\IEditor\res\dummy.png" />
+    <Image Include="..\..\Source\IEditor\res\envmap.png" />
+    <Image Include="..\..\Source\IEditor\res\Font1.png" />
+    <Image Include="..\..\Source\IEditor\res\Font1_a.png" />
+    <Image Include="..\..\Source\IEditor\res\game.ico" />
+    <Image Include="..\..\Source\IEditor\res\I3d2.bmp" />
+    <Image Include="..\..\Source\IEditor\res\icon1.ico" />
+    <Image Include="..\..\Source\IEditor\res\icon_config.ico" />
+    <Image Include="..\..\Source\IEditor\res\iduck.bmp" />
+    <Image Include="..\..\Source\IEditor\res\letters.png" />
+    <Image Include="..\..\Source\IEditor\res\light_a.png" />
+    <Image Include="..\..\Source\IEditor\res\light_d.png" />
+    <Image Include="..\..\Source\IEditor\res\light_f.png" />
+    <Image Include="..\..\Source\IEditor\res\light_p.png" />
+    <Image Include="..\..\Source\IEditor\res\light_s.png" />
+    <Image Include="..\..\Source\IEditor\res\sample.png" />
+    <Image Include="..\..\Source\IEditor\res\sound_a.png" />
+    <Image Include="..\..\Source\IEditor\res\sound_p.png" />
+    <Image Include="..\..\Source\IEditor\res\sphere.png" />
+    <Image Include="..\..\Source\IEditor\res\target.png" />
+    <Image Include="..\..\Source\IEditor\res\tb_bsp.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_create.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_debug.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_file.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_light.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_lmap.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_undo.bmp" />
+    <Image Include="..\..\Source\IEditor\res\tb_validity.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

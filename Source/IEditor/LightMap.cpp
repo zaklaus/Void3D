@@ -149,7 +149,7 @@ public:
       ed->AddShortcut(this, E_LMAP_CONSTRUCT_SEL, MB"Construct &selection\tCtrl+F1", K_F1, SKEY_CTRL);
       ed->AddShortcut(this, E_LMAP_CONSTRUCT_SEL_PREV, MB"Construct &selection\tAlt+F1", K_F1, SKEY_ALT);
       ed->AddShortcut(this, E_LMAP_CONSTRUCT_ALL, MB"%a Construct &all", K_NOKEY, 0);
-      /*
+      
       ed->AddShortcut(this, E_LMAP_TOGGLE_BLUR, MB"&Blur", K_NOKEY, 0);
       ed->AddShortcut(this, E_LMAP_AA_1, MB"Ant&ialiasing\\&1x1 (draft)", K_NOKEY, 0);
       ed->AddShortcut(this, E_LMAP_AA_2, MB"Ant&ialiasing\\&2x2", K_NOKEY, 0);
@@ -157,15 +157,15 @@ public:
       ed->AddShortcut(this, E_LMAP_AA_4, MB"Ant&ialiasing\\&4x4 (production)", K_NOKEY, 0);
       ed->AddShortcut(this, E_LMAP_AA_5, MB"Ant&ialiasing\\&5x5", K_NOKEY, 0);
       ed->AddShortcut(this, E_LMAP_AA_6, MB"Ant&ialiasing\\&6x6 (waste of time)", K_NOKEY, 0);
-      */
+      
       ed->AddShortcut(this, E_LMAP_DESTRUCT_SEL, MB"&Destruct selection", K_NOKEY, 0);
       ed->AddShortcut(this, E_LMAP_DESTRUCT_ALL, MB"D&estruct all", K_NOKEY, 0);
 
-      /*
+      
       ed->CheckMenu(this, E_LMAP_TOGGLE_BLUR, lm_blur);
       ed->GetDriver()->SetState(RS_LM_AA_RATIO, lm_aa_ratio);
       ed->CheckMenu(this, E_LMAP_AA_1 + lm_aa_ratio - 1, true);
-      */
+      
                               //initialize toolbar
       PC_toolbar tb = ed->GetToolbar("Create");
       {
@@ -384,7 +384,7 @@ public:
          }
          break;
 
-         /*
+         
       case E_LMAP_TOGGLE_BLUR:
          lm_blur = !lm_blur;
          ed->CheckMenu(this, E_LMAP_TOGGLE_BLUR, lm_blur);
@@ -401,7 +401,7 @@ public:
          ed->GetDriver()->SetState(RS_LM_AA_RATIO, lm_aa_ratio);
          ed->CheckMenu(this, E_LMAP_AA_1 + lm_aa_ratio - 1, true);
          break;
-         */
+         
       }
       return 0;
    }

@@ -9,7 +9,6 @@ void OnSignal(int id = 0){
    FlashObject(t, t/10, t);
    {
       int pi = RandomI(4);
-      LogI(pi);
       SendSignal(peers[pi]);
    }
 }
