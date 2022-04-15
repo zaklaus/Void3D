@@ -3004,7 +3004,7 @@ void I3D_driver::InitShadowResources(){
       if(!(d3d_caps.DestBlendCaps&D3DPBLENDCAPS_INVSRCCOLOR))
          break;
 
-      const int SHD_RECT_SIZE = 128;
+      const int SHD_RECT_SIZE = 1024;
 
       I3D_RESULT ir = InitRenderTarget(rt_shadow,
          TEXTMAP_NOMIPMAP | //TEXTMAP_HINTDYNAMIC |
