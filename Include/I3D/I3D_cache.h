@@ -389,6 +389,7 @@ public:
          return I3DERR_NOFILE;
       }
                                  //load file with extension
+      //NOTE: keep extension from file
       I3D_RESULT ir = C_I3D_cache<I3D_model>::OpenFile(mod, dir,
          C_fstr("%s.i3d", filename),
          flags | I3DLOAD_BUILD_SECTORS, cb_proc, cb_context);
