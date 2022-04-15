@@ -1423,8 +1423,8 @@ class C_edit_Mission: public C_editor_item_Mission{
    virtual E_QUERY_MODIFY QueryModify(bool quiet){
 
                         //if locked, no editing possible
-      if(edit_lock)
-         return QM_NO_LOCKED;
+      //if(edit_lock)
+      //   return QM_NO_LOCKED;
 
                         //check if current mission is readonly
       C_fstr filename("missions\\%s\\scene.bin", (const char*)mission_name);
@@ -2208,7 +2208,7 @@ public:
             mission->GameEnd();
             SetupCameraRange();
          }
-         EditLock(false); 
+
          ed->SetActive(true);
          ed->Message("Edit mode");
          SetTickClass(mission);
