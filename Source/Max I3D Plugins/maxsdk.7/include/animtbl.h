@@ -32,7 +32,6 @@ class AppDataChunk;
 class IParamBlock2;
 class FPInterface;
 class ICustAttribContainer;
-class ParamBlockDesc2;
 
 // The maximum number of track views that can be opened. Each
 // animatable stores 3 bits for each track to identify it's open/close
@@ -105,11 +104,7 @@ class ParamBlockDesc2;
 #define A_INODE_CLONE_TARGET	(1<<8)
 #endif
 #define A_INODE_IN_UPDATE		(1<<10) // Used internally only
-#define A_INODE_IN_UPDATE_TM	(1<<18) // Flag is set if it's updating it's TM. Don't Call GetNodeTM if it is.
 #define A_COMPONENT_LOCKED		(1<<19)	// needed for CompositeBase and its children
-
-// Trackview Node flags
-#define A_TVNODE_DONTRESACLECONTROLLERS (1 << 5)	// Don't call RescaleWorldUnits on sub-controllers
 
 // Flags for Hold and Restore logic, for "lazy holding",
 // to avoid multiple holding.
@@ -121,9 +116,6 @@ class ParamBlockDesc2;
 
 // To prevent AutoDelete from being re-entered.
 #define A_BEING_AUTO_DELETED  (1<<15)
-
-// Flag used internally by EnumRefHierarchyOnce. Nothing else should use it.
-#define A_IN_ENUM_REF_HIERARCHY_ONCE		(1<<16)
 
 // Object has a Hardware Mesh
 #define A_HARDWARE_MESH		(1<<17)
@@ -248,7 +240,6 @@ typedef Tab<TrackHitRecord> TrackHitTab;
 #define PAINTCURVE_FROZENKEYS		(1<<10) // Show keys on frozen tracks
 #define PAINTCURVE_SHOWALLTANGENTS	(1<<11) // Show tangents for unselected keys as well
 #define PAINTCURVE_SOFTSELECT		(1<<12) // Draw curves using Soft Selection
-#define PAINTCURVE_WCOLOR			(1<<13)	// Draw curve in yellow
 
 // Flags passed to GetFCurveExtents
 #define EXTENTS_SHOWTANGENTS		(1<<0) // Tangents are visible for selected keys
@@ -270,11 +261,10 @@ typedef Tab<TrackHitRecord> TrackHitTab;
 
 // These flags are passed into PaintFCurves, HitTestFCurves, and GetFCurveExtnents
 // They are filters for controllers with more than one curve
-// NOTE: RGBA controllers interpret X as red, Y as green, Z as blue, and A as yellow.
-#define DISPLAY_XCURVE		(1<<28)
-#define DISPLAY_YCURVE		(1<<29)
-#define DISPLAY_ZCURVE		(1<<30)
-#define DISPLAY_WCURVE		(1<<31)
+// NOTE: RGB controllers interpret X as red, Y as green and Z as blue.
+#define DISPLAY_XCURVE		(1<<29)
+#define DISPLAY_YCURVE		(1<<30)
+#define DISPLAY_ZCURVE		(1<<31)
 
 // Values returned from GetSelKeyCoords()
 #define KEYS_NONESELECTED	(1<<0)
@@ -446,6 +436,12 @@ CoreExport extern ParamDimension *stdTimeDim;
 
 #define I_COMPONENT			0x0000F010
 #define I_REFARRAY			0x0000F030
+#ifdef DESIGN_VER
+//VIZ specific range begins here 0x0000F000
+#define I_LINK_TARGET		0x0000F020
+#define I_LAYER				0x0000F040
+#define I_LAYER_MANAGER		0x0000F050
+#endif
 #define I_REAGENT			0x0000F060
 #define I_GEOMIMP			0x0000F070 //JH 3/7/99 implementaion neutral interface to geometry caches
 #define I_AGGREGATION		0x0000F080
@@ -455,7 +451,6 @@ CoreExport extern ParamDimension *stdTimeDim;
 #define I_SCENEOBJECT		0x0000F120
 #define I_MULTITANGENT		0x0000F130
 #define I_SOFTSELECT		0x0000F140
-#define I_UNREPLACEABLECTL	0x0000F150 //mz 08/02/04 for the exposetransform controllers
 
 // Plug-in defined interfaces should be > this id
 #define I_USERINTERFACE		0x0000ffff
@@ -476,16 +471,13 @@ CoreExport extern ParamDimension *stdTimeDim;
 #define GetSoftSelectInterface(anim) ((ISoftSelect*)anim->GetInterface(I_SOFTSELECT))
 
 class Interface;
-class Interface7;
-CoreExport Interface	*GetCOREInterface();
-CoreExport Interface7	*GetCOREInterface7();
+CoreExport Interface *GetCOREInterface();
 // Core FnPub interface access - JBW 4.10.00
 CoreExport FPInterface *GetCOREInterface(Interface_ID id);  // get ID'd CORE interface
 CoreExport void RegisterCOREInterface(FPInterface* fpi);    // register CORE interface
 CoreExport int NumCOREInterfaces();							// indexed access for MAXScript enumaration, etc...
 CoreExport FPInterface *GetCOREInterfaceAt(int i);			
 CoreExport FPInterface *GetInterface(SClass_ID super, Class_ID cls, Interface_ID id);  // get ID'd interface from ClassDesc for given class/sclass
-CoreExport void UnregisterCOREInterface(FPInterface* fpi);    // unregister CORE interface
 
 // This is the base class for classes that can be hung off an animatable's
 // property list. When an animatable is deleted, it's properties will be
@@ -547,8 +539,6 @@ class AnimPropertyList : public Tab<AnimProperty*> {
 #define FILE_ENUM_1STSUB_MISSING (1<<9) 	    // just enumerate 1st file named by ifl if missing
 #define FILE_ENUM_DONT_RECURSE   (1<<10) 	    // don't enumerate references
 #define FILE_ENUM_CHECK_AWORK1   (1<<11) 	    // don't enumerate things with flag A_WORK1 set
-#define FILE_ENUM_DONTCHECK_CUSTATTR  (1<<12)	// don't enumerate custom attributes
-#define FILE_ENUM_SKIP_VPRENDER_ONLY (1<<13)	// skip files needed only for viewport rendering
 
 // To enumerate all active but missing files
 #define FILE_ENUM_MISSING_ACTIVE (FILE_ENUM_VP|FILE_ENUM_RENDER|FILE_ENUM_MISSING_ONLY)
@@ -898,11 +888,8 @@ class Animatable : public InterfaceServer {
 		CoreExport int NumNoteTracks();
 		CoreExport NoteTrack *GetNoteTrack(int i);
 
-		// Enumerate auxiliary files -- see ref.h 
-		// this implementation calls EnumAuxFiles on the CustomAttributeContainer. If
-		// you override this method, call this method also.
-		// This method sets A_WORK1
-		CoreExport void EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags = FILE_ENUM_ALL);
+		// Enumerate auxiliary files -- see ref.h for default implementation
+		virtual void EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags = FILE_ENUM_ALL) {}
 
 		// Free all bitmaps in the Animatable: don't recurse
 		virtual void FreeAllBitmaps() {}
@@ -1066,27 +1053,9 @@ class Animatable : public InterfaceServer {
 		// Detach this object from its owner...
 		CoreExport virtual bool SvDetach(IGraphObjectManager *gom, IGraphNode *gNode);
 
-		// Returns a string to be displayed in the tip window
-		// in the schematic view for a relationship from "gNodeMaker" to "gNodeTarget"...
-		CoreExport virtual TSTR SvGetRelTip(IGraphObjectManager *gom, IGraphNode *gNodeTarget, int id, IGraphNode *gNodeMaker);
-
-		// Returns true if this object can respond to the SvDetachRel(...) method...
-		CoreExport virtual bool SvCanDetachRel(IGraphObjectManager *gom, IGraphNode *gNodeTarget, int id, IGraphNode *gNodeMaker);
-
-		// Detach this relationship.  gNodeMaker is called to detach gNodeTarget
-		CoreExport virtual bool SvDetachRel(IGraphObjectManager *gom, IGraphNode *gNodeTarget, int id, IGraphNode *gNodeMaker);
-
-		// Called when this relationship is double-clicked in the schematic view...
-		CoreExport virtual bool SvHandleRelDoubleClick(IGraphObjectManager *gom, IGraphNode *gNodeTarget, int id, IGraphNode *gNodeMaker);
-
 		CoreExport ICustAttribContainer *GetCustAttribContainer();						
 		CoreExport void AllocCustAttribContainer();
 		CoreExport void DeleteCustAttribContainer();   // JBW 6.26.00
-
-		//When plugins use a dynamic Paramblock system, and build ParamBlockDesc2 on demand, the list maintained by the ClassDesc may not reflect
-		//the active configuration in the plugin.  This method lets the system filter the list maintained by asking the plugin whether 
-		//the current ParamBlockDesc2 is currently used by the plugin.
-		virtual bool IsParamBlockDesc2Used(ParamBlockDesc2 * desc) {return true;}
 
 	};
 

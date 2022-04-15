@@ -15,7 +15,7 @@
 
 #define _NOTIFY_H_
 
-// Pre-defined Max system notification codes
+// Pre-defined Jaguar system notification codes
 
 #define NOTIFY_UNITS_CHANGE				0x00000001
 #define NOTIFY_TIMEUNITS_CHANGE	 		0x00000002
@@ -146,7 +146,7 @@
 #define NOTIFY_POST_MIRROR_NODES			0x0000006A
 
 // [bayboro | 1may2002] Broadcast on node cloning
-#define NOTIFY_NODE_CLONED					0x0000006B  // Sent after a node is cloned but before theHold.Accept(..) (callParam is pointer to node)
+#define NOTIFY_NODE_CLONED					0x0000006B // Sent after a node is cloned but before theHold.Accept(..) (callParam is pointer to node)
 
 // [J.Zhao - 10/4/02] The following two notifications may be broadcast
 // when NotifyDependents from outside the recursion, that is, not during
@@ -159,132 +159,13 @@
 #define NOTIFY_PRE_NOTIFYDEPENDENTS			0x0000006C
 #define NOTIFY_POST_NOTIFYDEPENDENTS		0x0000006D
 
-//[hutchij 10/26/02] The following are sent by Mtl::RefAdded() and Mtl::RefDeleted() respectively.
-//They are only sent in VIZ. CallParam is Mtl pointer.
-#define	NOTIFY_MTL_REFADDED					0x0000006E
-#define NOTIFY_MTL_REFDELETED				0x0000006F
-
-
 //watje TIMERANGE CALLBACK
 //watje time range call back for CS
-#define NOTIFY_TIMERANGE_CHANGE				0x00000070 // Sent after the animate time range has been changed
+#define NOTIFY_TIMERANGE_CHANGE				0x0000006E // Sent after the animate time range has been changed
 
-//aszabo|dec.04.02|The NotifyInfo structure pointer callParam is passed a pointer 
-// to a struct{ INode* node; Modifier* mod; ModContext* mc;}. 
-#define NOTIFY_PRE_MODIFIER_ADDED			0x00000071
-#define NOTIFY_POST_MODIFIER_ADDED			0x00000072
-#define NOTIFY_PRE_MODIFIER_DELETED			0x00000073
-#define NOTIFY_POST_MODIFIER_DELETED		0x00000074
-
-//aszabo|dec.11.02|The callParam is a pointer to the list of nodes
-// (INodeTab*) that is about to change \ has changed
-#define NOTIFY_PRE_NODE_GENERAL_PROP_CHANGED	0x00000075
-#define NOTIFY_POST_NODE_GENERAL_PROP_CHANGED	0x00000076
-#define NOTIFY_PRE_NODE_GI_PROP_CHANGED			0x00000077
-#define NOTIFY_POST_NODE_GI_PROP_CHANGED		0x00000078
-#define NOTIFY_PRE_NODE_MENTALRAY_PROP_CHANGED	0x00000079
-#define NOTIFY_POST_NODE_MENTALRAY_PROP_CHANGED	0x00000080
-#define NOTIFY_PRE_NODE_BONE_PROP_CHANGED		0x00000081
-#define NOTIFY_POST_NODE_BONE_PROP_CHANGED		0x00000082
-#define NOTIFY_PRE_NODE_USER_PROP_CHANGED		0x00000083
-#define NOTIFY_POST_NODE_USER_PROP_CHANGED		0x00000084
-
-// CA - 1/23/03 - Added new notification for filelink. This one
-// happens after all of the new objects for a reload have been
-// created, but before any objects have been deleted.
-#define NOTIFY_FILELINK_POST_RELOAD_PRE_PRUNE	0x00000085
-
-// aszabo|jan.24.03|The two notification below are sent before
-// and after each set of clones are created. For example, if
-// there are N nodes cloned C times, the notification is sent 
-// C times. 
-// The CallParam for NOTIFY_PRE_NODES_CLONED is a pointer to the array of nodes
-// that will be cloned (the original nodes): INodeTab* origNodes
-// The CallParam for NOTIFY_POST_NODES_CLONED is a pointer to this struct:
-// struct{ INodeTab* origNodes; INodeTab* clonedNodes; CloneType cloneType;}
-#define NOTIFY_PRE_NODES_CLONED					0x00000086
-#define NOTIFY_POST_NODES_CLONED				0x00000087
-#define NOTIFY_POST_MERGE_PROCESS				0x00000088
-
-// xavier robitaille | 03.02.07
-// Broadcast a notification that a system path has changed. This 
-// was added in order to notify the toolpalette if the Catalogs 
-// dir gets modified from the Configure Path dialogue.
-#define NOTIFY_SYSTEM_PRE_DIR_CHANGE			0x00000089
-#define NOTIFY_SYSTEM_POST_DIR_CHANGE			0x0000008A
-
-// a final notification for file open
-//
-#define NOTIFY_FILE_POST_OPEN_PROCESS			0x0000008B
-
-// Schematic View notifications
-// callParam is ptr to index of schematic view (int*)
-#define NOTIFY_SV_SELECTIONSET_CHANGED			0x0000008C
-// callParam is IGraphNode*
-#define NOTIFY_SV_DOUBLECLICK_GRAPHNODE			0x0000008D
-
-// Notifications when changing the renderer
-#define NOTIFY_PRE_RENDERER_CHANGE				0x0000008E
-#define NOTIFY_POST_RENDERER_CHANGE				0x0000008F
-
-// Schematic View notifications
-// callParam is ptr to index of schematic view (int*)
-#define NOTIFY_SV_PRE_LAYOUT_CHANGE				0x00000090
-// callParam is ptr to index of schematic view (int*)
-#define NOTIFY_SV_POST_LAYOUT_CHANGE			0x00000091
-
-// Notification sent AFTER object categories were marked to be hidden\unhidden 
-// Clients registered for this notification can retrieve the categories
-// whose hidden state have changed by retrieving the category flags by calling
-// DWORD Interface::GetHideByCategoryFlags()
-#define NOTIFY_BY_CATEGORY_DISPLAY_FILTER_CHANGED			0x00000092
-// Notification sent AFTER custom display filters have been activated\deactivated
-// resulting in changes to some objects hidden state.
-// Clients registered for this notification can retrieve the active 
-// custom display filters by checking their On\Off state using
-// BOOL Interface::GetDisplayFilter(int index)
-#define NOTIFY_CUSTOM_DISPLAY_FILTER_CHANGED			0x00000093
-
-// callParam is ptr to ILayer
-#define NOTIFY_LAYER_CREATED				0x00000094 // called after layer is added to layer manager
-#define NOTIFY_LAYER_DELETED				0x00000095 // called before layer is removed from layer manager
-// callParam is ptr to struct{ INode* node; ILayer* oldLayer; ILayer* newLayer;}
-// newLayer and oldLayer can be NULL when switching between layers, during create, and when loading files
-// Layers may not be present in layer manager when sent during file load/merge
-#define NOTIFY_NODE_LAYER_CHANGED			0x00000096
-
-// following sent when a tabbed dialog is created or deleted. callparam is point to dialogID (Class_ID)
-#define NOTIFY_TABBED_DIALOG_CREATED		0x00000097
-#define NOTIFY_TABBED_DIALOG_DELETED		0x00000098
-
-#define NOTIFY_NODE_NAME_SET				0x00000099	// Sent by BaseNode::SetName. (call Param is pointer to struct{ TCHAR* oldname; TCHAR* newname; INode* node} }
-
-// Sent by the Material Editor when the "use texture in hardware shader" button is pressed.  This allow the standard
-//material to force a rebuild of the hardware shader.  Param is a pointer to the material being effected.
-#define NOTIFY_HW_TEXTURE_CHANGED			0x0000009A	
-
-// Sent by MAXScript during its initialization immediately before it scans the
-// registered plugin classes and wraps them in MAXClass values
-// any runtime defined classes created in this callback will be detected by MXS
-// any core interfaces installed in this callback will be detected by MXS
-#define NOTIFY_MXS_STARTUP					0x0000009B
-
-// Sent by MAXScript when it has completed its initialization 
-#define NOTIFY_MXS_POST_STARTUP				0x0000009C
-
-// Sent before and after an action item is executed
-// NotifyInfo::callParam is ActionItem*
-#define NOTIFY_ACTION_ITEM_PRE_EXEC				0x0000009D
-#define NOTIFY_ACTION_ITEM_POST_EXEC			0x0000009E
-
-// Note #1: If you add more built-in notification codes, consider
-//    increasing NUM_BUILTIN_NOTIFIERS in core\notify.cpp - currently 0x00A0
-
-// Note #2: If you add more built-in notification codes, consider
-//    adding them to MAXScript. See maxscrpt\maxcallbacks.cpp
 
 // Start of messages for internal use only.
-#define NOTIFY_INTERNAL_USE_START				0x70000000
+#define NOTIFY_INTERNAL_USE_START	0x70000000
 
 // Flag values in callParam for NOTIFY_SYSTEM_PRE_NEW:
 #define PRE_NEW_NEW_ALL						0x1
@@ -309,8 +190,6 @@ void CoreExport BroadcastNotification(int code, void *callParam);
 
 // Unregister a callback from all codes
 int CoreExport UnRegisterNotification(NOTIFYPROC proc, void *param);
-
-class ClassDesc;
 
 class CreateInstanceCallParam {
 public:

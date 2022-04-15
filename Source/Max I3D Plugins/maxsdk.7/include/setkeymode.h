@@ -47,12 +47,6 @@
 #define		HOTKEY_ALL_SCALEZ				(1<<23)
 #define		SETKEY_SETTING_KEYS				(1<<24)
 
-// defined for release 6 and later only
-#define		HOTKEY_ALL						(1<<25)
-#define		SETKEY_ALL						(1<<26)
-#define		SETKEY_OTHER					(1<<27)
-
-
 // Gets a pointer to the SetKeyModeInterface interface, the caller should pass a pointer to "Interface"
 #define GetSetKeyModeInterface(i)  ((SetKeyModeInterface*)i->GetInterface(I_SETKEYMODE))
 

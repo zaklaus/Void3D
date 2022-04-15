@@ -76,12 +76,6 @@ DllExport void ComputeBumpVectors(const Point3 tv[3], const Point3 v[3], Point3 
 // can give erroneous results
 DllExport void ComputeBumpVec2D(int axis, const Point3 tv[3], const Point3 v[3], Point3 bvec[2]);
 
-//----------------------------------------------------------------------
-// Computes the bump basis vector for the U texture channel (called the Tangent),
-// and the cross product of the surface normal with the Tangent (called the Binormal).
-// These along with the surface normal are used as the basis vectors for normal mapping.
-DllExport void ComputeTangentAndBinormal(const Point3 tv[3], const Point3 v[3], Point3 bvec[2]);
-
 //-------------------------------------------------------------------------------
 // Quick and dirty unit vector compression. Only accurate to 1 part in 512
 //

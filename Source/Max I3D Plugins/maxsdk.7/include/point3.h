@@ -92,7 +92,7 @@ int DllExport MaxComponent(const Point3&);  // the component with the maximum ab
 int DllExport MinComponent(const Point3&);  // the component with the minimum abs value
 Point3 DllExport Normalize(const Point3&);  // Accurate normalize
 Point3 DllExport FNormalize(const Point3&); // Fast normalize 
-Point3 DllExport CrossProd(const Point3& a, const Point3& b);	// CROSS PRODUCT
+
 
 // RB: moved this here from object.h
 class Ray {
@@ -199,5 +199,9 @@ inline Point3 operator+(const Point3& a, float f) {
 inline float DotProd(const Point3& a, const Point3& b) { 
 	return(a.x*b.x+a.y*b.y+a.z*b.z);	
 	}
+
+Point3 DllExport CrossProd(const Point3& a, const Point3& b);	// CROSS PRODUCT
+
+
 #endif
 

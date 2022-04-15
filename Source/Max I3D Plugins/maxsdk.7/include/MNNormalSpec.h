@@ -39,11 +39,9 @@ public:
 	// Low-level - do not use mSpecified data!
 	int GetNormalID(int corner) { return (mpNormalID && (corner<mDegree)) ? mpNormalID[corner] : -1; }
 	void SetNormalID (int corner, int norm) { if (mpNormalID && (corner<mDegree)) mpNormalID[corner] = norm; }
-	int *GetNormalIDArray () { return mpNormalID; }
 
 	bool GetSpecified (int corner) { return (mpNormalID && (corner<mDegree) && mSpecified[corner]) ? true : false; }
 	void SetSpecified (int corner, bool value=true) { if (mpNormalID && (corner<mDegree)) mSpecified.Set (corner, value); }
-	void SpecifyAll (bool value=true) { if (value) mSpecified.SetAll(); else mSpecified.ClearAll(); }
 	DllExport void SpecifyNormalID (int corner, int norm);
 
 	DllExport void MakePoly (int degree, int *pNormalID);
@@ -112,7 +110,6 @@ public:
 	Point3 * GetNormalArray () const { return mpNormal; }
 	bool GetNormalExplicit (int normID) const { return mNormalExplicit[normID] ? true : false; }
 	void SetNormalExplicit (int normID, bool value) { mNormalExplicit.Set (normID, value); }
-	void SetAllExplicit (bool value=true) { if (value) mNormalExplicit.SetAll(); else mNormalExplicit.ClearAll (); }
 	MNNormalFace & Face(int faceID) const { return mpFace[faceID]; }
 	MNNormalFace * GetFaceArray () const { return mpFace; }
 
@@ -182,10 +179,9 @@ public:
 	// Actual operations:
 	DllExport bool Transform (Matrix3 & xfm, BOOL useSel=false, BitArray *normalSelection=NULL);
 	DllExport bool Translate (Point3 & translate, BOOL useSel=true, BitArray *normalSelection=NULL);
-	DllExport bool BreakNormals (BOOL useSel=true, BitArray *normalSelection=NULL, BOOL toAverage=false);
+	DllExport bool BreakNormals (BOOL useSel=true, BitArray *normalSelection=NULL);
 	// Requires an accurate mpParent pointer:
-	DllExport bool UnifyNormals (BOOL useSel=true, BitArray *normalSelection=NULL, BOOL toAverage=false);
-	DllExport bool AverageNormals (BOOL useThresh=false, float threshold=0.0f, BOOL useSel=true, BitArray *normalSelection=NULL);
+	DllExport bool UnifyNormals (BOOL useSel=true, BitArray *normalSelection=NULL);
 	DllExport bool SpecifyNormals (BOOL useSel=true, BitArray *normalSelection=NULL);
 	DllExport bool MakeNormalsExplicit (BOOL useSel=true, BitArray *normalSelection=NULL, bool value=true);
 	DllExport bool ResetNormals (BOOL useSel=true, BitArray *normalSelection=NULL);

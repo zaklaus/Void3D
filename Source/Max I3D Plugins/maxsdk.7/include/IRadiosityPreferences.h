@@ -17,12 +17,6 @@
                 September 17, 2001 Daniel Levesque
                         - addition of Get/Set 'Save Geometry' methods
 
-				May 20, 2003 Alexandre Cossette
-						- addition of Get/Set 'Update Data When Required on Start'
-
-				June 9, 2003 Alexandre Cossette
-						- removed 'Display Warning on GI Props Change'
-
 
 © 2001 Autodesk
 ==============================================================================*/
@@ -65,13 +59,13 @@ public:
     // Display warning on reset
     virtual BOOL GetDisplayResetWarning() const = 0;
     virtual void SetDisplayResetWarning(BOOL val) = 0;
-    // Automatically update solution data when required
-    virtual BOOL GetUpdateDataWhenRequiredOnStart() const = 0;
-    virtual void SetUpdateDataWhenRequiredOnStart(BOOL val) = 0;
+    // Display warning when INodeGIProperties change and invalidate the solution
+    virtual BOOL GetDisplayWarningOnGIPropsChange() const = 0;
+    virtual void SetDisplayWarningOnGIPropsChange(BOOL val) = 0;
     // Save the geometry along with the solution in the .max file, for faster load times.
     virtual BOOL GetSaveScene() const = 0;
     virtual void SetSaveScene(BOOL val) = 0;
-
+	 
     /**
      * The functions below provide access to current radiosity settings.
      * These properties are saved on a per file basis, so they

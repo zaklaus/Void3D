@@ -149,7 +149,7 @@ public:
 	RO_PROP_FN(kNumParticles,				NumParticles,			TYPE_INT);
 	RO_PROP_FN(kNumParticlesGenerated,		NumParticlesGenerated,	TYPE_INT);
 
-	FN_0(kAddParticle,			TYPE_bool,	AddParticle				);
+	FN_0(kAddParticle,			TYPE_bool,	AddParticle,			);
 	FN_1(kAddParticles,			TYPE_bool,	AddParticles,			TYPE_INT);
 	FN_1(kDeleteParticle,		TYPE_bool,	DeleteParticle,			TYPE_INDEX);
 	FN_2(kDeleteParticles,		TYPE_bool,	DeleteParticles,		TYPE_INDEX, TYPE_INT);

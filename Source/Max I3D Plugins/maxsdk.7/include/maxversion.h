@@ -10,63 +10,24 @@
 // The product and file version could be different.
 // For example, VIZ 4.0 works with max files version 4.2
 
-#if defined(RENDER_VER)
-
-	// VIZ Render File version
-	#ifndef MAX_VERSION_MAJOR
-	#define MAX_VERSION_MAJOR 3
-	#endif
-
-	#ifndef MAX_VERSION_MINOR
-	#define MAX_VERSION_MINOR 0
-	#endif
-
-	#ifndef MAX_VERSION_POINT
-	#define MAX_VERSION_POINT 0
-	#endif
-  
-	// VIZ Product version
-	#ifndef MAX_PRODUCT_VERSION_MAJOR
-	#define MAX_PRODUCT_VERSION_MAJOR 3
-	#endif
-
-	#ifndef MAX_PRODUCT_VERSION_MINOR
-	#define MAX_PRODUCT_VERSION_MINOR 0
-	#endif
-
-	#ifndef MAX_PRODUCT_VERSION_POINT
-	#define MAX_PRODUCT_VERSION_POINT 0
-	#endif
-
-	// aszabo|Mar.15.02|This should be blank for a non-service-pack release
-	#ifndef MAX_PRODUCT_VERSION_SP
-	#define MAX_PRODUCT_VERSION_SP " "
-	#endif
-
-	// MAX_RELEASE_EXTERNAL is an alternative for MAX_RELEASE (plugapi.h)
-	// that can be used by UI when the internal version of the product
-	// is different from the branded version number
-	// JH 4/23/03 I'm incrementing this as well although I'm not 100% sure this is right
-	#define MAX_RELEASE_EXTERNAL	3000
-
-#elif defined(DESIGN_VER)
+#if defined(DESIGN_VER)
 
 	// VIZ File version
 	#ifndef MAX_VERSION_MAJOR
-	#define MAX_VERSION_MAJOR 6
+	#define MAX_VERSION_MAJOR 4
 	#endif
 
 	#ifndef MAX_VERSION_MINOR
-	#define MAX_VERSION_MINOR 0
+	#define MAX_VERSION_MINOR 2
 	#endif
 
 	#ifndef MAX_VERSION_POINT
-	#define MAX_VERSION_POINT 0
+	#define MAX_VERSION_POINT 7
 	#endif
-  
+
 	// VIZ Product version
 	#ifndef MAX_PRODUCT_VERSION_MAJOR
-	#define MAX_PRODUCT_VERSION_MAJOR 6
+	#define MAX_PRODUCT_VERSION_MAJOR 4
 	#endif
 
 	#ifndef MAX_PRODUCT_VERSION_MINOR
@@ -77,9 +38,9 @@
 	#define MAX_PRODUCT_VERSION_POINT 0
 	#endif
 
-	// aszabo|Mar.15.02|This should be blank for a non-service-pack release
-	#ifndef MAX_PRODUCT_VERSION_SP
-	#define MAX_PRODUCT_VERSION_SP "\0"
+  // aszabo|Mar.15.02|This should be blank for a non-service-pack release
+  #ifndef MAX_PRODUCT_VERSION_SP
+  #define MAX_PRODUCT_VERSION_SP "SP 1\0"
 	#endif
 
 #elif defined(WEBVERSION)
@@ -110,20 +71,19 @@
 	#define MAX_PRODUCT_VERSION_POINT 0
 	#endif
 
-	// aszabo|May.13.02|This should be blank for a non-service-pack release
-	#ifndef MAX_PRODUCT_VERSION_SP
-	#define MAX_PRODUCT_VERSION_SP "\0"
+  // aszabo|May.13.02|This should be blank for a non-service-pack release
+  #ifndef MAX_PRODUCT_VERSION_SP
+  #define MAX_PRODUCT_VERSION_SP "\0"
 	#endif
-
 #else
 
 	// MAX File version:
 	#ifndef MAX_VERSION_MAJOR
-	#define MAX_VERSION_MAJOR 7
+	#define MAX_VERSION_MAJOR 5
 	#endif
 
 	#ifndef MAX_VERSION_MINOR
-	#define MAX_VERSION_MINOR 0
+	#define MAX_VERSION_MINOR 1
 	#endif
 
 	#ifndef MAX_VERSION_POINT
@@ -132,20 +92,20 @@
 
 	// MAX Product version
 	#ifndef MAX_PRODUCT_VERSION_MAJOR
-	#define MAX_PRODUCT_VERSION_MAJOR 7
+	#define MAX_PRODUCT_VERSION_MAJOR 5
 	#endif
 
 	#ifndef MAX_PRODUCT_VERSION_MINOR
-	#define MAX_PRODUCT_VERSION_MINOR 0
+	#define MAX_PRODUCT_VERSION_MINOR 1
 	#endif
 
 	#ifndef MAX_PRODUCT_VERSION_POINT
 	#define MAX_PRODUCT_VERSION_POINT 0
 	#endif
 
-	// aszabo|May.13.02|This should be blank for a non-service-pack release
-	#ifndef MAX_PRODUCT_VERSION_SP
-	#define MAX_PRODUCT_VERSION_SP ""
+  // aszabo|May.13.02|This should be blank for a non-service-pack release
+  #ifndef MAX_PRODUCT_VERSION_SP
+  #define MAX_PRODUCT_VERSION_SP "\0"
 	#endif
 #endif
 

@@ -94,7 +94,6 @@ class ClassEntry {
 		bool IsLoaded() { return loaded; }
 		int ClassNumber() { return classNum; }
 		CoreExport ClassDesc *FullCD();
-		DWORD GetPageState() {return pageState;} // new to r7
 	};
 
 // access type.

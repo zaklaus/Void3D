@@ -33,13 +33,10 @@ typedef Point3 VertColor;
 
 #define MESH_MULTI_PROCESSING	TRUE		// TRUE turns on mp vertex transformation
 
-#define MESH_CAGE_BACKFACE_CULLING	// for "cage" orange gizmo meshes in EMesh, EPoly, Mesh Select, etc.
-
 class ISave;
 class ILoad;
 class IHardwareShader;
 class TriStrip;
-class MeshNormalSpec;
 
 #define NEWMESH
 
@@ -198,13 +195,13 @@ public:
 	int vnum, fnum;
 
 	MeshMap () { flags=0x0; tv=NULL; tf=NULL; vnum = fnum = 0; }
-	DllExport ~MeshMap ();
+	~MeshMap () { if (tv) delete [] tv; if (tf) delete [] tf; }
 
 	int getNumVerts () { return vnum; }
 	DllExport void setNumVerts (int vn, BOOL keep=FALSE);
 	int getNumFaces () { return fnum; }
 	DllExport void setNumFaces (int fn, BOOL keep=FALSE, int oldCt=0);
-	DllExport void Clear ();
+	void Clear () { if (tv) delete [] tv; if (tf) delete [] tf; tv=NULL; tf=NULL; vnum = fnum = 0; flags=0; }
 	DllExport BitArray GetIsoVerts ();
 	DllExport void DeleteVertSet (BitArray set, BitArray *delFace=NULL);
 	DllExport void DeleteFaceSet (BitArray set, BitArray *isoVert=NULL);
@@ -223,118 +220,6 @@ DllExport DWORD MapChannelID (int mp);
 // Usually returns TEXMAP_CHAN_NUM, etc:
 DllExport int MapChannelNum (int mp);
 
-/// <summary>
-/// This class can be used to store a bit per map channel,
-/// including both negative and positive map channels, and it works with any
-/// size index.
-/// </summary>
-class MapBitArray {
-private:
-	bool mTexture, mColor;
-	BitArray mTextureFlip, mColorFlip;
-
-public:
-	/// <summary>
-	/// Constructor.  Sets all channels to false.
-	/// </summary>
-	MapBitArray () : mTexture(false), mColor(false) { }
-
-	/// <summary>
-	/// Constructor.  Sets all channels to the given default value.
-	/// </summary>
-	MapBitArray (bool defaultValue)
-		: mTexture(defaultValue), mColor(defaultValue) { }
-
-	/// <summary>
-	/// Constructor.  Sets all texture channels (1 and above) to the texture default,
-	/// and all color channels (0 and below) to the color default.
-	/// </summary>
-	MapBitArray (bool textureDefault, bool colorDefault)
-		: mTexture(textureDefault), mColor(colorDefault) { }
-
-	/// <summary>
-	/// Returns the highest index that this MapBitArray could have a non-default value for.
-	/// All indices above this are guaranteed to have value "TextureDefault()".
-	/// </summary>
-	int Largest() const { return (mTextureFlip.GetSize()>1) ? mTextureFlip.GetSize()-1 : 0; }
-
-	/// <summary>
-	/// Returns the lowest index that this MapBitArray could have a non-default value for.
-	/// All indices below this are guaranteed to have value "ColorDefault()".
-	/// </summary>
-	int Smallest() const { return (mColorFlip.GetSize()>1) ? 1-mColorFlip.GetSize() : 0; }
-
-	/// <summary>
-	/// Sets the value of the given channel.
-	/// </summary>
-	DllExport void Set (int mapChannel, bool val=true);
-
-	/// <summary>
-	/// Clears the value of the given channel.
-	/// </summary>
-	void Clear (int mapChannel) { Set (mapChannel, false); }
-
-	/// <summary>
-	/// Gets the value of the given channel.  (If this particular channel has
-	/// not been set before, the default for the channel will be returned.)
-	/// </summary>
-	DllExport bool Get (int mapChannel) const;
-
-	/// <summary>
-	/// Returns the default value for texture channels, channels 1 and above.
-	/// </summary>
-	bool TextureDefault () const { return mTexture; }
-
-	/// <summary>
-	/// Returns the default value for color channels, channels 0 and below.
-	/// </summary>
-	bool ColorDefault () const { return mColor; }
-
-	/// <summary>
-	/// Inverts the value of all texture channels (1 and above).
-	/// </summary>
-	void InvertTextureChannels () { mTexture=!mTexture; }
-
-	/// <summary>
-	/// Inverts the value of all color channels (0 and below).
-	/// </summary>
-	void InvertColorChannels () { mColor=!mColor; }
-
-	/// <summary>
-	/// Inverts all channel values.
-	/// </summary>
-	void InvertAll () { mColor = !mColor; mTexture = !mTexture; }
-
-	/// <summary>
-	/// Saves data to stream.
-	/// </summary>
-	DllExport IOResult Save(ISave* isave);
-
-	/// <summary>
-	/// Loads data from stream.
-	/// </summary>
-	DllExport IOResult Load(ILoad* iload);
-
-	/// <summary>
-	/// Indexing operator
-	/// </summary>
-	bool operator[](int i) const { return Get(i); }
-
-	/// <summary>
-	/// Comparison operator.
-	/// </summary>
-	DllExport BOOL operator==(const MapBitArray& b) const;
-
-	/// <summary>
-	/// Inequality operator.
-	/// </summary>
-	BOOL operator!=(const MapBitArray& b) const { return !(*this == b); }
-
-	/// <summary>
-	/// Assignment operator
-	/// </summary>
-	DllExport MapBitArray& operator=(const MapBitArray& b);
-};
 
 // Following is used for arbitrary per-element info in meshes, such as weighted verts
 // or weighted vert selections.  Methods are deliberately made to look like Tab<> methods.
@@ -459,9 +344,20 @@ class SubObjHitList {
 		MeshSubHitRec *first;
 	public:
 		SubObjHitList() { first = NULL; }
-		DllExport ~SubObjHitList();
+		~SubObjHitList() {
+			MeshSubHitRec *ptr = first, *fptr;
+			while (ptr) {
+				fptr = ptr;
+				ptr = ptr->Next();
+				delete fptr;
+				}
+			first = NULL;
+			}	
+
 		MeshSubHitRec *First() { return first; }
-		DllExport void AddHit( DWORD dist, int index );
+		void AddHit( DWORD dist, int index ) {
+			first = new MeshSubHitRec(dist,index,first);
+			}
 	};
 
 
@@ -970,14 +866,6 @@ class Mesh : public BaseInterfaceServer {
 		void  SetRenderData(MeshRenderData *p) {renderData = p; } 
 		MeshRenderData * GetRenderData() { return renderData; }
 
-		// Quick access to specified normal interface.
-		DllExport void ClearSpecifiedNormals ();
-		DllExport MeshNormalSpec *GetSpecifiedNormals ();
-		DllExport void SpecifyNormals ();
-
-		// Copy only vertices and faces - no maps, selection, per-vertex data, etc.
-		DllExport void CopyBasics (const Mesh & from);
-
 		// --- from InterfaceServer
 		DllExport BaseInterface* GetInterface(Interface_ID id);
 	};
@@ -1007,36 +895,11 @@ int DllExport getUseVisEdge();
 #define SMALL_VERTEX_DOTS	0
 #define LARGE_VERTEX_DOTS	1
 
-// CAL-05/07/03: new vertex dot types with radius from 2 to 7 (release 6.0)
-#define VERTEX_DOT2	0		// equivalent to SMALL_VERTEX_DOTS
-#define VERTEX_DOT3	1		// equivalent to LARGE_VERTEX_DOTS
-#define VERTEX_DOT4	2
-#define VERTEX_DOT5	3
-#define VERTEX_DOT6	4
-#define VERTEX_DOT7	5
-
-// CAL-05/07/03: new handle box types with radius from 2 to 7 (release 6.0)
-#define HANDLE_BOX2	0
-#define HANDLE_BOX3	1
-#define HANDLE_BOX4	2
-#define HANDLE_BOX5	3
-#define HANDLE_BOX6	4
-#define HANDLE_BOX7	5
-
-// CAL-05/07/03: get vertex dot marker from vertex dot type
-#define VERTEX_DOT_MARKER(vtype) (MarkerType)(vtype - VERTEX_DOT2 + DOT2_MRKR)
-
-// CAL-05/07/03: get vertex dot marker from vertex dot type
-#define HANDLE_BOX_MARKER(htype) (MarkerType)(htype - HANDLE_BOX2 + BOX2_MRKR)
-
 void DllExport setUseVertexDots(int b);
 int DllExport getUseVertexDots();
 
 void DllExport setVertexDotType(int t);
 int DllExport getVertexDotType();
-
-void DllExport setHandleBoxType(int t);
-int DllExport getHandleBoxType();
 
 void DllExport setDisplayBackFaceVertices(int b);
 int DllExport getDisplayBackFaceVertices();

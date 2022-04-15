@@ -67,7 +67,7 @@ CoreExport Color color_spline(float x, int nknots, Color *knot);
 
 
 // faster version of floor
-inline int FLOOR( float x) { return ((int)(x) - ((int)(x)>(x)? 1:0)); }
+inline int FLOOR( float x) { return ((int)(x)-((x)<0.0f)); }
 
 inline float frac(float x) { return x - (float)FLOOR(x); }
 inline float fmax(float x, float y) { return x>y?x:y;	}

@@ -58,7 +58,7 @@
  	int		ungetchar_count;
 	TCHAR	ungetchar_buf[8];
  	Parser* reader;
-	DWORD	decrypt;	// was BOOL. russom - 10/09/2002
+	BOOL	decrypt;
  
  			ScripterExport FileStream ();
  		    ScripterExport ~FileStream ();

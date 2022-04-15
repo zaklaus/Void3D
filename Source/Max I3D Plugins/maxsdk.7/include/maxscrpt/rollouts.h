@@ -127,7 +127,6 @@ public:
 
 	virtual	Value*	get_property(Value** arg_list, int count);
 	virtual	Value*	set_property(Value** arg_list, int count);
-	virtual	Value*	set_nested_controller(Value** arg_list, int count);
 };
 
 #define RO_NO_CLOSEBUTTON	0x0001
@@ -139,7 +138,6 @@ public:
 #define RO_SILENT_ERRORS	0x0040
 #define RO_HIDDEN2			0x0080
 #define RO_PLUGIN_OWNED		0x0100
-#define RO_CONTROLS_INSTALLED	0x0200
 
 /* --------------------- RolloutFloater class ------------------------ */
 
@@ -248,18 +246,12 @@ public:
 
 };
 
-// flag bits for RolloutControl::flags
-#define ROC_FIXED_WIDTH				0x0001	// a specific width: supplied, don't resize buttons on .text =
-#define ROC_MAKING_EDIT				0x0002
-#define ROC_INVISIBLE				0x0004	// rollout control is set to invisible and is disabled
-#define ROC_VAL_CHANGED				0x0008	// value was changed while control had focus
+#define ROC_FIXED_WIDTH		0x0001			// a specific width: supplied, don't resize buttons on .text =
+#define ROC_MAKING_EDIT		0x0002
+#define ROC_INVISIBLE		0x0004			// rollout control is set to invisible and is disabled
+#define ROC_VAL_CHANGED		0x0008			// value was changed while control had focus
 #define ROC_EDITTEXT_MULTILINE		0x0010	// edittext control is multiline
-#define ROC_COLORSWATCH_POINT4		0x0010	// Set if color swatch is a Point4 (FRGBA)
-#define ROC_PICKBUTTON_AUTODISP		0x0010	// Set if autoDisplay is turned on for pickbutton (autodisplay node name)
-
-#define ROC_IN_HANDLER				0x0020	// Set if currently running event handler
-#define ROC_HANDLER_REENTRANT		0x0040	// Set if rollout control's event handlers are re-entrant. Only case is checkbutton.
-#define ROC_EDITTEXT_READONLY		0x0080	// edittext control is read-only
+#define ROC_IN_HANDLER		0x0020			// Set if currently running event handler
 
 extern LPCTSTR cust_button_class;
 
@@ -487,11 +479,6 @@ public:
 	Value*		set_property(Value** arg_list, int count);
 	void		set_enable();
 	int			num_controls() { return 2; }
-
-	void		Reload();
-	void		InvalidateUI();
-	void		set_pb2_value();
-	void		get_pb2_value(BOOL load_UI=TRUE);
 };
 
 /* -------------------- SpinnerControl  ------------------- */
@@ -501,8 +488,7 @@ visible_class (SpinnerControl)
 class SpinnerControl : public RolloutControl
 {
 public:
-	float		fvalue;
-	int			ivalue;
+	float		value;
 	float		max, min;
 	float		scale;
 	EditSpinnerType spin_type;
@@ -711,7 +697,7 @@ public:
 	Value*		set_property(Value** arg_list, int count);
 	void		set_enable();
 	BOOL		set_focus();
-	int			num_controls() { return btn_count + 1; } // buttons and caption. don't count 1 dummy button that ends group
+	int			num_controls() { return btn_count + 1; }
 
 	void		Reload();
 	void		InvalidateUI();
@@ -857,7 +843,6 @@ public:
 	BOOL		handle_message(Rollout *ro, UINT message, WPARAM wParam, LPARAM lParam);
 	Value*		get_property(Value** arg_list, int count);
 	Value*		set_property(Value** arg_list, int count);
-	void		set_enable();
 
 	void		Reload();
 	void		InvalidateUI();

@@ -283,9 +283,6 @@ class BezierShape : public BaseInterfaceServer {
 		// Specify a poly number or -1 for all.  Can specify selection level optionally
 		CoreExport BitArray	VertexTempSelAll(int poly = -1, BOOL includeVecs = FALSE, int level = 0, BOOL forceSel = FALSE);
 
-		// CAL-05/23/03: Constructs a vertex selection list based on the given flag set on the vertex.
-		CoreExport BitArray VertexFlagSel(int poly, DWORD flag);
-
 		CoreExport IOResult Save(ISave* isave);
 		CoreExport IOResult Load(ILoad* iload);
 

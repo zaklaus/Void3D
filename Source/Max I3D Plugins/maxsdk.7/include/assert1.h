@@ -15,8 +15,8 @@
 #undef assert
 #endif
 
-//#define _SHOW_DEBUG_ASSERTIONS_IN_RELEASE    Modif. by JP Morel 05/2002
-//                                             Assertions in the release version of Kahn has been temporarily disabled                                            
+// Commenting out line below for Luna Release - IB 6/18/02
+//#define _SHOW_DEBUG_ASSERTIONS_IN_RELEASE
 
 #define assert( expr ) ( expr || assert1( /*#expr,*/ __LINE__, __FILE__ ) )
 
@@ -24,8 +24,7 @@
 
 extern int UtilExport assert1( /*char *expr,*/ int line, char *file );
 
-//SS 1/10/2003: checking NDEBUG instead of _DEBUG
-#if !defined(NDEBUG)
+#if defined(_DEBUG)
 #define DbgAssert( expr ) ( (expr) || assert1( __LINE__, __FILE__ ) )
 #define DbgVerify( expr ) ( (expr) || assert1( __LINE__, __FILE__ ) )
 #elif defined(_SHOW_DEBUG_ASSERTIONS_IN_RELEASE)

@@ -8,22 +8,8 @@
 #ifndef _H_MAXSCRIPT
 #define _H_MAXSCRIPT
 
-#ifndef STRICT
 #define STRICT					// strict type-checking - conformance with MAX SDK libs
-#endif
-
-#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN		// trims win32 includes
-#endif
-
-#ifdef BLD_MAXSCRIPT
-#	define ScripterExport __declspec( dllexport )
-#else
-#	define ScripterExport __declspec( dllimport )
-#	define IMPORTING
-#endif
-#include "export.h"
-
 
 #include <stdlib.h> 
 #include <stdio.h>
@@ -51,6 +37,12 @@ class String;
 #define MAXSCRIPT_UTILITY_CLASS_ID	Class_ID(0x4d64858, 0x16d1751d)
 #define MAX_SCRIPT_DIR				_T("scripts")
 #define SCRIPT_AUTOLOAD_DIR			_T("Startup\\")
+
+#ifdef BLD_MAXSCRIPT
+#	define ScripterExport __declspec( dllexport )
+#else
+#	define ScripterExport __declspec( dllimport )
+#endif
 
 // check whether we are UNICODE or Code page 0 (==> no mbcs code)
 #ifdef _UNICODE
@@ -84,7 +76,6 @@ inline double EPS(double v) { return _isnan(v) ? (v) : fabs(v) < FLT_EPSILON ? 0
 #define MXS_STOP_EDITING			(WM_USER + 0x110)
 #define MXS_LOAD_STARTUP_SCRIPTS	(WM_USER + 0x111)
 #define MXS_EXECUTE_MACRO			(WM_USER + 0x112)
-#define MXS_RESTART_EDITING			(WM_USER + 0x113)
 
 typedef struct			// LPARAM for MXS_MESSAGE_BOX contains a pointer to this structure
 {
@@ -166,16 +157,16 @@ extern ScripterExport Value* _get_key_arg_or_default(Value** arg_list, int count
 	if (_val < _lowerLimit || _val > _upperLimit) {							\
 		TCHAR buf[256];														\
 		TCHAR buf2[128];													\
-		_tcscpy(buf,_desc);													\
-		_tcscat(buf,_T(" < "));												\
-		_sntprintf(buf2, 128, _T("%g"), EPS(_lowerLimit));					\
-		_tcscat(buf,buf2);													\
-		_tcscat(buf,_T(" or > "));											\
-		_sntprintf(buf2, 128, _T("%g"), EPS(_upperLimit));					\
-		_tcscat(buf,buf2);													\
-		_tcscat(buf,_T(": "));												\
-		_sntprintf(buf2, 128, _T("%g"), EPS(_val));							\
-		_tcscat(buf,buf2);													\
+		strcpy(buf,_desc);													\
+		strcat(buf,_T(" < "));												\
+		_snprintf(buf2, 128, _T("%g"), EPS(_lowerLimit));					\
+		strcat(buf,buf2);													\
+		strcat(buf,_T(" or > "));											\
+		_snprintf(buf2, 128, _T("%g"), EPS(_upperLimit));					\
+		strcat(buf,buf2);													\
+		strcat(buf,_T(": "));												\
+		_snprintf(buf2, 128, _T("%g"), EPS(_val));							\
+		strcat(buf,buf2);													\
 		throw RuntimeError (buf);											\
 	}
 
@@ -281,28 +272,16 @@ extern ScripterExport Value* _get_key_arg_or_default(Value** arg_list, int count
 // LAM - 6/07/02 - added new defines - no SDK impact	
 #define nine_value_locals(n1, n2, n3, n4, n5, n6, n7, n8, n9)									\
 	struct { int count; Value** link; Value *n1, *n2, *n3, *n4, *n5, *n6, *n7, *n8, *n9; } vl = \
-		{ 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };						\
+		{ 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };						\
 	vl.link = thread_local(current_locals_frame);												\
 	thread_local(current_locals_frame) = (Value**)&vl;
 	
 #define nine_typed_value_locals(n1, n2, n3, n4, n5, n6, n7, n8, n9)					\
 	struct { int count; Value** link; n1; n2; n3; n4; n5; n6; n7; n8; n9; } vl =	\
-		{ 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };			\
+		{ 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };			\
 	vl.link = thread_local(current_locals_frame);									\
 	thread_local(current_locals_frame) = (Value**)&vl;
 	
-#define ten_value_locals(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10)									\
-struct { int count; Value** link; Value *n1, *n2, *n3, *n4, *n5, *n6, *n7, *n8, *n9, *n10; } vl =	\
-		{ 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };					\
-		vl.link = thread_local(current_locals_frame);												\
-		thread_local(current_locals_frame) = (Value**)&vl;
-
-#define ten_typed_value_locals(n1, n2, n3, n4, n5, n6, n7, n8, n9, n10)				\
-struct { int count; Value** link; n1; n2; n3; n4; n5; n6; n7; n8; n9; n10; } vl =	\
-		{ 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };	\
-		vl.link = thread_local(current_locals_frame);								\
-		thread_local(current_locals_frame) = (Value**)&vl;
-
 #define value_local_array(var, count) {								\
 	var = &((Value**)_alloca(((count) + 2) * sizeof(Value*)))[2];	\
 	memset(var, 0, (count) * sizeof(Value*));						\
@@ -418,7 +397,6 @@ typedef void   (*max_setter_cf)(ReferenceTarget*, Value*, TimeValue, Value*);
 #define EXIT_LISTENER		0x0002
 
 extern ScripterExport Interface* MAXScript_interface;
-extern ScripterExport Interface7* MAXScript_interface7;
 extern ScripterExport int		MAXScript_signals;
 extern ScripterExport BOOL		escape_enabled; // RK: 05/20/02, 5.0 or later only
 extern ScripterExport BOOL		check_maxscript_interrupt;
@@ -444,24 +422,12 @@ extern ScripterExport HWND		main_thread_window;
 extern ScripterExport BOOL		progress_bar_up;
 extern ScripterExport BOOL		trace_back_active;
 extern ScripterExport BOOL		disable_trace_back;
-extern ScripterExport int		trace_back_levels;
 typedef void (*utility_installer)(Rollout* ro);
 extern ScripterExport void		set_utility_installer(utility_installer ui);
 extern ScripterExport void		reset_utility_installer();
 extern ScripterExport void		error_message_box(MAXScriptException& e, TCHAR* caption);
 typedef Value* (*autocad_point_reader)(TCHAR* str);
 extern ScripterExport void		set_autocad_point_reader(autocad_point_reader apr);
-
-// LAM - 4/28/03
-// Returns TRUE if script was executed successfully. If quietErrors == false and net rendering, errors are logged to LogSys. 
-// If not net rendering, errors are logged to Listener. Return value from script stored in fpv, if specified.
-extern ScripterExport BOOL		ExecuteMAXScriptScript(TCHAR *s, BOOL quietErrors = FALSE, FPValue *fpv = NULL);
-
-// LAM - 6/24/03
-// Method for processing input value or array for default action value. Current recognized values are:
-// #logMsg, #logToFile, #abort, and integer values. Actions are converted to DWORD where bit 0 is log to Default Action 
-// system log, bit 1 is log to log file, and bit 2 is abort/cancel (if applicable).
-extern ScripterExport DWORD		ProcessDefaultActionVal (Value* inpActionVal, DWORD defaultAction = DEFAULTACTIONS_LOGMSG);
 
 #define check_interrupts()	if (check_maxscript_interrupt) escape_checker(); if (MAXScript_signals) throw SignalException()
 
@@ -498,9 +464,6 @@ extern ScripterExport HWND		  the_listener_window;
 extern                HINSTANCE  hInstance;
 extern ScripterExport void       listener_message(UINT iMsg, WPARAM wParam, LPARAM lParam, BOOL block_flag);
 
-class RandGenerator;
-extern ScripterExport RandGenerator *ClassIDRandGenerator;
-
 inline int _count_with_keys(Value** arg_list, int count)
 {
 	// compute # args before any key-args
@@ -509,57 +472,5 @@ inline int _count_with_keys(Value** arg_list, int count)
 			return i;
 	return count;
 }
-
-extern ScripterExport BOOL GetPrintAllElements(); // get whether to print all elements of arrays, meshselection, BigMatrix, etc.
-extern ScripterExport BOOL SetPrintAllElements(BOOL); // set whether to print all elements of arrays, meshselection, BigMatrix, etc. Returns old value
-
-extern ScripterExport bool CanChangeGroupFlags(INode* node); // Since grouping break the node hierarchy used to represent ALOs, we don't allow it
-
-// MAXScript preferences.  An instance of this class lives in CORE and is accessible to both CORE and MAXScript
-class MAXScriptPrefs
-{
-public:
-	int		loadStartupScripts;
-	int		loadSaveSceneScripts;
-	int		loadSavePersistentGlobals;
-	TSTR	font;
-	int		fontSize;
-	int		autoOpenListener;
-	float	initialHeapSize;
-	int		enableMacroRecorder;
-	int		showCommandPanelSwitch;
-	int		showToolSelections;
-	int		showMenuSelections;
-	int		absoluteSceneNames;
-	int		absoluteSubObjects;
-	int		absoluteTransforms;
-	int		explicitCoordinates;
-	int		useFastNodeNameLookup;
-
-	MAXScriptPrefs() { Reset(); }
-	void	Reset()
-	{
-		// MAXScript preference defaults
-		loadStartupScripts =		TRUE;
-		loadSaveSceneScripts =		TRUE;
-		loadSavePersistentGlobals = TRUE;
-		font =						_T("Courier New");
-		fontSize =					12;
-		initialHeapSize =			7.5;
-		autoOpenListener =			FALSE;
-		enableMacroRecorder =		FALSE;
-		showCommandPanelSwitch =	FALSE;
-		showToolSelections =		FALSE;
-		showMenuSelections =		FALSE;
-		absoluteSceneNames =		FALSE;
-		absoluteSubObjects =		FALSE;
-		absoluteTransforms =		FALSE;
-		explicitCoordinates =		FALSE;
-		useFastNodeNameLookup =		TRUE;
-	}
-
-	virtual void LoadMAXScriptPreferences();
-	virtual void SaveMAXScriptPreferences();
-};
 
 #endif

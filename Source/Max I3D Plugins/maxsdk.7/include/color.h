@@ -40,7 +40,7 @@ public:
 	Color(double R, double G, double B) { r = (float)R; g = (float)G; b = (float)B; }
 	Color(int R, int G, int B) { r = (float)R; g = (float)G; b = (float)B; }
 	Color(const Color& a) { r = a.r; g = a.g; b = a.b; } 
-	DllExport explicit Color(DWORD rgb);  // from Windows RGB value
+	DllExport Color(DWORD rgb);  // from Windows RGB value
 	Color(Point3 p) { r = p.x; g = p.y; b = p.z; }
 	Color(float af[3]) { r = af[0]; g = af[1]; b = af[2]; }
 	Color(RealPixel rp) { ExpandRealPixel(rp,r,g,b); } 
@@ -77,8 +77,7 @@ public:
 	operator const float*() const { return(&r); }
 
 	// Convert to Windows RGB
-//	operator DWORD() { return RGB(FLto255(r),FLto255(g), FLto255(b)); }
-	DWORD toRGB() { return RGB(FLto255(r),FLto255(g), FLto255(b)); };
+	operator DWORD() { return RGB(FLto255(r),FLto255(g), FLto255(b)); }
 
 	// Convert to Point3
 	operator Point3() { return Point3(r,g,b); }

@@ -83,20 +83,6 @@ typedef ULONG_PTR PartID;
 #define PART_GI_STOREILLUMMESH			(1<<10)
 #define PART_GI_RAYMULT					(1<<11)
 
-// aszabo|june.04.03
-// Part IDs sent with the REFMSG_NODE_RENDERING_PROP_CHANGED message.
-#define PART_REND_PROP_RENDERABLE								(1<<0)
-#define PART_REND_PROP_CAST_SHADOW							(1<<1)
-#define PART_REND_PROP_RCV_SHADOW								(1<<2)
-#define PART_REND_PROP_RENDER_OCCLUDED					(1<<3)
-#define PART_REND_PROP_VISIBILITY								(1<<4)
-#define PART_REND_PROP_INHERIT_VIS							(1<<5)
-#define PART_REND_PROP_PRIMARY_INVISIBILITY			(1<<6)
-#define PART_REND_PROP_SECONDARY_INVISIBILITY		(1<<7)
-// Part IDs sent with the REFMSG_NODE_DISPLAY_PROP_CHANGED message.
-#define PART_DISP_PROP_IS_HIDDEN								(1<<0)
-#define PART_DISP_PROP_IS_FROZEN								(1<<1)
-
 /* The message passed to notify and evaluate.
  */
 typedef unsigned int RefMessage;
@@ -347,7 +333,7 @@ typedef unsigned int RefMessage;
 
 #define REFMSG_NODE_FLAGOMB_RENDER 0x00000237 
 
-// Notification sent AFTER the Global Illumination (radiosity) properties of a node changed
+// Notification sent AFTER the Global Illumination (radiosity) properties of an object change
 // The part id will contain information about the property that has changed.
 // [dl 7june2001]
 #define REFMSG_NODE_GI_PROP_CHANGED	0x00000238
@@ -355,14 +341,6 @@ typedef unsigned int RefMessage;
 // R5.1 and later only
 // Sent when key selection changes.
 #define REFMSG_KEY_SELECTION_CHANGED 0x00000239
-
-// aszabo|june.04.03
-// Notification sent AFTER the Node Rendering Properties have changed
-// The part id will contain information about the property that has changed.
-#define REFMSG_NODE_RENDERING_PROP_CHANGED	0x00000240
-// Notification sent AFTER the Node Display Properties have changed
-// The part id will contain information about the property that has changed.
-#define REFMSG_NODE_DISPLAY_PROP_CHANGED	0x00000241
 
 /* Message numbers above this value can be defined for use
  * by sub-classes, below are reserved.
@@ -395,10 +373,7 @@ enum RefResult {
 	REF_SUCCEED,
 	REF_DONTCARE,
 	REF_STOP,
-	REF_INVALID,
-	// Return this from NotifRefChanged() when a REFMGS_TAGET_DELETED message is sent
-	// if a ReferenceMaker should be removed from the scene when all its references are removed.
-	REF_AUTO_DELETE
+	REF_INVALID	
 	};
 
 
@@ -571,11 +546,9 @@ class  ReferenceMaker : public Animatable {
 				BOOL propagate=TRUE, RefTargetHandle hTarg=NULL );
 
 		// Enumerate auxiliary files (e.g. bitmaps)
-		// The default implementation just calls itself on all references and
-		// calls Animatable::EnumAuxFiles to pick up Custom Attributes
+		// The default implementation just calls itself on all references.
 		// Entities which actually need to load aux files must implement this,
-		// possibly calling ReferenceMaker::EnumAuxFiles also to recurse. If
-		// you don't call ReferenceMaker::EnumAuxFiles call Animatable::EnumAuxFiles
+		// possibly calling ReferenceMaker::EnumAuxFiles also to recurse.
 		CoreExport virtual void EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags);
 
 		CoreExport RefResult DeleteReference( int i);
@@ -764,7 +737,7 @@ class RefEnumProc {
 	virtual void proc(ReferenceMaker *rm)=0;
 	};
 
-CoreExport void  EnumRefHierarchy(ReferenceMaker *rm, RefEnumProc &proc, bool includeCustAttribs = true);
+CoreExport void  EnumRefHierarchy(ReferenceMaker *rm, RefEnumProc &proc);
 CoreExport ReferenceTarget *CloneRefHierarchy(ReferenceTarget *rm);
 
 
@@ -814,25 +787,6 @@ CoreExport DWORD SetSavingVersion(DWORD version);
 CoreExport void DisableRefMsgs();
 CoreExport void EnableRefMsgs();
 
-// New to R6. Reference Maker to single entity
-class SingleRefMaker: public ReferenceMaker {
-public:
-	RefTargetHandle rtarget;
-	CoreExport SingleRefMaker();
-	CoreExport ~SingleRefMaker();      //suspended from Undo system
-	CoreExport	void SetRef(RefTargetHandle rt);  //suspended from Undo system
-	CoreExport RefTargetHandle GetRef();
-	// ReferenceMaker 
-	CoreExport RefResult NotifyRefChanged( Interval changeInt,RefTargetHandle hTarget, 
-		PartID& partID, RefMessage message );    // by default handles REFMSG_TARGET_DELETED message only
-	CoreExport void DeleteThis();
-	CoreExport	SClass_ID  SuperClassID();
-	// From ref
-	CoreExport	int NumRefs();
-	CoreExport	RefTargetHandle GetReference(int i);
-	CoreExport	void SetReference(int i, RefTargetHandle rtarg);
-	CoreExport	BOOL CanTransferReference(int i);
-};
 #endif
 
 

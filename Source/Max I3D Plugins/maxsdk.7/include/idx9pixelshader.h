@@ -13,9 +13,6 @@
 
 #include <d3dx9.h>
 
-#ifndef IDX9_PIXELSHADER9_H
-#define IDX9_PIXELSHADER9_H
-
 #define DX9_PIXEL_SHADER_INTERFACE_ID Interface_ID(0x544218fd, 0x7b344bc9)
 
 class ID3D9GraphicsWindow;
@@ -45,12 +42,10 @@ public:
 	virtual int GetNumMultiPass() = 0;
 
 	// Retrieve the PixelShader handle for the specified pass for use in GFX
-	virtual LPDIRECT3DPIXELSHADER9 GetPixelShaderHandle(int numPass) = 0;
+	virtual LPDIRECT3DPSHADER9 GetPixelShaderHandle(int numPass) = 0;
 
 	// Set the PixelShader for the specified pass.  This call will be made at
 	// least once per object to set the per object data for the PixelShader
 	// such as the PixelShader constants.
 	virtual HRESULT SetPixelShader(ID3D9GraphicsWindow *gw, int numPass) = 0;
 };
-
-#endif

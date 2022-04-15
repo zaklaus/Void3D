@@ -394,8 +394,7 @@ class Shader : public BaseShader, public IReshading  {
 	void PreShade(ShadeContext& sc, IReshadeFragment* pFrag){}
 	void PostShade(ShadeContext& sc, IReshadeFragment* pFrag, int& nextTexIndex, IllumParams* ip){ Illum( sc, *ip ); }
 
-	// [dl | 13march2003] Adding this inlined definition to resolve compile errors
-    BaseInterface* GetInterface(Interface_ID id) { return BaseShader::GetInterface(id); }
+    using BaseShader::GetInterface;
 	void* GetInterface(ULONG id){
 		if( id == IID_IReshading )
 			return (IReshading*)( this );

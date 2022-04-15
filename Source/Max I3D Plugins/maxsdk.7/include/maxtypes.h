@@ -137,7 +137,7 @@ class Interface_ID {
 // Types used by ISave, ILoad, AppSave, AppLoad 
 typedef enum {IO_OK=0, IO_END=1, IO_ERROR=2} IOResult; 
 typedef enum {NEW_CHUNK=0, CONTAINER_CHUNK=1, DATA_CHUNK=2} ChunkType;
-typedef enum {IOTYPE_MAX=0, IOTYPE_MATLIB=1, IOTYPE_RENDER_PRESETS=2} FileIOType; 
+typedef enum {IOTYPE_MAX=0, IOTYPE_MATLIB=1} FileIOType; 
 
 
 // Lock / licensing types  000817  --prs.
@@ -147,7 +147,7 @@ enum ProductVersionType { PRODUCT_VERSION_DEVEL, PRODUCT_VERSION_TRIAL,
 						  PRODUCT_VERSION_NFR };
 
 enum LockBehaviorType { LICENSE_BEHAVIOR_PERMANENT, LICENSE_BEHAVIOR_EXTENDABLE,
-                        LICENSE_BEHAVIOR_NONEXTENDABLE, LICENSE_BEHAVIOR_BORROWED };
+                        LICENSE_BEHAVIOR_NONEXTENDABLE };
 
 
 

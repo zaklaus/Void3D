@@ -14,10 +14,10 @@
 
 #define WIN95STUFF
 
-// To set up Max to use Unicode, define _UNICODE, and don't define _MBCS
-// To set up Max to use multi-byte character sets, define _MBCS and 
+// To set up Jaguar to use Unicode, define _UNICODE, and don't define _MBCS
+// To set up Jaguar to use multi-byte character sets, define _MBCS and 
 //              don't define _UNICODE
-// To set up Max to use single-byte ANSI character strings, don't define
+// To set up Jaguar to use single-byte ANSI character strings, don't define
 //              either _UNICODE or _MBCS
 
 // #define _UNICODE     // turn on Unicode support
@@ -58,7 +58,7 @@
 
 // Bring in the Rogue Wave regular and wide string classes
 // These classes will help us avoid problems in dealing with strings.
-// Use the RWWString class to store all strings used in Max -- The
+// Use the RWWString class to store all strings used in Jaguar -- The
 // RWWString class allows unlimited length strings, so we will avoid
 // the problems of string truncation or overwriting memory.
 // NOTE: No RogueWave classes should be used in plugin API's !!

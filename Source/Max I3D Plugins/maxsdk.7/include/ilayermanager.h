@@ -14,6 +14,7 @@
 #pragma once
 #ifndef __ILAYERMANAGER_H__
 #define __ILAYERMANAGER_H__
+//#include <ILayer.h>
 
 class ILayer;
 class LayerIterator;
@@ -48,10 +49,6 @@ public:
 	virtual ILayer * GetRootLayer() const = 0;
 	virtual void Reset(BOOL fileReset = FALSE) = 0;
 	virtual void SelectObjectsByLayer(HWND hWnd) = 0;
-
-	// new Hide/Freeze logic, 030516  --prs.
-	virtual void SetPropagateToLayer(int prop) = 0;
-	virtual int GetPropagateToLayer(void) = 0;
 };
 
 #endif //__ILAYERMANAGER_H__

@@ -80,7 +80,7 @@ public:
 	// Should the light render it's illumination in the production render. This is
 	// used to allow the radiosity plugin to supply lighting for lights
 	// from its solution.
-	virtual bool UseLight(INode* node, bool recalcSolution = false) { return true; }
+	virtual bool UseLight(INode* node) { return true; }
 
 	// Create light objects that the renderer can use to get the
 	// radiosity contribution. NumLightDesc returns the number of
@@ -182,7 +182,7 @@ public:
     // are no lights in the scene. A radiosity plugin could override this if it
     // uses objects other than lights as light sources (e.g. self-emitting
     // surfaces)
-    virtual bool UseDefaultLight(const DefaultLight& defLight, bool recalcSolution = false) const = 0;
+    virtual bool UseDefaultLight(const DefaultLight& defLight) const = 0;
 
     // Returns whether the the radiosity plugin is interested in any
 	// of the channels in the part id.
@@ -190,58 +190,6 @@ public:
 
     // -- from BaseInterface
     virtual Interface_ID GetID() { return IRADIOSITYEFFECT_EXTENSION_INTERFACE; }
-};
-
-
-/*===========================================================================
- *
- * Class IRadiosityRenderParameters
- *
- * This interface provides access to our radiosity plug-in rendering parameters.
- *
- *===========================================================================*/
-
-#define IRADIOSITY_RENDER_PARAMETERS_INTERFACE Interface_ID(0x39981beb, 0x38df21ad)
-
-class IRadiosityRenderParameters : public BaseInterface {
-
-public:
-
-    virtual bool GetReuseDirectIllumination(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetReuseDirectIllumination(bool in_reuse, TimeValue in_time = 0) = 0;
-
-    virtual bool GetRegather(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetRegather(bool in_gather, TimeValue in_time = 0) = 0;
-
-    virtual int GetRaysPerSample(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetRaysPerSample(int in_raysPerSample, TimeValue in_time = 0) = 0;
-
-    virtual float GetFilterRadius(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetFilterRadius(float in_radius, TimeValue in_time = 0) = 0;
-
-    virtual bool GetClampEnabled(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetClampEnabled(bool in_clamp, TimeValue in_time = 0) = 0;
-
-    virtual float GetClampValue(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetClampValue(float in_clampValue, TimeValue in_time = 0) = 0;
-
-    virtual bool GetAdaptiveEnabled(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetAdaptiveEnabled(bool in_adaptive, TimeValue in_time = 0) = 0;
-
-    virtual int GetSampleSpacing(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetSampleSpacing(int in_sampleSpacing, TimeValue in_time = 0) = 0;
-
-    virtual float GetSubdivionContrast(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetSubdivionContrast(float in_contrast, TimeValue in_time = 0) = 0;
-
-    virtual int GetMinSampleSpacing(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetMinSampleSpacing(int in_minSpacing, TimeValue in_time = 0) = 0;
-
-    virtual bool GetShowSamples(TimeValue in_time = 0, Interval *valid = NULL) const = 0;
-    virtual void SetShowSamples(bool in_show, TimeValue in_time = 0) = 0;
-
-    // -- from BaseInterface
-    virtual Interface_ID GetID() { return IRADIOSITY_RENDER_PARAMETERS_INTERFACE; }
 };
 
 #endif

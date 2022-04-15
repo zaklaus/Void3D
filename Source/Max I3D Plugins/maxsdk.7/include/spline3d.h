@@ -41,7 +41,6 @@
 #define KTYPE_CORNER 1
 #define KTYPE_BEZIER 2
 #define KTYPE_BEZIER_CORNER (KTYPE_BEZIER | KTYPE_CORNER)
-#define KTYPE_RESET	4
 
 // Parameter types
 #define PARM_UNIFORM		0
@@ -98,7 +97,6 @@ class SplinePoint {
 //watje
 #define SEGMENT_VISIBLE		(1<<0)
 #define SPLINEKNOT_NO_SNAP	(1<<1)	// Suppresses snapping to knot if set
-#define SPLINEKNOT_ADD_SEL	(1<<2)	// CAL-05/23/03: additional selection for transformation
 
 // This class is used for the internal storage of spline knot assemblies
 // in the Spline3D class
@@ -157,10 +155,7 @@ class SplineKnotAssy {
 		inline	BOOL	IsNoSnap() {return (flags&SPLINEKNOT_NO_SNAP);}
 		inline	void    SetNoSnap() { flags |= (DWORD)(SPLINEKNOT_NO_SNAP);}
 		inline	void    ClearNoSnap() { flags &= (DWORD)(~SPLINEKNOT_NO_SNAP);}
-// CAL-05/23/03
-		inline	BOOL	GetFlag (DWORD fl) { return (flags & fl) ? TRUE : FALSE; }
-		inline	void	SetFlag (DWORD fl, BOOL val=TRUE) { if (val) flags |= fl; else flags &= ~fl; }
-		inline	void	ClearFlag (DWORD fl) { flags &= ~fl; }
+
 	};
 
 // This class is used by plugins to get and set knot information in the Spline3D class.
@@ -229,10 +224,6 @@ public:
 	inline	BOOL	IsNoSnap() {return (flags&SPLINEKNOT_NO_SNAP);}
 	inline	void    SetNoSnap() { flags |= (DWORD)(SPLINEKNOT_NO_SNAP);}
 	inline	void    ClearNoSnap() { flags &= (DWORD)(~SPLINEKNOT_NO_SNAP);}
-// CAL-05/23/03
-	inline	BOOL	GetFlag (DWORD fl) { return (flags & fl) ? TRUE : FALSE; }
-	inline	void	SetFlag (DWORD fl, BOOL val=TRUE) { if (val) flags |= fl; else flags &= ~fl; }
-	inline	void	ClearFlag (DWORD fl) { flags &= ~fl; }
 	};
 
 // Private spline flags

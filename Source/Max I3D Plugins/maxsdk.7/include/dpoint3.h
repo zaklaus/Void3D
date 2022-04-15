@@ -17,12 +17,7 @@
 
 #include "point3.h"
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
+class ostream;
 
 class DPoint3 {
 public:
@@ -70,11 +65,7 @@ DPoint3 DllExport operator*(double, const DPoint3&);	// multiply by scalar
 DPoint3 DllExport operator*(const DPoint3&, double);	// multiply by scalar
 DPoint3 DllExport operator/(const DPoint3&, double);	// divide by scalar
 
-#if _MSC_VER < 1300  // Visual Studio .NET
 ostream DllExport &operator<<(ostream&, const DPoint3&); 
-#else
-std::ostream DllExport &operator<<(std::ostream&, const DPoint3&); 
-#endif
 	 
 // Inlines:
 

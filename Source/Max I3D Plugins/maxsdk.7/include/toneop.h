@@ -172,56 +172,8 @@ public:
 	// components are stored in that order in the array.
 	virtual void ScaleRGB(float color[3]) const = 0;
 	virtual float ScaleRGB(float color) const = 0;
-	
-	// Is this tone operator invertable
-	bool CanInvert();
-	
-	// Calculate the physical value from the display value
-	void RGBToScaled(float energy[3]);
-	float RGBToScaled(float energy);
 };
 
-
-/*=====================================================================
- * Invertable Tone Operator Interface class
- *===================================================================*/
-// Not all tone operators can map display RGB values to physical values.
-// This interface is used by tone operators that are invertable to
-// do this mapping.
-
-#define INVERTABLE_TONE_OPERATOR_INTERFACE	Interface_ID(0xbe9171b, 0x71183b19)
-
-class ToneOperatorInvertable : public BaseInterface {
-public:
-	// Calculate the physical value from the display value
-	virtual void InverseMap(float rgb[3]) = 0;
-	virtual float InverseMap(float rgb) = 0;
-};
-
-
-// Is this tone operator invertable
-inline bool ToneOperator::CanInvert()
-{
-	return GetInterface(INVERTABLE_TONE_OPERATOR_INTERFACE) != NULL;
-}
-
-// Calculate the physical value from the display value
-inline void ToneOperator::RGBToScaled(float energy[3])
-{
-	ToneOperatorInvertable* p = static_cast<ToneOperatorInvertable*>(
-		GetInterface(INVERTABLE_TONE_OPERATOR_INTERFACE));
-		
-	if (p != NULL)
-		p->InverseMap(energy);
-}
-
-inline float ToneOperator::RGBToScaled(float energy)
-{
-	ToneOperatorInvertable* p = static_cast<ToneOperatorInvertable*>(
-		GetInterface(INVERTABLE_TONE_OPERATOR_INTERFACE));
-		
-	return p == NULL ? energy : p->InverseMap(energy);
-}
 
 // Does this tone operator really map physical values to RGB. This method
 // is provided so shaders can determine whether the shading calculations

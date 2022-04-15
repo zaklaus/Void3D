@@ -20,11 +20,6 @@ class IBaseWireControl;
 #define PARAMWIRE_MGR_INTERFACE   Interface_ID(0x490d0e99, 0xbe87c96)
 inline IParamWireMgr* GetParamWireMgr() { return (IParamWireMgr*)GetCOREInterface(PARAMWIRE_MGR_INTERFACE); }
 
-#define PWMF_LEFT_TARGET	0x001
-#define PWMF_RIGHT_TARGET	0x002
-#define PWMF_HAS_MENU		0x004
-#define PWMF_OPEN_EDITOR	0x008
-
 // class IParamWireMgr
 //    parameter wiring manager interface 
 class IParamWireMgr : public FPStaticInterface 
@@ -35,8 +30,9 @@ public:
 		   openEditor,
 		   editParams, editParam,
 		   editControllers, editController,
+		   popupParamMenu, 
 		   connect, connect2Way,
-		   disconnect, disconnect2Way
+		   disconnect, disconnect2Way,
 		}; 
 
 	virtual void StartParamWire()=0;					// launch param wiring UI mode
@@ -55,7 +51,6 @@ public:
 	virtual bool Disconnect(Control* wireController)=0;  // disconnect one-way
 	virtual bool Disconnect2Way(Control* wireController1, Control* wireController2)=0;  // disconnect two-way
 
-	virtual Animatable* ParamWireMenu( ReferenceTarget* pTarget, int iSubNum, int iFlags = PWMF_LEFT_TARGET, HWND hWnd = NULL, IPoint2 *pPt = NULL )=0;
 }; 
 
 // ------ individual wire controller interface -------------
@@ -65,7 +60,6 @@ public:
 #define FLOAT_WIRE_CONTROL_CLASS_ID		Class_ID(0x498702e7, 0x71f11549)
 #define POSITION_WIRE_CONTROL_CLASS_ID	Class_ID(0x5065767c, 0x683a42a6)
 #define POINT3_WIRE_CONTROL_CLASS_ID	Class_ID(0x4697286a, 0x2f7f05cf)
-#define POINT4_WIRE_CONTROL_CLASS_ID	Class_ID(0x4697286b, 0x2f7f05ff)
 #define ROTATION_WIRE_CONTROL_CLASS_ID	Class_ID(0x31381913, 0x3a904167)
 #define SCALE_WIRE_CONTROL_CLASS_ID		Class_ID(0x7c8f3a2b, 0x1e954d92)
 

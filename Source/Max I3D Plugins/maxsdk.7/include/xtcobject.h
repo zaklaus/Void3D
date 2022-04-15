@@ -11,9 +11,6 @@
  *>     Copyright (c) 2000, All Rights Reserved.
  **********************************************************************/
 
-#ifndef __XTC_OBJECT_H__
-#define __XTC_OBJECT_H__
-
 #include "maxapi.h"
 #include "plugapi.h"
 #include "iFnPub.h"
@@ -88,5 +85,3 @@ public:
 	// not lost.
 	virtual bool RemoveXTCObjectOnBranchDeleted(Object *ComObj,int branchID, bool branchWillBeReordered) { return true; }
 };
-
-#endif

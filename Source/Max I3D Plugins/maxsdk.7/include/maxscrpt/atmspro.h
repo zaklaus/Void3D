@@ -7,8 +7,6 @@
  
 /* gizmo operations */
 
-#ifndef NO_ATMOSPHERICS	// russom - 04/11/02
 	def_visible_generic  ( getGizmo,	"getGizmo");
 	def_visible_generic  ( deleteGizmo,	"deleteGizmo");
 	def_visible_generic  ( appendGizmo,	"appendGizmo");
-#endif // NO_ATMOSPHERICS

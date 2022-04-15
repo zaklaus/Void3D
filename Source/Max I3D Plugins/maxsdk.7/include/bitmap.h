@@ -42,8 +42,6 @@
 #define TARGAPLSCLASSID 13
 #define AVICLASSID      14
 #define RLACLASSID      15
-#define RPFCLASSID		16
-#define MPGCLASSID      17
 
 //-- local definitions
 
@@ -279,8 +277,6 @@ typedef unsigned short BMMRES;              // Traps the use of int or BOOL
 
 #define BMM_FILTER_NOFLAGS       ((DWORD)0)
 #define BMM_FILTER_LERP_WRAP     ((DWORD)(1<<0))
-// Set when when the filter fails to build its lookup table, cleared otherwise
-#define BMM_FILTER_BUILD_FAILED  ((DWORD)(1<<1))
 
 //-- Dither Types
 
@@ -805,15 +801,6 @@ class BitmapIO : public BaseInterfaceServer {
       bVirtual  DWORD          EvaluateConfigure           ( ) = 0;
       bVirtual  BOOL           LoadConfigure               ( void *ptr ) = 0;
       bVirtual  BOOL           SaveConfigure               ( void *ptr ) = 0;
-
-      //  Cfg methods provide access to the plug-in's default options, as saved in its .cfg file
-      //  ReadCfg() loads the default options into the parameter block
-      //  WriteCfg() saves the parameter block as the defaults
-
-      bVirtual  void           GetCfgFilename              ( TCHAR *filename ) {}
-      bVirtual  BOOL           ReadCfg                     ( ) { return TRUE; }
-      bVirtual  void           WriteCfg                    ( ) {}
-
 
       //-- Used internaly to make sure current block belongs to Plug-In
       
@@ -1861,11 +1848,9 @@ class BitmapManager : public InterfaceServer{
 	  virtual void DeleteAllAutonomousVFBMaps()=0;
 
 // cmd values passed in to Execute
-#define BMM_STORE_GEOREF_DATA				0 // Used in VIZ only; arg1: const TCHAR*; arg2: GeoTableItem*; arg3: not used
-#define BMM_RETRIEVE_GEOREF_DATA			1 // Used in VIZ only; arg1: const TCHAR*; arg2: GeoTableItem**; arg3: not used
-#define BMM_USE_CUSTOM_FILTERLIST			2 // Used to pass a Filter list to the BitmapManager; arg1 TCHAR *, arg2,arg3 not used  
-#define BMM_SET_FILE_INPUT_SEQUENCE_FLAG	3 // Used to set the sequence flag  for file input 
-#define BMM_GET_FILE_INPUT_SEQUENCE_FLAG	4 // Used to get the sequence flag for file input 
+#define BMM_STORE_GEOREF_DATA    0 // Used in VIZ only; arg1: const TCHAR*; arg2: GeoTableItem*; arg3: not used
+#define BMM_RETRIEVE_GEOREF_DATA 1 // Used in VIZ only; arg1: const TCHAR*; arg2: GeoTableItem**; arg3: not used
+#define BMM_USE_CUSTOM_FILTERLIST 2// Used to pass a Filter list to the BitmapManager; arg1 TCHAR *, arg2,arg3 not used  
 
 	  // Generic expansion function
 	  virtual INT_PTR Execute(int cmd, ULONG_PTR arg1=0, ULONG_PTR arg2=0, ULONG_PTR arg3=0)=0; 

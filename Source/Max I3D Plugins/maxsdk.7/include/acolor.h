@@ -17,7 +17,6 @@
 
 #include "maxtypes.h"
 #include "point3.h"
-#include "point4.h"
 #include "color.h"
 
 class AColor {
@@ -33,8 +32,7 @@ public:
 		r = (float)R; g = (float)G; b = (float)B; a = (float)A; }
 	AColor(const AColor& c) { r = c.r; g = c.g; b = c.b; a = c.a; } 
 	AColor(const Color& c, float alph=1.0f) { r = c.r; g = c.g; b = c.b; a = alph; } 
-	DllExport explicit AColor(DWORD rgb, float alph=1.0f);  // from Windows RGB value
-	AColor(Point4 p) { r = p.x; g = p.y; b = p.z; a = p.w; }
+	DllExport AColor(DWORD rgb, float alph=1.0f);  // from Windows RGB value
 	AColor(float af[4]) { r = af[0]; g = af[1]; b = af[2];a = af[3]; }
 	AColor(const BMM_Color_24& c) { 
 		r = float(c.r)/255.0f; g = float(c.g)/255.0f; b = float(c.b)/255.0f; a = 1.0f; 
@@ -95,12 +93,10 @@ public:
 		}
 
 	// Convert to Windows RGB
-//	operator DWORD() { return RGB(FLto255(r),FLto255(g), FLto255(b)); }
-	DWORD toRGB() { return RGB(FLto255(r),FLto255(g), FLto255(b)); };
+	operator DWORD() { return RGB(FLto255(r),FLto255(g), FLto255(b)); }
 
-	// Convert to Point3, 4
+	// Convert to Point3
 	operator Point3() { return Point3(r,g,b); }
-	operator Point4() { return Point4(r,g,b,a); }
 
 	// Unary operators
 	AColor operator-() const { return (AColor(-r,-g,-b, -a)); } 

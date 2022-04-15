@@ -46,7 +46,7 @@ public:
 	int nverts;			// size of 'list'.
 
 	DllExport AdjEdgeList(Mesh& amesh);
-	DllExport ~AdjEdgeList();
+	~AdjEdgeList() { if (list) delete [] list; }
 
 	DllExport void AddEdge( DWORD fi, DWORD v1, DWORD v2 );
 	DWORDTab& operator[](int i) { return list[i]; }
@@ -124,7 +124,7 @@ public:
 
 	MeshChamferData () { mdir=NULL; }
 	MeshChamferData (const Mesh & m) { mdir=NULL; InitToMesh(m); }
-	DllExport ~MeshChamferData ();
+	~MeshChamferData () { if (mdir) delete [] mdir; }
 
 	DllExport void InitToMesh (const Mesh & m);
 	DllExport void setNumVerts (int nv, bool keep=TRUE, int resizer=0);

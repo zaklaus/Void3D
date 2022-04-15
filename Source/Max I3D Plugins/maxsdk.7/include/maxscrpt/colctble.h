@@ -30,19 +30,6 @@ enum gc_flags
 	GC_MIGRATED_TO_HEAP	= 0x0080,
 };
 
-// general purpose Collectable flag bits ...
-enum gp_flags2
-{
-	COLLECTABLE_IN_SPRIN1	= 0x0001, // used by values that can recursively call sprin1. For example, arrays
-	COLLECTABLE_UNUSED2		= 0x0002,
-	COLLECTABLE_UNUSED3		= 0x0004,
-	COLLECTABLE_UNUSED4		= 0x0008,
-	COLLECTABLE_UNUSED5		= 0x0010,
-	COLLECTABLE_UNUSED6		= 0x0020,
-	COLLECTABLE_UNUSED7		= 0x0040,
-	COLLECTABLE_UNUSED8		= 0x0080,
-};
-
 class Value;
 class ValueMapper;
 
@@ -73,9 +60,7 @@ public:
 											// on stack: pointer to heap migrated value, NULL if not migrated
 	Collectable*	prev;
 	static CRITICAL_SECTION heap_update;	// for syncing allocation list updates
-	byte			flags;					// collection flags - see enum gc_flags
-	byte			flags2;					// general purpose flags - only to be used by Collectable - see enum gp_flags2
-	short			flags3;					// general purpose flags - can be used by Values
+	short			flags;					// collection flags
 
 	static Collectable* collectable_list;	// head of the collectable list
 	static Collectable* permanent_list;		// head of the permanent list
@@ -84,8 +69,6 @@ public:
 	static size_t heap_size;				// alloc'd heap size
 	// LAM: 2/23/01 - need to export following for ms_make_collectable (see below) to link in DLXs.
 	ScripterExport static col_state state;	// current collector state 
-	ScripterExport static bool fullCollectNextHoldFlush;	// if true, perform gc on next Hold system flush
-	static bool gc_light;					// if true, no Hold system flush during current gc
 	
 	ScripterExport Collectable();
 	ScripterExport ~Collectable();

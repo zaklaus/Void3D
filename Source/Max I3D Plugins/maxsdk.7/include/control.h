@@ -371,13 +371,12 @@ class CtrlHitRecord {
 class CtrlHitLog {
 	CtrlHitRecord *first;
 	int hitIndex;
-	bool hitIndexReady;			// CAL-07/10/03: hitIndex is ready to be increased.
 	public:
-		CtrlHitLog()  { first = NULL; hitIndex = 0; hitIndexReady = false; }
+		CtrlHitLog()  { first = NULL; }
 		~CtrlHitLog() { Clear(); }
 		CoreExport void Clear();
-		CoreExport void ClearHitIndex(bool ready = false)		{ hitIndex = 0; hitIndexReady = ready; }
-		CoreExport void IncrHitIndex()		{ if (hitIndexReady) hitIndex++; else hitIndexReady = true; }
+		CoreExport void ClearHitIndex()		{ hitIndex = 0; }
+		CoreExport void IncrHitIndex()		{ hitIndex++; }
 		CtrlHitRecord* First() { return first; }
 		CoreExport CtrlHitRecord* ClosestHit();
 		void LogHit(INode *nr,DWORD dist,ulong info,DWORD infoExtra)
@@ -555,19 +554,18 @@ class Control : public ReferenceTarget {
 		virtual BOOL SetRotationController(Control *c) {return FALSE;}
 		virtual BOOL SetScaleController(Control *c) {return FALSE;}
 
-		// If a controller has an 'X', 'Y', 'Z', or 'W' controller, it can implement
+		// If a controller has an 'X', 'Y', or 'Z' controller, it can implement
 		// these methods so that its sub controllers can respect track view filters
 		virtual Control *GetXController() {return NULL;}
 		virtual Control *GetYController() {return NULL;}
 		virtual Control *GetZController() {return NULL;}
-		virtual Control *GetWController() {return NULL;}
 
 		// Implemented by look at controllers that have a float valued roll
 		// controller so that the roll can be edited via the transform type-in
 		virtual Control *GetRollController() {return NULL;}
 		virtual BOOL SetRollController(Control *c) {return FALSE;}
 
-		// Implemented by any Point3/Point4 controller that wishes to indicate that it is intended
+		// Implemented by any Point3 controller that wishes to indicate that it is intended
 		// to control floating point RGB color values
 		virtual BOOL IsColorController() {return FALSE;}
 
@@ -773,13 +771,7 @@ class Control : public ReferenceTarget {
 		virtual void SubScale( TimeValue t, Matrix3& partm, Matrix3& tmAxis, Point3& val, BOOL localOrigin=FALSE ){}		
 		
 		// Schematic View Animatable Overides...
-		CoreExport virtual SvGraphNodeReference SvTraverseAnimGraph(IGraphObjectManager *gom, Animatable *object, int id, DWORD flags);
-		CoreExport virtual TSTR SvGetName(IGraphObjectManager *gom, IGraphNode *gNode, bool isBeingEdited);
-		CoreExport virtual bool SvHandleDoubleClick(IGraphObjectManager *gom, IGraphNode *gNode);
-		CoreExport virtual bool SvCanInitiateLink(IGraphObjectManager *gom, IGraphNode *gNode);
-		CoreExport virtual bool SvCanConcludeLink(IGraphObjectManager *gom, IGraphNode *gNode, IGraphNode *gNodeChild);
-		CoreExport virtual bool SvLinkChild(IGraphObjectManager *gom, IGraphNode *gNodeThis, IGraphNode *gNodeChild);
-		CoreExport virtual bool SvEditProperties(IGraphObjectManager *gom, IGraphNode *gNode);
+		CoreExport SvGraphNodeReference SvTraverseAnimGraph(IGraphObjectManager *gom, Animatable *object, int id, DWORD flags);
 
 		// Called when the user rescales time in the time configuration dialog. If FALSE
 		// is returned from this method then MapKeys() will be used to perform the scaling. 
@@ -1101,12 +1093,6 @@ class TempStore {
 		CoreExport void GetPoint3(Point3 *f, void *ptr) { 
 			GetBytes(sizeof(Point3),(void *)f,ptr);
 			}
-		CoreExport void PutPoint4(Point4  f, void *ptr) {
-			PutBytes(sizeof(Point4),(void *)&f,ptr);
-			}
-		CoreExport void GetPoint4(Point4 *f, void *ptr) { 
-			GetBytes(sizeof(Point4),(void *)f,ptr);
-			}
 		CoreExport void PutQuat( Quat  f, void *ptr) {
 			 PutBytes(sizeof(Quat),(void *)&f,ptr);
 			 }
@@ -1149,8 +1135,6 @@ CoreExport Control *NewDefaultScaleController();
 CoreExport Control *NewDefaultBoolController();
 CoreExport Control *NewDefaultColorController();
 CoreExport Control *NewDefaultMasterPointController();
-CoreExport Control *NewDefaultPoint4Controller();
-CoreExport Control *NewDefaultFRGBAController();
 
 CoreExport Control* CreateInterpFloat();
 CoreExport Control* CreateInterpPosition();
@@ -1160,13 +1144,11 @@ CoreExport Control* CreateInterpScale();
 CoreExport Control* CreatePRSControl();
 CoreExport Control* CreateLookatControl();
 CoreExport Control* CreateMasterPointControl();
-CoreExport Control* CreateInterpPoint4();
 
 CoreExport void SetDefaultController(SClass_ID sid, ClassDesc *desc);
 CoreExport ClassDesc *GetDefaultController(SClass_ID sid);
 
 CoreExport void SetDefaultColorController(ClassDesc *desc);
-CoreExport void SetDefaultFRGBAController(ClassDesc *desc);
 CoreExport void SetDefaultBoolController(ClassDesc *desc);
 
 CoreExport BOOL GetSetKeyMode();

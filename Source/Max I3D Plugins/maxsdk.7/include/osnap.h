@@ -55,7 +55,6 @@ class Osnap {
 	friend class OsnapHit;
 	friend class MXS_IOsnap; // LAM: added 2/6/01 for MXS osnap exposure
 	friend class OsnapManager;
-	friend class OSnapDecorator;
 
 protected:
 	BOOL *m_active;
@@ -74,6 +73,7 @@ protected:
 	DllExport Point3 *GetCandidatePoint(int index);
 	DllExport void GetCandidateMesh(int index, HitMesh *m);
 	DllExport int GetCandidateType(int index);
+//	DllExport void AddCandidate(Point3 *pt);
 	DllExport void ClearCandidates();
 	DllExport int NumCandidates(){return point_candidates.Count();}
 	virtual DllExport Point3 ReEvaluate(TimeValue t, OsnapHit *hit, Object* pobj);
@@ -86,7 +86,7 @@ protected:
 
 public:
 
-	DllExport Osnap();
+	DllExport Osnap();//constructor
 	DllExport virtual ~Osnap();
 	DllExport void Init();
 
@@ -115,58 +115,17 @@ public:
 
 protected://data
 	IOsnapManager *theman;
-	// Holds the point candidates
- 	CandidateTab point_candidates; 
+//	Point3Tab point_candidates; //this will hold the point candidates
+  	CandidateTab point_candidates; //this will hold the point candidates
+
+public://data
+//	INode *m_inode;
+//	ViewExp *m_vpt;
+
 };
 
-//-----------------------------------------------------------------------------
-// This class extends\decorates class Osnap with a few usefull methods. 
-// Object Snap plugins should continue to derive from class Osnap. Code that 
-// wishes to work with these plugins can use them directly or create and work 
-// with instances of this class
-class OSnapDecorator : protected Osnap
-{
-	public:
-		// Ctor\Dtor
-		DllExport OSnapDecorator(Osnap* pOsnap);
 
-		// Returns true if at least one of its snap types is active  
-		DllExport virtual bool IsActive() const;
-		// Returns true if the snap identified by the index parameter is active  
-		DllExport virtual bool IsActive(const int nSnapIdx) const;
-		// Turns On the snap identified by the index parameter
-		DllExport virtual void Activate(const int nSnapIdx);
-		// Turns Off the snap identified by the index parameter
-		DllExport virtual void Deactivate(const int nSnapIdx);
 
-		// --- From Osnap
-		DllExport virtual int numsubs(); 
-		DllExport virtual TCHAR *Category();
-		DllExport virtual Class_ID ClassID();
-		DllExport virtual BOOL UseCallbacks();
-		DllExport virtual int NumCallbacks();
-		DllExport virtual BOOL GetSupportedObject(
-			INode *iNode, TimeValue t, ObjectState *os);
-
-		DllExport virtual TSTR *snapname(int index);
-		DllExport virtual OsnapMarker *GetMarker(int index);
-		DllExport virtual HBITMAP getTools();
-		DllExport virtual HBITMAP getMasks();
-		DllExport virtual WORD AccelKey(int index);
-		DllExport virtual boolean ValidInput(SClass_ID scid, Class_ID cid);
-
-		DllExport virtual boolean BeginUI(HWND hwnd);
-		DllExport virtual void EndUI(HWND hwnd);
-		DllExport virtual void Snap(Object* pobj, IPoint2 *p, TimeValue t);
-		DllExport virtual BOOL HitTest(Object* pobj, IPoint2 *p, TimeValue t);
-		DllExport virtual SnapCallback GetSnapCallback( int sub);
-
-	protected:
-		OSnapDecorator(); // not implemented
-
-	private:
-		Osnap*	mpOsnapImp;
-};
 
 
 

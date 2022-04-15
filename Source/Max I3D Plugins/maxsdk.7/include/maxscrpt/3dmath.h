@@ -119,7 +119,6 @@ public:
 
 	Ray			to_ray() { return r; }
 	void		to_fpvalue(FPValue& v) { v.ray = new Ray (r); v.type = TYPE_RAY; }
-#	define		is_ray(r) ((r)->tag == class_tag(RayValue))
 
 	// scene I/O 
 	IOResult Save(ISave* isave);
@@ -359,7 +358,6 @@ public:
 	use_generic( minus,		"-" );
 	use_generic( times,		"*" );
 	use_generic( div,		"/" );
-	use_generic( uminus,	"u-");
 	use_generic( eq,		"=");
 	use_generic( ne,		"!=");
 	use_generic( random,	"random");
@@ -393,56 +391,6 @@ inline  IPoint2 to_ipoint2(Value* val) {
 			return IPoint2((int)p.x, (int)p.y); }
 
 // End of 3ds max 4.2 Extension
-
-/* ------------------------ Point4Value ------------------------------ */
-
-applyable_class (Point4Value)
-
-class Point4Value : public Value
-{
-public:
-	Point4		p;
-
-	ENABLE_STACK_ALLOCATE(Point4Value);
-
-	ScripterExport Point4Value(Point4 init_point);
-	ScripterExport Point4Value(float x, float y, float z, float w);
-	ScripterExport Point4Value(Value* x, Value* y, Value* z, Value* w);
-
-	classof_methods(Point4Value, Value);
-	void		collect() { delete this; }
-	ScripterExport void		sprin1(CharStream* s);
-#	define		is_point4(p) ((p)->tag == class_tag(Point4Value))
-
-	static Value* make(Value**arg_list, int count);
-
-	/* operations */
-
-#include "defimpfn.h"
-#	include "vectpro.h"
-	use_generic  ( coerce,	"coerce");
-	use_generic  ( copy,	"copy");
-	use_generic  ( get,		"get");
-	use_generic  ( put,		"put");
-
-	/* built-in property accessors */
-
-	def_property ( x );
-	def_property ( y );
-	def_property ( z );
-	def_property ( w );
-
-	Point4		to_point4() { return p; }
-	Point3		to_point3() { return Point3 (p.x, p.y, p.z); }
-	AColor		to_acolor() { return AColor (p.x, p.y, p.z, p.w); }
-	Point2		to_point2() { return Point2 (p.x, p.y); }
-	void		to_fpvalue(FPValue& v) { v.p4 = new Point4 (p); v.type = (ParamType2)TYPE_POINT4; }
-	COLORREF	to_colorref() { return RGB((int)(p.x*255.f), (int)(p.y*255.f), (int)(p.z*255.f)); }
-
-	// scene I/O 
-	IOResult Save(ISave* isave);
-	static Value* Load(ILoad* iload, USHORT chunkID, ValueLoader* vload);
-};
 
 
 // The following class has been added

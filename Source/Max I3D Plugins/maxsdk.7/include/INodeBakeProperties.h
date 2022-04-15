@@ -67,7 +67,7 @@ public:
 	virtual BOOL GetBakeEnabled() const = 0;
 	virtual void SetBakeEnabled( BOOL isExcluded ) = 0;
 
-	// mapping channel to use for baking Object level
+	// mapping channel to use for baking
 	virtual int  GetBakeMapChannel() const = 0;
 	virtual void SetBakeMapChannel( int mapChannel ) = 0;
 
@@ -87,7 +87,9 @@ public:
 	// bake render elements
 	virtual int GetNBakeElements() const = 0;
 	virtual MaxBakeElement* GetBakeElement( int nElement ) = 0;
-	virtual Tab<MaxBakeElement*> GetBakeElementArray() = 0;
+	virtual MaxBakeElement** GetBakeElementArray() = 0;
+	// direct set of element...used by setreference only
+	virtual void SetBakeElement( int nElement, MaxBakeElement* pElement )=0;
 
 	virtual BOOL AddBakeElement( MaxBakeElement* pEle ) = 0;
 	virtual BOOL RemoveBakeElement( MaxBakeElement* pEle ) = 0;
@@ -106,121 +108,23 @@ public:
 
 	virtual FBox2 GetActiveRegion() =0;
 	virtual void SetActiveRegion(FBox2 region) = 0;
-};
 
+    // Clone thyself .... needed????
+//    virtual INodeBakeProperties* Clone() = 0;
+//   virtual void CopyBakePropertiesFrom(const INodeBakeProperties& source) = 0;
 
-//==============================================================================
-// class INodeBakeProjProperties
-//
-// Properties related to projection mapping with texture baking
-//
-//==============================================================================
+	// attachments hold user data
+	// you must guarantee the id is unique: e.g. use owners pointer
+//	virtual void* GetAttachment( long id );
+//	virtual void  AddAttachment( long id, void* pAttachment );
+//	virtual void  RemoveAttachment( long id );
+//	virtual void  RemoveAllAttachments();
+//	virtual FPInterfaceDesc* GetDesc() =0 ; 
 
-#define NODE_BAKE_PROJ_PROPERTIES_INTERFACE Interface_ID(0x59d919a5, 0x6fb90a85)
-
-class INodeBakeProjProperties : public FPMixinInterface {
-public:
-	//Enabled
-	virtual BOOL	GetEnabled() = 0;
-	virtual void	SetEnabled( BOOL b ) = 0;
-
-	//ProjMod - Projection Modifier
-	virtual ReferenceTarget* GetProjMod() = 0;
-	virtual void	SetProjMod( ReferenceTarget* refTarg ) = 0;
-
-	//ProjModTarg - Projection Modifier Target
-	virtual TCHAR*	GetProjModTarg() = 0;
-	virtual void	SetProjModTarg( TCHAR* s ) = 0;
-
-	//CropAlpha
-	virtual BOOL	GetCropAlpha() = 0;
-	virtual void	SetCropAlpha( BOOL b ) = 0;
-
-	//ProjSpace: XYZ object space, or UVW texture space
-	enum { enumIdProjSpaceXYZ=0, enumIdProjSpaceUVW };
-	virtual int		GetProjSpace() = 0;
-	virtual void	SetProjSpace( int enum_val ) = 0;
-
-	//NormalSpace: World Space, Screen Space, Local Space, or Tangent Space
-	enum { enumIdNormalSpaceWorld=0, enumIdNormalSpaceScreen, enumIdNormalSpaceLocal, enumIdNormalSpaceTangent };
-	virtual int		GetNormalSpace() = 0;
-	virtual void	SetNormalSpace( int enum_val ) = 0;
-
-	//TangentYDir: Y-Up or Y-Down
-	enum { enumIdTangentDirYUp=0, enumIdTangentDirYDown};
-	virtual int		GetTangentYDir() = 0;
-	virtual void	SetTangentYDir( int enum_val ) = 0;
-
-	//TangentXDir: X-Right or X_Left
-	enum {enumIdTangentDirXRight=0, enumIdTangentDirXLeft };
-	virtual int		GetTangentXDir() = 0;
-	virtual void	SetTangentXDir( int enum_val ) = 0;
-
-	//UseCage
-	virtual BOOL	GetUseCage() = 0;
-	virtual void	SetUseCage( BOOL b ) = 0;
-
-	//RayOffset
-	virtual float	GetRayOffset() = 0;
-	virtual void	SetRayOffset( float f ) = 0;
-
-	//HitResolveMode
-	enum { enumIdHitResolveClosest=0, enumIdHitResolveFurthest };	
-	virtual int		GetHitResolveMode() = 0;
-	virtual void	SetHitResolveMode( int enum_val ) = 0;
-
-	//HitMatchMtlID
-	virtual BOOL	GetHitMatchMtlID() = 0;
-	virtual void	SetHitMatchMtlID( BOOL b ) = 0;
-
-	//HitWorkingModel
-	virtual BOOL	GetHitWorkingModel() = 0;
-	virtual void	SetHitWorkingModel( BOOL b ) = 0;
-
-	//WarnRayMiss
-	virtual BOOL	GetWarnRayMiss() = 0;
-	virtual void	SetWarnRayMiss( BOOL b ) = 0;
-
-	//RayMissColor
-	virtual Color*	GetRayMissColor() = 0;
-	virtual void	SetRayMissColor( Color* c ) = 0;
-
-	//HeightMapMin - rays of less than this length are output as black pixels by the Height Map
-	virtual float	GetHeightMapMin() = 0;
-	virtual void	SetHeightMapMin( float f ) = 0;
-
-	//HeightMapMax - rays of more than this length are output as white pixels by the Height Map
-	virtual float	GetHeightMapMax() = 0;
-	virtual void	SetHeightMapMax( float f ) = 0;
-
-	//HeightBufMin - the minimum height value encountered during the last rendering
-	virtual float	GetHeightBufMin() = 0;
-	virtual void	SetHeightBufMin( float f ) = 0;
-
-	//HeightBufMax - the maximum height value encountered during the last rendering
-	virtual float	GetHeightBufMax() = 0;
-	virtual void	SetHeightBufMax( float f ) = 0;
-
-	//ProportionalOutput
-	virtual BOOL	GetProportionalOutput() = 0;
-	virtual void	SetProportionalOutput( BOOL b ) = 0;
-
-	// mapping channel to use for baking SubObject level
-	virtual int  	GetBakeMapChannel_SO() const = 0;
-	virtual void 	SetBakeMapChannel_SO( int mapChannel ) = 0;
-
-	//BakeObjectLevel
-	virtual BOOL	GetBakeObjLevel() = 0;
-	virtual void	SetBakeObjLevel( BOOL b ) = 0;
-
-	//BakeSubObjLevels
-	virtual BOOL	GetBakeSubObjLevels() = 0;
-	virtual void	SetBakeSubObjLevels( BOOL b ) = 0;
-
-	//useObjectBakeForMtl
-	virtual BOOL	GetObjBakeToMtl() = 0;
-	virtual void	SetObjBakeToMtl( BOOL b ) = 0;
+	// for generic expansion
+//	virtual BaseInterface *GetInterface(Interface_ID id) = 0;
 
 };
+
 
 #endif

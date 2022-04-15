@@ -15,12 +15,10 @@
 #define NO_DIALOG		FALSE
 #define DISPLAY_DIALOG	TRUE
 
-#define	SYSLOG_ERROR		0x00000001
-#define	SYSLOG_WARN			0x00000002
-#define	SYSLOG_INFO			0x00000004
-#define	SYSLOG_DEBUG		0x00000008
-#define SYSLOG_BROADCAST	0x00010000
-#define SYSLOG_MR			0x00020000
+#define	SYSLOG_ERROR	0x00000001
+#define	SYSLOG_WARN		0x00000002
+#define	SYSLOG_INFO		0x00000004
+#define	SYSLOG_DEBUG	0x00000008
 
 #define	SYSLOG_LIFE_EVER	0
 #define	SYSLOG_LIFE_DAYS	1
@@ -68,7 +66,7 @@ class LogSys {
 		//
 		//
 	 
-		virtual		void	LogEntry		( DWORD type, BOOL dialogue, TCHAR *title, TCHAR *format,... ) = 0;
+		virtual		void	LogEntry		( DWORD type, BOOL dialogue, TCHAR *title, TCHAR *text,... ) = 0;
 
 		//-- By turning on quiet mode the log system will not display any dialogues
 		//-- even if it is not noetwork rendering.

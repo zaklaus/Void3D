@@ -41,8 +41,6 @@ extern HINSTANCE hInstance;
 #define PO_EDGE		2
 #define PO_PATCH	3
 #define PO_ELEMENT	4
-#define PO_HANDLE	5
-#define PO_LEVELS	6
 
 #define CID_EP_BIND	CID_USER + 203
 #define CID_EP_EXTRUDE	CID_USER + 204
@@ -51,9 +49,6 @@ extern HINSTANCE hInstance;
 #define CID_CREATE_VERT  CID_USER + 207
 #define CID_CREATE_PATCH CID_USER + 208
 #define CID_VERT_WELD CID_USER + 209
-// CAL-06/02/03: copy/paste tangent. (FID #827)
-#define CID_COPY_TANGENT CID_USER + 210
-#define CID_PASTE_TANGENT CID_USER + 211
 
 // Flags:
 // Disp Result keeps track of "Show End Result" button for this Editable Patch
@@ -321,87 +316,7 @@ public:
 };
 
 
-/*-------------------------------------------------------------------*/
-// CAL-06/02/03: copy/paste tangent modes. (FID #827)
 
-class EP_CopyTangentMouseProc : public MouseCallBack {
-	private:
-		PatchObject *po;
-		IObjParam *ip;
-
-	protected:
-		HCURSOR GetTransformCursor();
-		HitRecord* HitTest( ViewExp *vpt, IPoint2 *p, int type, int flags );
-
-	public:
-		EP_CopyTangentMouseProc(PatchObject* obj, IObjParam *i) { po=obj; ip=i; }
-		int proc(
-			HWND hwnd, 
-			int msg, 
-			int point, 
-			int flags, 
-			IPoint2 m );
-	};
-
-class EP_CopyTangentCMode : public CommandMode {
-	private:
-		ChangeFGObject fgProc;
-		EP_CopyTangentMouseProc eproc;
-		PatchObject* po;
-
-	public:
-		EP_CopyTangentCMode(PatchObject* obj, IObjParam *i) :
-			fgProc((ReferenceTarget*)obj), eproc(obj,i) {po=obj;}
-
-		int Class() { return MODIFY_COMMAND; }
-		int ID() { return CID_COPY_TANGENT; }
-		MouseCallBack *MouseProc(int *numPoints) { *numPoints=1; return &eproc; }
-		ChangeForegroundCallback *ChangeFGProc() { return &fgProc; }
-		BOOL ChangeFG( CommandMode *oldMode ) { return oldMode->ChangeFGProc() != &fgProc; }
-		void EnterMode();
-		void ExitMode();
-	};
-
-class EP_PasteTangentMouseProc : public MouseCallBack {
-	private:
-		PatchObject *po;
-		IObjParam *ip;
-
-	protected:
-		HCURSOR GetTransformCursor();
-		HitRecord* HitTest( ViewExp *vpt, IPoint2 *p, int type, int flags );
-
-	public:
-		EP_PasteTangentMouseProc(PatchObject* obj, IObjParam *i) { po=obj; ip=i; }
-		int proc(
-			HWND hwnd, 
-			int msg, 
-			int point, 
-			int flags, 
-			IPoint2 m );
-	};
-
-class EP_PasteTangentCMode : public CommandMode {
-	private:
-		ChangeFGObject fgProc;
-		EP_PasteTangentMouseProc eproc;
-		PatchObject* po;
-
-	public:
-		EP_PasteTangentCMode(PatchObject* obj, IObjParam *i) :
-			fgProc((ReferenceTarget*)obj), eproc(obj,i) {po=obj;}
-
-		int Class() { return MODIFY_COMMAND; }
-		int ID() { return CID_PASTE_TANGENT; }
-		MouseCallBack *MouseProc(int *numPoints) { *numPoints=1; return &eproc; }
-		ChangeForegroundCallback *ChangeFGProc() { return &fgProc; }
-		BOOL ChangeFG( CommandMode *oldMode ) { return oldMode->ChangeFGProc() != &fgProc; }
-		void EnterMode();
-		void ExitMode();
-	};
-
-
-/*-------------------------------------------------------------------*/
 
 class POPickPatchAttach : 
 		public PickModeCallback,
@@ -426,10 +341,6 @@ class POPickPatchAttach :
 		BOOL RightClick(IObjParam *ip,ViewExp *vpt)	{return TRUE;}
 	};
 
-
-class SingleRefMakerPatchNode;
-class SingleRefMakerPatchMtl;
-
 // The Base Patch class
 class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData, ISubMtlAPI, AttachMatDlgUser {
 	friend class PatchObjectRestore;
@@ -453,9 +364,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		static EP_CreateVertCMode *createVertMode;
 		static EP_CreatePatchCMode *createPatchMode;
 		static EP_VertWeldCMode *vertWeldMode;
-		// CAL-06/02/03: copy/paste tangent. (FID #827)
-		static EP_CopyTangentCMode *copyTangentMode;
-		static EP_PasteTangentCMode *pasteTangentMode;
 
 		// for the tessellation controls
 		static BOOL settingViewportTess;  // are we doing viewport or renderer
@@ -467,7 +375,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		static ISpinnerControl *distSpin;
 		static ISpinnerControl *mergeSpin;
 		static ISpinnerControl *matSpin;
-		static ISpinnerControl *matSpinSel;
 		// General rollup controls
 		static ISpinnerControl *weldSpin;
 		static ISpinnerControl *targetWeldSpin;
@@ -529,20 +436,10 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 
 		DWORD epFlags;
 
-		// CAL-06/02/03: copy/paste tangent info. (FID #827)
-		BOOL copyTanLength;
-		BOOL tangentCopied;
-		Point3 copiedTangent;
-
 		// Named selection sets:
-		GenericNamedSelSetList hselSet;  // Handle // CAL-06/10/03: (FID #1914)
 		GenericNamedSelSetList vselSet;  // Vertex
 		GenericNamedSelSetList eselSet;  // Edge
 		GenericNamedSelSetList pselSet;  // Patch
-
-		// additonal references
-		SingleRefMakerPatchNode* noderef;                  
-		SingleRefMakerPatchMtl* mtlref; 
 
 		CoreExport PatchObject();
 		CoreExport PatchObject(PatchObject &from);
@@ -710,9 +607,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport void SetShowInterior(BOOL si);
 		CoreExport BOOL GetShowInterior();
 
-		CoreExport void SetUsePatchNormals(BOOL usePatchNorm);
-		CoreExport BOOL GetUsePatchNormals();
-
 		CoreExport void SetAdaptive(BOOL sw);
 		CoreExport BOOL GetAdaptive();
 		CoreExport void SetViewTess(TessApprox tess);
@@ -844,14 +738,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport void DoVertWeld();
 		CoreExport void DoVertWeld(int fromVert, int toVert);
 		CoreExport void DoEdgeWeld();
-		// CAL-06/02/03: copy/paste tangent. (FID #827)
-		CoreExport void StartCopyTangentMode();
-		CoreExport void StartPasteTangentMode();
-		CoreExport void StartPasteTangent();
-		CoreExport void EndPasteTangent();
-
-		CoreExport BOOL CopyTangent(int vec);
-		CoreExport BOOL PasteTangent(int vec);
 //watje
 		//hide and unhide stuff
 		CoreExport void DoHide(int type) ;
@@ -876,9 +762,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport void EndBevel (TimeValue t, BOOL accept=TRUE);		
 		CoreExport void Bevel( TimeValue t, float amount, BOOL smoothStart, BOOL smoothEnd );
 
-		// CAL-04/23/03: patch smooth (FID #1914)
-		CoreExport void DoPatchSmooth(int type);
-
 		// methods for creating new vertices and patches
 		CoreExport void CreateVertex(Point3 pt, int& newIndex);
 		CoreExport void CreatePatch(int vertIndx1,int vertIndx2,int vertIndx3);
@@ -900,17 +783,14 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport void SetSelLevel(DWORD level);
 		CoreExport void LocalDataChanged();
 
-		CoreExport BitArray GetVecSel();
 		CoreExport BitArray GetVertSel();
 		CoreExport BitArray GetEdgeSel();
 		CoreExport BitArray GetPatchSel();
 		
-		CoreExport void SetVecSel(BitArray &set, IPatchSelect *imod, TimeValue t);
 		CoreExport void SetVertSel(BitArray &set, IPatchSelect *imod, TimeValue t);
 		CoreExport void SetEdgeSel(BitArray &set, IPatchSelect *imod, TimeValue t);
 		CoreExport void SetPatchSel(BitArray &set, IPatchSelect *imod, TimeValue t);
 
-		CoreExport GenericNamedSelSetList& GetNamedVecSelList();
 		CoreExport GenericNamedSelSetList& GetNamedVertSelList();
 		CoreExport GenericNamedSelSetList& GetNamedEdgeSelList();
 		CoreExport GenericNamedSelSetList& GetNamedPatchSelList();
@@ -932,13 +812,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport int GetMaxMtlID(ModContext* mc);
 //watje new patch mapping
 		CoreExport void ChangeMappingTypeLinear(BOOL linear);
-
-		// CAL-04/23/03: Shrink/Grow, Edge Ring/Loop selection. (FID #1914)
-		CoreExport void ShrinkSelection(int type);
-		CoreExport void GrowSelection(int type);
-		CoreExport void SelectEdgeRing();
-		CoreExport void SelectEdgeLoop();
-
 		CoreExport void SelectOpenEdges();
 		CoreExport void DoCreateShape();
 
@@ -949,8 +822,6 @@ class PatchObject: public GeomObject, IPatchOps, IPatchSelect, IPatchSelectData,
 		CoreExport int  UseSoftSelections();
 		CoreExport void SetUseSoftSelections( int useSoftSelections );
 		CoreExport void InvalidateVertexWeights();
-		// CAL-05/06/03: toggle shaded faces display for soft selection. (FID #1914)
-		CoreExport void ToggleShadedFaces();
 
 		CoreExport void UpdateVertexDists();
 		CoreExport void UpdateEdgeDists( );
@@ -986,38 +857,6 @@ class PatchObjectRestore : public RestoreObj {
 		void EndHold() {po->ClearAFlag(A_HELD);}
 		TSTR Description() { return TSTR(_T("PatchObject restore")); }
 	};
-
-#define  SRMPN_CLASS_ID 0x74c4969
-class SingleRefMakerPatchNode : public SingleRefMaker{
-	public:
-		HWND hwnd;
-		PatchObject *po;
-		SingleRefMakerPatchNode() {hwnd = NULL; po = NULL;}
-		~SingleRefMakerPatchNode() { 
-			theHold.Suspend();         
-			DeleteAllRefsFromMe(); 
-			theHold.Resume();
-		}
-		RefResult NotifyRefChanged( Interval changeInt,RefTargetHandle hTarget, 
-		PartID& partID, RefMessage message );
-		SClass_ID  SuperClassID() { return SRMPN_CLASS_ID; }
-	};
-
-#define  SRMPM_CLASS_ID 0x64391d45
-class SingleRefMakerPatchMtl : public SingleRefMaker{
-	public:	
-		HWND hwnd;
-		PatchObject *po;
-		SingleRefMakerPatchMtl() {hwnd = NULL; po = NULL;}
-		~SingleRefMakerPatchMtl() { 
-			theHold.Suspend();         
-			DeleteAllRefsFromMe(); 
-			theHold.Resume();
-		}
-		RefResult NotifyRefChanged( Interval changeInt,RefTargetHandle hTarget, 
-		PartID& partID, RefMessage message );
-		SClass_ID  SuperClassID() { return SRMPM_CLASS_ID; }
-};
 
 // Command ID for the dynamic spline quad menu entry
 #define ID_PATCH_MENU 1333

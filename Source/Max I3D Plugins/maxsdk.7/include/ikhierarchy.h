@@ -545,8 +545,7 @@ inline void IterJoint::SkipSliding()
 // Pre-condition: mNext == mEnd
 //
 {
-	DbgAssert(mNext >= 0);
-	while ((unsigned)mNext < mLinkChain.LinkCount()) {
+	while (mNext < mLinkChain.LinkCount()) {
 		Link& link = mLinkChain.LinkOf(mNext);
 		if (DofType(link.dofAxis) == RotationalJoint) {
 			break;
@@ -647,8 +646,7 @@ inline void IterJoint::SetJointAngles(const Point3& a)
 inline bool IterJoint::Next()
 {
 	mBegin = mNext;
-	DbgAssert(mBegin >= 0);
-	if ((unsigned)mBegin >= mLinkChain.LinkCount()) {
+	if (mBegin >= mLinkChain.LinkCount()) {
 		mEnd = mNext;
 		return false;
 	}
@@ -656,8 +654,7 @@ inline bool IterJoint::Next()
 	mMat0 = mMat;
 	JointType jt = DofType(mLinkChain.LinkOf(mBegin).dofAxis);
 	mEnd = mBegin;
-	DbgAssert(mEnd >= 0);
-	while ((unsigned)mEnd < mLinkChain.LinkCount()) {
+	while (mEnd < mLinkChain.LinkCount()) {
 		Link& link = mLinkChain.LinkOf(mEnd);
 		if (DofType(link.dofAxis) != jt)
 			break;

@@ -25,8 +25,6 @@ class IDerivedObject;
 
 #include "iFnPub.h"
 #include "INodeGIProperties.h"
-#include "INodeLayerProperties.h"
-#include "ILayerProperties.h"
 
 // Transform modes -- passed to Move/Rotate/Scale
 #define  PIV_NONE				0
@@ -38,10 +36,8 @@ class IDerivedObject;
 
 // Types of vertex colors to display:
 // (sca 9/9/00)
-// CAL-06/15/03: add a new color type, nvct_map_channel. (FID #1926)
-// nvct_num_types is the total number of vertex color types and should always stay at the end of nodeVertexColorType
 enum nodeVertexColorType
-{ nvct_color, nvct_illumination, nvct_alpha, nvct_color_plus_illum, nvct_soft_select, nvct_map_channel, nvct_num_types };
+{ nvct_color, nvct_illumination, nvct_alpha, nvct_color_plus_illum, nvct_soft_select };
 
 // Node interface													   
 class INode: public ReferenceTarget, public FPMixinInterface {
@@ -95,21 +91,14 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 		virtual void Delete(TimeValue t, int keepChildPosition) {} 
 
 		// display attributes
-		virtual void	Hide(BOOL onOff)=0;				// set node's hide bit
-		virtual void	UnhideObjectAndLayer(bool dolayer = true) {Hide(FALSE);} // clear node's hide bit,
-													// conditionally propagate to its layer, 030522  --prs.
-		virtual int		IsObjectHidden() {return 0;}	// added for new Hide/Freeze logic, 030513  --prs.
+		virtual void	Hide(BOOL onOff)=0;			// set node's hide bit
 		virtual int		IsHidden(DWORD hflags=0,BOOL forRenderer=FALSE) {return 0;}
 		virtual int		IsNodeHidden(BOOL forRenderer=FALSE) {return 0;}			// is node hidden in *any* way.
-		virtual void	Freeze(BOOL onOff)=0;			// stop node from being pickable
-		virtual void	UnfreezeObjectAndLayer(bool dolayer = true) {Freeze(FALSE);} // clear node's freeze bit,
-													// conditionally propagate to its layer, 030522  --prs.
-		virtual int		IsObjectFrozen() {return 0;};	// added for new Hide/Freeze logic, 030513  --prs.
+		virtual void	Freeze(BOOL onOff)=0;		// stop node from being pickable
 		virtual int		IsFrozen()=0;
 		virtual void	SetShowFrozenWithMtl(BOOL onOff)=0;
 		virtual int		ShowFrozenWithMtl()=0;
-		virtual void	XRayMtl(BOOL onOff)=0;			// use x-ray material on node
-		virtual int		HasObjectXRayMtl() {return 0;};	// added for new Hide/Freeze logic, 030514  --prs.
+		virtual void	XRayMtl(BOOL onOff)=0;		// use x-ray material on node
 		virtual int		HasXRayMtl()=0;
 		virtual void	IgnoreExtents(BOOL onOff)=0;// ignore this node during zoom extents
 		virtual int		GetIgnoreExtents()=0;
@@ -166,10 +155,6 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 		// nodeVertexColorType enum's above.  (sca 9/9/00)
 		virtual int GetVertexColorType () { return 0; }
 		virtual void SetVertexColorType (int nvct) { }
-
-		// CAL-06/15/03: get/set map channel to be displayed as vertex color. (FID #1926)
-		virtual int GetVertexColorMapChannel () { return 1; }
-		virtual void SetVertexColorMapChannel (int vcmc) { }
 
 		virtual int		GetTrajectoryON() {return 0;}
 		virtual void    SetTrajectoryON(BOOL onOff) {}
@@ -248,16 +233,6 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 		virtual	void 	SetObjOffsetScale(ScaleValue sv)=0;
 		virtual	ScaleValue GetObjOffsetScale()=0;
 		
-		// Resetting of object offset
-		virtual void 	CenterPivot(TimeValue t, BOOL moveObject)=0;
-		virtual void 	AlignPivot(TimeValue t, BOOL moveObject)=0;
-		virtual void 	WorldAlignPivot(TimeValue t, BOOL moveObject)=0;
-		virtual void 	AlignToParent(TimeValue t)=0;
-		virtual void 	AlignToWorld(TimeValue t)=0;
-		virtual void	ResetTransform(TimeValue t,BOOL scaleOnly)=0;
-		virtual void	ResetPivot(TimeValue t)=0;
-		virtual bool    MayResetTransform ()=0;
-
 		// Misc.
 		virtual void 	FlagForeground(TimeValue t,BOOL notify=TRUE)=0;
 		virtual int 	IsActiveGrid()=0;
@@ -395,11 +370,7 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 				// vertex color access - sca 9/9/00
 				getVertexColorType, setVertexColorType, getCVertMode, setCVertMode, getShadeCVerts, setShadeCVerts,
 				getNodeHandle,  //AF (9/27/00)
-				// CAL-06/15/03: get/set map channel to be displayed as vertex color. (FID #1926)
-				getVertexColorMapChannel, setVertexColorMapChannel,
-
-				// new Func IDs   >>>> >>>  MUST << <<<<  be inserted before kLastFPFuncID
-				// !!!!!   that means that this MUST be the last enum value  !!!!!
+				// Func IDs should be inserted before kLastFPFuncID
 				kLastFPFuncID
 		};
 		// FP-published symbolic enumerations
@@ -432,8 +403,6 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 			PROP_FNS(getCVertMode, GetCVertMode, setCVertMode, SetCVertMode, TYPE_INT);
 			PROP_FNS(getShadeCVerts, GetShadeCVerts, setShadeCVerts, SetShadeCVerts, TYPE_INT);
 			PROP_FNS(getVertexColorType, GetVertexColorType, setVertexColorType, SetVertexColorType, TYPE_ENUM);
-// CAL-06/15/03: get/set map channel to be displayed as vertex color. (FID #1926)
-			PROP_FNS(getVertexColorMapChannel, GetVertexColorMapChannel, setVertexColorMapChannel, SetVertexColorMapChannel, TYPE_INT);
 // AF 9/27/00 
 			RO_PROP_FN(getNodeHandle, GetHandle, TYPE_DWORD);
 		END_FUNCTION_MAP
@@ -475,7 +444,6 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 			SetCVertMode(from->GetCVertMode());
 			SetShadeCVerts(from->GetShadeCVerts());
 			SetVertexColorType (from->GetVertexColorType()); // sca 9/9/00
-			SetVertexColorMapChannel (from->GetVertexColorMapChannel());	// CAL-06/15/03: (FID #1926)
 			SetTrajectoryON(from->GetTrajectoryON());
 			if(from->IsBoneOnly())
 				ShowBone(2);
@@ -505,24 +473,6 @@ class INode: public ReferenceTarget, public FPMixinInterface {
 			SetBoneScaleType(from->GetBoneScaleType());
 			SetBoneAxis(from->GetBoneAxis());
 			SetBoneAxisFlip(from->GetBoneAxisFlip());
-
-			// copy layer, and by-layer info (fix to 504160) 030623  --prs.
-			{
-				INodeLayerProperties* thisNodeProps =
-					static_cast<INodeLayerProperties*>(this->GetInterface(NODELAYERPROPERTIES_INTERFACE));
-				INodeLayerProperties* fromNodeProps =
-					static_cast<INodeLayerProperties*>(from->GetInterface(NODELAYERPROPERTIES_INTERFACE));
-
-				if ((thisNodeProps != NULL) && (fromNodeProps != NULL))
-				{
-					fromNodeProps->getLayer()->addNode(this);
-					thisNodeProps->setDisplayByLayer(fromNodeProps->getDisplayByLayer());
-					thisNodeProps->setRenderByLayer(fromNodeProps->getRenderByLayer());
-					thisNodeProps->setMotionByLayer(fromNodeProps->getMotionByLayer());
-					thisNodeProps->setColorByLayer(fromNodeProps->getColorByLayer());
-					thisNodeProps->setGlobalIlluminationByLayer(fromNodeProps->getGlobalIlluminationByLayer());
-				}
-			}
 
             // [dl | 9Nov2001] Copy Global Illumination Properties
             {
@@ -759,15 +709,6 @@ class INodeTransformed : public INode {
 
 		CoreExport void 	SetObjOffsetScale(ScaleValue sv);
 		CoreExport ScaleValue GetObjOffsetScale();
-
-		void CenterPivot(TimeValue t, BOOL moveObject) { node->CenterPivot(t,moveObject); }
-		void AlignPivot(TimeValue t, BOOL moveObject) { node->AlignPivot(t,moveObject); }
-		void WorldAlignPivot(TimeValue t, BOOL moveObject) { node->WorldAlignPivot(t,moveObject); }
-		void AlignToParent(TimeValue t) { node->AlignToParent(t); }
-		void AlignToWorld(TimeValue t) { node->AlignToWorld(t); }
-		void ResetTransform(TimeValue t,BOOL scaleOnly) { node->ResetTransform(t,scaleOnly); }
-		void ResetPivot(TimeValue t) { node->ResetPivot(t); }
-		bool MayResetTransform () { return node->MayResetTransform(); }
 
 		void Move(TimeValue t, const Matrix3& tmAxis, const Point3& val, BOOL localOrigin=FALSE, BOOL affectKids=TRUE, int pivMode=PIV_NONE, BOOL ignoreLocks=FALSE) {node->Move(t,tmAxis,val,localOrigin,pivMode,ignoreLocks);}
 		void Rotate(TimeValue t, const Matrix3& tmAxis, const AngAxis& val, BOOL localOrigin=FALSE, BOOL affectKids=TRUE, int pivMode=PIV_NONE, BOOL ignoreLocks=FALSE) {node->Rotate(t,tmAxis,val,localOrigin,pivMode,ignoreLocks);}

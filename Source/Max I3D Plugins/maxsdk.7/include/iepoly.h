@@ -21,6 +21,7 @@ enum ePolySelLevel { EP_SL_OBJECT, EP_SL_VERTEX, EP_SL_EDGE,
 	EP_SL_BORDER, EP_SL_FACE, EP_SL_ELEMENT, EP_SL_CURRENT };
 
 // Editable Poly Parameters:
+// (Use with EpactionGetParamBlock)
 enum epolyParameters { ep_by_vertex, ep_ignore_backfacing, ep_show_normals,
 	ep_normal_size, ep_ss_use, ep_ss_retro, ep_ss_edist_use, ep_ss_edist,
 	ep_ss_affect_back, ep_ss_falloff, ep_ss_pinch, ep_ss_bubble,
@@ -45,26 +46,11 @@ enum epolyParameters { ep_by_vertex, ep_ignore_backfacing, ep_show_normals,
 	ep_extrude_spline_rotation, ep_inset, ep_inset_type, ep_constrain_type,
 	ep_extrude_spline_align, ep_show_cage, ep_bevel_height, ep_vertex_extrude_height,
 	ep_edge_extrude_height, ep_edge_extrude_width, ep_outline, ep_edge_chamfer,
-	ep_bevel_type, ep_edge_weld_threshold, ep_surf_isoline_display,
-	ep_delete_isolated_verts, ep_preserve_maps,
-
-	// Paint tools
-	ep_ss_lock,
-	ep_paintsel_value, ep_paintsel_size, ep_paintsel_strength,
-	ep_paintdeform_value, ep_paintdeform_size, ep_paintdeform_strength,
-	ep_paintdeform_axis,
-
-	// New parameters in 7.0:
-	ep_bridge_taper, ep_bridge_bias, ep_bridge_segments, ep_bridge_smooth_thresh,
-	// Target 1 and target 2 contain either edge or face indices, in 1-based indexing.
-	// Value of 0 indicates not yet set.
-	ep_bridge_target_1, ep_bridge_target_2, ep_bridge_twist_1, ep_bridge_twist_2,
-	ep_bridge_selected,
-	ep_relax_amount, ep_relax_iters, ep_relax_hold_boundary, ep_relax_hold_outer,
-	ep_select_by_angle, ep_select_angle
+	ep_bevel_type, ep_edge_weld_threshold
 };
 
-// Editable Poly Operations:
+// Editable Poly Button operations:
+// (Use with EpActionButtonOp)
 enum epolyButtonOp { epop_hide, epop_unhide, epop_ns_copy, epop_ns_paste,
 	epop_cap, epop_delete, epop_detach, epop_attach_list, epop_split,
 	epop_break, epop_collapse, epop_reset_plane, epop_slice, epop_weld_sel,
@@ -77,14 +63,11 @@ enum epolyButtonOp { epop_hide, epop_unhide, epop_ns_copy, epop_ns_paste,
 	epop_extrude_along_spline, epop_connect_edges, epop_connect_vertices,
 	epop_lift_from_edge, epop_select_ring, epop_select_loop,
 	epop_remove_iso_map_verts, epop_remove, epop_outline,
-	epop_toggle_shaded_faces, epop_hide_unsel,
-
-	// New operations in 7.0:
-	epop_bridge_border, epop_bridge_polygon, epop_make_planar_x, epop_make_planar_y,
-	epop_make_planar_z, epop_relax
+	epop_toggle_shaded_faces, epop_hide_unsel
 };
 
 // Editable Poly Command modes:
+// (Use with EpActionToggleCommandMode.)
 enum epolyCommandMode { epmode_create_vertex, epmode_create_edge,
 	epmode_create_face, epmode_divide_edge, epmode_divide_face,
 	epmode_extrude_vertex, epmode_extrude_edge,
@@ -92,22 +75,15 @@ enum epolyCommandMode { epmode_create_vertex, epmode_create_edge,
 	epmode_bevel, epmode_sliceplane, epmode_cut_vertex, epmode_cut_edge,
 	epmode_cut_face, epmode_weld, epmode_edit_tri, epmode_inset_face,
 	epmode_quickslice, epmode_lift_from_edge, epmode_pick_lift_edge,
-	epmode_outline,
-
-	// New command modes in 7.0:
-	epmode_bridge_border, epmode_bridge_polygon,
-	epmode_pick_bridge_1, epmode_pick_bridge_2,
-	epmode_turn_edge
+	epmode_outline
 };
 
-// Editable Poly Pick modes:
+// Pick modes:
 enum epolyPickMode { epmode_attach, epmode_pick_shape };
-
-// ---- from here on, everything is used in Editable Poly, but not in Edit Poly ----
 
 // Enum our enums, for use in the function publishing interface description
 enum epolyEnumList { epolyEnumButtonOps, epolyEnumCommandModes, epolyEnumPickModes,
-	ePolySelLevel, PMeshSelLevel, axisEnum };
+	ePolySelLevel, PMeshSelLevel };
 
 #define EPOLY_INTERFACE Interface_ID(0x092779, 0x634020)
 #define GetEPolyInterface(cd) (EPoly *)(cd)->GetInterface(EPOLY_INTERFACE)
@@ -173,12 +149,7 @@ enum ePolyMethods { epfn_hide, epfn_unhide_all, epfn_named_selection_copy,
 	epfn_get_num_map_vertices, epfn_get_map_vertex, epfn_get_map_face_vertex,
 
 	// All right all ready
-	epfn_collapse_dead_structs_spelled_right, epfn_get_map_face_vert,
-
-	// New published functions in 7.0:
-	epfn_get_preserve_map, epfn_set_preserve_map,
-	epfn_bridge, epfn_ready_to_bridge_selected, epfn_turn_diagonal,
-	epfn_relax, epfn_make_planar_in
+	epfn_collapse_dead_structs_spelled_right, epfn_get_map_face_vert
 };
 
 class EPoly : public FPMixinInterface {
@@ -333,16 +304,6 @@ public:
 		FN_2 (epfn_get_map_vertex, TYPE_POINT3_BV, EpfnGetMapVertex, TYPE_INT, TYPE_INDEX);
 		FN_3 (epfn_get_map_face_vertex, TYPE_INT, EpfnGetMapFaceVertex, TYPE_INT, TYPE_INDEX, TYPE_INDEX);
 		FN_3 (epfn_get_map_face_vert, TYPE_INDEX, EpfnGetMapFaceVertex, TYPE_INT, TYPE_INDEX, TYPE_INDEX);
-
-		// New functionality in 7.0:
-		FN_2 (epfn_bridge, TYPE_bool, EpfnBridge, TYPE_ENUM, TYPE_DWORD);
-		FN_2 (epfn_ready_to_bridge_selected, TYPE_bool, EpfnReadyToBridgeFlagged, TYPE_ENUM, TYPE_DWORD);
-		FN_2 (epfn_turn_diagonal, TYPE_bool, EpfnTurnDiagonal, TYPE_INDEX, TYPE_INDEX);
-		FNT_2 (epfn_relax, TYPE_bool, EpfnRelax, TYPE_ENUM, TYPE_DWORD);
-		FNT_3 (epfn_make_planar_in, TYPE_bool, EpfnMakePlanarIn, TYPE_ENUM, TYPE_ENUM, TYPE_DWORD);
-
-		FN_1(epfn_get_preserve_map, TYPE_bool, EpfnGetPreserveMap, TYPE_INT);
-		VFN_2(epfn_set_preserve_map, EpfnSetPreserveMap, TYPE_INT, TYPE_bool);
 	END_FUNCTION_MAP
 
 	FPInterfaceDesc *GetDesc ();
@@ -510,7 +471,31 @@ public:
 	// other things...
 	virtual void CollapseDeadStructs () { }
 	virtual int EpfnPropagateComponentFlags (int slTo, DWORD flTo, int slFrom, DWORD flFrom, bool ampersand=FALSE, bool set=TRUE, bool undoable=FALSE) { return 0; }
+	//FPMixin Interface Methods for keeping MAXScript happy
+	//****************************************
 
+	Tab<InterfaceNotifyCallback*> interfaceNotifyCBs;
+
+	LifetimeType LifetimeControl() { return serverControlled; }
+
+	void RegisterNotifyCallback(InterfaceNotifyCallback* incb) 
+	{
+		interfaceNotifyCBs.Append(1,&incb);
+	}
+		
+	void UnRegisterNotifyCallback(InterfaceNotifyCallback* incb) 
+	{ 
+		for (int i=0; i < interfaceNotifyCBs.Count(); i++)
+		{	if (incb == interfaceNotifyCBs[i])
+				interfaceNotifyCBs.Delete(i,1);
+		}
+	}
+
+	EPoly::~EPoly() 
+	{
+		for (int i=0; i < interfaceNotifyCBs.Count(); i++)
+			interfaceNotifyCBs[i]->InterfaceDeleted(this);
+	}
 	// New stuff we'd like to add, but have to keep private for SDK compatibility
 	// (We add as private so we can function-publish.)
 private:
@@ -572,19 +557,6 @@ private:
 	virtual int EpfnGetNumMapVertices (int mapChannel) { return 0; }
 	virtual UVVert EpfnGetMapVertex (int mapChannel, int vertIndex) { return UVVert(0,0,0); }
 	virtual int EpfnGetMapFaceVertex (int mapChannel, int faceIndex, int corner) { return 0; }
-
-	// New in 7.0:
-
-	virtual MapBitArray GetPreserveMapSettings () const { return MapBitArray(true, false); }
-	virtual void SetPreserveMapSettings (const MapBitArray & mapSettings) { }
-	virtual void EpfnSetPreserveMap (int mapChannel, bool preserve) { }
-	virtual bool EpfnGetPreserveMap (int mapChannel) { return (mapChannel>0); }
-
-	virtual bool EpfnBridge (int epolySelLevel, DWORD flag) { return false; }
-	virtual bool EpfnReadyToBridgeFlagged (int epolySelLevel, DWORD flag) { return false; }
-	virtual bool EpfnTurnDiagonal (int face, int diag) { return false; }
-	virtual bool EpfnRelax (int msl, DWORD flag, TimeValue t) { return false; }
-	virtual bool EpfnMakePlanarIn (int dimension, int msl, DWORD flag, TimeValue t) { return false; }
 };
 
 #endif //__POLYOBJED_INTERFACE_

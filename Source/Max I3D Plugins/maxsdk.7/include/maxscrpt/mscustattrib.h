@@ -14,10 +14,6 @@
 
 #define I_SCRIPTEDCUSTATTRIB	0x000010C1
 
-#define MSCUSTATTRIB_CHUNK	0x0110
-#define MSCUSTATTRIB_NAME_CHUNK	0x0010
-
-
 // special subclass for holding custom attribute definitions
 // these can be applied to any existing object, adding a CustAttrib to it
 //   instances of MSCustAttrib (an MSPlugin subclass) refer to CustAttribDefs for metadata
@@ -62,8 +58,6 @@ public:
 
 	Value*			get_property(Value** arg_list, int count);
 	Value*			set_property(Value** arg_list, int count);
-
-	def_property ( name );
 };
 
 // MSCustAttrib - instances contain individual custom attribute blocks 
@@ -75,7 +69,6 @@ public:
 	IObjParam*				cip;		// ip for any currently open command panel dialogs
 	static MSAutoMParamDlg* masterMDlg; // master dialog containing all scripted rollout
 	IMtlParams*				mip;		// ip for any open mtlEditor panel dlgs
-	TSTR					name;		// name of the custom attribute
 
 					MSCustAttrib() : cip(NULL), mip(NULL) { }
 					MSCustAttrib(MSCustAttribDef* pc, BOOL loading);
@@ -84,16 +77,14 @@ public:
 	void			sprin1(CharStream* s);
 
 	// From MSPlugin
-	HWND			AddRollupPage(HINSTANCE hInst, TCHAR *dlgTemplate, DLGPROC dlgProc, TCHAR *title, LPARAM param=0,DWORD flags=0, int category=ROLLUP_CAT_CUSTATTRIB - 1);
+	HWND			AddRollupPage(HINSTANCE hInst, TCHAR *dlgTemplate, DLGPROC dlgProc, TCHAR *title, LPARAM param=0,DWORD flags=0, int category=ROLLUP_CAT_STANDARD);
 	void			DeleteRollupPage(HWND hRollup);
 	IRollupWindow*  GetRollupWindow();
 	ReferenceTarget* get_delegate() { return NULL; }  // no delegates in MSCustAttribs 
 
 	// from CustAttrib
-	TCHAR*			GetName()	{ return name; } 
+	TCHAR*			GetName()	{ return pc->class_name->to_string(); }
 	ParamDlg*		CreateParamDlg(HWND hwMtlEdit, IMtlParams *imp);
-
-	void			SetName(TCHAR* newName)	{ name = newName ; }
 
 	// From Animatable
     
@@ -109,7 +100,6 @@ public:
 	int				NumParamBlocks() { return pblocks.Count(); }
 	IParamBlock2*	GetParamBlock(int i) { return pblocks[i]; }
 	IParamBlock2*	GetParamBlockByID(BlockID id) { return MSPlugin::GetParamBlockByID(id); }
-	BOOL			CanCopyAnim() { return FALSE; }
 
 	void*			GetInterface(ULONG id);
 	void			DeleteThis();
@@ -134,8 +124,8 @@ public:
 					}
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
-	IOResult		Save(ISave *isave);
-    IOResult		Load(ILoad *iload);
+	IOResult		Save(ISave *isave) { pc->mpc_flags |= MPC_CAD_FILESAVE; return MSPlugin::Save(isave); } // LAM - 1/24/02 - defect 299822
+    IOResult		Load(ILoad *iload) { return MSPlugin::Load(iload); }
 
 	// from ISubMap
 	int				NumSubTexmaps();

@@ -39,8 +39,7 @@ enum editNormalsModMethods { enfn_get_sel_level, enfn_set_sel_level, enfn_move,
 	enfn_get_num_edges, enfn_get_edge_id, enfn_get_edge_vertex,
 	enfn_get_face_edge_side, enfn_get_edge_face, enfn_get_edge_normal,
 	enfn_get_face_normal_specified, enfn_set_face_normal_specified,
-	enfn_rebuild_normals, enfn_recompute_normals, enfn_average,
-	enfn_average_global, enfn_average_two };
+	enfn_rebuild_normals, enfn_recompute_normals };
 
 // Enum of enums, for methods which accept enum parameters
 enum editNormalsModEnums { enprop_sel_level };
@@ -56,16 +55,13 @@ public:
 		FNT_1(enfn_rotate, TYPE_bool, EnfnRotate, TYPE_QUAT_BR);
 
 		// Operations
-		FN_3(enfn_break, TYPE_bool, EnfnBreakNormals, TYPE_BITARRAY, TYPE_INODE, TYPE_bool);
-		FN_3(enfn_unify, TYPE_bool, EnfnUnifyNormals, TYPE_BITARRAY, TYPE_INODE, TYPE_bool);
+		FN_2(enfn_break, TYPE_bool, EnfnBreakNormals, TYPE_BITARRAY, TYPE_INODE);
+		FN_2(enfn_unify, TYPE_bool, EnfnUnifyNormals, TYPE_BITARRAY, TYPE_INODE);
 		FN_2(enfn_reset, TYPE_bool, EnfnResetNormals, TYPE_BITARRAY, TYPE_INODE);
 		FN_2(enfn_specify, TYPE_bool, EnfnSpecifyNormals, TYPE_BITARRAY, TYPE_INODE);
 		FN_2(enfn_make_explicit, TYPE_bool, EnfnMakeNormalsExplicit, TYPE_BITARRAY, TYPE_INODE);
 		FN_2(enfn_copy, TYPE_bool, EnfnCopyNormal, TYPE_INDEX, TYPE_INODE);
 		FN_2(enfn_paste, TYPE_bool, EnfnPasteNormal, TYPE_BITARRAY, TYPE_INODE);
-		FN_4(enfn_average, TYPE_bool, EnfnAverageNormals, TYPE_bool, TYPE_FLOAT, TYPE_BITARRAY, TYPE_INODE);
-		FN_2(enfn_average_global, TYPE_bool, EnfnAverageGlobalNormals, TYPE_bool, TYPE_FLOAT);
-		FN_4(enfn_average_two, TYPE_bool, EnfnAverageTwoNormals, TYPE_INODE, TYPE_INDEX, TYPE_INODE, TYPE_INDEX);
 
 		// Selection set access
 		FN_1(enfn_get_selection, TYPE_BITARRAY, EnfnGetSelection, TYPE_INODE);
@@ -119,16 +115,13 @@ public:
 	virtual bool EnfnRotate (Quat & rotation, TimeValue t) { return false; }
 
 	// Operations:
-	virtual bool EnfnBreakNormals (BitArray *normalSelection=NULL, INode *pNode=NULL, bool toAverage=false) { return false; }
-	virtual bool EnfnUnifyNormals (BitArray *normalSelection=NULL, INode *pNode=NULL, bool toAverage=false) { return false; }
+	virtual bool EnfnBreakNormals (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
+	virtual bool EnfnUnifyNormals (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
 	virtual bool EnfnResetNormals (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
 	virtual bool EnfnSpecifyNormals (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
 	virtual bool EnfnMakeNormalsExplicit (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
 	virtual bool EnfnCopyNormal (int normalID, INode *pNode=NULL) { return false; }
 	virtual bool EnfnPasteNormal (BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
-	virtual bool EnfnAverageNormals (bool useThresh=false, float threshold=0.0f, BitArray *normalSelection=NULL, INode *pNode=NULL) { return false; }
-	virtual bool EnfnAverageGlobalNormals (bool useThresh=false, float threshold=0.0f) { return false; }
-	virtual bool EnfnAverageTwoNormals (INode *pNode1, int normID1, INode *pNode2, int normID2) { return false; }
 
 	// Selection accessors
 	virtual BitArray *EnfnGetSelection (INode *pNode=NULL) { return NULL; }

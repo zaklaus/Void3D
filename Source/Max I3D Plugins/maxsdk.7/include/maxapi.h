@@ -12,8 +12,8 @@
  *>	Copyright (c) 1994, All Rights Reserved.
  **********************************************************************/
 
-#ifndef __MAXAPI__
-#define __MAXAPI__
+#ifndef __JAGAPI__
+#define __JAGAPI__
 
 #include <ole2.h>
 #include "cmdmode.h"
@@ -25,9 +25,7 @@
 #include "log.h"
 #include "ActionTable.h"
 #include "iTreeVw.h"
-#include "iRenderPresets.h"
 #include "excllist.h"
-#include "DefaultActions.h"
 
 class ViewParams;
 class ModContext;
@@ -56,7 +54,6 @@ class CommandLineCallback;
 
 #ifdef _OSNAP
 class IOsnapManager;
-class IOsnapManager7;
 class MouseManager;
 #endif
 class MtlBaseLib;
@@ -68,7 +65,6 @@ class Effect;
 class SpaceArrayCallback;
 class IMenuManager;
 class IColorManager;
-class Modifier;
 
 // RB: I didn't want to include render.h here
 #ifndef _REND_TYPE_DEFINED
@@ -94,39 +90,20 @@ enum RenderSettingID
 {
 	RS_Production = 0,
 	RS_Draft,
-	RS_IReshade,
-	RS_MEdit		// [dl | 15may2003]
+	RS_IReshade
 };
 // mjm - end
 
 // This type describes the clone type when cloning nodes
-enum CloneType { NODE_COPY, NODE_INSTANCE, NODE_REFERENCE, NODE_NONE };
+enum CloneType { NODE_COPY, NODE_INSTANCE, NODE_REFERENCE };
 
 // values for dupAction, passed into MergeFromFile
-#define MERGE_DUPS_PROMPT 0    // prompt user when duplicate node names encountered
-#define MERGE_DUPS_MERGE  1	   // merge new, keep old when duplicate node names encountered
+#define MERGE_DUPS_PROMPT 0    // prompt user when duplicates encountered
+#define MERGE_DUPS_MERGE  1	   // merge new, keep old when duplicates encountered
 #define MERGE_DUPS_SKIP   2    // skip duplicates
-#define MERGE_DUPS_DELOLD 3    // delete old when duplicate node names encountered
+#define MERGE_DUPS_DELOLD 3    // delete old when duplicates encountered
 #define MERGE_LIST_NAMES  4    // Causes a list of objects in the file to be 
 							   // placed into mrgList. No actual merging will be done. mergeAll must be TRUE.
-// added for r6.0 - 8/5/03
-// values for dupMtlAction, passed into MergeFromFile
-#define MERGE_DUP_MTL_PROMPT      0    // prompt user when duplicate materials encountered
-#define MERGE_DUP_MTL_USE_MERGED  MERGE_DUPS_DELOLD	   // use merged material
-#define MERGE_DUP_MTL_USE_SCENE   MERGE_DUPS_SKIP    // use scene material
-#define MERGE_DUP_MTL_RENAME      1000    // auto-rename merged material
-
-// values for reparentAction, passed into MergeFromFile
-#define MERGE_REPARENT_PROMPT     0    // prompt user when reparenting
-#define MERGE_REPARENT_ALWAYS     1    // always reparent
-#define MERGE_REPARENT_NEVER      2    // never reparent
-
-// ConvertFlagedNodesToXRefs() xflags bits
-#define XREF_AS_PROXY				(1<<0)
-#define XREF_XREF_MODIFIERS			0
-#define XREF_DROP_MODIFIERS			(1<<1)
-#define XREF_MERGE_MODIFIERS		(1<<2)
-#define XREF_MERGE_MANIPULATORS		(1<<3)
 
 // CCJ: Property Set definitions
 // For internal reasons these must be bitflags
@@ -144,30 +121,21 @@ enum CloneType { NODE_COPY, NODE_INSTANCE, NODE_REFERENCE, NODE_NONE };
 // added as complement to Interface::GetDir(), 020919  --prs.
 #define  I_EXEC_SET_DIR 10             //   arg1:  int which; arg2: TCHAR *dir;
 
-#ifdef ACAD_MAXSCRIPT_EXTENSIONS
+#ifdef DESIGN_VER
 #define  I_EXEC_OFFSET_SPLINE   80     //   arg1:  INode *spline; arg2: float amount;
 #define  I_EXEC_OFFSET_MEASURE  81     //   arg1:  INode *spline; arg2: Point3 *point; arg3: float *result;
 #define  I_EXEC_TRIM_EXTEND     82     //   arg1:  INodeTab *all; arg2: INodeTab *act;
+#define  I_EXEC_SET_DISABLED_COLOR 84  //   arg1:  COLORREF 
 //#define  I_EXEC_REG_VIEWWINDOW2 85     //   arg1:  ViewWindow2* (deprecated)
 #endif
-
-#ifdef DESIGN_VER
-#define  I_EXEC_SET_DISABLED_COLOR 84  //   arg1:  COLORREF 
-#endif
-
 //SS 3/11/2002: Added to max to support Substitute modifier
 #define  I_EXEC_NEW_OBJ_XREF_DLG 83    //   arg1:  INodeTab *nodes; arg2: BOOL forceSingle;
 #define	 I_EXEC_MODIFYTASK_INVALIDATEPANEL 86 //No Args
 
-// russom - 08/27/03 - ECO 1146
-#define I_EXEC_INVALIDATE_VIEWEXP 87	// arg1: ViewExp *vp -- set invalidate flag on ViewExp*; arg2: BOOL Update all view related objects
-
-#define I_EXEC_SET_NUDGE 88	// arg1: BOOL bEnableNude -- Enable/Disable viewport arrow key nudge
-
 #define I_EXEC_COUNT_MTL_SCENEREFS  0x2001 // arg1 Mtl *mt: returns number of refs from scene 
 
 // Interface::Execute return values
-#ifdef ACAD_MAXSCRIPT_EXTENSIONS
+#ifdef DESIGN_VER
 #define I_EXEC_RET_NULL_NODE    1
 #define I_EXEC_RET_NULL_OBJECT  2
 #define I_EXEC_RET_NOT_SPLINE   3
@@ -182,27 +150,6 @@ class NameMaker {
         virtual ~NameMaker() {}
 	};
 
-// Viewport degradation flags used by Interface7::RedrawViewportsNow
-#define VP_DEFAULT_RENDER	0x0000	// same as REDRAW_INTERACTIVE
-#define VP_DONT_RENDER		0x0001
-#define VP_DONT_SIMPLIFY	0x0002	// same as REDRAW_NORMAL
-#define VP_START_SEQUENCE	0x0004	// same as REDRAW_BEGIN
-#define VP_END_SEQUENCE		0x0008	// same as REDRAW_END
-#define VP_SECOND_PASS		0x0010	// for when both back- and fore-ground is rendered
-
-// Viewport Rendering Levels
-#define SHADE_LEVELS		9
-enum ShadeType {
-	SMOOTH_HIGHLIGHT,
-	SMOOTH,
-	FACET_HIGHLITE,
-	FACET,
-	CONSTANT,
-	LITE_WIREFRAME,
-	Z_WIREFRAME,
-	WIREFRAME,
-	BOX,
-};
 
 //JH 05/06/98 
 // VIEW_OTHER must be last, since "other" types are then numbered consecutively!!!
@@ -230,91 +177,15 @@ public:
 	virtual int NumberCanCreate() { return -1; }
 };
 
-//docking states for opening a trackview window
-static const int FLOAT_TRACKVIEW		= 0;	// float window.  can't dock on top (the default)
-static const int DOCK_TRACKVIEW_TOP		= 1;	// dock on top
-static const int DOCK_TRACKVIEW_BOTTOM	= 2;	// dock on bottom.  can't dock on top
-static const int CAN_DOCK_TRACKVIEW_TOP	= 3;	// floating but able to dock on top
-
+// class for accessing the TrackBar (the Mini TrackView)
 #define TRACKBAR_FILTER_ALL			1
 #define TRACKBAR_FILTER_TMONLY		2
 #define TRACKBAR_FILTER_CURRENTTM	3
 #define TRACKBAR_FILTER_OBJECT		4
 #define TRACKBAR_FILTER_MATERIAL	5
 
-/// The TrackBar filter callback function
-/// ****************************************************
-/// The anim argument is the node you are filtering.
-/// The parent argument is the owning animatable.  It returns the anim with its cooresponding subAnimIndex.
-///		anim == parent->SubAnim(subAnimIndex)
-/// The grandParent argument is provided as an additional layer that is needed in case the parent is a ParamBlock(2) or something similar.  
-///		For instance you may need to know that the grandParent is a Bend modifier and the subAnimIndex is 
-///		an index into the param block storage unit.
-/// The node argument is the originating scene node.
-/// Return true if the node should be included, otherswise return false.
-typedef bool (* TRACKBAR_FILTER_PROC)(Animatable* anim, Animatable* parent, int subAnimIndex, Animatable* grandParent, INode* node);
-
-/// The TrackBar filter addition callback function
-/// ****************************************************
-/// The anims argument is a Tab of the parent animatables to add
-/// The subAnims argument is a Tab of the SubAnim numbers.  
-///		The actual animatable added will be anim = anims[i]->SubAnim(subAnims[i])
-/// The node argument is the originating scene node.
-///
-/// The anims, subAnims, and nodes Tab should all have the same count.
-/// Return true if the addition should occur or false if is should not.
-typedef bool (* TRACKBAR_ADDITION_PROC)(Tab<Animatable*> &anims, Tab<int> &subAnims, Tab<INode*> &nodes);
-
-/// The ITrackBarFilterManager interface is implemented by the TrackBar.
-/// You can get an instance of this interface from the TrackBar using the following:
-///	ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)GetCOREInterface()->GetTrackBar()->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-#define TRACKBAR_FILTER_MANAGER_INTERFACE Interface_ID(0xc85046, 0x2def7c7d)
-class ITrackBarFilterManager : public BaseInterface
-{
-public:
-	/// Register a new filter with the filter manager.  This is usually done at startup, but does not have to be.
-	/// callbackFilter or callbackAddition can be NULL
-	/// The name is a UI displayable name.
-	/// The ID is a unique ID so filters are not duplicated.
-	/// If active is true the filter will be used to filter TrackBar key display.
-	/// If stopTraversal is false. This filter will not filter out subAnims of the object is supports.  
-	virtual int	RegisterFilter(TRACKBAR_FILTER_PROC callbackFilter, TRACKBAR_ADDITION_PROC callbackAddition, TSTR name, Class_ID filterID, bool active = false, bool stopTraversal = true)=0;
-	/// Remove a registered filter from the filter manager.
-	virtual void UnRegisterFilter(int index)=0;
-	/// Remove a registered filter from the filter manager.
-	virtual void UnRegisterFilter(Class_ID filterID)
-	{
-		for (int i = FilterCount()-1; i >=0; i--)
-		{
-			if (GetFilterID(i) == filterID)
-			{
-				UnRegisterFilter(i);
-				break;
-			}
-		}
-	}
-	/// Returns the number of filters registered with the filter manager
-	virtual int FilterCount()=0;
-	/// Get a registered filter's ID.
-	virtual Class_ID GetFilterID(int index)=0;
-	/// Get a registered filter's Name.
-	virtual TSTR GetFilterName(int index)=0;
-	/// If the filter is active its Filter() method will be called once for 
-	/// each animatable visited by the TrackBar's traverser.
-	virtual bool IsFilterActive(int index)=0;
-	/// Activate or deactivate the filter.  If active it will be used to filter the key display.
-	virtual void SetFilterActive(int index, bool state)=0;
-
-private:
-friend class ITrackBar;
-	/// MAXScript support through function publishing
-	virtual int	RegisterFilter(Value* callbackFilter, Value* callbackAddition, TSTR name, int id, bool active = false, bool stopTraversal = true)=0;
-};
-
-
 #define TRACKBAR_INTERFACE Interface_ID(0x2aff3557, 0x16aa714b)
 
-// class for accessing the TrackBar (the Mini TrackView)
 class ITrackBar : public FPMixinInterface {
 public:
 	virtual void		SetVisible(BOOL bVisible) = 0;
@@ -343,7 +214,6 @@ public:
 		fIdgetShowFrames, fIdsetShowFrames, fIdgetShowAudio, fIdsetShowAudio, fIdgetShowSelectionRange, fIdsetShowSelectionRange,
 		fIdgetSnapToFrames, fIdsetSnapToFrames, fIdgetKeyTransparency, fIdsetKeyTransparency, 
 		fIdgetSelKeyTransparency, fIdsetSelKeyTransparency, fIdgetCursorTransparency, fIdsetCursorTransparency,
-		fIdregisterFilter, fIdUnRegisterFilter, fIdFilterCount, fIdFilterID, fIdFilterName, fIdIsFilterActive, fIdSetFilterActive,
 	};
 	//symbolic enum ID for Function Publishing
 	enum {enumIDfilterType,
@@ -357,14 +227,6 @@ public:
 	VFN_1(fIdredrawTrackBar, RedrawTrackBar, TYPE_bool);
 	FNT_0(fIdgetNextKeyTime, TYPE_TIMEVALUE, fpGetNextKey);
 	FNT_0(fIdgetPreviousKeyTime, TYPE_TIMEVALUE, fpGetPreviousKey);
-	FN_6(fIdregisterFilter, TYPE_INDEX, fpRegisterFilter, TYPE_VALUE, TYPE_VALUE, TYPE_TSTR, TYPE_INT, TYPE_bool, TYPE_bool);
-	VFN_1(fIdUnRegisterFilter, fpUnRegisterFilter, TYPE_INDEX);
-	FN_0(fIdFilterCount, TYPE_INT, fpFilterCount);
-	FN_1(fIdFilterID, TYPE_INT_TAB_BV, fpGetFilterID, TYPE_INDEX);
-	FN_1(fIdFilterName, TYPE_TSTR_BV, fpGetFilterName, TYPE_INDEX);
-	FN_1(fIdIsFilterActive, TYPE_bool, fpIsFilterActive, TYPE_INDEX);
-	VFN_2(fIdSetFilterActive, fpSetFilterActive, TYPE_INDEX, TYPE_bool);
-
 	PROP_FNS(fIdgetVisible, IsVisible, fIdsetVisible, SetVisible, TYPE_BOOL);
 	PROP_FNS(fIdgetFilter, GetFilter, fIdsetFilter, SetFilter, TYPE_ENUM);
 	PROP_FNS(fIdgetShowFrames, GetShowFrames, fIdsetShowFrames, SetShowFrames, TYPE_bool);
@@ -378,69 +240,9 @@ public:
 
 private:
 	//Private methods for Maxscript exposure -- Added by AF (09/27/00)
-	TimeValue fpGetNextKey(TimeValue t) {return GetNextKey(t, TRUE);}
-	TimeValue fpGetPreviousKey(TimeValue t) { return GetNextKey(t, FALSE);}
-	int	 fpRegisterFilter(Value* callbackFilter, Value* callbackAddition, TSTR name, int id, bool active = false, bool stopTraversal = true)
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			return filterManager->RegisterFilter(callbackFilter, callbackAddition, name, id, active, stopTraversal);
-		return -1;
-		}
-	void fpUnRegisterFilter(int index)
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			filterManager->UnRegisterFilter(index);
-		}
-	int fpFilterCount()
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			{
-			return filterManager->FilterCount();
-			}
-		return 0;
-		}
-	Tab<int> fpGetFilterID(int index)
-		{
-		Tab<int> ids;
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			{
-			Class_ID id = filterManager->GetFilterID(index);
-			int IDa = id.PartA();
-			int IDb = id.PartB();
-			ids.Append(1, &IDa);
-			ids.Append(1, &IDb);
-			}
-		return ids;
-		}
-	TSTR fpGetFilterName(int index)
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			{
-			return filterManager->GetFilterName(index);
-			}
-		return _T("");
-		}
+	TimeValue	fpGetNextKey(TimeValue t) {return GetNextKey(t, TRUE);}
+	TimeValue	fpGetPreviousKey(TimeValue t) { return GetNextKey(t, FALSE);}
 
-	bool fpIsFilterActive(int index)
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			{
-			return filterManager->IsFilterActive(index);
-			}
-		return false;
-		}
-	void fpSetFilterActive(int index, bool state)
-		{
-		ITrackBarFilterManager* filterManager = (ITrackBarFilterManager*)this->GetInterface(TRACKBAR_FILTER_MANAGER_INTERFACE);
-		if (filterManager != NULL)
-			filterManager->SetFilterActive(index, state);
-		}
 	};
 
 // This class provides functions that expose the portions of View3D
@@ -665,35 +467,25 @@ class INodeTab;
 #define NUMAXIS_INDIVIDUAL	2	// Do all, one at a time
 
 // MAX Directories
-#define APP_FONT_DIR	 	         0
-#define APP_SCENE_DIR		      1
-#define APP_IMPORT_DIR		      2
-#define APP_EXPORT_DIR		      3
-#define APP_HELP_DIR		         4
-#define APP_EXPRESSION_DIR	      5
-#define APP_PREVIEW_DIR		      6
-#define APP_IMAGE_DIR		      7
-#define APP_SOUND_DIR		      8
-#define APP_PLUGCFG_DIR		      9
-#define APP_MAXSTART_DIR	      10
-#define APP_VPOST_DIR		      11
-#define APP_DRIVERS_DIR		      12
-#define APP_AUTOBACK_DIR	      13
-#define APP_MATLIB_DIR		      14
-#define APP_SCRIPTS_DIR		      15
-#define APP_STARTUPSCRIPTS_DIR   16
-#define APP_MARKETDEFAULTS_DIR    17
-#define APP_RENDER_PRESETS_DIR   18
-#ifndef RENDER_VER_CONFIG_PATHS // xavier robitaille | 03.01.24 | modify kahn's config. paths
-#define APP_UI_DIR			      19	// this must be next to last!!
-#define APP_MAXROOT_DIR		      20	// this must be last!!
-#else
-#define APP_PLUGCFG_CATALOGS_DIR 19
-#define APP_UI_DIR			      20	// this must be next to last!!
-#define APP_MAXROOT_DIR		      21	// this must be last!!
-#endif // RENDER_VER_CONFIG_PATHS
-
-
+#define APP_FONT_DIR	 	   0
+#define APP_SCENE_DIR		   1
+#define APP_IMPORT_DIR		   2
+#define APP_EXPORT_DIR		   3
+#define APP_HELP_DIR		   4
+#define APP_EXPRESSION_DIR	   5
+#define APP_PREVIEW_DIR		   6
+#define APP_IMAGE_DIR		   7
+#define APP_SOUND_DIR		   8
+#define APP_PLUGCFG_DIR		   9
+#define APP_MAXSTART_DIR	   10
+#define APP_VPOST_DIR		   11
+#define APP_DRIVERS_DIR		   12
+#define APP_AUTOBACK_DIR	   13
+#define APP_MATLIB_DIR		   14
+#define APP_SCRIPTS_DIR		   15
+#define APP_STARTUPSCRIPTS_DIR 16
+#define APP_UI_DIR			   17	// this must be next to last!!
+#define APP_MAXROOT_DIR		   18	// this must be last!!
 
 // Types for status numbers
 #define STATUS_UNIVERSE					1
@@ -712,7 +504,6 @@ class INodeTab;
 #define EXT_DISP_ONLY_SELECTED		(1<<3)		// object is only thing selected
 #define EXT_DISP_DRAGGING			(1<<4)		// object is being "dragged"
 #define EXT_DISP_ZOOM_EXT			(1<<5)		// object is being tested for zoom ext
-#define EXT_DISP_GROUP_EXT			(1<<6)		// object is being tested for extents as member of group
 
 // Render time types passed to SetRendTimeType()
 #define REND_TIMESINGLE		0
@@ -760,45 +551,6 @@ class INodeTab;
 #define VP_LAYOUT_4HB		0x00b4
 #define VP_LAYOUT_1C		0x00c1
 #define VP_NUM_VIEWS_MASK	0x000f
-
-
-// Node attribute flags used by Interface7::SetNodeAttribute
-#define ATTRIB_HIDE									0
-#define	ATTRIB_FREEZE								1
-#define	ATTRIB_BOXMODE							2
-#define	ATTRIB_BACKCULL							3
-#define	ATTRIB_ALLEDGES							4
-#define ATTRIB_LINKDISP							5
-#define ATTRIB_LINKREPL							6
-#define ATTRIB_UNSEL								7		// for internal use only; something is not selected
-#define ATTRIB_HIDE_UNSEL						8		// for internal use only
-#define ATTRIB_FREEZE_UNSEL					9		// for internal use only
-#define ATTRIB_VERTTICKS						10
-#define ATTRIB_UNHIDE								11	// for internal use only
-#define ATTRIB_UNFREEZE							12	// for internal use only
-#define ATTRIB_CVERTS								13
-#define ATTRIB_SHADE_CVERTS					14
-#define ATTRIB_XRAY									15
-#define ATTRIB_IGNORE_EXT						16
-#define ATTRIB_TRAJECTORY						17 // valid if DESIGN_VER
-#define ATTRIB_FRZMTL								18
-#define ATTRIB_HIDE_WITH_LAYER			19 // used by MXS - also unhides layer if hidden
-#define ATTRIB_FREEZE_WITH_LAYER		20 // used by MXS - also unhides layer if hidden
-#define ATTRIB_INHERITVISIBILITY		100
-#define ATTRIB_CASTSHADOWS					101
-#define ATTRIB_RECEIVESHADOWS				102
-#define ATTRIB_ISTARGET							103
-#define ATTRIB_RENDERABLE						104
-#define ATTRIB_RENDEROCCLUDED				105
-#define ATTRIB_RCVCAUSTICS					106
-#define ATTRIB_GENERATECAUSTICS			107
-#define ATTRIB_RCVGLOBALILLUM				108
-#define ATTRIB_GENERATEGLOBALILLUM	109
-#define ATTRIB_SETWIRECOLOR					110
-#define ATTRIB_SETGBUFID						111
-#define ATTRIB_PRIMARYVISIBILITY		112
-#define ATTRIB_SECONDARYVISIBILITY	113
-#define ATTRIB_MOTIONBLUR						114
 
 
 class DWORDTab : public Tab<DWORD> {};
@@ -1004,51 +756,15 @@ public:
 	int		dspBkg;
 };
 
-// Viewport transparency rendering modes
+// viewport transparency rendering modes
 #define VPT_TRANS_NONE			0
 #define VPT_TRANS_STIPPLE		1
 #define VPT_TRANS_BLEND			2
-#define VPT_TRANS_SORT_BLEND	3		
-
-// Scene Display Flags	
-#define DISPLAY_WIRE_AS_MTL      1
-#define DISPLAY_SHADED_AS_MTL (1<<1)
-#define DISPLAY_SELECTED_ONLY (1<<2)
-
-// flag values for TrackViewPickMultiDlg and TrackViewPickDlg
-#define PICKTRACK_FLAG_ANIMATED			(1<<0)  /*-- turn on display of animated tracks only--*/
-#define PICKTRACK_FLAG_VISTRACKS		(1<<1)  /*-- turn off display of node Visibility track--*/
-#define PICKTRACK_FLAG_SELOBJECTS		(1<<2)  /*-- turn on display of only selected nodes--*/
-#define PICKTRACK_FLAG_WORLDMODS		(1<<3)  /*-- turn off display of World Space Modifiers--*/
-#define PICKTRACK_FLAG_OBJECTMODS		(1<<4)  /*-- turn off display of Object Space Modifiers--*/
-#define PICKTRACK_FLAG_TRANSFORM		(1<<5)  /*-- turn off display of node Transform track--*/
-#define PICKTRACK_FLAG_BASEPARAMS		(1<<6)  /*-- turn off display of node base object--*/
-#define PICKTRACK_FLAG_CONTTYPES		(1<<7)  /*-- turn off display of controller types--*/
-#define PICKTRACK_FLAG_NOTETRACKS		(1<<8)  /*-- turn off display of note tracks--*/
-#define PICKTRACK_FLAG_SOUND			(1<<9)  /*-- turn off display of the sound track--*/
-#define PICKTRACK_FLAG_MATMAPS			(1<<10) /*-- turn off display of maps in materials--*/
-#define PICKTRACK_FLAG_MATPARAMS		(1<<11) /*-- turn off display of material parameters--*/
-#define PICKTRACK_FLAG_VISIBLE_OBJS		(1<<12) /*-- turn on display of hidden nodes--*/
-#define PICKTRACK_FLAG_HIERARCHY		(1<<13) /*-- turn off display of hierarchy--*/
-#define PICKTRACK_FLAG_KEYABLE			(1<<14) /*-- turn off display of non-keyable tracks--*/
-#define PICKTRACK_FLAG_NODES			(1<<15) /*-- turn off display of nodes--*/
-#define PICKTRACK_FLAG_GEOM				(1<<16) /*-- turn off display of geometry nodes--*/
-#define PICKTRACK_FLAG_SHAPES			(1<<17) /*-- turn off display of shape nodes--*/
-#define PICKTRACK_FLAG_LIGHTS			(1<<18) /*-- turn off display of light nodes--*/
-#define PICKTRACK_FLAG_CAMERAS			(1<<19) /*-- turn off display of camera nodes--*/
-#define PICKTRACK_FLAG_HELPERS			(1<<20) /*-- turn off display of helper nodes--*/
-#define PICKTRACK_FLAG_WARPS			(1<<21) /*-- turn off display of warp nodes--*/
-#define PICKTRACK_FLAG_POSITION			(1<<22) /*-- turn off display of position controllers--*/
-#define PICKTRACK_FLAG_ROTATION			(1<<23) /*-- turn off display of rotation controllers--*/
-#define PICKTRACK_FLAG_SCALE			(1<<24) /*-- turn off display of scale controllers--*/
-#define PICKTRACK_FLAG_BONES			(1<<25) /*-- turn off display of bone nodes--*/
-
-#define PICKTRACK_FLAG_FOCUS_SEL_NODES	(1<<26) /*-- set focus to first selected node found--*/
-
+#define VPT_TRANS_SORT_BLEND	3		// not supported (yet?)
 
 #define MAIN_MAX_INTERFACE Interface_ID(0x64854123, 0x7b9e551c)
 
-// Generic interface into Max
+// Generic interface into Jaguar
 class Interface : public FPStaticInterface {
 	public:
 		virtual HFONT GetAppHFont()=0;
@@ -1200,7 +916,7 @@ class Interface : public FPStaticInterface {
 		virtual void SetFlyOffTime(int msecs)=0;
 		virtual int  GetFlyOffTime()=0;
 
-		// Get standard Max cursors.
+		// Get standard Jaguar cursors.
 		virtual HCURSOR GetSysCursor( int id )=0;
 
 		// Turn on or off a cross hair cursor which draws horizontal and vertical
@@ -1348,27 +1064,6 @@ class Interface : public FPStaticInterface {
 
 		// Turns the animate button on or off
 		virtual void SetAnimateButtonState(BOOL onOff)=0;
-
-		// In some simpulation task, a time sequence of matrices are computed
-		// and to be set to node via
-		// INode::SetNodeTM(TimeValue t, Matrix3& tm). If the node
-		// employs the standard PRS controller and the rotation is the
-		// standard Euler XYZ controller, it would achieve better animation
-		// result if we decides euler angles at this frame based on those at
-		// the previous frame. The Progressive Mode tells the Euler
-		// controller to derive angles based on the previous frame.
-		// It is assumed that in this mode, SetNodeTM() are called
-		// in strictly forward time order.
-		// Synoposis:
-		//   GetCOREInterface()->BeginProgressiveMode();
-		//   for (t = start_time, t < end_time; t += time_per_frame) {
-		//      node.SetNodeTM(t, tm_at_t);
-		//   }
-		//   GetCOREInterface()->EndProgressiveMode();
-		//
-		virtual bool InProgressiveMode() =0;
-		virtual void BeginProgressiveMode() =0;
-		virtual void EndProgressiveMode() =0;
 
 		// Registers a callback that gets called whenever the axis
 		// system is changed.
@@ -1547,19 +1242,9 @@ class Interface : public FPStaticInterface {
 		virtual TCHAR *GetPlugInDir(int i)=0;	// ith directory
 
 		// bitmap path
-		virtual int GetMapDirCount(BOOL xref=FALSE)=0;			// number of dirs in path
-		virtual TCHAR *GetMapDir(int i, BOOL xref=FALSE)=0;		// i'th dir of path
-		virtual BOOL AddMapDir(TCHAR *dir, BOOL xref=FALSE)=0;	// add a path to the list
-
-		virtual BOOL AddSessionMapDir(TCHAR *dir, int update=TRUE, BOOL xref=FALSE)=0;
-		virtual int GetSessionMapDirCount(BOOL xref=FALSE)=0;
-		virtual TCHAR *GetSessionMapDir(int i, BOOL xref=FALSE)=0;
-		virtual BOOL DeleteSessionMapDir(int i, int update=TRUE, BOOL xref=FALSE)=0;
-
-		//These methods provide access to the combined list of permanent and temporary (session) map dirs,
-		//therefore the current total set of map directories
-		virtual int GetCurMapDirCount(BOOL xref=FALSE)=0;
-		virtual TCHAR *GetCurMapDir(int i, BOOL xref=FALSE)=0;
+		virtual int GetMapDirCount()=0;			// number of dirs in path
+		virtual TCHAR *GetMapDir(int i)=0;		// i'th dir of path
+		virtual BOOL AddMapDir(TCHAR *dir)=0;	// add a path to the list
 
 		virtual float GetLightConeConstraint()=0;
 
@@ -1606,25 +1291,19 @@ class Interface : public FPStaticInterface {
 
 		// These do not bring up file requesters
 		virtual int LoadFromFile(const TCHAR *name, BOOL refresh=TRUE)=0;
-		// LAM - 8/8/03 - ECO 1125 - added clearNeedSaveFlag, useNewFile
-		// if clearNeedSaveFlag is false, the scene 'dirty' flag is not cleared
-		// if useNewFile is false, the file is not added to the MRU list and the current scene file is not set to the saved file
-		virtual int SaveToFile(const TCHAR *fname, BOOL clearNeedSaveFlag = TRUE, BOOL useNewFile = TRUE)=0; 
+		virtual int SaveToFile(const TCHAR *fname)=0;		
 		virtual void FileSaveSelected(TCHAR *fname)=0;
 		virtual void FileSaveNodes(INodeTab* nodes, TCHAR *fname)=0;
 		virtual int LoadMaterialLib(const TCHAR *name, MtlBaseLib *lib=NULL)=0;
 #ifndef NO_MATLIB_SAVING // orb 01-09-2002
 		virtual int SaveMaterialLib(const TCHAR *name, MtlBaseLib *lib=NULL)=0;
 #endif // #ifndef NO_MATLIB_SAVING // orb 01-09-2002
-		// dupMtlAction and reparentAction added for r6.0 - 8/5/03
 		virtual int MergeFromFile(const TCHAR *name, 
 				BOOL mergeAll=FALSE,    // when true, merge dialog is not put up
 				BOOL selMerged=FALSE,   // select merged items?
 				BOOL refresh=TRUE,      // refresh viewports ?
-				int dupAction = MERGE_DUPS_PROMPT,  // what to do when duplicate node names are encountered
-				NameTab* mrgList=NULL,  // names to be merged (mergeAll must be TRUE)
-				int dupMtlAction = MERGE_DUP_MTL_PROMPT,  // what to do when duplicate material names are encountered
-				int reparentAction = MERGE_REPARENT_PROMPT   // what to do when can reparent
+				int dupAction = MERGE_DUPS_PROMPT,  // what to do when duplicates are encountered
+				NameTab* mrgList=NULL  // names to be merged (mergeAll must be TRUE)
 				)=0;
 		virtual BOOL ImportFromFile(const TCHAR *name, BOOL suppressPrompts=FALSE, Class_ID *importerID=NULL)=0;
 		virtual BOOL ExportToFile(const TCHAR *name, BOOL suppressPrompts=FALSE, DWORD options=0, Class_ID *exporterID=NULL)=0;
@@ -1731,16 +1410,6 @@ class Interface : public FPStaticInterface {
 		// creates a default scanline renderer - must be deleted with IScanRenderer::DeleteThis()
 		virtual IScanRenderer *CreateDefaultScanlineRenderer()=0;
 
-		// [dl | 15may2003] Creates an instance of the default renderer for the given render setting. 
-		// If the class ID of the default renderer (see SetDefaultRendererClassID()) does not 
-		// exist, then an instance of the MAX scanline renderer is created.
-		// The instance returned must be deleted with Renderer::DeleteThis().
-		virtual Renderer* CreateDefaultRenderer(RenderSettingID renderSettingID) = 0;
-		// [dl | 15may2003] Gets/sets the class ID of the default renderer for the given render setting. 
-		// An instance of the default renderer can be created by using CreateDefaultRenderer()
-		virtual Class_ID GetDefaultRendererClassID(RenderSettingID renderSettingID) = 0;
-		virtual void SetDefaultRendererClassID(RenderSettingID renderSettingID, Class_ID classID) = 0;
-
 		// a set of functions parallel to those above, to work with any Renderer instance
 		virtual int OpenRenderer(Renderer *pRenderer, INode *camNode,ViewExp *view, RendType type = RENDTYPE_NORMAL, int w=0, int h=0)=0;
 		virtual int OpenRenderer(Renderer *pRenderer, ViewParams *vpar, RendType type = RENDTYPE_NORMAL, int w=0, int h=0)=0;
@@ -1758,7 +1427,6 @@ class Interface : public FPStaticInterface {
 		virtual Renderer *GetProductionRenderer()=0;
 		virtual Renderer *GetDraftRenderer()=0;
 		// this function can be used instead of the two above.
-		// RS_MEdit: Returns the renderer in the MEdit slot. Does not consider the lock.
 		virtual Renderer *GetRenderer(RenderSettingID renderSettingID)=0;				// mjm - 05.26.00
 
 		// assigns a renderer to be used with the currently active render settings
@@ -1768,7 +1436,6 @@ class Interface : public FPStaticInterface {
 		virtual void AssignProductionRenderer(Renderer *rend)=0;
 		virtual void AssignDraftRenderer(Renderer *rend)=0;
 		// this function can be used instead of the two above.
-		// RS_MEdit: Assign the renderer to the MEdit slot. Does not consider the lock.
 		virtual void AssignRenderer(RenderSettingID renderSettingID, Renderer *rend)=0;	// mjm - 05.26.00
 
 		// in order to support more than just two render settings, the following two functions should no
@@ -1784,25 +1451,8 @@ class Interface : public FPStaticInterface {
 		virtual BOOL GetUseDraftRenderer()=0;
 
 		// these functions can be used instead of the two above.
-		// RS_MEdit cannot be the current render setting. Calling ChangeRenderSetting(RS_MEdit) has no effect.
 		virtual void ChangeRenderSetting(RenderSettingID renderSettingID)=0;			// mjm - 05.26.00
 		virtual RenderSettingID GetCurrentRenderSetting()=0;							// mjm - 05.26.00
-
-		// [dl | 15may2003] Gets/sets the renderer assigned to the MEdit slot.
-		// NOTE: This ignores the state of the MEdit renderer lock, and will not necesarily
-		// get/set the renderer that is actually used for MEdit.
-		virtual Renderer* GetMEditRenderer() = 0;
-		virtual void AssignMEditRenderer(Renderer* renderer) = 0;
-		// [dl | 15may2003] This returns the renderer to be used for MEdit.
-		// This TAKES THE LOCK INTO ACCOUNT: this will return the Current renderer if
-		// the MEdit lock is ON.
-		virtual Renderer* GetActualMEditRenderer() = 0;
-		// [dl | 15may2003] Gets/sets the status of the MEdit renderer lock.
-		// When ON, the Current renderer should be used to render in MEdit.
-		virtual bool GetMEditRendererLocked() = 0;
-		virtual void SetMEditRendererLocked(bool locked) = 0;
-		virtual bool GetMEditRendererLocked_DefaultValue() = 0;
-		virtual void SetMEditRendererLocked_DefaultValue(bool locked) = 0;
 
 // mjm - begin - 06.30.00
 		// gets the current (production vs. draft) render element manager
@@ -1827,9 +1477,6 @@ class Interface : public FPStaticInterface {
 		// Call during render to check if user has cancelled render.  
 		// Returns TRUE iff user has cancelled.
 		virtual BOOL CheckForRenderAbort()=0;
-
-        // Call during render to abort the render
-        virtual void AbortRender()=0;
 
 		// These give access to individual user specified render parameters
 		// These are either parameters that the user specifies in the
@@ -1967,10 +1614,6 @@ class Interface : public FPStaticInterface {
 		virtual BOOL GetSkipRenderedFrames()=0;
 
 #endif // WEBVERSION
-
-		//Max 6.0
-		virtual BOOL GetRendSimplifyAreaLights() = 0;
-		virtual void SetRendSimplifyAreaLights(BOOL onOff) = 0;
 
 		virtual DWORD GetHideByCategoryFlags()=0;
 		virtual void SetHideByCategoryFlags(DWORD f)=0;
@@ -2311,22 +1954,6 @@ class Interface : public FPStaticInterface {
 		virtual BOOL CollapseNodeTo(INode *node, int modIndex, BOOL noWarning = FALSE)=0;
 		virtual BOOL ConvertNode(INode *node, Class_ID &cid)=0;
 
-		// TB 5/22/03
-		virtual IRenderPresetsManager* GetRenderPresetsManager()=0;
-
-		// LAM - 6/24/03
-		//-- Default Action Facilities 
-		//   Check DefaultActions.h for methods
-		virtual DefaultActionSys *DefaultActions()=0;
-
-		// Sets internal flag, returns old value. 
-		// Set to TRUE to indicate that no dialogs should be displayed to user.
-		virtual BOOL SetQuietMode(BOOL onOff)=0;
-
-		// The return value from this method should be called before displaying any dialogs.
-		// Returns internal flag set by SetQuietMode. If checkNetSlave == TRUE, returns internal 
-		// flag OR-ed with whether max is running in network rendering server mode. 
-		virtual BOOL GetQuietMode(BOOL checkNetSlave = TRUE)=0;
 
 }; // class Interface
 
@@ -2345,542 +1972,5 @@ class IObjParam: public Interface{};
 
 class IObjCreate: public IObjParam{};
 
-// Forward declarations
-class MAXScriptPrefs;
-class IMenu;
-class IMenuItem;
-class FrameRendParams;
-class DefaultLight;
-class ITabPage;
-
-//-----------------------------------------------------------------------------
-/// - This class extends Max's previous version of core interface (class Interface) 
-/// - "7" is the major version number of Max that exposes this interface.
-/// - Call GetCOREInterface7 to acquire a pointer to this interface.
-//-----------------------------------------------------------------------------
-class Interface7 : public IObjCreate
-{
-public:
-	/// --- Object Selection ------------------------------------------------ ///
-	/// Retrieves the currently selected nodes into the supplied parameter.
-	/// It clears the node tab supplied as parameter before using it.
-	virtual void GetSelNodeTab(INodeTab& selectedNodes) const = 0;
-
-	/// --- Transform Modes and Reference Coordinate System ----------------- ///
-	/// Pivot modes the system can be in
-	enum PivotMode {
-		/// Transforms will affect the objects' world transform
-		kPIV_NONE = PIV_NONE,
-		/// Transforms will affect only the pivot point of objects
-		kPIV_PIVOT_ONLY = PIV_PIVOT_ONLY,
-		/// Transforms will affect only the objects and not their pivot points
-		kPIV_OBJECT_ONLY = PIV_OBJECT_ONLY,
-		/// Rotation and Scale will be applied to the hierarchy by rotating or 
-		/// scaling the position of the pivot point without rotating or scaling 
-		/// the pivot point itself. 
-		kPIV_HIERARCHY_ONLY = PIV_HIERARCHY_ONLY
-	};
-	
-	/// Returns the current pivot mode the system is in. 
-	virtual PivotMode GetPivotMode() const = 0;
-	/// Set the pivot mode of the system
-	virtual void SetPivotMode(PivotMode pivMode) = 0;
-
-	/// Returns true if the transforms applied to a node will affect its children,
-	/// otherwise returns false
-	virtual bool GetAffectChildren() const = 0;
-	/// Sets whether the transforms applied to a node will affect its children.
-	/// If bAffectChildren is true, the children of a node will be transformed when
-	/// their parent node is transformed. Otherwise, they won't be transformed.
-	virtual void SetAffectChildren(bool bAffectChildren) = 0;
-
-	/// Given a reference coordinate system id, returns the name of it
-	virtual void GetCurRefCoordSysName(TSTR& name) const = 0;
-
-	/// Allows for setting the specified node's axis, as the current reference 
-	/// coordiante system
-	virtual void AddRefCoordNode(INode *node) = 0;
-	virtual INode* GetRefCoordNode() = 0;
-
-	/// --- Rendering ------------------------------------------------------- ///
-	/// Only relevant for network rendering.  It is possible to set a job flag
-	/// indicates that max should attempt to continue to render even when an
-	/// "error" has been detected.  This method allows plug-ins to determine
-	/// whether this flag has been set.
-	virtual bool ShouldContinueRenderOnError() const = 0;
-
-	virtual void SetupFrameRendParams(
-		FrameRendParams &frp, 
-		RendParams &rp, 
-		ViewExp *vx, 
-		RECT *r) = 0;
-	virtual void SetupFrameRendParams_MXS(
-		FrameRendParams &frp, 
-		RendParams &rp, 
-		ViewExp *vx, 
-		RECT *r, 
-		bool useSelBox) = 0;
-	virtual int InitDefaultLights(
-		DefaultLight *dl, 
-		int maxn, 
-		BOOL applyGlobalLevel = FALSE, 
-		ViewExp *vx = NULL, 
-		BOOL forRenderer = FALSE) = 0;
-
-	/// Methods used to sync use with Material Editor sample rendering
-	virtual void IncrRenderActive() = 0;  
-	virtual void DecrRenderActive() = 0;
-	virtual BOOL IsRenderActive() = 0;
-	
-	virtual BOOL XRefRenderBegin() = 0;
-	virtual void XRefRenderEnd() = 0;
-
-	virtual void OpenRenderDialog() = 0;
-	virtual void CancelRenderDialog() = 0;
-	virtual void CloseRenderDialog() = 0;
-	virtual void CommitRenderDialogParameters() = 0;
-	virtual void UpdateRenderDialogParameters() = 0;
-	virtual BOOL RenderDialogOpen() = 0;
-
-	virtual Bitmap* GetLastRenderedImage() = 0;
-
-	/// --- General UI ------------------------------------------------------ ///
-	/// Returns the window handle of the status panel window 
-	/// (this holds the MAXScript mini-listener)
-	virtual HWND GetStatusPanelHWnd() = 0;
-	
-	/// --- Maxscript ------------------------------------------------------- ///
-	virtual void SetListenerMiniHWnd(HWND wnd) = 0;
-	virtual HWND GetListenerMiniHWnd() = 0;
-	
-	/// Starts the MAXScript help
-	virtual int MAXScriptHelp(TCHAR* keyword = NULL) = 0;
-
-	/// Retrieves maxscript preferences
-	virtual MAXScriptPrefs& GetMAXScriptPrefs() = 0;
-
-	/// --- Trackview ------------------------------------------------------- ///
-	virtual BOOL OpenTrackViewWindow(
-		TCHAR* tv_name, 
-		TCHAR* layoutName = NULL, 
-		Point2 pos = Point2(-1.0f,-1.0f), 
-		int width = -1, 
-		int height = -1, 
-		int dock = TV_FLOAT) = 0;
-	
-	/// Sets the fous to the specified track view window
-	virtual BOOL BringTrackViewWindowToTop(TCHAR* tv_name) = 0;
-
-	virtual BOOL TrackViewZoomSelected(TCHAR* tv_name) = 0;
-	virtual BOOL TrackViewZoomOn(TCHAR* tv_name, Animatable* parent, int subNum) = 0;
-	virtual BOOL CloseTrackView(TCHAR* tv_name) = 0;
-	virtual int NumTrackViews() = 0;
-	virtual TCHAR* GetTrackViewName(int i) = 0;
-	/// The mask bits are defined in MAXSDK\INCLUDE\ITREEVW.H. Internally, the mask 
-	/// bits are stored in two DWORDs The 'which' param tells which to work with - 
-	/// valid values are 0 and 1.
-	virtual BOOL SetTrackViewFilter(
-		TCHAR* tv_name, 
-		DWORD mask, 
-		int which, 
-		BOOL redraw = TRUE) = 0;
-	virtual BOOL ClearTrackViewFilter(
-		TCHAR* tv_name, 
-		DWORD mask, 
-		int which, 
-		BOOL redraw = TRUE) = 0;
-	virtual DWORD TestTrackViewFilter(TCHAR* tv_name, DWORD mask, int which) = 0;
-	virtual void FlushAllTrackViewWindows() = 0;
-	virtual void UnFlushAllTrackViewWindows() = 0;
-	virtual void CloseAllTrackViewWindows() = 0;
-	
-	/// --- Command Panel Control ------------------------------------------- ///
-	virtual void SetCurEditObject(BaseObject *obj, BaseNode *hintNode = NULL) = 0;
-	/// Get the object or modifier that is currently being edited in the modifier panel
-	virtual BaseObject* GetCurEditObject() = 0;
-	virtual void AddModToSelection(Modifier* mod) = 0;
-	virtual void InvalidateObCache(INode* node) = 0;
-	virtual INode* FindNodeFromBaseObject(ReferenceTarget* obj) = 0;  
-	virtual void SelectedHistoryChanged() = 0; 
-	virtual BOOL CmdPanelOpen() = 0;
-	virtual void CmdPanelOpen(BOOL openClose) = 0;
-	
-	/// Suspends\Resumes command pannels specified via bits set in whichPanels param
-	virtual void SuspendEditing(
-		DWORD whichPanels = (1<<TASK_MODE_MODIFY), 
-		BOOL alwaysSuspend = FALSE) = 0;
-	virtual void ResumeEditing(
-		DWORD whichPanels = (1<<TASK_MODE_MODIFY), 
-		BOOL alwaysSuspend = FALSE) = 0;
-	virtual void SuspendMotionEditing() = 0;
-	virtual void ResumeMotionEditing() = 0;
-
-	/// This method expands Interface::AddClass. It allows for adding new ClassDesc 
-	/// dynamically to create panel 
-	virtual int AddClass(
-		ClassDesc *cdesc, 
-		int dllNum = -1, 
-		int index = -1, 
-		bool load = true) = 0;
-	/// Rebuilds the list of groups and categories of the Create Panel
-	virtual void ReBuildSuperList() = 0;
-	
-	/// Returns FALSE if the editing is stopped. While stopped, it shouldn't be resumed
-	virtual BOOL IsEditing() = 0;
-
-	/// Allows for changing the modifier panel's 
-	virtual void ChangeHistory(int upDown) = 0;
-
-	/// --- Object Creation ------------------------------------------------- ///
-	virtual void StartCreatingObject(ClassDesc* cd) = 0;
-	virtual BOOL IsCreatingObject(Class_ID& id) = 0;
-	virtual BOOL IsCreatingObject() = 0; 
-	/// Fast node creation for FileLink
-	virtual void UpdateLockCheckObjectCounts() = 0;
-	virtual INode *CreateObjectNode( Object *obj, const TCHAR* name) = 0;
-	
-	/// --- Configuration Paths/Directories --------------------------------- ///
-	/// The 'which' parameter corresponds to the 'MAX Directories' defines in maxapi.h
-	virtual BOOL SetDir(int which, TCHAR *dir) = 0;
-	virtual BOOL AddMapDir(TCHAR *dir, int update=TRUE, BOOL xref=FALSE) = 0;
-	virtual BOOL DeleteMapDir(int i, int update=TRUE, BOOL xref=FALSE) = 0;
-	virtual void UpdateMapSection(BOOL xref=FALSE) = 0;
-	
-	/// Appends a string to the current file name and file path. It also updates 
-	/// the string in the application's title bar. 
-	virtual BOOL AppendToCurFilePath(const TCHAR* toAppend) = 0;
-
-	/// Returns empty TSTR if locType == LOC_REGISTRY.
-	virtual TSTR GetMAXIniFile() = 0; 
-
-	/// --- Schematic View -------------------------------------------------- ///
-#ifndef NO_SCHEMATICVIEW
-	virtual BOOL OpenSchematicViewWindow(TCHAR* sv_name) = 0;
-	virtual BOOL SchematicViewZoomSelected(TCHAR* sv_name) = 0;
-	virtual BOOL CloseSchematicView(TCHAR* sv_name) = 0;
-	virtual int  NumSchematicViews() = 0;
-	virtual TCHAR* GetSchematicViewName(int i) = 0;
-	virtual void CloseAllSchematicViewWindows() = 0;
-	virtual void FlushAllSchematicViewWindows() = 0;
-	virtual void UnFlushAllSchematicViewWindows() = 0;
-#endif // NO_SCHEMATICVIEW
-
-	/// --- Scene ----------------------------------------------------------- ///
-	virtual BOOL DrawingEnabled() = 0;
-	virtual void EnableDrawing(BOOL onOff) = 0;
-	virtual BOOL SceneResetting() = 0;
-	virtual BOOL QuitingApp() = 0;
-
-	virtual BOOL GetHideFrozen() = 0;
-	/// See 'Scene Display Flags' in maxapi.h for the possible values of 'flag'
-	virtual void SetSceneDisplayFlag(DWORD flag, BOOL onOff, BOOL updateUI = TRUE) = 0;
-	virtual BOOL GetSceneDisplayFlag(DWORD flag) = 0;
-
-	/// Access to the scene interface
-	virtual IScene* GetScene() = 0;
-	
-	/// ---  Materials and Material Editor ---------------------------------- ///
-	virtual void SetMtlSlot(int i, MtlBase* m) = 0;
-	virtual int GetActiveMtlSlot() = 0;
-	virtual void SetActiveMtlSlot(int i) = 0;
-	virtual int NumMtlSlots() = 0;
-	virtual void FlushMtlDlg() = 0;
-	virtual void UnFlushMtlDlg() = 0;
-	virtual BOOL IsMtlInstanced(MtlBase* m) = 0;
-
-	virtual Mtl *FindMtlNameInScene(TSTR &name) = 0;
-	virtual void PutMaterial(
-		MtlBase* mtl, 
-		MtlBase* oldMtl, 
-		BOOL delOld = 1, 
-		RefMakerHandle skipThis = 0) = 0;
-
-	virtual BOOL IsMtlDlgShowing() = 0;
-	virtual void OpenMtlDlg() = 0;
-	virtual void CloseMtlDlg() = 0;
-
-	/// --- Viewport -------------------------------------------------------- ///
-	/// Returns the window handle for the viewport frame
-	virtual HWND GetViewPanelHWnd() = 0;  
-	/// Viewport access by index
-	virtual int  getActiveViewportIndex() = 0;
-	virtual BOOL setActiveViewport(int index) = 0;
-	virtual int getNumViewports() = 0;
-	virtual ViewExp *getViewport(int i) = 0;
-	virtual void resetAllViews() = 0;
-	
-	/// Viewport name access
-	virtual TCHAR* getActiveViewportLabel() = 0;
-	virtual TCHAR* getViewportLabel(int index) = 0;
-	
-	/// Viewport blow-up and sub-region access
-	virtual void SetRegionRect(int index, Rect r) = 0;
-	virtual Rect GetRegionRect(int index) = 0;
-	virtual void SetBlowupRect(int index, Rect r) = 0;
-	virtual Rect GetBlowupRect(int index) = 0;
-	virtual void SetRegionRect2(int index, Rect r) = 0;
-	virtual Rect GetRegionRect2(int index) = 0;
-	virtual void SetBlowupRect2(int index, Rect r) = 0;
-	virtual Rect GetBlowupRect2(int index) = 0;
-	virtual int GetRenderType() = 0;
-	virtual void SetRenderType(int rtype) = 0;
-	virtual BOOL GetLockImageAspRatio() = 0;
-	virtual void SetLockImageAspRatio(BOOL on) = 0;
-	virtual float GetImageAspRatio() = 0;
-	virtual void SetImageAspRatio(float on) = 0;
-	virtual BOOL GetLockPixelAspRatio() = 0;
-	virtual void SetLockPixelAspRatio(BOOL on) = 0;
-	virtual float GetPixelAspRatio() = 0;
-	virtual void SetPixelAspRatio(float on) = 0;
-
-	virtual void SetViewportGridVisible(int index, BOOL state) = 0;
-	virtual BOOL GetViewportGridVisible(int index) = 0;
-
-	virtual void ViewportInvalidate(int index) = 0; 
-	virtual void ViewportInvalidateBkgImage(int index) = 0; 
-	virtual void InvalidateAllViewportRects() = 0;
-
-	virtual void RedrawViewportsNow(
-		TimeValue t, 
-		DWORD vpFlags = VP_DONT_SIMPLIFY) = 0;
-	virtual void RedrawViewportsLater(
-		TimeValue t, 
-		DWORD vpFlags = VP_DONT_SIMPLIFY ) = 0;
-
-	/// See 'Viewport Rendering Levels' in maxapi.h for possible values of 'level' 
-	virtual void SetActiveViewportRenderLevel(int level) = 0;
-	virtual int GetActiveViewportRenderLevel() = 0;
-
-	/// Access to viewport show edge faces states
-	virtual void SetActiveViewportShowEdgeFaces(BOOL show) = 0;
-	virtual BOOL GetActiveViewportShowEdgeFaces() = 0;
-
-	/// There are 3 levels of transparency: 0, 1 and 2. 
-	/// 0 - no transperancy
-	/// 1 - if hardware rendring -> Blend, otherwise Stipple
-	/// 2 - if hardware rendring -> Sorted Blend, otherwise Blend
-	virtual void SetActiveViewportTransparencyLevel(int level) = 0;
-	virtual int GetActiveViewportTransparencyLevel() = 0;
-
-	/// Access dual plane settings
-	virtual BOOL GetDualPlanes() = 0;
-	virtual void SetDualPlanes(BOOL b) = 0;
-
-	/// --- Hit Testing ----------------------------------------------------- ///
-	/// When the flag is On, only frozen objects are hit tested during a pick
-	virtual void SetTestOnlyFrozen(int onOff) = 0;
-
-	/// --- Tool and Command Modes ------------------------------------------ ///
-	/// Scale modes: CID_OBJSCALE, CID_OBJUSCALE, CID_OBJSQUASH (see cmdmode.h)
-	virtual void SetScaleMode(int mode) = 0;
-	/// Center modes - see 'Origin modes' in maxapi.h
-	virtual void SetCenterMode(int mode) = 0;
-	/// Manipulator related
-	virtual BOOL InManipMode() = 0;
-	virtual void StartManipulateMode() = 0;
-	virtual void EndManipulateMode() = 0;
-	virtual BOOL IsViewportCommandMode(CommandMode *m) = 0;
-	
-	/// --- XRefs ----------------------------------------------------------- ///
-	/// See the 'ConvertFlagedNodesToXRefs() xflags bits' in maxapi.h for the 
-	// possible values the 'xflag' parameter can take
-	virtual	void ConvertFlagedNodesToXRefs(
-		TSTR &fname,
-		INode *rootNode,
-		Tab<INode*> &nodes, 
-		int xFlags) = 0;
-	/// 'f' parameter can take values defined as 'Xref flag bits' in inode.h
-	virtual void XRefSceneSetIgnoreFlag(int index, DWORD f, BOOL onOff) = 0;
-	virtual void UpdateSceneXRefState() = 0;
-
-	/// --- Object Snaps ---------------------------------------------------- ///
-	virtual BOOL GetSnapActive() = 0;
-	virtual void SetSnapActive(BOOL onOff) = 0;
-	virtual int  GetSnapType() = 0;
-	/// See 'Snap types' in snap.h for possible values of 'type'
-	virtual void SetSnapType(int type) = 0;
-	virtual void ToggleASnap() = 0;
-	virtual int ASnapStatus() = 0;
-	virtual void TogglePSnap() = 0;
-	virtual int PSnapStatus() = 0;
-	virtual float GetGridSpacing() = 0;
-	virtual void SetGridSpacing(float newVal) = 0;
-	virtual int GetGridMajorLines() = 0;
-	virtual void SetGridMajorLines(float newVal) = 0;
-	virtual float GetSnapAngle() = 0;
-	virtual void SetSnapAngle(float newVal) = 0;
-	virtual float GetSnapPercent() = 0;
-	virtual void SetSnapPercent(float newVal) = 0;
-
-	/// --- Node Properties ------------------------------------------------- ///
-	virtual BOOL GetPrimaryVisibility(INode* node) = 0;
-	virtual void SetPrimaryVisibility(INode* node, BOOL onOff) = 0;
-	virtual BOOL GetSecondaryVisibility(INode* node) = 0;
-	virtual void SetSecondaryVisibility(INode* node, BOOL onOff) = 0;
-	/// 'whatAttrib' can take the valid values of the "Node attribute flags" 
-	/// defined in maxapi.h
-	virtual void SetNodeAttribute(INodeTab &nodes, int whatAttrib, int onOff) = 0;
-	virtual void SetNodeAttribute(INode *node, int whatAttrib, int onOff) = 0;
-
-	virtual void InvalidateNodeRect(INode* node, TimeValue t, BOOL oldPos=FALSE) = 0;
-
-	/// --- Custom and General UI ------------------------------------------- ///
-	virtual void SetExpertMode(int onOff) = 0;
-	virtual int GetExpertMode() = 0;
-	virtual void LoadCUIConfig(TCHAR* fileName) = 0;
-	virtual void WriteCUIConfig() = 0;
-	virtual void SaveCUIAs() = 0;
-	virtual void LoadCUI() = 0;
-	virtual void RevertToBackupCUI() = 0;
-	virtual void ResetToFactoryDefaultCUI() = 0;
-	virtual void DoUICustomization(int startPage) = 0;
-
-	virtual int GetDefaultImageListBaseIndex(SClass_ID sid, Class_ID cid) = 0;
-	virtual TSTR* GetDefaultImageListFilePrefix(SClass_ID sid, Class_ID cid) = 0;
-
-	virtual float GetGridIntens() = 0;
-	virtual void SetGridIntens(float f) = 0;
-	virtual BOOL GetWhiteOrigin() = 0;
-	virtual void SetWhiteOrigin(BOOL b) = 0;
-	virtual BOOL GetUseGridColor() = 0;
-	virtual void SetUseGridColor(BOOL b) = 0;
-	virtual void UpdateColors(
-		BOOL useGridColor, 
-		int gridIntensity, 
-		BOOL whiteOrigin) = 0;
-
-	virtual IMenu* GetIMenu() = 0;
-	virtual IMenuItem* GetIMenuItem() = 0;
-
-	virtual void RepaintTimeSlider() = 0;
-
-	virtual TSTR GetTabPageTitle(ITabPage *page) = 0;
-
-	/// --- File Open/Save Dialogs ------------------------------------------ ///
-	virtual BOOL DoMaxFileSaveAsDlg(TSTR &fileName, BOOL setAsCurrent=TRUE) = 0;
-	virtual BOOL DoMaxFileOpenDlg(TSTR &fileName, TSTR *defDir, TSTR *defFile) = 0;
-	virtual BOOL DoMaxFileMergeDlg(TSTR &fileName, TSTR *defDir, TSTR *defFile) = 0;
-	virtual BOOL DoMaxFileXRefDlg(TSTR &fileName, TSTR *defDir, TSTR *defFile) = 0;
-
-	/// --- Animation ------------------------------------------------------- ///
-	/// Old style playback with no immediate return
-	virtual void StartAnimPlayback2(int selOnly) = 0; 
-
-	/// --- Modifiers ------------------------------------------------------- ///
-	enum ResCode
-	{
-		kRES_INTERNAL_ERROR = -3,
-		kRES_MOD_NOT_FOUND = -2,
-		kRES_MOD_NOT_APPLICABLE = -1,
-		kRES_SUCCESS = 0,
-	};
-	/// Tests of modifier applicability
-	virtual BOOL IsValidModForSelection(ClassEntry* ce) = 0;
-	/// Returns FALSE if the specied modifier cannot be applied to the object
-	virtual BOOL IsValidModifier(INode& node, Modifier& mod) = 0;
-
-	/// Adds the specified modifier to a node.
-	/// INode& node - the node the modifier will be added to
-	/// Modifier& mod - the modifier instance that will be applied to node
-	/// int beforeIdx - the index in the modstack where the modifier should
-	///									be inserted. 0 means at the top of the modstack 
-	///									(just below the node)
-	/// If the object's stack doesn't have beforeIdx number of modifiers in it,
-	/// the modifier is added at the lowest possible index (just on top of the 
-	/// base object)
-	/// Returns one of these error codes:
-	/// kRES_INTERNAL_ERROR - if an error such as invalid pointer is encountered
-	/// kRES_MOD_NOT_APPLICABLE - if the modifier is not applicable
-	/// kRES_SUCCESS - on success
-	virtual ResCode AddModifier(INode& node, Modifier& mod, int beforeIdx = 0) = 0;
-
-	/// Deletes the first occurance of the specified modifier from the node's 
-	/// modifier stack. Returns one of the following values: kRES_INTERNAL_ERROR,
-	/// kRES_MOD_NOT_FOUND or kRES_SUCCESS
-	virtual ResCode DeleteModifier(INode& node, Modifier& mod) = 0;
-
-	/// Deletes the modifier at the specified index from the node's modifier stack
-	/// Returns one of the following values: kRES_INTERNAL_ERROR,
-	/// kRES_MOD_NOT_FOUND or kRES_SUCCESS
-	virtual ResCode DeleteModifier(INode& node, int modIdx) = 0;
-
-	/// Finds the first occurance of the specified modifier on a node. 
-	/// It returns a pointer to the derived object to which this modifier belongs,
-	/// the index of the modifier within this derived object and the index within 
-	/// the modifier stack. If the modifier is not found, returns NULL. 
-	/// It searches the WS, then the OS part of the geom pipeline of the node.
-	virtual IDerivedObject* FindModifier(
-		INode& node, 
-		Modifier& mod, 
-		int& modStackIdx, 
-		int& derivedObjIdx) = 0;
-
-	/// Finds the modifier at the specified modstack index on a node. 
-	/// It returns a pointer to the derived object to which this modifier belongs, 
-	/// the index of the modifier within this derived object, and a pointer to the 
-	/// modifier itself. If the modifier is not found, returns NULL. 
-	/// It searches both WS and OS part of the geom pipeline of the object
-	virtual IDerivedObject* FindModifier(
-		INode& node, 
-		int modIdx, 
-		int& idx, 
-		Modifier*& mod) = 0;
-
-	/// Finds the index of a modifier instance in a modstack of a node, when 
-	/// the node, the modifier it's corresponding cod context are given.
-	/// It returns a pointer to the derived object to which this modifier belongs, 
-	/// the index of the modifier within this derived object, and a pointer to the 
-	/// modifier itself. If the modifier is not found, returns NULL. It searches 
-	/// both WS and OS part of the geom pipeline of the object node, mod and mc 
-	/// are input parameters, while modStackIdx and dobjidx are output params
-	virtual IDerivedObject* FindModifier(
-		INode& node, 
-		Modifier& mod, 
-		ModContext& mc, 
-		int& modStackIdx, 
-		int& dobjidx) = 0;
-
-	virtual ResCode DoDeleteModifier(INode& node, IDerivedObject& dobj, int idx) = 0;
-
-	/// A node's reference to its object should be replaced using this method. 
-	/// Returns NULL when the operation cannot be completed, such as for Actively 
-	/// (File) Linked objects or their user created clone-instances\references.
-	virtual Object* GetReplaceableObjRef(INode& node) = 0;
-
-	/// --- Render Effects -------------------------------------------------- ///
-#ifndef NO_RENDEREFFECTS 
-	virtual void OpenEnvEffectsDialog() = 0;
-	virtual void CloseEnvEffectsDialog() = 0;
-	virtual BOOL EnvEffectsDialogOpen() = 0;
-#endif // NO_RENDEREFFECTS
-
-}; // class Interface7
-
-/// Methods that control an internal optimization related to reference message 
-/// propagation. The optimization consists of preventing the same ref message 
-/// from being sent repeatedly to the same refmaker. This optimization improves
-/// the performance of interactive manipulation of complex IK rigs, but it is 
-/// not completely reliable in the presence of some objects such as VIZWalls.
-///
-/// Call this method to turn the optimization On (value = true) or Off 
-/// (value = false) at runtime. When 'commitToInit' is true, 'value' is saved
-/// to the current market default file as 'DontRepeatRefMsg=<value>'
-CoreExport void SetDontRepeatRefMsg(bool value, bool commitToInit);
-/// Call this method to find out if the optimization is active or not
-CoreExport bool DontRepeatRefMsg();
-/// In order to apply the optimization to a notification session, the 
-/// Pre\PostRefNotifyDependents methods have to bracket it.
-/// IMPORTANT: The notification session should not contain GetValue calls.
-CoreExport void PreRefNotifyDependents();
-CoreExport void PostRefNotifyDependents();
-
-
-/// Methods that control optimization for evaluating the transforms of complex rigs,
-/// especially of those with the expose transform helper. Note that this optimization
-/// may not work completely reliable with all objects\controllers
-CoreExport void SetInvalidateTMOpt(bool value, bool commitToInit);
-CoreExport bool GetInvalidateTMOpt();
-
-
-#endif // __MAXAPI__
+#endif // __JAGAPI__
 

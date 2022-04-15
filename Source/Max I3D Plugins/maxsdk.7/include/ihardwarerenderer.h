@@ -16,8 +16,6 @@
 
 #define HARDWARE_RENDERER_INTERFACE_ID Interface_ID(0x7f78405c, 0x43894b27)
 
-#define HARDWARE_RENDERER_ST_INTERFACE_ID Interface_ID(0x14716452, 0x65f35430)
-
 class IHardwareMesh;
 class IHardwareMaterial;
 class HardwareMaterial;
@@ -321,17 +319,6 @@ public:
 
 	// End Direct3D Device access
 	virtual void	EndDeviceAccess(GFX_ESCAPE_FN fn) = 0;
-
-	// This tells the mesh / mnmesh classes whther a shader has performed the drawing already
-	// so it can simply ignore the draw call.  This prevents double draws.
-	virtual bool ObjectDrawnByShader() = 0;
 };
-
-class IHardwareRendererST : public IHardwareRenderer
-{
-public:
-	virtual Interface_ID	GetID() { return HARDWARE_RENDERER_ST_INTERFACE_ID; }
-};
-
 
 #endif

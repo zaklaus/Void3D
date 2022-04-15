@@ -37,7 +37,6 @@ CoreExport BOOL doingXORDraw(void);
 #define HITTYPE_SOLID   4
 #define HITTYPE_FENCE   5
 #define HITTYPE_LASSO   6
-#define HITTYPE_PAINT   7
 
 // Flags for hit test.
 #define HIT_SELONLY				(1<<0)
@@ -427,11 +426,6 @@ class BaseObject: public ReferenceTarget {
 		// returned by GetSubObjType(int i) (with an offset of 1 obviously).
 
 		CoreExport virtual int GetSubObjectLevel();
-
-		// This method return true if GetWorldBoundBox returns different boxes
-		// for different viewports. It is used to inhibit a caching of the
-		// bounding box for all viewports. Default implementation returns false.
-		virtual BOOL HasViewDependentBoundingBox() { return false; }
 	};
 
 //-------------------------------------------------------------
@@ -867,10 +861,6 @@ class Object: public BaseObject {
 // a TriObject and counts faces and vertices otherwise.
 CoreExport void GetPolygonCount(TimeValue t, Object* pObj, int& numFaces, int& numVerts);
 
-// This function to count trifaces of a mesh
-// It works just like GetPolygonCount, where GetPolygonCount will count EditablePoly object's Polys as 1 Poly,
-// instead of several trifaces. It also will not count splines unless their renderable property is true
-CoreExport void GetTriMeshFaceCount(TimeValue t, Object* pObj, int& numFaces, int& numVerts);
 
 // mjm - begin - 07.17.00
 class  CameraObject;
@@ -1123,7 +1113,7 @@ public:
 		int n = -1;
 		for( int i = 0; i < nUserIllumOut; ++i ){
 			DbgAssert( userIllumNames );
-			if( _tcscmp( name, userIllumNames[i] ) == 0 ){
+			if( strcmp( name, userIllumNames[i] ) == 0 ){
 				n = i;
 				break;
 			}
@@ -1248,8 +1238,6 @@ class  LightObject: public Object {
 	// Methods specific to Lights:
 	virtual RefResult EvalLightState(TimeValue time, Interval& valid, LightState *ls)=0;
 	virtual ObjLightDesc *CreateLightDesc(INode *n, BOOL forceShadowBuffer=FALSE) {return NULL;}
-	//JH 06/03/03 new api to pass globalRenderContext
-	virtual ObjLightDesc *CreateLightDesc(RenderGlobalContext *rgc, INode *inode, BOOL forceShadowBuf=FALSE ){return NULL;}
 	virtual void SetUseLight(int onOff)=0;
 	virtual BOOL GetUseLight(void)=0;
 	virtual void SetHotspot(TimeValue time, float f)=0; 
@@ -1326,12 +1314,11 @@ class  HelperObject: public Object {
 #define GRID_PLANE_RIGHT	4
 #define GRID_PLANE_BACK		5
 
-class ConstObject: public HelperObject {
+class  ConstObject: public HelperObject {
 	private:
 		bool m_transient;
-		bool m_temporary;	// 030730  --prs.
 	public:
-		ConstObject() { m_transient = m_temporary = false; }
+		ConstObject():m_transient(false){};
 	
 	// Override this function in HelperObject!
 	int IsConstObject() { return 1; }
@@ -1348,10 +1335,6 @@ class ConstObject: public HelperObject {
 	//JH 09/28/98 for design ver
 	bool IsTransient()const {return m_transient;}
 	void SetTransient(bool state = true) {m_transient = state;}
-
-	// grid bug fix, 030730  --prs.
-	bool IsTemporary() const { return m_temporary; }
-	void SetTemporary(bool state = true) { m_temporary = state; }
 
 	//JH 11/16/98
 	virtual void SetExtents(TimeValue t, Point3 halfbox)=0;
@@ -1418,10 +1401,9 @@ class  GeomObject: public Object {
 // The force is then used to compute an acceleration on a particle
 // which modifies its velocity. Typically, particles are assumed to
 // to have a normalized uniform mass==1 so the acceleration is F/M = F.
-class ForceField  : public InterfaceServer {
+class ForceField {
 	public:
 		virtual Point3 Force(TimeValue t,const Point3 &pos, const Point3 &vel, int index)=0;
-		virtual void SetRandSeed(int seed) {}
 		virtual void DeleteThis() {}
 	};
 
@@ -1434,7 +1416,6 @@ class CollisionObject : public InterfaceServer {
 		// Check for collision. Return TRUE if there was a collision and the position and velocity have been modified.
 		virtual BOOL CheckCollision(TimeValue t,Point3 &pos, Point3 &vel, float dt,int index, float *ct=NULL, BOOL UpdatePastCollide=TRUE)=0;
 		virtual Object *GetSWObject()=0;
-		virtual void SetRandSeed(int seed) {}
 		virtual void DeleteThis() {}
 	};
 
@@ -1904,13 +1885,12 @@ class HitRecord {
 class HitLog {
 	HitRecord *first;
 	int hitIndex;
-	bool hitIndexReady;			// CAL-07/10/03: hitIndex is ready to be increased.
 	public:
-		HitLog()  { first = NULL; hitIndex = 0; hitIndexReady = false; }
+		HitLog()  { first = NULL; hitIndex = 0; }
 		~HitLog() { Clear(); }
 		CoreExport void Clear();
-		CoreExport void ClearHitIndex(bool ready = false)		{ hitIndex = 0; hitIndexReady = ready; }
-		CoreExport void IncrHitIndex()		{ if (hitIndexReady) hitIndex++; else hitIndexReady = true; }
+		CoreExport void ClearHitIndex()		{ hitIndex = 0; }
+		CoreExport void IncrHitIndex()		{ hitIndex++; }
 		HitRecord* First() { return first; }
 		CoreExport HitRecord* ClosestHit();
 		CoreExport void LogHit(INode *nr, ModContext *mc, DWORD dist, ulong info, HitData *hitdat = NULL);

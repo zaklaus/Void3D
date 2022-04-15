@@ -20,9 +20,6 @@
 #define I_SKIN 0x00010000
 #define I_SKINIMPORTDATA 0x00020000
 
-//New interface for max 6
-#define I_SKIN2 0x00030000
-
 #define I_GIZMO 9815854
 //Gizmo interface for r5 additions
 #define I_GIZMO2 9815855
@@ -150,43 +147,7 @@ Both boneNodelist and weights must be the same size  Return TRUE if the operatio
 	virtual BOOL AddWeights(INode *skinNode, int vertexID, Tab<INode*> &boneNodeList, Tab<float> &weights)=0;
 };
 
-
 // End of 3ds max 4.2 Extension
-
-//New For Max6
-//this exposes the initial stretch matrix that a bone as since we seperated this out from the base
-//matrix so we could turn it off.
-class ISkin2
-{
-public:
-/*
-	This will set the initial stretch tm for a bone in skin
-	boneNode  is the node of the bone to set
-	stretchTm is the stretch matrix
-	The stretch matrix is the bone stretch matrix applied to bone objects. You can get a node stretch tm by calling
-	node->GetStretchTM()	
-	This returns true if the function succeeds
-	
-	NOTE SetBoneTm will clear the stretchTM and set it to identity so make sure you call this after SetBoneTm
-*/
-	virtual BOOL SetBoneStretchTm(INode *boneNode, Matrix3 stretchTm)=0;
-
-/*
-	This will retrun  the initial stretch tm for a bone in skin
-	boneNode  is the node of the bone to set			
-*/
-
-	virtual Matrix3 GetBoneStretchTm(INode *boneNode)=0;
-
-/*
-	This will let you get the current vertex selection set for skin
-*/
-	virtual void GetVertexSelection(INode *skinNode, BitArray &sel) = 0;
-/*
-	This will let you set the current vertex selection set for skin
-*/
-	virtual void SetVertexSelection(INode *skinNode, BitArray &sel) = 0;
-};
 
 class IGizmoBuffer
 {

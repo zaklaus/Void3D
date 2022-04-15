@@ -48,15 +48,6 @@ public:
 	Point4 operator-() const { return(Point4(-x,-y,-z, -w)); } 
 	Point4 operator+() const { return *this; } 
 
-	// Property functions
-	float Length() const;
-	float FLength() const;
-	float LengthSquared() const;
-	int MaxComponent() const;
-	int MinComponent() const;
-	Point4 Normalize() const;     // more accurate than FNormalize()
-	Point4 FNormalize() const;    // faster than Normalize()
-
 	// Assignment operators
 	inline Point4& operator-=(const Point4&);
 	inline Point4& operator+=(const Point4&);
@@ -70,53 +61,15 @@ public:
 	int operator!=(const Point4& p) const { return ((p.x!=x)||(p.y!=y)||(p.z!=z)||(p.w!=w)); }
     int Equals(const Point4& p, float epsilon = 1E-6f);
 
-	// In-place normalize
-	Point4& Unify();
-	float LengthUnify();              // returns old Length
-
 	// Binary operators
 	inline  Point4 operator-(const Point4&) const;
 	inline  Point4 operator+(const Point4&) const;
 	inline  Point4 operator/(const Point4&) const;
 	inline  Point4 operator*(const Point4&) const;   
 
-	inline float operator%(const Point4&) const;	    // DOT PRODUCT
 	};
 
-inline float DllExport Length(const Point4&); 
-inline float DllExport FLength(const Point4&); 
-inline float DllExport LengthSquared(const Point4&); 
-int DllExport MaxComponent(const Point4&);  // the component with the maximum abs value
-int DllExport MinComponent(const Point4&);  // the component with the minimum abs value
-Point4 DllExport Normalize(const Point4&);  // Accurate normalize
-Point4 DllExport FNormalize(const Point4&); // Fast normalize 
-Point4 DllExport CrossProd(const Point4& a, const Point4& b, const Point4& c);	// CROSS PRODUCT
-
 // Inlines:
-
-inline float Point4::Length() const {	
-	return (float)sqrt(x*x+y*y+z*z+w*w);
-}
-
-inline float Point4::FLength() const {	
-	return Sqrt(x*x+y*y+z*z+w*w);
-}
-
-inline float Point4::LengthSquared() const {	
-	return (x*x+y*y+z*z+w*w);
-}
-
-inline float Length(const Point4& v) {	
-	return v.Length();
-}
-
-inline float FLength(const Point4& v) {	
-	return v.FLength();
-}
-
-inline float LengthSquared(const Point4& v) {	
-	return v.LengthSquared();
-}
 
 inline Point4& Point4::operator-=(const Point4& a) {	
 	x -= a.x;	y -= a.y;	z -= a.z; w -= a.w;
@@ -184,18 +137,10 @@ inline Point4 operator+(const Point4& a, float f) {
 	return(Point4(a.x+f, a.y+f, a.z+f, a.w+f));
 	}
 
-inline float Point4::operator%(const Point4& b) const {
-	return (x*b.x + y*b.y + z*b.z + w*b.w);
-}
-
 inline int Point4::Equals(const Point4& p, float epsilon) {
     return (fabs(p.x - x) <= epsilon && fabs(p.y - y) <= epsilon
             && fabs(p.z - z) <= epsilon && fabs(p.w - w) <= epsilon);
     }
-
-inline float DotProd(const Point4& a, const Point4& b) { 
-	return(a.x*b.x+a.y*b.y+a.z*b.z+a.w*b.w);	
-}
 
 #endif
 

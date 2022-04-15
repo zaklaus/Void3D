@@ -19,9 +19,6 @@
 
 class MouseCallBack;
 class ChangeForegroundCallback;
-class HitByNameDlgCallback;
-class PickModeCallback;
-class PickNodeCallback;
 
 class CommandMode {
 	public:
@@ -74,9 +71,9 @@ class XFormModes {
 
 // command classes
 #define VIEWPORT_COMMAND		1
-#define MOVE_COMMAND				2
+#define MOVE_COMMAND			2
 #define ROTATE_COMMAND			3
-#define SCALE_COMMAND				4
+#define SCALE_COMMAND			4
 #define USCALE_COMMAND			5
 #define SQUASH_COMMAND			6
 #define SELECT_COMMAND			7
@@ -86,12 +83,12 @@ class XFormModes {
 #define MOTION_COMMAND			11
 #define ANIMATION_COMMAND		12
 #define CAMERA_COMMAND			13
-#define NULL_COMMAND				14
+#define NULL_COMMAND			14
 #define DISPLAY_COMMAND			15
 #define SPOTLIGHT_COMMAND		16
-#define PICK_COMMAND				17
-#define MANIPULATE_COMMAND	18
-#define PICK_EX_COMMAND			19 // Extended Pick Command Mode
+#define PICK_COMMAND			17
+#define MANIPULATE_COMMAND      18
+
 
 // command IDs
 #define CID_USER				0x0000ffff
@@ -164,19 +161,6 @@ class XFormModes {
 // These are not to be used by third party developers
 #define CID_FREE_AXIS_ROTATE	-INT_MAX
 #define CID_SCREEN_SPACE_ROTATE -INT_MAX+1
-
-//-----------------------------------------------------------------------------
-// Derive your command mode class from this one if you wish to implement your 
-// own pick command mode and want to hook it into the select by name mechanism
-class PickCommandMode : public CommandMode
-{
-	public:
-		virtual ~PickCommandMode() { };
-		virtual int Class() { return PICK_EX_COMMAND; }
-		virtual HitByNameDlgCallback* GetHitByNameDlgCallback() = 0;
-		virtual PickModeCallback* GetPickModeCallback() = 0;
-		virtual PickNodeCallback* GetPickNodeCallback() = 0;
-};
 
 #endif // __CMDMODE
 

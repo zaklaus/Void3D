@@ -18,7 +18,7 @@
 //Forward decls
 class ILayerProperties;
 
-// The interface ID for class INodeLayerProperties
+// The interface ID for class INodeGIProperties
 #define NODELAYERPROPERTIES_INTERFACE Interface_ID(0x44e025f8, 0x6b071e44)
 
 // Provides access to the nodes layer and bylayer bits

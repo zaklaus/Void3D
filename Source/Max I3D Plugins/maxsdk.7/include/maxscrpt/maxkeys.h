@@ -13,19 +13,21 @@
 
 visible_class (MAXKeyArray)
 
-class MAXKeyArray : public Value
+class MAXKeyArray : public MAXWrapper
 {
 public:
-	MAXControl*		 controller;		/* the controller							*/
+	Control*		 controller;		/* the controller							*/
+	ParamDimension*  dim;				/* dimension from originating animatable	*/
+	IKeyControl*	 ik;	
 
-	ENABLE_STACK_ALLOCATE(MAXKeyArray);
-	ScripterExport	MAXKeyArray(Control* icont, ParamDimension* idim);
+				MAXKeyArray(Control* icont, ParamDimension* idim);
+	static ScripterExport Value* intern(Control* icont, ParamDimension* idim);
 
-				classof_methods (MAXKeyArray, Value);
+				classof_methods (MAXKeyArray, MAXWrapper);
 	BOOL		_is_collection() { return 1; }
 	void		collect() { delete this; }
-	void		gc_trace();
 	ScripterExport void sprin1(CharStream* s);
+	TCHAR*		class_name();
 
 	/* operations */
 	
@@ -48,6 +50,24 @@ public:
 	def_property ( count );
 };
 
+typedef union AnyKey AnyKey;
+union AnyKey
+{
+	TCHAR lfk[sizeof ILinFloatKey];
+	TCHAR lp3k[sizeof ILinPoint3Key];
+	TCHAR lrk[sizeof ILinRotKey];
+	TCHAR lsk[sizeof ILinScaleKey];
+	TCHAR bfk[sizeof IBezFloatKey];
+	TCHAR bp3k[sizeof IBezPoint3Key];
+	TCHAR bqk[sizeof IBezQuatKey];
+	TCHAR bsk[sizeof IBezScaleKey];
+	TCHAR tfk[sizeof ITCBFloatKey];
+	TCHAR tp3k[sizeof ITCBPoint3Key];
+	TCHAR trk[sizeof ITCBRotKey];
+	TCHAR tsk[sizeof ITCBScaleKey];
+	TCHAR bofk[sizeof IBoolFloatKey];
+};
+
 #define ToTCBUI(a) (((a)+1.0f)*25.0f)  // HEY!! pinched from TCBINTRP.CPP, why not in a header or documented?
 #define FromTCBUI(a) (((a)/25.0f)-1.0f)
 #define ToEaseUI(a) ((a)*50.0f)
@@ -55,23 +75,24 @@ public:
 
 visible_class (MAXKey)
 
-class MAXKey : public Value
+class MAXKey : public MAXWrapper
 {
 public:
-	MAXControl*	controller;			/* MAX-side controller						*/
+	Control*	controller;			/* MAX-side controller						*/
+	ParamDimension* dim;			/* dimension from originating animatable	*/
 	int			key_index;
 
-	ENABLE_STACK_ALLOCATE(MAXKey);
 	ScripterExport MAXKey (Control* icont, int ikey, ParamDimension* dim);
 	ScripterExport MAXKey (Control* icont, int ikey);
-	ScripterExport MAXKey (MAXControl* icont, int ikey);
+	static ScripterExport Value* intern(Control* icont, int ikey, ParamDimension* dim);
+	static ScripterExport Value* intern(Control* icont, int ikey);
 
 	static void setup();
 
-				classof_methods (MAXKey, Value);
+				classof_methods (MAXKey, MAXWrapper);
 	void		collect() { delete this; }
-	void		gc_trace();
 	ScripterExport void sprin1(CharStream* s);
+	TCHAR*		class_name();
 
 	def_generic ( delete,		"delete");
 	def_generic ( copy,			"copy");
@@ -92,7 +113,6 @@ public:
 	def_property	(x_locked);
 	def_property	(y_locked);
 	def_property	(z_locked);
-	def_property	(w_locked);
 	def_property	(constantVelocity);
 	def_property	(freeHandle);
 	def_property	(tension);

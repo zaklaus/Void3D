@@ -14,13 +14,8 @@
 #ifndef __HOLD__H__
 #define __HOLD__H__
 
-#define RESTOBJ_DOES_REFERENCE_POINTER		1 // cmd ID for RestoreObj::Execute
-#define RESTOBJ_GOING_TO_DELETE_POINTER		2 // cmd ID for RestoreObj::Execute
-#define REFTARG_AUTO_DELETED				10 // cmd ID for HoldStore::Execute
-
-#define HOLD_SYSTEM_EMPTY					1 // cmd ID for Hold::Execute - return 1 if hold system is definitely empty
-#define HOLD_POINTER_IS_MANAGER				2 // cmd ID for Hold::Execute - return 1 if arg1 is a pointer to the undo manager
-#define HOLD_SUPERLEVEL						3 // cmd ID for Hold::Execute - return Hold.superLevel
+#define RESTOBJ_DOES_REFERENCE_POINTER		1
+#define RESTOBJ_GOING_TO_DELETE_POINTER		2
 
 class HoldStore;
 class RestoreObj : public InterfaceServer {
@@ -81,8 +76,6 @@ class Hold : public BaseInterfaceServer {
 		// Get the number of times Put() has been called in the current session of MAX
 		CoreExport int GetGlobalPutCount();
 
-		CoreExport INT_PTR Execute(int cmd, ULONG_PTR arg1=0, ULONG_PTR arg2=0, ULONG_PTR arg3=0);
-
 	protected:
 		friend HoldStore;
 		unsigned flags;
@@ -98,33 +91,6 @@ class Hold : public BaseInterfaceServer {
 extern CoreExport Hold theHold;
 
 void CoreExport EnableUndoDebugPrintout(BOOL onoff);
-
-// A class to help control the hold system. Create an instance of this class, and when it is
-// destructed any hold suspends are resumed. Makes it safe in case a throw occurs after the suspend,
-// but before the resume
-class HoldSuspend {
-private:
-	int	suspendCount;
-public:
-	HoldSuspend(BOOL suspendNow = TRUE) {
-		if (suspendNow) {
-			theHold.Suspend ();
-			suspendCount=1;
-		}
-		else
-			suspendCount = 0;
-	}
-	void Suspend() {
-		if (suspendCount == 0) theHold.Suspend ();
-		suspendCount++;
-	}
-	void Resume() {
-		if (suspendCount == 1) theHold.Resume ();
-		if (suspendCount != 0) suspendCount--;
-	}
-	~HoldSuspend()	{ for (int i=0; i < suspendCount; i++) theHold.Resume ();};	
-};					  
-
 
 
 #endif //__HOLD__H__

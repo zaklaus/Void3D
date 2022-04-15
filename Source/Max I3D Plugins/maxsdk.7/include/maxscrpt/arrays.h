@@ -118,7 +118,6 @@ public:
 
 	BitArray&	to_bitarray() { return bits; }
 	void	    to_fpvalue(FPValue& v) { v.bits = &bits; v.type = TYPE_BITARRAY; }
-#	define		is_bitarray(b) ((b)->tag == class_tag(BitArrayValue))
 
 };
 

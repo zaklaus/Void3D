@@ -42,8 +42,6 @@ extern HINSTANCE hInstance;
 // Flags:
 // Disp Result keeps track of "Show End Result" button for this Editable Spline
 #define ES_DISP_RESULT 0x0100
-// Use additional vertex selection (marked as SPLINEKNOT_ADD_SEL) in SplineShape::XFormVerts()
-#define ES_ADDED_SELECT 0x0200
 
 // References
 // NOTE: Reference 0 is the ShapeObject's rendering parameter block!
@@ -74,11 +72,6 @@ extern HINSTANCE hInstance;
 #define CID_SPLINEBIND	CID_USER + 213
 #define CID_REFINECONNECT	CID_USER + 214
 
-// CAL-02/24/03: Add Cross Section. (FID #827)
-#define CID_CROSSSECTION	CID_USER + 215
-// CAL-02/27/03: copy/paste tangent. (FID #827)
-#define CID_COPYTANGENT		CID_USER + 216
-#define CID_PASTETANGENT	CID_USER + 217
 
 
 // General-purpose shape point table -- Maintains point table for each of n polygons
@@ -197,9 +190,6 @@ class SSNamedSelSetList {
 		CoreExport TSTR* Names(int i);
 	};
 
-class SingleRefMakerSplineNode;
-class SingleRefMakerSplineMtl;
-
 class IntersectPt;	// Internal class
 
 class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelectData, ISubMtlAPI, AttachMatDlgUser {
@@ -223,12 +213,9 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 	friend class SSVertConnectCMode;
 	friend class SSVertInsertCMode;
 	friend class SSCreateLineCMode;
-	friend class SSCrossSectionCMode;
 	friend class SSBooleanCMode;
 	friend class SSTrimCMode;
 	friend class SSExtendCMode;
-	friend class SSCopyTangentCMode;
-	friend class SSPasteTangentCMode;
 	friend class SSOutlineMouseProc;
 	friend class SSFilletMouseProc;
 	friend class SSChamferMouseProc;
@@ -273,12 +260,9 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		static SSVertConnectCMode *vertConnectMode;
 		static SSVertInsertCMode *vertInsertMode;
 		static SSCreateLineCMode *createLineMode;
-		static SSCrossSectionCMode *crossSectionMode;
 		static SSBooleanCMode *booleanMode;
 		static SSTrimCMode *trimMode;
 		static SSExtendCMode *extendMode;
-		static SSCopyTangentCMode *copyTangentMode;
-		static SSPasteTangentCMode *pasteTangentMode;
 		static ISpinnerControl *divSpin;
 		static ISpinnerControl *outlineSpin;
 		static ISpinnerControl *filletSpin;
@@ -287,13 +271,9 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		static ISpinnerControl *crossSpin;
 		static ISpinnerControl *stepsSpin;
 		static ISpinnerControl *matSpin;
-		static ISpinnerControl *matSpinSel;
 
 //2-1-99 watje
 		static ISpinnerControl *selectAreaSpin;
-
-		// CAL-05/23/03: Threshold for extending existing splines when Shift-Move Copy. (FID #827)
-		static ISpinnerControl *pConnectCopyThreshSpinner;
 
 		// endpoint autoweld controls
 		static ISpinnerControl *pEndPointAutoConnectWeldSpinner;
@@ -354,18 +334,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		// Load reference version
 		int loadRefVersion;
 
-		// CAL-05/23/03: Add Connecting Splines when Shift-Move Copy. (FID #827)
-		BOOL connectCopy;
-		float connectCopyThreshold;
-
-		// CAL-02/24/03: Add Cross Section mode. (FID #827)
-		int newKnotType;
-
-		// CAL-02/27/03: copy/paste tangent info. (FID #827)
-		BOOL copyTanLength;
-		BOOL tangentCopied;
-		Point3 copiedTangent;
-
 	protected:
 		//  inherited virtual methods for Reference-management
 		CoreExport RefResult NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message );
@@ -376,10 +344,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 	public:
 		static IObjParam *ip;		
 		static SplineShape *editObj;
-
-		// additonal references
-		SingleRefMakerSplineNode* noderef;                  
-		SingleRefMakerSplineMtl* mtlref; 
 
 		BezierShape		shape;
 
@@ -455,7 +419,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		CoreExport ObjectState Eval(TimeValue time);
 		CoreExport Interval ObjectValidity(TimeValue t);
 		CoreExport void MaybeEnlargeViewportRect(GraphicsWindow *gw, Rect &rect);
-		CoreExport virtual void InitNodeName(TSTR& s);
 
 		// Named selection set support:
 		BOOL SupportsNamedSubSels() {return TRUE;}
@@ -618,9 +581,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		CoreExport void StartCreateLineMode();
 		CoreExport BOOL StartCreateLine(BezierShape **shape);
 		CoreExport void EndCreateLine();
-		CoreExport void StartCrossSectionMode();
-		CoreExport void StartCrossSection();
-		CoreExport void EndCrossSection(BOOL acceptUndo);
 		CoreExport BOOL BooleanStartUp();
 		CoreExport void StartBooleanMode();
 		CoreExport void DoBoolean(int poly2);
@@ -635,7 +595,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		CoreExport void SetCondenseMat(BOOL sw);
 
 		CoreExport int DoAttach(INode *node, bool & canUndo);
-		CoreExport void DoCrossSection(Tab<int> &splineIndices);
 		CoreExport void DoVertBreak();
 		CoreExport void DoVertWeld();
 		CoreExport void DoMakeFirst();
@@ -673,8 +632,6 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 		CoreExport void SetRememberedPolyType(int type);
 
 		CoreExport void SplineShapeClone( SplineShape *source );
-
-		CoreExport int GetPointIndex(const Tab<Point3> &vertList, const Point3 &point) const;
 
 		// The following methods do the job and update controllers, named selections, etc.
 		CoreExport void DeleteSpline(int poly);
@@ -762,15 +719,7 @@ class SplineShape : public ShapeObject, ISplineOps, ISplineSelect, ISplineSelect
 
 //2-1-99 watje
 		CoreExport void DoVertFuse();
-		
-		// CAL-02/27/03: copy/paste tangent. (FID #827)
-		CoreExport void StartCopyTangentMode();
-		CoreExport void StartPasteTangentMode();
-		CoreExport void StartPasteTangent();
-		CoreExport void EndPasteTangent();
 
-		CoreExport BOOL CopyTangent(int poly, int vert);
-		CoreExport BOOL PasteTangent(int poly, int vert);
 
 		// spline select and operations interfaces, JBW 2/1/99
 		CoreExport void StartCommandMode(splineCommandMode mode);
@@ -1298,57 +1247,6 @@ class SSCreateLineCMode : public CommandMode {
 	};
 
 /*-------------------------------------------------------------------*/
-// CAL-02/24/03: Add Cross Section mode. (FID #827)
-
-class SSCrossSectionMouseProc : public MouseCallBack {
-	private:
-		SplineShape *ss;
-		IObjParam *ip;
-		IPoint2 om;
-		
-		static bool mCreating;
-		static bool mCrossingDrawn;
-		static int mPolys;
-		static Tab<int> mSelectedSplines;
-		static Matrix3 mObjToWorldTM;
-		static IPoint2 mMouse;
-
-	protected:
-		HCURSOR GetTransformCursor();
-		HitRecord* HitTest( ViewExp *vpt, IPoint2 *p, int type, int flags );
-		void DrawCrossing(HWND hWnd);
-
-	public:
-		SSCrossSectionMouseProc(SplineShape* spl, IObjParam *i) { ss=spl; ip=i; }
-		int proc(
-			HWND hwnd, 
-			int msg, 
-			int point, 
-			int flags, 
-			IPoint2 m );
-		int override(int mode) { return CLICK_DOWN_POINT; }
-	};
-
-class SSCrossSectionCMode : public CommandMode {
-	private:
-		ChangeFGObject fgProc;
-		SSCrossSectionMouseProc eproc;
-		SplineShape* ss;
-
-	public:
-		SSCrossSectionCMode(SplineShape* spl, IObjParam *i) :
-			fgProc(spl), eproc(spl,i) {ss=spl;}
-
-		int Class() { return MODIFY_COMMAND; }
-		int ID() { return CID_CROSSSECTION; }
-		MouseCallBack *MouseProc(int *numPoints) { *numPoints=999999; return &eproc; }
-		ChangeForegroundCallback *ChangeFGProc() { return &fgProc; }
-		BOOL ChangeFG( CommandMode *oldMode ) { return oldMode->ChangeFGProc() != &fgProc; }
-		void EnterMode();
-		void ExitMode();
-	};
-
-/*-------------------------------------------------------------------*/
 
 class SSBooleanMouseProc : public MouseCallBack {
 	private:
@@ -1569,124 +1467,11 @@ class SSRefineConnectCMode : public CommandMode {
 		void SetType(int type) { this->type = type; eproc.SetType(type); }
 	};
 
-/*-------------------------------------------------------------------*/
-// CAL-02/27/03: copy/paste tangent modes. (FID #827)
-
-class SSCopyTangentMouseProc : public MouseCallBack {
-	private:
-		SplineShape *ss;
-		IObjParam *ip;
-
-	protected:
-		HCURSOR GetTransformCursor();
-		HitRecord* HitTest( ViewExp *vpt, IPoint2 *p, int type, int flags );
-
-	public:
-		SSCopyTangentMouseProc(SplineShape* spl, IObjParam *i) { ss=spl; ip=i; }
-		int proc(
-			HWND hwnd, 
-			int msg, 
-			int point, 
-			int flags, 
-			IPoint2 m );
-	};
-
-class SSCopyTangentCMode : public CommandMode {
-	private:
-		ChangeFGObject fgProc;
-		SSCopyTangentMouseProc eproc;
-		SplineShape* ss;
-
-	public:
-		SSCopyTangentCMode(SplineShape* spl, IObjParam *i) :
-			fgProc(spl), eproc(spl,i) {ss=spl;}
-
-		int Class() { return MODIFY_COMMAND; }
-		int ID() { return CID_COPYTANGENT; }
-		MouseCallBack *MouseProc(int *numPoints) { *numPoints=1; return &eproc; }
-		ChangeForegroundCallback *ChangeFGProc() { return &fgProc; }
-		BOOL ChangeFG( CommandMode *oldMode ) { return oldMode->ChangeFGProc() != &fgProc; }
-		void EnterMode();
-		void ExitMode();
-	};
-
-class SSPasteTangentMouseProc : public MouseCallBack {
-	private:
-		SplineShape *ss;
-		IObjParam *ip;
-
-	protected:
-		HCURSOR GetTransformCursor();
-		HitRecord* HitTest( ViewExp *vpt, IPoint2 *p, int type, int flags );
-
-	public:
-		SSPasteTangentMouseProc(SplineShape* spl, IObjParam *i) { ss=spl; ip=i; }
-		int proc(
-			HWND hwnd, 
-			int msg, 
-			int point, 
-			int flags, 
-			IPoint2 m );
-	};
-
-class SSPasteTangentCMode : public CommandMode {
-	private:
-		ChangeFGObject fgProc;
-		SSPasteTangentMouseProc eproc;
-		SplineShape* ss;
-
-	public:
-		SSPasteTangentCMode(SplineShape* spl, IObjParam *i) :
-			fgProc(spl), eproc(spl,i) {ss=spl;}
-
-		int Class() { return MODIFY_COMMAND; }
-		int ID() { return CID_PASTETANGENT; }
-		MouseCallBack *MouseProc(int *numPoints) { *numPoints=1; return &eproc; }
-		ChangeForegroundCallback *ChangeFGProc() { return &fgProc; }
-		BOOL ChangeFG( CommandMode *oldMode ) { return oldMode->ChangeFGProc() != &fgProc; }
-		void EnterMode();
-		void ExitMode();
-	};
-
-/*-------------------------------------------------------------------*/
 
 
 CoreExport ClassDesc* GetSplineShapeDescriptor();
 CoreExport int ApplyOffset(Interface *intf, INode *node, float amount);
 CoreExport int MeasureOffset(Interface *intf, INode *node, Point3 *point, float *result);
-
-
-#define  SRMSN_CLASS_ID 0xba40242
-class SingleRefMakerSplineNode : public SingleRefMaker{
-public:
-	HWND hwnd;
-	SplineShape *ss;
-	SingleRefMakerSplineNode() {hwnd = NULL; ss = NULL;}
-	~SingleRefMakerSplineNode() { 
-		theHold.Suspend();         
-		DeleteAllRefsFromMe(); 
-		theHold.Resume();
-	}
-	RefResult NotifyRefChanged( Interval changeInt,RefTargetHandle hTarget, 
-		PartID& partID, RefMessage message );
-	SClass_ID  SuperClassID() { return SRMSN_CLASS_ID; }
-};
-
-#define  SRMSM_CLASS_ID 0x202b1fa9
-class SingleRefMakerSplineMtl : public SingleRefMaker{
-public:	
-	HWND hwnd;
-	SplineShape *ss;
-	SingleRefMakerSplineMtl() {hwnd = NULL; ss = NULL;}
-	~SingleRefMakerSplineMtl() { 
-		theHold.Suspend();         
-		DeleteAllRefsFromMe(); 
-		theHold.Resume();
-	}
-	RefResult NotifyRefChanged( Interval changeInt,RefTargetHandle hTarget, 
-		PartID& partID, RefMessage message );
-	SClass_ID  SuperClassID() { return SRMSM_CLASS_ID; }
-};
 
 // Command ID for the dynamic spline quad menu entry
 #define ID_SPLINE_MENU 1320

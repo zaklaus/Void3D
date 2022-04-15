@@ -44,50 +44,40 @@ public:
 	DWTab	c[GFX_MAX_COLORS];
 	DWTab	tv[GFX_MAX_TEXTURES];
 
-	void AddVertN(DWORD vtx, DWORD nor) { v.Append(1, &vtx, v.Count()/2); n.Append(1, &nor, n.Count()/2); }
-	void AddVertNC1(DWORD vtx, DWORD nor, DWORD col) { v.Append(1, &vtx, v.Count()/2); n.Append(1, &nor, n.Count()/2); c[0].Append(1, &col, c[0].Count()/2); }
+	void AddVertN(DWORD vtx, DWORD nor) { v.Append(1, &vtx); n.Append(1, &nor); }
+	void AddVertNC1(DWORD vtx, DWORD nor, DWORD col) { v.Append(1, &vtx); n.Append(1, &nor); c[0].Append(1, &col); }
 
 	void AddVertNT1(DWORD vtx, DWORD nor, DWORD tvtx) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc);
-		tv[0].Append(1, &tvtx, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor);
+		tv[0].Append(1, &tvtx);
 	}
 	void AddVertNC1T1(DWORD vtx, DWORD nor, DWORD col, DWORD tvtx) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc); c[0].Append(1, &col, alloc);
-		tv[0].Append(1, &tvtx, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor); c[0].Append(1, &col);
+		tv[0].Append(1, &tvtx);
 	}
 	void AddVertNT2(DWORD vtx, DWORD nor, DWORD tvtx1, DWORD tvtx2) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2);
 	}
 	void AddVertNC1T2(DWORD vtx, DWORD nor, DWORD col, DWORD tvtx1, DWORD tvtx2) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc); c[0].Append(1, &col, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor); c[0].Append(1, &col);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2);
 	}
 	void AddVertNT3(DWORD vtx, DWORD nor, DWORD tvtx1, DWORD tvtx2, DWORD tvtx3) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc); tv[2].Append(1, &tvtx3, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2); tv[2].Append(1, &tvtx3);
 	}
 	void AddVertNC1T3(DWORD vtx, DWORD nor, DWORD col, DWORD tvtx1, DWORD tvtx2, DWORD tvtx3) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc); c[0].Append(1, &col, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc); tv[2].Append(1, &tvtx3, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor); c[0].Append(1, &col);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2); tv[2].Append(1, &tvtx3);
 	}
 	void AddVertNT4(DWORD vtx, DWORD nor, DWORD tvtx1, DWORD tvtx2, DWORD tvtx3, DWORD tvtx4) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc);
-		tv[2].Append(1, &tvtx3, alloc); tv[3].Append(1, &tvtx4, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2); tv[2].Append(1, &tvtx3); tv[3].Append(1, &tvtx4);
 	}
 	void AddVertNC1T4(DWORD vtx, DWORD nor, DWORD col, DWORD tvtx1, DWORD tvtx2, DWORD tvtx3, DWORD tvtx4) {
-		int alloc = v.Count()/2+1;
-		v.Append(1, &vtx, alloc); n.Append(1, &nor, alloc); c[0].Append(1, &col, alloc);
-		tv[0].Append(1, &tvtx1, alloc); tv[1].Append(1, &tvtx2, alloc);
-		tv[2].Append(1, &tvtx3, alloc); tv[3].Append(1, &tvtx4, alloc);
+		v.Append(1, &vtx); n.Append(1, &nor); c[0].Append(1, &col);
+		tv[0].Append(1, &tvtx1); tv[1].Append(1, &tvtx2); tv[2].Append(1, &tvtx3); tv[3].Append(1, &tvtx4);
 	}
 };
 

@@ -19,8 +19,7 @@
 //-- Archives
 
 #define NET_ARCHIVE_SIG			0x6612FE10
-#define NET_ARCHIVE_SIG2		0x6612FE11
-#define NET_ARCHIVE_EXT			_T(".zip")
+#define NET_ARCHIVE_EXT			_T(".maz")
 #define NET_ARCHIVE_MAX_NAME	128
 
 typedef struct tagNET_ARCHIVE_HEADER {

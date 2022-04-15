@@ -28,12 +28,12 @@ public:
 	MAXWrapper*	owner;			// owner node or modifier if any
 	BYTE		sel_type;		// selection type
 	BitArray	vsel;			// stand-alone selection if any
-	int			index;			// single vert index 			
+	DWORD		index;			// single vert index 			
 	TSTR		nss_name;		// name of named selection set
 
 	void		gc_trace();
 
-	virtual MeshSelection* new_sel(MAXWrapper* own, BYTE stype, int indx = 0) = 0;
+	virtual MeshSelection* new_sel(MAXWrapper* own, BYTE stype, DWORD indx = 0) = 0;
 
 	// utility functions to be specialized
 	virtual BitArray get_sel() = 0;	// my element selection
@@ -51,7 +51,7 @@ public:
 	virtual void	delete_sel(MNMesh* m, ReferenceTarget* owner, BitArray &sel) = 0; 
 
 	// utility functions
-			int		get_sel_index(BitArray &vs, int n);  // index for n'th item vertex in BitArray
+			DWORD	get_sel_index(BitArray &vs, int n);  // index for n'th item vertex in BitArray
 			void	update_sel();
 			void	set_sel(BitArray &vs);
 			void	sprin1(TCHAR* type, CharStream* s);
@@ -86,9 +86,9 @@ visible_class (VertSelectionValue)
 class VertSelectionValue : public MeshSelection
 {
 public:
-	ScripterExport VertSelectionValue(MAXWrapper* own, BYTE stype, int indx = 0);
+	ScripterExport VertSelectionValue(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 	
-	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, int indx = 0);
+	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 
 				classof_methods (VertSelectionValue, Value);
 #	define		is_vertselection(v) ((v)->tag == class_tag(VertSelectionValue))
@@ -124,9 +124,9 @@ visible_class (FaceSelectionValue)
 class FaceSelectionValue : public MeshSelection
 {
 public:
-	ScripterExport FaceSelectionValue(MAXWrapper* own, BYTE stype, int indx = 0);
+	ScripterExport FaceSelectionValue(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 	
-	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, int indx = 0);
+	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 
 				classof_methods (FaceSelectionValue, Value);
 #	define		is_faceselection(v) ((v)->tag == class_tag(FaceSelectionValue))
@@ -161,9 +161,9 @@ visible_class (EdgeSelectionValue)
 class EdgeSelectionValue : public MeshSelection
 {
 public:
-	ScripterExport EdgeSelectionValue(MAXWrapper* own, BYTE stype, int indx = 0);
+	ScripterExport EdgeSelectionValue(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 	
-	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, int indx = 0);
+	MeshSelection* new_sel(MAXWrapper* own, BYTE stype, DWORD indx = 0);
 
 				classof_methods (EdgeSelectionValue, Value);
 #	define		is_edgeselection(v) ((v)->tag == class_tag(EdgeSelectionValue))

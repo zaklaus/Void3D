@@ -16,7 +16,7 @@ enum { cl_viewPoint, cl_worldPoint, cl_worldDist, cl_worldAngle, cl_gridPoint, c
 
 /* --------- MouseTool command mode & callback classes ------------- */
 
-class MouseToolCallBack : public MouseCallBack
+class MouseToolCallBack : public MouseCallBack 
 {
 	public:
 		MouseTool*	tool;
@@ -34,7 +34,7 @@ class MouseToolCallBack : public MouseCallBack
 #define MOUSE_TOOL_COMMAND	7364
 #define CID_MOUSE_TOOL		CID_USER + 45237
 
-class MouseToolCommandMode : public CommandMode, public CommandModeChangedCallback 
+class MouseToolCommandMode : public CommandMode 
 {
 public:
 	MouseToolCallBack	proc;
@@ -50,7 +50,6 @@ public:
 	BOOL ChangeFG(CommandMode *oldMode) { return FALSE; }
 	void EnterMode(); 
 	void ExitMode();
-	void ModeChanged(CommandMode *oldM, CommandMode *newM);
 };
 
 /* ------------- MouseTool MAXScript value class -------------- */

@@ -118,10 +118,10 @@ public:
 
 class ScripterExport RuntimeError : public MAXScriptException
 {
+	TCHAR*	desc1;
+	TCHAR*   desc2;
+	Value*  info;
 public:
-			TCHAR*	desc1;
-			TCHAR*   desc2;
-			Value*  info;
 			RuntimeError (TCHAR* d1);
 			RuntimeError (TCHAR* d1, TCHAR* d2);
 			RuntimeError (TCHAR* d1, Value* ii);

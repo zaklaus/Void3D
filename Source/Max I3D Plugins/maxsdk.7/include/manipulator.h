@@ -60,11 +60,6 @@ public:
 
 	ManipExport FPInterfaceDesc* GetDesc();
 
-	// russom - 09/01/04 - 582532
-	ManipExport LifetimeType LifetimeControl() { return wantsRelease; }
-	ManipExport BaseInterface* AcquireInterface() { return this; }
-	ManipExport void ReleaseInterface() { delete this; }
-
 private:
     Point3  mNormal;  // Plane normal vector
     Point3  mPoint;   // Point that the plane passes through
@@ -105,11 +100,6 @@ public:
 	END_FUNCTION_MAP
 
 	ManipExport FPInterfaceDesc* GetDesc();
-
-	// russom - 09/01/04 - 582532
-	ManipExport LifetimeType LifetimeControl() { return wantsRelease; }
-	ManipExport BaseInterface* AcquireInterface() { return this; }
-	ManipExport void ReleaseInterface() { delete this; }
 
 private:
     PolyShape mPolyShape;

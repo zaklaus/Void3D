@@ -99,7 +99,7 @@ typedef INT_PTR ResID;
 #define animatable_type(t) (base_type(t) == TYPE_INT || base_type(t) == TYPE_RGBA ||  base_type(t) == TYPE_HSV || base_type(t) == TYPE_POINT3 || \
 	                        base_type(t) == TYPE_FLOAT || base_type(t) == TYPE_ANGLE || base_type(t) == TYPE_BOOL || base_type(t) == TYPE_PCNT_FRAC || \
 	                        base_type(t) == TYPE_WORLD || base_type(t) == TYPE_COLOR_CHANNEL || base_type(t) == TYPE_TIMEVALUE  || \
-							base_type(t) == TYPE_INDEX  || base_type(t) == TYPE_RADIOBTN_INDEX || base_type(t) == TYPE_FRGBA || base_type(t) == TYPE_POINT4)
+							base_type(t) == TYPE_INDEX  || base_type(t) == TYPE_RADIOBTN_INDEX)
 #define reftarg_type(t) (base_type(t) == TYPE_MTL || base_type(t) == TYPE_TEXMAP || base_type(t) == TYPE_INODE || \
 	                     base_type(t) == TYPE_REFTARG || base_type(t) == TYPE_PBLOCK2)
         
@@ -131,7 +131,6 @@ typedef struct
 		int					i;
 		float				f;
 		Point3*				p;
-		Point4*				p4;
 		TimeValue			t;
 		TCHAR*				s;
 		PBBitmap*			bm;
@@ -186,9 +185,7 @@ class IParamBlock2 : public ReferenceTarget
 		virtual BOOL SetValue(ParamID id, TimeValue t, float v, int tabIndex=0)=0;
 		virtual BOOL SetValue(ParamID id, TimeValue t, int v, int tabIndex=0)=0;		
 		virtual BOOL SetValue(ParamID id, TimeValue t, Point3& v, int tabIndex=0)=0;		
-		virtual BOOL SetValue(ParamID id, TimeValue t, Point4& v, int tabIndex=0)=0;		
 		virtual BOOL SetValue(ParamID id, TimeValue t, Color& v, int tabIndex=0)=0;  // uses Point3 controller
-		virtual BOOL SetValue(ParamID id, TimeValue t, AColor& v, int tabIndex=0)=0;  // uses Point4 controller
 		virtual BOOL SetValue(ParamID id, TimeValue t, TCHAR* v, int tabIndex=0)=0;
 		virtual BOOL SetValue(ParamID id, TimeValue t, Mtl*	v, int tabIndex=0)=0;
 		virtual BOOL SetValue(ParamID id, TimeValue t, Texmap* v, int tabIndex=0)=0;
@@ -201,9 +198,7 @@ class IParamBlock2 : public ReferenceTarget
 		virtual BOOL GetValue(ParamID id, TimeValue t, float& v, Interval &ivalid, int tabIndex=0)=0;
 		virtual BOOL GetValue(ParamID id, TimeValue t, int& v, Interval &ivalid, int tabIndex=0)=0;
 		virtual BOOL GetValue(ParamID id, TimeValue t, Point3& v, Interval &ivalid, int tabIndex=0)=0;
-		virtual BOOL GetValue(ParamID id, TimeValue t, Point4& v, Interval &ivalid, int tabIndex=0)=0;
 		virtual BOOL GetValue(ParamID id, TimeValue t, Color& v, Interval &ivalid, int tabIndex=0)=0; // uses Point3 controller
-		virtual BOOL GetValue(ParamID id, TimeValue t, AColor& v, Interval &ivalid, int tabIndex=0)=0; // uses Point4 controller
 		virtual BOOL GetValue(ParamID id, TimeValue t, TCHAR*& v, Interval &ivalid, int tabIndex=0)=0;
 		virtual BOOL GetValue(ParamID id, TimeValue t, Mtl*& v, Interval &ivalid, int tabIndex=0)=0;
 		virtual BOOL GetValue(ParamID id, TimeValue t, Texmap*& v, Interval &ivalid, int tabIndex=0)=0;
@@ -215,9 +210,7 @@ class IParamBlock2 : public ReferenceTarget
 
 		// short cut getters for each type
 		virtual Color		GetColor(ParamID id, TimeValue t=0, int tabIndex=0)=0;
-		virtual AColor		GetAColor(ParamID id, TimeValue t=0, int tabIndex=0)=0;
 		virtual Point3		GetPoint3(ParamID id, TimeValue t=0, int tabIndex=0)=0;
-		virtual Point4		GetPoint4(ParamID id, TimeValue t=0, int tabIndex=0)=0;
 		virtual int			GetInt(ParamID id, TimeValue t=0, int tabIndex=0)=0;
 		virtual float		GetFloat(ParamID id, TimeValue t=0, int tabIndex=0)=0;
 		virtual TimeValue	GetTimeValue(ParamID id, TimeValue t=0, int tabIndex=0)=0;
@@ -244,9 +237,7 @@ class IParamBlock2 : public ReferenceTarget
 		// Tab Insert for each type
 		virtual int		Insert(ParamID id, int at, int num, float* el)=0;
 		virtual int		Insert(ParamID id, int at, int num, Point3** el)=0;
-		virtual int		Insert(ParamID id, int at, int num, Point4** el)=0;
 		virtual int		Insert(ParamID id, int at, int num, Color** el)=0;
-		virtual int		Insert(ParamID id, int at, int num, AColor** el)=0;
 		virtual int		Insert(ParamID id, int at, int num, TimeValue* el)=0;
 		virtual int		Insert(ParamID id, int at, int num, TCHAR** vel)=0;
 		virtual int		Insert(ParamID id, int at, int num, Mtl** el)=0;
@@ -259,9 +250,7 @@ class IParamBlock2 : public ReferenceTarget
 		// Tab Insert for each type
 		virtual int		Append(ParamID id, int num, float* el, int allocExtra=0)=0;
 		virtual int		Append(ParamID id, int num, Point3** el, int allocExtra=0)=0;
-		virtual int		Append(ParamID id, int num, Point4** el, int allocExtra=0)=0;
 		virtual int		Append(ParamID id, int num, Color** el, int allocExtra=0)=0;
-		virtual int		Append(ParamID id, int num, AColor** el, int allocExtra=0)=0;
 		virtual int		Append(ParamID id, int num, TimeValue* el, int allocExtra=0)=0;
 		virtual int		Append(ParamID id, int num, TCHAR** el, int allocExtra=0)=0;
 		virtual int		Append(ParamID id, int num, Mtl** el, int allocExtra=0)=0;
@@ -463,20 +452,10 @@ class SpecialFX; // mjm - 07.06.00
 // 2nd Edition of ClassDesc with necessary extra stuff for ParamBlock2 support
 class ClassDesc2 : public ClassDesc 
 {
-	private:
 		Tab<ParamBlockDesc2*>	pbDescs;		// parameter block descriptors
 		Tab<IParamMap2*>		paramMaps;		// any current param maps
 		IAutoMParamDlg*			masterMDlg;		// master material/mapParamDlg if any
 		IAutoEParamDlg*			masterEDlg;		// master EffectParamDlg if any
-
-	protected:
-		
-		// [dl | 27feb2003] These methods may be used by derived classes which want
-		// to handle the ParamDlg creation themselves (instead of using CreateParamDlg() et al.)
-		void SetMParamDlg(IAutoMParamDlg* dlg) { masterMDlg = dlg; }
-		void SetEParamDlg(IAutoEParamDlg* dlg) { masterEDlg = dlg; }
-		Tab<IParamMap2*>& GetParamMaps() { return paramMaps; }
-
 	public:
 		PB2Export				ClassDesc2();
 		PB2Export			   ~ClassDesc2();
@@ -587,16 +566,14 @@ public:
 	DWORD		Version() { return version; }
 	PB2Export int IDtoIndex(ParamID id);
 	PB2Export int NameToIndex(TCHAR* name);
-	ParamID		IndextoID(int i) { return (((i >= 0) && (i < Count())) ? paramdefs[i].ID : -1); }
-	ParamDef&	GetParamDef(ParamID id) { int i = IDtoIndex(id); DbgAssert(i >= 0); return paramdefs[i]; }
+	ParamID		IndextoID(int i) { return paramdefs[i].ID; }
+	ParamDef&	GetParamDef(ParamID id) { return paramdefs[IDtoIndex(id)]; }
 
 	// parameter accessors for static class param blocks, these bounce off to the class paramblock
 	BOOL SetValue(ParamID id, TimeValue t, float v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }
 	BOOL SetValue(ParamID id, TimeValue t, int v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }		
 	BOOL SetValue(ParamID id, TimeValue t, Point3& v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }		
-	BOOL SetValue(ParamID id, TimeValue t, Point4& v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }		
 	BOOL SetValue(ParamID id, TimeValue t, Color& v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }  // uses Point3 controller
-	BOOL SetValue(ParamID id, TimeValue t, AColor& v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }  // uses Point4 controller
 	BOOL SetValue(ParamID id, TimeValue t, TCHAR* v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }
 	BOOL SetValue(ParamID id, TimeValue t, Mtl*	v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }
 	BOOL SetValue(ParamID id, TimeValue t, Texmap* v, int tabIndex=0) { return class_params->SetValue(id, t, v, tabIndex); }
@@ -609,9 +586,7 @@ public:
 	BOOL GetValue(ParamID id, TimeValue t, float& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, int& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, Point3& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
-	BOOL GetValue(ParamID id, TimeValue t, Point4& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, Color& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
-	BOOL GetValue(ParamID id, TimeValue t, AColor& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, TCHAR*& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, Mtl*& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 	BOOL GetValue(ParamID id, TimeValue t, Texmap*& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
@@ -622,9 +597,7 @@ public:
 	BOOL GetValue(ParamID id, TimeValue t, Matrix3& v, Interval &ivalid, int tabIndex=0) { return class_params->GetValue(id, t, v, ivalid, tabIndex); }
 
 	PB2Export Color			GetColor(ParamID id, TimeValue t=0, int tabIndex=0);
-	PB2Export AColor		GetAColor(ParamID id, TimeValue t=0, int tabIndex=0);
 	PB2Export Point3		GetPoint3(ParamID id, TimeValue t=0, int tabIndex=0);
-	PB2Export Point4		GetPoint4(ParamID id, TimeValue t=0, int tabIndex=0);
 	PB2Export int			GetInt(ParamID id, TimeValue t=0, int tabIndex=0);
 	PB2Export float			GetFloat(ParamID id, TimeValue t=0, int tabIndex=0);
 	PB2Export TimeValue		GetTimeValue(ParamID id, TimeValue t=0, int tabIndex=0);

@@ -24,7 +24,7 @@ class MtlBase;
 #define UVSOURCE_XYZ		1	// compute UVW from object XYZ
 #define UVSOURCE_MESH2		2	// use UVW2 (vertexCol) coords
 #define UVSOURCE_WORLDXYZ	3	// use world XYZ as UVW
-#ifdef GEOREFSYS_UVW_MAPPING
+#ifdef DESIGN_VER
 #define UVSOURCE_GEOXYZ		4	// generate planar uvw mapping from geo referenced world xyz on-the-fly
 #endif
 #define UVSOURCE_FACEMAP	5	// use "face map" UV coords

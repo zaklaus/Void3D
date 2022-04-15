@@ -143,8 +143,8 @@ class WStr {
 //	 Example:
 //
 //	FilterList filterList;
-//	filterList.Append( _T("Max files(*.max)"));
-//	filterList.Append( _T("*.max"));
+//	filterList.Append( _T("Jaguar files(*.jag)"));
+//	filterList.Append( _T("*.jag"));
 //	ofn.lpstrFilter  = filterList;
 //	GetSaveFileName(&ofn)
 //----------------------------------------------------------------------------------
@@ -154,7 +154,6 @@ class FilterList {
 	public:
 		UtilExport FilterList();
 		UtilExport void Append(TCHAR *name);
-		UtilExport void Append(FilterList& filters);
 		UtilExport operator TCHAR *(); 
 	};
 
