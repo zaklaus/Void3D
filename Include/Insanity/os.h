@@ -154,6 +154,14 @@ void OsCreateUniqueFileName(const char *path, const char *ext, C_str &str);
 void OsCreteUniqueDirName(const char *path, C_str &str);
 
 //----------------------------
+// Copy directory to a new destination
+bool OsCopyDirectory(const char* path, const char* dest, bool dirs = true);
+
+//----------------------------
+// Copy a file to a new destination
+bool OsCopyFile(const char* path, const char* dest);
+
+//----------------------------
 // Return true if directoty exist.
 bool OsIsDirExist(const char *path);
 

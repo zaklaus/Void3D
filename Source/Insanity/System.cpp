@@ -258,6 +258,51 @@ void OsCreteUniqueDirName(const char *path, C_str &str){
 
 //----------------------------
 
+bool OsCopyDirectory(const char* path1, const char* dest1, bool dirs) {
+    //@todo dirs
+    C_str path = path1;
+    C_str dest = dest1;
+
+    if (path.Size() && path[path.Size() - 1] != '\\')
+        path += "\\";
+
+    if (dest.Size() && dest[dest.Size() - 1] != '\\')
+        dest += "\\";
+
+    if (dest.Size() < 1)
+        return 0;
+
+    C_buffer<C_str> files;
+    OsCollectFiles(path, "*", files, false);
+
+    OsCreateDirectoryTree(dest);
+
+    for (auto &f : files) {
+        C_str df = dest + f.TrimLeft(path.Size());
+        if (!CopyFile(f, df, TRUE))
+            return 0;
+    }
+
+    return 1;
+}
+
+//----------------------------
+
+bool OsCopyFile(const char* path1, const char* dest1){
+    C_str path = path1;
+    C_str dest = dest1;
+
+    if (path.Size() < 1 || dest.Size() < 1)
+        return 0;
+
+    if (!OsIsDirExist(path))
+        return 0;
+
+    return CopyFile(path, dest, TRUE) > 0;
+}
+
+//----------------------------
+
 void OsGetCurrentTimeDate(S_date_time &dt){
 
    SYSTEMTIME st;

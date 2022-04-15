@@ -39,6 +39,7 @@ class C_edit_Mission: public C_editor_item_Mission{
                                  //Dependence list: 
                                  //Purpose: open/close edited scene
    enum E_ACTION_MISSION_CONT{
+       E_MISSION_NEW,
       E_MISSION_OPEN,
       E_MISSION_SAVE,            //(dword save flags(MS_? defined above)); ret: (bool)success
       E_MISSION_RELOAD,
@@ -1139,6 +1140,7 @@ class C_edit_Mission: public C_editor_item_Mission{
    virtual void SetViewModel(const C_str &name){
 
       enabled = false;
+      ed->EnableMenu(this, E_MISSION_NEW, enabled);
       ed->EnableMenu(this, E_MISSION_OPEN, enabled);
       ed->EnableMenu(this, E_MISSION_SAVE, enabled);
       ed->EnableMenu(this, E_MISSION_RELOAD, enabled);
@@ -1486,6 +1488,7 @@ public:
       ed->AddShortcut(this, E_MISSION_HELP, "%100 %i &Help\\%0 %a &Help\tF1", K_F1, 0);
 
 #define MENU_BASE "%0 &File\\"
+      ed->AddShortcut(this, E_MISSION_NEW, MENU_BASE"%0 &New mission\tAlt+N", K_N, SKEY_ALT);
       ed->AddShortcut(this, E_MISSION_OPEN, MENU_BASE"%0 &Open mission\tO", K_O, 0);
       ed->AddShortcut(this, E_MISSION_SAVE, MENU_BASE"%0 &Save mission\tCtrl+S", K_S, SKEY_CTRL);
       ed->AddShortcut(this, E_MISSION_MERGE, MENU_BASE"%0 &Merge mission", K_NOKEY, 0);
@@ -1551,6 +1554,7 @@ public:
          */
          PC_toolbar tb = ed->GetToolbar("Standard");
          S_toolbar_button tbs[] = {
+            {E_MISSION_NEW,  0, "New mission"},
             {E_MISSION_OPEN,  0, "Open mission"},
             {E_MISSION_RELOAD,2, "Reload mission"},
             {E_MISSION_SAVE,  1, "Save mission"},
@@ -1637,6 +1641,46 @@ public:
       case E_MISSION_HELP:
          OsShell("..\\Docs\\Insanity3d.chm");
          break;
+
+      case E_MISSION_NEW: {
+          ed->GetScene()->AttenuateSounds();
+          C_str save_name = mission_name;
+          C_str new_name = "mission00";
+          if (WinGetName("Mission name:", new_name)) {
+              if (new_name.Size() < 1) break;
+
+              C_str dir_name = C_str("Missions\\") + new_name;
+
+              if (OsIsDirExist(dir_name)) {
+                  OsMessageBox(0, "Mission already exists!", "New mission error", MBOX_OK);
+                  break;
+              }
+
+              if (!Save(true))
+                  break;
+
+              if (!OsCopyDirectory("Missions\\_Null", dir_name)){
+                  OsMessageBox(0, "Mission generation failed!", "New mission error", MBOX_OK);
+                  break;
+              }
+
+              mission_name = new_name;
+              int save_time = ed->GetIGraph()->ReadTimer();
+
+              E_MISSION_IO mio = mission->Open(new_name, (make_log ? OPEN_LOG : 0));
+              mission_open_ok = (mio == MIO_OK);
+              if (!mission_open_ok)
+                  EditLock();
+
+              WriteStatusMessage(mio, "Load failed", FormatLoadTime(save_time), false);
+              last_mission_name = save_name;
+              if (mio == MIO_CORRUPT)
+                  RestoreBackup(mission_name);
+              else {
+                  SetupCameraRange();
+              }
+          }
+      } break;
 
       case E_MISSION_OPEN:
          {

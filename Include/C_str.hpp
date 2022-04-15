@@ -237,6 +237,37 @@ public:
       return ret;
    }
 
+   inline C_str AddChar(char c){
+       char cp[2] = { c, 0 };
+       return operator +=(cp);
+   }
+
+//----------------------------
+// Trim string with provided text
+   inline C_str TrimLeft(int size){
+       return C_str(this->rep->GetData() + size);
+   }
+
+   inline C_str TrimLeftW(int size) {
+       return C_str(this->rep->GetDataW() + size);
+   }
+
+   inline C_str Replace(const char *find, const char* rep){
+       C_str res;
+
+       for (const char *p=res; p != 0; p++){
+           if (*p != *find){
+               res.Assign(p, 1);
+           } else {
+               res.Assign(rep, 1);
+               ++rep;
+           }
+           ++find;
+       }
+
+       return res;
+   }
+
 //----------------------------
 // Get const character reference inside of string on particular position.
    inline const char &operator [](dword pos) const{ assert(pos<(Size()+1)); if(!rep) return *(char*)&rep; assert(!IsWide()); return rep->GetData()[pos]; }
