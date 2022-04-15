@@ -86,7 +86,6 @@ enum { mr_int, mr_float, mr_string, mr_bool,			// basic C types
 	   mr_matrix3, mr_nurbssel, mr_meshselbits, 
 	   mr_meshsel, mr_subanim, mr_animatable,
 	   mr_classid, mr_nurbsselbits, 
-	   mr_point4, mr_acolor,
 	   mr_sel, mr_funcall, mr_varname, mr_create,		// MAXScript types
 	   mr_angle, mr_percent, mr_index, mr_prop,
 	   mr_name, 

@@ -8,7 +8,7 @@
 
 	HISTORY: 1-6-95 file created
 
- *>	Copyright (c) 1994-2003 All Rights Reserved.
+ *>	Copyright (c) 1994, All Rights Reserved.
  **********************************************************************/
 
 #ifndef __WINUTIL__
@@ -169,107 +169,5 @@ CoreExport void DrawMAXIcon(HDC hDC, Rect &r, HIMAGELIST hList32, HIMAGELIST hLi
 CoreExport COLORREF ComputeXORDrawColor(COLORREF bkgColor);
 // Compute a good color to use for drawing XOR lines over a viewport
 CoreExport COLORREF ComputeViewportXORDrawColor();
-
-
-/**********************************************************************
-
-Dialog resizing and positioning. A generic class for resizing a dialog.
-Includes functions to save and restore the initial size and position
-of the dialog.
-
-This class makes it easy to add resizability to a dialog. You'll need
-one instance of this class for each instance of a dialog. Set up
-various parameters during your dialog's WM_INITDIALOG processing,
-then let this class handle all WM_SIZE events.
-
-Include library: core.lib
-
-HOW TO USE THIS CLASS:
-
-1. Create either a static instance in your DlgProc, or a live instance
-   in the object that is driving the dialog.
-2. In your WM_INITDIALOG handling, call Initialize().
-3. Optionally, call SetMinimumDlgSize(). However, the default minimum size
-   for a dialog is it's size at the time Initialize() is called.
-4. For each control in your dialog, call SetControlInfo(); you only need 
-   to do this if you want to override the default behavior for the control.
-   For most, the default is to be locked to the top left corner, with a
-   fixed size. Some controls may default to resizing; SysListView32 has
-   some specialized behaviors you may not need to override.
-5. Process the WM_SIZING message, and call Process_WM_SIZING().
-6. Process the WM_SIZE message, and call Process_WM_SIZE().
-
-**********************************************************************/
-
-class DialogItemSizeData
-{
-public:
-	HWND hwnd;
-	RECT rect;
-	DWORD flags;
-
-	DialogItemSizeData(HWND h, DWORD f = 0)
-		:	hwnd(h), flags(f)
-	{
-		WINDOWPLACEMENT wpControl;
-		wpControl.length = sizeof(WINDOWPLACEMENT);
-		GetWindowPlacement(hwnd, &wpControl);
-		rect = wpControl.rcNormalPosition;
-	}
-	// Compiler-generated destructor, copy constructor, and assignment 
-	// operator should all be fine.
-private:
-	// Ensure no default constructor is generated or used.
-	DialogItemSizeData();
-};
-
-class DialogResizer
-{
-public:
-	DialogResizer() : mhDlg(NULL)
-	{
-		mMinDlgSize.left = mMinDlgSize.top = 0;
-		mMinDlgSize.right = mMinDlgSize.bottom = 50;
-		mOriginalClientRect.left = mOriginalClientRect.top = 0;
-		mOriginalClientRect.right = mOriginalClientRect.bottom = 50;
-	}
-	// Compiler-generated destructor, copy constructor, and assignment 
-	// operator should all be fine.
-
-	CoreExport void Initialize(HWND hDlg);
-	CoreExport void SetMinimumDlgSize(LONG wid, LONG ht);
-
-	// If you have a control you want to have fixed width and height, and locked to 
-	// top left, you do not have to call SetControlInfo, as that is the default 
-	// behavior.
-	enum PositionControl
-		{ kLockToTopLeft=1, kLockToTopRight, kLockToBottomLeft, kLockToBottomRight, kPositionsOnly=0xff };
-	enum ControlFlags
-		{ kDefaultBehavior=0, kWidthChangesWithDialog=1<<8, kHeightChangesWithDialog=1<<9 };
-	CoreExport void SetControlInfo(int resID, PositionControl pos, DWORD flags = kDefaultBehavior);
-
-	CoreExport void Process_WM_SIZING(WPARAM wParam, LPARAM lParam);
-	CoreExport void Process_WM_SIZE(WPARAM wParam, LPARAM lParam);
-
-	// Static methods to let you save and restore the size and position of your dialog
-	// (whether it's resizable or not).
-	// If the section name is not specified, it will default to
-	// [DialogResizer_SizeAndPositions].
-	// If the ini filename is not specified, it will default to the main application ini
-	// file, typically 3dsmax.ini.
-	CoreExport static void SaveDlgPosition(HWND hDlg, const TCHAR* keyname, 
-				const TCHAR* section = NULL, const TCHAR* inifn = NULL);
-	CoreExport static void LoadDlgPosition(HWND hDlg, const TCHAR* keyname, 
-				const TCHAR* section = NULL, const TCHAR* inifn = NULL);
-
-	friend static BOOL CALLBACK GetInitialPositionECP(HWND hwnd, LPARAM lParam);
-
-private:
-	Tab<DialogItemSizeData> mControls;
-	RECT mMinDlgSize;
-	RECT mOriginalClientRect;
-	HWND mhDlg;
-};
-
 
 #endif

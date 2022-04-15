@@ -10,9 +10,10 @@
 
 #include "maxtypes.h"
 #include "buildver.h"	// russom - 03/08/01
-#include "maxversion.h"
 
 #ifndef PLUGAPI_H_DEFINED
+
+
 #define PLUGAPI_H_DEFINED
 
 // 3DSMAX Version number to be compared against that returned by DLL's
@@ -29,26 +30,12 @@
 //#define MAX_RELEASE  2500      // JMK 2/25/98  
 //#define MAX_RELEASE  3000      // DDS 9/3/98  
 //#define MAX_RELEASE  3100      // CCJ 10/21/99  
-//#define MAX_RELEASE  3900      // CCJ 6/26/00
-//#define MAX_RELEASE  4000      // CCJ 11/29/00
-//#define MAX_RELEASE  4200      // 010514  --prs.
-//#define MAX_RELEASE  4900      // for R5 alpha, 011115  --prs.
-//#define MAX_RELEASE  5000      // for R5, 020604  --prs.
-//#define MAX_RELEASE  5100      // for R5.1, 020801  --prs.
-//#define MAX_RELEASE  5900      // for R6 alpha, 030403  --prs.
-//#define MAX_RELEASE  6000      // for R6, 030806  --prs.
-#define MAX_RELEASE_R7_ALPHA    6900 // for R7 alpha
-#define MAX_RELEASE_R7          7000 // for R7 
-#define MAX_RELEASE             MAX_RELEASE_R7  // The current Max Release number
-
-// MAX_RELEASE_EXTERNAL is an alternative for MAX_RELEASE
-// that can be used for UI when the internal version of the product
-// is different from the branded version number.
-// MAX_RELEASE_EXTERNAL is defined in maxversion.h
-#ifndef MAX_RELEASE_EXTERNAL
- #define MAX_RELEASE_EXTERNAL MAX_RELEASE
-#endif
-
+//#define MAX_RELEASE  3900        // CCJ 6/26/00
+//#define MAX_RELEASE  4000        // CCJ 11/29/00
+//#define MAX_RELEASE  4200        // 010514  --prs.
+//#define MAX_RELEASE  4900        // for R5 alpha, 011115  --prs.
+//#define MAX_RELEASE  5000        // for R5, 020604  --prs.
+#define MAX_RELEASE  5100        // for R5.1, 020801  --prs.
 
 
 // This is the max API number.  When a change in the API requires DLL's
@@ -62,8 +49,6 @@
  #define MAX_API_NUM     128	// russom 01/17/01
 #elif defined(WEBVERSION)
  #define MAX_API_NUM     144	// russom 02/07/01
-#elif defined(RENDER_VER)
- #define MAX_API_NUM     160	// cleve ard 11/6/02
 #else
  //#define MAX_API_NUM     4	   // DDS 9/30/97
  //#define MAX_API_NUM     5	   // DDS 10/06/97
@@ -73,23 +58,15 @@
  // compiled with the API number of release 4.0 or 4.2, as well as those compiled with the release 5 API number. With release 5.0, plug-in developers have the option of compiling with the 
  // 4.x API number (which is 8, the default, defined below) or the 5.0 number (11, commented out below). Those compiled with the 4.x number will be accepted by 4.0, 4.2, and 5.0. Those
  // compiled with the 5.0 API number will be accepted by release 5.0, but not by 4.0 or 4.2.
- //#define MAX_API_NUM     8	   // CCJ 11/29/00 - R4
+#define MAX_API_NUM     8	   // CCJ 11/29/00 - R4
  //#define MAX_API_NUM     11	   // R5 FCS 020624  --prs.
-#ifndef MAXIMUS_BUILD
-//#define MAX_API_NUM     9	   // R5 011031  --prs.
-//#define MAX_API_NUM     11	   // R5 FCS 020624  --prs.
-//#define MAX_API_NUM       12	   // R6 prerelease 030409  --prs.
- // The API number has also been incremented for release 7.0. However, since the API did not change in a way that requires DLLs to be recompiled, release 7.0 will accept DLLs
- // compiled with the API number of release 6.0, as well as those compiled with the release 7 API number. With release 7.0, plug-in developers have the option of compiling with the 
- // release 6 API number (which is 13, the default, defined below) or the 7.0 number (15, commented out below). Those compiled with the 6.0 number will be accepted by 6.0 and 7.0. Those
- // compiled with the 7.0 API number will be accepted by release 7.0, but not by 6.0.
-#define MAX_API_NUM       13	   // R6 FCS 030806  --prs.
-//#define MAX_API_NUM       14	   // R7 prerelease 05/18/04 - russom
-//#define MAX_API_NUM       15	   // R7 FCS -- 2004-09-02 -- raffenn
-#else	// if MAXIMUS_BUILD:
-#define MAX_API_NUM     10	   // Maximus 020315  --prs.
 #endif
-#endif
+
+
+
+
+
+
 
 // This denotes the revision of the SDK for a given API. Increment this
 // when the SDK functionality changes in some significant way (for instance
@@ -104,7 +81,7 @@
 #endif
 
 // update jagapi.cpp product_app_id if new enums are added
-typedef enum {kAPP_NONE, kAPP_MAX, kAPP_VIZ, kAPP_GMAX, kAPP_PLASMA, kAPP_VIZR} APPLICATION_ID;
+typedef enum {kAPP_NONE, kAPP_MAX, kAPP_VIZ, kAPP_GMAX, kAPP_PLASMA} APPLICATION_ID;
 
 //This method returns the ApplicationID, either VIZ or MAX. If a plugin
 //is designed to work only in one product, then you could use this method
@@ -213,7 +190,7 @@ CoreExport APPLICATION_ID GetAppID();
 #define RADIOSITY_CLASS_ID			0x001170	// global illumination plugins
 #define TONE_OPERATOR_CLASS_ID		0x001180	// tone operator plugins
 #define MPASS_CAM_EFFECT_CLASS_ID	0x001190	// multi-pass camera effect plugins
-#define MR_SHADER_CLASS_ID_DEFUNCT	0x0011a0	// mental ray shaders (defunct, kept for file compatibility)
+#define MR_SHADER_CLASS_ID			0x0011a0	// mental ray shaders
 
 // Super-class ID's of various controls
 #define	CTRL_SHORT_CLASS_ID 	   	0x9001
@@ -224,7 +201,7 @@ CoreExport APPLICATION_ID GetAppID();
 #define	CTRL_POS_CLASS_ID		   	0x9006
 #define	CTRL_QUAT_CLASS_ID			0x9007
 #define	CTRL_MATRIX3_CLASS_ID		0x9008
-#define	CTRL_COLOR_CLASS_ID     	0x9009	// float color (RGB)
+#define	CTRL_COLOR_CLASS_ID     	0x9009	// float color
 #define	CTRL_COLOR24_CLASS_ID   	0x900A   // 24 bit color
 #define	CTRL_POSITION_CLASS_ID		0x900B
 #define	CTRL_ROTATION_CLASS_ID		0x900C
@@ -233,8 +210,6 @@ CoreExport APPLICATION_ID GetAppID();
 #define CTRL_USERTYPE_CLASS_ID		0x900F  // User defined type
 #define CTRL_MASTERPOINT_CLASS_ID	0x9010	
 #define MASTERBLOCK_SUPER_CLASS_ID	0x9011
-#define	CTRL_POINT4_CLASS_ID	   	0x9012
-#define	CTRL_FRGBA_CLASS_ID     	0x9013	// float color (RGBA)
 
 #define PATH_CONTROL_CLASS_ID				0x2011
 #define EULER_CONTROL_CLASS_ID				0x2012
@@ -259,8 +234,6 @@ CoreExport APPLICATION_ID GetAppID();
 #define SURF_CONTROL_CLASSID			Class_ID(0xe8334011,0xaeb330c8)
 #define LINKCTRL_CLASSID				Class_ID(0x873fe764,0xaabe8601)
 
-#define DUMMYCHANNEL_CLASS_ID				0xefffffff // used by PB and PB2 - superclass is CTRL_USERTYPE_CLASS_ID
-
 
 // Class ID's of built-in classes. The value is the first ULONG of the 
 // 8 byte Class ID: the second ULONG is 0 for all built-in classes.
@@ -279,18 +252,9 @@ CoreExport APPLICATION_ID GetAppID();
 #define EPOLYOBJ_CLASS_ID Class_ID(0x1bf8338d,0x192f6098)
 
 // Primitives
-// xavier robitaille | 03.02.15 
-// Prevents the user from creating box/cylinder/sphere objects without
-// removing them completely (we need them for the material editor).
-#ifndef NO_OBJECT_STANDARD_PRIMITIVES
 #define BOXOBJ_CLASS_ID 		0x0010
 #define SPHERE_CLASS_ID 		0x0011 
 #define CYLINDER_CLASS_ID 		0x0012
-#else
-#define BOXOBJ_CLASS_ID 		0x108f1589
-#define SPHERE_CLASS_ID 		0x72ce5ad6 
-#define CYLINDER_CLASS_ID 		0x759e40e1
-#endif
 #define CONE_CLASS_ID			0xa86c23dd
 #define TORUS_CLASS_ID			0x0020
 #define TUBE_CLASS_ID			0x7B21
@@ -485,7 +449,6 @@ CoreExport APPLICATION_ID GetAppID();
 #define DELETE_CLASS_ID				0xf826ee01
 #define MESHSELECT_CLASS_ID			0x73d8ff93
 #define UVW_XFORM_CLASS_ID			0x5f32de12
-#define UVW_XFORM2_CLASS_ID			0x5f32de13 //SS 11/20/2002: added
 
 #define EXTRUDEOSM_CLASS_ID 		0x000A0
 #define SURFREVOSM_CLASS_ID 		0x000B0
@@ -556,15 +519,12 @@ CoreExport APPLICATION_ID GetAppID();
 #define HYBRIDINTERP_POINT3_CLASS_ID		0x200A
 #define HYBRIDINTERP_SCALE_CLASS_ID			0x2010
 #define HYBRIDINTERP_COLOR_CLASS_ID			0x2011
-#define HYBRIDINTERP_POINT4_CLASS_ID		0x2012
-#define HYBRIDINTERP_FRGBA_CLASS_ID			0x2013
 
 #define TCBINTERP_FLOAT_CLASS_ID 			0x442311
 #define TCBINTERP_POSITION_CLASS_ID 		0x442312
 #define TCBINTERP_ROTATION_CLASS_ID 		0x442313
 #define TCBINTERP_POINT3_CLASS_ID			0x442314
 #define TCBINTERP_SCALE_CLASS_ID			0x442315
-#define TCBINTERP_POINT4_CLASS_ID			0x442316
 
 #define MASTERPOINTCONT_CLASS_ID			0xd9c20ff
 
@@ -713,16 +673,6 @@ class ClassDesc {
 
 // ClassDesc::Execute cmd values
 #define I_EXEC_CTRL_BYPASS_TREE_VIEW 1001 // return 1 to hide your controller in track view
-
-// arg1 is expected to be bool* The bool gets set to true or false 
-// depending whether sub-obj anim is or not enabled for that object type.
-// The Execute method returns TRUE if the arg1 is set successfully, otherwise FALSE
-#define I_EXEC_GET_SOA_STATE 1002 
-
-// arg1 is expected to be a TimeValue* The TimeValue gets set appropriately,
-// depending on whether sub-obj animation is allowed of not for that object type.
-// The Execute method returns TRUE if the arg1 is set successfully, otherwise FALSE
-#define I_EXEC_EVAL_SOA_TIME 1003
 
 
 // Create instance of the specified class

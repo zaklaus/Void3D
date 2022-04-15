@@ -116,14 +116,12 @@ class PatchVec {
 	};
 
 // Patch vertex flags
-#define PVERT_COPLANAR	(1<<0)
+#define PVERT_COPLANAR (1<<0)
 #define PVERT_CORNER (0)
 #define PVERT_TYPE_MASK 0xfffffffe
 //watje 12-10-98
-#define PVERT_HIDDEN	(1<<1)
+#define PVERT_HIDDEN		(1<<1)
 #define PVERT_HIDDEN_MASK 0xfffffffd
-// CAL-04/28/03
-#define PVERT_RESET		(1<<2)
 
 // Vertex flag processing tables
 #define NUM_PATCH_VERT_FLAGS 2
@@ -274,20 +272,8 @@ class Patch : public BaseInterfaceServer {
 		int *	getAllVerts(void)	{ return v; }
 		MtlID	getMatID() {return (int)((flags>>FACE_MATID_SHIFT)&FACE_MATID_MASK);}
 		void    setMatID(MtlID id) {flags &= 0xFFFF; flags |= (DWORD)(id<<FACE_MATID_SHIFT);}
-		Point3	getUVW(int index) const;		// UVW of a Triangle's i-th vertex
-		Point2	getUV(int index) const;			// UV of a Quadrilateral's i-th vertex
-		bool	getVertUVW(int vert, Point3 &uvw) const;	// UVW of a Triangle's vertex
-		bool	getVertUV(int vert, Point2 &uv) const;		// UV of a Quadrilateral's vertex
-		Point3 BicubicSurface(PatchMesh *pMesh, const float *uu, const float *vv);
-		CoreExport Point3 interp(PatchMesh *pMesh, float u, float v, float w);	// Triangle
 		CoreExport Point3 interp(PatchMesh *pMesh, float u, float v);			// Quadrilateral
-		CoreExport Point3 WUTangent(PatchMesh *pMesh, float u, float v, float w);	// Triangle WU Tangent
-		CoreExport Point3 UVTangent(PatchMesh *pMesh, float u, float v, float w);	// Triangle UV Tangent
-		CoreExport Point3 VWTangent(PatchMesh *pMesh, float u, float v, float w);	// Triangle VW Tangent
-		CoreExport Point3 UTangent(PatchMesh *pMesh, float u, float v);	// Quadrilateral U Tangent
-		CoreExport Point3 VTangent(PatchMesh *pMesh, float u, float v);	// Quadrilateral V Tangent
-		CoreExport Point3 Normal(PatchMesh *pMesh, float u, float v, float w);	// Triangle Surface Normal
-		CoreExport Point3 Normal(PatchMesh *pMesh, float u, float v);			// Quadrilateral Surface Normal
+		CoreExport Point3 interp(PatchMesh *pMesh, float u, float v, float w);	// Triangle
 		CoreExport void ComputeAux(PatchMesh *pMesh, int index);
 		CoreExport void ComputeAux(PatchMesh *pMesh);	// Do all degree-4 points
 		CoreExport void computeInteriors(PatchMesh* pMesh);
@@ -388,10 +374,20 @@ class SubPatchHitList {
 		PatchSubHitRec *first;
 	public:
 		SubPatchHitList() { first = NULL; }
-		CoreExport ~SubPatchHitList();
+		~SubPatchHitList() {
+			PatchSubHitRec *ptr = first, *fptr;
+			while ( ptr ) {
+				fptr = ptr;
+				ptr = ptr->Next();
+				delete fptr;
+				}
+			first = NULL;
+			}	
 
 		PatchSubHitRec *First() { return first; }
-		CoreExport void AddHit( DWORD dist, PatchMesh *patch, int index, int type );
+		void AddHit( DWORD dist, PatchMesh *patch, int index, int type ) {
+			first = new PatchSubHitRec(dist,patch,index,type,first);
+			}
 	};
 
 
@@ -423,13 +419,11 @@ class PatchHitData : public HitData {
 
 // Display flags
 #define DISP_VERTTICKS		(1<<0)
-#define DISP_BEZHANDLES		(1<<1)
 
 #define DISP_SELVERTS		(1<<10)
 #define DISP_SELPATCHES		(1<<11)
 #define DISP_SELEDGES		(1<<12)
 #define DISP_SELPOLYS		(1<<13)
-#define DISP_SELHANDLES		(1<<14)
 
 #define DISP_LATTICE		(1<<16)
 #define DISP_VERTS			(1<<17)
@@ -439,7 +433,6 @@ class PatchHitData : public HitData {
 #define PATCH_VERTEX		(1<<1)
 #define PATCH_PATCH			(1<<2)
 #define PATCH_EDGE			(1<<3)
-#define PATCH_HANDLE		(1<<4)
 
 // Types for Subdivision, below:
 #define SUBDIV_EDGES 0
@@ -454,8 +447,6 @@ class PatchHitData : public HitData {
 #define DEF_PM_SADDLE	FALSE
 
 // PatchMesh flags
-#define PM_HITTEST_REQUIRE_ALL (1<<0)	// Force faces to be hit only if all triangles are hit.  (Internal use.)
-
 
 class PatchMesh : public BaseInterfaceServer {
 	friend class Patch;
@@ -480,7 +471,6 @@ class PatchMesh : public BaseInterfaceServer {
 //3-18-99 watje to support render steps
 		int			meshStepsRender;
 		BOOL		showInterior;
-		BOOL		usePatchNormals;	// CAL-05/15/03: use true patch normals. (FID #1760)
 
 		BOOL		adaptive;
 		// GAP tessellation
@@ -516,10 +506,6 @@ class PatchMesh : public BaseInterfaceServer {
 		BOOL relaxBoundary;
 		BOOL relaxSaddle;
 		
-		void SetFlag(DWORD fl, bool val=TRUE) { if (val) flags |= fl; else flags &= ~fl; }
-		void ClearFlag(DWORD fl) { flags &= ~fl; }
-		bool GetFlag(DWORD fl) const { return (flags & fl) ? true : false; }
-
 		int 		renderPatch( GraphicsWindow *gw, int index);
 		int 		renderEdge( GraphicsWindow *gw, int index, HitRegion *hr);
 		void		checkRVertsAlloc(void);
@@ -539,9 +525,6 @@ class PatchMesh : public BaseInterfaceServer {
 		// Mesh caches
 		Mesh		unrelaxedMesh;	// Unrelaxed
 		Mesh		relaxedMesh;	// Relaxed
-
-		// CAL-03/06/03: Store the mapping of the faces on the cached mesh to the patches. (FID #832)
-		Tab<int>	mappingFaceToPatch;
 
 	public:
 		// Topology
@@ -576,7 +559,6 @@ class PatchMesh : public BaseInterfaceServer {
 		MtlID		mtlIndex;     // object material
 
 		// Selection
-		BitArray	vecSel;  		// selected vectors // CAL-06/10/03: (FID #1914)
 		BitArray	vertSel;  		// selected vertices
 		BitArray	edgeSel;  		// selected edges
 		BitArray	patchSel;  		// selected patches
@@ -734,10 +716,9 @@ class PatchMesh : public BaseInterfaceServer {
 		void		ClearDispFlag(DWORD f) { dispFlags &= ~f; }
 
 		// Selection access
-		BitArray& 	VecSel() { return vecSel; }		// CAL-06/10/03: (FID #1914)
-		BitArray& 	VertSel() { return vertSel; }
-		BitArray& 	EdgeSel() { return edgeSel; }
-		BitArray& 	PatchSel() { return patchSel; }
+		BitArray& 	VertSel() { return vertSel;  }	
+		BitArray& 	PatchSel() { return patchSel;  }	
+		BitArray& 	EdgeSel() { return edgeSel;  }	
 
 		// Constructs a vertex selection list based on the current selection level.
 		CoreExport BitArray 	VertexTempSel();
@@ -760,9 +741,6 @@ class PatchMesh : public BaseInterfaceServer {
 #endif // NO_OUTPUTRENDERER
 		CoreExport void SetShowInterior(BOOL si);
 		CoreExport BOOL GetShowInterior();
-
-		CoreExport void SetUsePatchNormals(BOOL usePatchNorm);
-		CoreExport BOOL GetUsePatchNormals();
 
 		CoreExport void SetAdaptive(BOOL sw);
 		CoreExport BOOL GetAdaptive();
@@ -890,22 +868,6 @@ class PatchMesh : public BaseInterfaceServer {
 		CoreExport BOOL SelVertsSameType();	// Are all selected vertices the same type?
 		CoreExport BOOL SelPatchesSameType();	// Are all selected patches the same type?
 
-		// CAL-04/28/03: reset vertex tangents (FID #827)
-		CoreExport BOOL ResetVertexTangents(int index);
-		CoreExport BOOL ResetVertexTangents(bool useSel=true, const BitArray *vSel=NULL);
-
-		// CAL-04/23/03: patch smooth (FID #1419)
-		CoreExport BOOL PatchSmoothVector(bool useSel=true, const BitArray *vSel=NULL);
-		CoreExport BOOL PatchSmoothVertex(bool useSel=true, const BitArray *vSel=NULL);
-		CoreExport BOOL PatchSmoothEdge(bool useSel=true, const BitArray *eSel=NULL);
-		CoreExport BOOL PatchSmoothPatch(bool useSel=true, const BitArray *pSel=NULL);
-
-		// CAL-04/23/03: Shrink/Grow, Edge Ring/Loop selection. (FID #1419)
-		CoreExport void ShrinkSelection(int type);
-		CoreExport void GrowSelection(int type);
-		CoreExport void SelectEdgeRing(BitArray &eSel);
-		CoreExport void SelectEdgeLoop(BitArray &eSel);
-
 		// Dump the patch mesh structure via DebugPrints
 		CoreExport void Dump();
 #ifdef CHECK_TRI_PATCH_AUX
@@ -1017,16 +979,14 @@ class PatchMesh : public BaseInterfaceServer {
 // Conversion flags
 // These are used in conversion methods in core\converters.cpp and
 // in poly\converters.cpp.
-#define CONVERT_KEEPSEL					0x0001
-#define CONVERT_USESOFTSEL			0x0002
-#define CONVERT_SEL_LEVEL				0x0004
-#define CONVERT_PATCH_USEQUADS	0x0010
-#define CONVERT_NO_RELAX				0x0020
+#define CONVERT_KEEPSEL 0x0001
+#define CONVERT_USESOFTSEL 0x0002
+#define CONVERT_PATCH_USEQUADS 0x0010
+#define CONVERT_NO_RELAX 0x0020
 
 // Conversion methods:
 CoreExport void ConvertMeshToPatch (Mesh &m, PatchMesh &pm, DWORD flags=0);
 CoreExport void ConvertPatchToMesh (PatchMesh &pm, Mesh &m, DWORD flags=0);
-CoreExport void ConvertPatchToMeshWithMapping (PatchMesh &pm, Mesh &m, Tab<int> *mapping, DWORD flags=0);
 CoreExport void RelaxMesh(Mesh &mesh, float value, int iter, BOOL boundary, BOOL saddle);
 
 #endif // _PATCH_H_

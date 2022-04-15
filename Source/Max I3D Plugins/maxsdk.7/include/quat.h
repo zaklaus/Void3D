@@ -16,13 +16,7 @@
 
 #include "matrix3.h"
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
-
+class ostream;
 class Quat;
 
 class AngAxis {
@@ -164,10 +158,6 @@ inline Quat IdentQuat() { return(Quat(0.0,0.0,0.0,1.0)); }
 void DllExport QuatToEuler(Quat &q, float *ang);
 void DllExport EulerToQuat(float *ang, Quat &q);
 
-#if _MSC_VER < 1300  // Visual Studio .NET
 ostream DllExport &operator<<(ostream&, const Quat&); 
-#else
-std::ostream DllExport &operator<<(std::ostream&, const Quat&); 
-#endif
 
 #endif _QUAT_H 

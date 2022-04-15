@@ -65,5 +65,32 @@ public:
 	static Value* Load(ILoad* iload, USHORT chunkID, ValueLoader* vload);
 };
 
+// StructMethods wrap member functions accessed on a struct instance
+// their apply() sets up the appropriate struct instance thread-local
+// for member data access thunks
+class StructMethod : public Value
+{
+public:
+	Struct* this_struct;
+	Value*	fn;
+
+			StructMethod(Struct* t, Value* f);
+
+	void	gc_trace();
+	void	collect() { delete this; }
+	void	sprin1(CharStream* s) { fn->sprin1(s); }
+	BOOL	_is_function() { return fn->_is_function(); }
+
+#	define is_structMethod(o) ((o)->tag == INTERNAL_STRUCT_METHOD_TAG)  // LAM - defect 307069
+	Value* classOf_vf(Value** arg_list, int count) { return fn->classOf_vf(arg_list, count); }
+	Value* superClassOf_vf(Value** arg_list, int count) { return fn->superClassOf_vf(arg_list, count); }
+	Value* isKindOf_vf(Value** arg_list, int count) { return fn->isKindOf_vf(arg_list, count); }
+	BOOL   is_kind_of(ValueMetaClass* c) { return fn->is_kind_of(c); }
+	Value* get_property(Value** arg_list, int count) { return fn->get_property(arg_list, count); }
+	Value* eval() { return fn->eval(); }
+	Value* apply(Value** arglist, int count, CallContext* cc=NULL);
+	Value* apply_no_alloc_frame(Value** arglist, int count, CallContext* cc=NULL); // LAM - 11/16/02
+};
+
 
 #endif

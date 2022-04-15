@@ -2,18 +2,18 @@
 /* VERSION_STRING is the build's posting, ie. MXXX, Daily, Midday. */
 /* VERSION_INT is the last successful major (MXXX) with the letter prefix (M) dropped. */
 #if defined(GAME_FREE_VER)
-  #define VERSION_STRING	"C000"
+  #define VERSION_STRING	_T("C000")
   #define VERSION_INT		0
 #elif defined(GAME_VER)
-  #define VERSION_STRING	"G000"
+  #define VERSION_STRING	_T("G000")
   #define VERSION_INT		0
 #elif defined(WEBVERSION)
-  #define VERSION_STRING	"M000"
+  #define VERSION_STRING	_T("M000")
   #define VERSION_INT		0
-#elif defined (DESIGN_VER)
-  #define VERSION_STRING	"B000"
+#elif defined DESIGN_VER
+  #define VERSION_STRING	_T("B000")
   #define VERSION_INT		0
 #else // MAX
-  #define VERSION_STRING	"Catalyst with PDBs C065 10-04-2004"
-  #define VERSION_INT		65
+  #define VERSION_STRING	_T("Aurora A033 12-13-2002")
+  #define VERSION_INT		33
 #endif

@@ -2,7 +2,7 @@
  *<
 	FILE: custcont.h
 
-	DESCRIPTION: Custom Controls for Max
+	DESCRIPTION: Custom Controls for Jaguar
 
 	CREATED BY: Rolf Berteig
 
@@ -40,13 +40,6 @@ COLORREF CoreExport GetAncestorTint(const HWND hwnd);
 
 // DS 9/29/00  -- Turnoff CustButton borders.
 #define I_EXEC_CB_NO_BORDER   0xA000 // Pass this to CustButton::Execute() to turnoff borders, like in the toolbar
-
-#define I_EXEC_CS_NO_BORDER   0xA001 // Pass this to CustStatus::Execute() to turnoff borders, like in the toolbar
-
-#define I_EXEC_SPINNER_RESET  0xA002 // Set a spinner back to its Reset value
-
-#define I_EXEC_SPINNER_IS_RESET_CHANGE  0xA003	// When called during a CC_SPINNER_xxx messages, it will return true if 
-												// the msg was triggered by a right-click reset
 
 // Values returned by DADMgr::SlotOwner()
 #define OWNER_MEDIT_SAMPLE 		0
@@ -201,7 +194,6 @@ void CoreExport UpdateButtonOutlines();
 #define CUI_SUBFRAME_ADDED_MSG		(WM_APP + 0x3413)	// tells a parent window that an ICUIFrame has been added
 #define CUI_SUBFRAME_REMOVED_MSG	(WM_APP + 0x3414)	// tells a parent window that an ICUIFrame has been removed
 #define CUI_PRESET_MACROBUTTONS		(WM_APP + 0x3415)	// Set MacroButtonStates is about to be called on the toolbar.
-#define CUI_SUBFRAME_ACTIVATE_MSG	(WM_APP + 0x3416)	// tells a parent window that a subframe's active state has changed
 
 // orientation parameters
 #define CUI_NONE			0
@@ -1243,19 +1235,11 @@ class IColorSwatch: public ICustomControl {
 	public:
 		// sets only the varying color of the color picker if showing
 		virtual COLORREF SetColor(COLORREF c, int notify=FALSE)=0;  // returns old color
-		COLORREF SetColor(Color c, int notify=FALSE) {return SetColor(c.toRGB(), notify);}  // returns old color
-		virtual AColor SetAColor(AColor c, int notify=FALSE)=0;  // returns old color
 
 		// sets both the varying color and the "reset"color of the color picker
 		virtual COLORREF InitColor(COLORREF c, int notify=FALSE)=0;  // returns old color
-		COLORREF InitColor(Color c, int notify=FALSE) {return InitColor(c.toRGB(), notify);}  // returns old color
-		virtual AColor InitAColor(AColor c, int notify=FALSE)=0;  // returns old color
-
-		virtual void SetUseAlpha(BOOL onOff)=0;
-		virtual BOOL GetUseAlpha()=0;
 
 		virtual COLORREF GetColor()=0;
-		virtual AColor GetAColor()=0;
 		virtual void ForceDitherMode(BOOL onOff)=0;
 		virtual void SetModal()=0;
 		virtual void Activate(int onOff)=0;
@@ -1264,8 +1248,6 @@ class IColorSwatch: public ICustomControl {
 	};
 
 IColorSwatch CoreExport *GetIColorSwatch( HWND hCtrl, COLORREF col, TCHAR *name);
-IColorSwatch CoreExport *GetIColorSwatch( HWND hCtrl, Color col, TCHAR *name);
-IColorSwatch CoreExport *GetIColorSwatch( HWND hCtrl, AColor col, TCHAR *name);
 IColorSwatch CoreExport *GetIColorSwatch(HWND hCtrl);
 void CoreExport ReleaseIColorSwatch( IColorSwatch *ics );
 
@@ -1282,6 +1264,7 @@ public:
 	// Interface ID
 	Interface_ID GetID() {return COLOR_SWATCH_RENAMER_INTERFACE_51;}
 };
+
 
 //---------------------------------------------------------------------------//
 // DragAndDrop Window

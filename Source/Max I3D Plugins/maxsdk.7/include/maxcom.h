@@ -232,9 +232,8 @@
 #define MAXCOM_HIDE_CMD_PAN				212
 #define MAXCOM_HIDE_SHELF				213
 #define MAXCOM_HIDE_MAIN_TB				214
-#define MAXCOM_FILE_SAVECOPYAS	215
 
-#ifdef ACAD_MAXSCRIPT_EXTENSIONS
+#ifdef DESIGN_VER
 #define MAXCOM_PRS_VIEWS_GRIDSETUP      220
 #define MAXCOM_PRS_VIEWS_UNITSETUP      221
 #endif
@@ -269,16 +268,6 @@
 #define MAXCOM_TOOL_SETKEY_HOTKEYSCALEY		248
 #define MAXCOM_TOOL_SETKEY_HOTKEYSCALEZ		249
 
-// defined in release 6 and later only
-#define MAXCOM_TOOL_SETKEY_ALL				250
-#define MAXCOM_TOOL_SETKEY_OTHER			251
-#define MAXCOM_TOOL_SETKEY_HOTKEYALL		252
-
-#define MAXCOM_SNAP_USE_AXIS_CONSTRAINT 253
-#define MAXCOM_SNAP_SNAP_TO_FROZEN_OBJ  254
-
-// defined in release 7 and later only
-#define MAXCOM_TOOL_WALKTHROUGH				255
 
 // these commands are API extensions, not macros
 #define MAXCOM_API_START				10000

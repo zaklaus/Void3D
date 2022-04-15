@@ -29,7 +29,6 @@ public:
 	ScripterExport void sprin1(CharStream* s);
 	void		collect() { delete this; }
 	TCHAR*		to_string();
-	TSTR		to_filename();
 	void		to_fpvalue(FPValue& v) { v.s = to_string(); v.type = TYPE_NAME; }
 
 #include "defimpfn.h"
@@ -38,7 +37,6 @@ public:
 	use_generic( lt,		"<");
 	use_generic( ge,		">=");
 	use_generic( le,		"<=");
-	use_generic( copy,		"copy");
 
 	// scene I/O 
 	IOResult Save(ISave* isave);

@@ -1,5 +1,7 @@
 #pragma once
 
+#ifdef DESIGN_VER
+
 class GeoTableItem
 {
 public:
@@ -14,3 +16,4 @@ public:
 		m_names.SetSize(0);
 	}
 };
+#endif

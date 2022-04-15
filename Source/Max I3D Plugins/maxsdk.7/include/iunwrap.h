@@ -109,11 +109,6 @@ class IUnwrapMod;
 #define UNWRAP_CLASSID	Class_ID(0x02df2e3a,0x72ba4e1f)
 #define UNWRAP_INTERFACE Interface_ID(0x53b3409b, 0x18ff7ab8)
 #define UNWRAP_INTERFACE2 Interface_ID(0x53b3409b, 0x18ff7ab9)
-//5.1.05
-#define UNWRAP_INTERFACE3 Interface_ID(0x53b3409b, 0x18ff7ac0)
-
-#define UNWRAP_INTERFACE4 Interface_ID(0x53b3409b, 0x18ff7ac1)
-
 
 #define GetIUnwrapInterface(cd) \
 			(IUnwrapMod *)(cd)->GetInterface(UNWRAP_INTERFACE)
@@ -416,34 +411,8 @@ enum {  unwrap_planarmap,unwrap_save,unwrap_load, unwrap_reset, unwrap_edit,
 		unwrap_setvertexposition2,
 		unwrap_relax,
 		unwrap_fitrelax,
-//5.1.05
-		unwrap_getautobackground,unwrap_setautobackground,
 
-//5.1.06
-		unwrap_relax2, unwrap_relax2dialog,
-		unwrap_setrelaxamount,unwrap_getrelaxamount,
-		unwrap_setrelaxiter,unwrap_getrelaxiter,
 
-		unwrap_setrelaxboundary,unwrap_getrelaxboundary,
-		unwrap_setrelaxsaddle,unwrap_getrelaxsaddle,
-
-		unwrap_setthickopenedges,unwrap_getthickopenedges,
-		unwrap_setviewportopenedges,unwrap_getviewportopenedges,
-
-		unwrap_selectinvertedfaces,
-		unwrap_getrelativetypein,unwrap_setrelativetypein,
-
-		unwrap_stitchverts2,
-
-		unwrap_addmap,
-
-		unwrap_flattenmapbymatid,
-
-		unwrap_getarea,
-		unwrap_getrotationsrespectaspect,
-		unwrap_setrotationsrespectaspect,
-
-		unwrap_setmax5flatten,
 
 		};
 //****************************************************************
@@ -607,7 +576,7 @@ class IUnwrapMod :  public Modifier, public FPMixinInterface
 			VFN_0(unwrap_updateview,fnUpdateViews);
 
 			VFN_0(unwrap_getfaceselfromstack,fnGetFaceSelFromStack);
-			
+
 
 
 		END_FUNCTION_MAP
@@ -1392,142 +1361,6 @@ class IUnwrapMod2 : public FPMixinInterface
 
 
 	};
-
-
-//5.1.05
-class IUnwrapMod3 : public FPMixinInterface  //interface for R6
-	{
-	public:
-
-		//Function Publishing System
-		//Function Map For Mixin Interface
-		//*************************************************
-		BEGIN_FUNCTION_MAP
-
-//TILE STUFF
-			FN_0(unwrap_getautobackground,TYPE_BOOL, fnGetAutoBackground);
-			VFN_1(unwrap_setautobackground,fnSetAutoBackground,TYPE_BOOL);
-
-//RELAX
-//5.1.06
-			FN_0(unwrap_getrelaxamount,TYPE_FLOAT, fnGetRelaxAmount);
-			VFN_1(unwrap_setrelaxamount, fnSetRelaxAmount,TYPE_FLOAT);			
-
-			FN_0(unwrap_getrelaxiter,TYPE_INT, fnGetRelaxIter);
-			VFN_1(unwrap_setrelaxiter, fnSetRelaxIter,TYPE_INT);			
-
-			FN_0(unwrap_getrelaxboundary,TYPE_BOOL, fnGetRelaxBoundary);
-			VFN_1(unwrap_setrelaxboundary, fnSetRelaxBoundary,TYPE_BOOL);			
-
-			FN_0(unwrap_getrelaxsaddle,TYPE_BOOL, fnGetRelaxSaddle);
-			VFN_1(unwrap_setrelaxsaddle, fnSetRelaxSaddle,TYPE_BOOL);			
-
-			VFN_0(unwrap_relax2, fnRelax2);			
-			VFN_0(unwrap_relax2dialog, fnRelax2Dialog);			
-
-		END_FUNCTION_MAP
-
-		FPInterfaceDesc* GetDesc();    // <-- must implement 
-
-//auto background
-		virtual BOOL	fnGetAutoBackground()=0;
-		virtual void	fnSetAutoBackground(BOOL autoBackground)=0;
-
-//5.1.06
-
-		virtual float	fnGetRelaxAmount() = 0;
-		virtual void	fnSetRelaxAmount(float amount) = 0;
-
-		virtual int		fnGetRelaxIter() = 0;
-		virtual void	fnSetRelaxIter(int iter) = 0;
-
-		virtual BOOL	fnGetRelaxBoundary() = 0;
-		virtual void	fnSetRelaxBoundary(BOOL boundary) = 0;
-
-		virtual BOOL	fnGetRelaxSaddle() = 0;
-		virtual void	fnSetRelaxSaddle(BOOL saddle) = 0;
-
-		virtual void	fnRelax2()=0;
-		virtual void	fnRelax2Dialog()=0;
-	};
-
-
-class IUnwrapMod4 : public FPMixinInterface  //interface for R7
-	{
-	public:
-
-		//Function Publishing System
-		//Function Map For Mixin Interface
-		//*************************************************
-		BEGIN_FUNCTION_MAP
-
-//new display edges in viewport
-			FN_0(unwrap_getthickopenedges,TYPE_BOOL, fnGetThickOpenEdges);
-			VFN_1(unwrap_setthickopenedges,fnSetThickOpenEdges,TYPE_BOOL);
-
-			FN_0(unwrap_getviewportopenedges,TYPE_BOOL, fnGetViewportOpenEdges);
-			VFN_1(unwrap_setviewportopenedges,fnSetViewportOpenEdges,TYPE_BOOL);
-
-			VFN_0(unwrap_selectinvertedfaces,fnSelectInvertedFaces);
-
-			FN_0(unwrap_getrelativetypein,TYPE_BOOL,fnGetRelativeTypeInMode);
-			VFN_1(unwrap_setrelativetypein,fnSetRelativeTypeInMode,TYPE_BOOL);
-
-			VFN_3(unwrap_stitchverts2,fnStitchVerts2,TYPE_BOOL,TYPE_FLOAT,TYPE_BOOL);
-			
-			VFN_1(unwrap_addmap,fnAddMap,TYPE_TEXMAP);
-
-
-			VFN_6(unwrap_flattenmapbymatid,fnFlattenMapByMatID,TYPE_FLOAT,TYPE_FLOAT,TYPE_BOOL,TYPE_INT,TYPE_BOOL,TYPE_BOOL);
-
-
-			VFN_7(unwrap_getarea,fnGetArea, TYPE_BITARRAY, 
-							TYPE_FLOAT_BR,TYPE_FLOAT_BR,
-							TYPE_FLOAT_BR,TYPE_FLOAT_BR,	
-							TYPE_FLOAT_BR,TYPE_FLOAT_BR);
-
-				
-
-			FN_0(unwrap_getrotationsrespectaspect,TYPE_BOOL, fnGetRotationsRespectAspect);
-			VFN_1(unwrap_setrotationsrespectaspect,fnSetRotationsRespectAspect,TYPE_BOOL);
-
-			VFN_1(unwrap_setmax5flatten,fnSetMax5Flatten,TYPE_BOOL);
-
-
-		END_FUNCTION_MAP
-
-		FPInterfaceDesc* GetDesc();    // <-- must implement 
-
-
-		virtual BOOL	fnGetThickOpenEdges()=0;
-		virtual void	fnSetThickOpenEdges(BOOL thick)=0;
-
-		virtual BOOL	fnGetViewportOpenEdges()=0;
-		virtual void	fnSetViewportOpenEdges(BOOL thick)=0;
-		virtual void	fnSelectInvertedFaces()=0;
-
-		virtual BOOL	fnGetRelativeTypeInMode() = 0;
-		virtual void	fnSetRelativeTypeInMode(BOOL absolute) = 0;
-
-		virtual void	fnStitchVerts2(BOOL bAlign, float fBias, BOOL bScale) = 0;
-
-		virtual void	fnAddMap(Texmap *map) = 0;
-
-		virtual void	fnFlattenMapByMatID(float angleThreshold, float spacing, BOOL normalize, int layoutType, BOOL rotateClusters, BOOL alignWidth)=0;
-		virtual void	fnGetArea(BitArray *faceSelection, 
-								  float &x, float &y,
-								  float &width, float &height,
-								  float &uvArea, float &geomArea) = 0;
-
-		virtual BOOL	fnGetRotationsRespectAspect()=0;
-		virtual void	fnSetRotationsRespectAspect(BOOL respect)=0;
-
-		virtual void	fnSetMax5Flatten(BOOL like5)=0;
-
-
-
-	};
-
 
 
 #endif // __IUWNRAP__H

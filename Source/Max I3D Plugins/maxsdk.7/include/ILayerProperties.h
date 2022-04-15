@@ -59,9 +59,6 @@ public:
 	virtual TCHAR*	getName	(void)		=	0;
 	// not a property, per se, since it can fail due to uniqueness of layer names
 	virtual BOOL	setName	(TCHAR *)		=	0;
-
-	// 030415  --prs.
-	virtual BOOL	Nodes(Tab<INode*>& layerNodes)	= 0;
 };
 
 #define LAYERMANAGER_INTERFACE Interface_ID(0x77ff1709, 0x19186e96)

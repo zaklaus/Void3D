@@ -20,9 +20,6 @@
 #include <strbasic.h>
 #include <windows.h>
 #include <windowsx.h>
-#if _MSC_VER < 1300  // Visual Studio .NET
- #include <ctl3d.h>
-#endif
 #include <commctrl.h>
 
 #include "udmIA64.h"
@@ -78,7 +75,6 @@
 #include "appio.h"
 #include "lockid.h"
 #include "excllist.h"
-#include "DefaultActions.h"
 
 // interfaces into MAX executable
 #include "maxapi.h"

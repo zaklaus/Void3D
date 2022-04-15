@@ -58,10 +58,6 @@ public:
 
 	// Get Texture Transfrom for specified texStage from GFX
 	virtual D3DXMATRIX	GetTexXform(int texStage) = 0;
-
-	// Get the current viewport dimensions. This is useful for doing multi pass rendering and the off screen buffer needs
-	// to be created the same size as the viewport currently being drawn.
-	virtual void GetWindowDimension(int &width, int &height) = 0;
 };
 
 #endif

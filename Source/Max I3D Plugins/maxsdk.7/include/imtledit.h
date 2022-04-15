@@ -11,9 +11,6 @@
  *>	Copyright (c) 2000, All Rights Reserved.
  **********************************************************************/
 
-#ifndef __IMTLEDIT__
-#define __IMTLEDIT__
-
 class MtlBase;
 
 class IMtlEditInterface : public FPStaticInterface 
@@ -43,5 +40,3 @@ public:
 
 #define MTLEDIT_INTERFACE Interface_ID(0x2c7b3f6e, 0x16fb35d4)
 inline IMtlEditInterface* GetMtlEditInterface () { return (IMtlEditInterface *)GetCOREInterface(MTLEDIT_INTERFACE); }
-
-#endif // __IMTLEDIT__

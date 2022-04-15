@@ -50,4 +50,3 @@
 
 	def_thread_local( String*,	undo_label,					new (GC_PERMANENT) String(_T("MAXScript"))); // current undo label
 	def_thread_local( BOOL,		try_mode,					0);				// try(...)
-	def_thread_local( MAXScriptException*, current_exception,	NULL);		// current exception that was thrown, if any. Non-null only in catch expression

@@ -10,6 +10,7 @@
 
 #include "Max.h"
 #include "MaxObj.h"
+#include "MSSceneAPI.h"
 
 #if 0 // HEY!! add material library access
 		virtual int LoadMaterialLib(const TCHAR *name)=0;
@@ -27,9 +28,8 @@ class MAXMaterial : public MAXWrapper
 public:
 	Mtl*		mat;				/* the MAX-side material	*/
 
-				MAXMaterial() {};
 				MAXMaterial(Mtl* imat);
-	static ScripterExport Value* intern(Mtl* imat);
+	static ScripterExport MAXMaterial* intern(Mtl* imat);
 
 	static Value* make(MAXClass* cls, Value** arg_list, int count);
 
@@ -43,7 +43,7 @@ public:
 
 	def_property   ( name );
 	def_property   ( effectsChannel );
-	def_property   ( showInViewport );
+	def_prop_setter( showInViewport );
 	Value*		get_property(Value** arg_list, int count);
 	Value*		set_property(Value** arg_list, int count);
 
@@ -56,17 +56,17 @@ public:
 
 visible_class (MAXMultiMaterial)
 
-class MAXMultiMaterial : public MAXMaterial
+class MAXMultiMaterial : public MAXWrapper
 {
 public:
+	MultiMtl*	mat;				/* the MAX-side material	*/
 
-				MAXMultiMaterial() {};
 				MAXMultiMaterial(MultiMtl* imat);
-	static ScripterExport Value* intern(MultiMtl* imat);
+	static ScripterExport MAXMultiMaterial* intern(MultiMtl* imat);
 
 	static Value* make(MAXClass* cls, Value** arg_list, int count);
 
-	BOOL		is_kind_of(ValueMetaClass* c) { return (c == class_tag(MAXMultiMaterial)) ? 1 : MAXMaterial::is_kind_of(c); }
+	BOOL		is_kind_of(ValueMetaClass* c) { return (c == class_tag(MAXMultiMaterial)) ? 1 : MAXWrapper::is_kind_of(c); }
 	void		collect() { delete this; }
 	ScripterExport void sprin1(CharStream* s);
 	TCHAR*		class_name();
@@ -77,6 +77,7 @@ public:
 
 	ScripterExport Value* map(node_map& m);
 
+	def_property( name );
 	def_property( numsubs );
 	def_property( count );
 
@@ -131,7 +132,7 @@ public:
 	Texmap*	map;				/* the MAX-side map	*/
 
 				MAXTexture(Texmap* imap);
-	static ScripterExport Value* intern(Texmap* imap);
+	static ScripterExport MAXTexture* intern(Texmap* imap);
 
 	static Value* make(MAXClass* cls, Value** arg_list, int count);
 
@@ -163,7 +164,7 @@ public:
 	MtlBase*	mtl;				/* the MAX-side mtlbase	*/
 
 				MAXMtlBase(MtlBase* imtl);
-	static ScripterExport Value* intern(MtlBase* imtl);
+	static ScripterExport MAXMtlBase* intern(MtlBase* imtl);
 
 	static Value* make(MAXClass* cls, Value** arg_list, int count);
 
@@ -190,6 +191,7 @@ public:
 	ScripterExport void sprin1(CharStream* s);
 	MtlBase*	get_mtl(int index);
 	MtlBase*	find_mtl(TCHAR* name);
+	static SceneAPI	*sceneapi;
 	static void setup();
 
 	// operations

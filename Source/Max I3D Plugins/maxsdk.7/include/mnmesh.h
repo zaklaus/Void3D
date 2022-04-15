@@ -28,7 +28,6 @@
 
 #include "export.h"
 #include "baseinterface.h"
-#include <hitdata.h>
 
 #define REALLOC_SIZE 10
 
@@ -54,9 +53,6 @@
 // Vertex flags
 #define MN_VERT_DONE (1<<8)
 #define MN_VERT_WELDED (1<<9)
-// CAL-04/07/03: ANDY: New flag here, to track which vertices are direct "descendants" of
-// the original cage vertices in subdivision.
-#define MN_VERT_SUBDIVISION_CORNER (1<<10)
 
 class IHardwareShader;
 class TriStrip;
@@ -76,12 +72,6 @@ public:
 #define MN_EDGE_INVIS (1<<8)
 #define MN_EDGE_NOCROSS (1<<9)
 #define MN_EDGE_MAP_SEAM (1<<10)
-// CAL-03/14/03: ANDY: New flag here, to track which edges are direct "descendants" of
-// the original cage edges in subdivision.
-#define MN_EDGE_SUBDIVISION_BOUNDARY (1<<11)
-// SCA - 6/20/04 - new flag to track unwanted edges created by Cut, so they might
-// be removed later.
-#define MN_EDGE_CUT_EXTRA (1<<12)
 
 // Edge goes from v1 to v2
 // f1 is forward-indexing face (face on "left" if surface normal above, v2 in front)
@@ -167,7 +157,6 @@ public:
 	MtlID material;
 	int track;	// Keep track of whatever -- MNMesh internal use only.
 	BitArray visedg, edgsel;
-	BitArray bndedg;	// CAL-03/18/03: boundary edges
 
 	MNFace() { Init(); }
 	MNFace (int d) { Init(); SetDeg (d); }
@@ -296,8 +285,6 @@ enum PMeshSelLevel { MNM_SL_OBJECT, MNM_SL_VERTEX, MNM_SL_EDGE, MNM_SL_FACE, MNM
 #define MNDISP_SMOOTH_SUBSEL 0x20
 #define MNDISP_BEEN_DISP 0x40
 #define MNDISP_DIAGONALS 0x80
-// CAL-03/14/03: ANDY: New display flag here for the behavior we want.
-#define MNDISP_HIDE_SUBDIVISION_INTERIORS 0x100
 
 // Flags for sub object hit test
 // NOTE: these are the same bits used for object level.
@@ -311,19 +298,10 @@ enum PMeshSelLevel { MNM_SL_OBJECT, MNM_SL_VERTEX, MNM_SL_EDGE, MNM_SL_FACE, MNM
 #define SUBHIT_MNVERTS		(1<<24)
 #define SUBHIT_MNFACES		(1<<25)
 #define SUBHIT_MNEDGES		(1<<26)
-#define SUBHIT_MNDIAGONALS  (1<<27)
-#define SUBHIT_MNTYPEMASK	(SUBHIT_MNVERTS|SUBHIT_MNFACES|SUBHIT_MNEDGES|SUBHIT_MNDIAGONALS)
-
-class MNDiagonalHitData : public HitData {
-public:
-	int mFace, mDiag;
-	MNDiagonalHitData (int face, int diagonal) : mFace(face), mDiag(diagonal) { }
-	~MNDiagonalHitData () { }
-};
+#define SUBHIT_MNTYPEMASK	(SUBHIT_MNVERTS|SUBHIT_MNFACES|SUBHIT_MNEDGES)
 
 // Subdivision flags:
 #define MN_SUBDIV_NEWMAP 0x01
-#define MN_SUBDIV_HIDE_INTERNAL_EDGES 0x10
 
 class MNMesh : public FlagUser, public BaseInterfaceServer {
 	friend class HardwareMNMesh;
@@ -403,9 +381,6 @@ private:
 	// Vertex Removal approaches - Luna task 748O
 	bool RemoveInternalVertex (int vertex);
 	bool RemoveBorderVertex (int vertex);
-
-	// Renders without any color handling - used only in hit-testing at this point.
-	void renderSingleDiagonal (GraphicsWindow *gw, int ff, int d);
 
 public:
 	MNVert *v;
@@ -738,8 +713,6 @@ public:
 	DllExport void CubicNURMS (MeshOpProgress *mop=NULL,
 		Tab<Point3> *offsets=NULL, DWORD subdivFlags=0);
 
-	//DllExport void CubicNURMSMesh (Mesh & out, MeshOpProgress *mop=NULL, DWORD subdivFlags=0);
-
 	// Boolean functions: (MNBool.cpp)
 	// Luna task 747: Someday these should all support specified normals - but not today.
 	DllExport void PrepForBoolean ();
@@ -757,10 +730,7 @@ public:
 	DllExport void CloneFaces (DWORD cloneFlag = MN_SEL, bool clear_orig=TRUE);
 	DllExport int DivideFace (int ff, Tab<float> & bary);
 	DllExport int CreateFace (int degg, int *vv);
-
-	// Moves the flagged subobjects to their average plane.
 	DllExport bool MakeFlaggedPlanar (int selLev, DWORD flag=MN_SEL, Point3 *delta=NULL);
-	// Moves flagged vertices to the plane given, or produces an array of offsets which would do so.
 	DllExport bool MoveVertsToPlane (Point3 & norm, float offset, DWORD flag=MN_SEL, Point3 *delta=NULL);
 	DllExport bool SplitFlaggedVertices (DWORD flag=MN_SEL);
 	DllExport bool SplitFlaggedEdges (DWORD flag=MN_SEL);
@@ -805,15 +775,6 @@ public:
 	DllExport void buildNormals ();
 	DllExport void buildRenderNormals ();
 	DllExport void UpdateBackfacing (GraphicsWindow *gw, bool force);
-
-	// This method can be used to invalidate any display-technology-specific caches of the MNMesh.
-	// In particular, it's currently used to invalidate the DirectX cache of the mesh.
-	// This is important to call, for example, after changing Vertex Colors or Texture coordinates, if
-	// you don't already call InvalidateGeomCache ().
-	// "DWORD keepFlags" should be zero.  We may someday add flags indicating that some parts of
-	// the hardware mesh cache should be kept, but for now, the whole cache is invalidated.
-	// (An example usage is in maxsdk\samples\mesh\EditablePoly\PolyEdOps.cpp.)
-	DllExport void InvalidateHardwareMesh (DWORD keepFlags=0);
 
 	// Display flags
 	void		SetDispFlag(DWORD f) { dispFlags |= f; }
@@ -891,7 +852,7 @@ class MNMeshBorder {
 	BitArray btarg;
 public:
 	~MNMeshBorder () { Clear(); }
-	DllExport void Clear ();
+	void Clear () { for (int i=0; i<bdr.Count(); i++) if (bdr[i]) delete bdr[i]; bdr.ZeroCount(); }
 	int Num () { return bdr.Count(); }
 	Tab<int> *Loop (int i) { return bdr[i]; }
 	bool LoopTarg (int i) { return ((i>=0) && (i<bdr.Count()) && (btarg[i])); }
@@ -918,7 +879,7 @@ public:
 	DllExport MNFaceClusters (MNMesh & mesh, DWORD clusterFlags);
 	// This version separates cluster also using a minimum angle and optionally by flags.
 	DllExport MNFaceClusters (MNMesh & mesh, float angle, DWORD clusterFlags);
-	int operator[](int i) { return (i<clust.Count()) ? clust[i] : -1; }
+	int operator[](int i) { return clust[i]; }
 	DllExport void MakeVertCluster(MNMesh &mesh, Tab<int> & vclust);
 	DllExport void GetNormalsCenters (MNMesh &mesh, Tab<Point3> & norm, Tab<Point3> & ctr);
 	DllExport void GetBorder (MNMesh &mesh, int clustID, Tab<int> & cbord);
@@ -945,7 +906,7 @@ public:
 
 	MNChamferData () { mdir=NULL; }
 	MNChamferData (const MNMesh & m) { mdir=NULL; InitToMesh(m); }
-	DllExport ~MNChamferData ();
+	~MNChamferData () { if (mdir) delete [] mdir; }
 
 	DllExport void InitToMesh (const MNMesh & m);
 	DllExport void setNumVerts (int nv, bool keep=TRUE, int resizer=0);
@@ -1036,128 +997,6 @@ public:
 	DllExport void EdgeToBorder (MNMesh & mesh, BitArray & edgeSel, BitArray & borderSel);
 	DllExport void VertexToEdge (MNMesh & mesh, BitArray & vertexSel, BitArray & edgeSel);
 	DllExport void VertexToFace (MNMesh & mesh, BitArray & vertexSel, BitArray & faceSel);
-};
-
-/// <summary>
-/// This class is new with Max 7.0.
-/// It contains new methods we'd like to put in MNMesh, but can't,
-/// because we don't want to break the 6.0 SDK.
-/// </summary>
-class MNMeshUtilities
-{
-private:
-	MNMesh *mpMesh;
-
-	// Private methods used by public ones:
-	// Bridge stuff:
-	void GetBorderVertices (Tab<int> & border, Tab<int> & verts, bool reversedLoop=false);
-	void GetBorderMapVertices (Tab<int> & border, Tab<int> & mapVerts, int mapChannel, bool reversedLoop=false);
-	void InterpolateVertices (int v1, int v2, float f, int outputVert);
-	void GetBridgeSmoothingGroups (Tab<int> & smVerts, Tab<int> & lgVerts, Tab<int> & match,
-		float smoothThresh, Tab<DWORD> & smoothers);
-	MtlID GetBridgeMaterial (Tab<int> & smaller, Tab<int> & larger);
-	bool PolygonToBorder (int face, int start, Tab<int> & border);
-	bool OrientBorders (Tab<int> & border1, Tab<int> & border2);
-	bool SynchBorders (Tab<int> & border1, Tab<int> & border2);
-	bool BridgeLoops (Tab<int> & smaller, Tab<int> & larger, float smoothThresh);
-	bool BridgeLoops (Tab<int> & smaller, Tab<int> & larger, float smoothThresh,
-		int segments, float taper, float bias);
-	void MatchLoops (Tab<Tab<int> *> & loopList, Tab<int> & loopMatch,
-		Tab<int> *loopClusterID=NULL, Tab<int> *clusterMatch=NULL);
-
-public:
-	///<summary>
-	/// Constructor.  Takes MNMesh pointer, which is the mesh that is operated upon
-	/// in all MNMeshUtilities methods.
-	///</summary>
-	MNMeshUtilities (MNMesh *mesh) { mpMesh = mesh; }
-
-	DllExport bool GetBorderFromEdge (int edge, Tab<int> & border);
-	DllExport bool AutoSmooth (float threshold, DWORD faceFlag);
-
-	DllExport bool FlipHingeAngle (Point3 & origin, Point3 & axis, int hingeEdge, DWORD faceFlag);
-	DllExport bool HingeFromEdge (Point3 & origin, Point3 & axis, float angle, int segments,
-									  MNFaceClusters & fclust, int clusterID);
-	///<summary>
-	/// Determines an average plane of the flagged subobjects, and moves vertices toward it
-	/// according to their soft selection value.
-	///</summary>
-	DllExport bool MakeFlaggedPlanar (int selLev, DWORD flag, float *softSel, Point3 *delta=NULL);
-
-	///<summary>
-	/// Moves soft-selected vertices toward the plane given according to their soft selection value,
-	/// or produces an array of offsets which would do so.  (Similar to MNMesh::MoveVertsToPlane,
-	/// but with soft selection support.)
-	///</summary>
-	DllExport bool MoveVertsToPlane (Point3 & norm, float offset, float *softSel, Point3 *delta=NULL);
-
-	/// <summary>
-	/// Edge-based collapse function - all edges with the given flag will be collapsed,
-	/// which means their vertex endpoints will be joined into a single vertex.
-	/// </summary>
-	DllExport bool CollapseEdges (DWORD edgeFlag);
-
-	/// <summary>
-	/// Constrains the vectors given for each vertex so that they are limited to travel
-	/// along a neighboring edge.  It's acceptable for deltaIn to be equal to deltaOut.
-	/// </summary>
-	DllExport void ConstrainDeltaToEdges (Tab<Point3> *deltaIn, Tab<Point3> *deltaOut);
-
-	/// <summary>
-	/// Constrains the vectors given for each vertex so that they are limited to travel
-	/// along a neighboring face.  It's acceptable for deltaIn to be equal to deltaOut.
-	/// </summary>
-	DllExport void ConstrainDeltaToFaces (Tab<Point3> *deltaIn, Tab<Point3> *deltaOut);
-
-	/// <summary>
-	/// Extrude method which creates new faces along open edges.
-	/// </summary>
-	/// <param name="edgeFlag"> The edges which should be extruded.
-	/// (Non-open edges that have this flag set always have it cleared.)</param>
-	/// <param name="clearFlagOnOldEdges">If true, the "edgeFlag" is cleared on the edges
-	/// used as the base of the extrusion.</param>
-	/// <param name="useTracking">If true, the new edges at the "top" of the extrusion have
-	/// their "track" data member set to the edge at the base of their extrusion.</param>
-	DllExport bool ExtrudeOpenEdges (DWORD edgeFlag, bool clearFlagOnOldEdges, bool useTracking);
-
-	DllExport bool BridgeBorders (int edge1, int twist1, int edge2, int twist2,
-		float smoothThresh, int segments, float taper, float bias);
-	DllExport bool BridgePolygons (int face1, int twist1, int face2, int twist2,
-		float smoothThresh, int segments, float taper, float bias);
-	DllExport bool BridgePolygonClusters (DWORD polyFlag, float smoothThresh, int segments, float taper, float bias,
-		int twist1, int twist2);
-	DllExport bool BridgeSelectedBorders (DWORD edgeFlag, float smoothThresh, int segments, float taper, float bias,
-		int twist1, int twist2);
-
-	DllExport int FindDefaultBridgeTwist (int face1, int face2);
-
-	//DllExport bool TurnEdge (int edge);
-	DllExport bool TurnDiagonal (int face, int diagonal);
-
-	DllExport bool Relax (DWORD vertexFlag, float *softSel, float relaxAmount,
-		int relaxIters, bool holdBoundaryPts, bool holdOuterPts, Point3 *delta=NULL);
-
-	DllExport int SelectPolygonsByAngle (int startPolygon, float angle, BitArray & polySel);
-
-	DllExport void CutPrepare ();
-	DllExport void CutCleanup ();
-};
-
-class MNMapPreserveData
-{
-private:
-	Tab<Point3> mFcx, mFcy;	// face corner x and y directions.
-	Tab<Point3 *> mMapXDir, mMapYDir;
-	int mDegreeSum;
-	bool mProtectVertexColors;
-
-public:
-	MNMapPreserveData () : mDegreeSum(0), mProtectVertexColors(true) { }
-	~MNMapPreserveData () { Clear(); }
-
-	DllExport void Clear ();
-	DllExport void Initialize (MNMesh & mm, const MapBitArray & mapsToDo);
-	DllExport void Apply (MNMesh & mm, Point3 *pDelta, int numDeltas);
 };
 
 #endif

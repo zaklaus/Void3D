@@ -95,7 +95,6 @@ class ChangeFGObject : public ChangeForegroundCallback {
 
 
 class SelectionProcessor : public MouseCallBack {
-	friend class PaintSelectionProcessor; //used internally
 	private:
 		MouseCallBack *mcallback;
 		BOOL brokenThresh, hitSel, drag, toggle, cloning, clear, invert;
@@ -644,9 +643,6 @@ int CoreExport GetMoveModeType();
 
 void CoreExport SetRotationIncrement(float inc);
 float CoreExport GetRotationIncrement();
-
-int CoreExport GetPaintSelBrushSize();
-void CoreExport SetPaintSelBrushSize(int size);
 
 #endif __OBJMODE__
 

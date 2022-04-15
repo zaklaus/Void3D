@@ -46,14 +46,14 @@ class GlobalThunk : public Thunk
 public:
 	Value*	cell;
 
-	ScripterExport		GlobalThunk(Value* init_name) { init(init_name); }
-	ScripterExport		GlobalThunk(Value* init_name, Value* init_val);
-	ScripterExport void	init(Value* init_name);
+			GlobalThunk(Value* init_name) { init(init_name); }
+			GlobalThunk(Value* init_name, Value* init_val);
+	void	init(Value* init_name);
 #	define	is_globalthunk(p) ((p)->tag == INTERNAL_GLOBAL_THUNK_TAG)
 
 	ScripterExport Value* eval();
 
-	ScripterExport void	gc_trace();
+	void	gc_trace();
 	void	collect() { delete this; }
 	ScripterExport void	sprin1(CharStream* s);
 
@@ -84,7 +84,7 @@ class SystemGlobalThunk : public Thunk
 	Value* (*get_fn)();
 	Value* (*set_fn)(Value*);
 public:
-	ScripterExport		SystemGlobalThunk(Value* init_name, Value* (*iget)(), Value* (*iset)(Value*));
+			SystemGlobalThunk(Value* init_name, Value* (*iget)(), Value* (*iset)(Value*));
 // LAM 4/1/00 - added following to prevent AF in name clash debugging output in HashTable::put_new()
 #	define	is_systemglobalthunk(p) ((p)->tag == INTERNAL_SYS_GLOBAL_THUNK_TAG)
 

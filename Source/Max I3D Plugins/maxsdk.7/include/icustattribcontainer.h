@@ -14,8 +14,6 @@
 #ifndef _ICUSTATTRIBCONTAINER_H_
 #define _ICUSTATTRIBCONTAINER_H_
 
-#define CUSTATTRIB_CONTAINER_CLASS_ID Class_ID(0x5ddb3626, 0x23b708db)
-
 class CustAttrib;
 
 class ICustAttribContainer : public ReferenceTarget

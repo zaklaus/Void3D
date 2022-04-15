@@ -38,7 +38,6 @@
 #define idh_file_properties			3255	// Properties
 #define idh_file_exit				3260	// Exit
 #define idh_file_history			3270	// History
-#define idh_file_save_copy_as 3280 // Save a Copy As
 
 // Edit menu items
 #define idh_edit_menu				3300	// Edit menu
@@ -121,9 +120,7 @@
 #define idh_views_standard_mode			3701
 #endif
 #define idh_views_viewport_configuration	3710	// Viewport Configuration
-#ifdef RENDER_VER
-#define idh_views_global_coor_sys       3720
-#endif
+
 // Rendering menu items
 #define idh_rendering_menu				3800	// Rendering menu
 #define idh_rendering_render			3810	// Render
@@ -160,8 +157,6 @@
 #define idh_help_maxscript			4345
 #define idh_help_authorize			4346
 #define idh_help_connect_to_update_site	4347
-#define idh_help_borrowlicense		4348
-#define idh_help_returnlicense		4349
 
 // Toolbar items
 #define idh_toolbar				5000	// Toolbar
@@ -624,8 +619,6 @@
 //layer property dialog 
 #define idh_dialog_layer_general			11540
 #define idh_dialog_layer_radiosity			11560
-#define idh_dialog_layer_manager			11570
-#define idh_dialog_layer_prop				11580
 
 // Schematic view ids...
 #define idh_dialog_schematicview_filters		11600
@@ -633,13 +626,6 @@
 // CCJ Dialog ids
 #define idh_dialog_file_properties			11700
 #define idh_ramplayer_window				11710
-
-// DWG/DXF import and export dialog ids
-#define idh_dwgexp_options					11750	// DWG/DXF Export options
-#define idh_dwgimp_options					11760	// DWG/DXF Import options (tabbed)
-#define idh_dwgimp_geometry_page			11761
-#define idh_dwgimp_layers_page				11762
-#define idh_dwgimp_rendering_page			11763
 
 // Prs dialog ids
 #define idh_3dsexp_export					11800	// 3DS Export Dialog
@@ -717,53 +703,5 @@
 
 #define idh_radiosity_lighting_analysis     12540   // Radiosity Lighting Analysis dialog
 
-#define idh_render_presets_control			12550	// Render presets control
-
-// aszabo|feb.03.03|Help ids for restrictions introduced by Kahn (#define RENDER_VER)
-// Help ids for restrictions that apply for actively linked objects
-#ifdef LINKEDOBJ_NO_LAYER_ASSIGNMENT
-#define idh_linkedobj_no_layer_assignment 12560
-#endif
-#ifdef LINKEDOBJ_NO_DELETE
-#define idh_linkedobj_no_delete 12561
-#endif
-#ifdef LINKEDOBJ_NO_CLONE
-#define idh_linkedobj_no_clone 12562
-#endif
-#ifdef LINKEDOBJ_NO_UNLINK_NODE
-#define idh_linkedobj_no_unlink_mode 12563
-#endif
-#ifdef LINKEDOBJ_NO_COLLAPSE
-#define idh_linkedobj_no_collapse 12564
-#endif
-#ifdef LINKEDOBJ_OK_TO_APPLY_TOPODEPENDENT_MODIFIER
-#define idh_linkedobj_ok_to_apply_topodependent_modifier 12565
-#endif
-// Help ids for restrictions on substituting objects
-#ifdef SUBSTOBJ_NO_DELETE
-#define idh_substobj_no_delete 12566
-#endif
-#ifdef SUBSTOBJ_NO_CLONE
-#define idh_substobj_no_clone 12567
-#endif
-#ifdef SUBSTOBJ_NO_LINK_UNLINK_NODE
-#define idh_substobj_no_link_unlink_mode 12568
-#endif
-
-#define idh_tool_palette_set_general									12569
-#define idh_tool_palette_set_view_options								12570
-#define idh_tool_palette_properties										12571
-
-#define idh_mtl_replace                                                 12572
-#define idh_mtl_convert                                                 12573
-
-// CA - 5/15/03 - Help id for fix ambient utility
-#define idh_fix_ambient									12600
-
-// aszabo|May.18.04|Help id of the Clone & Align (Batch Insert) tool
-#define idh_clone_align_tool							12605
-
-// aszabo|Feb.09.04|Help id of the "Stale RefID Problem" help topic
-//#define idh_stale_refid_problem					12605
 
 #endif // _CONTEXTIDS_H_

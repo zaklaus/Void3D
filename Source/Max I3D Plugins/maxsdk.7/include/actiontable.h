@@ -65,10 +65,8 @@ struct ActionDescription {
 };
 
 #define AO_DEFAULT 0x0001 //default option command to execute
-#define AO_CLOSEDIALOG 0x0002 //Execute closeDialog option
 
 #define ACTION_OPTION_INTERFACE Interface_ID(0x3c0276f5, 0x190964f5)
-#define ACTION_OPTION_INTERFACE_OPT2 Interface_ID(0x0011dcdc, 0x0012dcdc)
 // Implement if the an action item supports an alternate options command,
 // overwrite ActionItem::GetInterface(ACTION_OPTION_INTERFACE), to return an instance of this class
 class IActionOptions : public BaseInterface
@@ -143,80 +141,6 @@ protected:
     ActionTable* mpTable;  // The table that owns the action
 };
 
-#define ACTIONITEM_STANDIN_INTERFACE Interface_ID(0x108e1314, 0x5aff3138)
-class IActionItemStandin : public BaseInterface
-{
-public:
-	virtual void SetPersistentActionId(TSTR idString) = 0;
-	virtual TSTR &GetPersistentActionId() = 0;
-	virtual void SetActionTableId( ActionTableId id ) = 0;
-	virtual ActionTableId GetActionTableId() = 0;
-	virtual TSTR &GetPrefixString() = 0;
-};
-
-inline IActionItemStandin* GetIActionItemStandin(ActionItem* a) { return (IActionItemStandin*)a->GetInterface(ACTIONITEM_STANDIN_INTERFACE); }
-
-class ActionItemStandin: public ActionItem, public IActionItemStandin {
-public:
-	CoreExport ActionItemStandin(int cmdId );
-	CoreExport virtual ~ActionItemStandin() {};
-    
-	CoreExport virtual int    GetId() { return mCmdId; }
-	CoreExport virtual void SetId(int id) { mCmdId = id; }
-    
-	CoreExport virtual TCHAR*  GetDescription() { return mName.data();}
-	CoreExport virtual void SetDescription(TCHAR* pDesc) { mName = pDesc; }
-    
-	CoreExport virtual TCHAR*  GetShortName() { return mName.data();}
-	CoreExport virtual void SetShortName(TCHAR* pShortName) { mName = pShortName; }
-    
-	CoreExport virtual TCHAR*  GetCategory() { return mName.data();}
-	CoreExport virtual void SetCategory(TCHAR* pCategory) { mName = pCategory; }
-    
-	CoreExport virtual MaxIcon* GetIcon() { return NULL; };
-    
-	// return true if action executed, and FALSE otherwise
-	CoreExport virtual BOOL ExecuteAction() { return FALSE; };
-    
-	// Get the text to put on a button
-	CoreExport virtual void GetButtonText(TSTR& buttonText) { buttonText = mName; };
-	// Get the text to use in a menu
-	CoreExport virtual void GetMenuText(TSTR& menuText) { menuText = mName; };
-	// Get the long description text for tool tips etc.
-	CoreExport virtual void GetDescriptionText(TSTR& descText) { descText = mName; };
-	// Get the string describing the category of the item
-	CoreExport virtual void GetCategoryText(TSTR& catText) { catText = mName; };
-    
-	// check to see if menu items should be checked, or button pressed
-	CoreExport virtual BOOL IsChecked() { return FALSE; };
-	// Check to see if menu item should show up in context menu
-	CoreExport virtual BOOL IsItemVisible() { return TRUE; };
-	// Check to see if menu item should be enabled in a menu
-	CoreExport virtual BOOL IsEnabled() { return FALSE; };
-    
-	CoreExport virtual BOOL IsDynamicMenu() { return FALSE; }
-	CoreExport virtual void SetIsDynamicMenu() { };
-	CoreExport virtual IMenu* GetDynamicMenu(HWND hwnd, IPoint2& m) { return NULL; };
-
-	CoreExport void DeleteThis() { delete this; }
-    
-	CoreExport virtual BaseInterface* GetInterface(Interface_ID id);
-
-	// IActionItemStandin
-	CoreExport virtual void SetPersistentActionId(TSTR idString);
-	CoreExport virtual TSTR &GetPersistentActionId() { return mPersistentActionId; };
-	CoreExport virtual void SetActionTableId( ActionTableId id ) { mId = id; };
-	CoreExport virtual ActionTableId GetActionTableId() { return mId; };
-	CoreExport virtual TSTR &GetPrefixString() { return mPrefix; };
-
-protected:
-	int		mCmdId;
-	TSTR	mName;
-	TSTR	mPersistentActionId;
-	TSTR	mPrefix;
-	ActionTableId mId;
-};
-
 class ActionCallback;
 
 // A table of actions that can be tied to UI elements (buttons, menus, RC menu,
@@ -236,7 +160,7 @@ public:
                            ActionContextId contextId,
                            TSTR& name);
 
-    CoreExport virtual ~ActionTable();
+    CoreExport ~ActionTable();
 
     // Get/Set the current keyboard accelerators for the table
     CoreExport HACCEL GetHAccel() { return mhAccel; }
@@ -267,7 +191,7 @@ public:
     // Remove an operation from the table
     CoreExport BOOL DeleteOperation(ActionItem* pAction);
 
-    CoreExport virtual void DeleteThis() { delete this; }
+    CoreExport void DeleteThis() { delete this; }
 
     // Get the text to put on a button
     CoreExport virtual BOOL GetButtonText(int cmdId, TSTR& buttonText);

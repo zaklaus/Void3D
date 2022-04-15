@@ -175,30 +175,5 @@ CoreExport ClassDesc* GetEditTriObjDesc(); // Returns default of none have been 
 // if one is registered, otherwise you'll get a default tri-object.
 CoreExport TriObject *CreateNewTriObject();
 
-#include "XTCObject.h"
-
-const Class_ID kTriObjNormalXTCID = Class_ID(0x730a33d7, 0x27246c55);
-
-// The purpose of this class is to remove specified Mesh normals
-// after modifiers which would invalidate them.
-class TriObjectNormalXTC : public XTCObject
-{
-public:
-	TriObjectNormalXTC () { }
-
-	Class_ID ExtensionID () { return kTriObjNormalXTCID; }
-	XTCObject *Clone () { return new TriObjectNormalXTC(); }
-
-	ChannelMask DependsOn () { return PART_TOPO|PART_GEOM; }
-	ChannelMask ChannelsChanged () { return 0; }
-
-	CoreExport void PreChanChangedNotify (TimeValue t, ModContext &mc, ObjectState *os,
-		INode *node, Modifier *mod, bool bEndOfPipeline);
-	CoreExport void PostChanChangedNotify (TimeValue t, ModContext &mc, ObjectState *os,
-		INode *node, Modifier *mod, bool bEndOfPipeline);
-	
-	void DeleteThis () { delete this; }
-};
-
 
 #endif

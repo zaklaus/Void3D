@@ -11,8 +11,6 @@
 #define def_generic(fn, name)	\
 			ScripterExport Value* fn##_vf(Value** arglist, int arg_count)
 
-#define FPS_CACHE_SIZE 512
-
 /* --- function base class -- */
 
 visible_class (Function)
@@ -176,66 +174,7 @@ public:
 #define FN_MAPPED_FN	0x0001		// declared a collection-mapped function
 #define FN_BODY_FN		0x0002		// a loop or other body function, don't trap exits here
 #define FN_HAS_REFARGS	0x0004		// function has reference arguments
-#define FN_MAPPED_EVAL	0x0008		// set while evaluating a mapped function on each item
 
-
-// StructMethods wrap member functions accessed on a struct instance
-// their apply() sets up the appropriate struct instance thread-local
-// for member data access thunks
-class Struct;
-class StructMethod : public Value
-{
-public:
-	Struct* this_struct;
-	Value*	fn;
-
-	StructMethod(Struct* t, Value* f);
-
-	void	gc_trace();
-	void	collect() { delete this; }
-	void	sprin1(CharStream* s) { fn->sprin1(s); }
-	BOOL	_is_function() { return fn->_is_function(); }
-
-#	define is_structMethod(o) ((o)->tag == INTERNAL_STRUCT_METHOD_TAG)  // LAM - defect 307069
-	Value* classOf_vf(Value** arg_list, int count) { return fn->classOf_vf(arg_list, count); }
-	Value* superClassOf_vf(Value** arg_list, int count) { return fn->superClassOf_vf(arg_list, count); }
-	Value* isKindOf_vf(Value** arg_list, int count) { return fn->isKindOf_vf(arg_list, count); }
-	BOOL   is_kind_of(ValueMetaClass* c) { return fn->is_kind_of(c); }
-	Value* get_property(Value** arg_list, int count) { return fn->get_property(arg_list, count); }
-	Value* eval() { return fn->eval(); }
-	Value* apply(Value** arglist, int count, CallContext* cc=NULL);
-	Value* apply_no_alloc_frame(Value** arglist, int count, CallContext* cc=NULL); // LAM - 11/16/02
-};
-
-// LAM - 9/6/02 - defect 291499
-// PluginMethods wrap member functions accessed on a plugin instance
-// their apply() sets up the appropriate plugin instance thread-local
-// for member data access thunks
-class MSPlugin;
-class PluginMethod : public Value
-{
-public:
-	MSPlugin* this_plugin;
-	Value*	fn;
-
-	PluginMethod(MSPlugin* t, Value* f);
-
-	void	gc_trace();
-	void	collect() { delete this; }
-	void	sprin1(CharStream* s) { fn->sprin1(s); }
-	BOOL	_is_function() { return fn->_is_function(); }
-
-#	define is_pluginMethod(o) ((o)->tag == INTERNAL_MSPLUGIN_METHOD_TAG)
-	Value* classOf_vf(Value** arg_list, int count) { return fn->classOf_vf(arg_list, count); }
-	Value* superClassOf_vf(Value** arg_list, int count) { return fn->superClassOf_vf(arg_list, count); }
-	Value* isKindOf_vf(Value** arg_list, int count) { return fn->isKindOf_vf(arg_list, count); }
-	BOOL   is_kind_of(ValueMetaClass* c) { return (c->tag == INTERNAL_MSPLUGIN_METHOD_TAG) ? 1 : Value::is_kind_of(c); }
-	Value* get_property(Value** arg_list, int count) { return fn->get_property(arg_list, count); }
-	Value* eval() { return fn->eval(); }
-	Value* apply(Value** arg_list, int count, CallContext* cc=NULL);
-	Value* apply_no_alloc_frame(Value** arg_list, int count, CallContext* cc=NULL);
-
-};
 
 // UserProp & UserGeneric instances represent dynamically-added, user-defined generics
 //  on built-in classes.  They are kept in sorted tables in ValueMetaClass instances,
@@ -318,12 +257,12 @@ public:
 	Value*		get_property(Value** arg_list, int count);
 
 	// parameter conversion utilities
-	ScripterExport static void	  val_to_FPValue(Value* v, ParamType2 type, FPValue& fpv, FPEnum* e=NULL);
-	ScripterExport static Value* FPValue_to_val(FPValue& fpv, FPEnum* e=NULL);
-	ScripterExport static void	  release_param(FPValue& fpv, ParamType2 type, Value* v, FPEnum* e=NULL);
-	ScripterExport static void	  init_param(FPValue& fpv, ParamType2 type);
-	ScripterExport static void	  validate_params(FPInterface* fpi, FunctionID fid, FPParamDef* pd, ParamType2 type, int paramNum, FPValue& val, Value* v);
-	ScripterExport static FPEnum* FindEnum(short id, FPInterfaceDesc* fpid);
+	static void	  val_to_FPValue(Value* v, ParamType2 type, FPValue& fpv, FPEnum* e=NULL);
+	static Value* FPValue_to_val(FPValue& fpv, FPEnum* e=NULL);
+	static void	  release_param(FPValue& fpv, ParamType2 type, Value* v, FPEnum* e=NULL);
+	static void	  init_param(FPValue& fpv, ParamType2 type);
+	static void	  validate_params(FPInterface* fpi, FunctionID fid, FPParamDef* pd, ParamType2 type, int paramNum, FPValue& val, Value* v);
+	static FPEnum* FindEnum(short id, FPInterfaceDesc* fpid);
 };
 
 // InterfaceMethod - wraps an InterfaceFunction and its target object for shorthand mixin calls
@@ -331,7 +270,7 @@ class InterfaceMethod : public InterfaceFunction
 {
 private:
 				InterfaceMethod(FPMixinInterfaceValue* fpiv, FPFunctionDef* fd);
-	static		InterfaceMethod* interface_method_cache[FPS_CACHE_SIZE];
+	static		InterfaceMethod* interface_method_cache[128];
 	friend void Collectable::gc();
 	friend void Collectable::mark();
 public:
@@ -417,8 +356,8 @@ public:
 	HashTable*	 props;			// interface prop lookup
 	FPInterface::LifetimeType lifetime;	// interface lifetime control type
 	static bool	 enable_test_interfaces;  // test interface enable flag
-	// Whether to call fpi->ReleaseInterface stored in Collectable::flags3 - bit 0
-			ScripterExport FPInterfaceValue(FPInterface* fpi);
+
+			FPInterfaceValue(FPInterface* fpi);
 		   ~FPInterfaceValue();
 #	define	is_fpstaticinterface(c) ((c)->tag == class_tag(FPInterfaceValue))
 
@@ -457,8 +396,6 @@ extern ScripterExport void print_FP_interface(CharStream* out, FPInterface* fpi,
 
 // FPMixinInterfaceValue provides wrappers for mixin interfaces on individual target objects
 //  stored in a cache for fast retrieval and to minimize over-consing
-// Warning: FPMixinInterfaceValue can wrap a FPStaticInterface. If accessing FPMixinInterface
-// specific items, test 'fpi->GetDesc()->flags & FP_MIXIN' first.
 
 visible_class (FPMixinInterfaceValue)
 
@@ -467,13 +404,12 @@ class FPMixinInterfaceValue : public Value, public InterfaceNotifyCallback
 private:
 			FPMixinInterfaceValue(FPInterface* fpi);
 		   ~FPMixinInterfaceValue();
-	static  FPMixinInterfaceValue* FPMixinInterfaceValue::interface_cache[128];
+	static  FPMixinInterfaceValue* interface_cache[128];
 	friend void Collectable::gc();
 	friend void Collectable::mark();
 public:
 	FPInterface* fpi;						// interface
 	FPInterface::LifetimeType lifetime;		// interface lifetime control type
-	// Whether to call fpi->ReleaseInterface stored in Collectable::flags3 - bit 0
 
 	static  ScripterExport FPMixinInterfaceValue* intern(Value* prop_name, Value* target);
 	static  ScripterExport FPMixinInterfaceValue* intern(FPInterface* fpi);
@@ -498,7 +434,7 @@ public:
 // End of 3ds max 4.2 Extension
 
 	// from InterfaceNotifyCallback
-	void	InterfaceDeleted(BaseInterface* bi); 
+	void	InterfaceDeleted(BaseInterface* bi) { fpi = NULL; }  
 
 	// accesses methods & props in the interface
 	Value*	_get_property(Value* prop);
@@ -527,14 +463,13 @@ class FPStaticMethodInterfaceValue : public Value, public InterfaceNotifyCallbac
 private:
 			FPStaticMethodInterfaceValue(FPInterface* fpi, ParamType2 type, void* object);
 		   ~FPStaticMethodInterfaceValue();
-	static  FPStaticMethodInterfaceValue* interface_cache[FPS_CACHE_SIZE];
+	static  FPStaticMethodInterfaceValue* interface_cache[128];
 	friend void Collectable::gc();
 	friend void Collectable::mark();
 public:
 	FPInterface* fpi;			// interface
 	FPValue		 value;         // the target object as FPValue first argument
 	FPInterface::LifetimeType lifetime;	// interface lifetime control type
-	// Whether to call fpi->ReleaseInterface stored in Collectable::flags3 - bit 0
 
 	static  ScripterExport FPStaticMethodInterfaceValue* intern(FPInterface* fpi, ParamType2 type, void* object);
 #	define	is_fpstaticmethodinterface(c) ((c)->tag == class_tag(FPStaticMethodInterfaceValue))
@@ -564,7 +499,7 @@ class StaticInterfaceMethod : public InterfaceFunction
 {
 private:
 				StaticInterfaceMethod(FPStaticMethodInterfaceValue* fpiv, FPFunctionDef* fd);
-	static		StaticInterfaceMethod* interface_method_cache[FPS_CACHE_SIZE];
+	static		StaticInterfaceMethod* interface_method_cache[128];
 	friend void Collectable::gc();
 	friend void Collectable::mark();
 public:

@@ -340,12 +340,10 @@ class ITreeViewOps : public FPMixinInterface {
 			FPInterfaceDesc* GetDesc() { return GetDescByID(TREEVIEW_OPS_INTERFACE); }
 			Interface_ID	GetID() { return TREEVIEW_OPS_INTERFACE; }
 
-//	private:
+	private:
 		//these methods are created to massage data into a format the function publishing system can interpret
 		//these functions just call other public functions above
 		//Added by AF (09/12/00)
-		// LAM - 4/1/04 - made public. No access to SetTVDisplayFlag/GetTVDisplayFlag, which is needed for the 
-		// AutoXXXX methods below.
 		virtual Animatable* fpGetSelectedAnimatable(int index)=0;
 		virtual Animatable* fpGetSelectedClient(int index)=0;
 		virtual int fpGetSelectedAnimSubNum(int index)=0;
@@ -783,25 +781,22 @@ public:
 #define FILTER_POSX				(1<<7)
 #define FILTER_POSY				(1<<8)
 #define FILTER_POSZ				(1<<9)
-#define FILTER_POSW				(1<<10)
-#define FILTER_ROTX				(1<<11)
-#define FILTER_ROTY				(1<<12)
-#define FILTER_ROTZ				(1<<13)
-#define FILTER_SCALEX			(1<<14)
-#define FILTER_SCALEY			(1<<15)
-#define FILTER_SCALEZ			(1<<16)
-#define FILTER_RED				(1<<17)
-#define FILTER_GREEN			(1<<18)
-#define FILTER_BLUE				(1<<19)
-#define FILTER_ALPHA			(1<<20)
+#define FILTER_ROTX				(1<<10)
+#define FILTER_ROTY				(1<<11)
+#define FILTER_ROTZ				(1<<12)
+#define FILTER_SCALEX			(1<<13)
+#define FILTER_SCALEY			(1<<14)
+#define FILTER_SCALEZ			(1<<15)
+#define FILTER_RED				(1<<16)
+#define FILTER_GREEN			(1<<17)
+#define FILTER_BLUE				(1<<18)
 
-#define FILTER_CONTTYPES		(1<<21)
-#define FILTER_NOTETRACKS		(1<<22)
-#define FILTER_SOUND			(1<<23)
-#define FILTER_MATMAPS			(1<<24)
-#define FILTER_MATPARAMS		(1<<25)
-#define FILTER_VISTRACKS		(1<<26)
-
+#define FILTER_CONTTYPES		(1<<19)
+#define FILTER_NOTETRACKS		(1<<20)
+#define FILTER_SOUND			(1<<21)
+#define FILTER_MATMAPS			(1<<22)
+#define FILTER_MATPARAMS		(1<<23)
+#define FILTER_VISTRACKS		(1<<24)
 
 // More filter bits. These are stored in the 2nd DWORD.
 #define FILTER_GEOM				(1<<0)
@@ -817,20 +812,18 @@ public:
 #define FILTER_CONTX			(1<<10)
 #define FILTER_CONTY			(1<<11)
 #define FILTER_CONTZ			(1<<12)
-#define FILTER_CONTW			(1<<13)
-#define FILTER_STATICVALS		(1<<14)
-#define FILTER_HIERARCHY		(1<<15)
-#define FILTER_NODES			(1<<16)
-#define FILTER_BONES			(1<<17)
-#define FILTER_KEYABLE			(1<<18)
+#define FILTER_STATICVALS		(1<<13)
+#define FILTER_HIERARCHY		(1<<14)
+#define FILTER_NODES			(1<<15)
+#define FILTER_BONES			(1<<16)
 
 #define DEFAULT_TREEVIEW_FILTER0	(FILTER_WORLDMODS|FILTER_OBJECTMODS|FILTER_TRANSFORM|FILTER_BASEPARAMS| \
-	FILTER_POSX|FILTER_POSY|FILTER_POSZ|FILTER_POSW|FILTER_ROTX|FILTER_ROTY|FILTER_ROTZ| \
-	FILTER_SCALEX|FILTER_SCALEY|FILTER_SCALEZ|FILTER_RED|FILTER_GREEN|FILTER_BLUE|FILTER_ALPHA| \
-	FILTER_NOTETRACKS|FILTER_MATMAPS|FILTER_MATPARAMS|FILTER_VISTRACKS|FILTER_SOUND)
+	FILTER_POSX|FILTER_POSY|FILTER_POSZ|FILTER_ROTX|FILTER_ROTY|FILTER_ROTZ| \
+	FILTER_SCALEX|FILTER_SCALEY|FILTER_SCALEZ|FILTER_RED|FILTER_GREEN|FILTER_BLUE|FILTER_NOTETRACKS| \
+	FILTER_MATMAPS|FILTER_MATPARAMS|FILTER_VISTRACKS|FILTER_SOUND)
 
 #define DEFAULT_TREEVIEW_FILTER1	(FILTER_POSITION|FILTER_ROTATION|FILTER_SCALE| \
-	FILTER_CONTX|FILTER_CONTY|FILTER_CONTZ|FILTER_CONTW|FILTER_VISIBLE_OBJS|FILTER_STATICVALS| \
+	FILTER_CONTX|FILTER_CONTY|FILTER_CONTZ|FILTER_VISIBLE_OBJS|FILTER_STATICVALS| \
 	FILTER_HIERARCHY|FILTER_NODES)
 
 // key tangent display setting

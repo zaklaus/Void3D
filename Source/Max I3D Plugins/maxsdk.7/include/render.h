@@ -17,7 +17,6 @@
 // includes
 #include "sfx.h"
 #include "buildver.h"
-#include "iTargetedIO.h"
 
 
 #define FIELD_EVEN 0
@@ -107,13 +106,6 @@ public:
 		RM_IReshade,		// render is being used for interactive reshading
 	};
 
-	// This is a list of commands that can be passed to Execute()
-	enum Execute_Commands {
-		// Queries whether this is a tone operator preview rendering. 
-		// Execute() will return non-zero if it is indeed a preview render. None of the "arg" parameters are used.
-		kCommand_IsToneOpPreview = 0x4e80014c
-	};
-
 	RendType rendType;	 	// normal, region, blowup, selection
 
 	BOOL isNetRender;  		// is this a render on a network slave?	
@@ -148,9 +140,6 @@ public:
 	int width,height;		// image width,height.
 	BOOL filterBG;			// filter background
 	BOOL alphaOutOnAdditive;// produce alpha on additive transparency
-#ifdef SIMPLIFY_AREA_LIGHTS
-	bool simplifyAreaLights;
-#endif
 
 	RendParams()
 	{
@@ -190,9 +179,6 @@ public:
 		extraFlags = 0;
 		width=height = 0;
 		filterBG = 0;
-#ifdef SIMPLIFY_AREA_LIGHTS
-		simplifyAreaLights = false;
-#endif
 	}
 
 	RenderMode GetRenderMode() { return RM_Default; } // mjm - 06.08.00
@@ -206,17 +192,7 @@ public:
 
 	// Generic expansion function
 	virtual INT_PTR Execute(int cmd, ULONG_PTR arg1=0, ULONG_PTR arg2=0, ULONG_PTR arg3=0) { return 0; }
-
-	// Call this function to determine whether we are doing a tone operator preview rendering
-	bool IsToneOperatorPreviewRender();
 };
-
-inline bool RendParams::IsToneOperatorPreviewRender() {
-
-	// Execute the special command on the render params
-	INT_PTR result = Execute(kCommand_IsToneOpPreview);
-	return (result != 0);
-}
 
 // These are passed to the renderer on every frame
 class FrameRendParams : public BaseInterfaceServer {
@@ -289,8 +265,6 @@ public:
 	virtual BOOL AllowMultiSelect() {return FALSE;}
 };
 
-class ITabbedDialog;
-class ITabPage;
 
 // This is the interface given to a renderer when it needs to display its parameters
 // It is also given to atmospheric effects to display thier parameters.
@@ -347,51 +321,6 @@ public:
 
 	// JBW 12/1/98: get interface to rollup window interface
 	virtual IRollupWindow* GetIRollup()=0;
-
-	// Adds rollup pages to the render params dialog. Returns the window
-	// handle of the dialog that makes up the page.
-	virtual HWND AddTabRollupPage(const Class_ID& id, HINSTANCE hInst, TCHAR *dlgTemplate, 
-		DLGPROC dlgProc, TCHAR *title, LPARAM param=0, DWORD flags=0, int category = ROLLUP_CAT_STANDARD)
-	{
-		return AddRollupPage(hInst, dlgTemplate, dlgProc, title, param, flags, category);
-	}
-
-	virtual HWND AddTabRollupPage(const Class_ID& id, HINSTANCE hInst, DLGTEMPLATE *dlgTemplate, 
-		DLGPROC dlgProc, TCHAR *title, LPARAM param=0, DWORD flags=0, int category = ROLLUP_CAT_STANDARD)
-	{
-		return AddRollupPage(hInst, dlgTemplate, dlgProc, title, param, flags, category);
-	}
-
-	// Removes a rollup page and destroys it.
-	virtual void DeleteTabRollupPage(const Class_ID& id, HWND hRollup)
-	{
-		DeleteRollupPage(hRollup);
-	}
-
-	// When the user mouses down in dead area, the plug-in should pass
-	// mouse messages to this function which will pass them on to the rollup.
-	virtual void RollupTabMouseMessage(const Class_ID& id, HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-	{
-		RollupMouseMessage(hDlg, message, wParam, lParam);
-	}
-
-	// JBW 12/1/98: get interface to rollup window interface
-	virtual IRollupWindow* GetTabIRollup(const Class_ID& id)
-	{
-		return GetIRollup();
-	}
-
-	// Return the tabbed dialog for these render params
-	virtual ITabbedDialog* GetTabDialog()
-	{
-		return NULL;
-	}
-
-	// Return the page with the given class id.
-	virtual ITabPage* GetTabPage(const Class_ID& id)
-	{
-		return NULL;
-	}
 };
 
 
@@ -527,18 +456,6 @@ public:
 	virtual RendParamDlg *CreateParamDialog(IRendParams *ir,BOOL prog=FALSE)=0;
 	virtual void ResetParams()=0;
 	virtual int	GetAAFilterSupport(){ return 0; } // point sample, no reconstruction filter
-	virtual bool SupportsTexureBaking() { return false; }
-	virtual bool SupportsCustomRenderPresets() { return false; }
-	virtual int  RenderPresetsFileVersion() { return -1; }
-	virtual BOOL RenderPresetsIsCompatible( int version ) { return false; }
-
-	virtual TCHAR * RenderPresetsMapIndexToCategory( int catIndex ) { return NULL; }
-	virtual int     RenderPresetsMapCategoryToIndex( TCHAR* category )  { return 0; }
-
-	virtual int RenderPresetsPreSave( ITargetedIO * root, BitArray saveCategories ) { return -1; }
-	virtual int RenderPresetsPostSave( ITargetedIO * root, BitArray loadCategories ) { return -1; }
-	virtual int RenderPresetsPreLoad( ITargetedIO * root, BitArray saveCategories ) { return -1; }
-	virtual int RenderPresetsPostLoad( ITargetedIO * root, BitArray loadCategories ) { return -1; }
 };
 
 
@@ -602,11 +519,9 @@ public:
 
 
 // interface ID
-#define SCANLINE_RENDERER_INTERFACE  Interface_ID(0x342323, 0x551665)
-#define SCANLINE_RENDERER3_INTERFACE Interface_ID(0x44e40bbc, 0x52bc7cd1)
+#define SCANLINE_RENDERER_INTERFACE Interface_ID(0x342323, 0x551665) 
 
 #define GetScanRendererInterface(obj) ((IScanRenderer2*)obj->GetInterface(SCANLINE_RENDERER_INTERFACE)) 
-#define GetScanRendererInterface3(obj) ((IScanRenderer3*)obj->GetInterface(SCANLINE_RENDERER3_INTERFACE)) 
 
 //--------------------------------------------------------------------------
 // Interface into the default scanline renderer, Class_ID(SREND_CLASS_ID,0)
@@ -700,15 +615,6 @@ class IScanRenderer2: public IScanRenderer, public FPMixinInterface {
 			get_colorClampType, set_colorClampType,  
 			get_antiAliasFilter, set_antiAliasFilter,  
 			get_enableSSE, set_enableSSE,  
-			//new in R6
-			get_globalSamplerEnabled, set_globalSamplerEnabled, 
-			get_globalSamplerClassByName, set_globalSamplerClassByName,
-			get_globalSamplerSampleMaps, set_globalSamplerSampleMaps, 
-			get_globalSamplerQuality, set_globalSamplerQuality, 
-			get_globalSamplerAdaptive, set_globalSamplerAdaptive, 
-			get_globalSamplerAdaptiveThresh, set_globalSamplerAdaptiveThresh,
-			get_globalSamplerParam1, set_globalSamplerParam1,
-			get_globalSamplerParam2, set_globalSamplerParam2,
 		};
 
 	//Function Map For Mixin Interface
@@ -741,15 +647,6 @@ class IScanRenderer2: public IScanRenderer, public FPMixinInterface {
 
 		PROP_FNS(get_enableSSE, IsSSEEnabled,					set_enableSSE, SetEnableSSE, TYPE_BOOL);
 
-		PROP_FNS(get_globalSamplerEnabled, GetGlobalSamplerEnabled,					set_globalSamplerEnabled, SetGlobalSamplerEnabled, TYPE_BOOL); 
-		PROP_FNS(get_globalSamplerClassByName, GetGlobalSamplerClassByName,			set_globalSamplerClassByName, SetGlobalSamplerClassByName, TYPE_TSTR_BV);
-		PROP_FNS(get_globalSamplerSampleMaps, GetGlobalSamplerSampleMaps,			set_globalSamplerSampleMaps, SetGlobalSamplerSampleMaps, TYPE_BOOL);
-		PROP_FNS(get_globalSamplerQuality, GetGlobalSamplerQuality ,				set_globalSamplerQuality, SetGlobalSamplerQuality, TYPE_FLOAT);
-		PROP_FNS(get_globalSamplerAdaptive, GetGlobalSamplerAdaptive,				set_globalSamplerAdaptive, SetGlobalSamplerAdaptive, TYPE_BOOL);
-		PROP_FNS(get_globalSamplerAdaptiveThresh, GetGlobalSamplerAdaptiveThresh,	set_globalSamplerAdaptiveThresh, SetGlobalSamplerAdaptiveThresh, TYPE_FLOAT);
-		PROP_FNS(get_globalSamplerParam1, GetGlobalSamplerParam1,					set_globalSamplerParam1, SetGlobalSamplerParam1, TYPE_FLOAT);
-		PROP_FNS(get_globalSamplerParam2, GetGlobalSamplerParam2,					set_globalSamplerParam2, SetGlobalSamplerParam2, TYPE_FLOAT);
-
 	END_FUNCTION_MAP
 
 	FPInterfaceDesc* GetDesc();    // <-- must implement 
@@ -776,96 +673,8 @@ class IScanRenderer2: public IScanRenderer, public FPMixinInterface {
 	virtual BOOL GetMemFrugal() = 0;
 	virtual void SetEnableSSE(BOOL b) = 0;
 	virtual BOOL IsSSEEnabled() = 0;
-
-	//new for R6
-	virtual BOOL GetGlobalSamplerEnabled() = 0;
-	virtual void SetGlobalSamplerEnabled(BOOL enable) = 0;
-	virtual TSTR GetGlobalSamplerClassByName() = 0;
-	virtual void SetGlobalSamplerClassByName(const TSTR) = 0;
-	virtual BOOL GetGlobalSamplerSampleMaps() = 0;
-	virtual void SetGlobalSamplerSampleMaps(BOOL enable) = 0;
-	virtual float GetGlobalSamplerQuality() = 0;
-	virtual void SetGlobalSamplerQuality(float f) = 0;
-	virtual BOOL GetGlobalSamplerAdaptive() = 0;
-	virtual void SetGlobalSamplerAdaptive(BOOL enable) = 0;
-	virtual float GetGlobalSamplerAdaptiveThresh() = 0;
-	virtual void SetGlobalSamplerAdaptiveThresh(float f) = 0;
-	virtual float GetGlobalSamplerParam1() = 0;
-	virtual void SetGlobalSamplerParam1(float f) = 0;
-	virtual float GetGlobalSamplerParam2() = 0;
-	virtual void SetGlobalSamplerParam2(float f) = 0;
 };
 
-#if defined(SINGLE_SUPERSAMPLE_IN_RENDER) || defined(DESIGN_VER)
-//--------------------------------------------------------------------------
-// Extended Interface into the default scanline renderer, Class_ID(SREND_CLASS_ID,0)
-//---------------------------------------------------------------------------
-class IScanRenderer3: public IScanRenderer2 {
-	public:
-
-	virtual float GetSamplerQuality() = 0;
-	virtual void SetSamplerQuality(float) = 0;
-
-	virtual BOOL GetRenderWatermark() = 0;
-	virtual void SetRenderWatermark(BOOL on) = 0;
-	virtual Bitmap* GetWatermarkBitmap() = 0;
-	virtual void SetWatermarkBitmap(Bitmap* bm) = 0;
-	virtual int GetWatermarkTop() = 0;
-	virtual void SetWatermarkTop(int top) = 0;
-	virtual int GetWatermarkLeft() = 0;
-	virtual void SetWatermarkLeft(int left) = 0;
-	virtual float GetWatermarkBlend() = 0;
-	virtual void SetWatermarkBlend(float blend) = 0;
-	virtual BOOL GetWatermarkUI() = 0;
-	virtual void SetWatermarkUI(BOOL on) = 0;
-};
-#endif	// defined(SINGLE_SUPERSAMPLE_IN_RENDER) || defined(DESIGN_VER)
-
-//==============================================================================
-// class IRendererRequirements
-//
-// This interface is used to query special requirement flags from renderers.
-//==============================================================================
-#define IRENDERERREQUIREMENTS_INTERFACE_ID Interface_ID(0x27c85c29, 0xfab6ee0)
-class IRendererRequirements : public BaseInterface {
-public:
-
-	enum Requirement {
-		// Indicates that the renderer does not support the pause button found
-		// in the render progress dialog, and that the pause button should be disabled.
-		kRequirement_NoPauseSupport = 0,
-		// Indicates that the VFB shouldn't be poped-up after rendering, even if 
-		// "Show VFB" is ON in the common render parameters. This is useful for
-		// renderers which generate something other than an image.
-		// Note that this also affects render element VFBs.
-		kRequirement_NoVFB = 1,
-		// Indicates that the rendered image shouldn't be saved after rendering, even
-		// if a file was specified in the common render parameters. This is useful for
-		// renderers which generate something other than an image.
-		// Note that this also affects render element outputs.
-		kRequirement_DontSaveRenderOutput = 2
-	};
-
-	// Returns true if the renderer has the given requirement, or returns false otherwise.
-	virtual bool HasRequirement(Requirement requirement) = 0;
-
-	// -- from BaseInterface
-	virtual Interface_ID GetID();
-};
-
-inline Interface_ID IRendererRequirements::GetID() {
-
-	return IRENDERERREQUIREMENTS_INTERFACE_ID;
-}
-
-inline IRendererRequirements* GetRendererRequirements(Renderer* renderer) {
-	return (renderer != NULL) ? static_cast<IRendererRequirements*>(renderer->GetInterface(IRENDERERREQUIREMENTS_INTERFACE_ID)) : NULL;
-}
-
-inline bool RendererHasRequirement(Renderer* renderer, IRendererRequirements::Requirement requirement) {
-	IRendererRequirements* iRequirements = GetRendererRequirements(renderer);
-	return (iRequirements != NULL) ? iRequirements->HasRequirement(requirement) : false;
-}
 
 #endif
 

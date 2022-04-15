@@ -119,19 +119,19 @@ public:
 	virtual void SetDisplayByLayer(BOOL onOff, INode *) = 0;
 	virtual void SetRenderByLayer(BOOL onOff, INode *) = 0;
 	virtual void SetMotionByLayer(BOOL onOff, INode *) = 0;
-	virtual BOOL GetDisplayByLayer(INode *) const = 0;
-	virtual BOOL GetRenderByLayer(INode *) const = 0;
-	virtual BOOL GetMotionByLayer(INode *) const = 0;
+	virtual BOOL GetDisplayByLayer(INode *) = 0;
+	virtual BOOL GetRenderByLayer(INode *) = 0;
+	virtual BOOL GetMotionByLayer(INode *) = 0;
 	virtual void SelectObjects(void) = 0;
 	virtual void SetVisibility(TimeValue t, float vis) = 0;
-	virtual float GetVisibility(TimeValue t,Interval *valid=NULL) const = 0;
-	virtual float GetVisibility(TimeValue t,View & view, Interval *valid=NULL) const = 0;
-	virtual float GetImageBlurMultiplier(TimeValue t) const = 0;
+	virtual float GetVisibility(TimeValue t,Interval *valid=NULL) = 0;
+	virtual float GetVisibility(TimeValue t,View & view, Interval *valid=NULL) = 0;
+	virtual float GetImageBlurMultiplier(TimeValue t) = 0;
 	virtual void  SetImageBlurMultiplier(TimeValue t, float m) = 0;
-	virtual bool GetMotBlurOnOff(TimeValue t) const = 0;
+	virtual bool GetMotBlurOnOff(TimeValue t) = 0;
 	virtual void  SetMotBlurOnOff(TimeValue t, bool m) = 0;
 	virtual bool IsHiddenByVisControl() = 0;
-	virtual float GetLocalVisibility(TimeValue t,Interval *valid) const = 0;
+	virtual float GetLocalVisibility(TimeValue t,Interval *valid) = 0;
 
 	//New methods in R4
 	virtual void SetShowFrozenWithMtl( bool onOff) = 0;
@@ -139,9 +139,6 @@ public:
 
 	virtual void SetRenderOccluded(bool onOff) = 0;
 	virtual int	GetRenderOccluded() const = 0;
-
-	// promoted to public method 030530  --prs.
-	virtual bool HasObjects() const = 0;
 };
 
 

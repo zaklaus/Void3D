@@ -472,11 +472,6 @@ class ITCBFloatKey : public ITCBKey {
 		float val;		
 	};
 
-class ITCBPoint4Key : public ITCBKey {
-public:
-	Point4 val;		
-};
-
 class ITCBPoint3Key : public ITCBKey {
 	public:
 		Point3 val;		
@@ -527,15 +522,6 @@ class IBezScaleKey : public IKey  {
 		Point3 inLength, outLength;
 	};
 
-class IBezPoint4Key : public IKey {
-public:
-	Point4 intan, outtan;
-	Point4 val;
-	//watje horizontal handles
-	//these are the length of the handles
-	Point4 inLength, outLength;
-};
-
 
 //--- Linear Keys --------------
 
@@ -575,17 +561,8 @@ class IBoolFloatKey : public IKey {
 #define IKEY_XSEL		(1<<1)
 #define IKEY_YSEL		(1<<2)
 #define IKEY_ZSEL		(1<<3)
-#define IKEY_WSEL		(1<<30)
 #define IKEY_FLAGGED	(1<<31)  //13
 #define IKEY_TIME_LOCK	(1<<14)
-
-#define IKEY_ALLSEL		(IKEY_SELECTED|IKEY_XSEL|IKEY_YSEL|IKEY_ZSEL|IKEY_WSEL)
-
-#define IKEY_VALLOCK_SHIFT	16
-#define IKEY_VALX_LOCK		(1<<IKEY_VALLOCK_SHIFT)
-#define IKEY_VALY_LOCK		(1<<(IKEY_VALLOCK_SHIFT+1))
-#define IKEY_VALZ_LOCK		(1<<(IKEY_VALLOCK_SHIFT+2))
-#define IKEY_VALA_LOCK		(1<<(IKEY_VALLOCK_SHIFT+3))
 
 // TCB specific key flags
 #define TCBKEY_QUATVALID	(1<<4) // When this bit is set the angle/axis is derived from the quat instead of vice/versa
@@ -594,7 +571,6 @@ class IBoolFloatKey : public IKey {
 #define BEZKEY_XBROKEN		(1<<4) // Broken means not locked
 #define BEZKEY_YBROKEN		(1<<5)
 #define BEZKEY_ZBROKEN		(1<<6)
-#define BEZKEY_WBROKEN		(1<<21)
 
 // The in and out types are stored in bits 7-13
 #define BEZKEY_NUMTYPEBITS	3
@@ -618,8 +594,8 @@ class IBoolFloatKey : public IKey {
 //watje determines whether a user handle is limited
 #define BEZKEY_UNCONSTRAINHANDLE		(1<<20)
 
-#define TangentsLocked(f,j) (!(f&(j <= 2 ? (BEZKEY_XBROKEN<<j) : BEZKEY_WBROKEN)))
-#define SetTangentLock(f,j,l) {if (l) (f)=(f)&(~(j <= 2 ? (BEZKEY_XBROKEN<<j) : BEZKEY_WBROKEN)); else (f)|=(j <= 2 ? (BEZKEY_XBROKEN<<j) : BEZKEY_WBROKEN);}
+#define TangentsLocked(f,j) (!(f&(BEZKEY_XBROKEN<<j)))
+#define SetTangentLock(f,j,l) {if (l) (f)=(f)&(~(BEZKEY_XBROKEN<<j)); else (f)|=(BEZKEY_XBROKEN<<j);}
 
 // Macros to access hybrid tangent types
 #define GetInTanType(f)  int(((f)>>BEZKEY_INTYPESHIFT)&BEZKEY_TYPEMASK)
@@ -628,7 +604,7 @@ class IBoolFloatKey : public IKey {
 #define SetOutTanType(f,t) {(f) = ((f)&(~(BEZKEY_TYPEMASK<<BEZKEY_OUTTYPESHIFT)))|(t<<BEZKEY_OUTTYPESHIFT);}
 
 // HitTrackRecord flags
-// KEY_XSEL, KEY_YSEL, KEY_ZSEL, and KEY_WSEL are also used to identify the component
+// KEY_XSEL through KEY_WSEL are also used to identify the component
 #define HITKEY_INTAN	(1<<10)
 #define HITKEY_OUTTAN	(1<<11)
 
@@ -637,18 +613,16 @@ class IBoolFloatKey : public IKey {
 #define TFLAG_RANGE_UNLOCKED	(1<<1)
 #define TFLAG_LOOPEDIN			(1<<3)
 #define TFLAG_LOOPEDOUT			(1<<4)
-#define TFLAG_COLOR				(1<<5)	// Set for Bezier Point3/Point4 controlers that are color controllers
+#define TFLAG_COLOR				(1<<5)	// Set for Bezier Point3 controlers that are color controllers
 #define TFLAG_HSV				(1<<6)	// Set for color controls that interpolate in HSV
-#define TRACK_XLOCKED			(1<<7)	// Used by controller to lock Y and Z to X.
-#define KT_FLAG_DELAY_KEYSCHANGED (1<<8)
-#define TFLAG_NOTKEYABLE		(1<<9)
+#define TFLAG_NOTKEYABLE			(1<<9)
 #define TFLAG_TCBQUAT_NOWINDUP	(1<<10)
 
 //-------------------------------------------------------
-// This is an interface into key frame controllers. 
-// To get a pointer to the IKeyControl interface given a pointer to a controller,
-// use the macro defined in animtbl.h: GetKeyControlInterface()
-// Use class AnyKey as wrapper for IKey for automatic handling of memory. See example below
+// This is an interface into either a TCB or Bezier key
+// frame controller. It is up to the client to make sure
+// that the IKey* point to a key of the approriate derived
+// class based on the ClassID() of the controller.
 
 class IKeyControl {
 	public:
@@ -676,31 +650,10 @@ class IKeyControl {
 
 		// Access track flags
 		virtual DWORD &GetTrackFlags()=0;
-
-		// Specify the max size of a key in bytes. Just need to implement if 
-		// size of IKey is greater than this default value.
-		virtual int GetKeySize() {return 128;}
 	};
 
-class AnyKey
-{
-public:
-	Tab<char> data;
-	AnyKey(int size = 128) { data.SetCount(size); } // 128 is default from IKeyControl::GetKeySize()
-	void SetSize(int size) { data.SetCount(size); }
-	operator IKey*() { return (IKey*)data.Addr(0); }
-};
-
-
-// ------- example:
-//	IKeyControl* ki = GetKeyControlInterface(controller);
-//	if (ki != NULL)
-//	{
-//		if (key_index >= ki->GetNumKeys())
-//			throw RuntimeError (GetString(IDS_KEY_NO_LONGER_EXISTS_IN_CONTROLLER), controller);
-//		AnyKey ak(ki->GetKeySize()); IKey* k = ak;
-//		ki->GetKey(key_index, k);
-
+// To get a pointer to the above interface given a pointer to a controller
+// use the macro defined in animtbl.h: GetKeyControlInterface()
 
 //--------------------------------------------------------------
 // The following interface is an FP interface to flag TFLAG_TCBQUAT_NOWINDUP
@@ -1364,7 +1317,6 @@ public:
 #define SCALELIST_CONTROL_CLASS_ID		0x4b4b1004
 #define DUMMY_CONTROL_CLASS_ID			0xeeefffff
 #define MASTERLIST_CONTROL_CLASS_ID		0x4b4b1015
-#define POINT4LIST_CONTROL_CLASS_ID		0x4b4b1005
 
 class IListControl;
 
@@ -1386,7 +1338,7 @@ class IListControl : public Control, public FPMixinInterface {
 		BEGIN_FUNCTION_MAP
 			FN_0		(list_getNumItems,	TYPE_INT,	GetListCount				);
 			VFN_1		(list_setActive,				SetActive,		TYPE_INDEX	);
-			FN_0		(list_getActive,	TYPE_INDEX,	GetActive					);
+			FN_0		(list_getActive,	TYPE_INDEX,	GetActive,					);
 			VFN_1		(list_deleteItem,				DeleteItem,		TYPE_INDEX	);
 			VFN_1		(list_cutItem,					CutItem,		TYPE_INDEX	);
 			VFN_1		(list_pasteItem,				PasteItem,		TYPE_INDEX	);
@@ -1439,9 +1391,9 @@ class ISplineIKControl: public Modifier, public FPMixinInterface {
 		BEGIN_FUNCTION_MAP
 			FN_0		(getHelperCount,		TYPE_INT,	GetHelperCount		);
 			FN_0		(getKnotCount,			TYPE_INT,	GetKnotCount		);
-			FN_0		(link_allToRoot,		TYPE_BOOL,	LinkToRoot			);
-			FN_0		(link_allinHierarchy,	TYPE_BOOL,	LinkInHierarchy		);
-			FN_0		(link_none,				TYPE_BOOL,	UnLink				);
+			FN_0		(link_allToRoot,		TYPE_BOOL,	LinkToRoot,			);
+			FN_0		(link_allinHierarchy,	TYPE_BOOL,	LinkInHierarchy,	);
+			FN_0		(link_none,				TYPE_BOOL,	UnLink,				);
 			FN_1		(create_hlpr,			TYPE_BOOL,	CreateHelpers,		TYPE_INT);
 		END_FUNCTION_MAP
 
@@ -1582,7 +1534,7 @@ public:
 
 enum splineCommandMode { ScmCreateLine, ScmAttach, ScmInsert, ScmConnect, ScmRefine, ScmFillet, ScmChamfer, 
 					     ScmBind, ScmRefineConnect, ScmOutline, ScmTrim, ScmExtend, ScmCrossInsert,
-						 ScmBreak, ScmUnion, ScmSubtract, ScmCrossSection, ScmCopyTangent, ScmPasteTangent, };
+						 ScmBreak, ScmUnion, ScmSubtract,  };
 enum splineButtonOp    { SopHide, SopUnhideAll, SopDelete, SopDetach, SopDivide, SopCycle,
 						 SopUnbind, SopWeld, SopMakeFirst, SopAttachMultiple, SopExplode, SopReverse, 
 						 SopClose, SopIntersect, SopMirrorHoriz, SopMirrorVert,
@@ -1623,29 +1575,25 @@ class IPatchSelectData				// accessed via GetInterface(I_PATCHSELECTDATA)
 {
 public:
 	// access patch sub-object selections, current & named
-	virtual BitArray GetVecSel()=0;
 	virtual BitArray GetVertSel()=0;
 	virtual BitArray GetEdgeSel()=0;
 	virtual BitArray GetPatchSel()=0;
 	
-	virtual void SetVecSel(BitArray &set, IPatchSelect *imod, TimeValue t)=0;
 	virtual void SetVertSel(BitArray &set, IPatchSelect *imod, TimeValue t)=0;
 	virtual void SetEdgeSel(BitArray &set, IPatchSelect *imod, TimeValue t)=0;
 	virtual void SetPatchSel(BitArray &set, IPatchSelect *imod, TimeValue t)=0;
 
-	virtual GenericNamedSelSetList & GetNamedVecSelList ()=0;
 	virtual GenericNamedSelSetList & GetNamedVertSelList ()=0;
 	virtual GenericNamedSelSetList & GetNamedEdgeSelList ()=0;
 	virtual GenericNamedSelSetList & GetNamedPatchSelList ()=0;
 };
 
 enum patchCommandMode { PcmAttach, PcmExtrude, PcmBevel, PcmBind, PcmCreate, PcmWeldTarget,
-						PcmFlipNormal, PcmCopyTangent, PcmPasteTangent };
+						PcmFlipNormal };
 enum patchButtonOp    { PopUnbind, PopHide, PopUnhideAll, PopWeld, PopDelete, PopSubdivide,
 						PopAddTri, PopAddQuad, PopDetach, PopSelectOpenEdges, PopBreak, 
 						PopCreateShapeFromEdges, PopFlipNormal, PopUnifyNormal, PopSelectByID, 
-						PopSelectBySG, PopClearAllSG, PopPatchSmooth, PopSelectionShrink, PopSelectionGrow,
-						PopEdgeRingSel, PopEdgeLoopSel, PopShadedFaceToggle };
+						PopSelectBySG, PopClearAllSG };
 // LAM: added 9/3/00
 enum patchUIParam {  };
 
@@ -1662,91 +1610,6 @@ public:
 	virtual void SetUIParam (patchUIParam uiCode, int val) { }
 	virtual void GetUIParam (patchUIParam uiCode, float & ret) { }
 	virtual void SetUIParam (patchUIParam uiCode, float val) { }
-};
-
-
-//----------------------------------------------------------------
-// Access to the new Assign Vertex Color utility - MAB - 6/04/03
-
-#define APPLYVC_UTIL_CLASS_ID	Class_ID(0x6e989195, 0x5dfb41b7)
-#define IASSIGNVERTEXCOLORS_INTERFACE_ID Interface_ID(0x4f913fd8, 0x422a32af)
-
-class IAssignVertexColors : public FPStaticInterface {
-public:
-	DECLARE_DESCRIPTOR( IAssignVertexColors );
-
-	typedef enum {
-		kLightingOnly = 0,      // Store lighting only
-		kShadedLighting = 1,    // Store shaded color with lighting
-		kShadedOnly = 2         // Store shaded color without lighting
-	} LightingModel;
-
-	// The options used when calculating the vertex colors
-	typedef struct {
-		int mapChannel;
-		bool mixVertColors; // face colors is false, or mixed vertex colors if true
-		bool castShadows;
-		bool useMaps;
-		bool useRadiosity;
-		bool radiosityOnly;
-		LightingModel lightingModel;
-	} Options;
-
-	//Assigns colors into the iVertexPaint object (if given), or applies an instanced modifier across the nodes
-	virtual int		ApplyNodes( Tab<INode*>* nodes, ReferenceTarget* iVertexPaint=NULL ) = 0;
-	virtual void	GetOptions( Options& options ) = 0;
-	virtual void	SetOptions( Options& options ) = 0;
-};
-
-#define IASSIGNVERTEXCOLORS_R7_INTERFACE_ID Interface_ID(0x77870f30, 0x4ed82b62)
-
-class IAssignVertexColors_R7 : public IAssignVertexColors {
-public:
-	DECLARE_DESCRIPTOR( IAssignVertexColors_R7 );
-
-	// The options used when calculating the vertex colors
-	class Options2: public Options
-	{
-	public:
-		bool reuseIllumination;			// or render direct lights
-	} ;
-
-	// Assigns colors into the iVertexPaint object (if given), or applies an instanced modifier across the nodes
-	virtual void	GetOptions2( Options2& options ) = 0;
-	virtual void	SetOptions2( Options2& options ) = 0;
-};
-
-//----------------------------------------------------------------
-// Access to the new Vertex Paint modifier in 3ds max 6 - MAB - 5/15/03
-
-#define PAINTLAYERMOD_CLASS_ID	Class_ID(0x7ebb4645, 0x7be2044b)
-#define IVERTEXPAINT_INTERFACE_ID Interface_ID(0x3e262ef9, 0x220e7190)
-
-class IVertexPaint : public FPMixinInterface {
-public:
-	typedef struct FaceColor_tab { // Stores a color for each vertex of a triangle face.
-		Color colors[3];
-	} FaceColor;
-	typedef Tab<Color*> VertColorTab;
-	typedef Tab<FaceColor*> FaceColorTab;
-	typedef IAssignVertexColors::Options Options;
-
-	//Assumes colors were calculated on the same object as seen by the modifier (converted to a tri-mesh)
-	virtual int		SetColors( INode* node, VertColorTab& vertColors ) = 0;
-	virtual int		SetColors( INode* node, FaceColorTab& faceColors ) = 0;
-	virtual void	GetOptions( Options& options ) = 0;
-	virtual void	SetOptions( Options& options ) = 0;
-};
-
-#define IVERTEXPAINT_R7_INTERFACE_ID Interface_ID(0x4ea42df5, 0x44a35866)
-
-class IVertexPaint_R7 : public IVertexPaint {
-public:
-	typedef IAssignVertexColors_R7::Options2 Options2;
-
-	// Assumes colors were calculated on the same object as seen by the modifier (converted to a tri-mesh)
-	virtual void	GetOptions2( Options2& options ) = 0;
-	virtual void	SetOptions2( Options2& options ) = 0;
 };
 
 
@@ -1819,67 +1682,5 @@ public:
 	virtual BOOL	GetPreMultAlpha() = 0;
 	virtual void	SetPreMultAlpha(BOOL preMult) = 0;
 	};
-
-// Interface for the RLA I/O plug-in
-//Fetching the interface using either RLAIO_INTERFACE or RPFIO_INTERFACE returns an object
-//of the same class.  But the object affects only the RLA or RPF settings accordingly.
-//The "RPF-specific" methods have undefined behavior unless used with an RPFIO_INTERFACE object
-#define RLAIO_INTERFACE Interface_ID(0x282c2f79, 0x68f7373d)
-#define RPFIO_INTERFACE Interface_ID(0x25a87871, 0x2e265a49)
-class IBitmapIO_RLA : public FPStaticInterface {
-public:
-	// 8, 16, 32
-	virtual int		GetColorDepth() = 0;
-	virtual void	SetColorDepth(int bpp) = 0;
-	virtual BOOL	GetStoreAlpha() = 0;
-	virtual void	SetStoreAlpha(BOOL storeAlpha) = 0;
-	virtual BOOL	GetPremultAlpha() = 0;
-	virtual void	SetPremultAlpha(BOOL preMult) = 0;
-
-	virtual TSTR	GetDescription() = 0;
-	virtual void	SetDescription(TSTR description) = 0;
-	virtual TSTR	GetAuthor() = 0;
-	virtual void	SetAuthor(TSTR author) = 0;
-
-	virtual BOOL	GetZChannel() = 0;
-	virtual void	SetZChannel(BOOL b) = 0;
-	virtual BOOL	GetMtlIDChannel() = 0;
-	virtual void	SetMtlIDChannel(BOOL b) = 0;
-	virtual BOOL	GetNodeIDChannel() = 0;
-	virtual void	SetNodeIDChannel(BOOL b) = 0;
-	virtual BOOL	GetUVChannel() = 0;
-	virtual void	SetUVChannel(BOOL b) = 0;
-	virtual BOOL	GetNormalChannel() = 0;
-	virtual void	SetNormalChannel(BOOL b) = 0;
-	virtual BOOL	GetRealpixChannel() = 0;
-	virtual void	SetRealpixChannel(BOOL b) = 0;
-	virtual BOOL	GetCoverageChannel() = 0;
-	virtual void	SetCoverageChannel(BOOL b) = 0;
-
-	// RPF-specific methods
-	virtual BOOL	GetNodeRenderIDChannel() = 0;
-	virtual void	SetNodeRenderIDChannel(BOOL b) = 0;
-	virtual BOOL	GetColorChannel() = 0;
-	virtual void	SetColorChannel(BOOL b) = 0;
-	virtual BOOL	GetTranspChannel() = 0;
-	virtual void	SetTranspChannel(BOOL b) = 0;
-	virtual BOOL	GetVelocChannel() = 0;
-	virtual void	SetVelocChannel(BOOL b) = 0;
-	virtual BOOL	GetWeightChannel() = 0;
-	virtual void	SetWeightChannel(BOOL b) = 0;
-	virtual BOOL	GetMaskChannel() = 0;
-	virtual void	SetMaskChannel(BOOL b) = 0;
-};
-
-//IUnReplaceableControl --added 08/03/04 MZ. Added for exposetransform helper object.
-//This interface serves 2 related functions.  First, if this interface is present, pb2's and wires won't try to replace this controller
-///Basically it's a backwards-compatabile fix for the fact that the 'IsReplaceable' control flag isn't used by PB2's.  Secondly the class provides
-//a function to replace it's default 'clone' method. This is currently also used in wiring when a wire is unconnected.
-class IUnReplaceableControl
-{
-public:
-	virtual ~IUnReplaceableControl(){};
-	virtual Control * GetReplacementClone()=0;
-};
 
 #endif //__ISTDPLUG__

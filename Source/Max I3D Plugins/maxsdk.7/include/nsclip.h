@@ -52,7 +52,6 @@ class PatchNamedSelClip {
 #define CLIP_P_VERT		1
 #define CLIP_P_PATCH	2
 #define CLIP_P_EDGE		3
-#define CLIP_P_HANDLE	4
 
 CoreExport void SetPatchNamedSelClip(PatchNamedSelClip *clip, int which);
 CoreExport PatchNamedSelClip *GetPatchNamedSelClip(int which);

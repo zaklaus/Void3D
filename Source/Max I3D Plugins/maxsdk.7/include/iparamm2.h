@@ -469,51 +469,47 @@ PB2Export void DestroyMParamMap2(IParamMap2 *m);
 // create a child dialog of the given parent parammap (for tabbed dialogs, etc.)
 PB2Export IParamMap2 *CreateChildMParamMap2(
 		MapID map_id, 
-		IParamBlock2 *pb, 
-		IMtlParams *ip, 
-		HINSTANCE hInst, 
-		IParamMap2* parent,
-		HWND hmedit,
-		TexDADMgr* tdad,
-		MtlDADMgr* mdad,
-		TCHAR *dlgTemplate, 
-		TCHAR *title, 
-		ParamMap2UserDlgProc* dlgProc=NULL);
-inline IParamMap2 *CreateChildMParamMap2(
 		IParamBlock2 *pb,
 		IMtlParams *ip,
 		HINSTANCE hInst,
 		IParamMap2* parent,
-		HWND hmedit,
 		TexDADMgr* tdad,
 		MtlDADMgr* mdad,
 		TCHAR *dlgTemplate,
 		TCHAR *title,
-		ParamMap2UserDlgProc* dlgProc=NULL) { return CreateChildMParamMap2(0, pb, ip, hInst, parent, hmedit, tdad, mdad, dlgTemplate, title, dlgProc); }
-
-PB2Export IParamMap2 *CreateChildMParamMap2(
-		MapID map_id, 
-		IParamBlock2 *pb, 
-		IMtlParams *ip, 
-		HINSTANCE hInst, 
-		IParamMap2* parent,
-		HWND hmedit,
-		TexDADMgr* tdad,
-		MtlDADMgr* mdad,
-		DLGTEMPLATE *dlgTemplate, 
-		TCHAR *title, 
 		ParamMap2UserDlgProc* dlgProc=NULL);
 inline IParamMap2 *CreateChildMParamMap2(
 		IParamBlock2 *pb,
 		IMtlParams *ip,
 		HINSTANCE hInst,
 		IParamMap2* parent,
-		HWND hmedit,
+		TexDADMgr* tdad,
+		MtlDADMgr* mdad,
+		TCHAR *dlgTemplate,
+		TCHAR *title,
+		ParamMap2UserDlgProc* dlgProc=NULL) { return CreateChildMParamMap2(0, pb, ip, hInst, parent, tdad, mdad, dlgTemplate, title, dlgProc); }
+
+PB2Export IParamMap2 *CreateChildMParamMap2(
+		MapID map_id, 
+		IParamBlock2 *pb,
+		IMtlParams *ip,
+		HINSTANCE hInst,
+		IParamMap2* parent,
 		TexDADMgr* tdad,
 		MtlDADMgr* mdad,
 		DLGTEMPLATE *dlgTemplate,
 		TCHAR *title,
-		ParamMap2UserDlgProc* dlgProc=NULL) { return CreateChildMParamMap2(0, pb, ip, hInst, parent, hmedit, tdad, mdad, dlgTemplate, title, dlgProc); }
+		ParamMap2UserDlgProc* dlgProc=NULL);
+inline IParamMap2 *CreateChildMParamMap2(
+		IParamBlock2 *pb,
+		IMtlParams *ip,
+		HINSTANCE hInst,
+		IParamMap2* parent,
+		TexDADMgr* tdad,
+		MtlDADMgr* mdad,
+		DLGTEMPLATE *dlgTemplate,
+		TCHAR *title,
+		ParamMap2UserDlgProc* dlgProc=NULL) { return CreateChildMParamMap2(0, pb, ip, hInst, parent, tdad, mdad, dlgTemplate, title, dlgProc); }
 
 PB2Export void DestroyChildMParamMap2(IParamMap2 *m);
 

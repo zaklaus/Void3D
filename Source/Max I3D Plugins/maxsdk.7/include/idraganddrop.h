@@ -28,7 +28,7 @@ public:
 	URLTab& operator=(const Tab<TCHAR*>& tb) {
 		for (int i = 0; i < tb.Count(); i++)
 		{
-			TCHAR* u = new TCHAR [_tcslen(tb[i]) + 1];
+			TCHAR* u = new TCHAR [strlen(tb[i]) + 1];
 			_tcscpy(u, tb[i]);
 			Append(1, &u);
 		}
@@ -38,7 +38,7 @@ public:
 	URLTab& operator=(const URLTab& tb) {
 		for (int i = 0; i < tb.Count(); i++)
 		{
-			TCHAR* u = new TCHAR [_tcslen(tb[i]) + 1];
+			TCHAR* u = new TCHAR [strlen(tb[i]) + 1];
 			_tcscpy(u, tb[i]);
 			Append(1, &u);
 		}
@@ -46,14 +46,14 @@ public:
 		return *this;
 	}	
 	void Add(TCHAR* url) { 
-		TCHAR* u = new TCHAR [_tcslen(url) + 1];
+		TCHAR* u = new TCHAR [strlen(url) + 1];
 		_tcscpy(u, url);
 		Append(1, &u);
 	}
 	void Change(int i, TCHAR* url) {
 		if (i < Count() && (*this)[i] != NULL)
 			delete (*this)[i];
-		TCHAR* u = new TCHAR [_tcslen(url) + 1];
+		TCHAR* u = new TCHAR [strlen(url) + 1];
 		_tcscpy(u, url);
 		(*this)[i] = u;		
 	}

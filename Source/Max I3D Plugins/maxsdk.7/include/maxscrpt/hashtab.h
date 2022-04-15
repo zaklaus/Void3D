@@ -53,7 +53,7 @@ public:
 				HashTable() { init(17, default_eq_fn, default_hash_fn, KEY_IS_OBJECT + VALUE_IS_OBJECT); }
 				HashTable(size_t primary_size) { init(primary_size, default_eq_fn, default_hash_fn, KEY_IS_OBJECT + VALUE_IS_OBJECT); }
 				~HashTable();
-	ScripterExport void		init(size_t primary_size, int (*key_eq_fn)(void*, void*), INT_PTR (*key_hash_fn)(void*), int flags);
+	void		init(size_t primary_size, int (*key_eq_fn)(void*, void*), INT_PTR (*key_hash_fn)(void*), int flags);
 				// Win64 Cleanup: Shuler
 
 	static void	setup();

@@ -59,7 +59,7 @@ UtilExport int TBMakeSize(TabHdr** pth, int num, int elsize);
 UtilExport int TBInsertAt(TabHdr** pth,int at, int num, void *el, int elsize, int extra); 
 UtilExport int TBCopy(TabHdr** pth,int at, int num, void *el, int elsize); 
 UtilExport int TBDelete(TabHdr** pth,int starting, int num, int elsize);
-UtilExport void TBSetCount(TabHdr** pth,int n, int elsize, BOOL resize);
+UtilExport void TBSetCount(TabHdr** pth,int n, int elsize);
 UtilExport void zfree(void**p);
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -110,7 +110,7 @@ public:
 	int Count() const { if (th) return(th->count); return 0; }  // return number of entries being used
 
 	void ZeroCount() { if (th) th->count=0; }
-	void SetCount(int n, BOOL resize=TRUE) { TBSetCount((TabHdr **)&th, n, sizeof(T), resize); }
+	void SetCount(int n) { TBSetCount((TabHdr **)&th, n, sizeof(T)); }
 
 	T& operator[](const INT_PTR i) const {       // access ith entry.
 			// WIN64 Cleanup: Shuler

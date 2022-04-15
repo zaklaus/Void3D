@@ -15,12 +15,7 @@
 
 #define __POINT2__
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
+class ostream;
 
 class DllExport Point2 {
 public:
@@ -89,11 +84,7 @@ Point2 DllExport operator*(float, const Point2&);	// multiply by scalar
 Point2 DllExport operator*(const Point2&, float);	// multiply by scalar
 Point2 DllExport operator/(const Point2&, float);	// divide by scalar
 
-#if _MSC_VER < 1300  // Visual Studio .NET
 ostream DllExport &operator<<(ostream&, const Point2&);
-#else
-std::ostream DllExport &operator<<(std::ostream&, const Point2&);
-#endif
 	 
 // Inlines:
 

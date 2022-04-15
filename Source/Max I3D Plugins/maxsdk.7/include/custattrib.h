@@ -22,7 +22,6 @@ public:
 	virtual TCHAR* GetName(){ return "Custom Attribute";}
 	virtual ParamDlg *CreateParamDlg(HWND hwMtlEdit, IMtlParams *imp){return NULL;}
 	virtual bool CheckCopyAttribTo(ICustAttribContainer *to) { return true; }
-	virtual SvGraphNodeReference SvTraverseAnimGraph(IGraphObjectManager *gom, Animatable *owner, int id, DWORD flags) { return SvStdTraverseAnimGraph(gom, owner, id, flags); }
 };
 
 #endif

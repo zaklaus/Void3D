@@ -147,13 +147,6 @@ extern void    node_set_secondaryVisibility(ReferenceTarget* obj, Value* prop, T
 extern Value*  node_get_vertexTicks(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    node_set_vertexTicks(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
 
-extern Value*  node_get_ishiddenInVpt(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
-extern void    node_set_ishiddenInVpt(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
-extern Value*  node_get_isnodehidden(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
-extern void    node_set_isnodehidden(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
-extern Value*  node_get_isnodefrozen(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
-extern void    node_set_isnodefrozen(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
-
 #ifndef NO_HELPER_CAMMATCH	// russom - 10/16/01
 extern Value*  campoint_get_showAxis(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid); 
 extern void    campoint_set_showAxis(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
@@ -384,7 +377,7 @@ extern void    noiz_set_y_positive(ReferenceTarget* obj, Value* prop, TimeValue 
 extern Value*  noiz_get_z_positive(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    noiz_set_z_positive(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
 
-#ifndef NO_MODIFIER_DISPLACE // JP Morel - July 24th 2002
+
 extern Value*  spcdsp_get_bitmap(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    spcdsp_set_bitmap(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
 extern Value*  spcdsp_get_map(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
@@ -393,12 +386,9 @@ extern Value*  dsp_get_bitmap(ReferenceTarget* obj, Value* prop, TimeValue t, In
 extern void    dsp_set_bitmap(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
 extern Value*  dsp_get_map(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    dsp_set_map(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
-#endif
 
-#ifndef NO_MODIFIER_PATH_DEFORM // JP Morel - July 24th 2002
 extern Value*  pathdef_get_path(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    pathdef_set_path(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);
-#endif
 
 extern Value*  surfdef_get_surface(ReferenceTarget* obj, Value* prop, TimeValue t, Interval& valid);
 extern void    surfdef_set_surface(ReferenceTarget* obj, Value* prop, TimeValue t, Value* val);

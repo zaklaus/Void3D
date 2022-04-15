@@ -10,8 +10,6 @@
 
  *>	Copyright (c) 2000, All Rights Reserved.
  **********************************************************************/
-#ifndef IDX9_VERTEXSHADER9_H
-#define IDX9_VERTEXSHADER9_H
 
 #include <d3dx9.h>
 #include "IHardwareShader.h"
@@ -53,7 +51,7 @@ public:
 	virtual int GetNumMultiPass() = 0;
 
 	// Retrieve the VertexShader handle for the specified pass for use in GFX
-	virtual LPDIRECT3DVERTEXSHADER9 GetVertexShaderHandle(int numPass) = 0;
+	virtual LPDIRECT3DVSHADER9 GetVertexShaderHandle(int numPass) = 0;
 
 	// Set the VertexShader for the specified pass.  This call will be made at
 	// least once per object to set the per object data for the VertexShader
@@ -146,5 +144,3 @@ public:
 	// Let the Mesh know that all drawing and data access is finished.
 	virtual void	EndTriangles(ID3D9GraphicsWindow *gw, GFX_ESCAPE_FN fn) = 0;
 };
-
-#endif

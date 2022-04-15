@@ -132,35 +132,4 @@ public:
 
 };
 
-//! Class used by EnumGeomPipeline to notify the pipeline of a collapse as well as maintaing the Custom Attributes.
-/*! 
-This class is used in conjunction with ICustAttribCollapseManager.  The calling code needs to make sure they call the correct
-version of the enumeration.  The following is a code example of it usage.
-
-ICustAttribCollapseManager * iCM = ICustAttribCollapseManager::GetICustAttribCollapseManager();
-
-if(iCM && iCM->GetCustAttribSurviveCollapseState())
-{
-	NotifyCollapseMaintainCustAttribEnumProc PostNCEP(false,node,obj);	//use the CA safe version
-	EnumGeomPipeline(&PostNCEP,oldObj);
-}
-else
-{
-	NotifyCollapseEnumProc PostNCEP(false,node,obj);	//use the original
-	EnumGeomPipeline(&PostNCEP,oldObj);
-}
-*/
-class NotifyCollapseMaintainCustAttribEnumProc : public GeomPipelineEnumProc
-{
-	bool bPreCollapse;
-	INode *node;
-	Object *collapsedObject;
-	bool bCopied;
-public:	
-	
-	CoreExport NotifyCollapseMaintainCustAttribEnumProc(bool preCollapse, INode *n, Object *collapsedObj = NULL);
-	CoreExport virtual PipeEnumResult proc(ReferenceTarget *object,IDerivedObject *derObj, int index); 
-
-};
-
 #endif //__MODSTACK__

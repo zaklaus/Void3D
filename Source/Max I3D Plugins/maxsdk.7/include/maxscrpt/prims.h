@@ -108,7 +108,6 @@
 	def_visible_primitive( turbulence,		"turbulence");
 	def_visible_primitive( fractalNoise,	"fractalNoise");
 
-#ifndef NO_ATMOSPHERICS		// russom - 04/11/02
 	/* atmospherics */
 
 	def_visible_primitive( addAtmospheric,		"addAtmospheric");
@@ -116,7 +115,7 @@
 	def_visible_primitive( getAtmospheric,		"getAtmospheric");
 	def_visible_primitive( deleteAtmospheric,	"deleteAtmospheric");
 	def_visible_primitive( editAtmospheric,		"editAtmospheric"); // RK: Added this
-#endif // NO_ATMOSPHERICS
+
 
 #ifndef NO_RENDEREFFECTS	// russom - 03/26/02
 	/* effects */ // RK: Added this
@@ -154,7 +153,6 @@
 	def_struct_primitive( edit_macro,	macros,	"edit");
 	def_struct_primitive( new_macro,	macros,	"new");
 	def_struct_primitive( load_macros,	macros,	"load");
-	def_struct_primitive( list_macros,	macros,	"list");
 
 	/* track view window access */
 	
@@ -205,14 +203,10 @@
 	def_struct_primitive( xrefPaths_count,		xrefPaths,	"count");
 	def_struct_primitive( xrefPaths_get,		xrefPaths,	"get");
 	def_struct_primitive( xrefPaths_delete,		xrefPaths,	"delete");
-	def_struct_primitive( sessionPaths_add,		sessionPaths,	"add");
-	def_struct_primitive( sessionPaths_count,	sessionPaths,	"count");
-	def_struct_primitive( sessionPaths_get,		sessionPaths,	"get");
-	def_struct_primitive( sessionPaths_delete,	sessionPaths,	"delete");
 
 	/* references */
 
-	def_struct_primitive( refs_dependsOn,		refs,		"dependsOn");
+//	def_struct_primitive( refs_dependsOn,		refs,		"dependsOn");
 	def_struct_primitive( refs_dependents,		refs,		"dependents");
 
 	/* tool modes */
@@ -296,7 +290,6 @@
 	def_visible_primitive( getCurrentSelection,	"getCurrentSelection");
 	def_visible_primitive( selectByName,		"selectByName");
 	def_primitive        ( getDollarSel,		"getDollarSel");
-	def_primitive        ( getCurrentScriptCtrl,		"getCurrentScriptCtrl");
 
 	def_visible_primitive( animateVertex,		"animateVertex");
 
@@ -404,7 +397,6 @@
 	def_lazy_primitive( coordsys_context,	"coordsys_context");
 	def_lazy_primitive( center_context,		"center_context");
 	def_lazy_primitive( undo_context,		"undo_context");
-	def_lazy_primitive( printallelements_context,		"printallelements_context");
 
 	def_lazy_primitive( assign,				"=");
 	def_lazy_primitive( op_assign,			"+=");
@@ -416,7 +408,6 @@
 
 	def_lazy_primitive( try,				"try");
 	def_primitive	  ( throw,				"throw");
-	def_visible_primitive	  ( getCurrentException,"getCurrentException");
 
 	def_lazy_primitive( change_handler,		"change_handler");
 
@@ -456,10 +447,5 @@
 	def_visible_primitive(GetDialogPos, "GetDialogPos");
 	def_visible_primitive(GetDialogSize, "GetDialogSize");
 
-	def_visible_primitive(SetDialogBitmap, "SetDialogBitmap");
-	def_visible_primitive(GetDialogBitmap, "GetDialogBitmap");
-
 	def_visible_primitive(PopupMenu,	"PopupMenu");
 //	def_visible_primitive(PopupMenuBar, "PopupMenuBar");
-
-	def_visible_primitive	( getNodeByName,		"getNodeByName");

@@ -64,9 +64,8 @@ public:
 	// If the implementation of AcquireInterface and ReleaseInterface changes
 	// in this class or derived classes, the return value of LifetimeControl 
 	// needs to be updated accordingly.
-	// RegisterNotifyCallback returns true if the callback will be called at or before deletion
 	virtual LifetimeType	LifetimeControl() { return noRelease; }
-	virtual bool			RegisterNotifyCallback(InterfaceNotifyCallback* incb) { return false; }
+	virtual void			RegisterNotifyCallback(InterfaceNotifyCallback* incb) { }
 	virtual void			UnRegisterNotifyCallback(InterfaceNotifyCallback* incb) { }
 	virtual BaseInterface*	AcquireInterface() { return (BaseInterface*)this; };  
 	virtual void			ReleaseInterface() { };

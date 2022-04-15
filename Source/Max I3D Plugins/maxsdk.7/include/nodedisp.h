@@ -40,16 +40,6 @@ class NodeDisplayCallback : public InterfaceServer {
 
 	};
 
-#define IID_NODE_DISPLAY_CALLBACK_EX Interface_ID(0x5c583214, 0x4a3b44e7)
-
-//we're adding an overload of SuspendObjectDisplay which gets a viewport and the object cache
-class NodeDisplayCallbackEx : public BaseInterface, public NodeDisplayCallback{
-	public:
-
-		// HideObject: Queries if the normal node mesh should be displayed
-		virtual bool SuspendObjectDisplay(TimeValue t, ViewExp *vpt,  INode *node,Object *pObj )=0;
-	};
-
 #define I_NODEDISPLAYCONTROL  0x00001000	
 
 // Gets a pointer to the INodeDisplayControl interface, the caller should pass a pointer to "Interface"

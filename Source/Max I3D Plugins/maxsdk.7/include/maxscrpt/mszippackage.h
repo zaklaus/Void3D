@@ -69,8 +69,8 @@ public:
 	void	add_extraction(TCHAR* zip_name, TCHAR* extracted_name);
 
 	// directory & file manipulation
-	ScripterExport static TSTR	expand_dir(TCHAR* dir);
-	ScripterExport static TSTR	expand_file(TCHAR* file_name);
+	static TSTR	expand_dir(TCHAR* dir);
+	static TSTR	expand_file(TCHAR* file_name);
 	TSTR	expand_dir_for_extraction(TCHAR* dir);
 	TSTR	expand_file_for_extraction(TCHAR* file_name);
 
@@ -120,7 +120,7 @@ public:
 
 	// utils
 	void	copy_files(TCHAR* from, TCHAR* to, BYTE type);
-	ScripterExport static bool	create_dir(TCHAR* dir);
+	bool	create_dir(TCHAR* dir);
 };
 
 #endif

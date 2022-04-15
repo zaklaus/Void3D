@@ -49,9 +49,6 @@ enum ParamType2
 	TYPE_INDEX,
 	TYPE_MATRIX3,
 	TYPE_PBLOCK2,
-	// new for R6...
-	TYPE_POINT4,
-	TYPE_FRGBA,
 
 	// only for published function parameter types, not pblock2 parameter types...
 	TYPE_ENUM,
@@ -102,9 +99,6 @@ enum ParamType2
 	TYPE_INDEX_TAB,
 	TYPE_MATRIX3_TAB,
 	TYPE_PBLOCK2_TAB,
-	// new for R6...
-	TYPE_POINT4_TAB,
-	TYPE_FRGBA_TAB,
 
 	// only for published function parameter types, not pblock2 parameter types...
 	TYPE_ENUM_TAB,
@@ -148,8 +142,6 @@ enum ParamType2
 	TYPE_HSV_BR 					= TYPE_HSV + TYPE_BY_REF,
 	TYPE_REFTARG_BR 				= TYPE_REFTARG + TYPE_BY_REF,
 	TYPE_MATRIX3_BR 				= TYPE_MATRIX3 + TYPE_BY_REF,
-	TYPE_POINT4_BR 					= TYPE_POINT4 + TYPE_BY_REF,
-	TYPE_FRGBA_BR 					= TYPE_FRGBA + TYPE_BY_REF,
 	TYPE_ENUM_BR 					= TYPE_ENUM + TYPE_BY_REF,
 	TYPE_INTERVAL_BR 				= TYPE_INTERVAL + TYPE_BY_REF,
 	TYPE_ANGAXIS_BR 				= TYPE_ANGAXIS + TYPE_BY_REF,
@@ -187,8 +179,6 @@ enum ParamType2
 	TYPE_REFTARG_TAB_BR				= TYPE_REFTARG + TYPE_TAB + TYPE_BY_REF,
 	TYPE_INDEX_TAB_BR				= TYPE_INDEX + TYPE_TAB + TYPE_BY_REF,
 	TYPE_MATRIX3_TAB_BR				= TYPE_MATRIX3 + TYPE_TAB + TYPE_BY_REF,
-	TYPE_POINT4_TAB_BR 				= TYPE_POINT4 + TYPE_TAB + TYPE_BY_REF,
-	TYPE_FRGBA_TAB_BR 				= TYPE_FRGBA + TYPE_TAB + TYPE_BY_REF,
 	TYPE_TSTR_TAB_BR				= TYPE_TSTR + TYPE_TAB + TYPE_BY_REF,
 	TYPE_ENUM_TAB_BR				= TYPE_ENUM + TYPE_TAB + TYPE_BY_REF,
 	TYPE_INTERVAL_TAB_BR			= TYPE_INTERVAL + TYPE_TAB + TYPE_BY_REF,
@@ -219,8 +209,6 @@ enum ParamType2
 	TYPE_INTERVAL_BV				= TYPE_INTERVAL + TYPE_BY_VAL,
 	TYPE_BITMAP_BV					= TYPE_BITMAP + TYPE_BY_VAL,
 	TYPE_MATRIX3_BV					= TYPE_MATRIX3 + TYPE_BY_VAL,
-	TYPE_POINT4_BV 					= TYPE_POINT4 + TYPE_BY_VAL,
-	TYPE_FRGBA_BV 					= TYPE_FRGBA + TYPE_BY_VAL,
 	TYPE_ANGAXIS_BV					= TYPE_ANGAXIS + TYPE_BY_VAL,
 	TYPE_QUAT_BV					= TYPE_QUAT + TYPE_BY_VAL,
 	TYPE_RAY_BV						= TYPE_RAY + TYPE_BY_VAL,
@@ -255,8 +243,6 @@ enum ParamType2
 	TYPE_REFTARG_TAB_BV				= TYPE_REFTARG + TYPE_TAB + TYPE_BY_VAL,
 	TYPE_INDEX_TAB_BV				= TYPE_INDEX + TYPE_TAB + TYPE_BY_VAL,
 	TYPE_MATRIX3_TAB_BV				= TYPE_MATRIX3 + TYPE_TAB + TYPE_BY_VAL,
-	TYPE_POINT4_TAB_BV 				= TYPE_POINT4 + TYPE_TAB + TYPE_BY_VAL,
-	TYPE_FRGBA_TAB_BV 				= TYPE_FRGBA + TYPE_TAB + TYPE_BY_VAL,
 	TYPE_PBLOCK2_TAB_BV				= TYPE_PBLOCK2 + TYPE_TAB + TYPE_BY_VAL,
 	TYPE_VOID_TAB_BV				= TYPE_VOID + TYPE_TAB + TYPE_BY_VAL,
 	TYPE_TSTR_TAB_BV				= TYPE_TSTR + TYPE_TAB + TYPE_BY_VAL,
@@ -345,12 +331,9 @@ enum ControlType2
 	// new for R4
 	TYPE_BUTTON,
 	TYPE_POINT3LISTBOX, // nac 11.12.00
-	TYPE_SHADERBUTTON_DEFUNCT,	// nac 02.26.02
-    TYPE_CONNECTIONSHADERBUTTON_DEFUNCT,    // [dl | 13aug2002]
+	TYPE_SHADERBUTTON,	// nac 02.26.02
+    TYPE_CONNECTIONSHADERBUTTON,    // [dl | 13aug2002]
     TYPE_SHADERSUBPARAMETERBLOCK,   // [dl | 14aug2002]
-	TYPE_POINT4LISTBOX, // LAM - 5/27/03
-	TYPE_COLORSWATCH_FRGBA, // LAM - 5/27/03
-
 };
 
 // param definition optional info tags
@@ -380,8 +363,6 @@ enum ParamTags
 	p_ctrl_ids,					// <used internally> sets the ctrl_id array for the parameter
 	// new for R4
 	p_uix,						// map ID if param is in more than one map, can have more than one of these
-	// new for R6
-	p_configurable_default,		// default can be taken from .ini file.
 
 	tend = p_default + 1024,
 	properties,

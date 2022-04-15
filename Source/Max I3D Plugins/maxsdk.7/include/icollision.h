@@ -224,7 +224,6 @@ enum { collisionsphere_params, };
 // geo_param param IDs
 enum { collisionsphere_radius,
 	   collisionsphere_node,    //using a node right now this really needs to be a TM but it does not look like tms are hooked up yet in pb2
-	   collisionsphere_scaleFactor
 	};
 
 
@@ -426,7 +425,7 @@ public:
 	void SetReference(int i, RefTargetHandle rtarg) {pblock = (IParamBlock2*)rtarg;}
 	RefTargetHandle Clone(RemapDir &remap = NoRemap())
 		{
-		CollisionMesh* newob = new CollisionMesh();	
+		CollisionSphere* newob = new CollisionSphere();	
 		newob->ReplaceReference(0,pblock->Clone(remap));
 		BaseClone(this, newob, remap);
 		return newob;

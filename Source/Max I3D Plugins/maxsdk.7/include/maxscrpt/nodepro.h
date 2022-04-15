@@ -40,9 +40,7 @@
 	def_node_generic       (convertTo,				"convertTo");
 	def_node_generic       (flagForeground,			"flagForeground");
 
-	def_visible_primitive( AttachObjects, 			"AttachObjects");
-
-	/* node state */
+/* node state */
 	
 	def_node_generic(hide,			"hide");
 	def_node_generic(unhide,		"unhide");
@@ -278,9 +276,6 @@
 	def_struct_primitive( so_startUnion,		splineOps, "startUnion");
 	def_struct_primitive( so_startSubtract,		splineOps, "startSubtract");
 	def_struct_primitive( so_startIntersect,	splineOps, "startIntersect");
-	def_struct_primitive( so_startCrossSection,	splineOps, "startCrossSection");
-	def_struct_primitive( so_startCopyTangent,	splineOps, "startCopyTangent");
-	def_struct_primitive( so_startPasteTangent,	splineOps, "startPasteTangent");
 
 	def_struct_primitive( so_opHide,			splineOps, "hide");
 	def_struct_primitive( so_opUnhideAll,		splineOps, "unhideAll");
@@ -321,8 +316,6 @@
 	def_struct_primitive( po_startCreate,		patchOps, "startCreate");
 	def_struct_primitive( po_startWeldTarget,	patchOps, "startWeldTarget");
 	def_struct_primitive( po_startFlipNormalMode,	patchOps, "startFlipNormalMode");
-	def_struct_primitive( po_startCopyTangent,	patchOps, "startCopyTangent");
-	def_struct_primitive( po_startPasteTangent,	patchOps, "startPasteTangent");
 
 	def_struct_primitive( po_opUnbind,			patchOps, "unbind");
 	def_struct_primitive( po_opHide,			patchOps, "hide");
@@ -333,12 +326,7 @@
 	def_struct_primitive( po_opAddTri,			patchOps, "addTri");
 	def_struct_primitive( po_opAddQuad,			patchOps, "addQuad");
 	def_struct_primitive( po_opDetach,			patchOps, "detach");
-	def_struct_primitive( po_opPatchSmooth,		patchOps, "patchSmooth");
 
-	def_struct_primitive( po_opSelectionShrink,	patchOps, "shrinkSelection");
-	def_struct_primitive( po_opSelectionGrow,	patchOps, "growSelection");
-	def_struct_primitive( po_opEdgeRingSel,		patchOps, "selectEdgeRing");
-	def_struct_primitive( po_opEdgeLoopSel,		patchOps, "selectEdgeLoop");
 	def_struct_primitive( po_opSelectOpenEdges,	patchOps, "selectOpenEdges");
 	def_struct_primitive( po_opBreak,			patchOps, "break");
 	def_struct_primitive( po_opCreateShapeFromEdges,	patchOps, "createShapeFromEdges");
@@ -347,7 +335,6 @@
 	def_struct_primitive( po_opSelectByID,		patchOps, "selectByID");
 	def_struct_primitive( po_opSelectBySG,		patchOps, "selectBySG");
 	def_struct_primitive( po_opClearAllSG,		patchOps, "clearAllSG");
-	def_struct_primitive( po_opShadedFaceToggle,	patchOps, "toggleShadedFaces");
 
 /* patch access */
 
@@ -436,14 +423,3 @@
 	def_struct_primitive( p_getPatchType,		patch,	"getPatchType");
 
 #endif // NO_PATCHES
-
-	// xrefs
-	def_struct_primitive( update_changed_xrefs,		xrefs, "updateChangedXRefs");
-	def_struct_primitive( get_xref_file,			xrefs, "getXRefFile");
-	def_struct_primitive( get_xref_file_count,		xrefs, "getXRefFileCount");
-	def_struct_primitive( add_xref_file,			xrefs, "addNewXRefFile");
-	def_struct_primitive( delete_all_xrefs,			xrefs, "deleteAllXRefs");
-	def_struct_primitive( find_unresolved_xrefs,	xrefs, "findUnresolvedXRefs");
-	def_struct_primitive( attempt_unresolved_xrefs,	xrefs, "attemptUnresolvedXRefs");
-	def_struct_primitive( add_xref_object,			xrefs, "addNewXRefObject");
-

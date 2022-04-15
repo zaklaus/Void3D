@@ -61,10 +61,6 @@ public:
 	virtual void SetTDist(TimeValue time, float f)=0;
 	virtual float GetTDist(TimeValue t, Interval& valid = Interval(0,0))=0;
 	virtual ObjLightDesc *CreateLightDesc(INode *inode, BOOL forceShadowBuf=FALSE )=0;
-	//JH 06/03/03 overload with RenderGlobalContext as additional arg
-	//allows extended light sources to simplify based on global render params
-	virtual ObjLightDesc *CreateLightDesc(RenderGlobalContext *rgc, INode *inode, BOOL forceShadowBuf=FALSE )
-	{return CreateLightDesc(inode, forceShadowBuf);}
 	virtual void SetRGBColor(TimeValue t, Point3& rgb)=0;
 	virtual Point3 GetRGBColor(TimeValue t, Interval &valid = Interval(0,0))=0;
 	virtual void SetHSVColor(TimeValue t, Point3& hsv)=0;
@@ -159,12 +155,6 @@ public:
 	virtual void SetAmbientOnly(BOOL onOff) {  }
 	virtual BOOL GetAmbientOnly() { return FALSE; }
 
-	/* [dl | 01apr2003] These methods were used by mental ray to retrieve indirect
-	   illumination properties from MAX standard lights. The standard lights implemented
-	   a rollup to specify these properties. The new mental ray connection no longer
-	   uses these properties, but instead uses a custom attribute. These methods have
-	   therefore become useless, and we decided to remove them to avoid cluttering the SDK
-	   with deprecated functionality.
 	virtual void SetEmitterEnable(TimeValue t, BOOL onOff) {}
 	virtual BOOL GetEmitterEnable(TimeValue t, Interval& valid = Interval(0,0)) { return 0; }
 	virtual void SetEmitterEnergy(TimeValue t, float energy) {}
@@ -175,7 +165,6 @@ public:
 	virtual int  GetEmitterCausticPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return 0; }
 	virtual void SetEmitterGlobalIllumPhotons(TimeValue t, int photons) {}
 	virtual int  GetEmitterGlobalIllumPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return 0; }
-	*/
 };
 
 

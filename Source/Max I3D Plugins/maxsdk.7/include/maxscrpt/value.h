@@ -128,11 +128,9 @@ public:
 	
 	virtual float		to_float() { ABSTRACT_CONVERTER(float, Float); }
 	virtual TCHAR*		to_string() { ABSTRACT_CONVERTER(TCHAR*, String); }
-	virtual TSTR		to_filename() { ABSTRACT_CONVERTER(TCHAR*, FileName); }
 	virtual int			to_int() { ABSTRACT_CONVERTER(int, Integer); }
 	virtual BOOL		to_bool() { ABSTRACT_CONVERTER(BOOL, Boolean); }
 	virtual BitArray&	to_bitarray() { throw ConversionError (this, _T("BitArray")); return *(BitArray*)NULL; }
-	virtual Point4		to_point4() { ABSTRACT_CONVERTER(Point4, Point4); }
 	virtual Point3		to_point3() { ABSTRACT_CONVERTER(Point3, Point3); }
 	virtual Point2		to_point2() { ABSTRACT_CONVERTER(Point2, Point2); }
 	virtual AColor		to_acolor() { throw ConversionError (this, _T("Color")); return AColor(0,0,0); }
@@ -171,7 +169,8 @@ public:
 	virtual Thunk*		to_thunk() { ABSTRACT_CONVERTER(Thunk*, &-reference); }
 	virtual void		to_fpvalue(FPValue& v) { throw ConversionError (this, _T("FPValue")); }
 
-	virtual Renderer*	to_renderer() { ABSTRACT_CONVERTER(Renderer*, Renderer); }	// LAM: Added this 9/15/01
+//  !!!!!!!!!!   uncomment when SDK can change - fix up renderer access in avg_dlx.cpp   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//	virtual Renderer*	to_renderer() { ABSTRACT_CONVERTER(Renderer*, Renderer); }	// LAM: Added this 9/15/01
 
 // MXSAgni specific -- START --
 	virtual Box2&	to_box2() { throw ConversionError (this, _T("Box2")); return s_error_box2;  }
@@ -183,9 +182,6 @@ public:
 	virtual Value*	widen_to(Value* arg, Value** arg_list) { ABSTRACT_WIDENER(arg); }
 	virtual BOOL	comparable(Value* arg) { return (tag == arg->tag); }
 	virtual BOOL	is_const() { return FALSE; }
-	// LAM - 7/8/03 - defect 504956 - following identifies classes that derive from MAXWrapper. Only other implementation is in MAXWrapper
-	// used by garbage collector to prevent collection of MAXWrapper-derived values while doing light collection
-	virtual BOOL	derives_from_MAXWrapper()  { return FALSE; } 
 
 	ScripterExport virtual Value*	get_property(Value** arg_list, int count);
 	ScripterExport virtual Value*	set_property(Value** arg_list, int count);
@@ -442,7 +438,6 @@ public:
 
 extern ScripterExport Undefined undefined;
 extern ScripterExport Undefined dontCollect;
-extern ScripterExport Undefined loopExit;
 
 /* ----- */
 

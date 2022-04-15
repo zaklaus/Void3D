@@ -66,7 +66,6 @@ public:
 	Color		to_color() { return Color (color.r, color.g, color.b); }
 	COLORREF	to_colorref() { return RGB((int)(color.r * 255.0f), (int)(color.g * 255.0f), (int)(color.b * 255.0f)); }
 	Point3		to_point3() { return Point3 (color.r * 255.0, color.g * 255.0, color.b * 255.0); }
-	Point4		to_point4() { return Point4 (color.r, color.g, color.b, color.a); }
 	void		to_fpvalue(FPValue& v) { v.clr = new Color (color.r, color.g, color.b); v.type = TYPE_COLOR; }
 
 	// scene I/O 

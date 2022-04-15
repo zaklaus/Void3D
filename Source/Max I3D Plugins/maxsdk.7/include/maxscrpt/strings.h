@@ -12,14 +12,13 @@
 
 visible_class (String)
 
-// Collectable::flags3 - bit 0 set if string is a literal
 class String : public Value
 {
 	TCHAR*		string;
 
 public:
  ScripterExport String(TCHAR *init_string);
-			   ~String();
+			   ~String() { if (string) free(string); }
 
 				classof_methods (String, Value);
 #	define		is_string(o) ((o)->tag == class_tag(String))
@@ -35,7 +34,6 @@ public:
 	def_property( count );
 
 	TCHAR*		to_string();
-	TSTR		to_filename();
 	void		to_fpvalue(FPValue& v) { v.s = to_string(); v.type = TYPE_STRING; }
 
 	// scene I/O 
@@ -82,7 +80,7 @@ public:
 	ScripterExport void		set_size(int size);
 	ScripterExport void		flush_to_eol();
 	ScripterExport void		flush_to_eobuf();
-	ScripterExport void		undo_lookahead();
+			  	   void		undo_lookahead();
 
 	ScripterExport	TCHAR*	puts(TCHAR* str);
 	ScripterExport	TCHAR	putch(TCHAR c);

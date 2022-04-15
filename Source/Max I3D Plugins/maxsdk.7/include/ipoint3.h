@@ -15,12 +15,7 @@
 
 #define __IPOINT3__
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
+class ostream;
 
 class IPoint3 {
 public:
@@ -64,11 +59,7 @@ public:
 int DllExport MaxComponent(const IPoint3&);  // the component with the maximum abs value
 int DllExport MinComponent(const IPoint3&);  // the component with the minimum abs value
 	 
-#if _MSC_VER < 1300  // Visual Studio .NET
 ostream DllExport &operator<<(ostream&, const IPoint3&); 
-#else
-std::ostream DllExport &operator<<(std::ostream&, const IPoint3&); 
-#endif
 
 // Inlines:
 

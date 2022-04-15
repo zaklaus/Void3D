@@ -60,7 +60,6 @@
 #define TOOLBUT_LAYER_OBJ_PROP		34
 #define TOOLBUT_MEASURE				35
 #define TOOLBUT_SCHEMATIC_VIEW		36
-#define TOOLBUT_RENDER_PRESETS		37
 
 // Standard MAX tool buttons use IDs greater then this value.
 // FE plug-in tool buttons should use IDs less then this max value
@@ -180,7 +179,6 @@
 
 #define MENUITEM_VIEWS_ACT_MAPS					    94
 
-#define MENUITEM_FILE_SAVECOPYAS						95
 
 // Standard MAX menu items use IDs greater then this value.
 // FE plug-in menu items should use IDs less then this max value

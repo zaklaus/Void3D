@@ -16,10 +16,8 @@
 #include "funcs.h"
 #include "tvUtil.h"
 #include "custattrib.h"
-#include "macrorec.h"
 
 extern ScripterExport Interface* MAXScript_interface;
-extern ScripterExport Interface7* MAXScript_interface7;
 class MAXControl;
 
 #define MESH_READ_ACCESS	0  // mesh access modes
@@ -84,11 +82,9 @@ public:
 	BOOL		is_kind_of(ValueMetaClass* c) { return (c == class_tag(MAXWrapper)) ? 1 : Value::is_kind_of(c); }
 	ScripterExport BOOL		not_on_undo_stack();
 	void					collect() { if (not_on_undo_stack()) delete this; }
-	ScripterExport void		gc_trace();
 	virtual	TCHAR* class_name() = 0;
 	virtual ReferenceTarget* get_max_object() { return (NumRefs()) ? GetReference(0) : NULL; } // LAM - 7/18/01
 	ScripterExport Value*		copy_no_undo(Value** arg_list, int count);
-	BOOL		derives_from_MAXWrapper()  { return TRUE; } // LAM - 7/8/03 - defect 504956
 
 	ScripterExport void make_ref(int ref_no, ReferenceTarget* ref);
 	void		drop_MAX_refs() { DeleteAllRefsFromMe(); }
@@ -210,7 +206,6 @@ public:
 			def_nested_prop	( x );
 			def_nested_prop	( y );
 			def_nested_prop	( z );
-			def_nested_prop	( w );
 
 	// utility methods for the above subanim property accessors, implemented by 
 	// those that have standard transform subsanims
@@ -370,8 +365,8 @@ typedef struct			// parameter descriptor struct
 		int			ival;
 		BOOL		bval;
 		INT_PTR		pval;	// WIN64 Cleanup: Shuler -Need a pointer sized type (see TYPE_STRING)
-		struct		{float x, y, z, w;};
-		struct		{float r, g, b, a;};
+		struct		{float x, y, z;};
+		struct		{float r, g, b;};
 		struct		{float h, s, v;};
 		struct		{int btn_min, btn_max, btn_val;};
 	} init_val;
@@ -524,7 +519,7 @@ public:
 	static class_table*	classes;		// lookup table of all classes by Class_ID
 	static short	n_classes;
 	static BOOL		class_table_dirty;
-	static ScripterExport MAXClass* lookup_class(Class_ID* cid, SClass_ID scid, bool make_new_if_missing = true);
+	static MAXClass* lookup_class(Class_ID* cid, SClass_ID scid, bool make_new_if_missing = true);
 
 								   MAXClass() { }
 					ScripterExport MAXClass(TCHAR* cname, Class_ID cid, SClass_ID sid, MAXSuperClass* sclass, short cflags, ...);
@@ -611,7 +606,7 @@ Value* make_max_custattrib(MAXClass* cls, ReferenceTarget* obj, Value** arg_list
 // mechanism, be sure that your clients are aware that they
 // must run your plugin with 3ds max version 4.3 or higher.
 
-extern ScripterExport MAXClass* lookup_MAXClass (Class_ID* cid, SClass_ID scid, bool make_new_if_missing = false);
+extern ScripterExport MAXClass* lookup_MAXClass (Class_ID* cid, SClass_ID scid);
 
 // End of 3ds max 4.3 Extension
 
@@ -621,9 +616,6 @@ extern ScripterExport MAXClass* lookup_MAXClass (Class_ID* cid, SClass_ID scid, 
 // MAXWrapper instance cache - it's critical we don't wind up generating a million
 // MAXWrappers with References to the same MAX-side object as this KILLS the collector
 // during the DeleteAllRefsFromMe() which seems to do a linear search through its refs
-
-// if object not found in cache, use FindMAXWrapperEnum (below) to search dependents
-// of the ReferenceTarget for a wrapper value
 
 #define MAXWRAPPER_CACHE_SIZE 2048			// must be power of 2
 extern ScripterExport MAXWrapper* maxwrapper_cache[];
@@ -680,46 +672,6 @@ extern ScripterExport MAXWrapper* maxwrapper_cache[];
 		 (_mw_var = *_ce_var)->tag == class_tag(_mw_class))
 				// Win64 Cleanup: Shuler
 #endif
-
-// Use the following in MAXWrapper-derived intern methods to determine if
-// a MXS value already wraps the ReferenceTarget, and return that value.
-// intern method should then that value. This guarantees a single MXS wrapper
-// value per ReferenceTarget
-// 
-class FindMAXWrapperEnum : public DependentEnumProc
-{
-	ValueMetaClass* mytag;  // the type of MAXWrapper being created
-	ReferenceTarget* myref; // the ReferenceTarget being searched
-	void* arg;				// 2nd argument passed to finalCheckProc
-	bool (*finalCheckProc)(MAXWrapper*, void*); // if needed, a secondary callback proc for testing the ReferenceTarget
-	// needed for things like MAXTVNode, which consist of both a ReferenceTarget and an index
-public:
-	FindMAXWrapperEnum(ReferenceTarget* ref, ValueMetaClass* tag, bool (*finalCheckProc)(MAXWrapper*, void*) = NULL, void* arg = NULL)
-	{	mytag = tag;
-		myref = ref;
-		result = NULL;
-		this->finalCheckProc = finalCheckProc;
-		this->arg = arg;
-	}
-	int proc(ReferenceMaker* rm)
-	{
-		if (rm == myref) 
-			return DEP_ENUM_CONTINUE;
-		if (rm->SuperClassID() == MAXSCRIPT_WRAPPER_CLASS_ID && 
-			((MAXWrapper*)rm)->tag == mytag &&
-			rm->NumRefs() && rm->GetReference(0) == myref &&
-			(finalCheckProc == NULL || (*finalCheckProc)((MAXWrapper*)rm, arg))
-			) 
-		{
-			result = (MAXWrapper*)rm;
-			return DEP_ENUM_HALT;
-		}
-		return DEP_ENUM_SKIP; // just look at direct dependents
-	}
-	Value* result;
-};
-
-	
 /* ------------------------ MAXNode class  ------------------------ */
 
 /* this class is the MAXScript wrapper for object hierarchy 
@@ -930,20 +882,19 @@ public:
 
 visible_class (MAXNodeChildrenArray)
 
-class MAXNodeChildrenArray : public Value, public Collection
+class MAXNodeChildrenArray : public MAXWrapper, public Collection
 {
 public:
-	MAXNode*		parent;				/* parent node */
+	INode*		parent;				/* parent node */
 
-	ENABLE_STACK_ALLOCATE(MAXNodeChildrenArray);
-	ScripterExport MAXNodeChildrenArray(INode* parent);
-	ScripterExport MAXNodeChildrenArray(MAXNode* parent);
+				MAXNodeChildrenArray(INode* parent);
+	static ScripterExport Value* intern(INode* parent);
 
-				classof_methods (MAXNodeChildrenArray, Value);
+				classof_methods (MAXNodeChildrenArray, MAXWrapper);
 	BOOL		_is_collection() { return 1; }
 	void		collect() { delete this; }
-	void		gc_trace();
 	ScripterExport void		sprin1(CharStream* s);
+	TCHAR*		class_name();
 
 	// operations
 	ScripterExport Value* map(node_map& m);
@@ -994,8 +945,6 @@ public:
 	Value*		set_property(Value** arg_list, int count);
 
 	void		to_fpvalue(FPValue& v) { v.obj = obj; v.type = TYPE_OBJECT; }
-
-	def_visible_generic	( updateXRef,	"updateXRef");
 };
 
 /* ---------------------- MAXPB2ArrayParam ----------------------- */
@@ -1026,9 +975,6 @@ public:
 
 #include "defimpfn.h"
 #	include "arraypro.h"
-
-	def_generic( coerce,	"coerce");
-	ScripterExport Value*		insertItem(Value** arg_list, int count); // called by insertItem_cf
 
 	// built-in property accessors
 	def_property ( count );
@@ -1072,18 +1018,16 @@ public:
 
 visible_class (MAXModifierArray)
 
-class MAXModifierArray : public Value
+class MAXModifierArray : public MAXWrapper
 {
 public:
-	MAXNode*	node;			/* the noed containing the modifiers */
+	INode*		node;			/* the noed containing the modifiers */
 
-	ENABLE_STACK_ALLOCATE(MAXModifierArray);
-	ScripterExport	MAXModifierArray(INode* node);
-	ScripterExport	MAXModifierArray(MAXNode* node);
+				MAXModifierArray(INode* node);
+	static ScripterExport Value* intern(INode* node);
 
-				classof_methods (MAXModifierArray, Value);
+				classof_methods (MAXModifierArray, MAXWrapper);
 	void		collect() { delete this; }
-	void		gc_trace();
 	BOOL		_is_collection() { return 1; }
 	ScripterExport void		sprin1(CharStream* s);
 	Modifier*	get_modifier(int index);
@@ -1205,9 +1149,6 @@ public:
 	def_property( keys );
 	def_property( value );
 	def_property( object );
-	def_property( name );
-	def_property( parent );
-	def_property( index );
 
 	// these converters all attempt to bounce off the subanim object
 	Value*		subanim_obj();
@@ -1254,7 +1195,6 @@ class MAXTVNode : public MAXWrapper
 public:
 	ITrackViewNode*	 parent;		// parent node
 	int				 index;			// the TVNode index
-	ITrackViewNode*	 me;			 // LAM - 8/11/02 - defect 507276 - leaf class, not used outside MXS
 
 	ScripterExport MAXTVNode(ITrackViewNode* parent, int index);
 	static ScripterExport Value* intern(ITrackViewNode* parent, int index);
@@ -1300,11 +1240,10 @@ public:
 	int					sub_num;
 	TSTR				name;
 	ScripterExport		TrackViewPickValue(TrackViewPick pick);
-						classof_methods (TrackViewPickValue, Value);
 	void				collect() { delete this; }
-	ScripterExport	void	sprin1(CharStream* s);
+	ScripterExport void	sprin1(CharStream* s);
 	void				gc_trace();
-#	define				is_trackviewpick(p) ((p)->tag == class_tag(TrackViewPickValue))
+#	define				is_trackviewpick(p) ((p)->tag == class_tag(TrackViewPick))
 	Value*				get_property(Value** arg_list, int count);
 	Value*				set_property(Value** arg_list, int count);	
 };
@@ -1644,30 +1583,28 @@ public:
 //	Value*		get_property(Value** arg_list, int count);
 //	Value*		set_property(Value** arg_list, int count);
 
-	def_property   ( name );
+	def_prop_getter   ( name );
 	CustAttrib*	to_custattrib() { check_for_deletion(); return custattrib; }
 };
 
 
 visible_class (MAXCustAttribArray)
 
-class MAXCustAttribArray : public Value
+class MAXCustAttribArray : public MAXWrapper
 {
 public:
-	MAXWrapper*		ref;			/* the ref containing the CAs */
+	ReferenceTarget*		ref;			/* the ref containing the CAs */
 
-	ENABLE_STACK_ALLOCATE(MAXCustAttribArray);
-	ScripterExport	MAXCustAttribArray(MAXWrapper* ref);
-	ScripterExport	MAXCustAttribArray(ReferenceTarget* ref);
-	ScripterExport	MAXCustAttribArray(MAXRefTarg* ref);
+				MAXCustAttribArray(ReferenceTarget* ref);
+	static ScripterExport Value* intern(ReferenceTarget* ref);
 
-				classof_methods (MAXCustAttribArray, Value);
+				classof_methods (MAXCustAttribArray, MAXWrapper);
 	void		collect() { delete this; }
-	void		gc_trace();
 	BOOL		_is_collection() { return 1; }
 	ScripterExport void		sprin1(CharStream* s);
 	CustAttrib*	get_CustAttrib(int index);
 	CustAttrib*	find_CustAttrib(TCHAR* name);
+	TCHAR*		class_name();
 
 	// operations
 	ScripterExport Value* map(node_map& m);
@@ -1839,14 +1776,13 @@ typedef struct { TCHAR* name; int code; } gbuff_chan_code;
 extern gbuff_chan_code gbuff_chan_codes[];
 
 // various externs
-extern bool for_all_nodes(INode* root, node_map* m);
+extern void for_all_nodes(INode* root, node_map* m);
 extern Value* find_first_node(INode* root, node_find* f);
 extern Value* get_node(INode* root, node_get* g);
-extern bool for_all_path_nodes(INode* root, PathName* path, node_map* m);
+extern void for_all_path_nodes(INode* root, PathName* path, node_map* m);
 extern BOOL all_objects_selector(INode* node, int level, void* selector_arg);
 extern int max_name_compare(TCHAR* max_name, TCHAR* other);
-extern int max_name_match(TCHAR* max_name, TCHAR* pattern); // always case insensitive
-extern int max_name_match(TCHAR* max_name, TCHAR* pattern, bool caseSensitive);
+extern int max_name_match(TCHAR* max_name, TCHAR* pattern);
 extern Value* get_subanim_property(Animatable* anim, Value* prop);
 extern Value* get_subanim_property(Animatable* anim, int i);
 extern Value* set_subanim_property(Animatable* anim, Value* prop, Value* val);
@@ -1855,38 +1791,31 @@ extern BOOL set_subanim_controller(Animatable* anim, Value* prop, Control* newc,
 extern Control* find_subanim_controller(Animatable* anim, Value* prop, ParamDimension** dim);
 extern void deselect_if_motion_panel_open();
 
-// A class to help control the Animate system. Create an instance of this class, and when it is
-// destructed any Animate suspends are resumed. Makes it safe in case a throw occurs after the suspend,
+// <Courtesy of Larry Minton> a class to help control the hold system. Create an instance of this class, and when it is
+// destructed any hold suspends are resumed. Makes it safe in case a throw occurs after the suspend,
 // but before the resume
-class AnimateSuspend {
-private:
-	BOOL animateSuspended, setKeyModeSuspended, macroRecSuspended, refMsgsSuspended;
-public:
-	AnimateSuspend(BOOL setKeyModeToo = FALSE, BOOL macroRecToo = FALSE, BOOL refMsgsToo = FALSE ) {
-		SuspendAnimate();
-		animateSuspended = TRUE;
-		if (setKeyModeToo)
-			SuspendSetKeyMode();
-		setKeyModeSuspended = setKeyModeToo;
-		if (macroRecToo)
-			macroRec->Disable(); 
-		macroRecSuspended = macroRecToo;
-		if (refMsgsToo)
-			DisableRefMsgs();
-		refMsgsSuspended = refMsgsToo;
-	}
-	void Resume() {
-		if (refMsgsSuspended) EnableRefMsgs();
-		refMsgsSuspended = FALSE;
-		if (macroRecSuspended) macroRec->Enable();
-		macroRecSuspended = FALSE;
-		if (setKeyModeSuspended) ResumeSetKeyMode();
-		setKeyModeSuspended = FALSE;
-		if (animateSuspended) ResumeAnimate();
-		animateSuspended = FALSE;
-	}
-	~AnimateSuspend() {Resume ();}
-};					  
+class HoldSuspend {
+	private:
+		int	holdCount;
+	public:
+		HoldSuspend(BOOL holdNow = TRUE) {
+			if (holdNow) {
+				theHold.Suspend ();
+				holdCount=1;
+			}
+			else
+				holdCount = 0;
+		}
+		void Suspend() {
+			if (holdCount == 0) theHold.Suspend ();
+			holdCount++;
+		}
+		void Resume() {
+			if (holdCount == 1) theHold.Resume ();
+			if (holdCount != 0) holdCount--;
+		}
+		~HoldSuspend()	{ if (holdCount != 0) theHold.Resume ();};	
+	};					  
 
 // class for suspending/resuming motion panel around controller assignment.
 // Added post-r5.0 - 8/22/02
@@ -1919,60 +1848,10 @@ public:
 	{
 		return (IndexOf(node) >= 0);
 	}
-	INodeTab* AsINodeTabPtr()
-	{	
-		return reinterpret_cast<INodeTab*>(this);
-	}
-	INodeTab& AsINodeTabRef()
-	{ 
-		return reinterpret_cast<INodeTab&>(*this);
-	}
 };
 
 // node tab collector for collection node mapping
 // arg0 is node candidate, arg1 is NodeTab*
 extern ScripterExport Value* collect_nodes(Value** arg_list, int count);
-
-// R7 - moved from MXSAgni
-
-visible_class (MAXSceneXRef)
-class MAXSceneXRef : public MAXWrapper
-{
-public:
-	int				index;
-	TSTR			name;
-	TSTR			full_name;
-	INode			*root;
-	ULONG			nodeHandle;
-
-	ScripterExport	MAXSceneXRef (INode* root, int i);
-	static ScripterExport Value* intern(INode* root, int i);
-	TCHAR*			class_name() { return _T("XRefScene"); }
-	classof_methods (MAXSceneXRef, MAXWrapper);
-	void			collect() { delete this; }
-	ScripterExport	void sprin1(CharStream* s);
-	void			check_for_xref_deletion();
-	/* operations */	
-#include "defimpfn.h"	
-#	include "xrefspro.h"	
-
-	/* built-in property accessors */
-	def_property( tree );
-	def_property( parent );
-	def_property( fileName );
-
-	def_property( autoUpdate );
-	def_property( boxDisp );
-	def_property( hidden );
-	def_property( disabled );
-	def_property( ignoreLights );
-	def_property( ignoreCameras );
-	def_property( ignoreShapes );
-	def_property( ignoreHelpers );
-	def_property( ignoreAnimation );
-};
-
-
-
 
 #endif

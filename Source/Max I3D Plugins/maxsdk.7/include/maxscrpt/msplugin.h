@@ -57,15 +57,9 @@ class MSAutoEParamDlg;
 #include <manipulator.h>
 #include <tvutil.h>
 
-#include "IDX9PixelShader.h"
-#include "IDX9VertexShader.h"
-#include "IViewportManager.h"
-#include "IMtlRender_Compatibility.h"
-
-
-// plugin context predefined local indexes - MUST match order in Parser::plugin_def() and Parser::attributes_body()
+// plugin context predefined local indexes - MUST match order in Parser::plugin_def()
 enum { 
-	pl_this, pl_version, pl_loading, pl_delegate			// common
+	pl_this, pl_version, pl_delegate						// common
 };
 
 enum { 
@@ -122,7 +116,7 @@ public:
 	Tab<ParamRef>	sub_texmaps;	// param references to any texmaps in pblocks in instances of this class in subobjno order
 	Tab<ParamRef>	sub_mtls;		// param references to any mtls in pblocks in instances of this class in subobjno order
 	int				version;		// plugin version (from version: param on def header)
-	DWORD			mpc_flags;		// flags	
+	short			mpc_flags;		// flags	
 	DWORD			rollup_state;	// initial rollup state
 
 	static HashTable* msp_classes;	// table of existing scripted plugin classes to enable redefinition
@@ -168,7 +162,7 @@ public:
 	// scene I/O
 	static void		save_class_defs(ISave* isave);
 	static IOResult load_class_def(ILoad* iload);
-	static void		post_load(ILoad *iload, int which);
+	static void		post_load();
 
 	// ClassDesc delegates
 	virtual RefTargetHandle	Create(BOOL loading);
@@ -207,8 +201,6 @@ public:
 #define MPC_ALTERNATE			(1<<14) //0x4000  // is currently an alternate
 // LAM - 1/24/02 - defect 299822 - added following
 #define MPC_CAD_FILESAVE		(1<<15) //0x8000  // custom attribute def used by saved instance of scripted plugin
-#define MPC_PROMOTE_DEL_PROPS	(1<<16) //0x00010000  // If set, automatically search delegate props on prop miss in scripted plugin
-#define MPC_USE_PB_VALIDITY		(1<<17) //0x00020000  // If set, AND delegate's validity interval with param blocks' validity interval
 
 // for accessing keyword params in pblock_defs
 #define key_parm(_key)	_get_key_param(keys, n_##_key)
@@ -217,14 +209,14 @@ extern Value* _get_key_param(Array* keys, Value* key_name);
 // ----------------------- MSPluginDesc -----------------------
 //	ClassDescs for scripted classes, created dynamically for each scripted class
 
-class MSPluginDesc : public ClassDesc2, public IMtlRender_Compatibility_MtlBase
+class MSPluginDesc : public ClassDesc2
 {
 public:
 	MSPluginClass*	pc;			// my MAXScript-side plugin class
 	MSPlugin*		plugin;		// object under creation, MSPlugin interface
 	RefTargetHandle base_obj;	//   "      "       "     base object interface
 
-					MSPluginDesc(MSPluginClass* ipc) { pc = ipc; Init(*this); }
+					MSPluginDesc(MSPluginClass* ipc) { pc = ipc; }
 
 	// from ClassDesc
 	int 			IsPublic();
@@ -253,32 +245,6 @@ public:
 	// local 
 	void			StartTool(IObjCreate *iob);   // start up scripted create tool
 	void			StopTool(IObjCreate *iob);   // stop scripted create tool
-
-	Class_ID		SubClassID()
-	{
-		if (pc->extend_cd != NULL) pc->extend_cd->SubClassID();
-		return Class_ID(0,0); 
-	}
-
-	bool IsCompatibleWithRenderer(ClassDesc& rendererClassDesc)		// Class descriptor of a Renderer plugin
-	{
-		ClassDesc * cd = pc->extend_cd;
-		IMtlRender_Compatibility_MtlBase* rendererCompatibility = Get_IMtlRender_Compability_MtlBase(*cd);
-		if(rendererCompatibility)
-			return rendererCompatibility->IsCompatibleWithRenderer(rendererClassDesc);
-		else
-			return true;
-	}
-	bool GetCustomMtlBrowserIcon(HIMAGELIST& hImageList, int& inactiveIndex, int& activeIndex, int& disabledIndex) 
-	{
-		ClassDesc * cd = pc->extend_cd;
-		IMtlRender_Compatibility_MtlBase* rendererCompatibility = Get_IMtlRender_Compability_MtlBase(*cd);
-		if(rendererCompatibility)
-			return rendererCompatibility->GetCustomMtlBrowserIcon(hImageList, inactiveIndex,  activeIndex,  disabledIndex);
-		else
-			return false;
-	}
-
 };
 
 // ----------------------- MSPluginPBAccessor -----------------------
@@ -314,14 +280,13 @@ public:
 	int				version;		// plugin version
 	ReferenceTarget* ref;			// ReferenceTarget interface to me
 	Tab<IParamBlock2*> pblocks;		// parameter blocks
-	ILoad*			iload;			// ILoad that the plugin instance was created from
 	
 					MSPlugin() { flags = 0; }
 	virtual		   ~MSPlugin();
 	void			init(MSPluginClass* pc);
 
 	void			gc_trace();
-	void			collect();
+	void			collect() { delete this; }
 
 	void			DeleteThis();
 	void			RefDeleted();
@@ -364,7 +329,7 @@ public:
 	// I/O
 	IOResult		Save(ISave *isave);
     IOResult		Load(ILoad *iload);
-	void			post_load(ILoad *iload, int which);
+	void			post_load();
 };
 
 // used for in-memory instance migration when a scripted plugin class is redefined
@@ -564,7 +529,7 @@ public:
 	// From Object
 	ObjectState		Eval(TimeValue time);
 	void			InitNodeName(TSTR& s) {s = GetObjectName();}
-	Interval		ObjectValidity(TimeValue t);
+	Interval		ObjectValidity(TimeValue t) { return delegate->ObjectValidity(t); }
 	int				CanConvertToType(Class_ID obtype) { return delegate->CanConvertToType(obtype); }
 	Object*			ConvertToType(TimeValue t, Class_ID obtype) {
 						// CAL-10/1/2002: Don't return the delegate, because it might be deleted.
@@ -634,23 +599,9 @@ public:
 				   ~MSHelperXtnd() { DeleteAllRefsFromMe(); }
 
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
-
-	// From BaseObject
-	int				Display(TimeValue t, INode* inode, ViewExp *vpt, int flags);
-
-	void			GetWorldBoundBox(TimeValue t, INode *inode, ViewExp* vpt, Box3& abox );
-	void			GetLocalBoundBox(TimeValue t, INode *inode, ViewExp *vpt, Box3& abox );
-	void			GetDeformBBox(TimeValue t, Box3& abox, Matrix3 *tm, BOOL useSel );
-	int				HitTest(TimeValue t, INode *inode, int type, int crossing, int flags, IPoint2 *p, ViewExp *vpt);
-	void			Snap(TimeValue t, INode* inode, SnapInfo *snap, IPoint2 *p, ViewExp *vpt);
-
-	// From Object
-	ObjectState		Eval(TimeValue time);
-	Interval		ObjectValidity(TimeValue t);
-
 	// From HelperObject
-	int				UsesWireColor();
-	BOOL			NormalAlignVector(TimeValue t,Point3 &pt, Point3 &norm);
+	int				UsesWireColor() { return delegate->UsesWireColor(); }
+	BOOL			NormalAlignVector(TimeValue t,Point3 &pt, Point3 &norm) { return delegate->NormalAlignVector(t, pt, norm); }
 };
 
 // ----------------------- MSPluginLight ----------------------
@@ -786,6 +737,17 @@ public:
 
 	void			SetShadowGenerator(ShadowType *s) { GenLight::SetShadowGenerator(s); };
 	ShadowType*		GetShadowGenerator() { return GenLight::GetShadowGenerator(); } 
+
+	void			SetEmitterEnable(TimeValue t, BOOL onOff) { GenLight::SetEmitterEnable(t, onOff); }
+	BOOL			GetEmitterEnable(TimeValue t, Interval& valid = Interval(0,0)) { return GenLight::GetEmitterEnable(t, valid); }
+	void			SetEmitterEnergy(TimeValue t, float energy) { GenLight::SetEmitterEnergy(t, energy); }
+	float			GetEmitterEnergy(TimeValue t, Interval& valid = Interval(0,0)) { return GenLight::GetEmitterEnergy(t, valid); }
+	void			SetEmitterDecayType(TimeValue t, int decay) { GenLight::SetEmitterDecayType(t, decay); }
+	int				GetEmitterDecayType(TimeValue t, Interval& valid = Interval(0,0)) { return GenLight::GetEmitterDecayType(t, valid); }
+	void			SetEmitterCausticPhotons(TimeValue t, int photons) { GenLight::SetEmitterCausticPhotons(t, photons); }
+	int				GetEmitterCausticPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return GenLight::GetEmitterCausticPhotons(t, valid); }
+	void			SetEmitterGlobalIllumPhotons(TimeValue t, int photons) { GenLight::SetEmitterGlobalIllumPhotons(t, photons); }
+	int				GetEmitterGlobalIllumPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return GenLight::GetEmitterGlobalIllumPhotons(t, valid); }
 };
 
 class MSLightXtnd : public MSObjectXtnd<GenLight, MSPluginLight>
@@ -800,7 +762,7 @@ public:
 
 	// From LightObject
 
-	RefResult		EvalLightState(TimeValue time, Interval& valid, LightState *ls);
+	RefResult		EvalLightState(TimeValue time, Interval& valid, LightState *ls) { return delegate->EvalLightState(time, valid, ls); }
 	ObjLightDesc *	CreateLightDesc(INode *n, BOOL forceShadowBuf) { return delegate->CreateLightDesc(n, forceShadowBuf); }
 	void			SetUseLight(int onOff) { delegate->SetUseLight(onOff); }
 	BOOL			GetUseLight(void) { return delegate->GetUseLight(); }
@@ -918,6 +880,17 @@ public:
 
 	void			SetShadowGenerator(ShadowType *s) { delegate->SetShadowGenerator(s); }
 	ShadowType*		GetShadowGenerator() { return delegate->GetShadowGenerator(); } 
+
+	void			SetEmitterEnable(TimeValue t, BOOL onOff) { delegate->SetEmitterEnable(t, onOff); }
+	BOOL			GetEmitterEnable(TimeValue t, Interval& valid = Interval(0,0)) { return delegate->GetEmitterEnable(t, valid); }
+	void			SetEmitterEnergy(TimeValue t, float energy) { delegate->SetEmitterEnergy(t, energy); }
+	float			GetEmitterEnergy(TimeValue t, Interval& valid = Interval(0,0)) { return delegate->GetEmitterEnergy(t, valid); }
+	void			SetEmitterDecayType(TimeValue t, int decay) { delegate->SetEmitterDecayType(t, decay); }
+	int				GetEmitterDecayType(TimeValue t, Interval& valid = Interval(0,0)) { return delegate->GetEmitterDecayType(t, valid); }
+	void			SetEmitterCausticPhotons(TimeValue t, int photons) { delegate->SetEmitterCausticPhotons(t, photons); }
+	int				GetEmitterCausticPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return delegate->GetEmitterCausticPhotons(t, valid); }
+	void			SetEmitterGlobalIllumPhotons(TimeValue t, int photons) { delegate->SetEmitterGlobalIllumPhotons(t, photons); }
+	int				GetEmitterGlobalIllumPhotons(TimeValue t, Interval& valid = Interval(0,0)) { return delegate->GetEmitterGlobalIllumPhotons(t, valid); }
 };
 
 // ----------------------- MSPluginCamera ----------------------
@@ -985,16 +958,9 @@ public:
 	// From BaseObject
 	int				Display(TimeValue t, INode* inode, ViewExp *vpt, int flags);
 
-	void			GetWorldBoundBox(TimeValue t, INode *inode, ViewExp* vpt, Box3& abox );
-	void			GetLocalBoundBox(TimeValue t, INode *inode, ViewExp *vpt, Box3& abox );
-	void			GetDeformBBox(TimeValue t, Box3& abox, Matrix3 *tm, BOOL useSel );
-	int				HitTest(TimeValue t, INode *inode, int type, int crossing, int flags, IPoint2 *p, ViewExp *vpt);
-	void			Snap(TimeValue t, INode* inode, SnapInfo *snap, IPoint2 *p, ViewExp *vpt);
-
-
 	// From CameraObject
 
-	RefResult		EvalCameraState(TimeValue time, Interval& valid, CameraState* cs);
+	RefResult		EvalCameraState(TimeValue time, Interval& valid, CameraState* cs) { return delegate->EvalCameraState(time, valid, cs); }
 	void			SetOrtho(BOOL b) { delegate->SetOrtho(b); }
 	BOOL			IsOrtho() { return delegate->IsOrtho(); }
 	void			SetFOV(TimeValue time, float f) { delegate->SetFOV(time, f); } 
@@ -1198,7 +1164,6 @@ public:
 							((MAXWrapper*)locals[pl_this])->ref_deleted = FALSE; //RK:294821 Mark "this" as un-deleted 
 					}
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
-	void			RefAdded(RefMakerHandle rm) { MSPlugin::RefAdded( rm); }
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
 	IOResult		Save(ISave *isave) { return MSPlugin::Save(isave); }
     IOResult		Load(ILoad *iload) { return MSPlugin::Load(iload); }
@@ -1284,7 +1249,7 @@ public:
 	// From Object
 	ObjectState		Eval(TimeValue time);
 	void			InitNodeName(TSTR& s) {s = GetObjectName();}
-	Interval		ObjectValidity(TimeValue t);
+	Interval		ObjectValidity(TimeValue t) { return delegate->ObjectValidity(t); }
 	int				CanConvertToType(Class_ID obtype) { return delegate->CanConvertToType(obtype); }
 	Object*			ConvertToType(TimeValue t, Class_ID obtype) {
 						// CAL-10/1/2002: Don't return the delegate, because it might be deleted.
@@ -1353,7 +1318,6 @@ public:
 	RefTargetHandle GetReference(int i);
 	void			SetReference(int i, RefTargetHandle rtarg);
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
-	void			RefAdded(RefMakerHandle rm) { MSPlugin::RefAdded( rm); }
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
 	IOResult		Save(ISave *isave) { return MSPlugin::Save(isave); }
     IOResult		Load(ILoad *iload) { return MSPlugin::Load(iload); }
@@ -1493,7 +1457,6 @@ public:
 							((MAXWrapper*)locals[pl_this])->ref_deleted = FALSE; //RK:294821 Mark "this" as un-deleted 
 					}
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
-	void			RefAdded(RefMakerHandle rm) { MSPlugin::RefAdded( rm); }
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
 	IOResult		Save(ISave *isave) { MSPlugin::Save(isave); return Modifier::Save(isave); }
     IOResult		Load(ILoad *iload) { MSPlugin::Load(iload); return Modifier::Load(iload); }
@@ -1652,13 +1615,7 @@ public:
 	// This is the method that is called when the modifier is needed to 
 	// apply its effect to the object. Note that the INode* is always NULL
 	// for object space modifiers.
-	// LAM - 8/27/03 - 517135
-	// removing the call to os->obj->UpdateValidity. This was added by me in G038_MINTONL_Aug-5-2003_08h45m41s.txt as part of:
-	// Added keyword argument to scripted plugin definitions: [usePBValidity:t/f]
-	// If the delegate's UI is up LocalValidity(t) always returns NEVER, and the extension channel is invalidated. This cause ModifyObject to be called again, and we
-	// end up in a nice tight loop. 
-//	void			ModifyObject(TimeValue t, ModContext &mc, ObjectState* os, INode *node) { delegate->ModifyObject(t, mc, os, node); os->obj->UpdateValidity(EXTENSION_CHAN_NUM,LocalValidity(t));}
-	void			ModifyObject(TimeValue t, ModContext &mc, ObjectState* os, INode *node); 
+	void			ModifyObject(TimeValue t, ModContext &mc, ObjectState* os, INode *node) { delegate->ModifyObject(t, mc, os, node); }
 
 	// Modifiers that place a dependency on topology should return TRUE
 	// for this method. An example would be a modifier that stores a selection
@@ -1738,7 +1695,6 @@ public:
 	RefTargetHandle GetReference(int i);
 	void			SetReference(int i, RefTargetHandle rtarg);
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
-	void			RefAdded(RefMakerHandle rm) { MSPlugin::RefAdded( rm); }
 	RefTargetHandle Clone(RemapDir& remap = NoRemap());
 	IOResult		Save(ISave *isave) { MSPlugin::Save(isave); return SimpleMod::Save(isave); }
     IOResult		Load(ILoad *iload) { MSPlugin::Load(iload); return SimpleMod::Load(iload); }
@@ -1946,11 +1902,7 @@ public:
 	void			SetGBufID(ULONG id) {  }
 #endif // NO_MTLEDITOR_EFFECTSCHANNELS
 
-	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) 
-	{
-		if ((flags&FILE_ENUM_CHECK_AWORK1)&&TestAFlag(A_WORK1)) return; // LAM - 4/21/03
-		ReferenceTarget::EnumAuxFiles(nameEnum, flags);
-	}
+	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) { MtlBase::EnumAuxFiles(nameEnum, flags); }   
 	PStamp*			GetPStamp(int sz) { return MtlBase::GetPStamp(sz); }
 	PStamp*			CreatePStamp(int sz) { return MtlBase::CreatePStamp(sz); }   		
 	void			DiscardPStamp(int sz) { MtlBase::DiscardPStamp(sz); }      		
@@ -2063,7 +2015,7 @@ public:
 	void			MappingsRequired(int subMtlNum, BitArray & mapreq, BitArray &bumpreq) { delegate->MappingsRequired(subMtlNum, mapreq, bumpreq); } 
 	void			LocalMappingsRequired(int subMtlNum, BitArray & mapreq, BitArray &bumpreq) { delegate->LocalMappingsRequired(subMtlNum, mapreq, bumpreq); }
 	BOOL			IsMultiMtl() { return delegate->IsMultiMtl(); }
-	void			Update(TimeValue t, Interval& valid);
+	void			Update(TimeValue t, Interval& valid) { delegate->Update(t, valid); }
 	void			Reset() { delegate->Reset(); pc->cd2->Reset(this, TRUE); }
 	Interval		Validity(TimeValue t);
 	ParamDlg*		CreateParamDlg(HWND hwMtlEdit, IMtlParams* imp);
@@ -2075,11 +2027,7 @@ public:
 	void			SetGBufID(ULONG id) { delegate->SetGBufID(id); }
 #endif // NO_MTLEDITOR_EFFECTSCHANNELS 
 	
-	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) 
-	{
-		if ((flags&FILE_ENUM_CHECK_AWORK1)&&TestAFlag(A_WORK1)) return; // LAM - 4/21/03
-		ReferenceTarget::EnumAuxFiles(nameEnum, flags);
-	}
+	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) { delegate->EnumAuxFiles(nameEnum, flags); }   
 	PStamp*			GetPStamp(int sz) { return delegate->GetPStamp(sz); }
 	PStamp*			CreatePStamp(int sz) { return delegate->CreatePStamp(sz); }   		
 	void			DiscardPStamp(int sz) { delegate->DiscardPStamp(sz); }      		
@@ -2117,9 +2065,6 @@ public:
 	// plugged in map doesn't need this , it should return TRUE.
 	BOOL			HandleOwnViewPerturb() { return delegate->HandleOwnViewPerturb(); }
 
-	BITMAPINFO*		GetVPDisplayDIB(TimeValue t, TexHandleMaker& thmaker, Interval &valid, BOOL mono=FALSE, int forceW=0, int forceH=0)
-					{ return delegate->GetVPDisplayDIB(t, thmaker, valid, mono, forceW, forceH);  }
-
 	void			GetUVTransform(Matrix3 &uvtrans) {delegate->GetUVTransform(uvtrans); }
 	int				GetTextureTiling() { return delegate->GetTextureTiling(); }
 	void			InitSlotType(int sType) { delegate->InitSlotType(sType); }			   
@@ -2129,6 +2074,7 @@ public:
 	UVGen *			GetTheUVGen() { return delegate->GetTheUVGen(); }  // maps with a UVGen should implement this
 	XYZGen *		GetTheXYZGen() { return delegate->GetTheXYZGen(); } // maps with a XYZGen should implement this
 
+	// System function to set slot type for all subtexmaps in a tree.
 	void			SetOutputLevel(TimeValue t, float v) { delegate->SetOutputLevel(t, v); }
 
 	// called prior to render: missing map names should be added to NameAccum.
@@ -2145,8 +2091,6 @@ public:
 	// if it is the same as when the scene is rendered.			
 	bool			IsLocalOutputMeaningful( ShadeContext& sc ) { return delegate->IsLocalOutputMeaningful( sc ); }
 	bool			IsOutputMeaningful( ShadeContext& sc ) { return delegate->IsOutputMeaningful( sc ); }
-
-	int				IsHighDynamicRange( ) { return delegate->IsHighDynamicRange( ); }
 };
 
 // ----------------------- MSPluginMtl ----------------------
@@ -2233,11 +2177,7 @@ public:
 	void			SetGBufID(ULONG id) { MtlBase::SetGBufID(id); }
 #endif // NO_MTLEDITOR_EFFECTSCHANNELS
 
-	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) 
-	{	
-		if ((flags&FILE_ENUM_CHECK_AWORK1)&&TestAFlag(A_WORK1)) return; // LAM - 4/21/03
-		ReferenceTarget::EnumAuxFiles(nameEnum, flags);
-	}
+	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) { MtlBase::EnumAuxFiles(nameEnum, flags); }   
 	PStamp*			GetPStamp(int sz) { return MtlBase::GetPStamp(sz); }
 	PStamp*			CreatePStamp(int sz) { return MtlBase::CreatePStamp(sz); }   		
 	void			DiscardPStamp(int sz) { MtlBase::DiscardPStamp(sz); }      		
@@ -2322,11 +2262,6 @@ public:
 						else if (id == IID_IReshading) return delegate->GetInterface(id); 
 						else return MSPluginMtl::GetInterface(id); 
 					}
-
-	BaseInterface* GetInterface(Interface_ID id)
-	{
-		return delegate ? delegate->GetInterface(id) : NULL;
-	}
 	
 	// From ReferenceMaker
 //	RefResult		NotifyRefChanged(Interval changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message) { return REF_SUCCEED; }
@@ -2366,7 +2301,7 @@ public:
 //	TSTR			GetSubTexmapTVName(int i) { return delegate->GetSubTexmapTVName(i); }
 //	void			CopySubTexmap(HWND hwnd, int ifrom, int ito) { delegate->CopySubTexmap(hwnd, ifrom, ito); }     	
 	
-	void			Update(TimeValue t, Interval& valid);
+	void			Update(TimeValue t, Interval& valid) { delegate->Update(t, valid); }
 	void			Reset() { delegate->Reset(); pc->cd2->Reset(this, TRUE); }
 	Interval		Validity(TimeValue t);
 	ParamDlg*		CreateParamDlg(HWND hwMtlEdit, IMtlParams* imp);
@@ -2378,11 +2313,7 @@ public:
 	void			SetGBufID(ULONG id) { delegate->SetGBufID(id); }
 #endif // NO_MTLEDITOR_EFFECTSCHANNELS
 	
-	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) 
-	{
-		if ((flags&FILE_ENUM_CHECK_AWORK1)&&TestAFlag(A_WORK1)) return; // LAM - 4/21/03
-		ReferenceTarget::EnumAuxFiles(nameEnum, flags);
-	}
+	void			EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags) { delegate->EnumAuxFiles(nameEnum, flags); }   
 	PStamp*			GetPStamp(int sz) { return delegate->GetPStamp(sz); }
 	PStamp*			CreatePStamp(int sz) { return delegate->CreatePStamp(sz); }   		
 	void			DiscardPStamp(int sz) { delegate->DiscardPStamp(sz); }      		
@@ -2409,18 +2340,11 @@ public:
 	BOOL			GetSelfIllumColorOn(int mtlNum=0, BOOL backFace=FALSE) { return delegate->GetSelfIllumColorOn(mtlNum, backFace); } 
 	float			GetSelfIllum(int mtlNum=0, BOOL backFace=FALSE) { return delegate->GetSelfIllum(mtlNum, backFace); } 
 	Color			GetSelfIllumColor(int mtlNum=0, BOOL backFace=FALSE) { return delegate->GetSelfIllumColor(mtlNum, backFace); } 
-
-	Sampler*		GetPixelSampler(int mtlNum=0, BOOL backFace=FALSE){ return delegate->GetPixelSampler(mtlNum, backFace); } 
-
 	float			WireSize(int mtlNum=0, BOOL backFace=FALSE) { return delegate->WireSize(mtlNum, backFace); } 
 	void			SetAmbient(Color c, TimeValue t) { delegate->SetAmbient(c, t); }		
 	void			SetDiffuse(Color c, TimeValue t) { delegate->SetDiffuse(c, t); }		
 	void			SetSpecular(Color c, TimeValue t) { delegate->SetSpecular(c, t); }
-	void			SetShininess(float v, TimeValue t) { delegate->SetShininess(v, t); }
-
-	BOOL			SupportsShaders() { return delegate->SupportsShaders(); }
-	BOOL			SupportsRenderElements() { return delegate->SupportsRenderElements(); }
-
+	void			SetShininess(float v, TimeValue t) { delegate->SetShininess(v, t); }	
 	void			Shade(ShadeContext& sc) { delegate->Shade(sc); }
 	int				NumSubMtls();
 	Mtl*			GetSubMtl(int i);
@@ -2552,7 +2476,6 @@ public:
 							((MAXWrapper*)locals[pl_this])->ref_deleted = FALSE; //RK:294821 Mark "this" as un-deleted 
 					}
 	void			RefDeleted() { MSPlugin::RefDeleted(); }
-	void			RefAdded(RefMakerHandle rm) { MSPlugin::RefAdded( rm); }
 	IOResult		Save(ISave *isave) { MSPlugin::Save(isave); return SpecialFX::Save(isave); }
     IOResult		Load(ILoad *iload) { MSPlugin::Load(iload); return SpecialFX::Load(iload); }
 
@@ -2629,7 +2552,7 @@ public:
 
 	// From SpecialFX
 	BOOL			Active(TimeValue t) { return delegate->Active(t); }
-	void			Update(TimeValue t, Interval& valid);
+	void			Update(TimeValue t, Interval& valid) { delegate->Update(t, valid); }
 	int				NumGizmos() { return delegate->NumGizmos(); }
 	INode*			GetGizmo(int i) { return delegate->GetGizmo(i); }
 	void			DeleteGizmo(int i) { delegate->DeleteGizmo(i); }
@@ -2848,133 +2771,55 @@ public:
   extern BOOL dump_load_postload_callback_order;
 #endif
 
-// A pair of post load callback2 to process possible redefinition of loaded instances of scripted classes
-// LAM - 3/7/03. Added per iload processing, 2 pass processing
-// PluginClassDefPLCB1 - migrates parameter blocks, calls update handler if needed
-// PluginClassDefPLCB2 - calls load handler, all set handlers, post load handler
-class PluginClassDefPLCB1 : public PostLoadCallback 
+// A post load callback to process possible redefinition of loaded instances of scripted classes
+class PluginClassDefPLCB : public PostLoadCallback 
 {
 public:
-	Tab<ILoad*> registeredILoads;
-	bool isRegistered(ILoad* iload)
-	{	int count = registeredILoads.Count();
-		for (int i = 0; i< count; i++)
-			if (registeredILoads[i] == iload)
-				return true;
-		return false;
-	}
-	void Register(ILoad* iload)
-	{	registeredILoads.Append(1,&iload);
-	}
-	void Unregister(ILoad* iload)
-	{	int count = registeredILoads.Count();
-		for (int i = 0; i< count; i++)
-			if (registeredILoads[i] == iload)
-			{
-				registeredILoads.Delete(i,1);
-				return;
-			}
-	}
-	
-	PluginClassDefPLCB1() { }
-	int Priority() { return 5; }
+	BOOL registered;
+
+	PluginClassDefPLCB() { registered = FALSE; }
 
 	void proc(ILoad *iload)
 	{
 #ifdef _DEBUG
 		if (dump_load_postload_callback_order) 
-			DebugPrint("MXS: PostLoadCallback1 run: thePluginClassDefPLCB1\n");
+			DebugPrint("MXS: PostLoadCallback run: thePluginClassDefPLCB\n");
 #endif
-		MSPluginClass::post_load(iload,0);
-		Unregister(iload);
+		MSPluginClass::post_load();
+		registered = FALSE;
 	}
 };
 
-extern PluginClassDefPLCB1 thePluginClassDefPLCB1;
+extern PluginClassDefPLCB thePluginClassDefPLCB;
 
-class PluginClassDefPLCB2 : public PostLoadCallback 
+// LAM - 9/6/02 - defect 291499
+// PluginMethods wrap member functions accessed on a plugin instance
+// their apply() sets up the appropriate plugin instance thread-local
+// for member data access thunks
+class PluginMethod : public Value
 {
 public:
-	
-	PluginClassDefPLCB2() { }
-	int Priority() { return 10; }
-	
-	void proc(ILoad *iload)
-	{
-#ifdef _DEBUG
-		if (dump_load_postload_callback_order) 
-			DebugPrint("MXS: PostLoadCallback2 run: thePluginClassDefPLCB2\n");
-#endif
-		MSPluginClass::post_load(iload,1);
-	}
+	MSPlugin* this_plugin;
+	Value*	fn;
+
+			PluginMethod(MSPlugin* t, Value* f);
+
+	void	gc_trace();
+	void	collect() { delete this; }
+	void	sprin1(CharStream* s) { fn->sprin1(s); }
+	BOOL	_is_function() { return fn->_is_function(); }
+
+#	define is_pluginMethod(o) ((o)->tag == INTERNAL_MSPLUGIN_METHOD_TAG)
+	Value* classOf_vf(Value** arg_list, int count) { return fn->classOf_vf(arg_list, count); }
+	Value* superClassOf_vf(Value** arg_list, int count) { return fn->superClassOf_vf(arg_list, count); }
+	Value* isKindOf_vf(Value** arg_list, int count) { return fn->isKindOf_vf(arg_list, count); }
+	BOOL   is_kind_of(ValueMetaClass* c) { return (c->tag == INTERNAL_MSPLUGIN_METHOD_TAG) ? 1 : Value::is_kind_of(c); }
+	Value* get_property(Value** arg_list, int count) { return fn->get_property(arg_list, count); }
+	Value* eval() { return fn->eval(); }
+	Value* apply(Value** arg_list, int count, CallContext* cc=NULL);
+	Value* apply_no_alloc_frame(Value** arg_list, int count, CallContext* cc=NULL);
+
 };
-extern PluginClassDefPLCB2 thePluginClassDefPLCB2;
-
-
-// LAM - 9/22/03 - need a different callback for custom attributes
-// than for scripted plugins, since the two are occurring in different
-// ILoadImp::CallPostCBs. Don't want the CA update to affect
-// scripted plugins - their PB defs haven't been read in from the 
-// scene file when the CA update occurs.
-// The CustAttribClassDefPLCB and PluginClassDefPLCB classes are identical
-// other than the value of the second arg to MSPluginClass::post_load
-class CustAttribClassDefPLCB1 : public PostLoadCallback 
-{
-public:
-	Tab<ILoad*> registeredILoads;
-	bool isRegistered(ILoad* iload)
-	{	int count = registeredILoads.Count();
-	for (int i = 0; i< count; i++)
-		if (registeredILoads[i] == iload)
-			return true;
-	return false;
-	}
-	void Register(ILoad* iload)
-	{	registeredILoads.Append(1,&iload);
-	}
-	void Unregister(ILoad* iload)
-	{	int count = registeredILoads.Count();
-	for (int i = 0; i< count; i++)
-		if (registeredILoads[i] == iload)
-		{
-			registeredILoads.Delete(i,1);
-			return;
-		}
-	}
-
-	CustAttribClassDefPLCB1() { }
-	int Priority() { return 5; }
-
-	void proc(ILoad *iload)
-	{
-#ifdef _DEBUG
-		if (dump_load_postload_callback_order) 
-			DebugPrint("MXS: PostLoadCallback1 run: theCustAttribClassDefPLCB1\n");
-#endif
-		MSPluginClass::post_load(iload,2);
-		Unregister(iload);
-	}
-};
-
-extern CustAttribClassDefPLCB1 theCustAttribClassDefPLCB1;
-
-class CustAttribClassDefPLCB2 : public PostLoadCallback 
-{
-public:
-
-	CustAttribClassDefPLCB2() { }
-	int Priority() { return 10; }
-
-	void proc(ILoad *iload)
-	{
-#ifdef _DEBUG
-		if (dump_load_postload_callback_order) 
-			DebugPrint("MXS: PostLoadCallback2 run: theCustAttribClassDefPLCB2\n");
-#endif
-		MSPluginClass::post_load(iload,3);
-	}
-};
-extern CustAttribClassDefPLCB2 theCustAttribClassDefPLCB2;
 
 
 #endif

@@ -113,9 +113,6 @@ const ColorId kTrackViewScaleOriginLine = 86;
 const ColorId kTrackViewKeyFCurveSelected = 87;
 const ColorId kTrackViewKeyFCurveUnSelected = 88;
 
-const ColorId kOutOfRangeLow = 89;
-const ColorId kOutOfRangeHigh = 90;
-
 #define COLOR_MGR_INTERFACE  Interface_ID(0x1bf46c90, 0x18bf6199)
 
 class IColorManager: public FPStaticInterface {

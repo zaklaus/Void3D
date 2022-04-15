@@ -29,7 +29,7 @@ public:
 	 inline   T&          operator[](int i) { return buf[i]; }
            int            Fill(int start, int count, T color) {
                           int ix,jx=start+count;
-                          if(jx > width) // MAB - 07/15/03 - changed from >=
+                          if(jx >= width)
                              return 0;
                           for(ix=start; ix<jx; buf[ix++]=color);
                           return 1;

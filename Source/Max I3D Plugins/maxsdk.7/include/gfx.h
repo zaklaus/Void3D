@@ -131,7 +131,6 @@ typedef BOOL	(*HitFunc)(int, int, void *);
 #define GW_EMISSIVE_VERTS	0x080000
 #define GW_ALL_OPAQUE		0x100000
 #define GW_EDGES_ONLY		0x200000
-#define GW_CONSTANT			0x400000
 
 #define GW_LIGHTING			(GW_ILLUM | GW_SPECULAR)
 
@@ -300,11 +299,7 @@ enum MarkerType  { POINT_MRKR, HOLLOW_BOX_MRKR, PLUS_SIGN_MRKR,
 						   CIRCLE_MRKR, TRIANGLE_MRKR, DIAMOND_MRKR,
 						   SM_HOLLOW_BOX_MRKR, SM_CIRCLE_MRKR, 
 						   SM_TRIANGLE_MRKR, SM_DIAMOND_MRKR,
-						   DOT_MRKR, SM_DOT_MRKR,
-						   BOX2_MRKR, BOX3_MRKR, BOX4_MRKR, BOX5_MRKR,
-						   BOX6_MRKR, BOX7_MRKR,
-						   DOT2_MRKR, DOT3_MRKR, DOT4_MRKR, DOT5_MRKR,
-						   DOT6_MRKR, DOT7_MRKR
+						   DOT_MRKR, SM_DOT_MRKR
 };
 
 
@@ -539,21 +534,6 @@ inline int hIsFacingBack(const IPoint3 &v0, const IPoint3 &v1, const IPoint3 &v2
 	return flip ? s < 0 : s > 0;
 }
 
-// CAL-03/05/03: include side facing in the facing type
-enum FacingType {kFrontFacing, kSideFacing, kBackFacing};
-
-inline FacingType wFacingType(const IPoint3 &v0, const IPoint3 &v1, const IPoint3 &v2, int flip=0 )
-{
-	int s = ( (v0[0]-v1[0])*(v2[1]-v1[1]) - (v2[0]-v1[0])*(v0[1]-v1[1]) );
-	return (s == 0) ? kSideFacing : ((flip ? s > 0 : s < 0) ? kBackFacing : kFrontFacing);
-}
-
-inline FacingType hFacingType(const IPoint3 &v0, const IPoint3 &v1, const IPoint3 &v2, int flip=0 )
-{
-	int s = ( (v0[0]-v1[0])*(v2[1]-v1[1]) - (v2[0]-v1[0])*(v0[1]-v1[1]) );
-	return (s == 0) ? kSideFacing : ((flip ? s < 0 : s > 0) ? kBackFacing : kFrontFacing);
-}
-
 DllExport HINSTANCE GetGraphicsLibHandle(TCHAR *driverLibName);
 DllExport BOOL GraphicsSystemIsAvailable(HINSTANCE drv);
 DllExport BOOL GraphicsSystemCanConfigure(HINSTANCE drv);
@@ -695,18 +675,7 @@ const int kColorNormalsUnspecified = 110;
 const int kColorNormalsSpecified = 111;
 const int kColorNormalsExplicit = 112;
 
-#define COLOR_SV_GRID              113 // SV Grid
-#define COLOR_SV_REL_INSTANCE      114 // SV Relationship Instances
-#define COLOR_SV_REL_CONSTRAINT    115 // SV Relationship Contraints
-#define COLOR_SV_REL_PARAMWIRE     116 // SV Relationship Param Wires
-#define COLOR_SV_REL_LIGHT         117 // SV Relationship Lights
-#define COLOR_SV_REL_MODIFIER      118 // SV Relationship Modifiers
-#define COLOR_SV_REL_CONTROLLER    119 // SV Relationship Controllers
-#define COLOR_SV_REL_OTHER         120 // SV Relationship Others
-#define COLOR_SV_SPACEWARP_BK      121 // SV SpaceWarp
-#define COLOR_SV_BASEOBJECT_BK     122 // SV BaseObject
-
-#define COLOR_TOTAL                123	// always the max number of colors
+#define COLOR_TOTAL                113	// always the max number of colors
 
 // Returns/sets color values for drawing in the viewport (selection, subsel, etc)
 DllExport Point3 GetUIColor(int which);

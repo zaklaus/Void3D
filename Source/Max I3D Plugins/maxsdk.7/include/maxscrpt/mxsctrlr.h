@@ -13,7 +13,6 @@
 #define SCRIPT_FLOAT_CONTROL_CLASS_ID	Class_ID(0x151d5ead, 0x55626f88)
 #define SCRIPT_SCALE_CONTROL_CLASS_ID	Class_ID(0x5f346d25, 0x2c67ff7)
 #define SCRIPT_ROT_CONTROL_CLASS_ID		Class_ID(0xc6625, 0xb003c2a)
-#define SCRIPT_P4_CONTROL_CLASS_ID		Class_ID(0x3d7b234d, 0x2b986df4)
 
 class ScriptControl : public StdControl 
 {
@@ -96,22 +95,9 @@ public:
 	~ScriptP3Control() {}
 
 	RefTargetHandle Clone(RemapDir& remap=NoRemap()) {  ScriptP3Control *newob = new ScriptP3Control(*this); BaseClone(this, newob, remap); return(newob); }		
-	void GetClassName(TSTR& s) { s = _T("Point3_script"); }
+	void GetClassName(TSTR& s) { s = _T("Point_script"); }
 	Class_ID ClassID() { return Class_ID(SCRIPT_P3_CONTROL_CLASS_ID,0); }  
 	SClass_ID SuperClassID() { return CTRL_POINT3_CLASS_ID; }  		
-};
-
-class ScriptP4Control : public ScriptControl 
-{
-public:
-	ScriptP4Control(ScriptP4Control &ctrl) : ScriptControl(CTRL_POINT4_CLASS_ID, ctrl) {}
-	ScriptP4Control(BOOL loading=FALSE) : ScriptControl(CTRL_POINT4_CLASS_ID, loading) {}
-	~ScriptP4Control() {}
-
-	RefTargetHandle Clone(RemapDir& remap=NoRemap()) {  ScriptP4Control *newob = new ScriptP4Control(*this); BaseClone(this, newob, remap); return(newob); }		
-	void GetClassName(TSTR& s) { s = _T("Point4_script"); }
-	Class_ID ClassID() { return Class_ID(SCRIPT_P4_CONTROL_CLASS_ID,0); }  
-	SClass_ID SuperClassID() { return CTRL_POINT4_CLASS_ID; }  		
 };
 
 class ScriptFloatControl : public ScriptControl 

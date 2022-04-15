@@ -1,17 +1,4 @@
-/**********************************************************************
- *<
-	FILE: svcore.h
-
-	DESCRIPTION: Schematic View Interface
-
-	HISTORY: Extended by Michael Russo for R6
-
- *>	Copyright (c) 1994-2003, All Rights Reserved.
- **********************************************************************/
-
-
-#ifndef __SVCORE_H__
-#define __SVCORE_H__
+#pragma once
 
 typedef enum
 	{
@@ -27,17 +14,6 @@ typedef enum
 	REFTYPE_PLUGIN,
 	} SvReferenceType;
 
-typedef enum
-	{
-	RELTYPE_INSTANCE,
-	RELTYPE_PARAMWIRE,
-	RELTYPE_CONSTRAINT,
-	RELTYPE_LIGHT,
-	RELTYPE_MODIFIER,
-	RELTYPE_CONTROLLER,
-	RELTYPE_OTHER,
-	} SvRelationshipType;
-
 // Filter bits...
 static const DWORD SV_FILTER_SELOBJECTS     = (1<<0);
 static const DWORD SV_FILTER_OBJECTMODS     = (1<<1);
@@ -52,15 +28,9 @@ static const DWORD SV_FILTER_WARPS          = (1<<9);
 static const DWORD SV_FILTER_VISIBLE_OBJS   = (1<<10);
 static const DWORD SV_FILTER_CONTROLLERS    = (1<<11);
 static const DWORD SV_FILTER_ANIMATEDONLY   = (1<<12);
-static const DWORD SV_FILTER_MAPS           = (1<<13);	// obsolete
-static const DWORD SV_FILTER_BONES          = (1<<14);	// obsolete
+static const DWORD SV_FILTER_MAPS           = (1<<13);
+static const DWORD SV_FILTER_BONES          = (1<<14);
 static const DWORD SV_FILTER_BONEOBJECTS    = (1<<15);
-static const DWORD SV_FILTER_PB_PARAMS      = (1<<16);
-static const DWORD SV_FILTER_PRS_POS        = (1<<17);
-static const DWORD SV_FILTER_PRS_ROT        = (1<<18);
-static const DWORD SV_FILTER_PRS_SCALE      = (1<<19);
-static const DWORD SV_FILTER_MASTER_POINT   = (1<<20);
-static const DWORD SV_FILTER_SKIN_DETAILS   = (1<<21);
 
 // Schematic view UI colors...
 static const int SV_UICLR_WINBK               = 0;
@@ -88,18 +58,8 @@ static const int SV_UICLR_CONTROLLER_BK       = 21;
 static const int SV_UICLR_MODIFIER_BK         = 22;
 static const int SV_UICLR_MATERIAL_BK         = 23;
 static const int SV_UICLR_MAP_BK              = 24;
-static const int SV_UICLR_GRID                = 25;
-static const int SV_UICLR_REL_INSTANCE        = 26;
-static const int SV_UICLR_REL_CONSTRAINT      = 27;
-static const int SV_UICLR_REL_PARAMWIRE       = 28;
-static const int SV_UICLR_REL_LIGHT           = 29;
-static const int SV_UICLR_REL_MODIFIER        = 30;
-static const int SV_UICLR_REL_CONTROLLER      = 31;
-static const int SV_UICLR_REL_OTHER           = 32;
-static const int SV_UICLR_SPACEWARP_BK        = 33;
-static const int SV_UICLR_BASEOBJECT_BK       = 34;
 
-static const int SV_UICLR_CACHE_SIZE          = 35;
+static const int SV_UICLR_CACHE_SIZE          = 25;
 
 // Magic value returned from Animatable::SvGetSwatchColor(...)
 // to indicate that no swatch is to be drawn...
@@ -214,9 +174,6 @@ class IGraphObjectManager
 		// Add a reference from "maker" node to "target"...
 	virtual IGraphRef *AddReference(IGraphNode *maker, IGraphNode *target, SvReferenceType type) = 0;
 
-		// Add a relationship from "maker" node to another animatable
-	virtual IGraphRef *AddRelationship( IGraphNode *maker, Animatable *anim, int id, SvRelationshipType type) = 0;
-
 		// Pops up the property editor dialog on the
 		// selected nodes in the schematic view...
 	virtual void SvEditSelectedNodeProperties() = 0;
@@ -238,8 +195,6 @@ class IGraphObjectManager
 	virtual bool ApplyModifier(IGraphNode *gModNode, IGraphNode *gParentNode) = 0;
 	virtual bool DeleteModifier(IGraphNode *gNode) = 0;
 
-	virtual bool ApplyController(IGraphNode *gSrcNode, IGraphNode *gDestNode) = 0;
-
 		// Invalidates the schematic view window...
 	virtual void SvInvalidateView() = 0;
 
@@ -259,10 +214,4 @@ class IGraphObjectManager
 
 		// Get a SV UI color given a color index...
 	virtual COLORREF SvGetUIColor(int colorIndex) = 0;
-
-		// Get HWnd for Schematic View window...
-	virtual HWND GetHWnd() = 0;
 	};
-
-#endif	// __SVCORE_H__
-

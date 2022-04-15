@@ -35,7 +35,6 @@ enum LoadableClassID
 	EulerAnglesValue_Chunk, Matrix3Value_Chunk,		Point2Value_Chunk,
 	ColorValue_Chunk,		MSTime_Chunk,			MSInterval_Chunk,
 	MAXWrapper_Chunk,		Unsupplied_Chunk,		Struct_Chunk,
-	Point4Value_Chunk,
 
 	// add more here...
 

@@ -13,8 +13,6 @@
 		#define MAXVER_PRODUCTNAME "gmax\0"
 	#elif defined(GAME_VER)
 		#define MAXVER_PRODUCTNAME "gmax dev\0"
-	#elif defined(RENDER_VER)
-		#define MAXVER_PRODUCTNAME "Autodesk VIZ Render\0"
 	#elif defined(DESIGN_VER)
 		#define MAXVER_PRODUCTNAME "Autodesk VIZ\0"
 	#elif defined(WEBVERSION)
@@ -31,7 +29,7 @@
 #ifndef MAXVER_ORIGINALFILENAME
 #define MAXVER_ORIGINALFILENAME "\0"
 #endif
-
+ 
 #ifndef MAXVER_FILEDESCRIPTION
 #define MAXVER_FILEDESCRIPTION "\0"
 #endif
@@ -41,11 +39,11 @@
 #endif
  
 #ifndef MAXVER_COPYRIGHT
-#define MAXVER_COPYRIGHT		"© 1994-2003 Autodesk, Inc. All rights reserved.\0"
+#define MAXVER_COPYRIGHT		"© 1994-2001 Autodesk, Inc. All rights reserved.\0"
 #endif
 
 #ifndef	MAXVER_LEGALTRADEMARKS
-#define MAXVER_LEGALTRADEMARKS	"Discreet, Autodesk, Inc., Kinetix, 3D Studio MAX, Autodesk VIZ, Biped, Character Studio, Heidi, Kinetix, Physique, plasma, 3ds max, DWG Unplugged, FLI, FLIC, and DXF are either registered trademarks or trademarks of Discreet Logic Inc./Autodesk, Inc.\0"
+#define MAXVER_LEGALTRADEMARKS	"Discreet, Autodesk, Inc., Kinetix, 3D Studio MAX, Autodesk VIZ, Biped, Character Studio, Heidi, Kinetix, Physique, 3ds max, DWG Unplugged, FLI, FLIC, and DXF are either registered trademarks or trademarks of Discreet Logic Inc./Autodesk, Inc.\0"
 #endif
 
 #ifndef MAXVER_COMPANYNAME
@@ -63,7 +61,7 @@
 #define MAXVER_FILEVERSION_STR			_MAXVER_RCVERSION_STR(MAX_VERSION_MAJOR, MAX_VERSION_MINOR, MAX_VERSION_POINT, VERSION_INT)
 #define MAXVER_PRODUCTVERSION				_MAXVER_RCVERSION(MAX_PRODUCT_VERSION_MAJOR, MAX_PRODUCT_VERSION_MINOR, MAX_PRODUCT_VERSION_POINT, VERSION_INT)
 #define MAXVER_PRODUCTVERSION_STR		_MAXVER_RCVERSION_STR(MAX_PRODUCT_VERSION_MAJOR, MAX_PRODUCT_VERSION_MINOR, MAX_PRODUCT_VERSION_POINT, VERSION_INT)
-#define MAXVER_PRIVATE_BUILD			VERSION_STRING
+	
 
 //
 // Version resource
@@ -94,7 +92,6 @@ BEGIN
             VALUE "InternalName", MAXVER_INTERNALNAME
             VALUE "LegalCopyright", MAXVER_COPYRIGHT
             VALUE "OriginalFilename", MAXVER_ORIGINALFILENAME
-            VALUE "Private Build Data", MAXVER_PRIVATE_BUILD
             VALUE "ProductName", MAXVER_PRODUCTNAME
             VALUE "ProductVersion", MAXVER_PRODUCTVERSION_STR
             VALUE "FileDescription", MAXVER_FILEDESCRIPTION

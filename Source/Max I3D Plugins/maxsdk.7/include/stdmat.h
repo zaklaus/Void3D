@@ -365,8 +365,6 @@ class MultiMtl: public Mtl {
 	virtual void SetNumSubMtls(int n)=0;
 	virtual void GetSubMtlName(int mtlid, TSTR &s)=0;
 	virtual void SetSubMtlAndName(int mtlid, Mtl *m, TSTR &subMtlName)=0;
-	virtual void AddMtl(ReferenceTarget *rt, int mtlid, TCHAR *name)=0;
-	virtual void RemoveMtl(int mtlid)=0;
 	};
 
 class Tex3D: public Texmap {

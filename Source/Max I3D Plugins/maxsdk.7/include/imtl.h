@@ -35,9 +35,6 @@
 #define V_WRAP   (1<<1)  
 #define U_MIRROR (1<<2)
 #define V_MIRROR (1<<3)
-#define UV_NOISE (1<<4)
-#define UV_NOISE_ANI (1<<5)
-
 
 #define	X_AXIS 0
 #define	Y_AXIS 1
@@ -462,10 +459,6 @@ public:
 	BOOL objMotBlur;	// is object motion blur enabled
 	int nBlurFrames;	// number of object motion blur time slices
 
-#ifdef SIMPLIFY_AREA_LIGHTS
-	bool simplifyAreaLights; //should area lights degrade to point lights
-#endif
-
 
 	// Methods
 	RenderGlobalContext() : pToneOp(NULL), mpIRenderElementMgr(NULL) { }
@@ -823,8 +816,6 @@ class ShadeContext : public InterfaceServer {
 
 #define MTL_DISPLAY_ENABLE_FLAGS (MTL_TEX_DISPLAY_ENABLED|MTL_SUB_DISPLAY_ENABLED)  // Interactive texture display enabled for THIS mtl base
 
-#define MTL_HW_TEX_ENABLED		(1<<17)	// flag to indicate whether the texture should be part of the realtime shader
-
 // Material Requirements flags: returned by Requirements() function
 #define MTLREQ_2SIDE    		(1<<0)  // 2-sided material
 #define MTLREQ_WIRE     		(1<<1)  // Wire frame
@@ -852,22 +843,14 @@ class ShadeContext : public InterfaceServer {
 #define MTLREQ_WORLDCOORDS 		(1<<22) //World coordinates are used in mtl/map evaluation
 #define MTLREQ_TRANSP_IN_VP  	(1<<23) //transparent in viewport ( opacity < 100, or opacity map & ShowMapInVP set)
 #define MTLREQ_FACETED		  	(1<<24) //render faceted in the viewports
-/* JH 5/21/03 Adjusting for R6
-#define MTLREQ_2SIDE_SHADOW  	(1<<25) // USED IN RENDERER.
-#define MTLREQ_REND2  			(1<<26) // USED IN RENDERER.
-#define MTLREQ_REND3  			(1<<27) // USED IN RENDERER.
-#define MTLREQ_REND4  			(1<<28) // USED IN RENDERER.
-#define MTLREQ_REND5 			(1<<29) // USED IN RENDERER.
-#define MTLREQ_REND6 			(1<<30) // USED IN RENDERER.
-#define MTLREQ_NOEXPOSURE		(1<<31) // don't do the tone-op (ie, for matte/shadow material, etc)
-*/
-#define MTLREQ_NOEXPOSURE		(1<<25) // don't do the tone-op (ie, for matte/shadow material, etc)
-#define MTLREQ_SS_GLOBAL		(1<<26) //Material requires supersampling but use global sampler
 
-#define MTLREQ_REND1  			(1<<28) // USED IN RENDERER.
-#define MTLREQ_REND2  			(1<<29) // USED IN RENDERER.
-#define MTLREQ_REND3  			(1<<30) // USED IN RENDERER.
-#define MTLREQ_REND4  			(1<<31) // USED IN RENDERER.
+#define MTLREQ_2SIDE_SHADOW  	(1<<25) // USED IN RENDERER.
+#define MTLREQ_REND2  	(1<<26) // USED IN RENDERER.
+#define MTLREQ_REND3  	(1<<27) // USED IN RENDERER.
+#define MTLREQ_REND4  	(1<<28) // USED IN RENDERER.
+#define MTLREQ_REND5 	(1<<29) // USED IN RENDERER.
+#define MTLREQ_REND6 	(1<<30) // USED IN RENDERER.
+#define MTLREQ_NOEXPOSURE (1<<31) // don't do the tone-op (ie, for matte/shadow material, etc)
 
 #define MAPSLOT_TEXTURE      0 	// texture maps: 
 #define MAPSLOT_ENVIRON      1 	// environment maps: generate UVW on-the-fly using view vector, default to spherical
@@ -879,7 +862,7 @@ class ShadeContext : public InterfaceServer {
 #define UVWSRC_OBJXYZ		1	// generate planar uvw mapping from object xyz on-the-fly
 #define UVWSRC_EXPLICIT2	2	// use explicit mesh map color vertices as a tex map
 #define UVWSRC_WORLDXYZ		3	// generate planar uvw mapping from world xyz on-the-fly
-#ifdef GEOREFSYS_UVW_MAPPING
+#ifdef DESIGN_VER
 #define UVWSRC_GEOXYZ		4	// generate planar uvw mapping from geo referenced world xyz on-the-fly
 #endif
 #define UVWSRC_FACEMAP		5	// use face map
@@ -1027,9 +1010,9 @@ class MtlBase: public ReferenceTarget, public ISubMap {
 		CoreExport void EnumAuxFiles(NameEnumCallback& nameEnum, DWORD flags);
 
 		// Postage Stamp
-		CoreExport virtual PStamp* GetPStamp(int sz); // sz = 0: small(32x32), 1: large(88x88), 2: tiny(24x24)  		
-		CoreExport virtual PStamp* CreatePStamp(int sz, BOOL Render = FALSE);    		
-		CoreExport virtual void DiscardPStamp(int sz);   		
+		CoreExport PStamp* GetPStamp(int sz); // sz = 0: small(32x32), 1: large(88x88), 2: tiny(24x24)  		
+		CoreExport PStamp* CreatePStamp(int sz, BOOL Render = FALSE);    		
+		CoreExport void DiscardPStamp(int sz);   		
 
 		// Schematic View Animatable Overides...
 		CoreExport SvGraphNodeReference SvTraverseAnimGraph(IGraphObjectManager *gom, Animatable *owner, int id, DWORD flags);
@@ -1442,7 +1425,7 @@ public:
 	float refractAmt;				// combined reflection.a * amt 
 	ULONG hasComponents;	// bits for active components(e.g.currently has active refl map)
 	ULONG stdParams;
-	int*  stdIDToChannel;	// combined shader & mtl. Note: may be NULL (for example, matte/shadow)
+	int*  stdIDToChannel;	// combined shader & mtl
 
 	// these are the component-wise outputs from the shading process
 	Color ambIllumOut, diffIllumOut, transIllumOut, selfIllumOut; // the diffuse clrs
@@ -1506,7 +1489,7 @@ public:
 		int i;
 		for( i = 0; i < nUserIllumOut; ++i ){
 			DbgAssert( userIllumNames );
-			if( _tcscmp( name, userIllumNames[i] ) == 0 ){
+			if( strcmp( name, userIllumNames[i] ) == 0 ){
 				n = i;
 				break;
 			}
@@ -1523,7 +1506,7 @@ public:
 		int i;
 		for( i = 0; i < nUserIllumOut; ++i ){
 			DbgAssert( userIllumNames );
-			if( _tcscmp( name, userIllumNames[i] )== 0){
+			if( strcmp( name, userIllumNames[i] )== 0){
 				userIllumOut[i] = out;
 				break;
 			}
@@ -1539,7 +1522,7 @@ public:
 		int i;
 		for( i = 0; i < nUserIllumOut; ++i ){
 			DbgAssert( userIllumNames );
-			if( _tcscmp( name, userIllumNames[i] )== 0){
+			if( strcmp( name, userIllumNames[i] )== 0){
 				return userIllumOut[i];
 			}
 		}
@@ -1815,7 +1798,10 @@ class MtlDADMgr: public DADMgr {
 		// called on the draggee to see what if anything can be dragged from this x,y
 		SClass_ID GetDragType(HWND hwnd, POINT p) { return MATERIAL_CLASS_ID; }
 		// called on potential dropee to see if can drop type at this x,y
-		CoreExport BOOL OkToDrop(ReferenceTarget *dropThis, HWND hfrom, HWND hto, POINT p, SClass_ID type, BOOL isNew);
+		BOOL OkToDrop(ReferenceTarget *dropThis, HWND hfrom, HWND hto, POINT p, SClass_ID type, BOOL isNew) {
+			if (hfrom==hto) return FALSE;
+			return (type==MATERIAL_CLASS_ID)?1:0;
+			}
 		int SlotOwner() { return OWNER_MTL_TEX;	}
 	    CoreExport ReferenceTarget *GetInstance(HWND hwnd, POINT p, SClass_ID type);
 		CoreExport void Drop(ReferenceTarget *dropThis, HWND hwnd, POINT p, SClass_ID type);

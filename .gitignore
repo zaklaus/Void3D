@@ -414,6 +414,7 @@ Source/ISnd2/_Debug/
 Source/ISnd2/Thunk/_Release/
 
 lib/
+!Source/ISnd2/OggVorbis/Lib
 
 Source/Insanity/_Debug/
 

@@ -184,9 +184,9 @@ public:
 	PerData *out;
 
 	VDataDelta () { out=NULL; }
-	DllExport ~VDataDelta ();
+	~VDataDelta () { if (out) delete out; }
 	void SetVNum (int nv, BOOL keep=FALSE) { if (out) out->SetCount(nv,keep); }
-	DllExport void Activate (int vnum, int vdID);
+	void Activate (int vnum, int vdID) { if (out==NULL) out = new PerData(vnum, VertexDataType(vdID)); }
 	DllExport void Set (int where, void *data, int num=1);
 };
 
@@ -422,9 +422,7 @@ enum meshButtonOp    { MopHide, MopUnhideAll, MopDelete, MopDetach, MopBreak, Mo
 enum meshUIParam { MuiSelByVert, MuiIgBack, MuiIgnoreVis, MuiSoftSel, MuiSSUseEDist, 
 		MuiSSEDist, MuiSSBack, MuiWeldBoxSize, MuiExtrudeType, MuiShowVNormals, 
 		MuiShowFNormals, MuiSliceSplit, MuiCutRefine, // end of integer values
-		MuiPolyThresh, MuiFalloff, MuiPinch, MuiBubble, MuiWeldDist, MuiNormalSize,
-		MuiDeleteIsolatedVerts // MuiDeleteIsolatedVerts is an integer value, but also supports float
-		};
+		MuiPolyThresh, MuiFalloff, MuiPinch, MuiBubble, MuiWeldDist, MuiNormalSize };
 
 #define EM_MESHUIPARAM_LAST_INT MuiShowFNormals // must specify last integer param
 #define EM_SL_OBJECT 0

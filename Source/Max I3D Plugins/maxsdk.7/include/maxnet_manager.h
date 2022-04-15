@@ -130,56 +130,6 @@ class MAXNETEXPORT MaxNetManager : public MaxNet {
 
 };
 
-//-----------------------------------------------------------------------------
-//-- Interface Class
-
-class MaxNetworkInterface {
-	public:
-		virtual	bool	GetCurrentRenderer		( TCHAR* name, DWORD* id1, DWORD* id2)=0;
-};
-
-//This class will have more methods with each version.
-//Version number indicates which methods are supported by a given implementation
-class MaxNetworkInterface2 : public MaxNetworkInterface {
-	protected:
-		int version;
-	public:
-		MaxNetworkInterface2() { version = 6010; }  //version 6.0.1.0
-		int		GetMAXVersion()						{return version;}
-		void	SetMAXVersion(int version)			{this->version = version;}
-
-		//-- version 6.0.1.0 - begin
-		virtual BOOL	GetRendMultiThread()		{return FALSE;}
-		virtual BOOL	GetRendSimplifyAreaLights()	{return FALSE;}
-		virtual BOOL	GetUseAdvLight()			{return FALSE;}
-		virtual BOOL	GetCalcAdvLight()			{return FALSE;}
-		//-- version 6.0.1.0 - end
-
-		//-- version 7.0.0.0 - begin
-		//-- ADD VERSION 7 METHODS HERE
-		//-- version 7.0.0.0 - end
-};
-
-//Uses interface version 1
-MAXNETEXPORT void AssignJobEx(
-	MaxNetManager* mgr, 
-	MaxNetworkInterface* maxIface,
-	Job* job,
-	TCHAR* archive,
-	HSERVER* servers,
-	CJobText& jobtext,
-	DWORD blocksize = 0 );
-
-//Uses interface version 2
-MAXNETEXPORT void AssignJobEx(
-	MaxNetManager* mgr, 
-	MaxNetworkInterface2* maxIface,
-	Job* job,
-	TCHAR* archive,
-	HSERVER* servers,
-	CJobText& jobtext,
-	DWORD blocksize = 0 );
-
 #endif
 
 //-- EOF: maxnet_manager.h ----------------------------------------------------

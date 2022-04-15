@@ -85,9 +85,6 @@ public:
 					mRefTarg = mMgr->mRefTargetPtrs[i];
 					mRefTarg->SetHeld(true);
 					mMgr->mRefTargetPtrs.Delete(i, 1);
-					int isUndo2;
-					if (theHold.Restoring(isUndo2) && !isUndo2) // LAM - 2/11/03 - defect 485698
-						mRefTarg = NULL;
 				}
 			} else {
 				mMgr->RemoveRef(mRefTarg);
@@ -96,11 +93,7 @@ public:
 				mMgr->mRefTargetPtrs.Append(1, &mRefTarg, 3);
 
 				mRefTarg->SetHeld(false);
-				int isUndo2;
-				if (theHold.Restoring(isUndo2) && !isUndo2) // LAM - 2/11/03 - defect 485698
-					isUndo2 = isUndo2; // LAM - just in here as a breakpoint location for testing
-				else
-					mRefTarg = NULL;
+				mRefTarg = NULL;
 			}
 		}
 	}
@@ -130,7 +123,6 @@ public:
 		if (i == 0)
 			mMgr = static_cast<RefMgr<T>*>(rtarg);
 	}
-	virtual BOOL CanTransferReference(int i) { return FALSE; }
 };
 
 

@@ -50,18 +50,4 @@ public:
 extern TCHAR* ellipsis_level_name;
 extern TCHAR* parent_level_name;
 
-// Added: 12/17/03
-// This class provides an interface to a derived implementation class that caches scene node names
-// based on the node name resolution scheme used by MAXScript. There is a single, static instance 
-// of the derived class.
-// usage: SceneNodeByNameCache::GetInst().GetSceneNodeByName(theName,true,false);
-class SceneNodeByNameCache
-{
-public:
-	// get the singleton instance of SceneNodeByNameCache
-	ScripterExport static SceneNodeByNameCache& GetInst();
-	// get the INode* given the name. If exactMatch is false, use inexact (MXS) name matching. Can return NULL
-	ScripterExport virtual INode *GetSceneNodeByName(const TCHAR* name, bool exactMatch = false, bool caseSensitive = false) = 0;
-};
-
 #endif

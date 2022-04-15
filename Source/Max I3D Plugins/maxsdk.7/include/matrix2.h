@@ -19,13 +19,6 @@
 #include "point2.h"
 #include "point3.h"
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
-
 class Matrix2 {
 	Point2& operator[](int i) { return((Point2&)(*m[i]));  }
 	Point2& operator[](int i) const { return((Point2&)(*m[i])); }
@@ -105,10 +98,6 @@ Point2 DllExport operator*( const Point2& V, const Matrix2& A);
 Point2 DllExport VectorTransform(const Matrix2& M, const Point2& V);
 
 // Printout
-#if _MSC_VER < 1300  // Visual Studio .NET
-ostream DllExport &operator<<(ostream& s, const Matrix2& A); 
-#else
-std::ostream DllExport &operator<<(std::ostream& s, const Matrix2& A); 
-#endif
+ostream DllExport &operator<< (ostream& s, const Matrix2& A); 
 
 #endif

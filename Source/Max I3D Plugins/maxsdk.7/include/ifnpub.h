@@ -146,7 +146,7 @@ public:
 class FPInterfaceDesc : public FPInterface 
 {
 protected:
-	CoreExport void	load_descriptor(Interface_ID id, TCHAR* int_name, StringResID descr, ClassDesc* cd, USHORT flag, va_list ap);
+	CoreExport void	load_descriptor(Interface_ID id, TCHAR* int_name, StringResID descr, ClassDesc* cd, ULONG flag, va_list ap);
 
 public:
 	// interface metadata 
@@ -218,49 +218,12 @@ class FPStaticInterface : public FPInterfaceDesc
 {
 };
 
-// The MAXScript FPMixinInterface wrapper class
-class FPMixinInterfaceValue;
-
 // mixin interface
 class FPMixinInterface : public FPInterface
 {
-	friend class FPMixinInterfaceValue;
-private:
-	FPMixinInterfaceValue* MXS_fpi;
-protected:
-	Tab<InterfaceNotifyCallback*> *interfaceNotifyCBs;
 public:
-
-	FPMixinInterface::FPMixinInterface() : MXS_fpi(NULL), interfaceNotifyCBs(NULL) {}
-
-	// from GenericInterface, default lifetime is serverControlled
-	virtual LifetimeType	LifetimeControl() { return serverControlled; }
-	
-	virtual bool RegisterNotifyCallback(InterfaceNotifyCallback* incb) 
-	{
-		if (interfaceNotifyCBs == NULL)
-			interfaceNotifyCBs = new Tab<InterfaceNotifyCallback*>;
-		interfaceNotifyCBs->Append(1,&incb);
-		return true;
-	}
-	
-	virtual void UnRegisterNotifyCallback(InterfaceNotifyCallback* incb) 
-	{ 
-		if (interfaceNotifyCBs)
-			for (int i=0; i < interfaceNotifyCBs->Count(); i++)
-			{	if (incb == (*interfaceNotifyCBs)[i])
-					interfaceNotifyCBs->Delete(i,1);
-			}
-	}
-	
-	FPMixinInterface::~FPMixinInterface() 
-	{
-		if (interfaceNotifyCBs)
-		{	for (int i=0; i < interfaceNotifyCBs->Count(); i++)
-				(*interfaceNotifyCBs)[i]->InterfaceDeleted(this);
-			delete interfaceNotifyCBs;
-		}
-	}
+	// from GenericInterface, default lifetime is immediateRelease
+	virtual LifetimeType	LifetimeControl() { return immediateRelease; }
 
 	// from BaseInterface
 	virtual BaseInterface*	GetInterface(Interface_ID id) { if (id == FPMIXININTERFACE_ID) return this; else return FPInterface::GetInterface(id); }
@@ -456,7 +419,6 @@ public:
 		int*				iptr;
 		float*				fptr;
 		Point3*				p;
-		Point4*				p4;
 		TimeValue			t;
 		TCHAR*				s;
 		TSTR*				tstr;
@@ -482,7 +444,6 @@ public:
 		FPInterface*		fpi;
 		void*				ptr;
 		Color*				clr;
-		AColor*				aclr;
 		FPValue*			fpv;
 		Value*				v;
 		DWORD*				dptr;
@@ -492,7 +453,6 @@ public:
 		Tab<int>*			i_tab;
 		Tab<float>*			f_tab;
 		Tab<Point3*>*		p_tab;
-		Tab<Point4*>*		p4_tab;
 		Tab<TimeValue>*		t_tab;
 		Tab<TCHAR*>*		s_tab;
 		Tab<TSTR*>*			tstr_tab;
@@ -518,7 +478,6 @@ public:
 		Tab<FPInterface*>*	fpi_tab;
 		Tab<void*>*			ptr_tab;
 		Tab<Color*>*		clr_tab;
-		Tab<AColor*>*		aclr_tab;
 		Tab<FPValue*>*		fpv_tab;
 		Tab<Value*>*		v_tab;
 		Tab<DWORD>*			d_tab;
@@ -612,7 +571,7 @@ public:
 	_interface() { }									\
 	_interface(Interface_ID id, TCHAR* name,			\
 			   StringResID descr, ClassDesc* cd,		\
-			   USHORT flags, ...)						\
+			   ULONG flags, ...)						\
 	{													\
 		va_list ap;										\
 		va_start(ap, flags);							\
@@ -624,7 +583,7 @@ public:
 	public:												\
 	_interface(Interface_ID id, TCHAR* name,			\
 			   StringResID descr, ClassDesc* cd,		\
-			   USHORT flags, ...)						\
+			   ULONG flags, ...)						\
 	{													\
 		va_list ap;										\
 		va_start(ap, flags);							\
@@ -1133,8 +1092,6 @@ public:
 #define TYPE_INT_FP_FIELD				i
 #define TYPE_RGBA_FP_FIELD				p
 #define TYPE_POINT3_FP_FIELD			p
-#define TYPE_FRGBA_FP_FIELD				p4
-#define TYPE_POINT4_FP_FIELD			p4
 #define TYPE_BOOL_FP_FIELD				i
 #define TYPE_ANGLE_FP_FIELD				f
 #define TYPE_PCNT_FRAC_FP_FIELD			f
@@ -1171,7 +1128,6 @@ public:
 #define TYPE_HWND_FP_FIELD				hwnd
 #define TYPE_NAME_FP_FIELD				s
 #define TYPE_COLOR_FP_FIELD				clr
-#define TYPE_ACOLOR_FP_FIELD			aclr
 #define TYPE_FPVALUE_FP_FIELD			fpv
 #define TYPE_VALUE_FP_FIELD				v
 #define TYPE_DWORD_FP_FIELD				d
@@ -1183,8 +1139,6 @@ public:
 #define TYPE_INT_TAB_FP_FIELD				i_tab
 #define TYPE_RGBA_TAB_FP_FIELD				p_tab
 #define TYPE_POINT3_TAB_FP_FIELD			p_tab
-#define TYPE_FRGBA_TAB_FP_FIELD				p4_tab
-#define TYPE_POINT4_TAB_FP_FIELD			p4_tab
 #define TYPE_BOOL_TAB_FP_FIELD				i_tab
 #define TYPE_ANGLE_TAB_FP_FIELD				f_tab
 #define TYPE_PCNT_FRAC_TAB_FP_FIELD			f_tab
@@ -1220,7 +1174,6 @@ public:
 #define TYPE_HWND_TAB_FP_FIELD				hwnd_tab
 #define TYPE_NAME_TAB_FP_FIELD				s_tab
 #define TYPE_COLOR_TAB_FP_FIELD				clr_tab
-#define TYPE_ACOLOR_TAB_FP_FIELD			aclr_tab
 #define TYPE_FPVALUE_TAB_FP_FIELD			fpv_tab
 #define TYPE_VALUE_TAB_FP_FIELD				v_tab
 #define TYPE_DWORD_TAB_FP_FIELD				d_tab
@@ -1246,8 +1199,6 @@ public:
 #define TYPE_INT_BR_FP_FIELD				iptr		
 #define TYPE_RGBA_BR_FP_FIELD				p	
 #define TYPE_POINT3_BR_FP_FIELD				p	
-#define TYPE_FRGBA_BR_FP_FIELD				p4	
-#define TYPE_POINT4_BR_FP_FIELD				p4	
 #define TYPE_BOOL_BR_FP_FIELD				iptr		
 #define TYPE_ANGLE_BR_FP_FIELD				fptr		
 #define TYPE_PCNT_FRAC_BR_FP_FIELD			fptr	
@@ -1271,7 +1222,6 @@ public:
 #define TYPE_POINT_BR_FP_FIELD				pt
 #define TYPE_TSTR_BR_FP_FIELD				tstr
 #define TYPE_COLOR_BR_FP_FIELD				clr
-#define TYPE_ACOLOR_BR_FP_FIELD				aclr
 #define TYPE_FPVALUE_BR_FP_FIELD			fpv
 #define TYPE_DWORD_BR_FP_FIELD				dptr
 #define TYPE_bool_BR_FP_FIELD				bptr
@@ -1281,8 +1231,6 @@ public:
 #define TYPE_INT_TAB_BR_FP_FIELD			i_tab
 #define TYPE_RGBA_TAB_BR_FP_FIELD			p_tab
 #define TYPE_POINT3_TAB_BR_FP_FIELD			p_tab
-#define TYPE_FRGBA_TAB_BR_FP_FIELD			p4_tab
-#define TYPE_POINT4_TAB_BR_FP_FIELD			p4_tab
 #define TYPE_BOOL_TAB_BR_FP_FIELD			i_tab
 #define TYPE_ANGLE_TAB_BR_FP_FIELD			f_tab
 #define TYPE_PCNT_FRAC_TAB_BR_FP_FIELD		f_tab
@@ -1318,7 +1266,6 @@ public:
 #define TYPE_INTERFACE_TAB_BR_FP_FIELD		fpi_tab
 #define TYPE_NAME_TAB_BR_FP_FIELD			s_tab
 #define TYPE_COLOR_TAB_BR_FP_FIELD			clr_tab
-#define TYPE_ACOLOR_TAB_BR_FP_FIELD			aclr_tab
 #define TYPE_FPVALUE_TAB_BR_FP_FIELD		fpv_tab
 #define TYPE_VALUE_TAB_BR_FP_FIELD			v_tab
 #define TYPE_DWORD_TAB_BR_FP_FIELD			d_tab
@@ -1327,8 +1274,6 @@ public:
 // by-value fields
 #define TYPE_RGBA_BV_FP_FIELD				p	
 #define TYPE_POINT3_BV_FP_FIELD				p	
-#define TYPE_FRGBA_BV_FP_FIELD				p4	
-#define TYPE_POINT4_BV_FP_FIELD				p4	
 #define TYPE_HSV_BV_FP_FIELD				p
 #define TYPE_BITMAP_BV_FP_FIELD				bm
 #define TYPE_MATRIX3_BV_FP_FIELD			m
@@ -1342,7 +1287,6 @@ public:
 #define TYPE_POINT_BV_FP_FIELD				pt
 #define TYPE_TSTR_BV_FP_FIELD				tstr
 #define TYPE_COLOR_BV_FP_FIELD				clr
-#define TYPE_ACOLOR_BV_FP_FIELD				aclr
 #define TYPE_FPVALUE_BV_FP_FIELD			fpv
 #define TYPE_CLASS_BV_FP_FIELD				cd
 
@@ -1351,8 +1295,6 @@ public:
 #define TYPE_INT_TAB_BV_FP_FIELD			i_tab
 #define TYPE_RGBA_TAB_BV_FP_FIELD			p_tab
 #define TYPE_POINT3_TAB_BV_FP_FIELD			p_tab
-#define TYPE_FRGBA_TAB_BV_FP_FIELD			p4_tab
-#define TYPE_POINT4_TAB_BV_FP_FIELD			p4_tab
 #define TYPE_BOOL_TAB_BV_FP_FIELD			i_tab
 #define TYPE_ANGLE_TAB_BV_FP_FIELD			f_tab
 #define TYPE_PCNT_FRAC_TAB_BV_FP_FIELD		f_tab
@@ -1387,8 +1329,7 @@ public:
 #define TYPE_IOBJECT_TAB_BV_FP_FIELD		iobj_tab
 #define TYPE_INTERFACE_TAB_BV_FP_FIELD		fpi_tab
 #define TYPE_NAME_TAB_BV_FP_FIELD			s_tab
-#define TYPE_COLOR_TAB_BV_FP_FIELD			clr_tab
-#define TYPE_ACOLOR_TAB_BV_FP_FIELD			aclr_tab
+#define TYPE_COLOR_TAB_BV_FP_FIELD			s_tab
 #define TYPE_FPVALUE_TAB_BV_FP_FIELD		fpv_tab
 #define TYPE_VALUE_TAB_BV_FP_FIELD			v_tab
 #define TYPE_DWORD_TAB_BV_FP_FIELD			d_tab
@@ -1404,8 +1345,6 @@ public:
 #define TYPE_INT_FIELD(_v)				(((_v).i))		
 #define TYPE_RGBA_FIELD(_v)				(*((_v).p))	
 #define TYPE_POINT3_FIELD(_v)			(*((_v).p))	
-#define TYPE_FRGBA_FIELD(_v)			(*((_v).p4))	
-#define TYPE_POINT4_FIELD(_v)			(*((_v).p4))	
 #define TYPE_BOOL_FIELD(_v)				(((_v).i))		
 #define TYPE_ANGLE_FIELD(_v)			(((_v).f))		
 #define TYPE_PCNT_FRAC_FIELD(_v)		(((_v).f))	
@@ -1441,7 +1380,6 @@ public:
 #define TYPE_HWND_FIELD(_v)				(((_v).hwnd))
 #define TYPE_NAME_FIELD(_v)				(((_v).s))
 #define TYPE_COLOR_FIELD(_v)			(((_v).clr))
-#define TYPE_ACOLOR_FIELD(_v)			(((_v).aclr))
 #define TYPE_FPVALUE_FIELD(_v)			(((_v).fpv))
 #define TYPE_VALUE_FIELD(_v)			(((_v).v))
 #define TYPE_DWORD_FIELD(_v)			(((_v).d))
@@ -1453,8 +1391,6 @@ public:
 #define TYPE_INT_TAB_FIELD(_v)				(((_v).i_tab))
 #define TYPE_RGBA_TAB_FIELD(_v)				(((_v).p_tab))
 #define TYPE_POINT3_TAB_FIELD(_v)			(((_v).p_tab))
-#define TYPE_FRGBA_TAB_FIELD(_v)			(((_v).p4_tab))
-#define TYPE_POINT4_TAB_FIELD(_v)			(((_v).p4_tab))
 #define TYPE_BOOL_TAB_FIELD(_v)				(((_v).i_tab))
 #define TYPE_ANGLE_TAB_FIELD(_v)			(((_v).f_tab))
 #define TYPE_PCNT_FRAC_TAB_FIELD(_v)		(((_v).f_tab))
@@ -1490,7 +1426,6 @@ public:
 #define TYPE_HWND_TAB_FIELD(_v)				(((_v).hwnd_tab))
 #define TYPE_NAME_TAB_FIELD(_v)				(((_v).s_tab))
 #define TYPE_COLOR_TAB_FIELD(_v)			(((_v).clr_tab))
-#define TYPE_ACOLOR_TAB_FIELD(_v)			(((_v).aclr_tab))
 #define TYPE_FPVALUE_TAB_FIELD(_v)			(((_v).fpv_tab))
 #define TYPE_VALUE_TAB_FIELD(_v)			(((_v).v_tab))
 #define TYPE_DWORD_TAB_FIELD(_v)			(((_v).d_tab))
@@ -1525,8 +1460,6 @@ public:
 #define TYPE_INT_BR_FIELD(_v)				(*((_v).iptr))		
 #define TYPE_RGBA_BR_FIELD(_v)				(*((_v).p))	
 #define TYPE_POINT3_BR_FIELD(_v)			(*((_v).p))	
-#define TYPE_FRGBA_BR_FIELD(_v)				(*((_v).p4))	
-#define TYPE_POINT4_BR_FIELD(_v)			(*((_v).p4))	
 #define TYPE_BOOL_BR_FIELD(_v)				(*((_v).iptr))		
 #define TYPE_ANGLE_BR_FIELD(_v)				(*((_v).fptr))		
 #define TYPE_PCNT_FRAC_BR_FIELD(_v)			(*((_v).fptr))	
@@ -1550,7 +1483,6 @@ public:
 #define TYPE_POINT_BR_FIELD(_v)				(*((_v).pt))
 #define TYPE_TSTR_BR_FIELD(_v)				(*((_v).tstr))
 #define TYPE_COLOR_BR_FIELD(_v)				(*((_v).clr))
-#define TYPE_ACOLOR_BR_FIELD(_v)			(*((_v).aclr))
 #define TYPE_FPVALUE_BR_FIELD(_v)			(*((_v).fpv))
 #define TYPE_DWORD_BR_FIELD(_v)				(*((_v).d))
 #define TYPE_bool_BR_FIELD(_v)				(*((_v).b))
@@ -1561,8 +1493,6 @@ public:
 #define TYPE_INT_TAB_BR_FIELD(_v)			(*((_v).i_tab))
 #define TYPE_RGBA_TAB_BR_FIELD(_v)			(*((_v).p_tab))
 #define TYPE_POINT3_TAB_BR_FIELD(_v)		(*((_v).p_tab))
-#define TYPE_FRGBA_TAB_BR_FIELD(_v)			(*((_v).p4_tab))
-#define TYPE_POINT4_TAB_BR_FIELD(_v)		(*((_v).p4_tab))
 #define TYPE_BOOL_TAB_BR_FIELD(_v)			(*((_v).i_tab))
 #define TYPE_ANGLE_TAB_BR_FIELD(_v)			(*((_v).f_tab))
 #define TYPE_PCNT_FRAC_TAB_BR_FIELD(_v)		(*((_v).f_tab))
@@ -1598,7 +1528,6 @@ public:
 #define TYPE_INTERFACE_TAB_BR_FIELD(_v)		(*((_v).fpi_tab))
 #define TYPE_NAME_TAB_BR_FIELD(_v)			(*((_v).s_tab))
 #define TYPE_COLOR_TAB_BR_FIELD(_v)			(*((_v).clr_tab))
-#define TYPE_ACOLOR_TAB_BR_FIELD(_v)		(*((_v).aclr_tab))
 #define TYPE_FPVALUE_TAB_BR_FIELD(_v)		(*((_v).fpv_tab))
 #define TYPE_VALUE_TAB_BR_FIELD(_v)			(*((_v).v_tab))
 #define TYPE_DWORD_TAB_BR_FIELD(_v)			(*((_v).d_tab))
@@ -1609,8 +1538,6 @@ public:
 #define TYPE_RGBA_BV_FIELD(_v)				(*((_v).p))	
 #define TYPE_POINT3_BV_FIELD(_v)			(*((_v).p))	
 #define TYPE_HSV_BV_FIELD(_v)				(*((_v).p))
-#define TYPE_FRGBA_BV_FIELD(_v)				(*((_v).p4))	
-#define TYPE_POINT4_BV_FIELD(_v)			(*((_v).p4))	
 #define TYPE_BITMAP_BV_FIELD(_v)			(*((_v).bm))
 #define TYPE_MATRIX3_BV_FIELD(_v)			(*((_v).m))
 #define TYPE_ANGAXIS_BV_FIELD(_v)			(*((_v).aa))
@@ -1623,7 +1550,6 @@ public:
 #define TYPE_POINT_BV_FIELD(_v)				(*((_v).pt))
 #define TYPE_TSTR_BV_FIELD(_v)				(*((_v).tstr))
 #define TYPE_COLOR_BV_FIELD(_v)				(*((_v).clr))
-#define TYPE_ACOLOR_BV_FIELD(_v)			(*((_v).aclr))
 #define TYPE_FPVALUE_BV_FIELD(_v)			(*((_v).fpv))
 #define TYPE_CLASS_BV_FIELD(_v)				(*((_v).cd))
 
@@ -1632,8 +1558,6 @@ public:
 #define TYPE_INT_TAB_BV_FIELD(_v)			(*((_v).i_tab))
 #define TYPE_RGBA_TAB_BV_FIELD(_v)			(*((_v).p_tab))
 #define TYPE_POINT3_TAB_BV_FIELD(_v)		(*((_v).p_tab))
-#define TYPE_FRGBA_TAB_BV_FIELD(_v)			(*((_v).p4_tab))
-#define TYPE_POINT4_TAB_BV_FIELD(_v)		(*((_v).p4_tab))
 #define TYPE_BOOL_TAB_BV_FIELD(_v)			(*((_v).i_tab))
 #define TYPE_ANGLE_TAB_BV_FIELD(_v)			(*((_v).f_tab))
 #define TYPE_PCNT_FRAC_TAB_BV_FIELD(_v)		(*((_v).f_tab))
@@ -1668,8 +1592,7 @@ public:
 #define TYPE_IOBJECT_TAB_BV_FIELD(_v)		(*((_v).iobj_tab))
 #define TYPE_INTERFACE_TAB_BV_FIELD(_v)		(*((_v).fpi_tab))
 #define TYPE_NAME_TAB_BV_FIELD(_v)			(*((_v).s_tab))
-#define TYPE_COLOR_TAB_BV_FIELD(_v)			(*((_v).clr_tab))
-#define TYPE_ACOLOR_TAB_BV_FIELD(_v)		(*((_v).aclr_tab))
+#define TYPE_COLOR_TAB_BV_FIELD(_v)			(*((_v).s_tab))
 #define TYPE_FPVALUE_TAB_BV_FIELD(_v)		(*((_v).fpv_tab))
 #define TYPE_VALUE_TAB_BV_FIELD(_v)			(*((_v).v_tab))
 #define TYPE_DWORD_TAB_BV_FIELD(_v)			(*((_v).d_tab))
@@ -1687,8 +1610,6 @@ public:
 #define TYPE_INT_RSLT				
 #define TYPE_RGBA_RSLT				
 #define TYPE_POINT3_RSLT			
-#define TYPE_FRGBA_RSLT				
-#define TYPE_POINT4_RSLT			
 #define TYPE_BOOL_RSLT				
 #define TYPE_ANGLE_RSLT				
 #define TYPE_PCNT_FRAC_RSLT			
@@ -1725,7 +1646,6 @@ public:
 #define TYPE_HWND_RSLT				
 #define TYPE_NAME_RSLT				
 #define TYPE_COLOR_RSLT				
-#define TYPE_ACOLOR_RSLT				
 #define TYPE_FPVALUE_RSLT				
 #define TYPE_VALUE_RSLT				
 #define TYPE_DWORD_RSLT				
@@ -1737,8 +1657,6 @@ public:
 #define TYPE_INT_TAB_RSLT				
 #define TYPE_RGBA_TAB_RSLT				
 #define TYPE_POINT3_TAB_RSLT			
-#define TYPE_FRGBA_TAB_RSLT				
-#define TYPE_POINT4_TAB_RSLT			
 #define TYPE_BOOL_TAB_RSLT				
 #define TYPE_ANGLE_TAB_RSLT				
 #define TYPE_PCNT_FRAC_TAB_RSLT			
@@ -1774,7 +1692,6 @@ public:
 #define TYPE_HWND_TAB_RSLT				
 #define TYPE_NAME_TAB_RSLT				
 #define TYPE_COLOR_TAB_RSLT				
-#define TYPE_ACOLOR_TAB_RSLT				
 #define TYPE_FPVALUE_TAB_RSLT				
 #define TYPE_VALUE_TAB_RSLT				
 #define TYPE_DWORD_TAB_RSLT				
@@ -1801,8 +1718,6 @@ public:
 #define TYPE_INT_BR_RSLT				&
 #define TYPE_RGBA_BR_RSLT				&
 #define TYPE_POINT3_BR_RSLT				&
-#define TYPE_FRGBA_BR_RSLT				&
-#define TYPE_POINT4_BR_RSLT				&
 #define TYPE_BOOL_BR_RSLT				&
 #define TYPE_ANGLE_BR_RSLT				&
 #define TYPE_PCNT_FRAC_BR_RSLT			&
@@ -1826,7 +1741,6 @@ public:
 #define TYPE_POINT_BR_RSLT				&
 #define TYPE_TSTR_BR_RSLT				&
 #define TYPE_COLOR_BR_RSLT				&
-#define TYPE_ACOLOR_BR_RSLT				&
 #define TYPE_FPVALUE_BR_RSLT			&
 #define TYPE_DWORD_BR_RSLT				&
 #define TYPE_bool_BR_RSLT				&
@@ -1836,8 +1750,6 @@ public:
 #define TYPE_INT_TAB_BR_RSLT			&
 #define TYPE_RGBA_TAB_BR_RSLT			&
 #define TYPE_POINT3_TAB_BR_RSLT			&
-#define TYPE_FRGBA_TAB_BR_RSLT			&
-#define TYPE_POINT4_TAB_BR_RSLT			&
 #define TYPE_BOOL_TAB_BR_RSLT			&
 #define TYPE_ANGLE_TAB_BR_RSLT			&
 #define TYPE_PCNT_FRAC_TAB_BR_RSLT		&
@@ -1873,7 +1785,6 @@ public:
 #define TYPE_INTERFACE_TAB_BR_RSLT		&
 #define TYPE_NAME_TAB_BR_RSLT			&
 #define TYPE_COLOR_TAB_BR_RSLT			&
-#define TYPE_ACOLOR_TAB_BR_RSLT			&
 #define TYPE_FPVALUE_TAB_BR_RSLT		&
 #define TYPE_VALUE_TAB_BR_RSLT			&
 #define TYPE_DWORD_TAB_BR_RSLT			&
@@ -1883,8 +1794,6 @@ public:
 #define TYPE_RGBA_BV_RSLT				&
 #define TYPE_POINT3_BV_RSLT				&
 #define TYPE_HSV_BV_RSLT				&
-#define TYPE_FRGBA_BV_RSLT				&
-#define TYPE_POINT4_BV_RSLT				&
 #define TYPE_BITMAP_BV_RSLT				&
 #define TYPE_MATRIX3_BV_RSLT			&
 #define TYPE_ANGAXIS_BV_RSLT			&
@@ -1897,7 +1806,6 @@ public:
 #define TYPE_POINT_BV_RSLT				&
 #define TYPE_TSTR_BV_RSLT				&
 #define TYPE_COLOR_BV_RSLT				&
-#define TYPE_ACOLOR_BV_RSLT				&
 #define TYPE_FPVALUE_BV_RSLT			&
 #define TYPE_CLASS_BV_RSLT				&
 
@@ -1906,8 +1814,6 @@ public:
 #define TYPE_INT_TAB_BV_RSLT			&
 #define TYPE_RGBA_TAB_BV_RSLT			&
 #define TYPE_POINT3_TAB_BV_RSLT			&
-#define TYPE_FRGBA_TAB_BV_RSLT			&
-#define TYPE_POINT4_TAB_BV_RSLT			&
 #define TYPE_BOOL_TAB_BV_RSLT			&
 #define TYPE_ANGLE_TAB_BV_RSLT			&
 #define TYPE_PCNT_FRAC_TAB_BV_RSLT		&
@@ -1943,7 +1849,6 @@ public:
 #define TYPE_INTERFACE_TAB_BV_RSLT		&
 #define TYPE_NAME_TAB_BV_RSLT			&
 #define TYPE_COLOR_TAB_BV_RSLT			&
-#define TYPE_ACOLOR_TAB_BV_RSLT			&
 #define TYPE_FPVALUE_TAB_BV_RSLT		&
 #define TYPE_VALUE_TAB_BV_RSLT			&
 #define TYPE_DWORD_TAB_BV_RSLT			&
@@ -1955,8 +1860,6 @@ public:
 #define TYPE_INT_TYPE				int
 #define TYPE_RGBA_TYPE				Point3
 #define TYPE_POINT3_TYPE			Point3
-#define TYPE_FRGBA_TYPE				Point4
-#define TYPE_POINT4_TYPE			Point4
 #define TYPE_BOOL_TYPE				BOOL
 #define TYPE_ANGLE_TYPE				float
 #define TYPE_PCNT_FRAC_TYPE			float
@@ -1993,7 +1896,6 @@ public:
 #define TYPE_HWND_TYPE				HWND
 #define TYPE_NAME_TYPE				TCHAR*
 #define TYPE_COLOR_TYPE				Color*
-#define TYPE_ACOLOR_TYPE			AColor*
 #define TYPE_FPVALUE_TYPE			FPValue*
 #define TYPE_VALUE_TYPE				Value*
 #define TYPE_DWORD_TYPE				DWORD
@@ -2004,8 +1906,6 @@ public:
 #define TYPE_INT_TAB_TYPE				Tab<int>*
 #define TYPE_RGBA_TAB_TYPE				Tab<Point3>*
 #define TYPE_POINT3_TAB_TYPE			Tab<Point3>*
-#define TYPE_FRGBA_TAB_TYPE				Tab<Point4>*
-#define TYPE_POINT4_TAB_TYPE			Tab<Point4>*
 #define TYPE_BOOL_TAB_TYPE				Tab<BOOL>*
 #define TYPE_ANGLE_TAB_TYPE				Tab<float>*
 #define TYPE_PCNT_FRAC_TAB_TYPE			Tab<float>*
@@ -2042,7 +1942,6 @@ public:
 #define TYPE_HWND_TAB_TYPE				Tab<HWND>*
 #define TYPE_NAME_TAB_TYPE				Tab<TCHAR*>*
 #define TYPE_COLOR_TAB_TYPE				Tab<Color*>*
-#define TYPE_ACOLOR_TAB_TYPE			Tab<AColor*>*
 #define TYPE_FPVALUE_TAB_TYPE			Tab<FPValue*>*
 #define TYPE_VALUE_TAB_TYPE				Tab<Value*>*
 #define TYPE_DWORD_TAB_TYPE				Tab<DWORD>*
@@ -2069,8 +1968,6 @@ public:
 #define TYPE_INT_BR_TYPE				int&
 #define TYPE_RGBA_BR_TYPE				Point3&
 #define TYPE_POINT3_BR_TYPE				Point3&
-#define TYPE_FRGBA_BR_TYPE				Point4&
-#define TYPE_POINT4_BR_TYPE				Point4&
 #define TYPE_BOOL_BR_TYPE				int&
 #define TYPE_ANGLE_BR_TYPE				float&
 #define TYPE_PCNT_FRAC_BR_TYPE			float&
@@ -2094,7 +1991,6 @@ public:
 #define TYPE_POINT_BR_TYPE				POINT&
 #define TYPE_TSTR_BR_TYPE				TSTR&
 #define TYPE_COLOR_BR_TYPE				Color&
-#define TYPE_ACOLOR_BR_TYPE				AColor&
 #define TYPE_FPVALUE_BR_TYPE			FPValue&
 #define TYPE_DWORD_BR_TYPE				DWORD&
 #define TYPE_bool_BR_TYPE				bool&
@@ -2104,8 +2000,6 @@ public:
 #define TYPE_INT_TAB_BR_TYPE				Tab<int>&
 #define TYPE_RGBA_TAB_BR_TYPE				Tab<Point3>&
 #define TYPE_POINT3_TAB_BR_TYPE				Tab<Point3>&
-#define TYPE_FRGBA_TAB_BR_TYPE				Tab<Point4>&
-#define TYPE_POINT4_TAB_BR_TYPE				Tab<Point4>&
 #define TYPE_BOOL_TAB_BR_TYPE				Tab<BOOL>&
 #define TYPE_ANGLE_TAB_BR_TYPE				Tab<float>&
 #define TYPE_PCNT_FRAC_TAB_BR_TYPE			Tab<float>&
@@ -2142,7 +2036,6 @@ public:
 #define TYPE_HWND_TAB_BR_TYPE				Tab<HWND>&
 #define TYPE_NAME_TAB_BR_TYPE				Tab<TCHAR*>&
 #define TYPE_COLOR_TAB_BR_TYPE				Tab<Color*>&
-#define TYPE_ACOLOR_TAB_BR_TYPE				Tab<AColor*>&
 #define TYPE_FPVALUE_TAB_BR_TYPE			Tab<FPValue*>&
 #define TYPE_VALUE_TAB_BR_TYPE				Tab<Value*>&
 #define TYPE_DWORD_TAB_BR_TYPE				Tab<DWORD>&
@@ -2152,8 +2045,6 @@ public:
 #define TYPE_RGBA_BV_TYPE				Point3		
 #define TYPE_POINT3_BV_TYPE				Point3
 #define TYPE_HSV_BV_TYPE				Point3
-#define TYPE_FRGBA_BV_TYPE				Point4		
-#define TYPE_POINT4_BV_TYPE				Point4
 #define TYPE_BITMAP_BV_TYPE				PBBitmap
 #define TYPE_MATRIX3_BV_TYPE			Matrix3
 #define TYPE_ANGAXIS_BV_TYPE			AngAxis
@@ -2166,7 +2057,6 @@ public:
 #define TYPE_POINT_BV_TYPE				POINT
 #define TYPE_TSTR_BV_TYPE				TSTR
 #define TYPE_COLOR_BV_TYPE				Color
-#define TYPE_ACOLOR_BV_TYPE				AColor
 #define TYPE_FPVALUE_BV_TYPE			FPValue
 #define TYPE_CLASS_BV_TYPE				ClassID
 
@@ -2175,8 +2065,6 @@ public:
 #define TYPE_INT_TAB_BV_TYPE				Tab<int>
 #define TYPE_RGBA_TAB_BV_TYPE				Tab<Point3>
 #define TYPE_POINT3_TAB_BV_TYPE				Tab<Point3>
-#define TYPE_FRGBA_TAB_BV_TYPE				Tab<Point4>
-#define TYPE_POINT4_TAB_BV_TYPE				Tab<Point4>
 #define TYPE_BOOL_TAB_BV_TYPE				Tab<BOOL>
 #define TYPE_ANGLE_TAB_BV_TYPE				Tab<float>
 #define TYPE_PCNT_FRAC_TAB_BV_TYPE			Tab<float>
@@ -2213,7 +2101,6 @@ public:
 #define TYPE_HWND_TAB_BV_TYPE				Tab<HWND>
 #define TYPE_NAME_TAB_BV_TYPE				Tab<TCHAR*>
 #define TYPE_COLOR_TAB_BV_TYPE				Tab<Color*>
-#define TYPE_ACOLOR_TAB_BV_TYPE				Tab<AColor*>
 #define TYPE_FPVALUE_TAB_BV_TYPE			Tab<FPValue*>
 #define TYPE_VALUE_TAB_BV_TYPE				Tab<Value*>
 #define TYPE_DWORD_TAB_BV_TYPE				Tab<DWORD>

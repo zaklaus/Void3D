@@ -93,11 +93,7 @@
 	def_name(display)
 	def_name(distance)
 	def_name(doubleClicked)
-#ifndef WEBVERSION
-#ifndef NO_DRAFT_RENDERER
 	def_name(draft)
-#endif // NO_DRAFT_RENDERER
-#endif // WEBVERSION
 	def_name(drop)
 	def_name(dropdownList)
 	def_name(dynamicOnly)
@@ -107,7 +103,6 @@
 	def_name(effectsDlg)
 	def_name(enabled)
 	def_name(enabledInViews)
-	def_name(enabledInRenders)
 	def_name(enablePixelSampler)
 	def_name(encryptFile)
 	def_name(entered)
@@ -298,11 +293,7 @@
 	def_name(preApply)
 	def_name(prefix)
 	def_name(pressed)
-#ifdef WEBVERSION
-	def_name(flash)
-#else
 	def_name(production)
-#endif
 	def_name(progressBar)
  	def_name(project)
  	def_name(projected)
@@ -573,7 +564,6 @@
 	def_name(x_locked)
 	def_name(y_locked)
 	def_name(z_locked)
-	def_name(w_locked)
 	def_name(constantVelocity)
 	def_name(freeHandle)
 	def_name(tension)
@@ -625,9 +615,6 @@
 	def_name(imageBlurEnvironmentMap)
 	def_name(raytracedShadowDepth)
 	def_name(autoReflectLevels)
-#ifdef	SINGLE_SUPERSAMPLE_IN_RENDER
-	def_name(sampleQuality)
-#endif	// SINGLE_SUPERSAMPLE_IN_RENDER
 
 	def_name(aperture)
 	def_name(ditherTrueColor)
@@ -641,10 +628,6 @@
 	def_name(render)
 	def_name(missing)
 	def_name(localOnly)
-	def_name(skipCustAttributes)
-	def_name(skipVPRender)
-	def_name(firstSubOnly)
-
 
 	def_name ( uParam )
 	def_name ( uTangent )
@@ -964,103 +947,6 @@
 	def_name ( keyable )
 	def_name ( isHSV )
 	def_name ( supportsKeys )
-
-	// LAM - 3/5/03
-	def_name ( postload )
-	def_name ( postcreate )
-
-	// LAM - 3/22/03
-	def_name ( delayed )
-
-	// LAM - 5/27/03
-	def_name ( dolayer )
-	def_name ( w )
-	def_name ( alpha )
-
-	// LAM - 6/2/03
-	def_name ( autoPromoteDelegateProps )
-	def_name ( warning )
-	def_name ( info )
-	def_name ( debug )
-	def_name ( supportsTexureBaking )
-	def_name ( instance )
-	def_name ( reference )
-    
-	def_name( rendSimplifyAreaLights )
-
-	// LAM - 6/24/03
-	def_name ( missingExtFilesAction )
-	def_name ( missingExtFilesList )
-	def_name ( missingDLLsAction )
-	def_name ( missingDLLsList )
-	def_name ( missingXRefsAction )
-	def_name ( missingXRefsList )
-	def_name ( missingUVWAction )
-	def_name ( missingUVWList )
-
-	def_name ( logToFile )
-	def_name ( logmsg )
-
-	def_name ( placement )
-	def_name ( minimized )
-	def_name ( maximized )
-	def_name ( usePBValidity )
-	def_name ( lockWidth )
-	def_name ( lockHeight )
-
-	def_name ( promptMtlDups )
-	def_name ( useMergedMtlDups )
-	def_name ( useSceneMtlDups )
-	def_name ( renameMtlDups )
-	def_name ( promptReparent )
-	def_name ( alwaysReparent )
-	def_name ( neverReparent )
-
-	def_name ( clearNeedSaveFlag )
-	def_name ( addFileToMRU )
-	def_name ( useNewFile )
-
-	def_name ( enabledIn )
-	def_name ( disabledIn )
-
-	def_name ( readOnly )
-	def_name ( yes )
-	def_name ( no )
-	def_name ( cancel )
-	def_name ( AltExecute )
-	def_name ( closeDialogs )
-
-	def_name ( root )
-	def_name ( proxy )
-	def_name ( manipulators )
-
-	def_name ( isDisplayed )
-	def_name ( autoDisplay )
-	def_name ( asString )
-	def_name ( explicitNames )
-	def_name ( remap )
-	def_name ( immediateOnly )
-	def_name ( labelOnTop )
-
-	def_name ( exact ) 
-	def_name ( ignoreCase )
-
-	def_name ( printAllElements )
-
-	def_name ( drawBG )
-	def_name ( drawGrid )
-	def_name ( upperToolbar )
-	def_name ( showReset )
-	def_name ( lowerToolbar )
-	def_name ( scrollBars )
-	def_name ( autoScroll )
-	def_name ( ruler )
-	def_name ( constrainY )
-	def_name ( hideDisabled )
-	def_name ( singleSelect )
-	def_name ( noFilterButtons )
-
-	def_name ( localizedName )
 
 /* distinguished marker values, un-interned names */
 	def_marker(keyarg_marker, "#keys")

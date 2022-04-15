@@ -15,12 +15,7 @@
 
 #define __IPOINT2__
 
-#if _MSC_VER < 1300  // Visual Studio .NET
- class ostream;
-#else
- #include <iosfwd>
-// using std::ostream;		CA - 10/24/02 - Removed to preserve compatibility for 3rd parties
-#endif
+class ostream;
 
 class IPoint2 {
 public:
@@ -66,11 +61,7 @@ IPoint2 DllExport operator*(int, const IPoint2&);	// multiply by scalar
 IPoint2 DllExport operator*(const IPoint2&, int);	// multiply by scalar
 IPoint2 DllExport operator/(const IPoint2&, int);	// divide by scalar
 
-#if _MSC_VER < 1300  // Visual Studio .NET
 ostream DllExport &operator<<(ostream&, const IPoint2&); 
-#else
-std::ostream DllExport &operator<<(std::ostream&, const IPoint2&); 
-#endif
 
 // Inlines:
 
