@@ -107,7 +107,7 @@ public:
    C_str user_comments;       //read from the loaded file
 
    int tab;                   //tab for log
-
+   bool mafia;
    typedef map<PI3D_frame, C_str> t_frm_properties;
    t_frm_properties frm_properties;
 
@@ -164,7 +164,8 @@ public:
       anim_set(NULL),
       load_cb_proc(NULL), load_cb_context(NULL),
       anim_length(0),
-      num_mats(0)
+      num_mats(0),
+	  mafia(false)
    {}
 
 //----------------------------
@@ -247,6 +248,9 @@ private:
 //----------------------------
 // Read single material from chunk.
    I3D_RESULT ReadMaterial();
+
+// Read all materials from 4ds file
+   I3D_RESULT ReadMaterials_4DS();
 
    bool ReadTrackPos(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
    bool ReadTrackRot(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
@@ -370,6 +374,15 @@ public:
 public:
    I3D_RESULT Open(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
       void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container);
+   
+
+   I3D_RESULT Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
+      void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container);
+
+   I3D_RESULT ReadVisual(PI3D_visual vis);
+   I3D_RESULT ReadSector(PI3D_sector sec);
+   I3D_RESULT ReadDummy(PI3D_dummy dummy);
+
    void Close();
 };
 

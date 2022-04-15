@@ -65,6 +65,8 @@ public:
    I3D_RESULT OpenFromChunk(C_chunk &ck, dword flags, PI3D_LOAD_CB_PROC cb_proc,
       void *cb_context, PI3D_scene scene, PI3D_frame root, PI3D_animation_set anim_set, PI3D_driver);
 
+   I3D_RESULT OpenFrom4DS(C_chunk &ck, dword flags, PI3D_LOAD_CB_PROC cb_proc,
+      void *cb_context, PI3D_scene scene, PI3D_frame root, PI3D_animation_set anim_set, PI3D_driver);
 public:
    I3DMETHOD_(I3D_RESULT,Open)(const char *fname, dword flags, PI3D_LOAD_CB_PROC cb_proc, void *cb_context){
       return (master_interface->*vcall->cbOpen)(fname, flags, cb_proc, cb_context);

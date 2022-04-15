@@ -592,7 +592,7 @@ class C_edit_Create: public C_editor_item_Create{
                               SendMessage(GetParent(hwnd), CDM_GETFILEPATH, MAX_PATH, (LPARAM)&buf);
                               hp->cache_model->GetRelativeDirectory(buf);
                               int len = strlen(buf);
-                              if(len>=4 && !stricmp(&buf[len-4], ".i3d"))
+                              if(len>=4 && (!stricmp(&buf[len - 4], ".i3d") || !stricmp(&buf[len - 4], ".4ds")))
                                  buf[len-4] = 0;
                                              //try to open the file and render scene
                               {
@@ -767,6 +767,7 @@ class C_edit_Create: public C_editor_item_Create{
          title = "Open model";
          extensions =
             "Insanity 3D files (*.i3d)\0*.i3d\0"
+            "LS3D file (*.4ds)\0*.4ds\0"
             "All files\0*.*\0";
 
          hlp.mode = S_hlp::MODE_MODEL;
