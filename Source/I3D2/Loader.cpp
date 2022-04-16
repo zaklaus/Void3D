@@ -2479,9 +2479,17 @@ void C_loader::SmoothSceneNormals(PI3D_scene scene, C_vector<S_smooth_info> &smo
    delete[] smooth_data;
 }
 
-//void ReadLod(C_chunk& c, 
+I3D_RESULT C_loader::ReadBillboard_4DS(PI3D_visual vis) {
+    if(vis->GetVisualType1() == I3D_VISUAL_BILLBOARD) {
+        //I3DPROP_BBRD_ROT_AXIS
+        vis->SetProperty(0, ck.ReadInt());
+        //I3DPROP_BBRD_ROT_AXIS
+        vis->SetProperty(1, ck.ReadBool());   
+    }
+    return I3D_OK;
+}
 
-I3D_RESULT C_loader::ReadVisual(PI3D_visual vis) {
+I3D_RESULT C_loader::ReadVisual_4DS(PI3D_visual vis) {
    
    word instanced = ck.ReadWord();
    byte lod_level = ck.ReadByte();
@@ -2555,7 +2563,7 @@ I3D_RESULT C_loader::ReadVisual(PI3D_visual vis) {
    return I3D_OK;
 }
 
-I3D_RESULT C_loader::ReadDummy(PI3D_dummy dummy) {
+I3D_RESULT C_loader::ReadDummy_4DS(PI3D_dummy dummy) {
 
    I3D_bbox bbox;
    ck.Read(&bbox, sizeof(I3D_bbox));
@@ -2564,7 +2572,7 @@ I3D_RESULT C_loader::ReadDummy(PI3D_dummy dummy) {
    return I3D_OK;
 }
 
-I3D_RESULT C_loader::ReadSector(PI3D_sector sec) {
+I3D_RESULT C_loader::ReadSector_4DS(PI3D_sector sec) {
    dword unk1 = ck.ReadDword();
    dword unk2 = ck.ReadDword();
    dword vertex_cnt = ck.ReadDword();
@@ -2665,28 +2673,29 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
             
             switch(visual_type) {
-
-               //object
-               case 0: {
-                  frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_OBJECT); 
-                  ReadVisual(I3DCAST_VISUAL(frm));
-               } break;
+                case DataFormat4DS::VISUALMESHTYPE_STANDARD: {
+                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_OBJECT); 
+                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
+                } break;
                
-               //glow
-               case 6: {
-                  //NOTE: read dummy data for glow to dont skip bytes
-                  byte glow_cnt = ck.ReadByte();
-                  for(int j = 0; j < glow_cnt; j++) {
-                     S_vector glow_pos = ck.ReadVector();
-                     word material_id = ck.ReadWord();
-                  }
-               } break;
+                case DataFormat4DS::VISUALMESHTYPE_BILLBOARD: {
+                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_BILLBOARD);
+                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
+                    ReadBillboard_4DS(I3DCAST_VISUAL(frm));
+                } break;
 
-               default: {
-                  int test = 0;
-                  test++;
-               } break;
-
+                case DataFormat4DS::VISUALMESHTYPE_GLOW: {
+                    //NOTE: read dummy data for glow to dont skip bytes
+                    byte glow_cnt = ck.ReadByte();
+                    for(int j = 0; j < glow_cnt; j++) {
+                        S_vector glow_pos = ck.ReadVector();
+                        word material_id = ck.ReadWord();
+                    }
+                } break;
+                default: {
+                    int test = 0;
+                    test++;
+                } break;
             }
          } break;
 
@@ -2696,7 +2705,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
 
             frm = scene->CreateFrame(FRAME_DUMMY);
-            ReadDummy(I3DCAST_DUMMY(frm));
+            ReadDummy_4DS(I3DCAST_DUMMY(frm));
          } break;
          
          case FRAME_SECTOR: {
@@ -2705,8 +2714,9 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
 
             frm = scene->CreateFrame(FRAME_SECTOR);
-            ReadSector(NULL);
+            ReadSector_4DS(NULL);
          } break;
+
          default: {
             int test = 0;
             test++;
@@ -2714,7 +2724,8 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
          }
       }
       
-      if(!frm) continue;
+      if(!frm) 
+          continue;
 
       frm->Release();
       frm->SetName(frm_name);

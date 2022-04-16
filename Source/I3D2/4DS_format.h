@@ -4,8 +4,7 @@
 #include <I3D\I3D_math.h>
 
 namespace DataFormat4DS {
-
-    typedef enum {
+    enum {
         MATERIALFLAG_TEXTUREDIFFUSE = 0x00040000,  // whether diffuse texture is present
         MATERIALFLAG_COLORED = 0x08000000,         // whether to use diffuse color (only applies with diffuse texture)
         MATERIALFLAG_MIPMAPPING = 0x00800000,
@@ -22,20 +21,19 @@ namespace DataFormat4DS {
         MATERIALFLAG_ADDITIONALEFFECT = 0x00008000,  // should be ALPHATEXTURE | COLORKEY | ADDITIVEMIXING
         MATERIALFLAG_ALPHATEXTURE = 0x40000000,
         MATERIALFLAG_COLORKEY = 0x20000000,
-        MATERIALFLAG_ADDITIVEMIXING = 0x80000000  // the object is blended against the world by
-                                                  // adding RGB (see street lamps etc.)
-    } MaterialFlag;
+        MATERIALFLAG_ADDITIVEMIXING = 0x80000000  // the object is blended against the world by                                             // adding RGB (see street lamps etc.)
+    };
 
-    typedef enum {
+    enum {
         MESHTYPE_STANDARD = 0x01,   // visual mesh
         MESHTYPE_COLLISION = 0x02,  // NOTE(zaklaus): Imaginary type based on mesh name "wcol*"
         MESHTYPE_SECTOR = 0x05,     // part of space, used for culling, effective lighting etc.
         MESHTYPE_DUMMY = 0x06,      // invisible bounding box
         MESHTYPE_TARGET = 0x07,     // used in human models (as a shooting target?)
         MESHTYPE_JOINT = 0x0a        // for skeletal animation
-    } MeshType;
+    };
 
-    typedef enum {
+    enum {
         VISUALMESHTYPE_STANDARD = 0x0,      // normal mesh
         VISUALMESHTYPE_SINGLEMESH = 0x02,   // mesh with bones
         VISUALMESHTYPE_SINGLEMORPH = 0x03,  // combination of morph (for face) and skeletal (for body) animation
@@ -43,23 +41,23 @@ namespace DataFormat4DS {
         VISUALMESHTYPE_MORPH = 0x05,        // mesh with morphing (non-skeletal) animation, e.g. curtains in wind
         VISUALMESHTYPE_GLOW = 0x06,         // has no geometry, only shows glow texture
         VISUALMESHTYPE_MIRROR = 0x08        // reflects the scene
-    } VisualMeshType;                       // subtype of mesh, when MeshType == MESHTYPE_STANDARD
+    };                       // subtype of mesh, when MeshType == MESHTYPE_STANDARD
 
-    typedef enum {
+    enum {
         MESHRENDERFLAG_USEDEPTHBIAS = 0x0001,  // whether to receive shadows
         MESHRENDERFLAG_USESHADOWS = 0x0002,
         MESHRENDERFLAG_UNKNOWN = 0x0008,        // always 1
         MESHRENDERFLAG_USEPROJECTION = 0x0020,  // used for projecting textures, such as blood
         MESHRENDERFLAG_FORBIDFOG = 0x0080
-    } MeshRenderFlag;
+    };
 
-    typedef enum {
+    enum {
         MESHOCCLUDINGFLAG_NORMAL = 0x09,
         MESHOCCLUDINGFLAG_SECTOR = 0x7D,
         MESHOCCLUDINGFLAG_WALL = 0x3D,    // mesh in sector (walls)
         MESHOCCLUDINGFLAG_PORTAL = 0x1D,  // mesh in portal
         MESHOCCLUDINGFLAG_INACTIVE = 0x11
-    } MeshOccludingFlag;
+    };
 
     typedef struct {
         dword mFlags;
