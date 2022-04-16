@@ -4,7 +4,7 @@
 
 //----------------------------
 
-#define TURN_SPEED 3000
+#define TURN_SPEED 1400
 
 #ifdef _DEBUG
 
@@ -34,8 +34,10 @@ class C_vehicle_imp: public C_actor_physics{
    C_smart_ptr<I3D_visual> brake_light;
                               //wheel joints, first are front, last are back
    C_smart_ptr<IPH_joint_hinge2> jnt_wheels[4];
+   C_str ctrl;
 
    bool enabled;
+   bool can_control;
 
    S_vector last_pos;
    int last_gear;
@@ -80,8 +82,10 @@ public:
    C_vehicle_imp(C_game_mission &gm1, PI3D_frame in_frm):
       C_actor_physics(gm1, in_frm, ACTOR_VEHICLE),
       enabled(false),
+      can_control(false),
       last_pos(0, 0, 0),
-      last_gear(0)
+      last_gear(0),
+      ctrl("")
       //emit_sound_count(0),
       //wheel_turn(0.0f)
    {
@@ -91,12 +95,7 @@ public:
 //----------------------------
 
    virtual void GameBegin(){
-
       SetupVolumes(0x1);
-
-      C_game_camera *gcam = mission.GetGameCamera();
-      gcam->SetFocus(frame->FindChildFrame("engine"), frame);
-      gcam->SetDistance(10.0f);
 
       PI3D_model mod = GetModel();
       if(mod){
@@ -173,11 +172,44 @@ public:
       snd_engine = NULL;
    }
 
+   virtual void Use(C_actor *act /* = NULL */){
+       C_game_camera* cam = mission.GetGameCamera();
+
+       if (!cam){
+           return;
+       }
+
+       if (!can_control){
+           cam->ReattachOwner();
+           cam->GetCamera()->SetPos(S_vector(0,0,0));
+           cam->SetFocus(frame->FindChildFrame("engine"), frame);
+           cam->SetDistance(8.0f);
+           can_control = true;
+           ctrl = act->GetName();
+
+           if (act){
+               //act->Enable(false);
+               //act->GetFrame()->SetOn(false);
+           }
+       }else{
+           can_control = false;
+
+           if (act){
+               //act->GetFrame()->SetOn(true);
+               //act->Enable(true);
+               act->Use(this);
+           }
+
+           ctrl = "";
+       }
+   }
+
 //----------------------------
 
    virtual void Tick(const S_tick_context &tc){
 
       float tsec = (float)tc.time * .001f;
+      int gear = 0;
 
       float curr_speed = 0.0f;
       bool moving_backward = false;
@@ -191,142 +223,158 @@ public:
       }
 
 #ifdef DEBUG_DIRECT_KEYS
-      int want_dir = 0;       //0=stay, 1=forward, -1=backward
-      float steer = 0.0f;
-      bool brake = false;
+      if (can_control) {
 
-      if(tc.p_ctrl){
-         if(tc.p_ctrl->Get(CS_MOVE_FORWARD)){
-            want_dir = 1;
-         }else
-         if(tc.p_ctrl->Get(CS_MOVE_BACK)){
-            want_dir = -1;
-         }
-         if(tc.p_ctrl->Get(CS_MOVE_LEFT)){
-            steer = .5f;
-         }else
-         if(tc.p_ctrl->Get(CS_MOVE_RIGHT)){
-            steer = -.5f;
-         }
-         if(tc.p_ctrl->Get(CS_FIRE)){
-            brake = true;
-         }
-      }
+          if (tc.p_ctrl->Get(CS_USE, true)){
+              if (ctrl.Size()){
+                  PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
+                  if (frm && GetFrameActor(frm))
+                      Use(GetFrameActor(frm));
+              }
+          }
 
-      const int max_gear = 5;
+          int want_dir = 0;       //0=stay, 1=forward, -1=backward
+          float steer = 0.0f;
+          bool brake = false;
 
-      static struct S_gear_table{
-         float _vel, force, trans_speed;
-      } gear_tab[max_gear+3] = {
-         {-2.0f, 20, 15},              //-1
-         {0, 0},              //0
-         {2.3f, 33, 15},      //1
-         {4.5f, 22, 35},      //2
-         {8.0f, 16, 55},      //3
-         {17.0f, 18, 80},      //4
-         {24.0f, 10,   },      //5
-      };
+          if (tc.p_ctrl) {
+              if (tc.p_ctrl->Get(CS_MOVE_FORWARD)) {
+                  want_dir = 1;
+              }
+              else
+                  if (tc.p_ctrl->Get(CS_MOVE_BACK)) {
+                      want_dir = -1;
+                  }
+              if (tc.p_ctrl->Get(CS_MOVE_LEFT)) {
+                  steer = .5f;
+              }
+              else
+                  if (tc.p_ctrl->Get(CS_MOVE_RIGHT)) {
+                      steer = -.5f;
+                  }
+              if (tc.p_ctrl->Get(CS_FIRE)) {
+                  brake = true;
+              }
+          }
 
-                              //determine gear
-      int gear = 0;
-      if(want_dir){
-         if(want_dir > 0){
-            if(moving_backward && curr_speed > 1.0f){
-               want_dir = 0;
-               brake = true;
-            }else{
-               for(gear=1; gear<max_gear; gear++){
-                  if(curr_speed < gear_tab[gear+1].trans_speed)
-                     break;
-               }
-                              //don't gear down too early
-               if(last_gear>gear && curr_speed > (gear_tab[gear+1].trans_speed*.7f))
-                  ++gear;
-               else
-               if(gear > last_gear+1)
-                  gear = last_gear+1;
-               //gear = 1;
-            }
-         }else{
-            if(!moving_backward && curr_speed > 1.0f){
-               want_dir = 0;
-               brake = true;
-            }else{
-               gear = -1;
-            }
-         }
-      }
-      last_gear = gear;
+          const int max_gear = 5;
 
-      //if(motor)
-      {
-         if((want_dir || steer) && !enabled)
-            Enable(true);
-         //float turn = 0.0f;
-                              //forces applied to joint motor under various circumstances
-         const float brake_force = 100.0f;
-         const float neutral_force = 3.0f;
+          static struct S_gear_table {
+              float _vel, force, trans_speed;
+          } gear_tab[max_gear + 3] = {
+             {-2.0f, 20, 15},              //-1
+             {0, 0},              //0
+             {2.3f, 33, 15},      //1
+             {4.5f, 22, 35},      //2
+             {8.0f, 16, 55},      //3
+             {17.0f, 18, 80},      //4
+             {24.0f, 10,   },      //5
+          };
 
-         float vel = 0.0f, force;
-         if(!want_dir){
-            force = brake ? brake_force : neutral_force;
-         }else{
-            //vel = gear_tab[gear+1].vel;
-            force = gear_tab[gear+1].force;
-            //DEBUG("***");
-            //DEBUG(vel);
-            //DEBUG(curr_speed * .25f);
-            float rel_speed = Min(curr_speed, gear_tab[gear+1].trans_speed);
-            vel = .5f + rel_speed * .3f;
-            vel *= (float)want_dir;
-         }
-                              //process all wheels
-         for(int i=4; i--; ){
-            PIPH_joint_hinge2 jnt = jnt_wheels[i];
-            if(i<2){
-               float curr_angle = jnt->GetAngle();
-               float v = steer - curr_angle;
-               float k = tsec * 2.0f;
-               if(curr_angle * steer < 0.0f)
-                  k *= 2.0f;
-               v = Max(-k, Min(k, v));
-               v *= 10.0f;
-               jnt->SetDesiredVelocity(v);
-            }
-                           //apply motor onto joint
-            jnt->SetDesiredVelocity(-vel, 1);
-            jnt->SetMaxForce(force, 1);
+          //determine gear
+          if (want_dir) {
+              if (want_dir > 0) {
+                  if (moving_backward && curr_speed > 1.0f) {
+                      want_dir = 0;
+                      brake = true;
+                  }
+                  else {
+                      for (gear = 1; gear < max_gear; gear++) {
+                          if (curr_speed < gear_tab[gear + 1].trans_speed)
+                              break;
+                      }
+                      //don't gear down too early
+                      if (last_gear > gear && curr_speed > (gear_tab[gear + 1].trans_speed * .7f))
+                          ++gear;
+                      else
+                          if (gear > last_gear + 1)
+                              gear = last_gear + 1;
+                      //gear = 1;
+                  }
+              }
+              else {
+                  if (!moving_backward && curr_speed > 1.0f) {
+                      want_dir = 0;
+                      brake = true;
+                  }
+                  else {
+                      gear = -1;
+                  }
+              }
+          }
+          last_gear = gear;
 
-            //turn += jnt->GetAngleRate(1);
-         }
-         //turn /= 4.0f;
-         if(snd_engine){
-            //float m = I3DFabs(turn);
-            float m = 1.0f;
-            if(gear){
-               m = curr_speed*.4f / I3DFabs(gear_tab[gear+1]._vel);
-               m = Max(.7f, m);
-            }
-            //DEBUG(m);
-            float delta = m - last_frequency;
-            const float max_change = tsec * 3.0f;
-            if(I3DFabs(delta) > max_change){
-               delta = (delta<0.0f) ? -max_change : max_change;
-            }
-            last_frequency += delta;
+          //if(motor)
+          {
+              if ((want_dir || steer) && !enabled)
+                  Enable(true);
+              //float turn = 0.0f;
+                                   //forces applied to joint motor under various circumstances
+              const float brake_force = 100.0f;
+              const float neutral_force = 3.0f;
 
-            //if(m > .1f){
-               if(!snd_engine->IsOn())
-                  snd_engine->SetOn(true);
-               snd_engine->SetFrequency(last_frequency);
-               //LOG(m);
-               //snd_engine->SetVolume((m / 5.0f)*1.0f);
-            //}else{
-               //snd_engine->SetOn(false);
-            //}
-         }
-         if(brake_light)
-            brake_light->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, brake ? 1.0f : 0.0f);
+              float vel = 0.0f, force;
+              if (!want_dir) {
+                  force = brake ? brake_force : neutral_force;
+              }
+              else {
+                  //vel = gear_tab[gear+1].vel;
+                  force = gear_tab[gear + 1].force;
+                  //DEBUG("***");
+                  //DEBUG(vel);
+                  //DEBUG(curr_speed * .25f);
+                  float rel_speed = Min(curr_speed, gear_tab[gear + 1].trans_speed);
+                  vel = .5f + rel_speed * .3f;
+                  vel *= (float)want_dir;
+              }
+              //process all wheels
+              for (int i = 4; i--; ) {
+                  PIPH_joint_hinge2 jnt = jnt_wheels[i];
+                  if (i < 2) {
+                      float curr_angle = jnt->GetAngle();
+                      float v = steer - curr_angle;
+                      float k = tsec * 2.0f;
+                      if (curr_angle * steer < 0.0f)
+                          k *= 2.0f;
+                      v = Max(-k, Min(k, v));
+                      v *= 10.0f;
+                      jnt->SetDesiredVelocity(v);
+                  }
+                  //apply motor onto joint
+                  jnt->SetDesiredVelocity(-vel, 1);
+                  jnt->SetMaxForce(force, 1);
+
+                  //turn += jnt->GetAngleRate(1);
+              }
+              //turn /= 4.0f;
+              if (snd_engine) {
+                  //float m = I3DFabs(turn);
+                  float m = 1.0f;
+                  if (gear) {
+                      m = curr_speed * .4f / I3DFabs(gear_tab[gear + 1]._vel);
+                      m = Max(.7f, m);
+                  }
+                  //DEBUG(m);
+                  float delta = m - last_frequency;
+                  const float max_change = tsec * 3.0f;
+                  if (I3DFabs(delta) > max_change) {
+                      delta = (delta < 0.0f) ? -max_change : max_change;
+                  }
+                  last_frequency += delta;
+
+                  //if(m > .1f){
+                  if (!snd_engine->IsOn())
+                      snd_engine->SetOn(true);
+                  snd_engine->SetFrequency(last_frequency);
+                  //LOG(m);
+                  //snd_engine->SetVolume((m / 5.0f)*1.0f);
+               //}else{
+                  //snd_engine->SetOn(false);
+               //}
+              }
+              if (brake_light)
+                  brake_light->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, brake ? 1.0f : 0.0f);
+          }
       }
 #endif   //DEBUG_DIRECT_KEYS
 

@@ -117,6 +117,9 @@ public:
    virtual void Die(C_actor *killer = NULL){ ReportActorError("Die() called"); }
 
 //----------------------------
+   virtual void Use(C_actor *act = NULL){}
+
+//----------------------------
 // Get table template associated with actor.
    virtual const C_table_template *GetTableTemplate() const{ return NULL; }
 

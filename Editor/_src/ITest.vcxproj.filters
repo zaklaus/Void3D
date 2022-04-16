@@ -69,7 +69,7 @@
     <ClCompile Include="Vehicle.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="Walk.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
     <ClCompile Include="CommandLine.cpp">

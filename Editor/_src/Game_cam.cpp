@@ -496,6 +496,17 @@ public:
       ellevation_rot.SetDir(S_vector(0.0f, -(float)sin(angle), (float)cos(angle)), 0.0f);
    }
 
+   void ReattachOwner() {
+       if (!cam) return;
+       cam->LinkTo(anim_dummy, I3DLINK_UPDMATRIX);
+       fly_interp->SetAnimation(0, NULL);
+   }
+
+   bool IsDetached() {
+       if (!cam) return true;
+       return (cam->GetParent() != anim_dummy);
+   }
+
 //----------------------------
 
    virtual void SetAnim(const char *name, bool loop){
@@ -528,7 +539,12 @@ public:
 #if 0
       DEBUG(C_fstr("focus_dir: '%s', focus_pos: '%s'", (const char*)focus_dir->GetName(), (const char*)focus_pos->GetName()));
 #endif
-      assert(("Game camera not linked to it's anim_dummy", cam->GetParent() == anim_dummy));
+      //assert(("Game camera not linked to it's anim_dummy", cam->GetParent() == anim_dummy));
+
+      if (cam->GetParent() != anim_dummy){
+          // camera is attached to a different frame, ignore tick
+          return;
+      }
 
                               //animate view distance
       UpdateViewDistance(time);

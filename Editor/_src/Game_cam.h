@@ -46,6 +46,11 @@ public:
    virtual CPI3D_frame GetFocusDir() const = 0;
 
 //----------------------------
+// Camera ownership utilities
+   virtual void ReattachOwner() = 0;
+   virtual bool IsDetached()  = 0;
+
+//----------------------------
 // Set additional shaking animation.
    virtual void SetAnim(const char *name, bool loop) = 0;
 
