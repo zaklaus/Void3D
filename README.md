@@ -1,4 +1,8 @@
 <div align="center">
+    <a href="https://github.com/zaklaus/Void3D"><img src="https://user-images.githubusercontent.com/9026786/163674605-72be64e5-d5b5-46b3-9ebc-f729e8246446.png" alt="logo" width="220px" /></a>
+</div>
+
+<div align="center">
     <a href="https://discord.gg/eBQ4QHX"><img src="https://img.shields.io/discord/402098213114347520.svg" alt="Discord server" /></a>
     <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="license" /></a>
 </div>
