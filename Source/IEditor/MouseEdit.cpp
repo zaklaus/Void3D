@@ -24,6 +24,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
       E_MOUSE_ALIGN_PICK,        // - internal - picked frame to alight with
       E_MOUSE_EDIT_SUBOBJECT,    // - toggle subobject edit mode
       E_MOUSE_MOVE_TO_CAMERA,    // - move to camera position
+      E_MOUSE_MOVE_TO_CAMERA_RAY,    // - move to camera ray position
       E_MOUSE_ALIGN_EXACT,       //align pos/rot/scale with picked object
       E_MOUSE_ALIGN_EXACT_PICK,  //internal - picked frame to alight with
 
@@ -1894,6 +1895,7 @@ public:
 
       ed->AddShortcut(this, E_MOUSE_EDIT_SUBOBJECT, "%10 &Edit\\Subobject edit\tB", K_B, 0);
       ed->AddShortcut(this, E_MOUSE_MOVE_TO_CAMERA, "%10 &Edit\\Move to camera", K_NOKEY, 0);
+      ed->AddShortcut(this, E_MOUSE_MOVE_TO_CAMERA_RAY, "%10 &Edit\\Move to camera ray", K_NOKEY, 0);
 
                               //edit/fly speed
 #define SB "&Edit\\&Speed\\"
@@ -2604,8 +2606,44 @@ public:
               break;
           }
 
+          S_vector pos = curr_cam->GetWorldPos();
+
           for (auto& frame : sel_list){
-              frame->SetPos(curr_cam->GetWorldPos());
+              frame->SetPos(pos);
+          }
+
+          ed->SetModified();
+      }break;
+
+      case E_MOUSE_MOVE_TO_CAMERA_RAY:
+      {
+          const C_vector<PI3D_frame>& sel_list = e_slct->GetCurSel();
+          if (!sel_list.size()) {
+              ed->Message("Move to camera ray - empty selection.");
+              break;
+          }
+
+          float n, f;
+          curr_cam->GetRange(n, f);
+          PI3D_scene scn = ed->GetScene();
+          S_vector pos = curr_cam->GetWorldPos(), dir = curr_cam->GetWorldDir();
+          float near_dist = n / cosf(dir.AngleTo({ 0,1,0 }));
+          pos += dir * near_dist;
+
+          I3D_collision_data cd(pos, dir, I3DCOL_EXACT_GEOMETRY |
+              I3DCOL_COLORKEY | I3DCOL_RAY,
+              NULL);
+          if (scn->TestCollision(cd)) {
+              CPI3D_frame frm = cd.GetHitFrm();
+
+              // replace ray pos
+              pos = frm->GetWorldPos();
+
+              for (auto& frame : sel_list) {
+                  frame->SetPos(pos);
+              }
+
+              ed->SetModified();
           }
       }break;
       }
