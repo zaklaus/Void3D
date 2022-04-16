@@ -2211,6 +2211,7 @@ public:
 
          ed->SetActive(true);
          ed->Message("Edit mode");
+         e_mouseedit->SetEditMode();
          SetTickClass(mission);
          //ed->FindPlugin("Properties")->Action(E_PROP_SHOW);
          break;
@@ -2227,6 +2228,7 @@ public:
             mission->GameBegin();
             ed->SetActive(false);
             ed->Message("Game mode");
+            e_mouseedit->SetViewMode();
 
             EditLock();
             SetupCameraRange();

@@ -225,16 +225,13 @@ class C_player_imp: public C_actor{
 
       const S_vector &limit_normal = rd.GetHitNormal();
       float angle_cos = limit_normal.y;
-#define FLOOR_ANGLE .75f
+#define FLOOR_ANGLE .25f
 #define STAIRS_ANGLE .5f
 
-      bool is_stairs = false;
-      if(angle_cos >= (is_stairs ? STAIRS_ANGLE : FLOOR_ANGLE)){
-         cc.col_floor = rd.GetHitFrm();
-         //cc.floor_mat_id = mat_id;
-                              //make the collision normal appear vertical
-         if(cc.is_idle)
-            rd.ModifyNormal(AXIS_Y);
+      if(angle_cos >= FLOOR_ANGLE){
+          cc.col_floor = rd.GetHitFrm();
+          if (cc.is_idle)
+              rd.ModifyNormal(AXIS_Y);
       }else{
                               //the collision is considered to be wall
          if(angle_cos < .0f){
@@ -301,14 +298,29 @@ class C_player_imp: public C_actor{
       if(scene->TestCollision(cd)){
          move_delta = cd.GetDestination() - from;
 
-         if(cc.col_floor)
-            fall_speed = INIT_FALL_SPEED;
+         if(cc.col_floor){
+             fall_speed = INIT_FALL_SPEED;
+         }
+      }else{
+#if 0
+          I3D_collision_data cd;
+          cd.from = from+move_delta;
+          cd.dir = AXIS_Y*-2.0f;
+          cd.flags = I3DCOL_MOVING_GROUP | I3DCOL_SOLVE_SLIDE;
+          cd.frm_ignore = frame;
+          cd.frm_root = frame;
+
+          if (scene->TestCollision(cd)) {
+              move_delta = cd.GetDestination() - from - move_delta;
+              move_delta.Normalize();
+          }
+#endif
       }
       SetupFloorLink(cc.col_floor);
 
       //DEBUG(floor_link ? floor_link->GetName() : "-");
-      S_vector pos = from + move_delta;
       float curr_speed = curr_move_dir.Magnitude();
+      S_vector pos = from + move_delta;
 
       if(cc.wall_hit && !IsMrgZeroLess(curr_speed)){
                               //detect small steps
