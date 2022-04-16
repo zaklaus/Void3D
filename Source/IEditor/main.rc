@@ -1447,11 +1447,11 @@ IDB_TB_BSP              BITMAP                  "res\\tb_bsp.bmp"
 
 IDB_LOGO                BITMAP                  "res\\I3d2.bmp"
 
-I_DUCK                  BITMAP                  "res\\iduck.bmp"
+I_DUCK                  BITMAP                  "res\\I_LOGO.bmp"
 
 I_LOGO                  BITMAP                  "res\\I_LOGO.bmp"
 
-IDB_BITMAP2             BITMAP                  "F:\\Projects\\I3D\\Source\\IEditor\\res\\I_LOGO1.bmp"
+IDB_BITMAP2             BITMAP                  "res\\I_LOGO1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
