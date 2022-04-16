@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\build\CMakeFiles\b0963e4afb93727755d3e898548f2c3c\generate.stamp.rule">
+    <CustomBuild Include="..\Source\qhull\build\CMakeFiles\b0963e4afb93727755d3e898548f2c3c\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>

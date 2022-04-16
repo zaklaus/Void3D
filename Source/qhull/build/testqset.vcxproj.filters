@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhull\qset.c">
+    <ClCompile Include="..\Source\qhull\src\libqhull\qset.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhull\mem.c">
+    <ClCompile Include="..\Source\qhull\src\libqhull\mem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhull\usermem.c">
+    <ClCompile Include="..\Source\qhull\src\libqhull\usermem.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\testqset\testqset.c">
+    <ClCompile Include="..\Source\qhull\src\testqset\testqset.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhull\mem.h">
+    <ClInclude Include="..\Source\qhull\src\libqhull\mem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\src\libqhull\qset.h">
+    <ClInclude Include="..\Source\qhull\src\libqhull\qset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\zakla\Downloads\Insanity3D-main\Insanity3D-main\Source\qhull\CMakeLists.txt" />
+    <CustomBuild Include="..\Source\qhull\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

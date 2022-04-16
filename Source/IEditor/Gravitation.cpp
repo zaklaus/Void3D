@@ -300,7 +300,7 @@ public:
       e_modify->AddNotify(this, E_GRAV_MODIFY_NOTIFY);
 
       ed->AddShortcut(this, E_GRAV_SELECTED_DOWN, "&Edit\\&Gravitation\\Fall down\tCtrl+G", K_G, SKEY_CTRL);
-      ed->AddShortcut(this, E_GRAV_SELECTED_DOWN_PHYS, "&Edit\\&Gravitation\\Fall down\tShift+G", K_G, SKEY_SHIFT);
+      ed->AddShortcut(this, E_GRAV_SELECTED_DOWN_PHYS, "&Edit\\&Gravitation\\Fall down (Physics)\tShift+G", K_G, SKEY_SHIFT);
       ed->AddShortcut(this, E_GRAV_TOGGLE_DIALOG, "&Edit\\&Gravitation\\Properties", K_NOKEY, 0);
       ed->AddShortcut(this, E_GRAV_LINK_TO_BACKGROUND, "&Edit\\&Gravitation\\&Link to ground\tCtrl+L", K_L, SKEY_CTRL);
 
