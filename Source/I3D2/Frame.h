@@ -205,7 +205,8 @@ public:
    I3DMETHOD_(void,FrmReserved04)(){}
    I3DMETHOD_(void,FrmReserved05)(){}
    I3DMETHOD_(void,FrmReserved06)(){}
-   I3DMETHOD_(void,FrmReserved07)(){}
+   //I3DMETHOD_(void,FrmReserved07)(){}
+   I3DMETHOD(SetScale)(const S_vector& scale);
 };
 
 //----------------------------

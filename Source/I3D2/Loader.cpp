@@ -2558,9 +2558,9 @@ I3D_RESULT C_loader::ReadVisual(PI3D_visual vis) {
 I3D_RESULT C_loader::ReadDummy(PI3D_dummy dummy) {
 
    I3D_bbox bbox;
-   bbox.Invalidate();
    ck.Read(&bbox, sizeof(I3D_bbox));
-   //dummy->
+   bbox.Invalidate();
+
    return I3D_OK;
 }
 
@@ -2720,18 +2720,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
       frm->SetName(frm_name);
       frm->SetRot(rot);
       frm->SetPos(pos);
-
-      if(s.x<0.0f || s.y<0.0f || s.z<0.0f){
-         REPORT_ERR(C_xstr("Frame '%': negative scale") %frm_name);
-      }
-
-
-      if(IsUniformScale(s) && s.x>=0.0f){
-         frm->SetScale(s.x);
-      }else{
-         float avg_scale = (I3DFabs(s.x) + I3DFabs(s.y) + I3DFabs(s.z)) / 3.0f;
-         frm->SetScale(avg_scale);
-      }
+      frm->SetScale(s);
       
       loaded_frames.push_back(frm);
       frame_parents.push_back(parent_id);

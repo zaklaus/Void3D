@@ -369,6 +369,13 @@ void I3D_frame::PropagateDirty(){
    }
 }
 
+I3D_RESULT I3D_frame::SetScale(const S_vector& scale) {
+    this->scale = scale;
+    PropagateDirty();
+    return I3D_OK;
+}
+
+
 //----------------------------
 
 I3D_RESULT I3D_frame::SetPos(const S_vector &v){

@@ -415,7 +415,8 @@ private:
    I3DMETHOD_(void,FrmReserved04)() = 0;
    I3DMETHOD_(void,FrmReserved05)() = 0;
    I3DMETHOD_(void,FrmReserved06)() = 0;
-   I3DMETHOD_(void,FrmReserved07)() = 0;
+   I3DMETHOD(SetScale)(const S_vector& scale) = 0;
+   //I3DMETHOD_(void,FrmReserved07)() = 0;
 };
 
 #endif
