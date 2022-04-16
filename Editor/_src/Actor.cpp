@@ -203,7 +203,7 @@ void C_actor::OnSignal(int signal_id){
 void C_actor::Enable(bool on_off){
 
                               //just write warning
-   ReportActorError("unprocessed Enable() function call");
+   //ReportActorError("unprocessed Enable() function call");
 }
 
 //----------------------------

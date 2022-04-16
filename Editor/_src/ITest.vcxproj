@@ -239,7 +239,7 @@
     <ClCompile Include="Systables.cpp" />
     <ClCompile Include="TerrainDetail.cpp" />
     <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="Walk.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Winstuff.cpp" />
   </ItemGroup>
   <ItemGroup>

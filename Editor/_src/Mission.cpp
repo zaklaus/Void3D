@@ -204,7 +204,7 @@ void C_mission::InitializeLoadProgress(){
          }
       }
                         //draw logo texture to corner
-      PI3D_texture txt;
+      /*PI3D_texture txt;
       I3D_CREATETEXTURE ct;
       memset(&ct, 0, sizeof(ct));
       ct.file_name = "System\\LoadingLogo.png";
@@ -232,7 +232,7 @@ void C_mission::InitializeLoadProgress(){
          scene->DrawTriangles(v, 4, I3DVC_XYZRHW | (1<<I3DVC_TEXCOUNT_SHIFT), indx, 6, 0xfeffffff);
 
          txt->Release();
-      }
+      }*/
       if(was_zb) driver->SetState(RS_USEZB, true);
    }
 

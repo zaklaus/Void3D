@@ -59,8 +59,48 @@ class C_player_imp: public C_actor{
          cam->SetPos(S_vector(0, 1.7f, 0));
          cam->LinkTo(vols[2], I3DLINK_UPDMATRIX);
       }else{
-         cam->LinkTo(mission.GetScene()->GetPrimarySector(), I3DLINK_UPDMATRIX);
+          mission.GetGameCamera()->ReattachOwner();
       }
+   }
+
+   bool EjectOnSide(PI3D_frame frm, int side){
+       S_vector pos = frm->GetWorldPos();
+       S_vector dir = S_vector(0, 1, 0).Cross(frm->GetWorldDir()) * 2.0f * side;
+
+       I3D_collision_data cd;
+       cd.from = pos;
+       cd.dir = dir;
+       cd.frm_ignore = frm;
+       cd.flags = I3DCOL_MOVING_SPHERE;
+       cd.radius = 0.25f;
+
+       frame->SetOn(false);
+       bool collided = mission.TestCollision(cd);
+       frame->SetOn(true);
+
+       if (!collided){
+           frame->SetPos(cd.GetDestination());
+       }
+
+       return !collided;
+   }
+
+   virtual void Use(C_actor* act /* = NULL */) {
+       if (!act){
+           return;
+       }
+
+       if (act->GetActorType() == ACTOR_VEHICLE){
+           PI3D_frame frm = act->GetFrame();
+           SetFocus(true);
+
+           if (!EjectOnSide(frm, -1)) {
+               if (!EjectOnSide(frm, 1)){
+                   S_vector pos = act->GetFrame()->GetWorldPos() + S_vector(0, 2, 0);
+                   frame->SetPos(pos);
+               }
+           }
+       }
    }
 
 //----------------------------                               
@@ -424,7 +464,7 @@ public:
       {
          PI3D_model mod = I3DCAST_MODEL(frame);
          model_cache.Open(mod, "test\\player", mission.GetScene());
-         frame->SetName("hero");
+         frame->SetName("player");
          frame->SetPos(in_frm->GetWorldPos());
          frame->SetRot(in_frm->GetWorldRot());
          frame->LinkTo(mission.GetScene()->GetPrimarySector());
@@ -477,7 +517,12 @@ public:
 //----------------------------
 
    virtual void Tick(const struct S_tick_context &tc){
-      
+       C_game_camera* cam = mission.GetGameCamera();
+
+       if (cam->GetCamera()->GetParent() != vols[2]){
+           return;
+       }
+
       LPC_controller ctrl = tc.p_ctrl;
 
       float rx = (float)tc.mouse_rel[0], ry = (float)tc.mouse_rel[1];
@@ -499,7 +544,42 @@ public:
             is_running = !is_running;
 
          if(ctrl->Get(CS_FIRE)){
-            //DEBUG("Fire!");
+            DEBUG("Fire!");
+         }
+
+         if (cam){
+             const S_matrix& m0 = cam->GetCamera()->GetMatrix();
+             S_vector from = m0(3);
+             S_vector dir = m0(2);
+
+             I3D_collision_data cd;
+             cd.from = from;
+             cd.dir = dir*2.0f;
+             cd.flags = I3DCOL_MOVING_SPHERE;
+             cd.radius = 0.5f;
+             cd.frm_ignore = frame;
+             //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
+             //DebugPoint(from + dir * 2.0f, 0.25f, 1);
+
+             
+            if (mission.GetScene()->TestCollision(cd)) {
+                PI3D_frame hit_frm = cd.GetHitFrm();
+                while (GetFrameActor(hit_frm) == nullptr) {
+                    if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
+                        break;
+                    hit_frm = hit_frm->GetParent();
+                }
+                if (GetFrameActor(hit_frm)) {
+                    DebugPoint(cd.GetDestination(), 0.05f, 1);
+                    DEBUG("Press F to use");
+                    if (ctrl->Get(CS_USE, true)) {
+                        PC_actor hit_act = GetFrameActor(hit_frm);
+                        if (hit_act){
+                            hit_act->Use(this);
+                        }
+                    }
+                 }
+             }
          }
 
          if(ctrl->Get(CS_JUMP)){
