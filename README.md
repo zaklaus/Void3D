@@ -22,6 +22,12 @@
 
 3D engine originally developed by Lonely Cat Games, now continued by the open source community, contributions are welcome!
 
+This fork offers the following changes:
+- Updated to support the latest MSVC compiler set
+- Increased shadowmap resolution
+- Various editor enhancements and fixes
+- Experimental 4DS model format support (used in Mafia: The City of Lost Heaven for example)
+
 ![Image](Docs/img1.png)
 
 Structure of the project:
