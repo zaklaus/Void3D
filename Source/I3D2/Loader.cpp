@@ -2645,6 +2645,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
       I3D_FRAME_TYPE frame_type = (I3D_FRAME_TYPE)ck.ReadByte();
       byte visual_type = 0;
 
+      
       if(frame_type == FRAME_VISUAL) {
          visual_type = ck.ReadByte();
          word render_flags = ck.ReadWord();
@@ -2665,6 +2666,8 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
       ck.Read(mesh_params, mesh_params_len);
 
       C_smart_ptr<I3D_frame> frm;
+      
+      //OutputDebugString(C_fstr("loading frame %s type: %d, visual: %d\n", frm_name, frame_type, visual_type));
 
       switch(frame_type) {
          case FRAME_VISUAL: {
@@ -2724,8 +2727,10 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
          }
       }
       
-      if(!frm) 
+      if (!frm) {
+          //OutputDebugString(C_fstr("unable to load frame: %s\n", frm_name));
           continue;
+      }
 
       frm->Release();
       frm->SetName(frm_name);
@@ -2738,14 +2743,14 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
    }
    
    for(int i = 0; i < loaded_frames.size(); i++) {
-      C_smart_ptr<I3D_frame> current_frm = loaded_frames[i];
+      C_smart_ptr<I3D_frame> curent_frm = loaded_frames[i];
       int parent = frame_parents[i];
-
       if(parent > 0) {
-         current_frm->LinkTo(loaded_frames[parent - 1]);
+        container->AddFrame(curent_frm);
+        curent_frm->LinkTo(loaded_frames[parent - 1]);
       } else {
-         current_frm->LinkTo(root_frame);
-         container->AddFrame(current_frm);
+        container->AddFrame(curent_frm);
+        curent_frm->LinkTo(root_frame);
       }
    }
 
