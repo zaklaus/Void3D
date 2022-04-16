@@ -23,6 +23,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
       E_MOUSE_ALIGN_TO_NORMAL,   //align selection to picked frame
       E_MOUSE_ALIGN_PICK,        // - internal - picked frame to alight with
       E_MOUSE_EDIT_SUBOBJECT,    // - toggle subobject edit mode
+      E_MOUSE_MOVE_TO_CAMERA,    // - move to camera position
       E_MOUSE_ALIGN_EXACT,       //align pos/rot/scale with picked object
       E_MOUSE_ALIGN_EXACT_PICK,  //internal - picked frame to alight with
 
@@ -1892,6 +1893,7 @@ public:
       ed->AddShortcut(this, E_MOUSE_ROT_45_RIGHT, "%10 &Edit\\Rotate 45 degrees\\Right\t.", K_DOT, 0);
 
       ed->AddShortcut(this, E_MOUSE_EDIT_SUBOBJECT, "%10 &Edit\\Subobject edit\tB", K_B, 0);
+      ed->AddShortcut(this, E_MOUSE_MOVE_TO_CAMERA, "%10 &Edit\\Move to camera", K_NOKEY, 0);
 
                               //edit/fly speed
 #define SB "&Edit\\&Speed\\"
@@ -2593,6 +2595,19 @@ public:
             }
          }
          break;
+
+      case E_MOUSE_MOVE_TO_CAMERA:
+      {
+          const C_vector<PI3D_frame>& sel_list = e_slct->GetCurSel();
+          if (!sel_list.size()) {
+              ed->Message("Move to camera - empty selection.");
+              break;
+          }
+
+          for (auto& frame : sel_list){
+              frame->SetPos(curr_cam->GetWorldPos());
+          }
+      }break;
       }
       return 0;
    }
