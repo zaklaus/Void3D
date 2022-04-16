@@ -350,10 +350,10 @@ I3D_RESULT C_loader::ReadMaterials_4DS(){
       ck.Read(diffuse_map_name, diffuse_map_len);
       *(C_str*)&diff = C_str(diffuse_map_name);
       
-     /* if(mat_flags & DataFormat4DS::MATERIALFLAG_COLORKEY) {
-        diff.flags |= MAT_SRC_ANIMATE | TXTF_CKEY_ALPHA;
-      }*/
-
+      if(mat_flags & DataFormat4DS::MATERIALFLAG_COLORKEY) {
+          txt_flags |= LOADF_TXT_TRANSP;
+          mat->SetMatGlags(mat->GetMatGlags() | MATF_CKEY_ZERO_REF);
+      }
 
       //animated diffuse
       if(mat_flags & DataFormat4DS::MATERIALFLAG_ANIMATEDTEXTUREDIFFUSE) {
