@@ -1796,7 +1796,7 @@ private:
             do{
                float this_rect_progress = float(size_x * size_y) / (float)num_lumels;
 
-               const int AA_MODE = 3;//drv->lm_create_aa_ratio;
+               const int AA_MODE = drv->lm_create_aa_ratio;
                //const int AA_MODE = 1;
                float aa_pixel_offset = (.5f/(float)AA_MODE - .5f);
                float aa_pixel_shift = (1.0f/(float)AA_MODE);
