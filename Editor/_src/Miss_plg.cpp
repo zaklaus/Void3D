@@ -1603,7 +1603,7 @@ public:
             if(mission_open_ok &&
                mission->GetMissionCRC(mission_name, mission_crc)){
                if(mission_crc!=mission->GetCRC()){
-                  MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission binary file changed outside the Editor. Click OK to reload the file now.", "Insanity editor", MB_OK);
+                  MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission binary file changed outside the Editor. Click OK to reload the file now.", "Void editor", MB_OK);
                                  //reload without attempting to save
                   Reload(false);
                }
@@ -1846,7 +1846,7 @@ public:
             C_fstr filename("missions\\%s\\scene.bin", (const char*)mission_name);
             ed->Message(C_fstr("Getting '%s'...", (const char*)filename), 0, EM_MESSAGE, true);
             OsMakeFileReadOnly(filename, true);
-            bool ok = SCGetFile("Insanity3d\\Editor", filename);
+            bool ok = SCGetFile("Void3d\\Editor", filename);
             if(!ok){
                ed->Message(C_fstr("Failed to get: '%s'", (const char*)filename));
                break;
@@ -1855,7 +1855,7 @@ public:
             dword mission_crc;
             if(mission->GetMissionCRC(mission_name, mission_crc)){
                if(mission_crc!=mission->GetCRC()){
-                  MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission must be reloaded now.", "Insanity editor", MB_OK);
+                  MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission must be reloaded now.", "Void editor", MB_OK);
                                  //reload without attempting to save
                   Reload(false);
                   return 2;
@@ -1905,7 +1905,7 @@ public:
                   ed->Message(C_fstr("Checking out '%s'...", (const char*)filename), 0, EM_MESSAGE, true);
                   if(!is_rdonly)
                      OsMakeFileReadOnly(filename, true);
-                  bool ok = SCCheckOutFile("Insanity3d\\Editor", filename);
+                  bool ok = SCCheckOutFile("Void3d\\Editor", filename);
                   if(!ok){
                      ed->Message(C_fstr("Failed to check out: '%s'", (const char*)filename));
                      break;
@@ -1914,7 +1914,7 @@ public:
                   dword mission_crc;
                   if(mission->GetMissionCRC(mission_name, mission_crc)){
                      if(mission_crc!=mission->GetCRC()){
-                        MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission must be reloaded now.", "Insanity editor", MB_OK);
+                        MessageBox((HWND)ed->GetIGraph()->GetHWND(), "Mission must be reloaded now.", "Void editor", MB_OK);
                                        //reload without attempting to save
                         Reload(false);
                         return 2;
@@ -1990,7 +1990,7 @@ public:
             if(i==IDOK){
                               //try to check in the file
                ed->Message(C_fstr("Checking in '%s'...", (const char*)filename), 0, EM_MESSAGE, true);
-               bool ok = SCCheckInFile("Insanity3d\\Editor", filename, keep_checked_out);
+               bool ok = SCCheckInFile("Void3d\\Editor", filename, keep_checked_out);
                if(!ok){
                   ed->Message(C_fstr("Failed to check in: '%s'", (const char*)filename));
                }else{

@@ -7,6 +7,11 @@
 #define IDC_CT_DISABLED                 4
 #define IDC_CT_NORMAL                   10
 #define IDC_MESH_INFO                   132
+#define IDB_BITMAP1                     146
+#define I_LOGO                          146
+#define IDR_BINARY1                     150
+#define I_LOGO2                         151
+#define IDB_BITMAP2                     151
 #define IDC_RESET_POS                   1000
 #define IDC_LIST1                       1001
 #define IDC_RESET_ROT                   1001
@@ -353,7 +358,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        144
+#define _APS_NEXT_RESOURCE_VALUE        152
 #define _APS_NEXT_COMMAND_VALUE         40079
 #define _APS_NEXT_CONTROL_VALUE         1300
 #define _APS_NEXT_SYMED_VALUE           101

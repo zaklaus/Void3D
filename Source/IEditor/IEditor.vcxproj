@@ -161,11 +161,13 @@
     <ClInclude Include="all.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Properties.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Toolbar.h" />
     <ClInclude Include="Usability.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\arrow.cur" />
+    <None Include="res\binary1.bin" />
     <None Include="res\cur00001.cur" />
     <None Include="res\cur00002.cur" />
     <None Include="res\cur00003.cur" />
@@ -196,6 +198,8 @@
     <None Include="res\SEEDPUT.CUR" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp" />
+    <Image Include="F:\Projects\I3D\Source\IEditor\res\I_LOGO1.bmp" />
     <Image Include="res\axes.png" />
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bmp12.png" />
@@ -212,6 +216,7 @@
     <Image Include="res\icon1.ico" />
     <Image Include="res\icon_config.ico" />
     <Image Include="res\iduck.bmp" />
+    <Image Include="res\I_LOGO.bmp" />
     <Image Include="res\letters.png" />
     <Image Include="res\light_a.png" />
     <Image Include="res\light_d.png" />

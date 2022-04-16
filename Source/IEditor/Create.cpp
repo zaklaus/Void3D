@@ -766,7 +766,7 @@ class C_edit_Create: public C_editor_item_Create{
             last_model_path = ed->GetModelCache().GetDir();
          title = "Open model";
          extensions =
-            "Insanity 3D files (*.i3d)\0*.i3d\0"
+            "Void 3D files (*.i3d)\0*.i3d\0"
             "LS3D file (*.4ds)\0*.4ds\0"
             "All files\0*.*\0";
 

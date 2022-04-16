@@ -1434,7 +1434,7 @@ bool C_editor_imp::SaveState(const char *bin_name) const{
       if(!b){
          MessageBox((HWND)GetIGraph()->GetHWND(),
             C_fstr("Cannot save editor state: failed to open file \"%s.bin\" for writing.\nPlease make sure the file is not read-only.", bin_name),
-            "Insanity editor", MB_OK);
+            "Void editor", MB_OK);
          return false;
       }
    }
@@ -1542,7 +1542,7 @@ bool C_editor_imp::AddShortcut(PC_editor_item ei, int id, const char *menu_item,
                   ,
                   (const char*)ei->GetName(),
                   (const char*)ei1->GetName(), menu_item),
-                  "Insanity editor", MB_OK);
+                  "Void editor", MB_OK);
                return false;
             }
          }
@@ -1861,7 +1861,7 @@ static BOOL CALLBACK dlgSplash(HWND hwnd,  // handle to dialog box
          igraph->EnableSuspend(false);
 
          RECT rc;
-         SetRect(&rc, 0, 0, 298, 196);
+         SetRect(&rc, 0, 0, 108, 108);
          int scx = GetSystemMetrics(SM_CXSCREEN);
          int scy = GetSystemMetrics(SM_CYSCREEN);
          int x = rc.left+(scx-(rc.right-rc.left))/2;
@@ -1911,22 +1911,22 @@ static void RegisterViewer(){
    {
       rkey = RegkeyCreate(".i3d", E_REGKEY_CLASSES_ROOT);
       if(rkey!=-1){
-         RegkeyWtext(rkey, NULL, "Insanity.Viewer");
+         RegkeyWtext(rkey, NULL, "Void.Viewer");
          RegkeyClose(rkey);
       }
-      rkey = RegkeyCreate("Insanity.Viewer", E_REGKEY_CLASSES_ROOT);
+      rkey = RegkeyCreate("Void.Viewer", E_REGKEY_CLASSES_ROOT);
       if(rkey!=-1){
-         RegkeyWtext(rkey, NULL, "Insanity 3D scene");
+         RegkeyWtext(rkey, NULL, "Void 3D scene");
          RegkeyClose(rkey);
       }
-      rkey = RegkeyCreate("Insanity.Viewer\\DefaultIcon", E_REGKEY_CLASSES_ROOT);
+      rkey = RegkeyCreate("Void.Viewer\\DefaultIcon", E_REGKEY_CLASSES_ROOT);
       if(rkey!=-1){
          char buf[MAX_PATH];
          GetModuleFileName(GetModuleHandle("I3D_2.DLL"), buf, sizeof(buf));
          RegkeyWtext(rkey, NULL, C_fstr("%s,0", buf));
          RegkeyClose(rkey);
       }
-      rkey = RegkeyCreate("Insanity.Viewer\\shell\\open\\command", E_REGKEY_CLASSES_ROOT);
+      rkey = RegkeyCreate("Void.Viewer\\shell\\open\\command", E_REGKEY_CLASSES_ROOT);
       if(rkey!=-1){
          char buf[MAX_PATH];
          GetModuleFileName(NULL, buf, sizeof(buf));
@@ -1935,7 +1935,7 @@ static void RegisterViewer(){
       }
       rkey = RegkeyCreate("Software\\Classes\\.I3D", E_REGKEY_LOCAL_MACHINE);
       if(rkey!=-1){
-         RegkeyWtext(rkey, NULL, "Insanity.Viewer");
+         RegkeyWtext(rkey, NULL, "Void.Viewer");
       }
    }
 }

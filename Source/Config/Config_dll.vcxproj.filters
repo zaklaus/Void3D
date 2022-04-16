@@ -37,6 +37,9 @@
     <Image Include="Resources\ICON1.ICO">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\I_LOGO1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="setup.rc">

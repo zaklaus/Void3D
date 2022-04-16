@@ -152,6 +152,7 @@
   <ItemGroup>
     <Image Include="Resources\I3D2.BMP" />
     <Image Include="Resources\ICON1.ICO" />
+    <Image Include="Resources\I_LOGO1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="setup.rc" />

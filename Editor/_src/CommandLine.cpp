@@ -64,7 +64,7 @@ bool C_command_line::ShowHelp(const char **cl){
                   "  debugdll\tuse debug engine dlls\n"
                   "  mission \"name\"\tset specified mission\n"
       ,
-      C_fstr("%s - command-line help", "Insanity Demo help"),
+      C_fstr("%s - command-line help", "Void Demo help"),
       MBOX_OK);
    return false;
 }

@@ -6683,7 +6683,7 @@ public:
 
       C_str filename;               
       bool b = GetBrowsePath(ed, "Import animation", filename, "Anims",
-         "Insanity 3D files (*.i3d)\0*.i3d\0" "All files\0*.*\0");
+         "Void 3D files (*.i3d)\0*.i3d\0" "All files\0*.*\0");
       if(!b)
          return;
                      //try to strip current working directory from fname

@@ -1313,9 +1313,9 @@ private:
                         C_fstr fname("%s\\%s.scr", SCRIPT_DIR, (const char*)si.full_name);
                         bool ok;
                         if(out)
-                           ok = SCCheckOutFile("Insanity3d\\Editor", fname);
+                           ok = SCCheckOutFile("Void3d\\Editor", fname);
                         else
-                           ok = SCCheckInFile("Insanity3d\\Editor", fname, false);
+                           ok = SCCheckInFile("Void3d\\Editor", fname, false);
                         if(!ok){
                            ed->Message(C_fstr("Failed to %s: '%s'", out ? "check out" : "check in", (const char*)fname));
                            break;

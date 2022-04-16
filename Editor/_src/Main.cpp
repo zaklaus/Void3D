@@ -1058,7 +1058,7 @@ static C_str AppCrashInfo(){
 //----------------------------
 
 S_application_data init_data = {
-   "Insanity Demo",
+   "Void Demo",
    "Software\\Lonely Cat Games\\Insanity Demo\\",
 #ifdef _DEBUG
    "\\\\Mike\\!In\\Crashes\\",
@@ -1181,7 +1181,7 @@ int GameRun(const S_application_data &app_data, const char *cp_cmd_line){
       CloseSystem();
    }catch(const C_except &e){
       //e.ShowCallStackDialog();
-      MessageBox(NULL, e.what(), "Insanity application error", MB_OK);
+      MessageBox(NULL, e.what(), "Void application error", MB_OK);
    }
    return 0;
 }

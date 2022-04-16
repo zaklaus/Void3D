@@ -21,7 +21,7 @@ using namespace std;
 //static const char REGDIR[] = REG_BASE"1.50";
 //static const char REGKEY_CONFIG[] = REG_BASE"Config";
 
-static const char APP_NAME[] = "Insanity 3D setup";
+static const char APP_NAME[] = "Void 3D setup";
 
 //#define ALLOW_FREQUENCY
 

@@ -915,21 +915,21 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,78,24,50,14
 END
 
-IDD_ABOUT1 DIALOG 0, 0, 294, 157
-STYLE DS_SETFONT | DS_3DLOOK | WS_POPUP
-FONT 8, "MS Sans Serif"
+IDD_ABOUT1 DIALOGEX 0, 0, 203, 152
+STYLE DS_SETFONT | WS_POPUP
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    CONTROL         "I_DUCK",-1,"Static",SS_BITMAP | SS_SUNKEN,0,0,16,14
+    CONTROL         I_LOGO2,-1,"Static",SS_BITMAP,0,0,72,66
 END
 
-IDD_ABOUT DIALOG 0, 0, 109, 135
+IDD_ABOUT DIALOGEX 0, 0, 221, 290
 STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
-CAPTION "Insanity 3D - Game editor"
-FONT 8, "MS Sans Serif"
+CAPTION "Void 3D - Game editor"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDCANCEL,35,114,40,14
-    CONTROL         "IDB_LOGO",IDC_STATIC,"Static",SS_BITMAP | SS_SUNKEN,7,7,16,14
-    CTEXT           "Insanity 3D Game Editor\nCopyright (c) \nLonely Cat Games",IDC_STATIC,7,81,95,27,SS_SUNKEN
+    DEFPUSHBUTTON   "OK",IDCANCEL,7,258,207,25
+    CTEXT           "Void 3D Game Editor\nCopyright (c) \nV4 Games\n\nBased on Insanity 3D 2.0 made by\nLonely Cat Games",IDC_STATIC,7,197,207,57,SS_SUNKEN
+    CONTROL         IDB_BITMAP1,IDC_STATIC,"Static",SS_BITMAP | SS_SUNKEN,7,7,207,191
 END
 
 GET_MODELNAME DIALOGEX 0, 0, 184, 67
@@ -1334,17 +1334,17 @@ BEGIN
     "IDD_ABOUT1", DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 287
+        RIGHTMARGIN, 196
         TOPMARGIN, 7
-        BOTTOMMARGIN, 150
+        BOTTOMMARGIN, 145
     END
 
     "IDD_ABOUT", DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 102
+        RIGHTMARGIN, 214
         TOPMARGIN, 7
-        BOTTOMMARGIN, 128
+        BOTTOMMARGIN, 283
     END
 
     "GET_MODELNAME", DIALOG
@@ -1448,6 +1448,10 @@ IDB_TB_BSP              BITMAP                  "res\\tb_bsp.bmp"
 IDB_LOGO                BITMAP                  "res\\I3d2.bmp"
 
 I_DUCK                  BITMAP                  "res\\iduck.bmp"
+
+I_LOGO                  BITMAP                  "res\\I_LOGO.bmp"
+
+IDB_BITMAP2             BITMAP                  "F:\\Projects\\I3D\\Source\\IEditor\\res\\I_LOGO1.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1660,6 +1664,16 @@ BEGIN
 END
 
 OPEN_MODEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUT1 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUT AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

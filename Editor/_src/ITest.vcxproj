@@ -312,6 +312,7 @@
   <ItemGroup>
     <Image Include="..\..\Source\IEditor\res\axes.png" />
     <Image Include="..\..\Source\IEditor\res\bitmap1.bmp" />
+    <Image Include="..\..\Source\IEditor\res\bmp00001.bmp" />
     <Image Include="..\..\Source\IEditor\res\bmp12.png" />
     <Image Include="..\..\Source\IEditor\res\bmp13.png" />
     <Image Include="..\..\Source\IEditor\res\bone.png" />
@@ -345,6 +346,7 @@
     <Image Include="..\..\Source\IEditor\res\tb_lmap.bmp" />
     <Image Include="..\..\Source\IEditor\res\tb_undo.bmp" />
     <Image Include="..\..\Source\IEditor\res\tb_validity.bmp" />
+    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

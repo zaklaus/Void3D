@@ -509,7 +509,7 @@ class C_edit_SysConfig: public C_editor_item{
                bool ok = false;
                PC_table tab = *tab_info[sel_i].tab;
                if(out){
-                  ok = SCCheckOutFile("Insanity3d\\Editor", tab_name);
+                  ok = SCCheckOutFile("Void3d\\Editor", tab_name);
                               //re-load table
                   tab->Load((const char*)tab_name, TABOPEN_FILENAME | TABOPEN_UPDATE);
                }else{
@@ -517,7 +517,7 @@ class C_edit_SysConfig: public C_editor_item{
                   if(tab->IsModified()){
                      tab->Save((const char*)tab_name, TABOPEN_FILENAME);
                   }
-                  ok = SCCheckInFile("Insanity3d\\Editor", tab_name, false);
+                  ok = SCCheckInFile("Void3d\\Editor", tab_name, false);
                }
                if(ok){
                   ed->Message(C_fstr("File '%s' checked %s.", (const char*)tab_name, out ? "out" : "in"));

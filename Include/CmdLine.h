@@ -7,9 +7,9 @@
 //----------------------------
 
 #ifdef _DEBUG
-#pragma comment(lib, "insanity_d")
+#pragma comment(lib, "Insanity_d")
 #else
-#pragma comment(lib, "insanity")
+#pragma comment(lib, "Insanity")
 #endif
 
 //----------------------------

@@ -307,5 +307,11 @@
     <Image Include="..\..\Source\IEditor\res\Font1.png" />
     <Image Include="..\..\Source\IEditor\res\envmap.png" />
     <Image Include="..\..\Source\IEditor\res\axes.png" />
+    <Image Include="..\..\Source\IEditor\res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

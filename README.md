@@ -1,20 +1,28 @@
-# Insanity3D
+<div align="center">
+    <a href="https://discord.gg/eBQ4QHX"><img src="https://img.shields.io/discord/402098213114347520.svg" alt="Discord server" /></a>
+    <a href="LICENSE.md"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="license" /></a>
+</div>
 
-3D engine developed by Lonely Cat Games
+<br />
+<div align="center">
+  Void 3D Game engine
+</div>
+
+<div align="center">
+  <sub>
+    Based on <a href="https://github.com/mice777/Insanity3D">Insanity3D</a> made by <a href="https://github.com/mice777">mice777</a>,
+    improved by <a href="https://github.com/zaklaus">@zaklaus</a>,
+    <a href="https://github.com/DavoSK">@DavoSK</a>,
+    and other contributors!
+  </sub>
+</div>
+<hr/>
+
+## Introduction
+
+3D engine originally developed by Lonely Cat Games, now continued by the open source community, contributions are welcome!
 
 ![Image](Docs/img1.png)
-
-This engine was used for PC game *Hidden and Dangerous*
-
-It's not maintained since 2004, but it still shows some nice techniques: physics, sectors+portals, occluders, bump/detail/light/environment -mapping, human animations, BSP tree, collisions, rain, snow, level-of-detail, particles, scripting, shadows, etc.  
-This was used in a real PC game!
-
-This project can be compiled under Microsoft Visual Studio 2008  
-It contains also compiled binaries, so it can be run directly without compilation (run *Editor\Bin\test.exe*) Use *Menu>File>Open mission* to load different scenes.
-
-It runs under Windows (XP up to Windows 11, and maybe newer)
-
-
 
 Structure of the project:
 
@@ -30,3 +38,15 @@ Structure of the project:
   - Maps - textures
   - Missions - 3D scenes
   - Models - 3D models
+
+## Build Instructions
+
+This project can be compiled under Microsoft Visual Studio 2019 and up.
+
+Open up Editor/_src/ITest.sln and compile the project!
+
+## Trivia
+
+The original Insanity3D engine was used for PC game *Hidden and Dangerous*
+
+Insanity3D is not maintained since 2004, but it still shows some nice techniques: physics, sectors+portals, occluders, bump/detail/light/environment -mapping, human animations, BSP tree, collisions, rain, snow, level-of-detail, particles, scripting, shadows, etc.  

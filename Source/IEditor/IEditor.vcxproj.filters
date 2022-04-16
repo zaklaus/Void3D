@@ -151,6 +151,9 @@
     <ClInclude Include="Usability.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\arrow.cur">
@@ -240,6 +243,7 @@
     <None Include="res\SEEDPUT.CUR">
       <Filter>Resources</Filter>
     </None>
+    <None Include="res\binary1.bin" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\axes.png">
@@ -347,6 +351,11 @@
     <Image Include="res\tb_validity.bmp">
       <Filter>Resources</Filter>
     </Image>
+    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\I_LOGO.bmp" />
+    <Image Include="F:\Projects\I3D\Source\IEditor\res\I_LOGO1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\font.txt">
