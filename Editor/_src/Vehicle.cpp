@@ -4,7 +4,7 @@
 
 //----------------------------
 
-#define TURN_SPEED 1400
+#define TURN_SPEED 800
 
 #ifdef _DEBUG
 
@@ -246,11 +246,11 @@ public:
                       want_dir = -1;
                   }
               if (tc.p_ctrl->Get(CS_MOVE_LEFT)) {
-                  steer = .5f;
+                  steer = .25f;
               }
               else
                   if (tc.p_ctrl->Get(CS_MOVE_RIGHT)) {
-                      steer = -.5f;
+                      steer = -.25f;
                   }
               if (tc.p_ctrl->Get(CS_FIRE)) {
                   brake = true;
@@ -265,7 +265,7 @@ public:
              {-2.0f, 20, 15},              //-1
              {0, 0},              //0
              {2.3f, 33, 15},      //1
-             {4.5f, 22, 35},      //2
+             {5.5f, 22, 35},      //2
              {8.0f, 16, 55},      //3
              {17.0f, 18, 80},      //4
              {24.0f, 10,   },      //5
