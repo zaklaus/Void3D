@@ -566,7 +566,7 @@ public:
 
              I3D_collision_data cd;
              cd.from = from;
-             cd.dir = dir*2.0f;
+             cd.dir = dir*DEFAULT_MAX_USE_DIST;
              cd.flags = I3DCOL_MOVING_SPHERE;
              cd.radius = 0.5f;
              cd.frm_ignore = frame;
