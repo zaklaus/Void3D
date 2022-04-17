@@ -28,6 +28,26 @@ static const float wanted_speed[] = {
    2, 8, 16, 32, 50, 72
 };
 
+enum C_vehicle_props_data_index {
+    CVEH_F_STEER_FORCE,
+    CVEH_F_GEAR_S_NAME,
+    CVEH_F_GEAR_VEL = 2,
+    CVEH_F_GEAR_FORCE,
+    CVEH_F_GEAR_TRAN_SPEED,
+};
+
+static const C_table_element te_veh_props[] = {
+       {TE_FLOAT, CVEH_F_STEER_FORCE, "Steer Force", 0, 2, 1, ""},
+       {TE_ARRAY, CVEH_F_GEAR_S_NAME, "Gears", 7, 0, 0, "Vehicle gears"},
+         {TE_BRANCH, 0, "Gear", 3, (dword)"%[0]"},
+          {TE_FLOAT, CVEH_F_GEAR_VEL,"Velocity", -1000, 1000, 0, "Gear velocity"},
+          {TE_FLOAT, CVEH_F_GEAR_FORCE, "Force", -1000, 1000, 0, "Gear force"},
+          {TE_FLOAT, CVEH_F_GEAR_TRAN_SPEED, "Tran. Speed", -2000, 2000, 0, "Transition speed to gear up at"},
+       {TE_NULL}
+};
+
+static const C_table_template templ_veh_props = { "Vehicle", te_veh_props };
+
 class C_vehicle_imp: public C_actor_physics{
 
    C_smart_ptr<I3D_sound> snd_engine;
@@ -90,17 +110,19 @@ public:
       //wheel_turn(0.0f)
    {
       //InitVals();
+       AssignTableTemplate();
    }
+
+   virtual const C_table_template* GetTableTemplate() const { return &templ_veh_props; }
 
 //----------------------------
 
    virtual void GameBegin(){
       SetupVolumes(0x1);
-
       PI3D_model mod = GetModel();
       if(mod){
+          const C_str& mname = mod->GetFileName();
          S_phys_template templ;
-         const C_str &mname = mod->GetFileName();
          if(!mission.LoadPhysicsTemplate(C_xstr("Models\\%\\scene.bin") %&mname[1], templ))
             ReportActorError("Model is not listed in active objects");
          else{
@@ -225,11 +247,12 @@ public:
 #ifdef DEBUG_DIRECT_KEYS
       if (can_control) {
 
-          if (tc.p_ctrl->Get(CS_USE, true)){
+          if (tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true)){
               if (ctrl.Size()){
                   PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
-                  if (frm && GetFrameActor(frm))
-                      Use(GetFrameActor(frm));
+                  PC_actor act = GetFrameActor(frm);
+                  if (frm && act)
+                      Use(act);
               }
           }
 
@@ -259,17 +282,7 @@ public:
 
           const int max_gear = 5;
 
-          static struct S_gear_table {
-              float _vel, force, trans_speed;
-          } gear_tab[max_gear + 3] = {
-             {-2.0f, 20, 15},              //-1
-             {0, 0},              //0
-             {2.3f, 33, 15},      //1
-             {5.5f, 22, 35},      //2
-             {8.0f, 16, 55},      //3
-             {17.0f, 18, 80},      //4
-             {24.0f, 10,   },      //5
-          };
+          //C_table* gear_tab = tab->;
 
           //determine gear
           if (want_dir) {
@@ -280,11 +293,11 @@ public:
                   }
                   else {
                       for (gear = 1; gear < max_gear; gear++) {
-                          if (curr_speed < gear_tab[gear + 1].trans_speed)
+                          if (curr_speed < tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1))
                               break;
                       }
                       //don't gear down too early
-                      if (last_gear > gear && curr_speed > (gear_tab[gear + 1].trans_speed * .7f))
+                      if (last_gear > gear && curr_speed > (tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1)* .7f))
                           ++gear;
                       else
                           if (gear > last_gear + 1)
@@ -319,11 +332,11 @@ public:
               }
               else {
                   //vel = gear_tab[gear+1].vel;
-                  force = gear_tab[gear + 1].force;
+                  force = tab->GetItemF(CVEH_F_GEAR_FORCE, gear + 1);
                   //DEBUG("***");
                   //DEBUG(vel);
                   //DEBUG(curr_speed * .25f);
-                  float rel_speed = Min(curr_speed, gear_tab[gear + 1].trans_speed);
+                  float rel_speed = Min(curr_speed, tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1));
                   vel = .5f + rel_speed * .3f;
                   vel *= (float)want_dir;
               }
@@ -351,7 +364,7 @@ public:
                   //float m = I3DFabs(turn);
                   float m = 1.0f;
                   if (gear) {
-                      m = curr_speed * .4f / I3DFabs(gear_tab[gear + 1]._vel);
+                      m = curr_speed * .4f / I3DFabs(tab->GetItemF(CVEH_F_GEAR_VEL, gear + 1));
                       m = Max(.7f, m);
                   }
                   //DEBUG(m);
