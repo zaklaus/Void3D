@@ -511,8 +511,8 @@ endm
 macro MAC_GENERATE_ENVMAP POS, NORM
 
 MAC_ENVMAP_BASE %POS, %NORM
-mul r_r_half.xy, r_r_sz.x, CV_HALF_NEGHALF
-mad r_uv.xy, r_r.xz, r_r_half.xy, CV_HALF
+mul r_r_half.xy, r_r_sz.x, CV_HALF
+mad r_uv.xy, r_r.xy, r_r_half.xy, CV_HALF
 
 endm
 
