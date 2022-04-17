@@ -350,10 +350,10 @@ I3D_RESULT C_loader::ReadMaterials_4DS(){
       ck.Read(diffuse_map_name, diffuse_map_len);
       *(C_str*)&diff = C_str(diffuse_map_name);
       
-     /* if(mat_flags & DataFormat4DS::MATERIALFLAG_COLORKEY) {
-        diff.flags |= MAT_SRC_ANIMATE | TXTF_CKEY_ALPHA;
-      }*/
-
+      if(mat_flags & DataFormat4DS::MATERIALFLAG_COLORKEY) {
+          txt_flags |= LOADF_TXT_TRANSP;
+          mat->SetMatGlags(mat->GetMatGlags() | MATF_CKEY_ZERO_REF);
+      }
 
       //animated diffuse
       if(mat_flags & DataFormat4DS::MATERIALFLAG_ANIMATEDTEXTUREDIFFUSE) {
@@ -2479,9 +2479,17 @@ void C_loader::SmoothSceneNormals(PI3D_scene scene, C_vector<S_smooth_info> &smo
    delete[] smooth_data;
 }
 
-//void ReadLod(C_chunk& c, 
+I3D_RESULT C_loader::ReadBillboard_4DS(PI3D_visual vis) {
+    if(vis->GetVisualType1() == I3D_VISUAL_BILLBOARD) {
+        //I3DPROP_BBRD_ROT_AXIS
+        vis->SetProperty(0, ck.ReadInt());
+        //I3DPROP_BBRD_ROT_AXIS
+        vis->SetProperty(1, ck.ReadBool());   
+    }
+    return I3D_OK;
+}
 
-I3D_RESULT C_loader::ReadVisual(PI3D_visual vis) {
+I3D_RESULT C_loader::ReadVisual_4DS(PI3D_visual vis) {
    
    word instanced = ck.ReadWord();
    byte lod_level = ck.ReadByte();
@@ -2555,7 +2563,7 @@ I3D_RESULT C_loader::ReadVisual(PI3D_visual vis) {
    return I3D_OK;
 }
 
-I3D_RESULT C_loader::ReadDummy(PI3D_dummy dummy) {
+I3D_RESULT C_loader::ReadDummy_4DS(PI3D_dummy dummy) {
 
    I3D_bbox bbox;
    ck.Read(&bbox, sizeof(I3D_bbox));
@@ -2564,7 +2572,7 @@ I3D_RESULT C_loader::ReadDummy(PI3D_dummy dummy) {
    return I3D_OK;
 }
 
-I3D_RESULT C_loader::ReadSector(PI3D_sector sec) {
+I3D_RESULT C_loader::ReadSector_4DS(PI3D_sector sec) {
    dword unk1 = ck.ReadDword();
    dword unk2 = ck.ReadDword();
    dword vertex_cnt = ck.ReadDword();
@@ -2637,6 +2645,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
       I3D_FRAME_TYPE frame_type = (I3D_FRAME_TYPE)ck.ReadByte();
       byte visual_type = 0;
 
+      
       if(frame_type == FRAME_VISUAL) {
          visual_type = ck.ReadByte();
          word render_flags = ck.ReadWord();
@@ -2657,6 +2666,8 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
       ck.Read(mesh_params, mesh_params_len);
 
       C_smart_ptr<I3D_frame> frm;
+      
+      //OutputDebugString(C_fstr("loading frame %s type: %d, visual: %d\n", frm_name, frame_type, visual_type));
 
       switch(frame_type) {
          case FRAME_VISUAL: {
@@ -2665,28 +2676,29 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
             
             switch(visual_type) {
-
-               //object
-               case 0: {
-                  frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_OBJECT); 
-                  ReadVisual(I3DCAST_VISUAL(frm));
-               } break;
+                case DataFormat4DS::VISUALMESHTYPE_STANDARD: {
+                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_OBJECT); 
+                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
+                } break;
                
-               //glow
-               case 6: {
-                  //NOTE: read dummy data for glow to dont skip bytes
-                  byte glow_cnt = ck.ReadByte();
-                  for(int j = 0; j < glow_cnt; j++) {
-                     S_vector glow_pos = ck.ReadVector();
-                     word material_id = ck.ReadWord();
-                  }
-               } break;
+                case DataFormat4DS::VISUALMESHTYPE_BILLBOARD: {
+                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_BILLBOARD);
+                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
+                    ReadBillboard_4DS(I3DCAST_VISUAL(frm));
+                } break;
 
-               default: {
-                  int test = 0;
-                  test++;
-               } break;
-
+                case DataFormat4DS::VISUALMESHTYPE_GLOW: {
+                    //NOTE: read dummy data for glow to dont skip bytes
+                    byte glow_cnt = ck.ReadByte();
+                    for(int j = 0; j < glow_cnt; j++) {
+                        S_vector glow_pos = ck.ReadVector();
+                        word material_id = ck.ReadWord();
+                    }
+                } break;
+                default: {
+                    int test = 0;
+                    test++;
+                } break;
             }
          } break;
 
@@ -2696,7 +2708,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
 
             frm = scene->CreateFrame(FRAME_DUMMY);
-            ReadDummy(I3DCAST_DUMMY(frm));
+            ReadDummy_4DS(I3DCAST_DUMMY(frm));
          } break;
          
          case FRAME_SECTOR: {
@@ -2705,8 +2717,9 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
                return ir;
 
             frm = scene->CreateFrame(FRAME_SECTOR);
-            ReadSector(NULL);
+            ReadSector_4DS(NULL);
          } break;
+
          default: {
             int test = 0;
             test++;
@@ -2714,7 +2727,10 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
          }
       }
       
-      if(!frm) continue;
+      if (!frm) {
+          //OutputDebugString(C_fstr("unable to load frame: %s\n", frm_name));
+          continue;
+      }
 
       frm->Release();
       frm->SetName(frm_name);
@@ -2727,14 +2743,14 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
    }
    
    for(int i = 0; i < loaded_frames.size(); i++) {
-      C_smart_ptr<I3D_frame> current_frm = loaded_frames[i];
+      C_smart_ptr<I3D_frame> curent_frm = loaded_frames[i];
       int parent = frame_parents[i];
-
       if(parent > 0) {
-         current_frm->LinkTo(loaded_frames[parent - 1]);
+        container->AddFrame(curent_frm);
+        curent_frm->LinkTo(loaded_frames[parent - 1]);
       } else {
-         current_frm->LinkTo(root_frame);
-         container->AddFrame(current_frm);
+        container->AddFrame(curent_frm);
+        curent_frm->LinkTo(root_frame);
       }
    }
 

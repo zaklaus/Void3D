@@ -379,9 +379,10 @@ public:
    I3D_RESULT Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
       void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container);
 
-   I3D_RESULT ReadVisual(PI3D_visual vis);
-   I3D_RESULT ReadSector(PI3D_sector sec);
-   I3D_RESULT ReadDummy(PI3D_dummy dummy);
+   I3D_RESULT ReadBillboard_4DS(PI3D_visual vis);
+   I3D_RESULT ReadVisual_4DS(PI3D_visual vis);
+   I3D_RESULT ReadSector_4DS(PI3D_sector sec);
+   I3D_RESULT ReadDummy_4DS(PI3D_dummy dummy);
 
    void Close();
 };
