@@ -416,6 +416,7 @@ class C_edit_Create: public C_editor_item_Create{
          C_edit_Create *ec;
          PC_editor_item_Mission e_mission;
          char buf[MAX_PATH];
+         char buf2[MAX_PATH];
          bool mission_model;
          const char *last_mission_path;
          C_str cwd;
@@ -565,7 +566,7 @@ class C_edit_Create: public C_editor_item_Create{
                      //strcpy(hp->buf, hp->last_mission_path);
                      C_str mission_name = hp->last_mission_path;
                      if(hp->e_mission->BrowseMission(hwnd, mission_name)){
-                        strcpy(hp->buf, mission_name);
+                        strcpy(hp->buf2, mission_name);
                         hp->mission_model = true;
                         //PostMessage(GetParent(hwnd), WM_COMMAND, MAKELPARAM(IDABORT, BN_CLICKED), (LPARAM)GetDlgItem(GetParent(hwnd), IDABORT));
                         EndDialog(GetParent(hwnd), true);
@@ -746,7 +747,7 @@ class C_edit_Create: public C_editor_item_Create{
          }
       };
 
-      S_hlp hlp;
+      S_hlp hlp = {};
       hlp.igraph = ed->GetIGraph();
       hlp.ed_scene = ed->GetScene();
       hlp.ec = this;
@@ -879,8 +880,8 @@ class C_edit_Create: public C_editor_item_Create{
                break;
             }
          }else{
-            last_mission_path = hlp.buf;
-            C_fstr tmp("+%s", hlp.buf);
+            last_mission_path = hlp.buf2;
+            C_fstr tmp("+%s", hlp.buf2);
             strcpy(hlp.buf, tmp);
          }
          if(b && !hlp.mission_model){
@@ -1259,7 +1260,7 @@ public:
       ed->AddShortcut(this, E_CREATE_DUMMY, MB"&Dummy\tShift+D", K_D, SKEY_SHIFT);
       ed->AddShortcut(this, E_CREATE_DUMMY_FRAMED, MB"&Dummy framed\tCtrl+Y", K_Y, SKEY_CTRL);
       ed->AddShortcut(this, E_CREATE_OCCLUDER, MB"&Occluder\tShift+O", K_O, SKEY_SHIFT);
-      //ed->AddShortcut(this, E_CREATE_VISUAL, MB"Visual", K_NOKEY, 0);
+      ed->AddShortcut(this, E_CREATE_VISUAL, MB"Visual", K_NOKEY, 0);
 
 #undef MB
 #define MB "%25 &Create\\"
