@@ -804,7 +804,6 @@ public:
 //----------------------------
 
    virtual bool LoadPhysicsTemplate(const char *fname, S_phys_template &t) const{
-
       C_chunk ck;
       if(ck.ROpen(C_xstr("Missions\\%") % fname) && ++ck==CT_BASECHUNK){
          bool done = false;
@@ -849,7 +848,7 @@ bool C_game_mission_imp::LoadChunk(CK_TYPE in_ck_t, S_load_context &lc){
 
    case CT_ACTOR:
       if(lc.merge_mode && !(lc.open_flags&OPEN_MERGE_ACTORS)) break;
-      if(lc.open_flags&OPEN_MODEL) break;
+      if(lc.open_flags&OPEN_MODEL && !(lc.open_flags&OPEN_FORCE_MODEL)) break;
       {
          C_str str;
          map<C_str, PI3D_frame>::const_iterator it_fmap;

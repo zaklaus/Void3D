@@ -1289,6 +1289,24 @@ public:
       return true;
    }
 
+   bool GetFrameName(PI3D_scene scn, char* frm_name) {
+       MakeSceneName(ed->GetScene(), frm_name);
+       //prompt user for name
+       while (true) {
+           S_dlg_name hlp = { ed->GetIGraph(), frm_name };
+           bool b = DialogBoxParam(GetHInstance(), "GET_MODELNAME", (HWND)ed->GetIGraph()->GetHWND(),
+               dlgName, (LPARAM)&hlp);
+           if (!b) {
+               return false;
+           }
+           //check name duplication
+           if (!IsNameInScene(ed->GetScene(), frm_name))
+               return true;
+       }
+
+       return false;
+   }
+
 //----------------------------
 
    virtual void Close(){
@@ -1869,21 +1887,8 @@ public:
             if(!frm)
                break;
                   
-            MakeSceneName(ed->GetScene(), frm_name);
-                              //prompt user for name
-            while(true){
-               S_dlg_name hlp = {ed->GetIGraph(), frm_name};
-               bool b = DialogBoxParam(GetHInstance(), "GET_MODELNAME", (HWND)ed->GetIGraph()->GetHWND(),
-                  dlgName, (LPARAM)&hlp);
-               if(!b){
-                  frm->Release();
-                  frm = NULL;
-                  break;
-               }
-                              //check name duplication
-               if(!IsNameInScene(ed->GetScene(), frm_name))
-                  break;
-            }
+            GetFrameName(scene, frm_name);
+
             if(frm){   
                frm->SetName(frm_name);
 

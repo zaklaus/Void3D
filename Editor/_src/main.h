@@ -125,6 +125,7 @@ enum E_MISSION_OPEN_FLAGS{
    OPEN_NO_EDITOR = 0x400000, //don't load editor info
    OPEN_LOG = 0x800000,       //log loading
    OPEN_MODEL = 0x1000000,    //opening model, not affecting scene
+   OPEN_FORCE_MODEL = 0x4000000,
 };
 
 //----------------------------
@@ -362,7 +363,7 @@ public:
 
 //----------------------------
 // Load model, use mission's scene for adding model's volumes and sectors to (no other changes to mission are done).
-   E_MISSION_IO LoadModel(PI3D_model, const char *dir, I3D_LOAD_CB_PROC* = NULL, void *load_cb_context = NULL) const;
+   E_MISSION_IO LoadModel(PI3D_model, const char *dir, I3D_LOAD_CB_PROC* = NULL, void *load_cb_context = NULL, bool force_model = false) const;
 
 //----------------------------
 // Get name of currently open mission.

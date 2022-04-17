@@ -204,6 +204,26 @@ class C_actor *FindFrameActor(PI3D_frame frm1){
    return NULL;
 }
 
+class C_actor* FindChildFrameActor(PI3D_frame frm1) {
+
+    if (frm1) {
+        const PI3D_frame* children = frm1->GetChildren();
+        for (int i = 0; i < frm1->NumChildren(); i++){
+            I3D_frame* child = children[i];
+            C_actor* act = GetFrameActor(child);
+            if (act){
+                return act;
+            }else{
+                C_actor* act = FindChildFrameActor(frm1);
+                if (act) {
+                    return act;
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
 //----------------------------
 
 bool IsChildOf(CPI3D_frame frm, CPI3D_frame root){

@@ -49,6 +49,7 @@ class C_edit_Mission: public C_editor_item_Mission{
       E_MISSION_AUTOSAVE_CONFIG,
       E_MISSION_SAVE_ASK_TOGGLE, // - togle save query messagebox
 
+      E_MISSION_ACTOR_IMPORT, // - import model template with actor data
       E_MISSION_ACTOR_CREATE_EDIT,  // - create actor on selection, or edit their tables
       E_MISSION_ACTOR_DESTROY,   // - create actor on selection
       E_MISSION_ACTOR_DRAW_NAMES,// - toggle draw actor's names
@@ -130,6 +131,8 @@ class C_edit_Mission: public C_editor_item_Mission{
    C_smart_ptr<C_editor_item_Selection> e_slct;
    C_smart_ptr<C_editor_item_Undo> e_undo;
    C_smart_ptr<C_editor_item_MouseEdit> e_mouseedit;
+   C_smart_ptr<C_editor_item_Create> e_create;
+   C_smart_ptr<C_editor_item_Modify> e_modify;
    
    bool make_log;
    bool ask_to_save;
@@ -1487,7 +1490,9 @@ public:
       e_slct = (PC_editor_item_Selection)ed->FindPlugin("Selection");
       e_undo = (PC_editor_item_Undo)ed->FindPlugin("Undo");
       e_mouseedit = (PC_editor_item_MouseEdit)ed->FindPlugin("MouseEdit");
-      if(!e_slct || !e_undo || !e_mouseedit)
+      e_create = (PC_editor_item_Create)ed->FindPlugin("Create");
+      e_modify = (PC_editor_item_Modify)ed->FindPlugin("Modify");
+      if(!e_slct || !e_undo || !e_mouseedit || !e_create || !e_modify)
          return false;
 
       ed->AddShortcut(this, E_MISSION_HELP, "%100 %i &Help\\%0 %a &Help\tF1", K_F1, 0);
@@ -1517,6 +1522,7 @@ public:
 
 #undef MENU_BASE
 #define MENU_BASE "%80 &Game\\"
+      ed->AddShortcut(this, E_MISSION_ACTOR_IMPORT, "%25 &Create\\%0 3D object\\%&Model mission", K_NOKEY, 0);
       ed->AddShortcut(this, E_MISSION_ACTOR_CREATE_EDIT, MENU_BASE"%0 &Create actor (edit table)\tA", K_A, 0);
       ed->AddShortcut(this, E_MISSION_ACTOR_DESTROY, MENU_BASE"%a &Destroy actor", K_NOKEY, 0);
       ed->AddShortcut(this, E_MISSION_ACTOR_DRAW_NAMES, MENU_BASE"Draw actor &names\tCtrl+Shift+Alt+A", K_A, SKEY_CTRL|SKEY_ALT|SKEY_SHIFT);
@@ -2043,6 +2049,56 @@ public:
             tab_prop->Release();
          }
          break;
+
+      case E_MISSION_ACTOR_IMPORT: {
+          if (!ed->CanModify())
+              break;
+
+          C_str file_name;
+          if (BrowseMission(ed->GetIGraph()->GetHWND(), file_name)) {
+              PI3D_model mod = I3DCAST_MODEL(mission->GetScene()->CreateFrame(FRAME_MODEL));
+
+              if (mission->LoadModel(mod, C_fstr("+models\\%s", &file_name[0]), 0, 0, true) == MIO_OK) {
+                  char frm_name[256] = {};
+                  if (e_create->GetFrameName(ed->GetScene(), frm_name)) {
+                      mod->SetName(frm_name);
+                      mod->StoreFileName(C_str("+")+file_name);
+                      e_slct->Clear();
+                      e_slct->AddFrame(mod);
+                      e_modify->AddFrameFlags(mod, E_MODIFY_FLG_POSITION | E_MODIFY_FLG_CREATE | E_MODIFY_FLG_ROTATION);
+                  }
+                  else {
+                      mod->Release();
+                      break;
+                  }
+
+                  PI3D_camera cam = ed->GetScene()->GetActiveCamera();
+                  assert(cam);
+                  const S_vector& cdir = cam->GetWorldDir();
+                  S_vector pos = cam->GetWorldPos() + cdir * 2.0f;
+                  S_quat rot; rot.SetDir(S_vector(cdir.x, 0.0f, cdir.z), 0.0f);
+
+                  e_undo->Begin(this, 1, mod);
+                  e_undo->End();
+                  mod->SetPos(pos);
+                  mod->SetRot(rot);
+
+                  PC_actor act = FindChildFrameActor(mod);
+                  if (act){
+                      act->SetFrame(mod);
+                  }
+
+                  ed->GetScene()->SetFrameSector(mod);
+                  ed->GetScene()->AddFrame(mod);
+                  mod->Release();
+
+                  ed->SetModified();
+              }
+              else {
+                  mod->Release();
+              }
+          }
+      }break;
 
       case E_MISSION_ACTOR_CREATE_EDIT:
          {

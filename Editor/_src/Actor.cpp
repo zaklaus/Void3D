@@ -6,9 +6,6 @@
 
 //----------------------------
 
-#define DEFAULT_MAX_USE_DIST 1.5f   //default maximal use distance
-#define DEFAULT_MAX_USE_ANGLE (PI*.4f) //default maximal use angle
-
 //----------------------------
 
 const S_actor_type_info actor_type_info[ACTOR_LAST] = {
@@ -51,19 +48,32 @@ C_actor::C_actor(C_game_mission &m1, PI3D_frame in_frm, E_ACTOR_TYPE in_type):
 //----------------------------
 
 C_actor::~C_actor(){
-
-   S_frame_info *fi = GetFrameInfo(frame);
-   assert(fi);
-   if(fi){
-      fi->actor = NULL;
-      fi = SetFrameInfo(frame, fi);
-   }
+    SetFrame(NULL);
 }
 
 //----------------------------
 
 bool C_actor::SetFrameSector(){
    return mission.GetScene()->SetFrameSector(frame);
+}
+
+void C_actor::SetFrame(PI3D_frame frm){
+    S_frame_info* fi = GetFrameInfo(frame);
+    assert(fi);
+    if (fi) {
+        fi->actor = NULL;
+        fi = SetFrameInfo(frame, fi);
+    }
+
+    frame = NULL;
+
+    if (frm){
+        frame = frm;
+        S_frame_info* fi = CreateFrameInfo(frame);
+        assert(fi && frame && !fi->actor);
+        fi->actor = this;
+        SetFrameInfo(frame, fi);
+    }
 }
 
 //----------------------------

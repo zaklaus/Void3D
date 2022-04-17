@@ -372,6 +372,8 @@ public:
 //----------------------------
 // Delete specified frame from scene.
    virtual bool DeleteFrame(PI3D_frame frm) = 0;
+
+   virtual bool GetFrameName(PI3D_scene scn, char* frm_name) = 0;
 };
 
 typedef C_editor_item_Create *PC_editor_item_Create;

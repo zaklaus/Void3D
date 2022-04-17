@@ -76,6 +76,7 @@ PI3D_frame GetFrameParent(PI3D_frame frm, I3D_FRAME_TYPE type);
 //----------------------------
 // Search frame hiearchy up to model, return associated actor if find it.
 class C_actor *FindFrameActor(PI3D_frame frm1);
+class C_actor* FindChildFrameActor(PI3D_frame frm1);
 
 //----------------------------
 //Check if frm is child of frame root. 

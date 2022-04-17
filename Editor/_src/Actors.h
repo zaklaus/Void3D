@@ -67,6 +67,10 @@ public:
    inline PI3D_model GetModel(){ assert(frame->GetType()==FRAME_MODEL); return I3DCAST_MODEL(frame); }
    inline CPI3D_model GetModel() const{ assert(frame->GetType()==FRAME_MODEL); return I3DCAST_CMODEL(frame); }
 
+//----------------------------
+// Set a new frame actor to operate on
+   void SetFrame(PI3D_frame frm);
+
    virtual void Tick(const struct S_tick_context&){}
 
 //----------------------------
@@ -170,5 +174,9 @@ struct S_effect_init{
 
 //----------------------------
 //----------------------------
+
+#define DEFAULT_MAX_USE_DIST 1.5f   //default maximal use distance
+#define DEFAULT_MAX_USE_ANGLE (PI*.4f) //default maximal use angle
+
 
 #endif

@@ -674,7 +674,7 @@ E_MISSION_IO C_mission::Open(const char *dir, dword open_flags, I3D_LOAD_CB_PROC
 
 //----------------------------
 
-E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB_PROC *lcbp, void *lcbc) const{
+E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB_PROC *lcbp, void *lcbc, bool force_model) const{
 
    S_load_context lc;
    lc.load_cb_proc = lcbp ? lcbp : cbLoadScene;
@@ -683,6 +683,9 @@ E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB
    lc.loaded_model = mod;
    lc.open_flags = OPEN_NO_SHOW_PROGRESS | OPEN_NO_EDITOR | OPEN_MODEL;
 
+   if (force_model)
+       lc.open_flags |= OPEN_FORCE_MODEL;
+
    /*
    C_str conv_name = fname;
    for(int i=1; i<conv_name.Size(); i++){
@@ -690,6 +693,9 @@ E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB
          conv_name[i] = '\\';
    }
    */
+
+
+
                               //debuggin support - log errors
                               // (debug compilation only)
 #ifdef EDITOR
@@ -719,7 +725,7 @@ E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB
 #endif   //!EDITOR
 
    bool load_cancelled = false;
-                              
+                      
    dword i3d_open_flags = I3DLOAD_ERRORS;
    I3D_RESULT ir;
    ir = mod->Open(C_xstr("missions\\%\\scene.i3d") % &fname[1], i3d_open_flags, SCENE_LOAD_LOG);
@@ -772,7 +778,7 @@ E_MISSION_IO C_mission::LoadModel(PI3D_model mod, const char *fname, I3D_LOAD_CB
 
       if(++lc.ck == CT_BASECHUNK){
          while(lc.ck){
-                              //let virtual func to load this chunk
+             //let virtual func to load this chunk
             if(!const_cast<C_mission*>(this)->LoadChunk(++lc.ck, lc)){
                ok = false;
                load_cancelled = lc.cancelled;
