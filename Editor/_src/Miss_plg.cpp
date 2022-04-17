@@ -198,13 +198,12 @@ class C_edit_Mission: public C_editor_item_Mission{
          break;
 
       case TCM_IMPORT: {
-          C_edit_Mission* es = (C_edit_Mission*)cb_user;
+          //C_edit_Mission* es = (C_edit_Mission*)cb_user;
           prm2 = 0xffffffff;
-          es->ed->SetModified();
-      }
+      };
                               //flow...
       case TCM_MODIFY:
-         if(prm2!=-1){
+         if(1){
             C_edit_Mission *es = (C_edit_Mission*)cb_user;
             es->ed->SetModified();
                               //update tables on frame(s)
@@ -216,11 +215,45 @@ class C_edit_Mission: public C_editor_item_Mission{
                PC_table dst = const_cast<PC_table>(fi->actor->GetTable());
 
                if(prm2==-1){
-                  /*
-                  for(int i=tab->NumItems(); i--; ){
-                     memcpy(dst->Item(i), tab->Item(i), tab->SizeOf(i));
+                  for(prm2=tab->NumItems(); prm2--; ){
+                      int len = tab->ArrayLen(prm2);
+                      bool is_array = !!len;
+                      switch (tab->GetItemType(prm2)) {
+                      case TE_STRING:
+                          if (is_array)
+                              for (prm3 = len; prm3--;) strcpy(dst->ItemS(prm2, prm3), tab->ItemS(prm2, prm3));
+                          else
+                              strcpy(dst->ItemS(prm2), tab->ItemS(prm2));
+                          break;
+                      case TE_ENUM:
+                          if (is_array)
+                              for (prm3 = len; prm3--;) dst->ItemE(prm2, prm3) = tab->ItemE(prm2, prm3);
+                          else
+                              dst->ItemE(prm2) = tab->ItemE(prm2);
+                          break;
+                      case TE_BOOL:
+                          if (is_array)for (prm3 = len; prm3--;)
+                              dst->ItemB(prm2, prm3) = tab->ItemB(prm2, prm3);
+                          else
+                              dst->ItemB(prm2) = tab->ItemB(prm2);
+                          break;
+                      case TE_COLOR_VECTOR:
+                          if (is_array)for (prm3 = len; prm3--;)
+                              dst->ItemV(prm2, prm3) = tab->ItemV(prm2, prm3);
+                          else
+                              dst->ItemV(prm2) = tab->ItemV(prm2);
+                          break;
+                      case TE_INT:
+                          if (is_array)for (prm3 = len; prm3--;)  dst->ItemI(prm2, prm3) = tab->ItemI(prm2, prm3);
+                          else dst->ItemI(prm2) = tab->ItemI(prm2);
+                          break;
+
+                      case TE_FLOAT:
+                          if (is_array)for (prm3 = len; prm3--;)  dst->ItemF(prm2, prm3) = tab->ItemF(prm2, prm3);
+                          else dst->ItemF(prm2) = tab->ItemF(prm2);
+                          break;
+                      }
                   }
-                  */
                }else{
                   bool is_array = (tab->ArrayLen(prm2));
                   switch(tab->GetItemType(prm2)){
