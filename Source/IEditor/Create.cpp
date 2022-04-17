@@ -1614,6 +1614,7 @@ public:
                         frm->SetRot(sel_frm->GetRot());
                         frm->SetScale(sel_frm->GetScale());
                         setup_pos = false;
+                        modify_flags = 0;
                      }
 
                   }
