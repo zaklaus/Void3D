@@ -184,16 +184,21 @@ class C_edit_Mission: public C_editor_item_Mission{
          {
             C_edit_Mission *es = (C_edit_Mission*)cb_user;
             es->edited_template = NULL;
-            es->ed->GetIGraph()->RemoveDlgHWND(es->hwnd_tab_edit);
-            es->hwnd_tab_edit = NULL;
-            es->ed->GetIGraph()->EnableSuspend(true);
-            es->multiple_edited_frames.clear();
-            memcpy(es->tab_pos_size, (LPRECT)prm2, sizeof(int)*4);
+            if (es->ed) {
+                es->ed->GetIGraph()->RemoveDlgHWND(es->hwnd_tab_edit);
+                es->hwnd_tab_edit = NULL;
+                es->ed->GetIGraph()->EnableSuspend(true);
+                es->multiple_edited_frames.clear();
+                memcpy(es->tab_pos_size, (LPRECT)prm2, sizeof(int) * 4);
+            }
          }
          break;
 
-      case TCM_IMPORT:
-         prm2 = 0xffffffff;
+      case TCM_IMPORT: {
+          C_edit_Mission* es = (C_edit_Mission*)cb_user;
+          prm2 = 0xffffffff;
+          es->ed->SetModified();
+      }
                               //flow...
       case TCM_MODIFY:
          if(prm2!=-1){
