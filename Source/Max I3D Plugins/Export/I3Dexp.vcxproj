@@ -60,7 +60,7 @@
     </Midl>
     <ClCompile>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>c:\program files\3dsviz4\maxsdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;DTA_READ_STATIC;NO_EXCEPT_STACK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -81,10 +81,10 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>core.lib;geom.lib;gfx.lib;mesh.lib;maxutil.lib;comctl32.lib;util.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;dta_read.lib;zlib.lib;core.lib;geom.lib;gfx.lib;mesh.lib;maxutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\i3dexp.dle</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>c:\program files\3dsviz4\maxsdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\I3Dexp.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Release_4/i3dexp.pdb</ProgramDatabaseFile>
@@ -106,7 +106,7 @@
     <ClCompile>
       <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk.7\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;DTA_READ_STATIC;NO_EXCEPT_STACK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -131,7 +131,7 @@
       <AdditionalDependencies>base_lib_d.lib;core.lib;zlib.lib;dta_read_d.lib;geom.lib;gfx.lib;mesh.lib;maxutil.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\i3dexp.dle</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk.7\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\I3Dexp.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Debug_4/i3dexp.pdb</ProgramDatabaseFile>

@@ -33,6 +33,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+*.exp
+*.bsc
+*.recipe
+
 # Visual Studio 2015/2017 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
@@ -397,36 +401,22 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-Source/ISnd2/Thunk/_Release/ISound_Thunk.idb
-Source/ISnd2/_Debug/vc143.idb
-lib/ISound2_thunk_d.lib
 
-Editor/_src/_Debug/
+# mess
+_Debug/
 
 Tools/Plugins.max/
-
-Source/IGraph2/_Debug/
-
-Source/IGraph2/PNG/_Debug/
-
-Source/ISnd2/_Debug/
 
 Source/ISnd2/Thunk/_Release/
 
 lib/
 !Source/ISnd2/OggVorbis/Lib
 
-Source/Insanity/_Debug/
 
-Source/Physics/_Debug/
+_Debug_dll/
 
-Source/Base_lib/_Debug/
+_Debug_static/
 
-Source/Config/_Debug_dll/
-
-Source/Config/_Debug_static/
-
-Source/Editctrl/_Debug/
 
 Editor/Bin/pixel.shd
 
@@ -434,8 +424,21 @@ Editor/Bin/vertex.shd
 
 Source/IEditor/_Debug/main.res
 
-Editor/Missions/_backup/
+_backup/
 
-Editor/_src/_output/
+_output/
 
 Thumbs.db
+
+Source/Max I3D Plugins/maxsdk/
+
+_debug_mem_rel/
+
+
+_Release/
+
+_Debug_4/
+
+_Release_4/
+
+*.idb

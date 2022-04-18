@@ -62,7 +62,7 @@
     <ClCompile>
       <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk.7\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;DTA_READ_STATIC;NO_EXCEPT_STACK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -87,7 +87,7 @@
       <AdditionalDependencies>base_lib_d.lib;comctl32.lib;delayimp.lib;maxscrpt.lib;geom.lib;core.lib;maxutil.lib;paramblk2.lib;gfx.lib;mesh.lib;edmodel.lib;poly.lib;mnmath.lib;bmm.lib;particle.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\joints.dlo</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk.7\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\prim.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Debug_4/joints.pdb</ProgramDatabaseFile>

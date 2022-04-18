@@ -362,7 +362,7 @@ class C_SceneEnumProc: public ITreeEnumProc{
          Object *obj_ref = node->GetObjectRef();
          Class_ID idr = obj_ref->ClassID();
          //dword sidr = obj_ref->SuperClassID();
-         if(idr==Class_ID(XREFOBJ_CLASS_ID, 0)){
+         if(idr==(Class_ID)XREFOBJ_CLASS_ID, 0){
             /*
             IXRefObject *xref = (IXRefObject*)obj_ref;
             TSTR fn = xref->GetFileName();

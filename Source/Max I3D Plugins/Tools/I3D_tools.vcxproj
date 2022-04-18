@@ -60,7 +60,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk.7\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -85,7 +85,7 @@
       <AdditionalDependencies>base_lib_d.lib;odbc32.lib;odbccp32.lib;comctl32.lib;geom.lib;core.lib;maxutil.lib;gfx.lib;mesh.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\I3DTools.dle</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk.7\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\I3D_tools.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/I3DTools.pdb</ProgramDatabaseFile>
