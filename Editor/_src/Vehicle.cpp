@@ -62,6 +62,8 @@ class C_vehicle_imp: public C_actor_physics{
    S_vector last_pos;
    int last_gear;
    float last_frequency;
+   bool brake;
+   bool engine_on;
 
 //----------------------------
 
@@ -103,6 +105,7 @@ public:
       C_actor_physics(gm1, in_frm, ACTOR_VEHICLE),
       enabled(false),
       can_control(false),
+       engine_on(false),
       last_pos(0, 0, 0),
       last_gear(0),
       ctrl("")
@@ -205,21 +208,23 @@ public:
            cam->ReattachOwner();
            cam->GetCamera()->SetPos(S_vector(0,0,0));
            cam->SetFocus(frame->FindChildFrame("engine"), frame);
-           cam->SetDistance(8.0f);
+           cam->SetDistance(10.0f);
            can_control = true;
            ctrl = act->GetName();
 
            if (act){
                //act->Enable(false);
-               //act->GetFrame()->SetOn(false);
+               act->GetFrame()->SetOn(false);
+               //Enable(true);
            }
        }else{
            can_control = false;
 
            if (act){
-               //act->GetFrame()->SetOn(true);
+               act->GetFrame()->SetOn(true);
                //act->Enable(true);
                act->Use(this);
+               brake = false;
            }
 
            ctrl = "";
@@ -247,18 +252,9 @@ public:
 #ifdef DEBUG_DIRECT_KEYS
       if (can_control) {
 
-          if (tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true)){
-              if (ctrl.Size()){
-                  PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
-                  PC_actor act = GetFrameActor(frm);
-                  if (frm && act)
-                      Use(act);
-              }
-          }
-
           int want_dir = 0;       //0=stay, 1=forward, -1=backward
           float steer = 0.0f;
-          bool brake = false;
+          brake = false;
 
           if (tc.p_ctrl) {
               if (tc.p_ctrl->Get(CS_MOVE_FORWARD)) {
@@ -277,6 +273,23 @@ public:
                   }
               if (tc.p_ctrl->Get(CS_FIRE)) {
                   brake = true;
+              }
+          }
+
+          if (tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true)) {
+              if (engine_on && curr_speed < 2.0f){
+                  engine_on = false;
+                  brake = false;
+                  if (snd_engine->IsOn()){
+                      snd_engine->SetOn(false);
+                  }
+                  Enable(false);
+              }
+              else if (ctrl.Size()) {
+                  PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
+                  PC_actor act = GetFrameActor(frm);
+                  if (frm && act)
+                      Use(act);
               }
           }
 
@@ -319,8 +332,10 @@ public:
 
           //if(motor)
           {
-              if ((want_dir || steer) && !enabled)
+              if ((want_dir || steer) && !enabled){
                   Enable(true);
+                  engine_on = true;
+              }
               //float turn = 0.0f;
                                    //forces applied to joint motor under various circumstances
               const float brake_force = 100.0f;
@@ -376,7 +391,7 @@ public:
                   last_frequency += delta;
 
                   //if(m > .1f){
-                  if (!snd_engine->IsOn())
+                  if (!snd_engine->IsOn() && engine_on)
                       snd_engine->SetOn(true);
                   snd_engine->SetFrequency(last_frequency);
                   //LOG(m);
@@ -392,8 +407,10 @@ public:
 #endif   //DEBUG_DIRECT_KEYS
 
 #ifdef DEBUG_SHOW_INFO
-      DEBUG(C_xstr("Speed: #.1% km/h") %curr_speed);
-      DEBUG(C_xstr("Gear: %") %gear);
+      if (can_control) {
+          DEBUG(C_xstr("Speed: #.1% km/h") % curr_speed);
+          DEBUG(C_xstr("Gear: %") % gear);
+      }
       //DEBUG(C_xstr("Moving back: %") %moving_backward);
 #endif
 

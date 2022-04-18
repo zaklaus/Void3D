@@ -150,12 +150,6 @@ bool InitSystem(const C_command_line &cmd_line){
    _set_printf_count_output(1);
 #endif
 
-#ifndef EDITOR                 //force 4:3 screen ratio if windowed mode
-   if(!game_configuration.fullscreen){
-      game_configuration.mode_x = (game_configuration.mode_y*4/3 + 3) & -4;
-   }
-#endif
-
    int res_x = game_configuration.mode_x;
    int res_y = game_configuration.mode_y;
 
