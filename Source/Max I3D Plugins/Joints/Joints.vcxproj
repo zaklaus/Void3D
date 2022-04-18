@@ -108,7 +108,7 @@
     </Midl>
     <ClCompile>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>c:\program files\3dsviz4\maxsdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)maxsdk\include;$(SolutionDir)..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;DTA_READ_STATIC;NO_EXCEPT_STACK;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -122,6 +122,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <CompileAs>Default</CompileAs>
+      <Optimization>Disabled</Optimization>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -130,10 +131,10 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib.lib;comctl32.lib;delayimp.lib;maxscrpt.lib;geom.lib;core.lib;maxutil.lib;paramblk2.lib;gfx.lib;mesh.lib;edmodel.lib;poly.lib;mnmath.lib;bmm.lib;particle.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;dta_read.lib;zlib.lib;core.lib;geom.lib;gfx.lib;mesh.lib;maxutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\joints.dlo</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>c:\program files\3dsviz4\maxsdk\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\prim.def</ModuleDefinitionFile>
       <ProgramDatabaseFile>.\_Release_4/joints.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>

@@ -1432,17 +1432,17 @@ public:
       return _T("");
    }
 
-   virtual const TCHAR *LongDesc(){ return "Insanity3D import"; }
    virtual const TCHAR *ShortDesc(){
       switch(mode){
-      case IMPORT_REPLACE: return "Insanity3D (replace)";
-      case IMPORT_MERGE: return "Insanity3D (merge)";
-      case IMPORT_MERGE_ANIM: return "Insanity3D (merge tracks)";
+      case IMPORT_REPLACE: return "Void3D (replace)";
+      case IMPORT_MERGE: return "Void3D (merge)";
+      case IMPORT_MERGE_ANIM: return "Void3D (merge tracks)";
       default: return "";
       }
    }
-   virtual const TCHAR *AuthorName(){ return "Lonely Cat Games"; }
-   virtual const TCHAR *CopyrightMessage(){ return "Copyright (c) 2002 Lonely Cat Games"; }
+   virtual const TCHAR* LongDesc() { return "Void 3D Resource File"; }
+   virtual const TCHAR* AuthorName() { return "V4 Games"; }
+   virtual const TCHAR* CopyrightMessage() { return "Copyright (c) 2022 V4 Games"; }
    virtual const TCHAR *OtherMessage1(){ return _T(""); }
    virtual const TCHAR *OtherMessage2(){ return _T(""); }
    virtual unsigned int Version(){ return 200; }

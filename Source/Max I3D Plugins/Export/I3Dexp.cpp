@@ -362,7 +362,7 @@ class C_SceneEnumProc: public ITreeEnumProc{
          Object *obj_ref = node->GetObjectRef();
          Class_ID idr = obj_ref->ClassID();
          //dword sidr = obj_ref->SuperClassID();
-         if(idr==(Class_ID)XREFOBJ_CLASS_ID, 0){
+         if(idr==(Class_ID)XREFOBJ_CLASS_ID){
             /*
             IXRefObject *xref = (IXRefObject*)obj_ref;
             TSTR fn = xref->GetFileName();
@@ -384,7 +384,7 @@ class C_SceneEnumProc: public ITreeEnumProc{
       Class_ID id = obj->ClassID();
 
                               //NURBS
-      if(id==EDITABLE_SURF_CLASS_ID){
+      if(id==(Class_ID)EDITABLE_SURF_CLASS_ID){
          Append(node, obj, OBTYPE_NURBS);
          materials.AddMaterial(node->GetMtl());
          ++num_unique_materials;
@@ -1879,10 +1879,10 @@ public:
       return "";
    }
 
-   virtual const TCHAR *LongDesc(){ return "Insanity 3D Resource File"; }
-   virtual const TCHAR *ShortDesc(){ return "Insanity3D format"; }
-   virtual const TCHAR *AuthorName(){ return "Lonely Cat Games"; }
-   virtual const TCHAR *CopyrightMessage(){ return "Copyright (c) 2001 Lonely Cat Games"; }
+   virtual const TCHAR *LongDesc(){ return "Void 3D Resource File"; }
+   virtual const TCHAR *ShortDesc(){ return "Void3D format"; }
+   virtual const TCHAR *AuthorName(){ return "V4 Games"; }
+   virtual const TCHAR *CopyrightMessage(){ return "Copyright (c) 2022 V4 Games"; }
    virtual const TCHAR *OtherMessage1(){ return ""; }
    virtual const TCHAR *OtherMessage2(){ return ""; }
    virtual unsigned int Version(){ return 200; }
@@ -1928,7 +1928,7 @@ public:
    virtual SClass_ID SuperClassID(){ return SCENE_EXPORT_CLASS_ID; }
 #endif
    virtual Class_ID ClassID(){ return Class_ID(0x51b52649, 0x1662350c); }
-   virtual const TCHAR *ClassName(){ return "Insanity3D Import/Export"; }
+   virtual const TCHAR *ClassName(){ return "Void3D Import/Export"; }
 
    virtual const TCHAR *Category(){ return "Scene Export"; }
 
