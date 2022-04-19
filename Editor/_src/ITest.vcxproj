@@ -244,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\IEditor\ilib_res.h" />
+    <ClInclude Include="..\..\Source\IEditor\resource.h" />
     <ClInclude Include="Actors.h" />
     <ClInclude Include="All.h" />
     <ClInclude Include="Checkpoint.h" />
@@ -327,6 +328,8 @@
     <Image Include="..\..\Source\IEditor\res\icon1.ico" />
     <Image Include="..\..\Source\IEditor\res\icon_config.ico" />
     <Image Include="..\..\Source\IEditor\res\iduck.bmp" />
+    <Image Include="..\..\Source\IEditor\res\I_LOGO.bmp" />
+    <Image Include="..\..\Source\IEditor\res\I_LOGO1.bmp" />
     <Image Include="..\..\Source\IEditor\res\letters.png" />
     <Image Include="..\..\Source\IEditor\res\light_a.png" />
     <Image Include="..\..\Source\IEditor\res\light_d.png" />

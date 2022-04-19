@@ -140,6 +140,9 @@
     <ClInclude Include="Winstuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\IEditor\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\IEditor\main.rc">
@@ -311,6 +314,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\I_LOGO.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\I_LOGO1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -40,7 +40,7 @@ void C_mission::ResetScreen(){
    assert(scene);
    int sx = igraph->Scrn_sx();
    int sy = igraph->Scrn_sy();
-   scene->SetViewport(I3D_rectangle(0, 0, sx, sy), !(igraph->GetFlags()&IG_FULLSCREEN));
+   scene->SetViewport(I3D_rectangle(0, 0, sx, sy), true);
 }
 
 //----------------------------

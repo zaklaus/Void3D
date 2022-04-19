@@ -1320,8 +1320,9 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
       const char *name = NULL;
       switch(ctrl_id){
       case IDC_RESET_POS: name = "position"; modify_flags = E_MODIFY_FLG_POSITION; break;
-      case IDC_RESET_ROT: name = "roation"; modify_flags = E_MODIFY_FLG_ROTATION; break;
+      case IDC_RESET_ROT: name = "rotation"; modify_flags = E_MODIFY_FLG_ROTATION; break;
       case IDC_RESET_SCL: name = "scale"; modify_flags = E_MODIFY_FLG_SCALE; break;
+      case IDC_RESET_TRAN: name = "transform"; modify_flags = E_MODIFY_FLG_POSITION|E_MODIFY_FLG_ROTATION|E_MODIFY_FLG_SCALE; break;
       case IDC_RESET_LINK: name = "link"; modify_flags = E_MODIFY_FLG_LINK; break;
       case IDC_RESET_VOL_TYPE: name = "volume type"; modify_flags = E_MODIFY_FLG_VOLUME_TYPE; break;
       case IDC_RESET_COL_MAT: name = "collision material"; modify_flags = E_MODIFY_FLG_COL_MAT; break;
@@ -2438,6 +2439,32 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
             {
                dword ctrl_id = LOWORD(wParam);
                switch(ctrl_id){
+               case IDC_RESET_TRAN: {
+                   SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)0);
+                   if (ed->CanModify()) {
+                       if (MessageBox((HWND)ed->GetIGraph()->GetHWND(),
+                           "Are you sure to reset transform on the selected frames?",
+                           "Reset transform?",
+                           MB_OKCANCEL) == IDOK) {
+
+                           dword flags = E_MODIFY_FLG_POSITION | E_MODIFY_FLG_ROTATION | E_MODIFY_FLG_SCALE;
+
+                           const C_vector<PI3D_frame>& sel_list  = e_slct->GetCurSel();
+                           for (dword i = sel_list.size(); i--; ) {
+                               PI3D_frame frm = sel_list[i];
+                               //e_modify->SaveUn
+                               e_modify->RemoveFlags(frm, flags);
+                                frm->SetPos(S_vector(0, 0, 0));
+                                S_quat quat; quat.Identity();
+                                frm->SetRot(quat);
+                                frm->SetScale(1.0f);
+                                ed->SetModified();
+                                //SendNotify(frm, flags);
+                           }
+                       }
+                   }
+                   SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)this);
+               }break;
                case IDC_RESET_POS: case IDC_RESET_ROT: case IDC_RESET_SCL: case IDC_RESET_LINK:
                case IDC_RESET_VOL_TYPE: case IDC_RESET_COL_MAT: case IDC_RESET_NU_SCL: case IDC_RESET_FRM_FLAGS:
                case IDC_RESET_LIGHT: case IDC_RESET_BRIGHTNESS:

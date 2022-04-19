@@ -269,7 +269,7 @@ class C_player_imp: public C_actor{
          move_delta = cd.GetDestination() - from;
 
          if(cc.col_floor){
-             fall_speed = INIT_FALL_SPEED;
+             fall_speed = 0;
          }
       }else{
 #if 0
@@ -282,7 +282,6 @@ class C_player_imp: public C_actor{
 
           if (scene->TestCollision(cd)) {
               move_delta = cd.GetDestination() - from - move_delta;
-              move_delta.Normalize();
           }
 #endif
       }

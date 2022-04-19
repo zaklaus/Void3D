@@ -248,7 +248,7 @@ bool I3D_scene::Init(){
 
    SetBgndColor(S_vector(0, 0, 0));
    PIGraph ig = drv->GetGraphInterface();
-   SetViewport(I3D_rectangle(0, 0, ig->Scrn_sx(), ig->Scrn_sy()), !(ig->GetFlags()&IG_FULLSCREEN));
+   SetViewport(I3D_rectangle(0, 0, ig->Scrn_sx(), ig->Scrn_sy()), true);
 
                               //init sound listener
    PISND_driver isp = drv->GetSoundInterface();
