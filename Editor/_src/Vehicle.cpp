@@ -34,6 +34,7 @@ enum C_vehicle_props_data_index {
     CVEH_F_GEAR_VEL = 2,
     CVEH_F_GEAR_FORCE,
     CVEH_F_GEAR_TRAN_SPEED,
+    CVEH_F_CAMERA_DISTANCE,
 };
 
 static const C_table_element te_veh_props[] = {
@@ -43,6 +44,7 @@ static const C_table_element te_veh_props[] = {
           {TE_FLOAT, CVEH_F_GEAR_VEL,"Velocity", -1000, 1000, 0, "Gear velocity"},
           {TE_FLOAT, CVEH_F_GEAR_FORCE, "Force", -1000, 1000, 0, "Gear force"},
           {TE_FLOAT, CVEH_F_GEAR_TRAN_SPEED, "Tran. Speed", -2000, 2000, 0, "Transition speed to gear up at"},
+       {TE_FLOAT, CVEH_F_CAMERA_DISTANCE, "Camera Dist.", 0, 100, 10, "Camera max distance"},
        {TE_NULL}
 };
 
@@ -55,6 +57,8 @@ class C_vehicle_imp: public C_actor_physics{
                               //wheel joints, first are front, last are back
    C_smart_ptr<IPH_joint_hinge2> jnt_wheels[4];
    C_str ctrl;
+
+   C_smart_ptr<I3D_frame> exits[3];
 
    bool enabled;
    bool can_control;
@@ -160,6 +164,17 @@ public:
             jnt_wheels[0]->SetMaxForce(force_steer);
             jnt_wheels[1]->SetMaxForce(force_steer);
          }
+
+         {
+             PI3D_frame frm = 0;
+
+             if (frm = mod->FindChildFrame("exit_l"))
+                 exits[0] = frm;
+             if (frm = mod->FindChildFrame("exit_r"))
+                 exits[1] = frm;
+             if (frm = mod->FindChildFrame("exit_t"))
+                 exits[2] = frm;
+         }
       }
 
       {
@@ -197,6 +212,39 @@ public:
       snd_engine = NULL;
    }
 
+
+   bool EjectOnSide(PI3D_frame frm, int side) {
+       PI3D_frame exit_frm = exits[side == -1 ? 0 : 1];
+       S_vector pos;
+       S_vector dir;
+
+       if (exit_frm == NULL) {
+           pos = frame->GetWorldPos();
+           dir = S_vector(0, 1, 0).Cross(frame->GetWorldDir()) * 2.0f * side;
+       }else{
+           pos = exit_frm->GetWorldPos();
+           dir = S_vector(0, 1, 0);
+       }
+
+       I3D_collision_data cd;
+       cd.from = pos;
+       cd.dir = dir;
+       cd.frm_ignore = frame;
+       cd.flags = I3DCOL_MOVING_SPHERE;
+       cd.radius = 1;
+
+       frm->SetOn(false);
+       bool collided = mission.TestCollision(cd);
+       frm->SetOn(true);
+
+       if (!collided) {
+           frm->SetPos(cd.GetDestination());
+       }
+
+       return !collided;
+   }
+
+
    virtual void Use(C_actor *act /* = NULL */){
        C_game_camera* cam = mission.GetGameCamera();
 
@@ -208,7 +256,7 @@ public:
            cam->ReattachOwner();
            cam->GetCamera()->SetPos(S_vector(0,0,0));
            cam->SetFocus(frame->FindChildFrame("engine"), frame);
-           cam->SetDistance(10.0f);
+           cam->SetDistance(tab->GetItemF(CVEH_F_CAMERA_DISTANCE));
            can_control = true;
            ctrl = act->GetName();
 
@@ -221,8 +269,17 @@ public:
            can_control = false;
 
            if (act){
+               PI3D_frame frm = act->GetFrame();
                act->GetFrame()->SetOn(true);
                //act->Enable(true);
+               {
+                   if (!EjectOnSide(frm, -1)) {
+                       if (!EjectOnSide(frm, 1)) {
+                           S_vector pos = (exits[2] == NULL ? frame->GetWorldPos() + S_vector(0, 2, 0) : exits[2]->GetWorldPos());
+                           frm->SetPos(pos);
+                       }
+                   }
+               }
                act->Use(this);
                brake = false;
            }
@@ -334,6 +391,9 @@ public:
           {
               if ((want_dir || steer) && !enabled){
                   Enable(true);
+              }
+
+              if (want_dir || steer){
                   engine_on = true;
               }
               //float turn = 0.0f;

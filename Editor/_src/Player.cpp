@@ -63,43 +63,13 @@ class C_player_imp: public C_actor{
       }
    }
 
-   bool EjectOnSide(PI3D_frame frm, int side){
-       S_vector pos = frm->GetWorldPos();
-       S_vector dir = S_vector(0, 1, 0).Cross(frm->GetWorldDir()) * 2.0f * side;
-
-       I3D_collision_data cd;
-       cd.from = pos;
-       cd.dir = dir;
-       cd.frm_ignore = frm;
-       cd.flags = I3DCOL_MOVING_SPHERE;
-       cd.radius = 0.25f;
-
-       frame->SetOn(false);
-       bool collided = mission.TestCollision(cd);
-       frame->SetOn(true);
-
-       if (!collided){
-           frame->SetPos(cd.GetDestination());
-       }
-
-       return !collided;
-   }
-
    virtual void Use(C_actor* act /* = NULL */) {
        if (!act){
            return;
        }
 
        if (act->GetActorType() == ACTOR_VEHICLE){
-           PI3D_frame frm = act->GetFrame();
            SetFocus(true);
-
-           if (!EjectOnSide(frm, -1)) {
-               if (!EjectOnSide(frm, 1)){
-                   S_vector pos = act->GetFrame()->GetWorldPos() + S_vector(0, 2, 0);
-                   frame->SetPos(pos);
-               }
-           }
        }
    }
 
