@@ -444,3 +444,5 @@ _Release_4/
 *.idb
 
 *.mxp
+
+Editor/autoback/

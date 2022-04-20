@@ -193,6 +193,7 @@ enum I3D_FRAME_TYPE{
 #define I3D_VISUAL_SINGLEMESH 0x4d474e53  //SNGM
 #define I3D_VISUAL_BILLBOARD  0x44524242  //BBRD
 #define I3D_VISUAL_FIRE       'ERIF'      //FIRE
+#define I3D_VISUAL_SHADER     'RDHS'      //SHDR
 #define I3D_VISUAL_MORPH      0x4850524d  //MRPH
 #define I3D_VISUAL_DYNAMIC    0x434d4e44  //DNMC
 #define I3D_VISUAL_UV_SHIFT   0x5356554f  //OUVS
@@ -2223,6 +2224,7 @@ public:
    I3DMETHOD_(PI3D_animation_base,CreateAnimation)(I3D_ANIMATION_TYPE) = 0;
    I3DMETHOD_(PI3D_animation_set,CreateAnimationSet)() = 0;
    I3DMETHOD_(PI3D_interpolator,CreateInterpolator)() = 0;
+   I3DMETHOD_(PI3D_user, CreateShader)() = 0;
                               //visual types
    I3DMETHOD(EnumVisualTypes)(I3D_ENUMVISUALPROC*, dword user) const = 0;
 

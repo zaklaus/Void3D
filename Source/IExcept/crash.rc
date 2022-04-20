@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// English (U.S.) resources
+// English (United States) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
-#ifdef _WIN32
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -52,11 +50,11 @@ END
 // Dialog
 //
 
-IDD_CRASH DIALOG  0, 0, 284, 276
+IDD_CRASH DIALOGEX 0, 0, 284, 276
 STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "&Send",IDC_SEND,7,255,50,14
+    DEFPUSHBUTTON   "&Send",IDC_SEND,7,255,50,14,WS_DISABLED
     PUSHBUTTON      "S&ave to file",IDC_SAVE_TO_FILE,62,255,50,14
     PUSHBUTTON      "&Close",IDCLOSE,117,255,50,14
     PUSHBUTTON      "&Ignore",IDC_IGNORE,172,255,50,14
@@ -64,7 +62,7 @@ BEGIN
     EDITTEXT        IDC_EDIT,7,7,270,244,ES_MULTILINE | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
-IDD_WAIT DIALOG  0, 0, 124, 22
+IDD_WAIT DIALOG 0, 0, 124, 22
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -78,7 +76,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     "IDD_CRASH", DIALOG
     BEGIN
@@ -98,7 +96,18 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // English (U.S.) resources
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CRASH AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

@@ -291,6 +291,12 @@ public:
 };
 
 #endif
+
+class I3D_shader : public C_unknown{
+
+};
+
+
 //----------------------------
 
 #define MAX_TEXTURE_STAGES 8  //max texture stages we may use simlultaneously
@@ -1575,7 +1581,8 @@ public:
    I3DMETHOD_(PI3D_mesh_base,CreateMesh)(dword vc_flags);
    I3DMETHOD_(PI3D_animation_base,CreateAnimation)(I3D_ANIMATION_TYPE);
    I3DMETHOD_(PI3D_animation_set,CreateAnimationSet)();
-   I3DMETHOD_(PI3D_interpolator,CreateInterpolator)();
+   I3DMETHOD_(PI3D_interpolator, CreateInterpolator)();
+   I3DMETHOD_(PI3D_user, CreateShader)();
                               //visual types
    I3DMETHOD(EnumVisualTypes)(I3D_ENUMVISUALPROC*, dword user) const;
 

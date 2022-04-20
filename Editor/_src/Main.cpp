@@ -1053,7 +1053,7 @@ static C_str AppCrashInfo(){
 
 S_application_data init_data = {
    "Void Demo",
-   "Software\\Lonely Cat Games\\Insanity Demo\\",
+   "Software\\V4 Games\\Void Demo\\",
 #ifdef _DEBUG
    "\\\\Mike\\!In\\Crashes\\",
 #else
@@ -1144,10 +1144,10 @@ int GameRun(const S_application_data &app_data, const char *cp_cmd_line){
       }
       */
       if(cmd_line.run_config){
-         return !RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, false, language);
+         return !RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
       }
       if(cmd_line.run_config){
-         E_CONFIG_STATUS st = RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, false, language);
+         E_CONFIG_STATUS st = RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
          if(st!=CONFIG_OK)
             return 0;
       }

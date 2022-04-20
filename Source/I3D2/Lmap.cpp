@@ -5,7 +5,7 @@
    File: Lmap.cpp
    Content: Lit-object frame.
 --------------------------------------------------------*/
-
+#pragma optimize("", on)
 #include "all.h"
 #include "light.h"
 #include "visual.h"
@@ -4748,3 +4748,4 @@ I3D_visual *CreateLitObject(PI3D_driver drv){
 
 //----------------------------
 //----------------------------
+#pragma optimize("", off)

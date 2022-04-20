@@ -773,13 +773,6 @@ public:
          phys_world->SetGravity(S_vector(0, -.5f, 0));
          phys_world->SetERP(.2f); 
          phys_world->SetCFM(1e-5f);
-         /*
-#ifdef EDITOR
-         phys_world->SetErrorHandler(IPHMessage);
-         phys_world->SetDebugLineFunc(IPHDebugLine);
-         phys_world->SetDebugPointFunc(IPHDebugPoint);
-         phys_world->SetDebugTextFunc(IPHDebugText);
-#endif
                               //feed material params
          IPH_surface_param mats[MAX_MATERIALS];
          dword num_mats = 0;
@@ -795,7 +788,6 @@ public:
             }
          }
          phys_world->SetMaterials(mats, num_mats);
-         */
          phys_world->Release();
       }
       return phys_world;

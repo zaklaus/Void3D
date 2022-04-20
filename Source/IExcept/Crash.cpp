@@ -1217,7 +1217,7 @@ void __declspec(dllexport) __stdcall InitializeExceptions(dword fpu_cw){
 
 void __declspec(dllexport) __stdcall SetExceptionSendFunc(bool (__stdcall *send_fnc)(const char*)){
 
-   send_function = send_fnc;
+   //send_function = send_fnc;
    //allow_close = (send_function==NULL);
 }
 

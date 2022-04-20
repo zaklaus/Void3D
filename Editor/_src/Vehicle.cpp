@@ -322,11 +322,11 @@ public:
                       want_dir = -1;
                   }
               if (tc.p_ctrl->Get(CS_MOVE_LEFT)) {
-                  steer = .25f;
+                  steer = 1;
               }
               else
                   if (tc.p_ctrl->Get(CS_MOVE_RIGHT)) {
-                      steer = -.25f;
+                      steer = -1;
                   }
               if (tc.p_ctrl->Get(CS_FIRE)) {
                   brake = true;

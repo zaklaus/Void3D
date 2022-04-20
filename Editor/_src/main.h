@@ -74,6 +74,7 @@ inline void DebugPoint(const S_vector &from, float radius, int type, dword color
    if(ei)
       ei->AddPoint(from, radius, (E_DEBUGLINE_TYPE)type, color, time);
 }
+
 #define PRINT(cp) editor->PRINT(cp)
 #define DEBUG(cp) editor->DEBUG(cp)
 

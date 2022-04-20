@@ -195,7 +195,7 @@ class C_player_imp: public C_actor{
 
       const S_vector &limit_normal = rd.GetHitNormal();
       float angle_cos = limit_normal.y;
-#define FLOOR_ANGLE .25f
+#define FLOOR_ANGLE .75f
 #define STAIRS_ANGLE .5f
 
       if(angle_cos >= FLOOR_ANGLE){
@@ -203,15 +203,15 @@ class C_player_imp: public C_actor{
           if (cc.is_idle)
               rd.ModifyNormal(AXIS_Y);
       }else{
-                              //the collision is considered to be wall
+             //the collision is considered to be wall
          if(angle_cos < .0f){
-                              //make the collision normal horizontal
+             //make the collision normal horizontal
             S_vector n = limit_normal;
             n.y = .0f;
             n.Normalize();
             rd.ModifyNormal(n);
          }else{
-                              //remember first wall for step/climb handle
+             //remember first wall for step/climb handle
             if(!cc.wall_hit && rd.vol_source==vols[0]){
                cc.wall_normal = limit_normal;
                cc.wall_hit = true;
@@ -251,13 +251,13 @@ class C_player_imp: public C_actor{
       fall_speed += tsec * FALL_SPEED;
 
                               //detect collisions
-      //DebugLine(from, from+move_delta, 1);
+      DebugLine(from, from+move_delta, 1);
       PI3D_scene scene = mission.GetScene();
 
       C_collision_context cc(this);
       cc.is_idle = IsAbsMrgZero(move_delta.x*move_delta.z);
 
-      I3D_collision_data cd;
+      I3D_collision_data cd, cd2;
       cd.from = from;
       cd.dir = move_delta;
       cd.flags = I3DCOL_MOVING_GROUP | I3DCOL_SOLVE_SLIDE;
@@ -265,29 +265,35 @@ class C_player_imp: public C_actor{
       cd.frm_root = frame;
       cd.callback = ColResp_thunk;
       cd.cresp_context = &cc;
+      cd2 = cd;
+      cd2.dir = move_delta * 8.0f;
       if(scene->TestCollision(cd)){
          move_delta = cd.GetDestination() - from;
 
-         if(cc.col_floor){
-             fall_speed = 0;
+         if(cc.col_floor && !cc.is_idle){
+             fall_speed = INIT_FALL_SPEED;
          }
       }else{
 #if 0
           I3D_collision_data cd;
           cd.from = from+move_delta;
-          cd.dir = AXIS_Y*-2.0f;
+          cd.dir = AXIS_Y*-1.0f;
           cd.flags = I3DCOL_MOVING_GROUP | I3DCOL_SOLVE_SLIDE;
           cd.frm_ignore = frame;
           cd.frm_root = frame;
+          cd.callback = ColResp_thunk;
+          cd.cresp_context = &cc;
 
           if (scene->TestCollision(cd)) {
               move_delta = cd.GetDestination() - from - move_delta;
           }
 #endif
       }
+      scene->TestCollision(cd2);
+
       SetupFloorLink(cc.col_floor);
 
-      //DEBUG(floor_link ? floor_link->GetName() : "-");
+      DEBUG(floor_link ? floor_link->GetName() : "-");
       float curr_speed = curr_move_dir.Magnitude();
       S_vector pos = from + move_delta;
 

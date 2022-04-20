@@ -328,7 +328,7 @@ public:
    virtual bool LoadCachedInfo(C_cache *ck, class C_loader &lc, C_vector<C_smart_ptr<I3D_material> > &mats);
    virtual void SetMeshInternal(I3D_mesh_base*){}
    virtual bool FinalizeLoad(C_loader &ld, bool ck_load_ok, const void* = NULL){ return true; }
-   I3DMETHOD_(void,VisReserved11)(){}
+   I3DMETHOD_(void*, GetShader)() { return nullptr; }
    I3DMETHOD_(void,VisReserved12)(){}
    I3DMETHOD_(void,VisReserved13)(){}
    I3DMETHOD_(void,VisReserved14)(){}

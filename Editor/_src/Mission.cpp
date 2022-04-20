@@ -14,7 +14,7 @@ C_mission::C_mission():
    scene(driver->CreateScene()),
    cam_range(100.0f),
    cam_edit_range(0.0f),
-   cam_fov(PI*.5f),
+   cam_fov(PI*1.57f),
    last_render_time(0)
 {
                                     //catch igraph's messages

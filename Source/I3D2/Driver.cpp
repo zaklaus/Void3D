@@ -4,7 +4,7 @@
    File: Driver.cpp
    Content: Insanity 3D driver.
 --------------------------------------------------------*/
-
+#pragma optimize("", off)
 #include "all.h"
 #include "mesh.h"
 #include <math.h>
@@ -110,7 +110,8 @@ I3D_visual *CreateObject(PI3D_driver drv);
 I3D_visual *CreateObjectUVshift(PI3D_driver drv);
 I3D_visual *CreateParticle(PI3D_driver drv);
 I3D_visual *CreateSingleMesh(PI3D_driver drv);
-I3D_visual *CreateDynamic(PI3D_driver drv);
+I3D_visual* CreateDynamic(PI3D_driver drv);
+I3D_visual* CreateShader(PI3D_driver drv);
 
 extern const S_visual_property props_Atmospheric[],
    props_Billboard[],
@@ -119,7 +120,8 @@ extern const S_visual_property props_Atmospheric[],
    props_LitObject[],
    props_Morph[],
    props_ObjectUVshift[],
-   props_Particle[],
+    props_Particle[],
+    props_Shader[],
    props_CameraView[];
 
 const S_visual_plugin_entry visual_plugins[] = {
@@ -133,6 +135,7 @@ const S_visual_plugin_entry visual_plugins[] = {
    { &CreateObject, "Object", I3D_VISUAL_OBJECT },
    { &CreateSingleMesh, "SingleMesh", I3D_VISUAL_SINGLEMESH },
    { &CreateDynamic, "Dynamic", I3D_VISUAL_DYNAMIC },
+   { &CreateShader, "Shader", I3D_VISUAL_SHADER },
    { &CreateObjectUVshift, "Object (UV shift)", I3D_VISUAL_UV_SHIFT, props_ObjectUVshift},
    { &CreateParticle, "Particle", I3D_VISUAL_PARTICLE, props_Particle},
 };
@@ -3684,6 +3687,15 @@ PI3D_mesh_base I3D_driver::CreateMesh(dword vcf){
    if(fvf==-1)
       return NULL;
    return new I3D_mesh_base(this, fvf);
+}
+
+
+//----------------------------
+//----------------------------
+
+PI3D_user I3D_driver::CreateShader() {
+
+    return NULL;
 }
 //----------------------------
 

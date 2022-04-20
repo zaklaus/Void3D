@@ -981,7 +981,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         if (it == actor_name_textures.end()) {
             //init texture
             if (!h_font)
-                h_font = OsCreateFont(12);
+                h_font = OsCreateFont(22);
             actor_name_textures[type] = S_name_texture();
             it = actor_name_textures.find(type);
 
@@ -995,7 +995,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         //find (or create) texture associated with actor
         CPI3D_texture tp = nt.tp;
         assert(tp);
-        DrawStringTexture(act->GetFrame(), 0.0f, ed->GetScene(), tp, nt.tp_size, 0x68ff80ff, 20, 30, 2.0f, .12f);
+        DrawStringTexture(act->GetFrame(), 0.0f, ed->GetScene(), tp, nt.tp_size, 0x68ff80ff, 20, 30, 8.0f, .12f);
     }
 
     //----------------------------
@@ -2338,7 +2338,6 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                 ed->SetActive(false);
                 ed->Message("Game mode");
                 e_mouseedit->SetViewMode();
-                e_slct->Clear();
 
                 EditLock();
                 SetupCameraRange();

@@ -173,6 +173,7 @@
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Visual.cpp" />
     <ClCompile Include="Visual_dynamic.cpp" />
+    <ClCompile Include="Visual_shader.cpp" />
     <ClCompile Include="Volume.cpp" />
   </ItemGroup>
   <ItemGroup>

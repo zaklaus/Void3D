@@ -4,7 +4,7 @@
 //----------------------------
 
 //#define USE_EAX
-//#define USE_D3DX
+#define USE_D3DX
 
 //#define USE_PREFETCH
 

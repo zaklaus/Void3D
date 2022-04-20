@@ -862,6 +862,7 @@ void CreateTape(PC_editor);
 void CreateUsability(PC_editor editor);
 void CreateVideoGrab(PC_editor);
 void CreateProcEdit(PC_editor);
+void CreateShaderStudio(PC_editor);
 void CreateMeshInfo(PC_editor);
 void CreateAnimEdit(PC_editor);
 void InitCamPathPlugin(PC_editor);
@@ -1002,6 +1003,7 @@ bool C_editor_imp::Init(PI3D_driver d1, PI3D_scene s1){
    CreateTape(this);
    CreateUsability(this);
    InitCamPathPlugin(this);
+   CreateShaderStudio(this);
    e_console = CreateConsole(this);
 #endif
    CreateExit(this);
