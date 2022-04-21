@@ -199,7 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\I_LOGO.bmp" />
-    <Image Include="res\I_LOGO1.bmp" />
     <Image Include="tb_play.bmp" />
     <Image Include="res\axes.png" />
     <Image Include="res\bitmap1.bmp" />
@@ -218,7 +217,6 @@
     <Image Include="res\icon1.ico" />
     <Image Include="res\icon_config.ico" />
     <Image Include="res\iduck.bmp" />
-    <Image Include="res\I_LOGO.bmp" />
     <Image Include="res\I_LOGO1.bmp" />
     <Image Include="res\letters.png" />
     <Image Include="res\light_a.png" />

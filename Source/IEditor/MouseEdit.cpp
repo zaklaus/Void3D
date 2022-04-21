@@ -1889,11 +1889,11 @@ public:
       ed->AddShortcut(this, ACTION_LOC_SYSTEM, MENU_BASE"%20 %i &Local\t`", K_BACKAPOSTROPH, 0);
       ed->AddShortcut(this, ACTION_UNIFORM_SCALE, MENU_BASE"%20 &Uniform scale\tCtrl+U", K_U, SKEY_CTRL);
 
-      ed->AddShortcut(this, ACTION_LINK_SEL_TO, "%10 &Edit\\%88 %i %a Link &to...", K_NOKEY, 0);
+      ed->AddShortcut(this, ACTION_LINK_SEL_TO, "%10 &Edit\\%88 %i %a Link &to...\tB", K_B, 0);
       ed->AddShortcut(this, E_MOUSE_ROT_45_LEFT,  "%10 &Edit\\Rotate 45 degrees\\Left\t,", K_COMMA, 0);
       ed->AddShortcut(this, E_MOUSE_ROT_45_RIGHT, "%10 &Edit\\Rotate 45 degrees\\Right\t.", K_DOT, 0);
 
-      ed->AddShortcut(this, E_MOUSE_EDIT_SUBOBJECT, "%10 &Edit\\Subobject edit\tB", K_B, 0);
+      ed->AddShortcut(this, E_MOUSE_EDIT_SUBOBJECT, "%10 &Edit\\Subobject edit\tShift+B", K_B, SKEY_SHIFT);
       ed->AddShortcut(this, E_MOUSE_MOVE_TO_CAMERA, "%10 &Edit\\Move to camera", K_NOKEY, 0);
       ed->AddShortcut(this, E_MOUSE_MOVE_TO_CAMERA_RAY, "%10 &Edit\\Move to camera ray", K_NOKEY, 0);
 

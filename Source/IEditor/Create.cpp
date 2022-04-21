@@ -1886,7 +1886,10 @@ public:
             if(!frm)
                break;
                   
-            GetFrameName(scene, frm_name);
+            if (!GetFrameName(scene, frm_name)){
+                frm->Release();
+                frm = NULL;
+            }
 
             if(frm){   
                frm->SetName(frm_name);
