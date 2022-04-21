@@ -198,9 +198,9 @@
     <None Include="res\SEEDPUT.CUR" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp" />
-    <Image Include="F:\Projects\I3D\Source\IEditor\res\I_LOGO1.bmp" />
-    <Image Include="F:\Projects\I3D\Source\IEditor\res\tb_play.bmp" />
+    <Image Include="res\I_LOGO.bmp" />
+    <Image Include="res\I_LOGO1.bmp" />
+    <Image Include="tb_play.bmp" />
     <Image Include="res\axes.png" />
     <Image Include="res\bitmap1.bmp" />
     <Image Include="res\bitmap3.bmp" />
