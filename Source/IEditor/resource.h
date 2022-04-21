@@ -12,6 +12,7 @@
 #define IDR_BINARY1                     150
 #define I_LOGO2                         151
 #define IDB_BITMAP2                     151
+#define IDB_BITMAP3                     153
 #define IDC_RESET_POS                   1000
 #define IDC_LIST1                       1001
 #define IDC_RESET_ROT                   1001
@@ -278,7 +279,6 @@
 #define IDC_POW_CHECK                   1298
 #define IDC_TRANS_ALL                   1299
 #define IDC_TRANS_CLEAR                 1300
-#define IDC_BUTTON1                     1300
 #define IDC_RESET_TRAN                  1300
 #define IDC_MODE_SELECT                 1303
 #define IDC_NEW_MODE                    1304
@@ -360,7 +360,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        152
+#define _APS_NEXT_RESOURCE_VALUE        154
 #define _APS_NEXT_COMMAND_VALUE         40079
 #define _APS_NEXT_CONTROL_VALUE         1301
 #define _APS_NEXT_SYMED_VALUE           101

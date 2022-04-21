@@ -1578,10 +1578,10 @@ public:
         C_str vss_exe, vss_database;
         if (SCGetPath(vss_exe, vss_database)) {
 #undef MENU_BASE
-#define MENU_BASE "&File\\%10 &Version control\\"
-            ed->AddShortcut(this, E_MISSION_GET, MENU_BASE"&Get latest", K_NOKEY, 0);
-            ed->AddShortcut(this, E_MISSION_CHECK_OUT, MENU_BASE"Check &out mission\tCtrl+O", K_O, SKEY_CTRL);
-            ed->AddShortcut(this, E_MISSION_CHECK_IN, MENU_BASE"Check &in mission\tCtrl+I", K_I, SKEY_CTRL);
+//#define MENU_BASE "&File\\%10 &Version control\\"
+//            ed->AddShortcut(this, E_MISSION_GET, MENU_BASE"&Get latest", K_NOKEY, 0);
+//            ed->AddShortcut(this, E_MISSION_CHECK_OUT, MENU_BASE"Check &out mission\tCtrl+O", K_O, SKEY_CTRL);
+//            ed->AddShortcut(this, E_MISSION_CHECK_IN, MENU_BASE"Check &in mission\tCtrl+I", K_I, SKEY_CTRL);
         }
 
         ed->CheckMenu(this, E_MISSION_SAVE_ASK_TOGGLE, ask_to_save);
@@ -1607,21 +1607,51 @@ int x_pos = rc.left - 90, y_pos = rc.top;
 
 PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
 */
-            PC_toolbar tb = ed->GetToolbar("Standard");
-            S_toolbar_button tbs[] = {
-               {E_MISSION_NEW,  0, "New mission"},
-               {E_MISSION_OPEN,  0, "Open mission"},
-               {E_MISSION_RELOAD,2, "Reload mission"},
-               {E_MISSION_SAVE,  1, "Save mission"},
-               {0, -1},
-               {E_MISSION_GET,   3, "Get mission from SourceSafe"},
-               {E_MISSION_CHECK_OUT,  4, "Check out"},
-               {E_MISSION_CHECK_IN,  5, "Check in"},
-               {0, -1},
-               //{E_MISSION_PROPERTIES,  6, "Scene properties"},
-            };
-            tb->AddButtons(this, tbs, sizeof(tbs) / sizeof(tbs[0]), "IDB_TB_FILE", GetModuleHandle(NULL), 0);
+            {
+                PC_toolbar tb = ed->GetToolbar("Standard");
+                int num_file = 0;
+
+                {
+                    S_toolbar_button tbs[] = {
+                       {E_MISSION_NEW,  6, "New mission"},
+                       {E_MISSION_OPEN,  0, "Open mission"},
+                       {E_MISSION_RELOAD,2, "Reload mission"},
+                       {E_MISSION_SAVE,  1, "Save mission"},
+                    };
+                    num_file = sizeof(tbs) / sizeof(tbs[0]);
+                    tb->AddButtons(this, tbs, num_file, "IDB_TB_FILE", GetModuleHandle(NULL), 0);
+                }
+
+                {
+                    S_toolbar_button tbs[] = {
+                     {E_MISSION_PROPERTIES,  4, "Scene properties"},
+                     {0,-1}
+                    };
+                    tb->AddButtons(this, tbs, sizeof(tbs) / sizeof(tbs[0]), "IDB_TB_CREATE", GetModuleHandle(NULL), num_file);
+                }
+            }
+            {
+                PC_toolbar tb = ed->GetToolbar("Play");
+                S_toolbar_button tbs[] = {
+                    {E_MISSION_MODE_GAME,  0, "Game mode"},
+                    {E_MISSION_MODE_EDIT,  1, "Edit mode"},
+                    {E_MISSION_RELOAD,2, "Mission reload"},
+                };
+                tb->AddButtons(this, tbs, sizeof(tbs) / sizeof(tbs[0]), "IDB_TB_PLAY", GetModuleHandle(NULL), 0);
+            }
+
+            {
+                PC_toolbar tb = ed->GetToolbar("Create");
+                S_toolbar_button tbs[] = {
+                   {E_MISSION_ACTOR_IMPORT,  7, "Create model mission"},
+                   {0, -1},
+                };
+                tb->AddButtons(this, tbs, sizeof(tbs) / sizeof(tbs[0]), "IDB_TB_CREATE", GetModuleHandle(NULL), 2);
+            }
         }
+
+        // force edit mode on load
+        e_mouseedit->SetEditMode();
 
         return true;
     }

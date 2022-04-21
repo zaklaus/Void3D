@@ -458,6 +458,7 @@ void GameLoop(const C_command_line &cmd_line){
 #ifdef EDITOR
       if(editor){
          PC_editor_item_Mission_spec e_miss = (PC_editor_item_Mission_spec)editor->FindPlugin("Mission");
+         PC_editor_item_MouseEdit e_medit = (PC_editor_item_MouseEdit)editor->FindPlugin("MouseEdit");
                               //update Insanity editor
          PC_game_mission pm = e_miss->GetMission();
          bool gcam_acquired = (pm->IsInGame() && pm->GetScene()->GetActiveCamera()==pm->GetGameCamera()->GetCamera());
@@ -481,6 +482,7 @@ void GameLoop(const C_command_line &cmd_line){
             case K_SPACE:     //toggle edit mode
             case K_ESC:
             case K_NUM0: case K_NUM1: case K_NUM2: case K_NUM3: case K_NUM4: case K_NUM5: case K_NUM6: case K_NUM7: case K_NUM8: case K_NUM9:
+            //default:
                editor->MenuHit(0, tc.key, 0);
                break;
             }

@@ -576,7 +576,7 @@ public:
       ed->AddShortcut(this, TAB_GAME_CFG, "%0 &File\\%31 Edit table\\&Game config\tCtrl+Shift+Alt+G", K_G, SKEY_SHIFT|SKEY_CTRL|SKEY_ALT);
       ed->AddShortcut(this, TAB_MISSION_CFG, "%0 &File\\%31 Edit table\\M&ission config\tCtrl+Enter", K_ENTER, SKEY_CTRL);
 
-      /*
+      
       {
                               //initialize toolbar
          PC_toolbar tb = ed->GetToolbar("Standard");
@@ -586,7 +586,7 @@ public:
          };
          tb->AddButtons(this, tbs, sizeof(tbs)/sizeof(tbs[0]), "IDB_TB_FILE", GetModuleHandle(NULL), 1);
       }
-      */
+      
       return true;
    }
 

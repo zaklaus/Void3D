@@ -12,7 +12,7 @@ const dword SEPARATOR_WIDTH = 8;
 #define DEBUG(n) OutputDebugString(n)
 #endif
 
-//#define ENABLE_MAGNETISM      //use magneting toolbar window to edges of screen/main window when moving
+#define ENABLE_MAGNETISM      //use magneting toolbar window to edges of screen/main window when moving
 
 //----------------------------
                               //fast fix: C_smart_ptr without defined operator&, which causes problems with list<>

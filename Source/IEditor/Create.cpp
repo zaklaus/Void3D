@@ -1281,7 +1281,6 @@ public:
             {E_CREATE_CAMERA, 4, "Create camera"},
             {E_CREATE_DUMMY,  5, "Create dummy"},
             {E_CREATE_OCCLUDER, 6, "Create occluder"},
-            {0, -1},
          };
          toolbar->AddButtons(this, tbs, sizeof(tbs)/sizeof(tbs[0]), "IDB_TB_CREATE", GetHInstance(), 1);
       }

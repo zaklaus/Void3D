@@ -1463,6 +1463,8 @@ I_LOGO                  BITMAP                  "res\\I_LOGO.bmp"
 
 IDB_BITMAP2             BITMAP                  "res\\I_LOGO1.bmp"
 
+IDB_TB_PLAY             BITMAP                  "res\\tb_play.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1560,8 +1562,6 @@ CHECKPOINT.PNG          BINARY                  "res\\Checkpoint.png"
 1                       BINARY                  "res\\light_p.png"
 
 SPHERE                  BINARY                  "res\\sphere.png"
-
-SAMPLE.PNG              BINARY                  "res\\sample.png"
 
 LETTERS                 BINARY                  "res\\letters.png"
 

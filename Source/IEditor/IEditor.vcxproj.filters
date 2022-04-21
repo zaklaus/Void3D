@@ -356,6 +356,12 @@
     </Image>
     <Image Include="res\I_LOGO.bmp" />
     <Image Include="F:\Projects\I3D\Source\IEditor\res\I_LOGO1.bmp" />
+    <Image Include="F:\Projects\I3D\Source\IEditor\res\tb_play.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\bitmap3.bmp" />
+    <Image Include="res\tb_play.bmp" />
+    <Image Include="res\I_LOGO1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\font.txt">

@@ -1008,7 +1008,7 @@ bool C_editor_imp::Init(PI3D_driver d1, PI3D_scene s1){
 #endif
    CreateExit(this);
 
-   /*
+   
                               //initialize other plugins from directory
    {
       WIN32_FIND_DATA fd;
@@ -1031,7 +1031,7 @@ bool C_editor_imp::Init(PI3D_driver d1, PI3D_scene s1){
          FindClose(h);
       }
    }
-   */
+   
    return true;
 }
 

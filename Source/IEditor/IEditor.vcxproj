@@ -200,8 +200,10 @@
   <ItemGroup>
     <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp" />
     <Image Include="F:\Projects\I3D\Source\IEditor\res\I_LOGO1.bmp" />
+    <Image Include="F:\Projects\I3D\Source\IEditor\res\tb_play.bmp" />
     <Image Include="res\axes.png" />
     <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bmp12.png" />
     <Image Include="res\bmp13.png" />
     <Image Include="res\bone.png" />
@@ -217,6 +219,7 @@
     <Image Include="res\icon_config.ico" />
     <Image Include="res\iduck.bmp" />
     <Image Include="res\I_LOGO.bmp" />
+    <Image Include="res\I_LOGO1.bmp" />
     <Image Include="res\letters.png" />
     <Image Include="res\light_a.png" />
     <Image Include="res\light_d.png" />
@@ -234,6 +237,7 @@
     <Image Include="res\tb_file.bmp" />
     <Image Include="res\tb_light.bmp" />
     <Image Include="res\tb_lmap.bmp" />
+    <Image Include="res\tb_play.bmp" />
     <Image Include="res\tb_undo.bmp" />
     <Image Include="res\tb_validity.bmp" />
   </ItemGroup>
