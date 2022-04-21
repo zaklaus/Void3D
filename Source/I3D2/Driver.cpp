@@ -25,6 +25,8 @@
 #include "anim.h"
 #include <integer.h>
 
+#include <d3dx9effect.h>
+
 #ifdef _DEBUG
 #include <insanity\3DTexts.h>
 #endif
@@ -135,7 +137,7 @@ const S_visual_plugin_entry visual_plugins[] = {
    { &CreateObject, "Object", I3D_VISUAL_OBJECT },
    { &CreateSingleMesh, "SingleMesh", I3D_VISUAL_SINGLEMESH },
    { &CreateDynamic, "Dynamic", I3D_VISUAL_DYNAMIC },
-   { &CreateShader, "Shader", I3D_VISUAL_SHADER },
+   { &CreateShader, "Shader", I3D_VISUAL_SHADER, props_Shader },
    { &CreateObjectUVshift, "Object (UV shift)", I3D_VISUAL_UV_SHIFT, props_ObjectUVshift},
    { &CreateParticle, "Particle", I3D_VISUAL_PARTICLE, props_Particle},
 };
@@ -5457,3 +5459,154 @@ dword GetTickTime(){
    return GetTickCount();
 }
 
+class CD3DIncludeImpl : ID3DXInclude
+{
+public:
+    CD3DIncludeImpl();
+    HRESULT _stdcall Open(D3DXINCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID* ppData,
+        unsigned int* pBytes) override;
+    HRESULT _stdcall Close(LPCVOID pData) override;
+
+private:
+    bool include_sys;
+};
+
+CD3DIncludeImpl::CD3DIncludeImpl()
+{
+    include_sys = FALSE;
+}
+
+//@todo move to header file
+static const char* _d3dx9_common_include = "";
+
+auto CD3DIncludeImpl::Open(D3DXINCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID* ppData,
+    unsigned int* pBytes) -> HRESULT
+{
+#if 0 // support for embedded shader includes
+    if (IncludeType == D3DXINC_SYSTEM)
+    {
+        include_sys = TRUE;
+
+        if (strcmp(pFileName, "common") == 0)
+        {
+            *ppData = _d3dx9_common_include;
+            *pBytes = static_cast<unsigned int>(strlen(_d3dx9_common_include));
+            return S_OK;
+        }
+
+        return E_FAIL;
+    }
+#endif
+    PC_dta_stream st = DtaCreateStream(C_fstr("Shaders\\%s", pFileName));
+    if (st->GetSize() == 0){
+        return E_FAIL;
+    }
+
+    *pBytes = st->GetSize();
+    *ppData = (LPCVOID*)malloc(*pBytes + 1);
+    st->Read((void*)*ppData, *pBytes);
+    **(LPSTR*)ppData[*pBytes] = 0;
+    st->Release();
+
+    include_sys = FALSE;
+    return S_OK;
+}
+
+auto CD3DIncludeImpl::Close(LPCVOID pData) -> HRESULT
+{
+    if (include_sys)
+    {
+        return S_OK;
+    }
+
+    free((void*)pData);
+    return S_OK;
+}
+
+class I3D_shader_imp : public I3D_shader {
+private:
+    C_str fx_name;
+    LPD3DXEFFECT fx_handle;
+    C_smart_ptr<I3D_driver> drv;
+
+public:
+    I3D_shader_imp(PI3D_driver driver) :
+        fx_handle(0),
+        drv(driver)
+    {
+        drv->AddRef();
+    }
+    ~I3D_shader_imp() override;
+
+    I3DMETHOD_(bool, Compile)(C_str name, dword flags, I3D_SHDRCOMPPROC* cbProc, C_str* errors) override;
+    I3DMETHOD_(void, UnloadShader)() override;
+
+    C_str GetName() override { return fx_name; }
+    C_str GetName() const override { return fx_name; }
+
+    inline operator LPD3DXEFFECT() const override { return fx_handle; }
+};
+
+
+I3D_shader_imp::~I3D_shader_imp()
+{
+    UnloadShader();
+}
+
+bool I3D_shader_imp::Compile(C_str name, dword flags, I3D_SHDRCOMPPROC* cbProc, C_str* errors)
+{
+    UnloadShader();
+
+    dword shaderFlags = D3DXSHADER_NO_PRESHADER;
+
+#ifdef _DEBUG
+    shaderFlags |= D3DXSHADER_DEBUG;
+#endif
+
+    CD3DIncludeImpl inclHandler;
+#if 0
+    LPD3DXBUFFER errors = nullptr;
+    HRESULT hr = D3DXCreateEffect(
+        RENDERER->GetDevice(),
+        static_cast<LPCSTR>(shaderText.Str()),
+        static_cast<unsigned int>(shaderText.Length()),
+        nullptr,
+        reinterpret_cast<LPD3DXINCLUDE>(&inclHandler),
+        shaderFlags,
+        nullptr,
+        &mEffect,
+        &errors);
+
+    if (FAILED(hr))
+    {
+        if (errors != nullptr)
+        {
+            VM->PostError(static_cast<LPCSTR>(errors->GetBufferPointer()));
+            errors->Release();
+        }
+
+        return;
+    }
+
+    if (errors != nullptr)
+    {
+        errors->Release();
+    }
+#endif
+
+    fx_name = name;
+    return false;
+}
+
+void I3D_shader_imp::UnloadShader()
+{
+    if (!fx_handle) return;
+
+    fx_handle->Release();
+    fx_handle = NULL;
+}
+
+PI3D_shader CreateShaderEffect(PI3D_driver drv){
+    PI3D_shader shd = new I3D_shader_imp(drv);
+    return shd;
+}

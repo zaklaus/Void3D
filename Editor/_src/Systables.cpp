@@ -571,6 +571,7 @@ public:
          return false;
 
       ed->AddShortcut(this, 1000, "%0 &File\\%31 Table editor\tCtrl+T", K_T, SKEY_CTRL);
+      ed->AddShortcut(this, 1000, "%90 &Editors\\%31 Table editor", K_NOKEY, 0);
 
       ed->AddShortcut(this, TAB_GAME_CFG, "%0 &File\\%31 Edit table\\&Game config\tCtrl+Shift+Alt+G", K_G, SKEY_SHIFT|SKEY_CTRL|SKEY_ALT);
       ed->AddShortcut(this, TAB_MISSION_CFG, "%0 &File\\%31 Edit table\\M&ission config\tCtrl+Enter", K_ENTER, SKEY_CTRL);

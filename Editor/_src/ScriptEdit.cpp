@@ -1906,6 +1906,7 @@ public:
 
 #define MB "%i %78 Sc&ript\\"
       ed->AddShortcut(this, E_SCRIPT_LIST, MB"&List\tAlt+S", K_S, SKEY_ALT);
+      ed->AddShortcut(this, E_SCRIPT_LIST, "%90 &Editors\\&Scripts editor", K_NOKEY, 0);
       ed->AddShortcut(this, E_SCRIPT_EDIT_SELECTION, MB"&Edit script (&assign)\tE", K_E, 0);
       ed->AddShortcut(this, E_SCRIPT_ASSIGN_EDITTAB, MB"Edit table\tT", K_T, 0);
       ed->AddShortcut(this, E_SCRIPT_TOGGLE_NAMES, MB"Show &names\tCtrl+Alt+Shift+S", K_S, SKEY_SHIFT | SKEY_ALT | SKEY_CTRL);

@@ -14,7 +14,6 @@ typedef struct IDirect3DDevice9 *LPDIRECT3DDEVICE8;
 
 #include "nvidia\nvlink\nvlink.h"   //vertex shader stuff
 
-
 //----------------------------
                               //I3D class identificators
 enum I3D_CLID{
@@ -292,10 +291,26 @@ public:
 
 #endif
 
-class I3D_shader : public C_unknown{
+typedef void I3DAPI I3D_SHDRCOMPPROC(const char* msg, void* context, int l, int r, bool warn);
 
+class I3D_shader : public C_unknown {
+public:
+    I3D_shader(){}
+    virtual ~I3D_shader() {};
+
+    I3DMETHOD_(bool,Compile)(C_str name, dword flags, I3D_SHDRCOMPPROC* cbProc, C_str* errors) = 0;
+    I3DMETHOD_(void,UnloadShader)() = 0;
+
+    I3DMETHOD_(C_str, GetName)() = 0;
+    I3DMETHOD_(C_str, GetName)() const = 0;
+
+    virtual inline operator LPD3DXEFFECT() const = 0;
 };
 
+typedef I3D_shader* PI3D_shader;
+typedef const I3D_shader* CPI3D_shader;
+
+PI3D_shader CreateShaderEffect(PI3D_driver drv);
 
 //----------------------------
 

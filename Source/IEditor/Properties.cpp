@@ -2348,7 +2348,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                            static dword known_geom_vistypes[] = {
                               I3D_VISUAL_OBJECT, I3D_VISUAL_LIT_OBJECT, I3D_VISUAL_SINGLEMESH, I3D_VISUAL_BILLBOARD,
                               I3D_VISUAL_MORPH, I3D_VISUAL_DYNAMIC, I3D_VISUAL_UV_SHIFT,
-                              I3D_VISUAL_CAMVIEW,
+                              I3D_VISUAL_CAMVIEW, I3D_VISUAL_SHADER,
                               0
                            };
                            for(i=0; known_geom_vistypes[i]; i++){

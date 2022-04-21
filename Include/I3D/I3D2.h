@@ -773,6 +773,31 @@ enum I3D_VISUAL_BRIGHTNESS{
 //----------------------------
 
 #if !defined I3D_FULL
+typedef void *LPD3DXEFFECT;
+typedef void I3DAPI I3D_SHDRCOMPPROC(const char* msg, void* context, int l, int r, bool warn);
+
+class I3D_shader{
+public:
+    I3DMETHOD_(bool, Compile)(C_str name, dword flags, I3D_SHDRCOMPPROC* cbProc, C_str* errors) = 0;
+    I3DMETHOD_(void, UnloadShader)() = 0;
+
+    I3DMETHOD_(C_str, GetName)() = 0;
+    I3DMETHOD_(C_str, GetName)() const = 0;
+
+    virtual inline operator LPD3DXEFFECT() const = 0;
+
+    dword ref;
+    dword AddRef() { return ++ref; }
+    dword Release() {
+        if (--ref) return ref; UnloadShader(); delete this; return 0;
+    }
+};
+
+typedef I3D_shader* PI3D_shader;
+typedef const I3D_shader* CPI3D_shader;
+
+PI3D_shader CreateShaderEffect(PI3D_driver drv);
+
 class I3D_visual: public I3D_frame{
 public:
    I3DMETHOD_(dword,GetVisualType)() const = 0;
@@ -800,6 +825,8 @@ public:
 
    I3DMETHOD_(void,SetOverrideLight)(const S_vector *lcolor) = 0;
    I3DMETHOD_(bool,GetOverrideLight)(S_vector &lcolor) const = 0;
+
+   I3DMETHOD_(PI3D_shader, GetShader)() { return nullptr; }
 
 private:
    I3DMETHOD_(void,VisReserved00)() = 0;
@@ -2187,7 +2214,7 @@ struct I3D_collision_mat{
    dword color;               //visualization color
 };
 
-#if !defined I3D_FULL 
+#ifndef I3D_FULL
 class I3D_driver{
 public:
    I3DMETHOD_(dword,AddRef)() = 0;

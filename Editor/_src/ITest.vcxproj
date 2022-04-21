@@ -337,7 +337,6 @@
     <Image Include="..\..\Source\IEditor\res\light_f.png" />
     <Image Include="..\..\Source\IEditor\res\light_p.png" />
     <Image Include="..\..\Source\IEditor\res\light_s.png" />
-    <Image Include="..\..\Source\IEditor\res\sample.png" />
     <Image Include="..\..\Source\IEditor\res\sound_a.png" />
     <Image Include="..\..\Source\IEditor\res\sound_p.png" />
     <Image Include="..\..\Source\IEditor\res\sphere.png" />

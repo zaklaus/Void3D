@@ -304,7 +304,6 @@
     <Image Include="..\..\Source\IEditor\res\dummy.png" />
     <Image Include="..\..\Source\IEditor\res\light_p.png" />
     <Image Include="..\..\Source\IEditor\res\sphere.png" />
-    <Image Include="..\..\Source\IEditor\res\sample.png" />
     <Image Include="..\..\Source\IEditor\res\letters.png" />
     <Image Include="..\..\Source\IEditor\res\Font1_a.png" />
     <Image Include="..\..\Source\IEditor\res\Font1.png" />

@@ -780,6 +780,7 @@ public:
       ed->AddShortcut(this, 1000, DS"&Grab being/end\tScrollLock", K_SCROLLLOCK, 0);
       */
       ed->AddShortcut(this, ACTION_EDIT, "&Debug\\Procedural &editor", K_NOKEY, 0);
+      ed->AddShortcut(this, ACTION_EDIT, "%90 &Editors\\Procedural &editor", K_NOKEY, 0);
       edit_mat = ed->GetDriver()->CreateMaterial();
       edit_mat->Release();
       return true;

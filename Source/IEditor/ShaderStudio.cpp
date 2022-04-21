@@ -2,7 +2,6 @@
 #include "common.h"
 #include <editctrl.h>
 #include <insanity\sourcecontrol.h>
-#include <d3dx9.h>
 
 //----------------------------
 
@@ -92,11 +91,12 @@ class C_edit_ShaderStudio: public C_editor_item{
             case I3D_VISUAL_SHADER:
                {
                   S_hlp *hp = (S_hlp*)c;
-                  /*
-                  PI3D_shader shd = vs->GetShader();
+                  
+                  PI3D_shader shd = vis->GetShader();
                   if(shd){
                      const C_str &name = shd->GetName();
-                     for(int i=hp->shd_list->size(); i--; ){
+                     int i = 0;
+                     for(i=hp->shd_list->size(); i--; ){
                         if((*hp->shd_list)[i]->full_name.Matchi(name)){
                            ++(*hp->shd_list)[i]->use_count;
                            break;
@@ -110,7 +110,7 @@ class C_edit_ShaderStudio: public C_editor_item{
                         si->Release();
                         si->shd = shd;
                      }
-                  }*/
+                  }
                }
                break;
             }
@@ -180,7 +180,7 @@ public:
       int use_count;
       int status;             //0=unknown, 1=compile ok, 2=compile fail
       bool writtable;
-      //C_smart_ptr<I3D_shader> shd;
+      C_smart_ptr<I3D_shader> shd;
 
       S_shader_info():
          use_count(0),
@@ -496,7 +496,7 @@ private:
 // Compile shader. If 'check_date' is true, date of shader source and compiled destination is checked
 // to see if compiling is necessary.
    bool CompileShader(const C_str &name, bool display_errors){
-#if 0
+#if 1
       struct S_hlp{
          static void I3DAPI CompileErr(const char *msg, void *context, int l, int r, bool warn){
             C_vector<char> &errors = *(C_vector<char>*)context;
@@ -518,14 +518,14 @@ private:
          }
          */
       };
-      C_vector<char> errors;
+      C_str errors;
       /*
                               //find the shader
       C_script_manager::t_script_map::iterator it = script_man->script_map.find(name);
       if(it==script_man->script_map.end()){
       }
       */
-      /*PI3D_shader shd = NULL;
+      PI3D_shader shd = NULL;
       for(int i=shd_list.size(); i--; ){
          if(shd_list[i]->full_name.Matchi(name)){
             shd = shd_list[i]->shd;
@@ -535,7 +535,7 @@ private:
       if(!shd){
          ed->Message("Cannot compile shader - not found");
          return false;
-      }*/
+      }
       C_fstr filename("%s\\%s.fx", SHADER_DIR, (const char*)name);
 
                               //compile first on a temp script, so that we don't lose tables if compiling fails
@@ -594,7 +594,7 @@ private:
          assert(!ec_err_hwnd);
       }
                               //report errors
-      if(errors.size()){
+      /*if(errors.size()){
          errors.push_back(0);
          ed->Message("Compile errors encountered.", 0, EM_ERROR, true);
          if(display_errors){
@@ -608,7 +608,7 @@ private:
          return false;
       }else{
          ed->Message("Compilation succeeded.");
-      }
+      }*/
 #endif
       ed->GetIGraph()->GetTimer(1, 1);
       return true;

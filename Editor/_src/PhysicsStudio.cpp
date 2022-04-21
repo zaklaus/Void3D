@@ -203,6 +203,7 @@ private:
       ed->AddShortcut(this, E_PHYS_STATS, MENU_BASE"&Stats", K_NOKEY, 0);
       ed->AddShortcut(this, E_ACTION_EDIT_AUTO_CMD, MENU_BASE"&Edit start-up command", K_NOKEY, 0);
 
+      ed->AddShortcut(this, E_ACTION_PHYS_STUDIO_TOGGLE, "%90 &Editors\\&Physics editor", K_NOKEY, 0);
       return true;
    }
 

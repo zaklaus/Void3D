@@ -11,7 +11,7 @@
 
 
 //#define USE_ASM               //use inline assembly
-#define USE_D3DX
+//#define USE_D3DX
 
 #ifdef USE_D3DX
 #include <D3dx9math.h>
