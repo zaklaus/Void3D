@@ -2459,7 +2459,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                                 frm->SetRot(quat);
                                 frm->SetScale(1.0f);
                                 ed->SetModified();
-                                //SendNotify(frm, flags);
+                                e_modify->SendNotify(frm, flags);
                            }
                        }
                    }

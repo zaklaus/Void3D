@@ -306,6 +306,8 @@ public:
 // Return flags which were reset.
    virtual dword RemoveFlagsAndReset(PI3D_frame, dword flags) = 0;
 
+   virtual void SendNotify(PI3D_frame frm, dword flags) = 0;
+
 //----------------------------
 // Remove frame from modify list.
    virtual bool RemoveFrame(PI3D_frame) = 0;
