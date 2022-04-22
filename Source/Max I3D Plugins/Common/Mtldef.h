@@ -131,7 +131,7 @@ struct S_material{
    bool intended_duplicate;
 
                               //effect percent sliders 
-   //short shininess;     //0-100     
+   short shininess;     //0-100     
    //short refblur;       //0-100     
    short selfipct;      //0-100    
 
@@ -140,7 +140,7 @@ struct S_material{
    S_material():
       transparency(0),
       mirror_id(-1),
-      //shininess(50),
+      shininess(50),
       flags(0),
       //refblur(0),
       selfipct(0),
@@ -156,7 +156,8 @@ struct S_material{
          flags==m.flags &&
          mirror_id==m.mirror_id &&
          transp_mode==m.transp_mode &&
-         selfipct==m.selfipct
+         selfipct==m.selfipct &&
+          shininess==m.shininess
          ){
 
           int i;

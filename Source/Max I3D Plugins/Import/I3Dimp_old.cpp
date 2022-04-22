@@ -1995,7 +1995,7 @@ public:
       m->SetDiffuse((Color&)ColorFrom24(smtl->diff), 0);
       m->SetFilter((Color&)ColorFrom24(smtl->diff), 0);
       m->SetSpecular((Color&)ColorFrom24(smtl->spec), 0);
-      //m->SetShininess((float)smtl->shininess/100.0f,0);
+      m->SetShininess((float)smtl->shininess/100.0f,0);
       m->SetOpacity(1.0f - smtl->transparency, 0);
       m->SetFalloffOut(smtl->flags&MF_XPFALLIN?0:1);  
       m->SetSelfIllum((float)smtl->selfipct/100.0f,0);

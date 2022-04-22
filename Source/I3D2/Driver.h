@@ -184,6 +184,7 @@ enum E_VS_FIXED_CONSTANT{
    VSC_MAT_TRANSFORM_1 = 9,   //second matrix used for geometry blending (4 slots!)
    VSC_MAT_BLEND_BASE = 9,    //base for matrix palette blending, each matrix consumes 3 slots
    VSC_MAT_BLEND_END = VSC_MAT_BLEND_BASE + MAX_VS_BLEND_MATRICES*3 - 1,
+
                            //last value, until this, constants are reserved (NVLink can't use them)
    VSC_FIXED_LAST          
 };

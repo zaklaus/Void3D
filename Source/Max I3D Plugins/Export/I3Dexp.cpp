@@ -128,7 +128,7 @@ class C_material_list: public vector<S_material_entry>{
       }
 
       s->spec = C24(m->GetSpecular());
-      //s->shininess = Pcnt(m->GetShininess());
+      s->shininess = Pcnt(m->GetShininess());
       s->transparency = m->GetXParency();
       if(m->ClassID()==Class_ID(DMTL_CLASS_ID,0)){
          StdMat *std = (StdMat*)m;

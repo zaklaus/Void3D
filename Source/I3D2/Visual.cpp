@@ -15,7 +15,7 @@
 
 //----------------------------
 
-//#define ENABLE_ADVANCED_FOG
+#define ENABLE_ADVANCED_FOG
 #ifndef GL
 #define USE_SHARED_DEST_VB    //allocate dest VB on portions of huge VBs (VB alloc manager)
 #endif
@@ -252,7 +252,7 @@ void I3D_visual::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_stages){
          ++i;
          vis_flags |= VISF_USE_DETMAP;
       }
-#if defined _DEBUG && 0
+#if defined _DEBUG && 1
       if(txt_bump && i<drv->MaxSimultaneousTextures()){
          ++i;
          vis_flags |= VISF_USE_BUMPMAP;
@@ -1274,7 +1274,7 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
             do_detailmap = true;
          }
       }
-#if defined _DEBUG && 0
+#if defined _DEBUG && 1
       if((vis_flags&VISF_USE_BUMPMAP) && stage<drv->NumSimultaneousTextures()){
          se_in.AddFragment(VSF_PICK_UV_0);
          se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UV_0 + stage));
@@ -1282,7 +1282,7 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
          do_bumpmap = true;
 
          se_in.AddFragment(VSF_BUMP_OS);
-         CPI3D_frame lp = rp.scene->FindFrame("ldir", ENUMF_LIGHT);
+         CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
          if(lp){
             S_vectorw ldir = lp->GetWorldDir();
             S_vectorw lpos = lp->GetWorldPos();
@@ -1318,7 +1318,7 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
                se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UV_0 + stage));
                ++stage;
                se_in.AddFragment(VSF_BUMP_OS);
-               CPI3D_frame lp = rp.scene->FindFrame("ldir", ENUMF_LIGHT);
+               CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
                if(lp){
                   S_vectorw ldir = lp->GetWorldDir();
                   S_vectorw lpos = lp->GetWorldPos();
@@ -1510,7 +1510,7 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
       }
       ++stage;
    }
-#if defined _DEBUG && 0
+#if defined _DEBUG && 1
    if((vis_flags&VISF_USE_BUMPMAP) && stage<drv->NumSimultaneousTextures()){
       CPI3D_texture_base tp_normal = mat->GetTexture1(MTI_NORMAL);
       if(tp_normal){
