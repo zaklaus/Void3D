@@ -132,6 +132,10 @@ public:
    virtual void OnFrameDuplicate(PI3D_frame frm_old, PI3D_frame frm_new){}
 
 //----------------------------
+// Broadcast after frame was created.
+   virtual void OnFrameCreate(PI3D_frame) {}
+
+//----------------------------
 // Switch to subobject edit mode.
    virtual bool SubObjectEdit(){ return false; }
 

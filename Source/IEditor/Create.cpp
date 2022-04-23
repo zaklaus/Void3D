@@ -1909,6 +1909,7 @@ public:
                if(!context)
                   e_slct->Clear();
                e_slct->AddFrame(frm);
+               ed->Broadcast((void(C_editor_item::*)(void*))& C_editor_item::OnFrameCreate, frm);
 
                C_edit_Properties_ed *e_prop = (C_edit_Properties_ed*)ed->FindPlugin("Properties");
                switch(frm->GetType()){

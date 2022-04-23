@@ -242,15 +242,15 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 TVITEM tvi = {};
                 tvi.pszText = buf;
                 tvi.lParam = (LPARAM)frm;
-                tvi.state = TVIS_EXPANDED;
-                tvi.mask = TVIF_TEXT|TVIF_IMAGE|TVIF_PARAM;
+                tvi.state = TVIS_EXPANDED|TVIS_BOLD;
+                tvi.mask = TVIF_TEXT|TVIF_IMAGE|TVIF_PARAM|TVIF_STATE|TVIF_STATEEX;
                 tvi.iImage = ti;
                 tvi.iSelectedImage = ti;
-                for (j = sel_list.size(); j--; )
+                for (j = sel_list.size(); j-- > 0; )
                     if (frm == sel_list[j]) break;
                 if (j != -1) {
-                    tvi.state |= TVIS_SELECTED;
-                    focused = count;
+                    tvi.state |= TVIS_BOLD;
+                    focused = j;
                 }
 
                 tvins.item = tvi;
@@ -344,6 +344,12 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     }
 
     //----------------------------
+    
+    void ReselectItemInTreeView(LPARAM lparam){
+
+    }
+
+    //----------------------------
 
     BOOL dlgTreeView(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
@@ -373,25 +379,22 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             switch (wParam) {
             case IDC_TREE1:
                 switch (nm->code) {
-                case TVN_SELCHANGED:
+                case TVN_SELCHANGING:
                 {
                     LPNMTREEVIEW prnmtv = (LPNMTREEVIEW)lParam;
 
                     if (e_medit) {
-                        if (prnmtv->itemOld.hItem){
-                            TVITEM tvi = {};
-                            tvi.hItem = prnmtv->itemOld.hItem;
-                            SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETITEM, 0, (LPARAM)&tvi);
-                            RemoveFrame((PI3D_frame)tvi.lParam);
-                        }
-
                         if (prnmtv->itemNew.hItem) {
                             TVITEM tvi = {};
                             tvi.hItem = prnmtv->itemNew.hItem;
+                            tvi.mask = TVIF_PARAM;
                             SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETITEM, 0, (LPARAM)&tvi);
-                            AddFrame((PI3D_frame)tvi.lParam);
+
+                            PI3D_frame frm = (PI3D_frame)tvi.lParam;
+                            Clear();
+                            AddFrame(frm);
                         }
-                    }
+                    } 
                 }
                 break;
                 }
@@ -413,74 +416,6 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_COMMAND:
             switch (HIWORD(wParam)) {
-            case EN_CHANGE:
-                switch (LOWORD(wParam)) {
-                case IDC_INC_SEL:
-                {
-                    char buf[256];
-                    SendDlgItemMessage(hwnd, IDC_INC_SEL, WM_GETTEXT, sizeof(buf) - 1, (LPARAM)buf);
-                    int len = strlen(buf);
-                    if (!len)
-                        break;
-                    //space at the end is special, if present, the text typed
-                    // is matched exactly (without the space), otherwise
-                    // wild-cards are used
-                    if (buf[len - 1] == ' ')
-                        buf[len - 1] = 0;
-                    else
-                        buf[len++] = '*';
-                    bool model_search = (buf[0] == '.');
-
-                    //change contents of selection
-        //Clear();
-
-                    int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
-                    LVITEM lvi;
-                    memset(&lvi, 0, sizeof(lvi));
-                    lvi.mask = LVIF_PARAM | LVIF_STATE;
-                    lvi.stateMask = LVIS_SELECTED | LVIS_FOCUSED;
-                    int focus_index = -1;
-                    int i;
-                    for (i = 0; i < count; i++) {
-                        lvi.iItem = i;
-                        SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
-                        const char* fn = frm->GetName();
-                        bool b;
-                        if (model_search) {
-                            const char* mn = strchr(fn, '.');
-                            if (mn)
-                                fn = mn + 1;
-                            b = StringMatch(fn, strlen(fn), buf + 1, len - 1);
-                        }
-                        else
-                            b = StringMatch(fn, strlen(fn), buf, len);
-                        bool curr_state = (lvi.state & LVIS_SELECTED);
-                        if (b != curr_state) {
-                            lvi.state &= ~(LVIS_SELECTED | LVIS_FOCUSED);
-                            if (b) {
-                                lvi.state |= LVIS_SELECTED;
-                                if (focus_index == -1) {
-                                    lvi.state |= LVIS_FOCUSED;
-                                    focus_index = i;
-                                }
-                            }
-                            SendDlgItemMessage(hwnd, IDC_LIST, LVM_SETITEMSTATE, i, (LPARAM)&lvi);
-                        }
-                        else
-                            if (curr_state && focus_index == -1) {
-                                focus_index = i;
-                            }
-                        //if(b) AddFrame(frm);
-                    }
-                    if (focus_index != -1)
-                        SendDlgItemMessage(hwnd, IDC_LIST, LVM_ENSUREVISIBLE, focus_index, false);
-                    SetDlgItemInt(hwnd, IDC_NUM_SEL, sel_list.size(), false);
-                }
-                break;
-                }
-                break;
-
             case BN_CLICKED:
             {
                 switch (LOWORD(wParam)) {
@@ -1650,7 +1585,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         for (dword i = 0; i < notify_list.size(); i++) {
             notify_list[i].first->Action(notify_list[i].second, &sel_list);
         }
-        if (own_notify && (hwnd_sel||hwnd_treeview))
+        if (own_notify && hwnd_sel)
             sel_win_reset = RESET_SMART;
     }
 
@@ -1695,7 +1630,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         RESET_NO,
         RESET_FULL,
         RESET_SMART,
-    } sel_win_reset;
+    } sel_win_reset, tree_win_reset;
     POINT sel_dlg_pos;
     POINT tree_dlg_pos;
 
@@ -2007,7 +1942,18 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
         };
         S_hlp::cbEnum(frm, (dword)&flash_list);
         frm->EnumFrames(S_hlp::cbEnum, (dword)&flash_list);
+
+        tree_win_reset = RESET_SMART;
     }
+
+    virtual void OnFrameDuplicate(PI3D_frame frm_old, PI3D_frame frm_new) {
+        tree_win_reset = RESET_SMART;
+    }
+
+    virtual void OnFrameCreate(PI3D_frame) {
+        tree_win_reset = RESET_SMART;
+    }
+
 
     //----------------------------
 public:
@@ -2015,6 +1961,7 @@ public:
         hwnd_sel(NULL),
         hwnd_treeview(NULL),
         sel_win_reset(RESET_NO),
+        tree_win_reset(RESET_NO),
         view_axis_on(true),
         scene_tree_on(true),
         PGetFrameScript(NULL),
@@ -2332,9 +2279,13 @@ public:
         if (sel_win_reset) {
             if (hwnd_sel)
                 AddObjsToList(hwnd_sel, NULL, sel_list);
+            sel_win_reset = RESET_NO;
+        }
+
+        if (tree_win_reset) {
             if (hwnd_treeview)
                 AddObjsToList_Tree(hwnd_treeview, NULL, sel_list);
-            sel_win_reset = RESET_NO;
+            tree_win_reset = RESET_NO;
         }
     }
 
