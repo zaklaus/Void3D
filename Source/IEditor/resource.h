@@ -280,6 +280,7 @@
 #define IDC_TRANS_ALL                   1299
 #define IDC_TRANS_CLEAR                 1300
 #define IDC_RESET_TRAN                  1300
+#define IDC_TREE1                       1302
 #define IDC_MODE_SELECT                 1303
 #define IDC_NEW_MODE                    1304
 #define IDC_DELETE_MODE                 1305
@@ -360,9 +361,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        154
+#define _APS_NEXT_RESOURCE_VALUE        155
 #define _APS_NEXT_COMMAND_VALUE         40079
-#define _APS_NEXT_CONTROL_VALUE         1301
+#define _APS_NEXT_CONTROL_VALUE         1303
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

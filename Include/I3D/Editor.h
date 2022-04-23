@@ -231,7 +231,7 @@ public:
 //----------------------------
 // Let user select from list of frames. If user presses OK, the returned value is true and list contains selected
 // frames upon return.
-   virtual bool Prompt(C_vector<PI3D_frame> &lst) = 0;
+   virtual bool Prompt(C_vector<PI3D_frame> &lst, C_str custom_title = "") = 0;
 
 //----------------------------
 // Add plugin to notification list. All registered plugins are notified when selection changes.

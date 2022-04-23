@@ -321,5 +321,11 @@
     <Image Include="..\..\Source\IEditor\res\I_LOGO1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_play.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="test.exe.manifest" />
   </ItemGroup>
 </Project>

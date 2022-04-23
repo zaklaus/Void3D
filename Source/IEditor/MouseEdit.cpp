@@ -2557,7 +2557,7 @@ public:
             all_frames.push_back(ed->GetScene()->GetPrimarySector());
             all_frames.push_back(ed->GetScene()->GetBackdropSector());
             sort(all_frames.begin(), all_frames.end(), S_hlp::cbSortFrames);
-            int i = e_slct->Prompt(all_frames);
+            int i = e_slct->Prompt(all_frames, "Link to...");
             if(!i || !all_frames.size())
                break;
             if(all_frames.size() != 1){
