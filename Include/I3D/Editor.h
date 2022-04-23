@@ -136,6 +136,10 @@ public:
    virtual void OnFrameCreate(PI3D_frame) {}
 
 //----------------------------
+// Broadcast after the mission was modified
+   virtual void OnMissionModified() {}
+
+//----------------------------
 // Switch to subobject edit mode.
    virtual bool SubObjectEdit(){ return false; }
 

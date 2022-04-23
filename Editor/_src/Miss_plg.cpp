@@ -981,7 +981,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         if (it == actor_name_textures.end()) {
             //init texture
             if (!h_font)
-                h_font = OsCreateFont(22);
+                h_font = OsCreateFont(42);
             actor_name_textures[type] = S_name_texture();
             it = actor_name_textures.find(type);
 

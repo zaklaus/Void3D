@@ -28,7 +28,7 @@ static int objsel_list_width_defaults[SELECTION_NUM_TABS] = {
 //----------------------------
 
 class C_edit_Selection_imp : public C_editor_item_Selection {
-    virtual const char* GetName() const { return "Selection"; }
+    const char* GetName() const override { return "Selection"; }
     C_smart_ptr<C_editor_item_Undo> e_undo;
     C_smart_ptr<C_editor_item_MouseEdit> e_medit;
 
@@ -120,10 +120,10 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
     inline static bool* GetListMode() {
         static bool list_mode[LM_LAST] = {
-           1, 1, 1, 1,
-           1, 1, 1, 1,
-           1, 1, 1, 1,
-           1, 0,
+           true, true, true, true,
+           true, true, true, true,
+           true, true, true, true,
+           true, false,
         };
         return list_mode;
     }
@@ -132,7 +132,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     //----------------------------
                                   //phase 1 - collect one hierarchy level
     static I3DENUMRET I3DAPI dlgObjAdd(PI3D_frame frm, dword hl) {
-        C_vector<C_smart_ptr<I3D_frame> >* hier_level = (C_vector<C_smart_ptr<I3D_frame> >*)hl;
+        auto* hier_level = (C_vector<C_smart_ptr<I3D_frame> >*)hl;
         hier_level->push_back(frm);
         return list_mode[LM_HIERARCHY] ? I3DENUMRET_SKIPCHILDREN : I3DENUMRET_OK;
     }
@@ -165,7 +165,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
             E_FRM_IMAGE ti = FI_UNKNOWN;
             dword tmp[2];
-            const char* st = NULL;
+            const char* st = nullptr;
 
             switch (frm->GetType()) {
             case FRAME_VISUAL:
@@ -268,12 +268,12 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     void AddLevel_Tree(PI3D_frame root, HWND hwnd, const C_vector<C_smart_ptr<I3D_frame> >& sel_list, int& focused, HTREEITEM root_item = TVI_ROOT) {
 
         C_vector<C_smart_ptr<I3D_frame> > hl;
-        root->EnumFrames(dlgObjAdd, (dword)&hl, ENUMF_ALL, NULL);
+        root->EnumFrames(dlgObjAdd, (dword)&hl, ENUMF_ALL, nullptr);
         //sort level by name
         sort(hl.begin(), hl.end(), cbFrameLess);
 
-        for (dword i = 0; i < hl.size(); i++) {
-            PI3D_frame frm = hl[i];
+        for (auto & i : hl) {
+            PI3D_frame frm = i;
             HTREEITEM it;
 
             bool add = AddFrame_Tree(hwnd, frm, sel_list, focused, false, root_item, it);
@@ -283,7 +283,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     //repeat on children
                     C_vector<C_smart_ptr<I3D_frame> > hier_level;
                     frm->EnumFrames(dlgObjAdd, (dword)&hier_level,
-                        ENUMF_ALL, NULL);
+                        ENUMF_ALL, nullptr);
 
                     AddLevel_Tree(frm, hwnd, sel_list, focused, it);
                 }
@@ -333,9 +333,9 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         }
         else {
             //fill-in from provided list
-            for (dword i = 0; i < in_list->size(); i++) {
+            for (auto & i : *in_list) {
                 HTREEITEM it;
-                AddFrame_Tree(hwnd, (*in_list)[i], sel_list, focused, true, TVI_ROOT, it);
+                AddFrame_Tree(hwnd, i, sel_list, focused, true, TVI_ROOT, it);
             }
         }
         if (focused != -1)
@@ -362,13 +362,13 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             int y = GetSystemMetrics(SM_CYSCREEN);
             y -= (rc.bottom - rc.top);
 
-            SetWindowPos(hwnd, NULL, 0, y, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER);
+            SetWindowPos(hwnd, nullptr, 0, y, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
             InitCommonControls();
             HIMAGELIST il;
             il = ImageList_LoadBitmap(GetHInstance(), "objselect_list", 12, 1, 0x808000);
             SendDlgItemMessage(hwnd, IDC_TREE1, TVM_SETIMAGELIST, TVSIL_NORMAL, (LPARAM)il);
-            AddObjsToList_Tree(hwnd, NULL, sel_list);
+            AddObjsToList_Tree(hwnd, nullptr, sel_list);
             ShowWindow(hwnd, SW_SHOW);
         }
         return 1;
@@ -394,7 +394,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                             tvi.mask = TVIF_PARAM;
                             SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETITEM, 0, (LPARAM)&tvi);
 
-                            PI3D_frame frm = (PI3D_frame)tvi.lParam;
+                            auto frm = (PI3D_frame)tvi.lParam;
                             Clear();
                             AddFrame(frm);
                         }
@@ -407,7 +407,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                         tvi.hItem = (HTREEITEM) SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETNEXTITEM, TVGN_CARET, 0);
                         tvi.mask = TVIF_PARAM;
                         SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETITEM, 0, (LPARAM)&tvi);
-                        PI3D_frame frm = (PI3D_frame)tvi.lParam;
+                        auto frm = (PI3D_frame)tvi.lParam;
                         C_vector <PI3D_frame> frames; frames.push_back(frm);
                         e_medit->MoveToFrame(frames);
                     }
@@ -440,7 +440,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     DestroyTreeWindow();
                     break;
                 case IDC_REFRESH:
-                    AddObjsToList_Tree(hwnd, NULL, sel_list);
+                    AddObjsToList_Tree(hwnd, nullptr, sel_list);
                     break;
                 }
 
@@ -457,7 +457,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         if (uMsg == WM_INITDIALOG)
             SetWindowLong(hwnd, GWL_USERDATA, lParam);
-        C_edit_Selection_imp* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+        auto* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
         if (es)
             return es->dlgTreeView(hwnd, uMsg, wParam, lParam);
         return 0;
@@ -488,7 +488,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
             E_FRM_IMAGE ti = FI_UNKNOWN;
             dword tmp[2];
-            const char* st = NULL;
+            const char* st = nullptr;
 
             switch (frm->GetType()) {
             case FRAME_VISUAL:
@@ -622,12 +622,12 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         dword slct_tab = 0) {
 
         C_vector<C_smart_ptr<I3D_frame> > hl;
-        root->EnumFrames(dlgObjAdd, (dword)&hl, ENUMF_ALL, NULL);
+        root->EnumFrames(dlgObjAdd, (dword)&hl, ENUMF_ALL, nullptr);
         //sort level by name
         sort(hl.begin(), hl.end(), cbFrameLess);
 
-        for (dword i = 0; i < hl.size(); i++) {
-            PI3D_frame frm = hl[i];
+        for (auto & i : hl) {
+            PI3D_frame frm = i;
             bool add = AddFrame(hwnd, frm, sel_list, focused, slct_tab, false);
 
             if (add || !list_mode[LM_HIDE])
@@ -635,7 +635,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     //repeat on children
                     C_vector<C_smart_ptr<I3D_frame> > hier_level;
                     frm->EnumFrames(dlgObjAdd, (dword)&hier_level,
-                        ENUMF_ALL, NULL);
+                        ENUMF_ALL, nullptr);
 
                     AddLevel(frm, hwnd, sel_list, focused, slct_tab + 2);
                 }
@@ -672,8 +672,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         }
         else {
             //fill-in from provided list
-            for (dword i = 0; i < in_list->size(); i++) {
-                AddFrame(hwnd, (*in_list)[i], sel_list, focused, 0, true);
+            for (auto & i : *in_list) {
+                AddFrame(hwnd, i, sel_list, focused, 0, true);
             }
         }
         if (focused != -1)
@@ -732,7 +732,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         C_vector<C_smart_ptr<I3D_frame> >* in_list;
         C_vector<C_smart_ptr<I3D_frame> >* out_list;
         C_edit_Selection_imp* e_slct;
-        S_sel_help() : in_list(NULL) {}
+        S_sel_help() : in_list(nullptr) {}
     };
 
     //----------------------------
@@ -742,9 +742,9 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         switch (uMsg) {
         case WM_INITDIALOG:
         {
-            S_sel_help* hlp = (S_sel_help*)lParam;
+            auto* hlp = (S_sel_help*)lParam;
             InitDlg(hlp->igraph, hwnd);
-            ShowGroupButtons(hwnd, (hlp->in_list == NULL));
+            ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
 
             C_vector<C_smart_ptr<I3D_frame> >* sel_list = hlp->out_list;
             SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)hlp);
@@ -794,7 +794,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_NOTIFY:
         {
-            NMHDR* nm = (NMHDR*)lParam;
+            auto* nm = (NMHDR*)lParam;
             switch (wParam) {
             case IDC_LIST:
                 switch (nm->code) {
@@ -820,9 +820,9 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
                         static int CALLBACK CompareFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 
-                            PI3D_frame f1 = (PI3D_frame)lParam1;
-                            PI3D_frame f2 = (PI3D_frame)lParam2;
-                            S_hlp1* hp = (S_hlp1*)lParamSort;
+                            auto f1 = (PI3D_frame)lParam1;
+                            auto f2 = (PI3D_frame)lParam2;
+                            auto* hp = (S_hlp1*)lParamSort;
                             switch (hp->sort_type) {
                             case 0:     //type
                             {
@@ -910,13 +910,13 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                             return 0;
                         }
                     } hlp1;
-                    NMLISTVIEW* nml = (NMLISTVIEW*)lParam;
+                    auto* nml = (NMLISTVIEW*)lParam;
                     if (nml->iSubItem == 1) {   //sort by frame
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     else {
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp1.sort_type = nml->iSubItem;
                         hlp1.e_slct = hlp->e_slct;
                         hlp1.PGetFrameScript = hlp->e_slct->PGetFrameScript;
@@ -954,7 +954,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                         buf[len++] = '*';
                     bool model_search = (buf[0] == '.');
                     //change contents of selection
-                    S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
                     LVITEM lvi;
@@ -966,7 +966,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     for (i = 0; i < count; i++) {
                         lvi.iItem = i;
                         SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
+                        auto frm = (PI3D_frame)lvi.lParam;
                         const char* fn = frm->GetName();
                         bool b;
                         if (model_search) {
@@ -1009,8 +1009,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_GRP_ALL:
                 {
                     for (int i = 0; i < LM_HIERARCHY; i++) list_mode[i] = true;
-                    S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
-                    ShowGroupButtons(hwnd, (hlp->in_list == NULL));
+                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
                     hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                 }
                 break;
@@ -1018,8 +1018,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_GRP_NONE:
                 {
                     for (int i = 0; i < LM_HIERARCHY; i++) list_mode[i] = false;
-                    S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
-                    ShowGroupButtons(hwnd, (hlp->in_list == NULL));
+                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
                     hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                 }
                 break;
@@ -1028,7 +1028,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_SEL_NONE:
                 case IDC_BUTTON_SEL_INV:
                 {
-                    S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
                     LVITEM lvi;
@@ -1038,7 +1038,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     for (int i = 0; i < count; i++) {
                         lvi.iItem = i;
                         SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
+                        auto frm = (PI3D_frame)lvi.lParam;
                         switch (LOWORD(wParam)) {
                         case IDC_BUTTON_SEL_ALL:
                             lvi.state |= LVIS_SELECTED;
@@ -1061,28 +1061,28 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_CHECK_VIS:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VISUAL] = IsDlgButtonChecked(hwnd, IDC_CHECK_VIS);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_LIGHT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_LIGHT] = IsDlgButtonChecked(hwnd, IDC_CHECK_LIGHT);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_MODEL:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_MODEL] = IsDlgButtonChecked(hwnd, IDC_CHECK_MODEL);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_SND:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_SOUND] = IsDlgButtonChecked(hwnd, IDC_CHECK_SND);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
@@ -1090,61 +1090,61 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_CHECK_OCC:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_OCCLUDER] = IsDlgButtonChecked(hwnd, IDC_CHECK_OCC);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_VOL:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VOLUME] = IsDlgButtonChecked(hwnd, IDC_CHECK_VOL);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_DUM:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_DUMMY] = IsDlgButtonChecked(hwnd, IDC_CHECK_DUM);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_SCT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_SECTOR] = IsDlgButtonChecked(hwnd, IDC_CHECK_SCT);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_CAM:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_CAMERA] = IsDlgButtonChecked(hwnd, IDC_CHECK_CAM);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_JOINT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_JOINT] = IsDlgButtonChecked(hwnd, IDC_CHECK_JOINT);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_USER:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_USER] = IsDlgButtonChecked(hwnd, IDC_CHECK_USER);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_HIER:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_HIERARCHY] = IsDlgButtonChecked(hwnd, IDC_CHECK_HIER);
                         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_HIDE), list_mode[LM_HIERARCHY]);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_HIDE:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_HIDE] = IsDlgButtonChecked(hwnd, IDC_CHECK_HIDE);
-                        S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
@@ -1156,7 +1156,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
                 case IDOK:
                 {
-                    S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                     //collect selection and select
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
@@ -1167,7 +1167,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     for (int i = 0; i < count; i++) {
                         lvi.iItem = i;
                         SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
+                        auto frm = (PI3D_frame)lvi.lParam;
                         if (lvi.state & LVIS_SELECTED) hlp->out_list->push_back(frm);
                     }
                     EndDialog(hwnd, 1);
@@ -1180,7 +1180,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_DESTROY:
         {
-            S_sel_help* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+            auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
             for (int i = 0; i < (sizeof(objsel_list) / sizeof(S_objsel_column)); i++) {
                 hlp->e_slct->objsel_list_width[i] =
                     SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETCOLUMNWIDTH, i, 0);
@@ -1201,7 +1201,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             if (sel_dlg_pos.x == 0x80000000)
                 InitDlg(ed->GetIGraph(), hwnd);
             else {
-                SetWindowPos(hwnd, NULL, sel_dlg_pos.x, sel_dlg_pos.y, 0, 0,
+                SetWindowPos(hwnd, nullptr, sel_dlg_pos.x, sel_dlg_pos.y, 0, 0,
                     SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOSIZE | SWP_NOZORDER);
             }
             ShowGroupButtons(hwnd);
@@ -1236,7 +1236,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
             SetDlgItemInt(hwnd, IDC_NUM_SEL, sel_list.size(), false);
 
-            AddObjsToList(hwnd, NULL, sel_list);
+            AddObjsToList(hwnd, nullptr, sel_list);
 
             ShowWindow(hwnd, SW_SHOW);
         }
@@ -1244,7 +1244,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_NOTIFY:
         {
-            NMHDR* nm = (NMHDR*)lParam;
+            auto* nm = (NMHDR*)lParam;
             switch (wParam) {
             case IDC_LIST:
                 switch (nm->code) {
@@ -1258,9 +1258,9 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
                         static int CALLBACK CompareFunc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort) {
 
-                            PI3D_frame f1 = (PI3D_frame)lParam1;
-                            PI3D_frame f2 = (PI3D_frame)lParam2;
-                            S_hlp1* hp = (S_hlp1*)lParamSort;
+                            auto f1 = (PI3D_frame)lParam1;
+                            auto f2 = (PI3D_frame)lParam2;
+                            auto* hp = (S_hlp1*)lParamSort;
                             switch (hp->sort_type) {
                             case 0:     //type
                             case 4:     //subtype
@@ -1300,9 +1300,9 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                             return 0;
                         }
                     } hlp1;
-                    NMLISTVIEW* nml = (NMLISTVIEW*)lParam;
+                    auto* nml = (NMLISTVIEW*)lParam;
                     if (nml->iSubItem == 1) {   //sort by frame
-                        AddObjsToList(hwnd, NULL, sel_list);
+                        AddObjsToList(hwnd, nullptr, sel_list);
                     }
                     else {
                         hlp1.sort_type = nml->iSubItem;
@@ -1320,7 +1320,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     const NMLISTVIEW* lv = (NMLISTVIEW*)lParam;
                     if (lv->uChanged & LVIF_STATE) {
                         if ((lv->uNewState & LVIS_SELECTED) != (lv->uOldState & LVIS_SELECTED)) {
-                            PI3D_frame frm = (PI3D_frame)lv->lParam;
+                            auto frm = (PI3D_frame)lv->lParam;
                             //bool st;
                             if (lv->uNewState & LVIS_SELECTED) {
                                 AddFrame(frm);
@@ -1372,7 +1372,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     for (i = 0; i < count; i++) {
                         lvi.iItem = i;
                         SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
+                        auto frm = (PI3D_frame)lvi.lParam;
                         const char* fn = frm->GetName();
                         bool b;
                         if (model_search) {
@@ -1435,7 +1435,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     for (int i = 0; i < count; i++) {
                         lvi.iItem = i;
                         SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEM, 0, (LPARAM)&lvi);
-                        PI3D_frame frm = (PI3D_frame)lvi.lParam;
+                        auto frm = (PI3D_frame)lvi.lParam;
                         switch (LOWORD(wParam)) {
                         case IDC_BUTTON_SEL_ALL:
                             lvi.state |= LVIS_SELECTED;
@@ -1559,7 +1559,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         if (uMsg == WM_INITDIALOG)
             SetWindowLong(hwnd, GWL_USERDATA, lParam);
-        C_edit_Selection_imp* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+        auto* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
         if (es)
             return es->dlgObjSelModeless(hwnd, uMsg, wParam, lParam);
         return 0;
@@ -1594,12 +1594,12 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     int sb_index;              //index in status bar
 
                                //list of plugins to which we send notifications
-    typedef C_vector<pair<C_smart_ptr<C_editor_item>, dword> > t_notify_list;
+    using t_notify_list = C_vector<pair<C_smart_ptr<C_editor_item>, dword> >;
     t_notify_list notify_list;
 
     void SendNotify(bool own_notify = true) {
-        for (dword i = 0; i < notify_list.size(); i++) {
-            notify_list[i].first->Action(notify_list[i].second, &sel_list);
+        for (auto & i : notify_list) {
+            i.first->Action(i.second, &sel_list);
         }
         if (own_notify && hwnd_sel)
             sel_win_reset = RESET_SMART;
@@ -1610,7 +1610,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     void Message() {
         ed->Message(C_fstr("Selected: %i", sel_list.size()), sb_index);
 
-        bool any_sel = (sel_list.size() != 0);
+        bool any_sel = (!sel_list.empty());
         ed->EnableMenu(this, E_SELECTION_CLEAR2, any_sel);
         ed->EnableMenu(this, E_SELECTION_PARENTS, any_sel);
         ed->EnableMenu(this, E_SELECTION_CHILDREN, any_sel);
@@ -1654,7 +1654,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         if (hwnd_sel) {
             ed->GetIGraph()->RemoveDlgHWND(hwnd_sel);
             DestroyWindow(hwnd_sel);
-            hwnd_sel = NULL;
+            hwnd_sel = nullptr;
         }
     }
 
@@ -1666,24 +1666,24 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             tree_dlg_pos.y = rc.top;
             ed->GetIGraph()->RemoveDlgHWND(hwnd_treeview);
             DestroyWindow(hwnd_treeview);
-            hwnd_treeview = NULL;
+            hwnd_treeview = nullptr;
         }
     }
 
     //----------------------------
 
-    virtual const C_vector<PI3D_frame>& GetCurSel() const { return (const C_vector<PI3D_frame>&)sel_list; }
+    const C_vector<PI3D_frame>& GetCurSel() const override { return (const C_vector<PI3D_frame>&)sel_list; }
 
     //----------------------------
 
-    virtual PI3D_frame GetSingleSel() const {
+    PI3D_frame GetSingleSel() const override {
 
-        return (sel_list.size() == 1) ? ((PI3D_frame)(CPI3D_frame)sel_list.front()) : NULL;
+        return (sel_list.size() == 1) ? ((PI3D_frame)(CPI3D_frame)sel_list.front()) : nullptr;
     }
 
     //----------------------------
 
-    virtual void Clear() {
+    void Clear() override {
 
         if (!e_medit) e_medit = (PC_editor_item_MouseEdit)ed->FindPlugin("MouseEdit");
         const S_MouseEdit_user_mode* musr = e_medit->GetUserMode();
@@ -1691,7 +1691,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             musr->ei->Action(musr->modes[S_MouseEdit_user_mode::MODE_CLEAR_SEL].action_id);
         }
         else
-            if (sel_list.size()) {
+            if (!sel_list.empty()) {
                 //save undo info
                 for (dword i = sel_list.size(); i--; ) {
                     e_undo->Begin(this, UNDO_SELECT, sel_list[i]);
@@ -1706,7 +1706,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
     //----------------------------
 
-    virtual void Invert() {
+    void Invert() override {
 
         if (!e_medit) e_medit = (PC_editor_item_MouseEdit)ed->FindPlugin("MouseEdit");
         const S_MouseEdit_user_mode* musr = e_medit->GetUserMode();
@@ -1747,13 +1747,13 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void AddFrame(PI3D_frame frm) {
+    void AddFrame(PI3D_frame frm) override {
 
         if (!frm) {
             ed->Message("Selection::AddFrame: can't add NULL frame");
             return;
         }
-        int j = FindPointerIndex((void**)(sel_list.size() ? &sel_list.front() : NULL), sel_list.size(), frm);
+        int j = FindPointerIndex((void**)(!sel_list.empty() ? &sel_list.front() : nullptr), sel_list.size(), frm);
         if (j == -1) {
             //save undo info
             e_undo->Begin(this, UNDO_DESELECT, frm);
@@ -1772,9 +1772,9 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void RemoveFrame(PI3D_frame frm) {
+    void RemoveFrame(PI3D_frame frm) override {
 
-        int j = FindPointerIndex((void**)(sel_list.size() ? &sel_list.front() : NULL), sel_list.size(), frm);
+        int j = FindPointerIndex((void**)(!sel_list.empty() ? &sel_list.front() : nullptr), sel_list.size(), frm);
         if (j != -1) {
             //save undo info
             e_undo->Begin(this, UNDO_SELECT, frm);
@@ -1789,7 +1789,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void FlashFrame(PI3D_frame frm, dword time, dword color) {
+    void FlashFrame(PI3D_frame frm, dword time, dword color) override {
 
         for (int j = flash_list.size(); j--; )
             if (frm == flash_list[j].frm)
@@ -1803,7 +1803,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual bool Prompt(C_vector<PI3D_frame>& prompt_list, C_str custom_title) {
+    bool Prompt(C_vector<PI3D_frame>& prompt_list, C_str custom_title) override {
 
         C_vector<C_smart_ptr<I3D_frame> > tmp_list;
         tmp_list.reserve(prompt_list.size());
@@ -1829,7 +1829,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void AddNotify(PC_editor_item ei, dword msg) {
+    void AddNotify(PC_editor_item ei, dword msg) override {
 
         for (dword i = notify_list.size(); i--; )
             if (ei == notify_list[i].first)
@@ -1839,7 +1839,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void RemoveNotify(PC_editor_item ei) {
+    void RemoveNotify(PC_editor_item ei) override {
 
         for (dword i = notify_list.size(); i--; ) {
             if (ei == notify_list[i].first) {
@@ -1852,16 +1852,16 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual dword GetStatusBarIndex() const { return sb_index; }
+    dword GetStatusBarIndex() const override { return sb_index; }
 
     //----------------------------
 
-    virtual void SetGetScriptNameFunc(t_GetFrameScript* f) { PGetFrameScript = f; }
-    virtual void SetGetActorNameFunc(t_GetFrameActor* f) { PGetFrameActor = f; }
+    void SetGetScriptNameFunc(t_GetFrameScript* f) override { PGetFrameScript = f; }
+    void SetGetActorNameFunc(t_GetFrameActor* f) override { PGetFrameActor = f; }
 
     //----------------------------
 
-    virtual void Undo(dword id, PI3D_frame frm, C_chunk& ck) {
+    void Undo(dword id, PI3D_frame frm, C_chunk& ck) override {
 
         switch (id) {
         case UNDO_SELECT:
@@ -1886,7 +1886,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void AfterLoad() {
+    void AfterLoad() override {
 
         Message();
         SendNotify();
@@ -1894,7 +1894,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void BeforeFree() {
+    void BeforeFree() override {
         sel_list.clear();
         flash_list.clear();
         Message();
@@ -1902,7 +1902,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void LoadFromMission(C_chunk& ck) {
+    void LoadFromMission(C_chunk& ck) override {
 
         sel_list.clear();
         while (ck)
@@ -1919,21 +1919,21 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
             }
 
         if (hwnd_treeview) {
-            AddObjsToList_Tree(hwnd_treeview, NULL, sel_list);
+            AddObjsToList_Tree(hwnd_treeview, nullptr, sel_list);
         }
     }
 
     //----------------------------
 
-    virtual void MissionSave(C_chunk& ck, dword phase) {
+    void MissionSave(C_chunk& ck, dword phase) override {
 
         if (phase == 2) {
             //save current selection
-            if (sel_list.size()) {
+            if (!sel_list.empty()) {
                 ck <<= CT_EDITOR_PLUGIN;
                 ck.WStringChunk(CT_NAME, GetName());
-                for (dword i = 0; i < sel_list.size(); i++)
-                    ck.WStringChunk(CT_NAME, sel_list[i]->GetName());
+                for (auto & i : sel_list)
+                    ck.WStringChunk(CT_NAME, i->GetName());
                 --ck;
             }
         }
@@ -1941,7 +1941,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
 
     //----------------------------
 
-    virtual void OnFrameDelete(PI3D_frame frm) {
+    void OnFrameDelete(PI3D_frame frm) override {
         //check if this frame (or its children) are in our flash list
         struct S_hlp {
             static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c) {
@@ -1962,26 +1962,30 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
         tree_win_reset = RESET_SMART;
     }
 
-    virtual void OnFrameDuplicate(PI3D_frame frm_old, PI3D_frame frm_new) {
+    void OnFrameDuplicate(PI3D_frame frm_old, PI3D_frame frm_new) override {
         tree_win_reset = RESET_SMART;
     }
 
-    virtual void OnFrameCreate(PI3D_frame) {
+    void OnFrameCreate(PI3D_frame) override {
         tree_win_reset = RESET_SMART;
+    }
+
+    virtual void OnMissionModified() {
+        tree_win_reset = sel_win_reset = RESET_SMART;
     }
 
 
     //----------------------------
 public:
     C_edit_Selection_imp() :
-        hwnd_sel(NULL),
-        hwnd_treeview(NULL),
+        hwnd_sel(nullptr),
+        hwnd_treeview(nullptr),
         sel_win_reset(RESET_NO),
         tree_win_reset(RESET_NO),
         view_axis_on(true),
         scene_tree_on(true),
-        PGetFrameScript(NULL),
-        PGetFrameActor(NULL),
+        PGetFrameScript(nullptr),
+        PGetFrameActor(nullptr),
         draw_links(true)
     {
         sel_dlg_pos.x = 0x80000000;
@@ -1989,7 +1993,7 @@ public:
         memcpy(objsel_list_width, objsel_list_width_defaults, sizeof(objsel_list_width));
     }
 
-    virtual bool Init() {
+    bool Init() override {
         e_undo = (PC_editor_item_Undo)ed->FindPlugin("Undo");
         if (!e_undo) {
             return false;
@@ -2029,26 +2033,26 @@ public:
         }
 
         if (tree_dlg_pos.x != 0x80000000) {
-            SetWindowPos(hwnd_treeview, NULL, tree_dlg_pos.x, tree_dlg_pos.y, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER);
+            SetWindowPos(hwnd_treeview, nullptr, tree_dlg_pos.x, tree_dlg_pos.y, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER);
             ShowWindow(hwnd_treeview, SW_SHOW);
         }
     }
 
-    virtual void Close() {
+    void Close() override {
 
         DestroySelWindow();
         DestroyTreeWindow();
         sel_list.clear();
         flash_list.clear();
-        e_undo = NULL;
-        e_medit = NULL;
+        e_undo = nullptr;
+        e_medit = nullptr;
 
         notify_list.clear();
     }
 
     //----------------------------
 
-    virtual dword Action(int id, void* context) {
+    dword Action(int id, void* context) override {
 
         switch (id) {
 
@@ -2107,7 +2111,7 @@ public:
         */
 
         case E_SELECTION_CLEAR2:
-            if (sel_list.size()) {
+            if (!sel_list.empty()) {
                 Clear();
                 ed->Message("Selection cleared");
             }
@@ -2168,11 +2172,11 @@ public:
         case E_SELECTION_SEL_FLASH_NEXT:
         case E_SELECTION_SEL_FLASH_PREV:
         {
-            if (!flash_list.size()) {
+            if (flash_list.empty()) {
                 ed->Message("Flash list is empty");
                 break;
             }
-            PI3D_frame curr = (sel_list.size() == 1) ? sel_list.front() : NULL;
+            PI3D_frame curr = (sel_list.size() == 1) ? sel_list.front() : nullptr;
             for (int i = flash_list.size(); i--; ) {
                 if (curr == flash_list[i].frm)
                     break;
@@ -2281,7 +2285,7 @@ public:
 
     //----------------------------
 
-    virtual void Tick(byte skeys, int time, int mouse_rx, int mouse_ry, int mouse_rz, byte mouse_butt) {
+    void Tick(byte skeys, int time, int mouse_rx, int mouse_ry, int mouse_rz, byte mouse_butt) override {
         //process flashing selection
         for (int i = flash_list.size(); i--; ) {
             if (!flash_list[i].persistent) {
@@ -2294,20 +2298,20 @@ public:
         }
         if (sel_win_reset) {
             if (hwnd_sel)
-                AddObjsToList(hwnd_sel, NULL, sel_list);
+                AddObjsToList(hwnd_sel, nullptr, sel_list);
             sel_win_reset = RESET_NO;
         }
 
         if (tree_win_reset) {
             if (hwnd_treeview)
-                AddObjsToList_Tree(hwnd_treeview, NULL, sel_list);
+                AddObjsToList_Tree(hwnd_treeview, nullptr, sel_list);
             tree_win_reset = RESET_NO;
         }
     }
 
     //----------------------------
 
-    virtual void Render() {
+    void Render() override {
 
         int i;
 
@@ -2317,7 +2321,7 @@ public:
         bool is_wire = drv->GetState(RS_WIREFRAME);
         if (is_wire) drv->SetState(RS_WIREFRAME, false);
 
-        if (sel_list.size() || flash_list.size()) {
+        if (!sel_list.empty() || !flash_list.empty()) {
 
             I3D_bbox temp_bb;
             //line indicies
@@ -2329,7 +2333,7 @@ public:
                0, 1, 2, 3, 4, 5
             };
 
-            if (sel_list.size()) {
+            if (!sel_list.empty()) {
 
                 bool loc_system = false;
                 bool uniform_scale = true;
@@ -2364,7 +2368,7 @@ public:
                     case FRAME_CAMERA: case FRAME_OCCLUDER:
                     case FRAME_SECTOR: case FRAME_DUMMY:
                         frm->DebugDraw(scene);
-                        lvp = NULL;
+                        lvp = nullptr;
                         draw_pivot = single_sel;
                         scene->SetRenderMatrix(m);
                         break;
@@ -2654,8 +2658,8 @@ public:
         if (view_axis_on) {
             const I3D_rectangle& vp = scene->GetViewport();
 
-            float dx = float(vp.r - vp.l);
-            float dy = float(vp.b - vp.t);
+            auto dx = float(vp.r - vp.l);
+            auto dy = float(vp.b - vp.t);
             ed->GetDriver()->SetViewport(
                 I3D_rectangle(FloatToInt(vp.l + dx * .0f), FloatToInt(vp.t + dy * .9f),
                 FloatToInt(vp.l + dx * .1f),
@@ -2683,7 +2687,7 @@ public:
 
 #define SAVE_VERSION 6
 
-    virtual bool LoadState(C_chunk& ck) {
+    bool LoadState(C_chunk& ck) override {
 
         byte version = 0;
         ck.Read((char*)&version, sizeof(version));
@@ -2713,7 +2717,7 @@ public:
 
     //----------------------------
 
-    virtual bool SaveState(C_chunk& ck) const {
+    bool SaveState(C_chunk& ck) const override {
 
         byte version = SAVE_VERSION;
         ck.Write((char*)&version, sizeof(version));

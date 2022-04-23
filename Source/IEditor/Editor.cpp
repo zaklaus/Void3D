@@ -1287,7 +1287,7 @@ PC_editor_item C_editor_imp::FindPlugin(const char *plugin_name){
 //----------------------------
 
 void C_editor_imp::SetModified(bool b){
-
+   Broadcast((void(C_editor_item::*)(void*)) & C_editor_item::OnMissionModified, 0);
    if(b && !CanModify(false)){
       Message("ERR", sb_modify);
       return;
