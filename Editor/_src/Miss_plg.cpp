@@ -2372,6 +2372,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                 EditLock();
                 SetupCameraRange();
                 SetTickClass(mission);
+                SetFocus((HWND)ed->GetIGraph()->GetHWND());
                 return true;
             }
             break;

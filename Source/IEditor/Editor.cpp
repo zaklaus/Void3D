@@ -940,7 +940,7 @@ bool C_editor_imp::Init(PI3D_driver d1, PI3D_scene s1){
    if(!e_access->Action(0))
       return false;
       */
-   CreateAccess(this);
+   //CreateAccess(this);
 //#endif
                               //init status bar
    {
