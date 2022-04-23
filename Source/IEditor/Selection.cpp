@@ -435,14 +435,15 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             {
                 switch (LOWORD(wParam)) {
                 case IDCANCEL:
-                    DestroyTreeWindow();
-                    break;
-
                 case IDCLOSE:
                 case IDOK:
                     DestroyTreeWindow();
                     break;
+                case IDC_REFRESH:
+                    AddObjsToList_Tree(hwnd, NULL, sel_list);
+                    break;
                 }
+
             }
             break;
             }
