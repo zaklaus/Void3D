@@ -2154,6 +2154,85 @@ public:
 
 //----------------------------
 
+   virtual void C_edit_MouseEdit::MoveToFrame(const C_vector <PI3D_frame> sel_list){
+       S_vector center(0, 0, 0), dir(0, 0, 0);
+       for (int i = sel_list.size(); i--; ) {
+           CPI3D_frame frm = sel_list[i];
+           switch (frm->GetType()) {
+           case FRAME_VISUAL:
+           {
+               const I3D_bound_volume& bvol = I3DCAST_CVISUAL(frm)->GetBoundVolume();
+               S_vector p = ((bvol.bbox.min + bvol.bbox.max) * .5f) * frm->GetMatrix();
+               center += p;
+           }
+           break;
+           case FRAME_MODEL:
+           {
+               const I3D_bound_volume& bvol = I3DCAST_CMODEL(frm)->GetHRBoundVolume();
+               S_vector p = ((bvol.bbox.min + bvol.bbox.max) * .5f) * frm->GetMatrix();
+               center += p;
+           }
+           break;
+           default:
+               center += frm->GetWorldPos();
+           }
+           const S_vector& fdir = frm->GetWorldDir();
+           dir += S_normal(S_vector(fdir.x, 0.0f, fdir.z));
+       }
+       center /= (float)sel_list.size();
+       dir.y = 0.0f;
+       dir.Normalize();
+
+       S_vector dest = center;
+       dir *= 5.0f;
+       dir.y -= 5.0f;
+       dir.Invert();
+       {
+           I3D_collision_data cd(dest, dir, I3DCOL_EXACT_GEOMETRY);
+           if (ed->GetScene()->TestCollision(cd)) {
+               float d = cd.GetHitDistance();
+               d = Max(.1f, d - .3f);
+               dest += S_normal(dir) * d;
+           }
+           else {
+               dest += dir;
+           }
+       }
+       S_quat rot;
+       rot.SetDir(center - dest, 0.0f);
+
+       float dist = (curr_cam->GetPos() - dest).Magnitude();
+       int speed = 200 + (int)(dist * 4.0f);
+
+       PI3D_keyframe_anim anim = (PI3D_keyframe_anim)ed->GetDriver()->CreateAnimation(I3DANIM_KEYFRAME);
+       {
+           I3D_anim_pos_tcb pkeys[2];
+           memset(pkeys, 0, sizeof(pkeys));
+           pkeys[0].v = curr_cam->GetPos();
+           pkeys[0].easy_from = 1.0f;
+           pkeys[1].v = dest;
+           pkeys[1].time = speed;
+           anim->SetPositionKeys(pkeys, 2);
+       }
+       {
+           I3D_anim_rot rkeys[2];
+           memset(rkeys, 0, sizeof(rkeys));
+           const S_quat& curr_rot = curr_cam->GetRot();
+           curr_rot.Inverse(rkeys[0].axis, rkeys[0].angle);
+           rkeys[0].easy_from = 1.0f;
+           rot = ~curr_rot * rot;
+           rot.Inverse(rkeys[1].axis, rkeys[1].angle);
+           rkeys[1].time = speed;
+           anim->SetRotationKeys(rkeys, 2);
+       }
+       anim->SetEndTime(speed);
+       cam_interp = ed->GetDriver()->CreateInterpolator();
+       cam_interp->Release();
+       cam_interp->SetFrame(curr_cam);
+       cam_interp->SetAnimation(anim);
+       anim->Release();
+   }
+
    virtual dword C_edit_MouseEdit::Action(int id, void *context){
 
       switch(id){
@@ -2218,81 +2297,7 @@ public:
                ed->Message("Selection is empty!");
                break;
             }
-            S_vector center(0, 0, 0), dir(0, 0, 0);
-            for(int i=sel_list.size(); i--; ){
-               CPI3D_frame frm = sel_list[i];
-               switch(frm->GetType()){
-               case FRAME_VISUAL:
-                  {
-                     const I3D_bound_volume &bvol = I3DCAST_CVISUAL(frm)->GetBoundVolume();
-                     S_vector p = ((bvol.bbox.min + bvol.bbox.max) * .5f) * frm->GetMatrix();
-                     center += p;
-                  }
-                  break;
-               case FRAME_MODEL:
-                  {
-                     const I3D_bound_volume &bvol = I3DCAST_CMODEL(frm)->GetHRBoundVolume();
-                     S_vector p = ((bvol.bbox.min + bvol.bbox.max) * .5f) * frm->GetMatrix();
-                     center += p;
-                  }
-                  break;
-               default:
-                  center += frm->GetWorldPos();
-               }
-               const S_vector &fdir = frm->GetWorldDir();
-               dir += S_normal(S_vector(fdir.x, 0.0f, fdir.z));
-            }
-            center /= (float)sel_list.size();
-            dir.y = 0.0f;
-            dir.Normalize();
-
-            S_vector dest = center;
-            dir *= 5.0f;
-            dir.y -= 5.0f;
-            dir.Invert();
-            {
-               I3D_collision_data cd(dest, dir, I3DCOL_EXACT_GEOMETRY);
-               if(ed->GetScene()->TestCollision(cd)){
-                  float d = cd.GetHitDistance();
-                  d = Max(.1f, d-.3f);
-                  dest += S_normal(dir)*d;
-               }else{
-                  dest += dir;
-               }
-            }
-            S_quat rot;
-            rot.SetDir(center - dest, 0.0f);
-
-            float dist = (curr_cam->GetPos() - dest).Magnitude();
-            int speed = 200 + (int)(dist * 4.0f);
-
-            PI3D_keyframe_anim anim = (PI3D_keyframe_anim)ed->GetDriver()->CreateAnimation(I3DANIM_KEYFRAME);
-            {
-               I3D_anim_pos_tcb pkeys[2];
-               memset(pkeys, 0, sizeof(pkeys));
-               pkeys[0].v = curr_cam->GetPos();
-               pkeys[0].easy_from = 1.0f;
-               pkeys[1].v = dest;
-               pkeys[1].time = speed;
-               anim->SetPositionKeys(pkeys, 2);
-            }
-            {
-               I3D_anim_rot rkeys[2];
-               memset(rkeys, 0, sizeof(rkeys));
-               const S_quat &curr_rot = curr_cam->GetRot();
-               curr_rot.Inverse(rkeys[0].axis, rkeys[0].angle);
-               rkeys[0].easy_from = 1.0f;
-               rot = ~curr_rot * rot;
-               rot.Inverse(rkeys[1].axis, rkeys[1].angle);
-               rkeys[1].time = speed;
-               anim->SetRotationKeys(rkeys, 2);
-            }
-            anim->SetEndTime(speed);
-            cam_interp = ed->GetDriver()->CreateInterpolator();
-            cam_interp->Release();
-            cam_interp->SetFrame(curr_cam);
-            cam_interp->SetAnimation(anim);
-            anim->Release();
+            MoveToFrame(sel_list);
          }
          break;
 

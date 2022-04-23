@@ -512,6 +512,10 @@ public:
 //----------------------------
 // Get editing camera;
    virtual PI3D_camera GetEditCam() = 0;
+
+//----------------------------
+// Move to frame
+   virtual void MoveToFrame(const C_vector < PI3D_frame>) = 0;
 };
 
 typedef C_editor_item_MouseEdit *PC_editor_item_MouseEdit;

@@ -242,8 +242,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 TVITEM tvi = {};
                 tvi.pszText = buf;
                 tvi.lParam = (LPARAM)frm;
-                tvi.state = TVIS_EXPANDED|TVIS_BOLD;
-                tvi.mask = TVIF_TEXT|TVIF_IMAGE|TVIF_PARAM|TVIF_STATE|TVIF_STATEEX;
+                tvi.state = TVIS_EXPANDED | TVIS_BOLD;
+                tvi.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_PARAM | TVIF_STATE | TVIF_STATEEX;
                 tvi.iImage = ti;
                 tvi.iSelectedImage = ti;
                 for (j = sel_list.size(); j-- > 0; )
@@ -344,8 +344,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     }
 
     //----------------------------
-    
-    void ReselectItemInTreeView(LPARAM lparam){
+
+    void ReselectItemInTreeView(LPARAM lparam) {
 
     }
 
@@ -375,14 +375,18 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_NOTIFY:
         {
-            NMHDR* nm = (NMHDR*)lParam;
+            union {
+                LPARAM lp;
+                NMTVITEMCHANGE* pnm;
+                NMTREEVIEW* prnmtv;
+                NMHDR* phdr;
+            };
+            lp = lParam;
             switch (wParam) {
             case IDC_TREE1:
-                switch (nm->code) {
+                switch (phdr->code) {
                 case TVN_SELCHANGING:
                 {
-                    LPNMTREEVIEW prnmtv = (LPNMTREEVIEW)lParam;
-
                     if (e_medit) {
                         if (prnmtv->itemNew.hItem) {
                             TVITEM tvi = {};
@@ -394,12 +398,24 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                             Clear();
                             AddFrame(frm);
                         }
-                    } 
+                    }
                 }
                 break;
+                case NM_RCLICK: {
+                    if (e_medit) {
+                        TVITEM tvi = {};
+                        tvi.hItem = (HTREEITEM) SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETNEXTITEM, TVGN_CARET, 0);
+                        tvi.mask = TVIF_PARAM;
+                        SendDlgItemMessage(hwnd, IDC_TREE1, TVM_GETITEM, 0, (LPARAM)&tvi);
+                        PI3D_frame frm = (PI3D_frame)tvi.lParam;
+                        C_vector <PI3D_frame> frames; frames.push_back(frm);
+                        e_medit->MoveToFrame(frames);
+                    }
+                }break;
                 }
                 break;
             }
+            break;
         }
         break;
 
@@ -413,7 +429,6 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             scene_tree_on = false;
         }
         break;
-
         case WM_COMMAND:
             switch (HIWORD(wParam)) {
             case BN_CLICKED:
@@ -432,7 +447,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             break;
             }
             break;
-        break;
+            break;
         }
         return 0;
     }
@@ -1902,7 +1917,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
             default: --ck;
             }
 
-        if (hwnd_treeview){
+        if (hwnd_treeview) {
             AddObjsToList_Tree(hwnd_treeview, NULL, sel_list);
         }
     }
@@ -2006,7 +2021,7 @@ public:
     }
 
     void CreateTreeView() {
-        if (!hwnd_treeview){
+        if (!hwnd_treeview) {
             hwnd_treeview = CreateDialogParam(GetHInstance(), "IDD_TREE", (HWND)ed->GetIGraph()->GetHWND(),
                 dlgTreeView_thunk, (LPARAM)this);
             ed->GetIGraph()->AddDlgHWND(hwnd_treeview);
