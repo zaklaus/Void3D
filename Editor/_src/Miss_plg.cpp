@@ -2357,6 +2357,10 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
 
         case E_MISSION_MODE_GAME:
             if (!mission->IsInGame()) {
+                if (IsEditLocked()){
+                    Reload();
+                }
+
                 //save changes now
                 if (!Save(true, true))
                     break;
@@ -2373,6 +2377,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                 SetupCameraRange();
                 SetTickClass(mission);
                 SetFocus((HWND)ed->GetIGraph()->GetHWND());
+                e_slct->Clear();
                 return true;
             }
             break;
