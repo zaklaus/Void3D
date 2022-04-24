@@ -302,7 +302,7 @@ lrp r1, t1.a, r1, CP_ONE
 mad r1, r1, t0, r0
                               //environment
 mul r1, r1, t2
-mov r0, r1
+mul r0, r0, r1
 
 #endfragment
 
