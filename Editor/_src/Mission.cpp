@@ -1745,7 +1745,7 @@ E_MISSION_IO C_mission::Save(const char* bin_name, dword save_group) const {
         ck.Write(&i, 2);
         i = VERSION_MINOR;
         ck.Write(&i, 2);
-        static const char copyright[] = " - Mission file - Copyright (c) 2001  Lonely Cat Games - ";
+        static const char copyright[] = " - Mission file - Copyright (c) 2022 V4 Games - ";
         ck.Write(copyright, sizeof(copyright) + 1);
         --ck;
     }
