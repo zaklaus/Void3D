@@ -415,16 +415,16 @@ public:
       if(version!=VERSION)
          return false;
 
-      //ed->CheckMenu(this, E_LMAP_AA_1 + lm_aa_ratio - 1, false);
+      ed->CheckMenu(this, E_LMAP_AA_1 + lm_aa_ratio - 1, false);
                               //read variables
       ck.Read(&lm_blur, sizeof(byte));
       ck.Read(&lm_aa_ratio, sizeof(int));
 
-      /*
+      
       ed->CheckMenu(this, E_LMAP_TOGGLE_BLUR, lm_blur);
       ed->GetDriver()->SetState(RS_LM_AA_RATIO, lm_aa_ratio);
       ed->CheckMenu(this, E_LMAP_AA_1 + lm_aa_ratio - 1, true);
-      */
+      
       return true;
    }
 
