@@ -16,7 +16,7 @@
 //#define DEBUG_NO_3D_HW        //disable use of 3D sound hardware
 //#define DEBUG_FORCE_SOFTWARE  //force sw sound buffer (also disables 3D hw usage)
 
-//#define EMULATE_3DPOSITIONING //compute 3D positioning (by setting panning) ourselves
+#define EMULATE_3DPOSITIONING //compute 3D positioning (by setting panning) ourselves
 #endif
 
 #define EMULATE_ATTENUATION   //compute attenuation (by setting volume) ourselves
@@ -845,6 +845,7 @@ void I3D_sound::ComputePanning(){
          const S_matrix &lm = listener->GetMatrixDirect();
          const S_vector &l_dir = lm(2);
          S_vector dir_to_cam = lm(3) - m(3);
+         S_vector vec_to_cam = GetWorldPos() - listener->GetWorldPos();
          float ca = (!IsAbsMrgZero(l_dir.z)) ? (float)atan(l_dir.x/l_dir.z) : PI*.5f;
          if(l_dir.z<0.0f) ca += PI;
          if(l_dir.x<0.0f) ca += (PI*2.0f);
@@ -853,7 +854,19 @@ void I3D_sound::ComputePanning(){
          if(dir_to_cam.x>=0.0f) sa += (PI*2.0f);
          float diff = sa - ca;
          float pan = (float)sin(diff);
+#if 1
+#define PAN_INTENSITY 0.1f
+         float d = vec_to_cam.Magnitude();
+         float d2 = 1.f - 1.f/(sqrtf(d)*0.5f);
+         if (d2 <= 0.0f)
+             d2 = 0.0f;
+         /*char a[200];
+         sprintf(a, "%f", d2);
+         DEBUG_LOG(a);*/
+         voice->SetPanning(pan*pan*pan*PAN_INTENSITY*d2);
+#else
          voice->SetPanning(pan);
+#endif
       }
       break;
    }
