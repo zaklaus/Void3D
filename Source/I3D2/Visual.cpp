@@ -1568,9 +1568,8 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
                if(tp_normal){
                   se_ps.Tex(stage);
                   drv->SetTexture1(stage, tp_normal);
-                  se_ps.AddFragment(PSF_TEST_BUMP);
+                  se_ps.AddFragment(PSF_TEST_BUMP_ENV);
                   ++stage;
-                  se_ps.Tex(stage);
                }else{
                   ++stage;
                   se_ps.Tex(stage);

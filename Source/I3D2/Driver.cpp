@@ -1379,6 +1379,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "blend_by_alpha",
          "night_view",
          "ps_test_bump",
+         "ps_test_bump_env",
       };
 
       for(i=0; i<PSF_LAST; i++){

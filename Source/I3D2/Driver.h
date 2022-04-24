@@ -238,6 +238,7 @@ enum E_PS_FRAGMENT{
    PSF_BLEND_BY_ALPHA,        //blend between t1 and t2 using t0.a
    PSF_NIGHT_VIEW,            //using t0 as input, generate black-green-white gamma-raised night-vision look
    PSF_TEST_BUMP,             // TEST
+   PSF_TEST_BUMP_ENV,            
    PSF_LAST
 };
 
