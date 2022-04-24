@@ -62,7 +62,7 @@ static const dword BREAK_ALLOC_VERTEX_ID = 0; //id of vertex in vb
 //#define DEBUG_SIM_LOWVIDMEM (20*1024*1024)
 //#define DEBUG_DISABLE_BUMPMAPPING  //disable using of bump texture formats
 
-//#define DEBUG_FORCE_DIRECT_TRANSFORM   //direct transfrormations, force inclusion of DRVF2_DIRECT_TRANSFORM
+#define DEBUG_FORCE_DIRECT_TRANSFORM   //direct transfrormations, force inclusion of DRVF2_DIRECT_TRANSFORM
 
 //#define DEBUG_NO_NVLINK_OPTIM //disable shader optimizations of VN Linker
 
@@ -1378,6 +1378,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "r0_b_2_a",
          "blend_by_alpha",
          "night_view",
+         "ps_test_bump",
       };
 
       for(i=0; i<PSF_LAST; i++){
@@ -2560,7 +2561,7 @@ I3D_RESULT I3D_driver::InitD3DResources(){
    last_alpha_ref = (dword)-1;
 
    drv_flags2 &= ~DRVF2_CAN_USE_UBYTE4;
-   //if(!(d3d_caps.VertexProcessingCaps&D3DVTXPCAPS_NO_VSDT_UBYTE4))
+   //if(!(d3d_caps.VertexProcessingCaps&D3DVTXPCAO_VSDT_UBYTE4))
    if(d3d_caps.DeclTypes&D3DDTCAPS_UBYTE4)
       drv_flags2 |= DRVF2_CAN_USE_UBYTE4;
 
@@ -3696,8 +3697,8 @@ PI3D_mesh_base I3D_driver::CreateMesh(dword vcf){
 //----------------------------
 
 PI3D_user I3D_driver::CreateShader() {
-
-    return NULL;
+    return 0;
+    //return new I3D_shader();
 }
 //----------------------------
 

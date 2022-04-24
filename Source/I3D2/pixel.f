@@ -286,6 +286,7 @@ mad r1, r1, t0, r0
 
                               //environment
 ;mul_x2 r1, r1, t2
+mul r1, r1, t2
 
 mov r0, r1
 

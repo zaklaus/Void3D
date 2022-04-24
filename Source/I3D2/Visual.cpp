@@ -308,9 +308,13 @@ void I3D_visual::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_stages){
       if(vis_flags&VISF_USE_DETMAP){
          ++ntxt;
       }
+      if (vis_flags & VISF_USE_BUMPMAP)
+          ++ntxt;
       if(vis_flags&VISF_USE_ENVMAP){
          if(vis_flags&VISF_USE_EMBMMAP)
             ++ntxt;
+         if (vis_flags & VISF_USE_BUMPMAP)
+             ++ntxt;
          if(use_3d_envcoords)
             fvf |= D3DFVF_TEXCOORDSIZE3(ntxt);
          ++ntxt;
@@ -1274,30 +1278,6 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
             do_detailmap = true;
          }
       }
-#if defined _DEBUG && 1
-      if((vis_flags&VISF_USE_BUMPMAP) && stage<drv->NumSimultaneousTextures()){
-         se_in.AddFragment(VSF_PICK_UV_0);
-         se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UV_0 + stage));
-         ++stage;
-         do_bumpmap = true;
-
-         se_in.AddFragment(VSF_BUMP_OS);
-         CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
-         if(lp){
-            S_vectorw ldir = lp->GetWorldDir();
-            S_vectorw lpos = lp->GetWorldPos();
-            if(object_space){
-               (S_vector&)ldir %= GetInvMatrix1();
-               (S_vector&)lpos *= GetInvMatrix1();
-            }
-            //ldir.x = 1.0f;
-            ldir.w = 0.0f;
-            lpos.w = 0.0f;
-            drv->SetVSConstant(94, &lpos);
-            drv->SetVSConstant(95, &ldir);
-         }
-      }
-#endif
       if((vis_flags&VISF_USE_ENVMAP) && stage<drv->NumSimultaneousTextures()){
          CPI3D_texture_base tp_env = mat->GetTexture1(MTI_ENVIRONMENT);
          bool use_cube_map = (tp_env && tp_env->GetTextureType()==TEXTURE_CUBIC);
@@ -1314,10 +1294,10 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
                ++stage;
             }else
             if(vis_flags&VISF_USE_BUMPMAP){
-               se_in.AddFragment(VSF_PICK_UV_0);
+                se_in.AddFragment(VSF_PICK_UV_0);
+               se_in.AddFragment(VSF_BUMP_OS);
                se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UV_0 + stage));
                ++stage;
-               se_in.AddFragment(VSF_BUMP_OS);
                CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
                if(lp){
                   S_vectorw ldir = lp->GetWorldDir();
@@ -1340,6 +1320,29 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
          ++stage;
          do_env_mapping = true;
       }
+      else
+          if ((vis_flags & VISF_USE_BUMPMAP) && stage < drv->NumSimultaneousTextures()) {
+              se_in.AddFragment(VSF_PICK_UV_0);
+              se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UV_0 + stage));
+              ++stage;
+              do_bumpmap = true;
+
+              se_in.AddFragment(VSF_BUMP_OS);
+              CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
+              if (lp) {
+                  S_vectorw ldir = lp->GetWorldDir();
+                  S_vectorw lpos = lp->GetWorldPos();
+                  if (object_space) {
+                      (S_vector&)ldir %= GetInvMatrix1();
+                      (S_vector&)lpos *= GetInvMatrix1();
+                  }
+                  //ldir.x = 1.0f;
+                  ldir.w = 0.0f;
+                  lpos.w = 0.0f;
+                  drv->SetVSConstant(94, &lpos);
+                  drv->SetVSConstant(95, &ldir);
+              }
+          }
 
       if((do_env_mapping || do_detailmap || do_bumpmap) && !(flags&(VSPREP_NO_COPY_UV|VSPREP_COPY_UV)))
          se_in.CopyUV();
@@ -1476,12 +1479,35 @@ void I3D_visual::SetupSpecialMapping(CPI3D_material mat, const S_render_primitiv
             ++stage;
             set_uv_scale = true;
          }
+         else
+             if ((vis_flags & VISF_USE_BUMPMAP)) {
+                 CPI3D_texture_base txt_bump = mat->GetTexture1(MTI_NORMAL);
+                 if (txt_bump) {
+                     //use primary UV coords for bump mapping
+                     if (!drv->IsDirectTransform())
+                         drv->SetTextureCoordIndex(stage, 0);
+
+                     drv->SetTexture1(stage, txt_bump);
+                     ++stage;
+                 }
+             }
          //if(!drv->IsDirectTransform()) drv->SetTextureCoordIndex(stage, num_txt_stages);
          drv->SetupTextureStage(stage, D3DTOP_MODULATE2X);
          drv->SetTexture1(stage, tp_env);
          ++stage;
       }
    }
+   else
+       if ((vis_flags & VISF_USE_BUMPMAP)) {
+           CPI3D_texture_base txt_bump = mat->GetTexture1(MTI_NORMAL);
+           if (txt_bump) {
+               //use primary UV coords for bump mapping
+               if (!drv->IsDirectTransform())
+                   drv->SetTextureCoordIndex(stage, 0);
+               drv->SetTexture1(stage, txt_bump);
+               ++stage;
+           }
+       }
 
    if(set_uv_scale){
       S_vectorw uv_scale;
@@ -1510,17 +1536,6 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
       }
       ++stage;
    }
-#if defined _DEBUG && 1
-   if((vis_flags&VISF_USE_BUMPMAP) && stage<drv->NumSimultaneousTextures()){
-      CPI3D_texture_base tp_normal = mat->GetTexture1(MTI_NORMAL);
-      if(tp_normal){
-         se_ps.Tex(stage);
-         se_ps.AddFragment(PSF_TEST);
-         drv->SetTexture1(stage, tp_normal);
-      }
-      ++stage;
-   }
-#endif
    if((vis_flags&VISF_USE_ENVMAP) && stage<drv->NumSimultaneousTextures()){
       CPI3D_texture_base tp_env = mat->GetTexture1(MTI_ENVIRONMENT);
       if(tp_env){
@@ -1553,7 +1568,7 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
                if(tp_normal){
                   se_ps.Tex(stage);
                   drv->SetTexture1(stage, tp_normal);
-                  se_ps.AddFragment(PSF_TEST);
+                  se_ps.AddFragment(PSF_TEST_BUMP);
                   ++stage;
                   se_ps.Tex(stage);
                }else{
@@ -1572,13 +1587,24 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
          drv->SetTexture1(stage, tp_env);
       }else{
          //drv->SetTexture1(stage, NULL);
-         if((vis_flags&VISF_USE_EMBMMAP) && stage<=drv->NumSimultaneousTextures()-2){
+         if((vis_flags&(VISF_USE_EMBMMAP|VISF_USE_BUMPMAP)) && stage<=drv->NumSimultaneousTextures()-2){
             ++stage;
             //drv->SetTexture1(stage, NULL);
          }
       }
       ++stage;
-   }/*else
+   }
+   else
+    if ((vis_flags & VISF_USE_BUMPMAP) && stage < drv->NumSimultaneousTextures()) {
+        CPI3D_texture_base tp_normal = mat->GetTexture1(MTI_NORMAL);
+        if (tp_normal) {
+            se_ps.Tex(stage);
+            drv->SetTexture1(stage, tp_normal);
+            se_ps.AddFragment(PSF_TEST_BUMP);
+        }
+        ++stage;
+    }
+   /*else
    if(vis_flags&VISF_USE_EMBMMAP){
       CPI3D_texture_base tb_bump = mat->GetTexture1(MTI_EMBM);
       if(tb_bump){
