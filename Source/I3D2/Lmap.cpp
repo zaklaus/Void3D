@@ -19,10 +19,10 @@
 
 //#define USE_ASM               //use inline assembly parts of code
 
-#define LM_REQUEST_TEXTURE_SIZE 256
-#define LM_MAX_COMPUTE_SIZE 256  //maximal size of lightmap we may compute
+#define LM_REQUEST_TEXTURE_SIZE 4096
+#define LM_MAX_COMPUTE_SIZE 4096  //maximal size of lightmap we may compute
 
-#define MAX_LM_PIXELS (256*256*16)  //max # of pixels we may allocate for lightmapping
+#define MAX_LM_PIXELS (4096*4096*16)  //max # of pixels we may allocate for lightmapping
 
 //#define LMAP_RANDOM_INIT      //init by random contents
 //#define FADE_SHADOWS
