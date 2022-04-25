@@ -2070,7 +2070,7 @@ public:
 
         case E_SELECTION_BROWSE:
         {
-#if 1
+#if 0
             if (hwnd_sel) {
                 SetFocus(hwnd_sel);
                 break;
