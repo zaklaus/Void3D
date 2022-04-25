@@ -19,8 +19,10 @@ Tip: Enable **Helping Light** (F10) in the Debug toolbar to see your model in th
 
 ## Modeling process
 
-Model your bodywork and wheels in 3DS MAX and export bodywork to `models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model we will refer to later.
+Model your bodywork and wheels in 3DS MAX and export bodywork to `missions\models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model (into `models\vehicles`) we will refer to later.
 ![3dsmax_-_Copy_makE2vBs8F](https://user-images.githubusercontent.com/9026786/165065588-424bb7a0-6f31-46bc-a73c-2229bec0800b.png)
+
+Hint: We've exported bodywork to a mission folder since our vehicle acts as a prefab (mission model), wheels however, are exported into the actual models folder since they only act as vehicle components.
 
 ## Dummy setup
 
