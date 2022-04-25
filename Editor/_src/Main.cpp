@@ -16,7 +16,7 @@
 
 #if defined _DEBUG || 1
 #define MIN_FPS 4
-#define MAX_FPS 200
+#define MAX_FPS 2000
 #else
 #define MIN_FPS 4             //we don't accept less than this
 #define MAX_FPS 100           //we don't accept more than this (the rest of time we're Sleeping)
@@ -391,7 +391,7 @@ public:
 // Return smoothed relative time - cut off too big changes in time (due resource loading, etc).
 static dword SmoothTime(dword time){
 
-   const int NUM_SAMPLES = 4;
+   const int NUM_SAMPLES = 16;
    static dword time_samples[NUM_SAMPLES];
    static dword curr_index = 0;
 
@@ -438,7 +438,7 @@ void GameLoop(const C_command_line &cmd_line){
       //DEBUG(tc.mouse_buttons);
 
       bool want_close = igraph->GetWindowCloseStatus();
-#ifdef MIN_FPS
+#if defined MIN_FPS && 0
       tc.time = igraph->GetTimer(1000/MAX_FPS, 1000/MIN_FPS);
 #else
       tc.time = igraph->GetTimer(1, 0);
@@ -535,8 +535,8 @@ void GameLoop(const C_command_line &cmd_line){
       igraph->UpdateScreen();
                               //force single precission
                               // something always changes it to double?!?
-      _control87(_PC_24, _MCW_PC);
-      _control87(dword(~(_EM_INVALID | _EM_OVERFLOW | _EM_ZERODIVIDE)), _MCW_EM);
+      //_control87(_PC_24, _MCW_PC);
+      //_control87(dword(~(_EM_INVALID | _EM_OVERFLOW | _EM_ZERODIVIDE)), _MCW_EM);
    }
    driver->SetViewport(I3D_rectangle(0, 0, igraph->Scrn_sx(), igraph->Scrn_sy()));
    igraph->ClearViewport();

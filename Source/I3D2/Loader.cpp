@@ -2615,7 +2615,7 @@ I3D_RESULT C_loader::ReadSector_4DS(PI3D_sector sec) {
 I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
                    void *cb_context, PI3D_frame root, PI3D_scene s, PI3D_animation_set as, PI3D_container c) {
 
-    _control87(_PC_24, _MCW_PC);
+    //_control87(_PC_24, _MCW_PC);
 
    load_cb_proc = cb_proc;
    load_cb_context = cb_context;
@@ -2763,7 +2763,7 @@ I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC c
 I3D_RESULT C_loader::Open(const char *fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
    void *cb_context, PI3D_frame root, PI3D_scene s, PI3D_animation_set as, PI3D_container c){
 
-   _control87(_PC_24, _MCW_PC);
+   //_control87(_PC_24, _MCW_PC);
 
    load_cb_proc = cb_proc;
    load_cb_context = cb_context;

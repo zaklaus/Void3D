@@ -660,10 +660,10 @@ public:
 
       float y = .005f;
       const float SIZE = .0185f;
-      if(show_fps){
-         DrawRect(.005f, y, .12f, .0262f);
+      if(show_fps && curr_fps_count){
+         DrawRect(.005f, y, .16f, .0262f);
          float rect_sy;
-         text_fps = CreateText(C_fstr("fps: %.2f", curr_fps_count), .01f, y+SIZE, SIZE, rect_sy);
+         text_fps = CreateText(C_fstr("fps: %.2f (%.2f ms)", curr_fps_count, (1000.f/curr_fps_count)), .01f, y+SIZE, SIZE, rect_sy);
          text_fps->Release();
          y += .03f;
       }

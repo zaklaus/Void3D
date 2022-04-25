@@ -2055,7 +2055,7 @@ PIGraph I2DAPI IGraphCreate(PIG_INIT in){
    if(!ig)
       return false;
 
-   dword fpu_save = _control87(0, 0);
+   //dword fpu_save = _control87(0, 0);
    if(!ig->Initialize(in->pos_x, in->pos_y, in->size_x, in->size_y,
       in->flags, in->bits_per_pixel, in->antialias_mode,
       D3DADAPTER_DEFAULT,
@@ -2065,7 +2065,7 @@ PIGraph I2DAPI IGraphCreate(PIG_INIT in){
    }else{
       ig->ProcessWinMessages(1);
    }
-   _control87(fpu_save, 0xffffffff);
+   //_control87(fpu_save, 0xffffffff);
    return ig;
 }
 
