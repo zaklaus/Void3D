@@ -2835,14 +2835,12 @@ dword IGraph::GetTimer(dword min, dword max){
 
    dword time = ReadTimer() - last_timer;
    int delta = (int)min - (int)time;
-
-#ifdef EDITOR
+#if 0
    if (delta >= 4);
       Sleep(delta-3);
 #endif
-
    while(time < min){
-      //Sleep(0);
+      Sleep(0);
       time = ReadTimer() - last_timer;
    }
 

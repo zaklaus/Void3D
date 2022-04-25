@@ -166,7 +166,7 @@ bool InitSystem(const C_command_line &cmd_line){
       (game_configuration.tripple_buffering ? IG_TRIPPLEBUF : 0) |
       (game_configuration.fullscreen ? IG_FULLSCREEN : 0);
 #if defined _DEBUG || defined EDITOR
-   ig.flags |= IG_DEBUGMOUSE;
+   //ig.flags |= IG_DEBUGMOUSE;
 #endif
 
    if(game_configuration.disable_vshader// || game_configuration.disable_pshader
@@ -391,7 +391,7 @@ public:
 // Return smoothed relative time - cut off too big changes in time (due resource loading, etc).
 static dword SmoothTime(dword time) {
 
-    const int NUM_SAMPLES = 4;
+    const int NUM_SAMPLES = 128;
     static dword time_samples[NUM_SAMPLES] = {};
    static dword curr_index = 0;
 
