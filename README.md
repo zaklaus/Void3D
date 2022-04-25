@@ -30,7 +30,6 @@ This fork offers the following changes:
 - Updated to support the latest MSVC compiler set
 - Increased shadowmap resolution
 - Various editor enhancements and fixes
-- Experimental 4DS model format support (used in Mafia: The City of Lost Heaven for example)
 - Normal mapping support
 - Increased lightmap atlas size
 - HLSL shader effects studio (wip)
