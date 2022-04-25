@@ -1971,7 +1971,7 @@ if(e_undo->IsTopEntry(this, UNDO_INVERT)){
     }
 
     virtual void OnMissionModified() {
-        tree_win_reset = sel_win_reset = RESET_SMART;
+        //tree_win_reset = sel_win_reset = RESET_SMART;
     }
 
 
