@@ -2835,11 +2835,14 @@ dword IGraph::GetTimer(dword min, dword max){
 
    dword time = ReadTimer() - last_timer;
    int delta = (int)min - (int)time;
-   if(delta >= 4)
+
+#ifdef _DEBUG
+   if (delta >= 4);
       Sleep(delta-3);
+#endif
 
    while(time < min){
-      Sleep(0);
+      //Sleep(0);
       time = ReadTimer() - last_timer;
    }
 
@@ -2859,7 +2862,7 @@ dword IGraph::ReadTimer() const{
                               //keep the value signed
       t >>= 1;
       double tm = qpc_resolution * (double)(__int64)t - (double)start_timer;
-                              //make high time values loop around 32-bit integet value
+                              //make high time values loop around 32-bit integer value
       tm = fmod(tm, (double)0x100000000);
                               //convert to integer (round to nearest)
       unsigned __int64 cutt_t;
@@ -2872,6 +2875,7 @@ dword IGraph::ReadTimer() const{
    }else
 #endif
    {
+      timeBeginPeriod(1);
       dword cutt_t = timeGetTime();
       return cutt_t - start_timer;
    }

@@ -14,12 +14,12 @@
 
 //----------------------------
 
-#if defined _DEBUG || 1
+#if defined _DEBUG && defined EDITOR
 #define MIN_FPS 4
-#define MAX_FPS 2000
+#define MAX_FPS 144
 #else
 #define MIN_FPS 4             //we don't accept less than this
-#define MAX_FPS 100           //we don't accept more than this (the rest of time we're Sleeping)
+#define MAX_FPS 144           //we don't accept more than this (the rest of time we're Sleeping)
 #endif
 
 extern S_application_data init_data;
@@ -181,9 +181,9 @@ bool InitSystem(const C_command_line &cmd_line){
    ig.log_func = LogFunc;
 #endif
    ig.adapter_id = game_configuration.adapter_identifier;
+   
+   ig.flags |= IG_VERBOSE;
    /*
-   if(cmd_line.dump_graph_caps) ig.flags |= IG_VERBOSE;
-
    if(cmd_line.pos_x!=0x80000000 && cmd_line.pos_y!=0x80000000){
       ig.pos_x = cmd_line.pos_x;
       ig.pos_y = cmd_line.pos_y;
@@ -389,10 +389,10 @@ public:
 
 //----------------------------
 // Return smoothed relative time - cut off too big changes in time (due resource loading, etc).
-static dword SmoothTime(dword time){
+static dword SmoothTime(dword time) {
 
-   const int NUM_SAMPLES = 16;
-   static dword time_samples[NUM_SAMPLES];
+    const int NUM_SAMPLES = 32;
+    static dword time_samples[NUM_SAMPLES] = {};
    static dword curr_index = 0;
 
    time_samples[curr_index] = time;
@@ -438,10 +438,10 @@ void GameLoop(const C_command_line &cmd_line){
       //DEBUG(tc.mouse_buttons);
 
       bool want_close = igraph->GetWindowCloseStatus();
-#if defined MIN_FPS && 0
+#if defined MIN_FPS
       tc.time = igraph->GetTimer(1000/MAX_FPS, 1000/MIN_FPS);
 #else
-      tc.time = igraph->GetTimer(1, 0);
+      tc.time = igraph->GetTimer(1, 1);
 #endif
       tc.time = SmoothTime(tc.time);
 
