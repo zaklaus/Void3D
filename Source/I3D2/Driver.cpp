@@ -48,7 +48,7 @@ static const dword BREAK_ALLOC_VERTEX_ID = 0; //id of vertex in vb
 //#define USE_OWN_FRAME_ALLOCATION 128   //specify heap size (kb), undef to disable own allocation
 
 
-#ifdef _DEBUG
+#if 1
                               //debugging:
 //#define OVERRIDE_F_TO_L       //override calls to _ftol with our (faster) version
 //#define DEBUG_NO_LEAK_WARNING //no warning on unreleased interfaces

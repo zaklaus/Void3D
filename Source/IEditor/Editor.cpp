@@ -98,7 +98,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, dword fdwReason, void* lpvReserved) {
     {
         //this func switches to MSVC mem allocation, instead of system allocation
 //_set_sbh_threshold(1016);
-#if defined _MSC_VER && defined _DEBUe && !defined DEBUG_NO_LEAK_WARNING
+#if defined _MSC_VER && defined _DEBUG && !defined DEBUG_NO_LEAK_WARNING
                               //report memory leaks at exit
         _CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
 
@@ -1005,7 +1005,9 @@ bool C_editor_imp::Init(PI3D_driver d1, PI3D_scene s1) {
     CreateTape(this);
     CreateUsability(this);
     InitCamPathPlugin(this);
+#ifdef _DEBUG
     CreateShaderStudio(this);
+#endif
     e_console = CreateConsole(this);
 #endif
     CreateExit(this);

@@ -14,7 +14,7 @@
 
 //----------------------------
 
-#if defined _DEBUG && 1
+#if defined _DEBUG || 1
 #define MIN_FPS 4
 #define MAX_FPS 200
 #else
