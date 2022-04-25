@@ -96,11 +96,13 @@ Susp.CFM: 0.002
 Select bodywork and hit A, select Vehicle actor and confirm.
 
 Hit A again, a table shows up, here we configure engine gears, max. camera distance and other goodies. Feel free to Import existing config from **Tables\Vehicles** to understand how to set the values up.
+
 ![test_4BgSpmtrp4](https://user-images.githubusercontent.com/9026786/165066709-9ed38b74-360e-41a0-a44f-b16fd7474f8a.png)
 
 ## Car exit dummies
 
 By default, player controller tries to approximate to which side they can exit the car, to improve the calculations however, it's recommended to set up exit dummies, called `exit_l`, `exit_r` and `exit_t` for left, right and top exit respectively.
+
 ![test_xXy977Uye7](https://user-images.githubusercontent.com/9026786/165066607-8d2b61d5-6eaf-4ac1-943a-adacf3a62413.png)
 
 ## End result scene tree
