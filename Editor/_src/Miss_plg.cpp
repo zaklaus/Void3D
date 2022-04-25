@@ -50,6 +50,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         E_MISSION_SAVE_ASK_TOGGLE, // - togle save query messagebox
 
         E_MISSION_ACTOR_IMPORT, // - import model template with actor data
+        E_MISSION_ACTOR_RELOAD, // - reload model with template
         E_MISSION_ACTOR_CREATE_EDIT,  // - create actor on selection, or edit their tables
         E_MISSION_ACTOR_DESTROY,   // - create actor on selection
         E_MISSION_ACTOR_DRAW_NAMES,// - toggle draw actor's names
@@ -1568,6 +1569,7 @@ public:
 #define MENU_BASE "%80 &Game\\"
         ed->AddShortcut(this, E_MISSION_ACTOR_IMPORT, "%25 &Create\\%0 3D object\\%&Model mission", K_NOKEY, 0);
         ed->AddShortcut(this, E_MISSION_ACTOR_CREATE_EDIT, MENU_BASE"%0 &Create actor (edit table)\tA", K_A, 0);
+        ed->AddShortcut(this, E_MISSION_ACTOR_RELOAD, MENU_BASE"%0 &Reload actor table\tShift+A", K_A, SKEY_SHIFT);
         ed->AddShortcut(this, E_MISSION_ACTOR_DESTROY, MENU_BASE"%a &Destroy actor", K_NOKEY, 0);
         ed->AddShortcut(this, E_MISSION_ACTOR_DRAW_NAMES, MENU_BASE"Draw actor &names\tCtrl+Shift+Alt+A", K_A, SKEY_CTRL | SKEY_ALT | SKEY_SHIFT);
 
@@ -2174,6 +2176,65 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                     mod->Release();
                 }
             }
+        }break;
+
+        case E_MISSION_ACTOR_RELOAD: {
+            if (!ed->CanModify())
+                break;
+
+            C_vector<PI3D_frame> models = e_slct->GetCurSel();
+
+            if (!models.size()){
+                ed->Message("No objects selected!");
+                break;
+            }
+
+            for (auto& frm : models){
+                PC_actor act = GetFrameActor(frm);
+                if (act){
+                    PI3D_model mod = I3DCAST_MODEL(frm);
+
+                    C_str model_name = mod->GetFileName();
+                    C_str scene_name = C_xstr("missions\\models\\%\\scene.bin") % &model_name[1];
+                    C_chunk ck = {};
+                    if (ck.ROpen(scene_name)){
+                        if (++ck == CT_BASECHUNK) {
+                            while (ck) {
+                                CK_TYPE t = ++ck;
+                                switch (t){
+                                case CT_ACTOR: {
+                                    C_str throwaway_name;
+                                    ck.ReadString(CT_NAME, throwaway_name);
+                                    word atw = 0;
+                                    ck.Read((char*)&atw, sizeof(word));
+                                    while (ck) {
+                                        switch (++ck) {
+                                        case CT_ACTOR_TABLE:
+                                        {
+                                            //allow editing actor's table
+                                            PC_table tab = const_cast<PC_table>(act->GetTable());
+                                            if (tab) {
+                                                tab->Load(ck.GetHandle(), TABOPEN_FILEHANDLE | TABOPEN_UPDATE);
+                                                ed->SetModified();
+                                            }
+                                            --ck;
+                                        }
+                                        break;
+                                        default:
+                                            --ck;
+                                        }
+                                    }
+                                }break;
+                                }
+                                --ck;
+                            }
+                            --ck;
+                        }
+                        ck.Close();
+                    }
+                }
+            }
+            ed->Message("Actors reloaded.");
         }break;
 
         case E_MISSION_ACTOR_CREATE_EDIT:
