@@ -132,7 +132,6 @@ public:
                 ReportActorError("Model is not listed in active objects");
             else {
                 C_actor_physics::Init(&templ);
-                assert(joints.size() >= 4);
                 enabled = true;
                 Enable(false);
                 //find all wheels
@@ -142,9 +141,9 @@ public:
                         //apply steering on the front joint
                         PIPH_joint_hinge2 jh = (PIPH_joint_hinge2)jnt;
 
-                        S_wheel wheel = { jh };
+                        S_wheel wheel = { jh, false };
 
-                        if (jh->GetName().Matchi("_power")) {
+                        if (jh->GetName().Matchi("*_power*")) {
                             wheel.powered = true;
                         }
 
@@ -155,7 +154,8 @@ public:
                 const float force_steer = 50.0f;
 
                 for (auto& wheel : jnt_wheels) {
-                    wheel.jnt->SetMaxForce(force_steer);
+                    if (wheel.powered)
+                        wheel.jnt->SetMaxForce(force_steer);
                 }
             }
 
@@ -188,7 +188,10 @@ public:
             if (!dum) dum = frame;
             snd_engine->LinkTo(dum);
         }
-        brake_light = I3DCAST_VISUAL(frame->FindChildFrame("light_brake", ENUMF_VISUAL));
+
+        PI3D_frame lit_dum = frame->FindChildFrame("light_brake", ENUMF_VISUAL);
+        if (lit_dum)
+            brake_light = I3DCAST_VISUAL(lit_dum);
 
         last_pos = frame->GetWorldPos();
         last_gear = 0;
@@ -320,7 +323,7 @@ public:
                     if (tc.p_ctrl->Get(CS_MOVE_RIGHT)) {
                         steer = -1;
                     }
-                if (tc.p_ctrl->Get(CS_FIRE)) {
+                if (tc.p_ctrl->Get(CS_JUMP)) {
                     brake = true;
                 }
             }
@@ -402,7 +405,7 @@ public:
                 for (int i = jnt_wheels.size(); i--; ) {
                     S_wheel* wheel = &jnt_wheels[i];
                     PIPH_joint_hinge2 jnt = wheel->jnt;
-                    if (!wheel->powered) {
+                    if (wheel->powered) {
                         float curr_angle = jnt->GetAngle();
                         float v = steer - curr_angle;
                         float k = tsec * 2.0f;
