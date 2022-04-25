@@ -4,7 +4,6 @@
    File: Driver.cpp
    Content: Insanity 3D driver.
 --------------------------------------------------------*/
-#pragma optimize("", off)
 #include "all.h"
 #include "mesh.h"
 #include <math.h>
@@ -1990,11 +1989,11 @@ I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se)
                               // both inherit from same base class, and find() only
                               // uses base's operator< for comparing
    ps_set::iterator it = ps_cache.find(*(const S_ps_shader_entry*)&se);
-   if(it != ps_cache.end()){
-       auto pica = *it;
-      ((S_ps_shader_entry*)&(*it))->last_render_time = render_time;
-      return &pica;
+   if (it != ps_cache.end()) {
+       ((S_ps_shader_entry*)&(*it))->last_render_time = render_time;
+       return (I3D_driver::S_ps_shader_entry*)&(*it);
    }
+
 
    assert(se.num_fragments <= 8);
 

@@ -5,7 +5,6 @@
    File: Lmap.cpp
    Content: Lit-object frame.
 --------------------------------------------------------*/
-#pragma optimize("", on)
 #include "all.h"
 #include "light.h"
 #include "visual.h"

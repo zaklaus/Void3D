@@ -7,7 +7,6 @@
 
 #include "all.h"
 #include <i3d\i3d_format.h>
-#include "4DS_format.h"
 #include "loader.h"
 
 #include "dummy.h"
@@ -17,7 +16,6 @@
 #include "mesh.h"
 #include "procedural.h"
 #include "anim.h"
-#include "Insanity/os.h"
 #include <integer.h>
 
 #define ANIM_FPS 100
@@ -300,101 +298,6 @@ I3D_RESULT C_loader::ShowProgress(){
 }
 
 //----------------------------
-I3D_RESULT C_loader::ReadMaterials_4DS(){
-	
-   I3D_RESULT ir = I3D_OK;
-   num_mats = ck.ReadWord();
-   for(int i = 0; i < num_mats; i++) {
-      byte self_illum = 0;
-      C_str txt_proc_name;
-      S_mat_src diff, opt, env, embm, det, normalmap, bump_level, specular, secondmap;
-
-      dword txt_flags = 0;
-      bool keep_diffuse = false;
-      C_smart_ptr<I3D_material> mat = driver->CreateMaterial(); mat->Release();
-      dword ct_flags = 0;
-   #ifdef FORCE_MIPMAPPING
-      ct_flags |= TEXTMAP_MIPMAP;
-   #endif
-
-      C_str mat_name = C_fstr("mat_%d", i);
-      mat->SetName(mat_name);
-      
-      dword mat_flags = ck.ReadDword();
-
-      S_vector ambient = ck.ReadVector();
-      mat->SetAmbient(ambient);
-
-      S_vector diffuse = ck.ReadVector();
-      mat->SetDiffuse(diffuse);
-
-      S_vector emission = ck.ReadVector();
-      mat->SetEmissive(emission);
-     
-      float opacity = ck.ReadFloat();
-      mat->SetAlpha(opacity);
-
-     //env
-      if(mat_flags & DataFormat4DS::MATERIALFLAG_ENVIRONMENTMAP) {
-         float env_val = ck.ReadFloat();
-         byte env_map_len = ck.ReadByte();
-         char env_map_name[255] = {0};
-         ck.Read(env_map_name, env_map_len);
-         *(C_str*)&env = C_str(env_map_name);
-         env.power = env_val;
-      }
-
-      //diffuse
-      byte diffuse_map_len = ck.ReadByte();
-      char diffuse_map_name[255] = {0};
-      ck.Read(diffuse_map_name, diffuse_map_len);
-      *(C_str*)&diff = C_str(diffuse_map_name);
-      
-      if(mat_flags & DataFormat4DS::MATERIALFLAG_COLORKEY) {
-          txt_flags |= LOADF_TXT_TRANSP;
-          mat->SetMatGlags(mat->GetMatGlags() | MATF_CKEY_ZERO_REF);
-      }
-
-      //animated diffuse
-      if(mat_flags & DataFormat4DS::MATERIALFLAG_ANIMATEDTEXTUREDIFFUSE) {
-         dword anim_seq_len = ck.ReadDword();
-         word unk0 = ck.ReadWord();
-         dword anim_time = ck.ReadDword();
-         dword unk1 = ck.ReadDword();
-         dword unk2 = ck.ReadDword();
-
-         diff.flags |= MAT_SRC_ANIMATED;
-         diff.anim_speed = anim_time;
-      }
-
-      //alpha   
-      if(mat_flags & DataFormat4DS::MATERIALFLAG_ALPHATEXTURE) {
-         byte alpha_map_len = ck.ReadByte();
-         char alpha_map_name[255] = {0};
-         ck.Read(alpha_map_name, alpha_map_len);
-         *(C_str*)&opt = C_str(alpha_map_name);
-      }
-
-      if(mat_flags & DataFormat4DS::MATERIALFLAG_DOUBLESIDEDMATERIAL) {
-         mat->Set2Sided(true);
-      }
-      
-      materials.push_back(mat);
-
-      I3D_RESULT ir = SetupMaterial(mat, ct_flags, txt_flags, diff, opt, env, txt_proc_name, embm, det,
-         normalmap, bump_level, specular, secondmap, mat_name);
-      
-      if(I3D_SUCCESS(ir))
-         ir = ShowProgress();
-      else {
-         break;
-      }
- 
-   }
-   
-	return ir;
-}
-
 I3D_RESULT C_loader::ReadMaterial(){
 
    byte self_illum = 0;
@@ -470,11 +373,8 @@ I3D_RESULT C_loader::ReadMaterial(){
          }
          break;
 		
-	  //case CT_LS3D_MAT_AMBIENT:
       case CT_MAT_AMBIENT:
-	  //case CT_LS3D_MAT_DIFFUSE:
       case CT_MAT_DIFFUSE:
-	  //case CT_LS3D_MAT_SPECULAR:
       case CT_MAT_SPECULAR:
          {
             C_rgb rgb;
@@ -483,12 +383,10 @@ I3D_RESULT C_loader::ReadMaterial(){
             const S_vector c = rgb.ToVector();
             switch(ct){
             case CT_MAT_AMBIENT: 
-			//case CT_LS3D_MAT_AMBIENT: 
 				mat->SetAmbient(c); 
 			break;
 
             case CT_MAT_DIFFUSE: 
-			//case CT_LS3D_MAT_DIFFUSE:
 				mat->SetDiffuse(c); 
 			break;
             //case CT_MAT_SPECULAR: mat->SetSpecularColor(c); break;
@@ -497,7 +395,6 @@ I3D_RESULT C_loader::ReadMaterial(){
          break;
 
       case CT_MAT_TRANSPARENCY:
-	 //case CT_LS3D_MAT_TRANSPERENCY:
          {
             dword alpha_percentage = 100 - ck.RByteChunk();
             if(!alpha_percentage){
@@ -2479,286 +2376,6 @@ void C_loader::SmoothSceneNormals(PI3D_scene scene, C_vector<S_smooth_info> &smo
    delete[] smooth_data;
 }
 
-I3D_RESULT C_loader::ReadBillboard_4DS(PI3D_visual vis) {
-    if(vis->GetVisualType1() == I3D_VISUAL_BILLBOARD) {
-        //I3DPROP_BBRD_ROT_AXIS
-        vis->SetProperty(0, ck.ReadInt());
-        //I3DPROP_BBRD_ROT_AXIS
-        vis->SetProperty(1, ck.ReadBool());   
-    }
-    return I3D_OK;
-}
-
-I3D_RESULT C_loader::ReadVisual_4DS(PI3D_visual vis) {
-   
-   word instanced = ck.ReadWord();
-   byte lod_level = ck.ReadByte();
-
-   C_smart_ptr<I3D_mesh_base> mesh = driver->CreateMesh(I3DVC_XYZ | I3DVC_NORMAL | (1<<I3DVC_TEXCOUNT_SHIFT));
-   mesh->Release();
-
-   for(int i = 0; i < lod_level; i++) {     
-      float dist = ck.ReadFloat();
-
-      //1 read vertices
-      C_vector<S_vertex> mesh_verts;
-
-      word vert_cnt = ck.ReadWord();
-      for(int j = 0; j < vert_cnt; j++) {
-         S_vertex v;
-         v.xyz = ck.ReadVector();
-         v.normal = ck.ReadVector();
-         v.tex.x = ck.ReadFloat();
-         v.tex.y = ck.ReadFloat();
-         mesh_verts.push_back(v);
-      }
-
-      //2 read face groups
-      C_vector<I3D_face_group> fgroups;
-      C_vector<I3D_triface> faces;
-      int base_idx = 0;
-
-      byte fgroups_cnt = ck.ReadByte();
-      for(int j = 0; j < fgroups_cnt; j++) {
-
-         I3D_face_group fgroup;
-   
-         word face_cnt = ck.ReadWord();
-         
-         fgroup.base_index = base_idx;
-         fgroup.num_faces= face_cnt;
-
-         for(int k = 0; k < face_cnt; k++) {
-            I3D_triface face;
-            ck.Read(&face, sizeof(I3D_triface));
-            faces.push_back(face);
-            base_idx ++;
-         }
-     
-
-         word material_id = ck.ReadWord();
-         if(!material_id) {
-            PI3D_material mat = driver->CreateMaterial();
-            materials.push_back(mat);
-            mat->Release();
-            
-            fgroup.mat = materials[word(materials.size() - 1)];
-         } else {
-            fgroup.mat = materials[material_id - 1];
-         }
-
-         fgroups.push_back(fgroup);
-      }
-
-      if(i == 0) {
-         mesh->vertex_buffer.SetVertices(&mesh_verts.front(), mesh_verts.size());
-         mesh->SetFGroups(&fgroups.front(), fgroups.size());
-         mesh->SetFaces(&faces.front());
-      }      
-   }
-
-   vis->SetMeshInternal(mesh);
-   vis->SetOn(true);
-
-   return I3D_OK;
-}
-
-I3D_RESULT C_loader::ReadDummy_4DS(PI3D_dummy dummy) {
-
-   I3D_bbox bbox;
-   ck.Read(&bbox, sizeof(I3D_bbox));
-   bbox.Invalidate();
-
-   return I3D_OK;
-}
-
-I3D_RESULT C_loader::ReadSector_4DS(PI3D_sector sec) {
-   dword unk1 = ck.ReadDword();
-   dword unk2 = ck.ReadDword();
-   dword vertex_cnt = ck.ReadDword();
-   dword face_cnt = ck.ReadDword();
-
-   C_vector<S_vector> vertices;
-   for(int i = 0; i < vertex_cnt; i++) {
-      vertices.push_back(ck.ReadVector());
-   }
-   
-   C_vector<I3D_triface> faces;
-   for(int i = 0; i < face_cnt; i++) {
-      I3D_triface face;
-      ck.Read(&face, sizeof(I3D_triface));
-      faces.push_back(face);
-   }
-
-   I3D_bbox bbox;
-   bbox.Invalidate();
-   ck.Read(&bbox, sizeof(I3D_bbox));
-
-   byte portal_cnt = ck.ReadByte();
-   for(int i = 0; i < portal_cnt; i++) {
-      
-      byte vertex_cnt = ck.ReadByte();
-      dword unk1 = ck.ReadDword();
-      dword unk2[6];
-      ck.Read(unk2, sizeof(dword) * 6);
-      
-      C_vector<S_vector> portal_vertices;
-      for(int j = 0; j < vertex_cnt; j++) {
-         portal_vertices.push_back(ck.ReadVector());
-      }  
-   }
-
-   return I3D_OK;
-}
-
-//----------------------------
-I3D_RESULT C_loader::Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
-                   void *cb_context, PI3D_frame root, PI3D_scene s, PI3D_animation_set as, PI3D_container c) {
-
-    //_control87(_PC_24, _MCW_PC);
-
-   load_cb_proc = cb_proc;
-   load_cb_context = cb_context;
-   load_flags = flags;
-   file_length = ck.GetHandle()->filesize();
-   file_name = fname;
-   file_name.ToLower();
-
-   word format_version = ck.ReadWord();
-   ck.Read(&file_time_, sizeof(__int64));
-   root_frame = root;
-   scene = s;
-   container = c;
-   anim_set = as;
-   
-   //1 read materials
-   I3D_RESULT res = ReadMaterials_4DS();
-   if(res != I3D_OK) 
-      return res;
-   
-   //2 read frames
-   C_vector<C_smart_ptr<I3D_frame>> loaded_frames;
-   C_vector<int> frame_parents;
-
-   word frame_cnt = ck.ReadWord();
-   for(int i = 0; i < frame_cnt; ++i) {
-      I3D_FRAME_TYPE frame_type = (I3D_FRAME_TYPE)ck.ReadByte();
-      byte visual_type = 0;
-
-      
-      if(frame_type == FRAME_VISUAL) {
-         visual_type = ck.ReadByte();
-         word render_flags = ck.ReadWord();
-      }
-      
-      word parent_id = ck.ReadWord();
-      S_vector pos = ck.ReadVector();
-      S_vector s = ck.ReadVector();
-      S_quat rot = ck.ReadQuaternion();
-      byte cull_flags = ck.ReadByte();
-      
-      byte frm_name_len = ck.ReadByte();
-      char frm_name[255] = {0};
-      ck.Read(frm_name, frm_name_len);
-
-      byte mesh_params_len = ck.ReadByte();
-      char mesh_params[255] = {0};
-      ck.Read(mesh_params, mesh_params_len);
-
-      C_smart_ptr<I3D_frame> frm;
-      
-      //OutputDebugString(C_fstr("loading frame %s type: %d, visual: %d\n", frm_name, frame_type, visual_type));
-
-      switch(frame_type) {
-         case FRAME_VISUAL: {
-            I3D_RESULT ir = ShowProgress();
-            if(I3D_FAIL(ir))
-               return ir;
-            
-            switch(visual_type) {
-                case DataFormat4DS::VISUALMESHTYPE_STANDARD: {
-                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_OBJECT); 
-                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
-                } break;
-               
-                case DataFormat4DS::VISUALMESHTYPE_BILLBOARD: {
-                    frm = scene->CreateFrame(FRAME_VISUAL, I3D_VISUAL_BILLBOARD);
-                    ReadVisual_4DS(I3DCAST_VISUAL(frm));
-                    ReadBillboard_4DS(I3DCAST_VISUAL(frm));
-                } break;
-
-                case DataFormat4DS::VISUALMESHTYPE_GLOW: {
-                    //NOTE: read dummy data for glow to dont skip bytes
-                    byte glow_cnt = ck.ReadByte();
-                    for(int j = 0; j < glow_cnt; j++) {
-                        S_vector glow_pos = ck.ReadVector();
-                        word material_id = ck.ReadWord();
-                    }
-                } break;
-                default: {
-                    int test = 0;
-                    test++;
-                } break;
-            }
-         } break;
-
-         case FRAME_DUMMY: {
-            I3D_RESULT ir = ShowProgress();
-            if(I3D_FAIL(ir))
-               return ir;
-
-            frm = scene->CreateFrame(FRAME_DUMMY);
-            ReadDummy_4DS(I3DCAST_DUMMY(frm));
-         } break;
-         
-         case FRAME_SECTOR: {
-            I3D_RESULT ir = ShowProgress();
-            if(I3D_FAIL(ir))
-               return ir;
-
-            frm = scene->CreateFrame(FRAME_SECTOR);
-            ReadSector_4DS(NULL);
-         } break;
-
-         default: {
-            int test = 0;
-            test++;
-            break;
-         }
-      }
-      
-      if (!frm) {
-          //OutputDebugString(C_fstr("unable to load frame: %s\n", frm_name));
-          continue;
-      }
-
-      frm->Release();
-      frm->SetName(frm_name);
-      frm->SetRot(rot);
-      frm->SetPos(pos);
-      frm->SetScale(s);
-      
-      loaded_frames.push_back(frm);
-      frame_parents.push_back(parent_id);
-   }
-   
-   for(int i = 0; i < loaded_frames.size(); i++) {
-      C_smart_ptr<I3D_frame> curent_frm = loaded_frames[i];
-      int parent = frame_parents[i];
-      if(parent > 0) {
-        container->AddFrame(curent_frm);
-        curent_frm->LinkTo(loaded_frames[parent - 1]);
-      } else {
-        container->AddFrame(curent_frm);
-        curent_frm->LinkTo(root_frame);
-      }
-   }
-
-   if(res != I3D_OK) 
-      return res;
-
-   return res;
-}
 
 I3D_RESULT C_loader::Open(const char *fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
    void *cb_context, PI3D_frame root, PI3D_scene s, PI3D_animation_set as, PI3D_container c){
@@ -2793,10 +2410,6 @@ I3D_RESULT C_loader::Open(const char *fname, dword flags, PI3D_LOAD_CB_PROC cb_p
    while(ck){
       CK_TYPE ct = ++ck;
       switch(ct){
-		  //case CT_LS3D_UNK:
-		/*  case CT_LS3D: {
-		  } break;*/
-
       case CT_USER_COMMENTS:
          ck >> user_comments;
          break;
@@ -2815,13 +2428,6 @@ I3D_RESULT C_loader::Open(const char *fname, dword flags, PI3D_LOAD_CB_PROC cb_p
          }
          --ck;
          break;
-		
-	 /* case CT_LS3D_MESH_NAME: 
-		  {
-			
-			C_str frm_nam = ck.RStringChunk();
-		  } break;*/
-
       case CT_NODE_MESH:
       case CT_NODE_DUMMY:
       case CT_NODE_BONE:
@@ -3846,51 +3452,6 @@ I3D_RESULT I3D_container::OpenFromChunk(C_chunk &ck, dword load_flags, PI3D_LOAD
    return ir;
 }
 
-template<typename T>
-void read(FILE* f, T* buffer, dword len = sizeof(T)) {
-   fread((void*), len, 1, f);
-}
-
-
-I3D_RESULT I3D_container::OpenFrom4DS(C_chunk &ck, dword load_flags, PI3D_LOAD_CB_PROC load_cb_proc,
-   void *load_cb_context, PI3D_scene scene, PI3D_frame root, PI3D_animation_set anim_set, PI3D_driver drv) {
-   
-   Close();
-   
-   if(load_flags&I3DLOAD_PROGRESS)
-      load_cb_proc(CBM_PROGRESS, I3DFloatAsInt(0.0f), 0, load_cb_context);
-
-   char sign[4];
-   ck.Read(sign, 4);
-
-   if(strcmp(sign, "4DS") != 0)
-      return I3DERR_FILECORRUPTED;
-   
-   I3D_RESULT ir = I3DERR_FILECORRUPTED;
-
-   try{
-      if(!load_cb_proc){
-         load_flags &= ~(I3DLOAD_LOG | I3DLOAD_PROGRESS);
-      }
-      
-      C_loader loader(drv, ck);
-      ir = loader.Open4DS(filename, load_flags, load_cb_proc, load_cb_context, root, scene, anim_set, this);
-      
-      if(I3D_SUCCESS(ir))
-         SetUserData(loader.user_comments);
-   }
-   catch(const C_except &){
-   }
-
-   if(load_flags&I3DLOAD_PROGRESS)
-      load_cb_proc(CBM_PROGRESS, I3DFloatAsInt(1.0f), 2, load_cb_context);
-
-   if(I3D_FAIL(ir))
-      Close();
-
-   return ir;
-}
-
 //----------------------------
 
 I3D_RESULT I3D_container::Open(const char *filename1, dword load_flags, PI3D_LOAD_CB_PROC load_cb_proc,
@@ -3898,21 +3459,10 @@ I3D_RESULT I3D_container::Open(const char *filename1, dword load_flags, PI3D_LOA
 
    filename = filename1;
    C_chunk ck;
-   
-   char buf[MAX_PATH] = {0};
-   strncpy(buf, filename, filename.Size());
-   buf[filename.Size() - 4] = '\0';
-   C_str file4ds = C_fstr("%s.4ds", buf);
-
-   bool is4ds = OsIsDirExist(file4ds);
     
    //open file
-   if(!ck.ROpen(is4ds ? file4ds : filename)) {
+   if(!ck.ROpen(filename)) {
       return I3DERR_NOFILE;
-   }
-   
-   if (is4ds) {
-       return OpenFrom4DS(ck, load_flags, load_cb_proc, load_cb_context, scene, root, anim_set, drv);
    }
    
    return OpenFromChunk(ck, load_flags, load_cb_proc, load_cb_context, scene, root, anim_set, drv);
