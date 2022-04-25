@@ -16,7 +16,7 @@ Tip: Enable **Helping Light** (F10) to see your model in the scene.
 
 ## Modeling process
 
-Model your bodywork and wheels in 3DS MAX and export bodywork only to `models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model we will refer to later.
+Model your bodywork and wheels in 3DS MAX and export bodywork to `models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model we will refer to later.
 
 ## Dummy setup
 
@@ -34,7 +34,7 @@ Now the fun part :)
 
 Create a dummy for each wheel socket and name it `wheel_<left/right>_<front/back>` such as **wheel_l_f**
 
-For forward drive make sure to append `_power` postfix to front wheels.
+For forward drive make sure to append `_power` postfix to front wheels. Ex. **wheel_r_f_power**.
 
 Make sure all wheel dummies are rotated 90 degrees to the right.
 
@@ -56,7 +56,9 @@ You've made it, physics setup awaits now!
 
 Enable Physics Studio first.
 
-Select primary sector, in physics studio pane enable Body and set weight to ex. `1100`
+Select primary sector, in physics studio pane enable Body and set weight to ex. `1100`, mark it as **Static (debug)**
+
+![test_Jr6NvdBE53](https://user-images.githubusercontent.com/9026786/165064325-f0e8924d-3d9f-4f9b-8925-8b93ec4c67c8.png)
 
 Per each wheel (model), enable Body and set weight to ex. `400`
 
@@ -79,6 +81,9 @@ Max force: 0.03
 Susp.ERP: 0.5
 Susp.CFM: 0.002
 ```
+
+![test_i2xPFnJkew](https://user-images.githubusercontent.com/9026786/165064709-039621d1-7a34-4f2e-8b2e-be25ad319212.png)
+
 ## Engine setup
 
 Select bodywork and hit A, select Vehicle actor and confirm.
@@ -88,3 +93,9 @@ Hit A again, a table shows up, here we configure engine gears, max. camera dista
 ## Car exit dummies
 
 By default, player controller tries to approximate to which side they can exit the car, to improve the calculations however, it's recommended to set up exit dummies, called `exit_l`, `exit_r` and `exit_t` for left, right and top exit respectively.
+
+## End result scene tree
+
+Here's how your scene should look like approximately :^)
+
+![test_u65iTYK13J](https://user-images.githubusercontent.com/9026786/165064879-3f47213c-9b0b-474e-9dd2-340c3f011d1b.png)
