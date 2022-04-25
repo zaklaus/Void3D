@@ -54,12 +54,12 @@ You've made it, physics setup awaits now!
 
 Enable Physics Studio first.
 
-Select primary sector, in physics studio pane enable Body and set weight to ex. 1100
+Select primary sector, in physics studio pane enable Body and set weight to ex. `1100`
 
-Per each wheel (model), enable Body and set weight to ex. 400
+Per each wheel (model), enable Body and set weight to ex. `400`
 
 Per each wheel front (driving) joint, enable Joint and set up the following parameters:
-
+```
 Type: Hinge2
 Lo 0: -20   Hi 0: 20
 Max force: 0.3
@@ -67,16 +67,16 @@ Fudge: 0.2
 
 Susp.ERP: 0.5
 Susp.CFM: 0.002
-
+```
 For all other wheel joints, enable Joint and set up the following parameters:
-
+```
 Type: Hinge2
 Lo 0: 0   Hi 0: 0
 Max force: 0.03
 
 Susp.ERP: 0.5
 Susp.CFM: 0.002
-
+```
 ## Engine setup
 
 Select bodywork and hit A, select Vehicle actor and confirm.
