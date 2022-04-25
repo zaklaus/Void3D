@@ -9,14 +9,18 @@ NOTE: This guide is specific to Void3D and many steps don't apply to Insanity3D 
 Mission models, also called prefabs, are single-model missions that can describe the physics behavior as well as actor data within a scene. These can then be instantiated in actual missions.
 
 Hit Alt+N and a prompt for mission name appears, type in `models\vehicles\<car_name>` such as **models\vehicles\niva**.
+![test_sCQJWqchaG](https://user-images.githubusercontent.com/9026786/165065737-c51ab8e0-8455-488e-a53a-ac38f8466ebd.png)
 
 Hit N to show object lister, select all objects and delete them, our scene has to remain empty. Save now.
+![test_AbEskkDsWj](https://user-images.githubusercontent.com/9026786/165065828-45484483-3700-4e22-87a4-d5aac59ffd2f.png)
 
-Tip: Enable **Helping Light** (F10) to see your model in the scene.
+Tip: Enable **Helping Light** (F10) in the Debug toolbar to see your model in the scene.
+![3dsmax_-_Copy_VENrhJLXTI](https://user-images.githubusercontent.com/9026786/165065949-2c933bf8-9d9d-45b8-b90b-c9fb86160d92.png)
 
 ## Modeling process
 
 Model your bodywork and wheels in 3DS MAX and export bodywork to `models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model we will refer to later.
+![3dsmax_-_Copy_makE2vBs8F](https://user-images.githubusercontent.com/9026786/165065588-424bb7a0-6f31-46bc-a73c-2229bec0800b.png)
 
 ## Dummy setup
 
@@ -35,6 +39,7 @@ Now the fun part :)
 Create a dummy for each wheel socket and name it `wheel_<left/right>_<front/back>` such as **wheel_l_f**
 
 For forward drive make sure to append `_power` postfix to front wheels. Ex. **wheel_r_f_power**.
+![test_r60pg4wAOT](https://user-images.githubusercontent.com/9026786/165066132-6bfda7b2-baff-4027-a7db-609b5e93a620.png)
 
 Make sure all wheel dummies are rotated 90 degrees to the right.
 
