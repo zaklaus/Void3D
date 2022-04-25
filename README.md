@@ -31,6 +31,16 @@ This fork offers the following changes:
 - Increased shadowmap resolution
 - Various editor enhancements and fixes
 - Experimental 4DS model format support (used in Mafia: The City of Lost Heaven for example)
+- Normal mapping support
+- Increased lightmap atlas size
+- HLSL shader effects studio (wip)
+- Vastly improved 3D sound panning
+- Improved environmental map scaling
+- Scene tree panel
+- I3D model import/export plugins for 3ds Max 2010
+- Player controller and vehicle interaction system
+- Revamped vehicle handling, support for abnormal wheel setups and engine gears table editor
+- Post-processing stack (wip)
 
 ![Image](Docs/img1.png)
 ![test_UZkMlxUW1H](https://user-images.githubusercontent.com/9026786/165069443-0d29dab7-272f-409b-af02-b2dd499c5b4a.jpg)
