@@ -11,10 +11,10 @@
 //----------------------------
 
 enum{
-   IPH_STEFRAME_USE_TRANSFORM = 1,  //use frame's pos/rot for initial body pos/rot
-   IPH_STEFRAME_HR_VOLUMES = 2,     //use all frames volumes, not only direct children
-   IPH_STEFRAME_OFF_VOLUMES = 4,    //use also volumes which are not on
-   IPH_STEFRAME_DENSITY_AS_WEIGHT = 8,//use density parameter as weight of object
+   IPH_SETFRAME_USE_TRANSFORM = 1,  //use frame's pos/rot for initial body pos/rot
+   IPH_SETFRAME_HR_VOLUMES = 2,     //use all frames volumes, not only direct children
+   IPH_SETFRAME_OFF_VOLUMES = 4,    //use also volumes which are not on
+   IPH_SETFRAME_DENSITY_AS_WEIGHT = 8,//use density parameter as weight of object
 };
 
 #ifndef PHYS_INTERNAL

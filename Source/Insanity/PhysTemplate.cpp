@@ -131,7 +131,7 @@ bool S_phys_template::InitSimulation(C_vector<C_smart_ptr<IPH_body> > &v_bodies,
                            //debug - ignore static bodies
       PIPH_body body = world->CreateBody();
       float density = b.density;
-      dword setf_flags = IPH_STEFRAME_USE_TRANSFORM;
+      dword setf_flags = IPH_SETFRAME_USE_TRANSFORM;
 
       if(I3DFloatAsInt(density)==0x80000000){
          density = 1000.0f;
@@ -149,7 +149,7 @@ bool S_phys_template::InitSimulation(C_vector<C_smart_ptr<IPH_body> > &v_bodies,
          */
       }else
       if(b.density_as_weight)
-         setf_flags |= IPH_STEFRAME_DENSITY_AS_WEIGHT;
+         setf_flags |= IPH_SETFRAME_DENSITY_AS_WEIGHT;
 
       if(body->SetFrame(frm, setf_flags, density)){
          v_bodies.push_back(body);

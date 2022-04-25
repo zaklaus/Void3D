@@ -522,7 +522,7 @@ dword C_edit_Gravitation::Action(int id, void *context){
                   cd.flags = I3DCOL_LINE;// | I3DCOL_RAY;
                   if(ed->GetScene()->TestCollision(cd)){
                      PIPH_body body = phys_world->CreateBody();
-                     if(body->SetFrame(frm, IPH_STEFRAME_USE_TRANSFORM | IPH_STEFRAME_HR_VOLUMES)){
+                     if(body->SetFrame(frm, IPH_SETFRAME_USE_TRANSFORM | IPH_SETFRAME_HR_VOLUMES)){
 
                         S_falling_object *obj = new S_falling_object;
                         obj->frm = frm;

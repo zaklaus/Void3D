@@ -227,11 +227,11 @@ bool C_actor_physics::Init(const S_phys_template *templ, float weight, PI3D_fram
       body->Release();
 
       float density = 2000.0f;
-      dword setf_flags = IPH_STEFRAME_USE_TRANSFORM | IPH_STEFRAME_HR_VOLUMES;
+      dword setf_flags = IPH_SETFRAME_USE_TRANSFORM | IPH_SETFRAME_HR_VOLUMES;
 
       if(weight){
          density = weight;
-         setf_flags |= IPH_STEFRAME_DENSITY_AS_WEIGHT;
+         setf_flags |= IPH_SETFRAME_DENSITY_AS_WEIGHT;
       }else{
                               //read density from material table
          PI3D_volume vol;

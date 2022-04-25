@@ -216,7 +216,7 @@ public:
          vol->SetName(C_xstr("<phys %>") % pname);
 #endif
          vol->LinkTo(frm);
-         body->SetFrame(frm, IPH_STEFRAME_USE_TRANSFORM, 1000.0f);
+         body->SetFrame(frm, IPH_SETFRAME_USE_TRANSFORM, 1000.0f);
          //vol->SetOwner(mod);
 
          bool linked = false;

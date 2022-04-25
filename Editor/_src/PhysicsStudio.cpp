@@ -81,7 +81,7 @@ private:
 
       ((PC_editor_item_Modify)ed->FindPlugin("Modify"))->AddFrameFlags(model, E_MODIFY_FLG_TEMPORARY, false);
 
-      body->SetFrame(model, IPH_STEFRAME_HR_VOLUMES);
+      body->SetFrame(model, IPH_SETFRAME_HR_VOLUMES);
       model->Release();
    }
 
@@ -1186,7 +1186,7 @@ private:
                   {
                      PI3D_frame frm = ed->GetScene()->FindFrame("phys");
                      if(frm){
-                        if(body->SetFrame(frm, IPH_STEFRAME_USE_TRANSFORM | IPH_STEFRAME_HR_VOLUMES))
+                        if(body->SetFrame(frm, IPH_SETFRAME_USE_TRANSFORM | IPH_SETFRAME_HR_VOLUMES))
                            break;
                         ed->Message("can't use model 'phys'");
                      }else{

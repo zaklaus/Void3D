@@ -153,7 +153,7 @@ bool IPH_body::SetFrame(PI3D_frame frm, dword flags, float in_density){
    {
       C_vector<PI3D_volume> vols;
       dword i;
-      if(flags&IPH_STEFRAME_HR_VOLUMES){
+      if(flags&IPH_SETFRAME_HR_VOLUMES){
          struct S_hlp{
             C_vector<PI3D_volume> *vols;
             bool also_off;
@@ -167,14 +167,14 @@ bool IPH_body::SetFrame(PI3D_frame frm, dword flags, float in_density){
             }
          } hlp;
          hlp.vols = &vols;
-         hlp.also_off = (flags&IPH_STEFRAME_OFF_VOLUMES);
+         hlp.also_off = (flags&IPH_SETFRAME_OFF_VOLUMES);
          frm->EnumFrames(S_hlp::cbEnum, (dword)&hlp, ENUMF_ALL);
       }else{
          const PI3D_frame *chlds = frm->GetChildren();
          for(i=frm->NumChildren(); i--; ){
             PI3D_frame f = chlds[i];
             if(f->GetType()==FRAME_VOLUME){
-               if(!(flags&IPH_STEFRAME_OFF_VOLUMES)){
+               if(!(flags&IPH_SETFRAME_OFF_VOLUMES)){
                               //check if this frame, or any of its parents up to 'frm' is not off
                   for(CPI3D_frame prnt = f; prnt && prnt!=frm; prnt = prnt->GetParent()){
                      if(!prnt->IsOn()){
@@ -189,7 +189,7 @@ bool IPH_body::SetFrame(PI3D_frame frm, dword flags, float in_density){
          }
       }
       if(frm->GetType()==FRAME_VOLUME){
-         if((flags&IPH_STEFRAME_OFF_VOLUMES) || frm->IsOn())
+         if((flags&IPH_SETFRAME_OFF_VOLUMES) || frm->IsOn())
             vols.push_back(I3DCAST_VOLUME(frm));
       }
       volumes.assign(vols.size());
@@ -252,7 +252,7 @@ bool IPH_body::SetFrame(PI3D_frame frm, dword flags, float in_density){
    if(IsMrgZeroLess(mass.GetWeight()))
       return false;
 
-   if(flags&IPH_STEFRAME_DENSITY_AS_WEIGHT){
+   if(flags&IPH_SETFRAME_DENSITY_AS_WEIGHT){
                               //treat input density as weight
 
                               //get current real weight
@@ -278,7 +278,7 @@ bool IPH_body::SetFrame(PI3D_frame frm, dword flags, float in_density){
    SetMass(mass);
 
                               //set the mass to body
-   if(!(flags&IPH_STEFRAME_USE_TRANSFORM)){
+   if(!(flags&IPH_SETFRAME_USE_TRANSFORM)){
       UpdateFrameTransform();
    }else{
       SetPosRot(frame->GetWorldPos(), frm->GetWorldRot());
