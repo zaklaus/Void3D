@@ -8,7 +8,7 @@
 //----------------------------
 
                               //disabled - problems after short times in _get_timer
-#define USE_QUERYPERFORMANCECOUNTER
+//#define USE_QUERYPERFORMANCECOUNTER
 
 //#ifdef NDEBUG
 // #define MOUSE_USE_EVENT      //it makes problems!
@@ -2836,7 +2836,7 @@ dword IGraph::GetTimer(dword min, dword max){
    dword time = ReadTimer() - last_timer;
    int delta = (int)min - (int)time;
 
-#ifdef _DEBUG
+#ifdef EDITOR
    if (delta >= 4);
       Sleep(delta-3);
 #endif

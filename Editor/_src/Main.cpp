@@ -391,7 +391,7 @@ public:
 // Return smoothed relative time - cut off too big changes in time (due resource loading, etc).
 static dword SmoothTime(dword time) {
 
-    const int NUM_SAMPLES = 32;
+    const int NUM_SAMPLES = 4;
     static dword time_samples[NUM_SAMPLES] = {};
    static dword curr_index = 0;
 
@@ -441,7 +441,7 @@ void GameLoop(const C_command_line &cmd_line){
 #if defined MIN_FPS
       tc.time = igraph->GetTimer(1000/MAX_FPS, 1000/MIN_FPS);
 #else
-      tc.time = igraph->GetTimer(1, 1);
+      tc.time = igraph->GetTimer(1, 0);
 #endif
       tc.time = SmoothTime(tc.time);
 
