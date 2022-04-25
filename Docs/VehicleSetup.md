@@ -44,11 +44,15 @@ Hit Shift+M to add a model, select your wheel, link it (B) to the wheel joint an
 
 Keep your wheel selected and create a sphere collision volume (Shift+V), scale it to fit your wheel.
 
+![test_xPh3KywKlt](https://user-images.githubusercontent.com/9026786/165065299-a1dce0bc-b7bb-4745-bf32-0f5ff9c48943.png)
+
 Repeat for all wheels.
 
 ### Bodywork collision
 
 Add a box collision that would cover an area right above wheels, make sure it's NOT LINKED TO the bodywork visual, but to the Primary Sector!
+
+![test_Jr6NvdBE53](https://user-images.githubusercontent.com/9026786/165064325-f0e8924d-3d9f-4f9b-8925-8b93ec4c67c8.png)
 
 ## Physics setup :^)
 
@@ -57,8 +61,6 @@ You've made it, physics setup awaits now!
 Enable Physics Studio first.
 
 Select primary sector, in physics studio pane enable Body and set weight to ex. `1100`, mark it as **Static (debug)**
-
-![test_Jr6NvdBE53](https://user-images.githubusercontent.com/9026786/165064325-f0e8924d-3d9f-4f9b-8925-8b93ec4c67c8.png)
 
 Per each wheel (model), enable Body and set weight to ex. `400`
 
