@@ -33,6 +33,7 @@ This fork offers the following changes:
 - Experimental 4DS model format support (used in Mafia: The City of Lost Heaven for example)
 
 ![Image](Docs/img1.png)
+![test_UZkMlxUW1H](https://user-images.githubusercontent.com/9026786/165069443-0d29dab7-272f-409b-af02-b2dd499c5b4a.jpg)
 
 Structure of the project:
 
