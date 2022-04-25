@@ -6,7 +6,7 @@
 
 #define TURN_SPEED 800
 
-#ifdef _DEBUG
+#ifdef EDITOR
 
 #define DEBUG_SHOW_INFO       //show info about vehicle (speed, etc)
 
