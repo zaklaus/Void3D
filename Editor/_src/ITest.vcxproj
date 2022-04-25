@@ -269,11 +269,9 @@
     <ResourceCompile Include="..\..\Source\IEditor\main.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\Source\IEditor\res\font.txt" />
     <Text Include="..\TEXT\English\SYSTEM.TXT" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Source\Config\Config_dll.vcproj" />
     <None Include="..\..\Source\IEditor\res\arrow.cur" />
     <None Include="..\..\Source\IEditor\res\cur00001.cur" />
     <None Include="..\..\Source\IEditor\res\cur00002.cur" />
@@ -303,7 +301,6 @@
     <None Include="..\..\Source\IEditor\res\occluder.cur" />
     <None Include="..\..\Source\IEditor\res\SEEDPICK.CUR" />
     <None Include="..\..\Source\IEditor\res\SEEDPUT.CUR" />
-    <None Include="..\MISSIONS\Common.i" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\I3D2\i3d_2.vcxproj">
@@ -316,18 +313,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\Source\IEditor\res\axes.png" />
     <Image Include="..\..\Source\IEditor\res\bitmap1.bmp" />
     <Image Include="..\..\Source\IEditor\res\bmp00001.bmp" />
-    <Image Include="..\..\Source\IEditor\res\bmp12.png" />
-    <Image Include="..\..\Source\IEditor\res\bmp13.png" />
-    <Image Include="..\..\Source\IEditor\res\bone.png" />
-    <Image Include="..\..\Source\IEditor\res\camera.png" />
-    <Image Include="..\..\Source\IEditor\res\Checkpoint.png" />
-    <Image Include="..\..\Source\IEditor\res\dummy.png" />
-    <Image Include="..\..\Source\IEditor\res\envmap.png" />
-    <Image Include="..\..\Source\IEditor\res\Font1.png" />
-    <Image Include="..\..\Source\IEditor\res\Font1_a.png" />
     <Image Include="..\..\Source\IEditor\res\game.ico" />
     <Image Include="..\..\Source\IEditor\res\I3d2.bmp" />
     <Image Include="..\..\Source\IEditor\res\icon1.ico" />
@@ -335,16 +322,6 @@
     <Image Include="..\..\Source\IEditor\res\iduck.bmp" />
     <Image Include="..\..\Source\IEditor\res\I_LOGO.bmp" />
     <Image Include="..\..\Source\IEditor\res\I_LOGO1.bmp" />
-    <Image Include="..\..\Source\IEditor\res\letters.png" />
-    <Image Include="..\..\Source\IEditor\res\light_a.png" />
-    <Image Include="..\..\Source\IEditor\res\light_d.png" />
-    <Image Include="..\..\Source\IEditor\res\light_f.png" />
-    <Image Include="..\..\Source\IEditor\res\light_p.png" />
-    <Image Include="..\..\Source\IEditor\res\light_s.png" />
-    <Image Include="..\..\Source\IEditor\res\sound_a.png" />
-    <Image Include="..\..\Source\IEditor\res\sound_p.png" />
-    <Image Include="..\..\Source\IEditor\res\sphere.png" />
-    <Image Include="..\..\Source\IEditor\res\target.png" />
     <Image Include="..\..\Source\IEditor\res\tb_bsp.bmp" />
     <Image Include="..\..\Source\IEditor\res\tb_create.bmp" />
     <Image Include="..\..\Source\IEditor\res\tb_debug.bmp" />

@@ -1236,7 +1236,7 @@ void IGraph::DestroyWindow(){
 
 //----------------------------
 
-static const char key_name[] = "Software\\Insanity3D system\\Applications";
+static const char key_name[] = "Software\\Void3D system\\Applications";
 
 //----------------------------
 

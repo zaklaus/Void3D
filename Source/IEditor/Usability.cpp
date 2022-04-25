@@ -27,7 +27,7 @@
 
 //----------------------------
 
-static const char REG_BASE[] = "Software\\Insanity3D system\\Usability1";
+static const char REG_BASE[] = "Software\\Void3D system\\Usability1";
 static const char REG_KEY_NAME_DAYS[] = "Day data";
 
 //----------------------------

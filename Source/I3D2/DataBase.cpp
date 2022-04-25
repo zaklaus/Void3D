@@ -23,7 +23,7 @@
 
 //----------------------------
 
-static const char version_info[] = "--- Insanity 3D database version 1.4 ---";
+static const char version_info[] = "--- VOID 3D database version 1.4 ---";
 
 //----------------------------
 

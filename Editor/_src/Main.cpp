@@ -1061,7 +1061,7 @@ S_application_data init_data = {
    "info@lonelycatgames.com",
 #endif
    "_tmp\\dbase.bin",
-   20*1024*1024,
+   200*1024*1024,
    &cmd_line,
    AppInit,
    //AppRun,
