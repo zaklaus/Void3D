@@ -2190,6 +2190,8 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
             }
 
             for (auto& frm : models){
+                if (frm->GetType() != FRAME_MODEL)
+                    continue;
                 PC_actor act = GetFrameActor(frm);
                 if (act){
                     PI3D_model mod = I3DCAST_MODEL(frm);
