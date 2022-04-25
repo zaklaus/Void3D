@@ -12,6 +12,8 @@ Hit Alt+N and a prompt for mission name appears, type in `models\vehicles\<car_n
 
 Hit N to show object lister, select all objects and delete them, our scene has to remain empty. Save now.
 
+Tip: Enable **Helping Light** (F10) to see your model in the scene.
+
 ## Modeling process
 
 Model your bodywork and wheels in 3DS MAX and export bodywork only to `models\vehicles\<car_name>\scene.i3d`, make sure your wheels are exported as a separate model we will refer to later.
