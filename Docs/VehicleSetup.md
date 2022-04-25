@@ -59,6 +59,12 @@ Add a box collision that would cover an area right above wheels, make sure it's 
 
 ![test_Jr6NvdBE53](https://user-images.githubusercontent.com/9026786/165064325-f0e8924d-3d9f-4f9b-8925-8b93ec4c67c8.png)
 
+#### Other collision volumes
+
+Add various collision volumes around/into your car so that it can respond to contact realistically. Ideally you want to put a few sphere collisions on each side of vehicle so that the car doesn't clip through collisions once it flips over or crashes to a surface. See niva car example to get the idea.
+
+![test_S4Z0FSaCIU](https://user-images.githubusercontent.com/9026786/165067679-5c8df045-f8a4-4267-8529-acd6bf299ce0.png)
+
 ## Physics setup :^)
 
 You've made it, physics setup awaits now!
