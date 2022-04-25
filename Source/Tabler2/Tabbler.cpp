@@ -32,7 +32,9 @@ Notes:
       - in order to edit C_table, GUIDs of table and template must match
 */
 #define TABBLER_FULL
+#define ISOLATION_AWARE_ENABLED 1
 #include <windows.h>
+#include <uxtheme.h>
 #include <tabler2.h>
 #include <commctrl.h>
 #include <rules.h>

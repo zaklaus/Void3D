@@ -325,7 +325,4 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
-  <ItemGroup>
-    <Manifest Include="test.exe.manifest" />
-  </ItemGroup>
 </Project>
