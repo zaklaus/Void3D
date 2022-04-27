@@ -294,7 +294,7 @@ public:
                               //any registered directories
                               //if match found, func returns true and fname is stripped
                               //by removing base directory
-
+#pragma optimize( "", off )
    bool GetRelativeDirectory(char *fn1){
                               //try to strip current working directory from fname
       char cd[260];
@@ -313,7 +313,7 @@ public:
       }
       return false;
    }
-
+#pragma optimize( "", on )
 //----------------------------
 
    virtual bool EraseItem(const char *filename){

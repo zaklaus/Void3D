@@ -969,6 +969,17 @@ static void __stdcall SetAnimation(t_string filename, int stage, int blend_op, f
    as->Release();
 }
 
+static void __stdcall StopAnimation(int stage){
+    PI3D_frame frm = script_man_imp.GetCurrFrame();
+    PC_game_mission gmis = script_man_imp.GetCurrMission();
+    if (frm->GetType() != FRAME_MODEL) {
+        ErrReport("SetAnimation: can stop anims only on models", editor);
+        return;
+    }
+    PI3D_model mod = I3DCAST_MODEL(frm);
+    mod->StopAnimation(stage);
+}
+
 //----------------------------
 //----------------------------
 #define DEFINE_SYMBOL(name) {&name, #name}
@@ -990,6 +1001,7 @@ const VM_LOAD_SYMBOL script_symbols[] = {
    DEFINE_SYMBOL(IsObjectOn),
    DEFINE_SYMBOL(SendSignal),
    DEFINE_SYMBOL(SetAnimation),
+   DEFINE_SYMBOL(StopAnimation),
 
    DEFINE_SYMBOL(MissionOver),
 

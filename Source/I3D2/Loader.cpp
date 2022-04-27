@@ -1952,7 +1952,6 @@ I3D_RESULT C_loader::ReadMesh(PI3D_frame frm, PI3D_mesh_base mesh, const char *n
 #endif
       allow_cache = false;
    }else{
-#if defined _DEBUG && 1
       if(any_bump){
          C_buffer<S_texture_space> texture_space;
          GenerateTextureSpace(mesh_verts, faces, texture_space, name, allow_cache);
@@ -1965,7 +1964,6 @@ I3D_RESULT C_loader::ReadMesh(PI3D_frame frm, PI3D_mesh_base mesh, const char *n
          }
          mesh->vertex_buffer.SetVertices(&st_verts.front(), st_verts.size());
       }else
-#endif
       mesh->vertex_buffer.SetVertices(&mesh_verts.front(), mesh_verts.size());
 
       mesh->SetFGroups(&fgroups.front(), fgroups.size());

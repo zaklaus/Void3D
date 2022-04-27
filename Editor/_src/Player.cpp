@@ -63,14 +63,20 @@ class C_player_imp: public C_actor{
       }
    }
 
-   virtual void Use(C_actor* act /* = NULL */) {
-       if (!act){
-           return;
+   virtual bool Use(E_USE_TYPE use_type, C_actor *instigator, PI3D_frame hit_frm) {
+       if (!instigator){
+           return 0;
        }
 
-       if (act->GetActorType() == ACTOR_VEHICLE){
+       if (use_type == USE_PEEK){
+           return 1;
+       }
+
+       if (instigator->GetActorType() == ACTOR_VEHICLE){
            SetFocus(true);
        }
+
+       return 1;
    }
 
 //----------------------------                               
@@ -503,6 +509,54 @@ public:
 
 //----------------------------
 
+   void CheckPlayerUse(const struct S_tick_context& tc){
+       C_game_camera* cam = mission.GetGameCamera();
+       if (!cam) return;
+
+       LPC_controller ctrl = tc.p_ctrl;
+       const S_matrix& m0 = cam->GetCamera()->GetMatrix();
+       S_vector from = m0(3);
+       S_vector dir = m0(2);
+
+       I3D_collision_data cd;
+       cd.from = from;
+       cd.dir = dir * DEFAULT_MAX_USE_DIST;
+       cd.flags = I3DCOL_MOVING_SPHERE;
+       cd.radius = 0.5f;
+       cd.frm_ignore = frame;
+       //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
+       //DebugPoint(from + dir * 2.0f, 0.25f, 1);
+
+
+       if (mission.GetScene()->TestCollision(cd)) {
+           PI3D_frame hit_frm = cd.GetHitFrm();
+           PI3D_frame old_frm = hit_frm;
+           while (GetFrameActor(hit_frm) == nullptr) {
+               if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
+                   break;
+               hit_frm = hit_frm->GetParent();
+           }
+
+           if (old_frm->GetParent() != mission.GetScene()->GetPrimarySector())
+               old_frm = old_frm->GetParent();
+
+           PC_actor act = GetFrameActor(hit_frm);
+           if (act) {
+               if (act->Use(USE_PEEK, this, old_frm)) {
+                   DebugPoint(cd.GetDestination(), 0.05f, 1);
+                   DEBUG("Press F to use");
+                   if (ctrl->Get(CS_USE, true)) {
+                       if (act) {
+                           act->Use(USE_ON, this, old_frm);
+                       }
+                   }
+               }
+           }
+       }
+   }
+
+//----------------------------
+
    virtual void Tick(const struct S_tick_context &tc){
        C_game_camera* cam = mission.GetGameCamera();
 
@@ -534,40 +588,7 @@ public:
             DEBUG("Fire!");
          }
 
-         if (cam){
-             const S_matrix& m0 = cam->GetCamera()->GetMatrix();
-             S_vector from = m0(3);
-             S_vector dir = m0(2);
-
-             I3D_collision_data cd;
-             cd.from = from;
-             cd.dir = dir*DEFAULT_MAX_USE_DIST;
-             cd.flags = I3DCOL_MOVING_SPHERE;
-             cd.radius = 0.5f;
-             cd.frm_ignore = frame;
-             //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
-             //DebugPoint(from + dir * 2.0f, 0.25f, 1);
-
-             
-            if (mission.GetScene()->TestCollision(cd)) {
-                PI3D_frame hit_frm = cd.GetHitFrm();
-                while (GetFrameActor(hit_frm) == nullptr) {
-                    if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
-                        break;
-                    hit_frm = hit_frm->GetParent();
-                }
-                if (GetFrameActor(hit_frm)) {
-                    DebugPoint(cd.GetDestination(), 0.05f, 1);
-                    DEBUG("Press F to use");
-                    if (ctrl->Get(CS_USE, true)) {
-                        PC_actor hit_act = GetFrameActor(hit_frm);
-                        if (hit_act){
-                            hit_act->Use(this);
-                        }
-                    }
-                 }
-             }
-         }
+         CheckPlayerUse(tc);
 
          if(ctrl->Get(CS_JUMP)){
             if(!bench_ratio && floor_link && jump_released){

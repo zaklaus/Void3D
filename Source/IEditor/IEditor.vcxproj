@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>all.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)IEditor.pch</PrecompiledHeaderOutputFile>
       <WarningLevel>Level4</WarningLevel>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>

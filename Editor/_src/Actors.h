@@ -12,6 +12,16 @@ enum E_ACTOR_TYPE{            //actor class ID
 
    ACTOR_LAST
 };
+
+enum E_USE_TYPE {
+    USE_PEEK, //used internally to highlight usable actor
+
+    USE_ON,
+    USE_OFF,
+    USE_TOGGLE,
+    USE_KILL, //special kind that destroys actor
+    USE_SET, //special kind for momentary actors
+};
   
 //----------------------------
 
@@ -121,7 +131,7 @@ public:
    virtual void Die(C_actor *killer = NULL){ ReportActorError("Die() called"); }
 
 //----------------------------
-   virtual void Use(C_actor *act = NULL){}
+   virtual bool Use(E_USE_TYPE use_type = USE_TOGGLE, C_actor* instigator = NULL, PI3D_frame hit_frm = NULL) { return 0; }
 
 //----------------------------
 // Get table template associated with actor.

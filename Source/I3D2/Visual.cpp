@@ -252,12 +252,10 @@ void I3D_visual::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_stages){
          ++i;
          vis_flags |= VISF_USE_DETMAP;
       }
-#if defined _DEBUG && 1
       if(txt_bump && i<drv->MaxSimultaneousTextures()){
          ++i;
          vis_flags |= VISF_USE_BUMPMAP;
       }
-#endif
       if(tp_env && i<drv->MaxSimultaneousTextures() && (drv->GetFlags2()&DRVF2_ENVMAPPING) && (drv->GetFlags()&DRVF_SINGLE_PASS_MODULATE2X)){
          ++i;
          vis_flags |= VISF_USE_ENVMAP;

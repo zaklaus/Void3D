@@ -871,11 +871,11 @@ class C_edit_Create: public C_editor_item_Create{
 
             switch(ft){
             case FRAME_MODEL:
-               if(!ed->GetModelCache().GetRelativeDirectory(hlp.buf))
+               if(!(ed->GetModelCache().GetRelativeDirectory(hlp.buf)))
                   b = false;
                break;
             case FRAME_SOUND:
-               if(!ed->GetSoundCache().GetRelativeDirectory(hlp.buf))
+               if(!(ed->GetSoundCache().GetRelativeDirectory(hlp.buf)))
                   b = false;
                break;
             }

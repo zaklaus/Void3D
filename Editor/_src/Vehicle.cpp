@@ -64,6 +64,7 @@ class C_vehicle_imp : public C_actor_physics {
     C_str ctrl;
 
     C_smart_ptr<I3D_frame> exits[3];
+    C_smart_ptr<I3D_frame> doors;
 
     bool enabled;
     bool can_control;
@@ -111,6 +112,7 @@ public:
         enabled(false),
         can_control(false),
         engine_on(false),
+        doors(0),
         last_pos(0, 0, 0),
         last_gear(0),
         ctrl("")
@@ -193,6 +195,8 @@ public:
         if (lit_dum)
             brake_light = I3DCAST_VISUAL(lit_dum);
 
+        doors = frame->FindChildFrame("doors", ENUMF_DUMMY);
+
         last_pos = frame->GetWorldPos();
         last_gear = 0;
         last_frequency = 1.0f;
@@ -242,43 +246,74 @@ public:
     }
 
 
-    virtual void Use(C_actor* act /* = NULL */) {
+    virtual bool Use(E_USE_TYPE use_type /*= USE_TOGGLE*/, C_actor* instigator /*= NULL*/, PI3D_frame hit_frm /*= NULL*/) {
         C_game_camera* cam = mission.GetGameCamera();
 
         if (!cam) {
-            return;
+            return 0;
         }
 
-        if (!can_control) {
-            cam->ReattachOwner();
-            cam->GetCamera()->SetPos(S_vector(0, 0, 0));
-            cam->SetFocus(frame->FindChildFrame("engine"), frame);
-            cam->SetDistance(tab->GetItemF(CVEH_F_CAMERA_DISTANCE));
-            can_control = true;
-            ctrl = act->GetName();
+        //@todo support more features
+        enum {
+            USE_NONE = 0x1,
+            USE_DOORS = 0x2,
+            USE_FUEL = 0x4,
+            USE_ENGINE = 0x8,
 
-            if (act) {
-                act->GetFrame()->SetOn(false);
+            USE_ANY = 0xffffffff
+        };
+
+        //check for door entrance
+        dword use = USE_NONE;
+        if (hit_frm) {
+            if (doors) {
+                if (hit_frm->GetParent() == doors) {
+                    use = USE_DOORS;
+                }
+            } else {
+                use = USE_DOORS;
             }
         }
-        else {
+
+        if (use == USE_NONE)
+            return 0;
+
+        if (use_type == USE_PEEK){
+            return 1;
+        }
+
+        if (use & USE_DOORS){
+            if (!can_control) {
+                cam->ReattachOwner();
+                cam->GetCamera()->SetPos(S_vector(0, 0, 0));
+                cam->SetFocus(frame->FindChildFrame("engine"), frame);
+                cam->SetDistance(tab->GetItemF(CVEH_F_CAMERA_DISTANCE));
+                can_control = true;
+                ctrl = instigator->GetName();
+                instigator->GetFrame()->SetOn(false);
+            }
+        }
+
+        return 1;
+    }
+
+    void ExitCar(){
+        PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
+        PC_actor act = GetFrameActor(frm);
+        if (frm && act) {
             can_control = false;
 
-            if (act) {
-                PI3D_frame frm = act->GetFrame();
-                act->GetFrame()->SetOn(true);
-                {
-                    if (!EjectOnSide(frm, -1)) {
-                        if (!EjectOnSide(frm, 1)) {
-                            S_vector pos = (exits[2] == NULL ? frame->GetWorldPos() + S_vector(0, 2, 0) : exits[2]->GetWorldPos());
-                            frm->SetPos(pos);
-                        }
+            act->GetFrame()->SetOn(true);
+            {
+                if (!EjectOnSide(frm, -1)) {
+                    if (!EjectOnSide(frm, 1)) {
+                        S_vector pos = (exits[2] == NULL ? frame->GetWorldPos() + S_vector(0, 2, 0) : exits[2]->GetWorldPos());
+                        frm->SetPos(pos);
                     }
                 }
-                act->Use(this);
-                brake = false;
             }
-
+            act->Use(USE_ON, this, NULL);
+            brake = false;
             ctrl = "";
         }
     }
@@ -338,10 +373,7 @@ public:
                     Enable(false);
                 }
                 else if (ctrl.Size()) {
-                    PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
-                    PC_actor act = GetFrameActor(frm);
-                    if (frm && act)
-                        Use(act);
+                    ExitCar();
                 }
             }
 
