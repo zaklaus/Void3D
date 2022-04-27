@@ -499,7 +499,9 @@ public:
    void ReattachOwner() {
        if (!cam) return;
        cam->LinkTo(anim_dummy, I3DLINK_UPDMATRIX);
+#ifndef NEW_STYLE
        fly_interp->SetAnimation(0, NULL);
+#endif
    }
 
    bool IsDetached() {

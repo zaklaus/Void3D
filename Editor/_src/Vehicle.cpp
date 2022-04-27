@@ -75,6 +75,8 @@ class C_vehicle_imp : public C_actor_physics {
     bool brake;
     bool engine_on;
 
+    float mx, my;
+
     //----------------------------
 
     void Enable(bool b) {
@@ -115,6 +117,8 @@ public:
         doors(0),
         last_pos(0, 0, 0),
         last_gear(0),
+        mx(0),
+        my(0),
         ctrl("")
     {
         AssignTableTemplate();
@@ -287,6 +291,7 @@ public:
                 cam->ReattachOwner();
                 cam->GetCamera()->SetPos(S_vector(0, 0, 0));
                 cam->SetFocus(frame->FindChildFrame("engine"), frame);
+                cam->SetAngleMode(1);
                 cam->SetDistance(tab->GetItemF(CVEH_F_CAMERA_DISTANCE));
                 can_control = true;
                 ctrl = instigator->GetName();
@@ -338,6 +343,29 @@ public:
 
 #ifdef DEBUG_DIRECT_KEYS
         if (can_control) {
+            // orbit camera
+            {
+                float rx = (float)tc.mouse_rel[0], ry = (float)tc.mouse_rel[1];
+                //mouse - apply sensitivity and speed
+                if (tc.p_ctrl) {
+                    if (tc.p_ctrl->GetConfigValue(C_controller::CFG_INVERT_MOUSE_Y))
+                        ry = -ry;
+
+                    float f = (float)tc.p_ctrl->GetConfigValue(C_controller::CFG_MOUSE_SENSITIVITY) * .01f;
+                    rx *= f;
+                    ry *= f;
+
+                    mx += rx * 0.1f;
+                    my += ry;
+
+                    C_game_camera* cam = mission.GetGameCamera();
+
+                    if (cam) {
+                        S_quat rot = S_quat(S_vector(0, 1, 0), (mx)*(PI/180.0f));
+                        cam->SetDeltaRot(rot);
+                    }
+                }
+            }
 
             int want_dir = 0;       //0=stay, 1=forward, -1=backward
             float steer = 0.0f;
