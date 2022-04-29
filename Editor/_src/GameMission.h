@@ -128,6 +128,13 @@ public:
    virtual const C_game_camera *GetGameCamera() const = 0;
 
 //----------------------------
+// Actor input system
+   virtual void SetInputActor(PC_actor act) = 0;
+   virtual void ClearInputActor(PC_actor act = NULL) = 0;
+   virtual bool IsInputActor(PC_actor act) = 0;
+   virtual void BlockInput(bool state) = 0;
+
+//----------------------------
 // Finish the game. This func may be called anytime, it just sets internal state
 // and finishes the game at appropriate time.
 // 'msg_id' specifies text written to message window, describing the purpose of finishing the mission,
