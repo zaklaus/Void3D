@@ -91,7 +91,37 @@ class C_game_mission_imp: public C_game_mission{
 
    C_smart_ptr<I3D_model> weather_effect; //model of weather (rain or snow)
 
+//----------------------------
+   // Input control actor
+   C_smart_ptr<C_actor> input_actor;
 
+public:
+   void SetInputActor(PC_actor act){
+       input_actor = act;
+   }
+
+   void ClearInputActor(PC_actor act = NULL){
+       if (input_actor.Ptr() == act || act == NULL)
+           input_actor = NULL;
+   }
+
+   bool IsInputActor(PC_actor act){
+       if (input_actor == NULL)
+           return false;
+       return (input_actor.Ptr() == act);
+   }
+private:
+    bool block_actor_input = false;
+
+   void ProcessInputActor(const S_tick_context& tc){
+       if (input_actor && !block_actor_input){
+           input_actor->Input(tc);
+       }
+   }
+
+   void BlockInput(bool state) {
+       block_actor_input = state;
+   }
 //----------------------------
                               //helpers (temp variables, counters, etc)
    C_action_snd_count action_snd_count;
@@ -149,8 +179,10 @@ class C_game_mission_imp: public C_game_mission{
    //----------------------------
    // Tick actors depending on current mission state.
    void TickActors(const S_tick_context& tc) {
-
        assert(IsInGame());
+
+       ProcessInputActor(tc);
+
        //tick actors
        for (dword i = 0; i < actors.size(); i++) {
            PC_actor ap = actors[i];
@@ -306,6 +338,7 @@ class C_game_mission_imp: public C_game_mission{
        PI3D_frame hero_loc = scene->FindFrame("hero", ENUMF_DUMMY);
        if (hero_loc) {
            hero = CreateActor(hero_loc, ACTOR_PLAYER);
+           SetInputActor(hero);
        }
        return hero;
    }
@@ -1364,6 +1397,7 @@ void C_game_mission_imp::DestroyActor(PC_actor act){
 
    for(int i=actors.size(); i--; )
    if(act==actors[i]){
+       ClearInputActor(act);
       actors[i] = actors.back(); actors.pop_back();
       break;
    }

@@ -118,6 +118,14 @@ public:
    }
 
 //----------------------------
+   // Ptr
+   inline T *Ptr(){
+       return ptr;
+   }
+   inline const T* Ptr() const {
+       return ptr;
+   }
+//----------------------------
 // Three pointer-access operators. Const and non-const versions.
    inline operator T *(){ return ptr; }
    inline operator const T *() const{ return ptr; }

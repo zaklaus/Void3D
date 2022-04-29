@@ -104,6 +104,10 @@ public:
    virtual void OnSignal(int signal_id);
 
 //----------------------------
+   // Process actor input
+   virtual void Input(const S_tick_context& tc){}
+
+//----------------------------
 // Enable/disable actor.
    virtual void Enable(bool on_off);
    virtual bool IsEnabled() const{ return true; }

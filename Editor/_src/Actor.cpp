@@ -49,6 +49,7 @@ C_actor::C_actor(C_game_mission &m1, PI3D_frame in_frm, E_ACTOR_TYPE in_type):
 
 C_actor::~C_actor(){
     SetFrame(NULL);
+    mission.ClearInputActor(this);
 }
 
 //----------------------------

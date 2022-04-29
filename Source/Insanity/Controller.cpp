@@ -834,7 +834,7 @@ public:
 
       memset(config, 0, sizeof(config));
       config[CFG_INVERT_MOUSE_Y] = false;
-      config[CFG_MOUSE_SENSITIVITY] = 100;
+      config[CFG_MOUSE_SENSITIVITY] = 50;
       config[CFG_ALWAYS_RUN] = false;
    }
 };
