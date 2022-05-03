@@ -16,6 +16,7 @@ public:
    bool run_config;
    bool debug_profile;
    bool disable_suspend;
+   bool edit_game_data;
 
    C_command_line();
 };

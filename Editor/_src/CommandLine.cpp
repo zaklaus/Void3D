@@ -12,6 +12,7 @@ const C_command_line_base::S_scan_data *C_command_line::GetScanData() const{
       {"mission", CMD_STRING, offsetof(C_command_line, cmdline_mission)},
 #ifdef EDITOR
       {"game_mode", CMD_BOOL, offsetof(C_command_line, debug_game_mode)},
+      {"edit_game_data", CMD_BOOL, offsetof(C_command_line, edit_game_data)},
 #endif
       {"no_suspend", CMD_BOOL, offsetof(C_command_line, disable_suspend)},
       {"config", CMD_BOOL, offsetof(C_command_line, run_config)},
@@ -48,10 +49,11 @@ C_command_line::C_command_line():
    run_config(false),
    debug_profile(false),
 #ifdef _DEBUG
-   debug_use_debug_dlls(true)
+   debug_use_debug_dlls(true),
 #else
-   debug_use_debug_dlls(false)
+   debug_use_debug_dlls(false),
 #endif
+   edit_game_data(false)
 {
 }
 

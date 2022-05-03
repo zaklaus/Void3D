@@ -7,6 +7,7 @@
 #include "Game_Cam.h"
 #include "GameMission.h"
 #include "SysTables.h"
+#include <Tabler2.h>
 #include "script.h"
 #include <Insanity\AppInit.h>
 #include <Windows.h>
@@ -1073,10 +1074,109 @@ static bool ReadConfigUntilOkCancel(const char* language) {
 
 //----------------------------
 
+#define GAMEINFO_FILE "gameinfo.bin"
+
+static PC_table game_data_table;
+
+/*
+* S_application_data init_data = {
+   "Void Demo",
+   "Software\\V4 Games\\Void Demo\\",
+#ifdef _DEBUG
+   "W:\\!Void_Crashes\\",
+#else
+   "contact@madaraszd.net",
+#endif
+   "_tmp\\dbase.bin",
+   200 * 1024 * 1024,
+   &cmd_line,
+   AppInit,
+   //AppRun,
+   AppClose,
+#ifdef EDITOR
+   EdCreate,
+#else
+   NULL,
+#endif
+   AppCrashInfo,
+};
+
+ */
+
+enum game_props_data_index
+{
+    GAME_F_APP_NAME,
+    GAME_F_REGISTRY_PATH,
+    GAME_F_ERR_REPORT_PATH,
+    GAME_F_DB_NAME,
+    GAME_F_DB_SIZE,
+};
+
+void OpenGameDataEditor(){
+    const C_table_element te_game_props[] = {
+        {TE_STRING, GAME_F_APP_NAME, "Application Name", 240, 0, 0, "Application name"},
+        {TE_STRING, GAME_F_REGISTRY_PATH, "Registry Path", 255, 0, 0, "Application registry path (used for storing game settings, ...)"},
+        {TE_STRING, GAME_F_ERR_REPORT_PATH, "Error Report Email", 240, 0, 0, "Error reporting e-mail destination"},
+        {TE_STRING, GAME_F_DB_NAME, "Cache Database Path", 255, 0, 0, "Cache database file path"},
+        {TE_INT, GAME_F_DB_SIZE, "Cache Database Size", 0,  1024, 200, "Cache database reserved file size in megabytes"},
+        {TE_NULL}
+    };
+
+    const C_table_template templ_game_props = {"Game Data", te_game_props};
+    game_data_table->Load(&templ_game_props, TABOPEN_TEMPLATE);
+
+    if (OsIsDirExist(GAMEINFO_FILE)){
+        game_data_table->Load(GAMEINFO_FILE, TABOPEN_UPDATE | TABOPEN_FILENAME);
+    }
+
+    HWND editor_window = (HWND)game_data_table->Edit(&templ_game_props, NULL, NULL, 0);
+    OsCenterWindow(editor_window, NULL);
+    WaitForSingleObject(editor_window, INFINITE);
+
+    game_data_table->Save(GAMEINFO_FILE, TABOPEN_FILENAME);
+}
+
+bool SetupGameData(S_application_data &app_data, bool first_try=true){
+    if (game_data_table){
+        game_data_table->Release();
+        game_data_table = NULL;
+    }
+    game_data_table = CreateTable();
+    
+    if (!OsIsDirExist(GAMEINFO_FILE)){
+#ifndef EDITOR
+        MessageBox(NULL, "Manifest gameinfo.bin was not found! Please re-install the game!", "Void application error", MB_OK);
+        return false;
+#else
+        if (first_try)
+            OpenGameDataEditor();
+        else{
+            MessageBox(NULL, "Manifest gameinfo.bin was not found! Make sure you configure it!", "Void application error", MB_OK);
+            return false;
+        }
+#endif
+    }
+
+    game_data_table->Load(GAMEINFO_FILE, TABOPEN_FILENAME);
+
+    app_data.app_name = game_data_table->ItemS(GAME_F_APP_NAME);
+    app_data.reg_base = game_data_table->ItemS(GAME_F_REGISTRY_PATH);
+    app_data.crash_send_addr = game_data_table->ItemS(GAME_F_ERR_REPORT_PATH);
+    app_data.dbase_name = game_data_table->ItemS(GAME_F_DB_NAME);
+    app_data.dbase_size = game_data_table->ItemI(GAME_F_DB_SIZE) * 1024 * 1024;
+
+    return true;
+}
+
 int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
 
     try {
         SetupExceptionHandling();
+        game_data_table = NULL;
+
+        if (!SetupGameData(const_cast<S_application_data&>(app_data))){
+            return 0;
+        }
 
         C_command_line& cmd_line = *app_data.cmd_line;
         //process command-line, exit if some errors encountered
@@ -1089,6 +1189,12 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
 
         if (cmd_line.run_config) {
             return !RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
+        }
+        if (cmd_line.edit_game_data){
+            OpenGameDataEditor();
+            if (!SetupGameData(const_cast<S_application_data&>(app_data), false)){
+                return 0;
+            }
         }
         if (cmd_line.run_config) {
             E_CONFIG_STATUS st = RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
