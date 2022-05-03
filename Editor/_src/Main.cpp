@@ -1134,6 +1134,7 @@ void OpenGameDataEditor(){
     WaitForSingleObject(editor_window, INFINITE);
 
     game_data_table->Save(GAMEINFO_FILE, TABOPEN_FILENAME);
+    MessageBox(NULL, "Manifest gameinfo.bin has been edited!", "Void application", MB_OK);
 }
 
 bool SetupGameData(S_application_data &app_data, bool first_try=true){
@@ -1192,9 +1193,8 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
         }
         if (cmd_line.edit_game_data){
             OpenGameDataEditor();
-            if (!SetupGameData(const_cast<S_application_data&>(app_data), false)){
-                return 0;
-            }
+            SetupGameData(const_cast<S_application_data&>(app_data), false);
+            return 0;
         }
         if (cmd_line.run_config) {
             E_CONFIG_STATUS st = RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);

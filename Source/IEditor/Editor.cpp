@@ -1450,7 +1450,7 @@ bool C_editor_imp::SaveState(const char* bin_name) const {
     ck <<= CT_EDITOR_STATE;
     {                          //copyright
         ck <<= CT_COPYRIGHT;
-        static const char copyright[] = " - Editor configuration - Copyright (c) 2000  Lonely Cat Games - ";
+        static const char copyright[] = " - Editor configuration - Copyright (c) 2022  V4 Games - ";
         ck.Write(copyright, sizeof(copyright) + 1);
         --ck;
     }
