@@ -2557,7 +2557,7 @@ I3D_RESULT I3D_scene::Render(dword flags){
    if(drv->GetFlags()&DRVF_DRAWLMTEXTURES)
       drv->DrawLMaps(viewport);
 
-#if defined _DEBUG && 0
+#if 0
    {
                               //save
       C_render_target<> save_rt = drv->GetCurrRenderTarget();

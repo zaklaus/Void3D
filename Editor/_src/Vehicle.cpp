@@ -1,4 +1,4 @@
-#include "all.h"                              
+#include "all.h"
 #include "gamemission.h"
 #include "PhysicsActor.h"
 
@@ -21,14 +21,15 @@
 
 #include "game_cam.h"
 
-                           //speed per AUTO_TRANSLATE_UP t/sec
+//speed per AUTO_TRANSLATE_UP t/sec
 static const float wanted_speed[] = {
-   -3.5,
-   0,
-   2, 8, 16, 32, 50, 72
+    -3.5,
+    0,
+    2, 8, 16, 32, 50, 72
 };
 
-enum C_vehicle_props_data_index {
+enum C_vehicle_props_data_index
+{
     CVEH_F_STEER_FORCE,
     CVEH_F_GEAR_S_NAME,
     CVEH_F_GEAR_VEL = 2,
@@ -38,21 +39,22 @@ enum C_vehicle_props_data_index {
 };
 
 static const C_table_element te_veh_props[] = {
-       {TE_FLOAT, CVEH_F_STEER_FORCE, "Steer Force", 0, 10, 1, ""},
-       {TE_ARRAY, CVEH_F_GEAR_S_NAME, "Gears", 7, 0, 0, "Vehicle gears"},
-         {TE_BRANCH, 0, "Gear", 3, (dword)"%[0]"},
-          {TE_FLOAT, CVEH_F_GEAR_VEL,"Velocity", -1000, 1000, 0, "Gear velocity"},
-          {TE_FLOAT, CVEH_F_GEAR_FORCE, "Force", -1000, 1000, 0, "Gear force"},
-          {TE_FLOAT, CVEH_F_GEAR_TRAN_SPEED, "Tran. Speed", -2000, 2000, 0, "Transition speed to gear up at"},
-       {TE_FLOAT, CVEH_F_CAMERA_DISTANCE, "Camera Dist.", 0, 100, 10, "Camera max distance"},
-       {TE_NULL}
+    {TE_FLOAT, CVEH_F_STEER_FORCE, "Steer Force", 0, 10, 1, ""},
+    {TE_ARRAY, CVEH_F_GEAR_S_NAME, "Gears", 7, 0, 0, "Vehicle gears"},
+    {TE_BRANCH, 0, "Gear", 3, (dword)"%[0]"},
+    {TE_FLOAT, CVEH_F_GEAR_VEL, "Velocity", -1000, 1000, 0, "Gear velocity"},
+    {TE_FLOAT, CVEH_F_GEAR_FORCE, "Force", -1000, 1000, 0, "Gear force"},
+    {TE_FLOAT, CVEH_F_GEAR_TRAN_SPEED, "Tran. Speed", -2000, 2000, 0, "Transition speed to gear up at"},
+    {TE_FLOAT, CVEH_F_CAMERA_DISTANCE, "Camera Dist.", 0, 100, 10, "Camera max distance"},
+    {TE_NULL}
 };
 
-static const C_table_template templ_veh_props = { "Vehicle", te_veh_props };
+static const C_table_template templ_veh_props = {"Vehicle", te_veh_props};
 
-class C_vehicle_imp : public C_actor_physics {
-
-    struct S_wheel {
+class C_vehicle_imp : public C_actor_physics
+{
+    struct S_wheel
+    {
         C_smart_ptr<IPH_joint_hinge2> jnt;
         bool powered;
     };
@@ -79,26 +81,26 @@ class C_vehicle_imp : public C_actor_physics {
     int gear = 0;
     float curr_speed = 0.0f;
     bool moving_backward = false;
-    int want_dir = 0;       //0=stay, 1=forward, -1=backward
+    int want_dir = 0; //0=stay, 1=forward, -1=backward
     float steer = 0.0f;
 
     float mx, my;
 
     //----------------------------
 
-    void Enable(bool b) {
-
+    void Enable(bool b)
+    {
         if (enabled == b)
             return;
-        for (int i = bodies.size(); i--; )
+        for (int i = bodies.size(); i--;)
             bodies[i]->Enable(b);
         enabled = b;
     }
 
     //----------------------------
 
-    virtual void OnPhysIdle() {
-
+    virtual void OnPhysIdle()
+    {
 #ifndef DEBUG_NO_IDLE
         Enable(false);
 #endif
@@ -108,8 +110,8 @@ class C_vehicle_imp : public C_actor_physics {
     //----------------------------
 
     virtual bool ContactReport(PI3D_frame dst_frm, const S_vector& pos, const S_vector& normal, float depth,
-        bool play_sounds = true) {
-
+                               bool play_sounds = true)
+    {
         return C_actor_physics::ContactReport(dst_frm, pos, normal, depth, false);
     }
 
@@ -135,28 +137,34 @@ public:
 
     //----------------------------
 
-    virtual void GameBegin() {
+    virtual void GameBegin()
+    {
         SetupVolumes(0x1);
         PI3D_model mod = GetModel();
-        if (mod) {
+        if (mod)
+        {
             const C_str& mname = mod->GetFileName();
             S_phys_template templ;
             if (!mission.LoadPhysicsTemplate(C_xstr("Models\\%\\scene.bin") % &mname[1], templ))
                 ReportActorError("Model is not listed in active objects");
-            else {
+            else
+            {
                 C_actor_physics::Init(&templ);
                 enabled = true;
                 Enable(false);
                 //find all wheels
-                for (dword i = joints.size(); i--; ) {
+                for (dword i = joints.size(); i--;)
+                {
                     PIPH_joint jnt = joints[i];
-                    if (jnt->GetType() == IPHJOINTTYPE_HINGE2) {
+                    if (jnt->GetType() == IPHJOINTTYPE_HINGE2)
+                    {
                         //apply steering on the front joint
                         PIPH_joint_hinge2 jh = (PIPH_joint_hinge2)jnt;
 
-                        S_wheel wheel = { jh, false };
+                        S_wheel wheel = {jh, false};
 
-                        if (jh->GetName().Matchi("*_power*")) {
+                        if (jh->GetName().Matchi("*_power*"))
+                        {
                             wheel.powered = true;
                         }
 
@@ -167,9 +175,10 @@ public:
                 const float force_steer = 50.0f;
                 const float force_steer_mul = tab->GetItemF(CVEH_F_STEER_FORCE, 0);
 
-                for (auto& wheel : jnt_wheels) {
+                for (auto& wheel : jnt_wheels)
+                {
                     if (wheel.powered)
-                        wheel.jnt->SetMaxForce(force_steer*force_steer_mul);
+                        wheel.jnt->SetMaxForce(force_steer * force_steer_mul);
                 }
             }
 
@@ -186,7 +195,8 @@ public:
         }
 
         {
-            if (!snd_engine) {
+            if (!snd_engine)
+            {
                 snd_engine = I3DCAST_SOUND(mission.GetScene()->CreateFrame(FRAME_SOUND));
                 snd_engine->Release();
             }
@@ -216,8 +226,8 @@ public:
 
     //----------------------------
 
-    virtual void GameEnd(bool) {
-
+    virtual void GameEnd(bool)
+    {
         bodies.clear();
         joints.clear();
         enabled = false;
@@ -225,16 +235,19 @@ public:
     }
 
 
-    bool EjectOnSide(PI3D_frame frm, int side) {
+    bool EjectOnSide(PI3D_frame frm, int side)
+    {
         PI3D_frame exit_frm = exits[side == -1 ? 0 : 1];
         S_vector pos;
         S_vector dir;
 
-        if (exit_frm == NULL) {
+        if (exit_frm == NULL)
+        {
             pos = frame->GetWorldPos();
             dir = S_vector(0, 1, 0).Cross(frame->GetWorldDir()) * 2.0f * side;
         }
-        else {
+        else
+        {
             pos = exit_frm->GetWorldPos();
             dir = S_vector(0, 1, 0);
         }
@@ -250,7 +263,8 @@ public:
         bool collided = mission.TestCollision(cd);
         frm->SetOn(true);
 
-        if (!collided) {
+        if (!collided)
+        {
             frm->SetPos(cd.GetDestination());
         }
 
@@ -258,15 +272,19 @@ public:
     }
 
 
-    virtual bool Use(E_USE_TYPE use_type /*= USE_TOGGLE*/, C_actor* instigator /*= NULL*/, PI3D_frame hit_frm /*= NULL*/) {
+    virtual bool Use(E_USE_TYPE use_type /*= USE_TOGGLE*/, C_actor* instigator /*= NULL*/,
+                     PI3D_frame hit_frm /*= NULL*/)
+    {
         C_game_camera* cam = mission.GetGameCamera();
 
-        if (!cam) {
+        if (!cam)
+        {
             return 0;
         }
 
         //@todo support more features
-        enum {
+        enum
+        {
             USE_NONE = 0x1,
             USE_DOORS = 0x2,
             USE_FUEL = 0x4,
@@ -277,12 +295,17 @@ public:
 
         //check for door entrance
         dword use = USE_NONE;
-        if (hit_frm) {
-            if (doors) {
-                if (hit_frm->GetParent() == doors) {
+        if (hit_frm)
+        {
+            if (doors)
+            {
+                if (hit_frm->GetParent() == doors)
+                {
                     use = USE_DOORS;
                 }
-            } else {
+            }
+            else
+            {
                 use = USE_DOORS;
             }
         }
@@ -290,12 +313,15 @@ public:
         if (use == USE_NONE)
             return 0;
 
-        if (use_type == USE_PEEK){
+        if (use_type == USE_PEEK)
+        {
             return 1;
         }
 
-        if (use & USE_DOORS){
-            if (!can_control) {
+        if (use & USE_DOORS)
+        {
+            if (!can_control)
+            {
                 cam->ReattachOwner();
                 cam->GetCamera()->SetPos(S_vector(0, 0, 0));
                 cam->SetFocus(frame->FindChildFrame("engine"), frame);
@@ -311,17 +337,23 @@ public:
         return 1;
     }
 
-    void ExitCar(){
+    void ExitCar()
+    {
         PI3D_frame frm = mission.GetScene()->FindFrame(ctrl);
         PC_actor act = GetFrameActor(frm);
-        if (frm && act) {
+        if (frm && act)
+        {
             can_control = false;
 
             act->GetFrame()->SetOn(true);
             {
-                if (!EjectOnSide(frm, -1)) {
-                    if (!EjectOnSide(frm, 1)) {
-                        S_vector pos = (exits[2] == NULL ? frame->GetWorldPos() + S_vector(0, 2, 0) : exits[2]->GetWorldPos());
+                if (!EjectOnSide(frm, -1))
+                {
+                    if (!EjectOnSide(frm, 1))
+                    {
+                        S_vector pos = (exits[2] == NULL
+                                            ? frame->GetWorldPos() + S_vector(0, 2, 0)
+                                            : exits[2]->GetWorldPos());
                         frm->SetPos(pos);
                     }
                 }
@@ -334,10 +366,12 @@ public:
 
     //----------------------------
 
-    void Input(const S_tick_context& tc){
+    void Input(const S_tick_context& tc)
+    {
         float tsec = (float)tc.time * .001f;
-        
-        if (tc.time) {
+
+        if (tc.time)
+        {
             S_vector move_dir = last_pos - frame->GetWorldPos();
             float dist = move_dir.Magnitude();
             float t = tsec / 3.6f;
@@ -347,12 +381,14 @@ public:
         }
 
 #ifdef DEBUG_DIRECT_KEYS
-        if (can_control) {
+        if (can_control)
+        {
             // orbit camera
             {
                 float rx = (float)tc.mouse_rel[0], ry = (float)tc.mouse_rel[1];
                 //mouse - apply sensitivity and speed
-                if (tc.p_ctrl) {
+                if (tc.p_ctrl)
+                {
                     if (tc.p_ctrl->GetConfigValue(C_controller::CFG_INVERT_MOUSE_Y))
                         ry = -ry;
 
@@ -365,7 +401,8 @@ public:
 
                     C_game_camera* cam = mission.GetGameCamera();
 
-                    if (cam) {
+                    if (cam)
+                    {
                         S_quat rot = S_quat(S_vector(0, 1, 0), (mx) * (PI / 180.0f));
                         cam->SetDeltaRot(rot);
                     }
@@ -374,36 +411,44 @@ public:
 
             brake = false;
 
-            if (tc.p_ctrl) {
-                if (tc.p_ctrl->Get(CS_MOVE_FORWARD)) {
+            if (tc.p_ctrl)
+            {
+                if (tc.p_ctrl->Get(CS_MOVE_FORWARD))
+                {
                     want_dir = 1;
                 }
-                else
-                    if (tc.p_ctrl->Get(CS_MOVE_BACK)) {
-                        want_dir = -1;
-                    }
-                if (tc.p_ctrl->Get(CS_MOVE_LEFT)) {
+                else if (tc.p_ctrl->Get(CS_MOVE_BACK))
+                {
+                    want_dir = -1;
+                }
+                if (tc.p_ctrl->Get(CS_MOVE_LEFT))
+                {
                     steer = 1;
                 }
-                else
-                    if (tc.p_ctrl->Get(CS_MOVE_RIGHT)) {
-                        steer = -1;
-                    }
-                if (tc.p_ctrl->Get(CS_JUMP)) {
+                else if (tc.p_ctrl->Get(CS_MOVE_RIGHT))
+                {
+                    steer = -1;
+                }
+                if (tc.p_ctrl->Get(CS_JUMP))
+                {
                     brake = true;
                 }
             }
 
-            if (tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true)) {
-                if (engine_on && curr_speed < 2.0f) {
+            if (tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true))
+            {
+                if (engine_on && curr_speed < 2.0f)
+                {
                     engine_on = false;
                     brake = false;
-                    if (snd_engine->IsOn()) {
+                    if (snd_engine->IsOn())
+                    {
                         snd_engine->SetOn(false);
                     }
                     Enable(false);
                 }
-                else if (ctrl.Size()) {
+                else if (ctrl.Size())
+                {
                     ExitCar();
                 }
             }
@@ -413,36 +458,44 @@ public:
 
     //----------------------------
 
-    virtual void Tick(const S_tick_context& tc) {
+    virtual void Tick(const S_tick_context& tc)
+    {
         float tsec = (float)tc.time * .001f;
         const int max_gear = 5;
 
         //determine gear
-        if (want_dir) {
-            if (want_dir > 0) {
-                if (moving_backward && curr_speed > 1.0f) {
+        if (want_dir)
+        {
+            if (want_dir > 0)
+            {
+                if (moving_backward && curr_speed > 1.0f)
+                {
                     want_dir = 0;
                     brake = true;
                 }
-                else {
-                    for (gear = 1; gear < max_gear; gear++) {
+                else
+                {
+                    for (gear = 1; gear < max_gear; gear++)
+                    {
                         if (curr_speed < tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1))
                             break;
                     }
                     //don't gear down too early
                     if (last_gear > gear && curr_speed > (tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1) * .7f))
                         ++gear;
-                    else
-                        if (gear > last_gear + 1)
-                            gear = last_gear + 1;
+                    else if (gear > last_gear + 1)
+                        gear = last_gear + 1;
                 }
             }
-            else {
-                if (!moving_backward && curr_speed > 1.0f) {
+            else
+            {
+                if (!moving_backward && curr_speed > 1.0f)
+                {
                     want_dir = 0;
                     brake = true;
                 }
-                else {
+                else
+                {
                     gear = -1;
                 }
             }
@@ -450,11 +503,13 @@ public:
         last_gear = gear;
 
         {
-            if ((want_dir || steer) && !enabled) {
+            if ((want_dir || steer) && !enabled)
+            {
                 Enable(true);
             }
 
-            if (want_dir || steer) {
+            if (want_dir || steer)
+            {
                 engine_on = true;
             }
             //forces applied to joint motor under various circumstances
@@ -462,20 +517,24 @@ public:
             const float neutral_force = 3.0f;
 
             float vel = 0.0f, force;
-            if (!want_dir) {
+            if (!want_dir)
+            {
                 force = brake ? brake_force : neutral_force;
             }
-            else {
+            else
+            {
                 force = tab->GetItemF(CVEH_F_GEAR_FORCE, gear + 1);
                 float rel_speed = Min(curr_speed, tab->GetItemF(CVEH_F_GEAR_TRAN_SPEED, gear + 1));
                 vel = .5f + rel_speed * .3f;
                 vel *= (float)want_dir;
             }
             //process all wheels
-            for (int i = jnt_wheels.size(); i--; ) {
+            for (int i = jnt_wheels.size(); i--;)
+            {
                 S_wheel* wheel = &jnt_wheels[i];
                 PIPH_joint_hinge2 jnt = wheel->jnt;
-                if (wheel->powered) {
+                if (wheel->powered)
+                {
                     float curr_angle = jnt->GetAngle();
                     float v = steer - curr_angle;
                     float k = tsec * 2.0f;
@@ -489,15 +548,18 @@ public:
                 jnt->SetDesiredVelocity(-vel, 1);
                 jnt->SetMaxForce(force, 1);
             }
-            if (snd_engine) {
+            if (snd_engine)
+            {
                 float m = 1.0f;
-                if (gear) {
+                if (gear)
+                {
                     m = curr_speed * .4f / I3DFabs(tab->GetItemF(CVEH_F_GEAR_VEL, gear + 1));
                     m = Max(.7f, m);
                 }
                 float delta = m - last_frequency;
                 const float max_change = tsec * 3.0f;
-                if (I3DFabs(delta) > max_change) {
+                if (I3DFabs(delta) > max_change)
+                {
                     delta = (delta < 0.0f) ? -max_change : max_change;
                 }
                 last_frequency += delta;
@@ -510,7 +572,8 @@ public:
                 brake_light->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, brake ? 1.0f : 0.0f);
         }
 #ifdef DEBUG_SHOW_INFO
-        if (can_control) {
+        if (can_control)
+        {
             DEBUG(C_xstr("Speed: #.1% km/h") % curr_speed);
             DEBUG(C_xstr("Gear: %") % gear);
         }
@@ -526,15 +589,15 @@ public:
         gear = 0;
         curr_speed = 0.0f;
         moving_backward = false;
-        want_dir = 0;       //0=stay, 1=forward, -1=backward
+        want_dir = 0; //0=stay, 1=forward, -1=backward
         steer = 0.0f;
     }
 };
 
 //----------------------------
 
-PC_actor CreateVehicleActor(C_game_mission& gm1, PI3D_frame in_frm) {
-
+PC_actor CreateVehicleActor(C_game_mission& gm1, PI3D_frame in_frm)
+{
     C_vehicle_imp* vp = new C_vehicle_imp(gm1, in_frm);
     return vp;
 }

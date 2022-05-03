@@ -13,7 +13,7 @@ const S_actor_type_info actor_type_info[ACTOR_LAST] = {
    {"NULL",           0},
    {"Effect",         0},
    {"Player",         0},
-   {"Dier",           1},
+   {"Ragdoll",           1},
    {"Physics",        1},
    {"Vehicle",        1},
 };

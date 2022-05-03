@@ -446,3 +446,7 @@ _Release_4/
 *.mxp
 
 Editor/autoback/
+
+Editor/export/
+
+Editor/_src/.idea/

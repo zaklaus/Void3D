@@ -6,7 +6,7 @@ enum E_ACTOR_TYPE{            //actor class ID
    ACTOR_NULL,
    ACTOR_EFFECT,
    ACTOR_PLAYER,
-   ACTOR_DIER,
+   ACTOR_RAGDOLL,
    ACTOR_PHYSICS,
    ACTOR_VEHICLE,
 

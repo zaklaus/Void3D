@@ -50,6 +50,10 @@ class C_player_imp : public C_actor {
     bool jump_released;
     float shake_anim_pos;
 
+    // player use highlight temp
+    C_str last_hit_frm_name;
+    float last_hit_frm_lit;
+
     void SetFocus(bool b) {
         PI3D_camera cam = mission.GetGameCamera()->GetCamera();
         if (b) {
@@ -64,7 +68,7 @@ class C_player_imp : public C_actor {
         }
     }
 
-    virtual bool Use(E_USE_TYPE use_type, C_actor* instigator, PI3D_frame hit_frm) {
+    virtual bool  Use(E_USE_TYPE use_type, C_actor* instigator, PI3D_frame hit_frm) {
         if (!instigator) {
             return 0;
         }
@@ -518,6 +522,32 @@ public:
 
     //----------------------------
 
+    //@todo: Move to common.cpp
+    void SetModelBrightness(PI3D_model mod, float brightness, I3D_VISUAL_BRIGHTNESS reg){
+        const PI3D_frame *frms = mod->GetFrames();
+        for(dword i=mod->NumFrames(); i--; ){
+            PI3D_frame frm = *frms++;
+            if(frm->GetType()==FRAME_VISUAL)
+                I3DCAST_VISUAL(frm)->SetBrightness(reg, brightness);
+        }
+    }
+
+    void RestoreHitBrightness(){
+        if (last_hit_frm_name.Size()){
+            PI3D_frame vis_or_mod = mission.GetScene()->FindFrame(last_hit_frm_name, ENUMF_VISUAL|ENUMF_MODEL);
+            if (vis_or_mod){
+                if (vis_or_mod->GetType() == FRAME_VISUAL){
+                    I3DCAST_VISUAL(vis_or_mod)->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, last_hit_frm_lit);
+                    last_hit_frm_lit = 0.0f;
+                }else{
+                    //@todo how to restore brightness in models?
+                    SetModelBrightness(I3DCAST_MODEL(vis_or_mod), 0.0f, I3D_VIS_BRIGHTNESS_EMISSIVE);
+                }
+                last_hit_frm_name = "";
+            }
+        }
+    }
+
     void CheckPlayerUse(const struct S_tick_context& tc) {
         C_game_camera* cam = mission.GetGameCamera();
         if (!cam) return;
@@ -536,6 +566,7 @@ public:
         //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
         //DebugPoint(from + dir * 2.0f, 0.25f, 1);
 
+        RestoreHitBrightness();
 
         if (mission.GetScene()->TestCollision(cd)) {
             PI3D_frame hit_frm = cd.GetHitFrm();
@@ -552,11 +583,22 @@ public:
             PC_actor act = GetFrameActor(hit_frm);
             if (act) {
                 if (act->Use(USE_PEEK, this, old_frm)) {
-                    DebugPoint(cd.GetDestination(), 0.05f, 1);
+                    if (old_frm->GetType() == FRAME_VISUAL){
+                        PI3D_visual vis = I3DCAST_VISUAL(old_frm);
+                        last_hit_frm_name = old_frm->GetName();
+                        last_hit_frm_lit = vis->GetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE);
+                        vis->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, 1.0f);
+                    }else if (old_frm->GetType() == FRAME_MODEL){
+                        PI3D_model mod = I3DCAST_MODEL(old_frm);
+                        last_hit_frm_name = old_frm->GetName();
+                        SetModelBrightness(mod, 1.0f, I3D_VIS_BRIGHTNESS_EMISSIVE);
+                    }
+                    
                     DEBUG("Press F to use");
                     if (ctrl->Get(CS_USE, true)) {
                         if (act) {
-                            act->Use(USE_ON, this, old_frm);
+                            RestoreHitBrightness();
+                            act->Use(USE_TOGGLE, this, old_frm);
                         }
                     }
                 }

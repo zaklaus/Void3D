@@ -72,7 +72,7 @@ static S_body_part body_part_info[BODY_LAST] = {
 
 //----------------------------
 
-                              //axis daya used with S_die_part_info struct
+                              //axis data used with S_die_part_info struct
 enum AXIS_ORDER{           //axis shuffling for ball joint (due to euler-angle transformations)
    AXIS_012 = 0,
    AXIS_021 = 1,
@@ -559,11 +559,11 @@ static const S_die_part_info die_part_info[] = {
 
 //----------------------------
 
-class C_dier: public C_actor{
+class C_ragdoll: public C_actor{
    C_die_physics *phys;
 public:
-   C_dier(C_game_mission &gm, PI3D_frame frm):
-      C_actor(gm, frm, ACTOR_DIER),
+   C_ragdoll(C_game_mission &gm, PI3D_frame frm):
+      C_actor(gm, frm, ACTOR_RAGDOLL),
       phys(NULL)
    {
                               //remove our collision
@@ -595,8 +595,8 @@ public:
 
 //----------------------------
 
-PC_actor CreateDierActor(C_game_mission &gm, PI3D_frame frm){
-   return new C_dier(gm, frm);
+PC_actor CreateRagdollActor(C_game_mission &gm, PI3D_frame frm){
+   return new C_ragdoll(gm, frm);
 }
 
 //----------------------------

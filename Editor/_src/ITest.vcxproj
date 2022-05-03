@@ -388,7 +388,7 @@
     <ClCompile Include="Checkpoint.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="Common.cpp" />
-    <ClCompile Include="Dying.cpp" />
+    <ClCompile Include="Ragdoll.cpp" />
     <ClCompile Include="EffectActor.cpp" />
     <ClCompile Include="GameMission.cpp" />
     <ClCompile Include="Game_cam.cpp" />
@@ -414,7 +414,6 @@
     <ClCompile Include="Winstuff.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Source\IEditor\ilib_res.h" />
     <ClInclude Include="..\..\Source\IEditor\resource.h" />
     <ClInclude Include="Actors.h" />
     <ClInclude Include="All.h" />
