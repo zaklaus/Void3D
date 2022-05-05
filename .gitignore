@@ -450,3 +450,5 @@ Editor/autoback/
 Editor/export/
 
 Editor/_src/.idea/
+
+Source/ISnd2/OggVorbis/Lib/*.lib
