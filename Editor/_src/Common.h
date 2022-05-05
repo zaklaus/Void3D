@@ -175,6 +175,22 @@ public:
    }
 };
 
+struct S_name_texture {
+   //name of actor type stored in texture - for editing purposes
+   C_smart_ptr<I3D_texture> tp;
+   //size of initialized part of texture
+   int tp_size[2];
+   S_name_texture() {}
+   /*
+   S_name_texture(const S_name_texture &nt){ operator =(nt); }
+   S_name_texture &operator =(const S_name_texture &nt){
+      tp = nt.tp;
+      memcpy(tp_size, nt.tp_size, sizeof(tp_size));
+      return *this;
+   }
+   */
+};
+
 //----------------------------
 
 #endif //__COMMON_H_

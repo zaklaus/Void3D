@@ -39,6 +39,11 @@ extern const S_actor_type_info actor_type_info[];
 class C_actor: public C_unknown{
    E_ACTOR_TYPE actor_type;
                               //send message to master onlu from time to time
+
+   static void* actor_font;
+
+   S_name_texture actor_tex;
+   C_str old_frame_name;
 protected:
    C_smart_ptr<C_table> tab;
    class C_game_mission &mission;
@@ -145,6 +150,10 @@ public:
 // Create and assign table from template. This can't be done in C_actor constructor,
 // since virtual table of child class is not set up yet (can't access GetTableTemplate).
    void AssignTableTemplate();
+
+   //------------------------------
+   // Get actor name texture (and update it if name is changed)
+   virtual const S_name_texture& GetActorNameTexture();
 };
 
 typedef C_actor *PC_actor;

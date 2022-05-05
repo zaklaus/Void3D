@@ -777,23 +777,6 @@ class C_edit_Mission : public C_editor_item_Mission {
 
     bool mission_open_ok;      //true if mission was loaded successfully
 
-
-    struct S_name_texture {
-        //name of actor type stored in texture - for editing purposes
-        C_smart_ptr<I3D_texture> tp;
-        //size of initialized part of texture
-        int tp_size[2];
-        S_name_texture() {}
-        /*
-        S_name_texture(const S_name_texture &nt){ operator =(nt); }
-        S_name_texture &operator =(const S_name_texture &nt){
-           tp = nt.tp;
-           memcpy(tp_size, nt.tp_size, sizeof(tp_size));
-           return *this;
-        }
-        */
-    };
-    map<E_ACTOR_TYPE, S_name_texture> actor_name_textures;
     void* h_font;
     bool draw_actor_names;
     int sb_rt_msg_pos;         //position in statusbar for run-time error messages
@@ -976,22 +959,7 @@ class C_edit_Mission : public C_editor_item_Mission {
     //----------------------------
 
     void DrawActorName(const C_actor* act) {
-
-        E_ACTOR_TYPE type = act->GetActorType();
-        map<E_ACTOR_TYPE, S_name_texture>::iterator it = actor_name_textures.find(type);
-        if (it == actor_name_textures.end()) {
-            //init texture
-            if (!h_font)
-                h_font = OsCreateFont(42);
-            actor_name_textures[type] = S_name_texture();
-            it = actor_name_textures.find(type);
-
-            PI3D_texture tp = CreateStringTexture(actor_type_info[type].friendly_name,
-                (*it).second.tp_size, ed->GetDriver(), h_font);
-            (*it).second.tp = tp;
-            tp->Release();
-        }
-        const S_name_texture& nt = (*it).second;
+        const S_name_texture& nt = const_cast<C_actor*>(act)->GetActorNameTexture();
 
         //find (or create) texture associated with actor
         CPI3D_texture tp = nt.tp;
@@ -1467,8 +1435,6 @@ class C_edit_Mission : public C_editor_item_Mission {
     //----------------------------
 
     virtual void OnDeviceReset() {
-        //destroy all current name textures
-        actor_name_textures.clear();
     }
 
     //----------------------------

@@ -8,7 +8,7 @@
 //----------------------------
 
 #define CTRL_INPUTS_PER_SLOT 2   //how many buttons/keys may be assigned to each slot
-
+//#define JOYSTICK                 // enable joystick support
 
 //----------------------------
 // Pure class, the implementation is in controller.cpp.

@@ -1,6 +1,7 @@
 #include "all.h"
 #include "actors.h"
 #include "GameMission.h"
+#include "insanity/sprite.h"
 
 
 
@@ -216,6 +217,30 @@ void C_actor::Enable(bool on_off){
                               //just write warning
    //ReportActorError("unprocessed Enable() function call");
 }
+
+const S_name_texture& C_actor::GetActorNameTexture(){
+   #ifdef EDITOR
+   if (!actor_font)
+      actor_font = OsCreateFont(42);
+
+   auto frm_name = GetFrame()->GetName();
+   if (frm_name != old_frame_name){
+      old_frame_name = frm_name;
+
+      auto actor_name = C_fstr("[%s] %s", actor_type_info[GetActorType()].friendly_name, (const char*)frm_name);
+
+      actor_tex.tp = CreateStringTexture(actor_name,
+                   actor_tex.tp_size, editor->GetDriver(), actor_font);
+      actor_tex.tp->Release();
+   }
+
+   return actor_tex;
+   #else
+   return {};
+   #endif
+}
+
+void* C_actor::actor_font = NULL;
 
 //----------------------------
 //----------------------------
