@@ -304,6 +304,7 @@ public:
             ctrl = instigator->GetName();
             instigator->GetFrame()->SetOn(false);
             mission.SetInputActor(this);
+            Enable(true);
          }
       }
 
@@ -394,13 +395,13 @@ public:
          }
 
          if(tc.p_ctrl && tc.p_ctrl->Get(CS_USE, true)){
-            if(engine_on && curr_speed < 2.0f){
+            if(engine_on && curr_speed < 2.0f && (!want_dir || brake)){
                engine_on = false;
                brake = false;
                if(snd_engine->IsOn()){
                   snd_engine->SetOn(false);
                }
-               Enable(false);
+               // Enable(false);
             }
             else if(ctrl.Size()){
                ExitCar();
@@ -452,12 +453,17 @@ public:
             Enable(true);
          }
 
-         if(want_dir || steer){
+         if(want_dir){
             engine_on = true;
          }
          //forces applied to joint motor under various circumstances
          const float brake_force = 100.0f;
-         const float neutral_force = 3.0f;
+         float neutral_force = 3.0f;
+
+         if (!engine_on){
+            neutral_force = FLT_MAX;
+            want_dir = 0;
+         }
 
          float vel = 0.0f, force;
          if(!want_dir){
