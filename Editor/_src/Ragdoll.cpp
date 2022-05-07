@@ -1,4 +1,6 @@
 #include "all.h"
+#include "Ragdoll.h"
+
 #include "gamemission.h"
 #include <IPhysics.h>
 
@@ -383,6 +385,15 @@ public:
       joints.clear();
    }
 
+   
+   C_smart_ptr<IPH_body> GetBodyPart(C_str name){
+      IPH_body* body = NULL;
+      for(auto& b : bodies){
+         // if (b->Get)
+      }
+      return body;
+   }
+
 //----------------------------
 
    enum{
@@ -559,15 +570,19 @@ static const S_die_part_info die_part_info[] = {
 
 //----------------------------
 
-class C_ragdoll: public C_actor{
+class C_ragdoll_imp: public C_ragdoll{
    C_die_physics *phys;
 public:
-   C_ragdoll(C_game_mission &gm, PI3D_frame frm):
-      C_actor(gm, frm, ACTOR_RAGDOLL),
+   C_ragdoll_imp(C_game_mission &gm, PI3D_frame frm):
+      C_ragdoll(gm, frm),
       phys(NULL)
    {
                               //remove our collision
       DeleteVolumes(GetModel());
+   }
+
+   C_smart_ptr<IPH_body> GetBodyPart(C_str name) override{
+      return phys->GetBodyPart(name);
    }
 
 //----------------------------
@@ -596,7 +611,7 @@ public:
 //----------------------------
 
 PC_actor CreateRagdollActor(C_game_mission &gm, PI3D_frame frm){
-   return new C_ragdoll(gm, frm);
+   return new C_ragdoll_imp(gm, frm);
 }
 
 //----------------------------

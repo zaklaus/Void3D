@@ -724,6 +724,7 @@ public:
             if (!grab_act){
                 I3D_collision_data cd;
                 if (CheckPlayerActorInteractive(tc, cd)){
+                    // DEBUG(cd.GetHitFrm()->GetName());
                     CheckPlayerUse(tc, cd);
                     CheckPlayerGrab(tc, cd);
                 }
