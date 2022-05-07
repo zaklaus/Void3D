@@ -661,14 +661,14 @@ CS_TURN_RIGHT, C_controller::VM_FLOAT, {C_controller::ID_KEYBOARD, K_CURSORRIGHT
 CS_MOVE_BACK,  C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_S, 0, C_controller::ID_JOY_AXIS, 0x00000001, .4f},
 CS_MOVE_LEFT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_A, 0, C_controller::ID_JOY_AXIS, 0x80000002, .4f},
 CS_MOVE_RIGHT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_D, 0, C_controller::ID_JOY_AXIS, 2, .4f},
-CS_JUMP, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_E, 0, C_controller::ID_MOUSE_BUTTON, 1},
+CS_JUMP, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_E, 0},
 //CS_RESET_AIM, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_C},
 //CS_SLANT_RIGHT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_PAGEDOWN},
 //CS_SLANT_LEFT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_DEL},
 
                            //mode change
 //CS_STAY_UP,    C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_W},//, 0, C_controller::ID_MOUSE_AXIS, 2},
-CS_STAY_DOWN, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_Q, 0, C_controller::ID_MOUSE_BUTTON, 2},
+CS_STAY_DOWN, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_Q, 0},
 CS_RUN, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_SHIFT, 0, C_controller::ID_JOY_AXIS, 1, .7f},
 //CS_STRAFE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_ALT, 0, C_controller::ID_JOY_BUTTON, 2},
 
@@ -692,7 +692,8 @@ CS_INV_SCROLL_LEFT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_LBRACKE
 CS_INV_SCROLL_RIGHT, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_RBRACKET, 0, C_controller::ID_MOUSE_AXIS, 0x80000002},
 CS_INV_HIDE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_BACKSPACE},
 //CS_INV_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_ENTER, 0},
-CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_F, 0, C_controller::ID_MOUSE_BUTTON, 2},
+CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_F, 0, C_controller::ID_MOUSE_BUTTON, 1},
+CS_GRAB, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_G, 0, C_controller::ID_MOUSE_BUTTON, 2},
 //CS_USE, C_controller::VM_BOOL, {C_controller::ID_KEYBOARD, K_SPACE, 0, C_controller::ID_JOY_BUTTON, 4},
 //CS_SHIELD, C_controller::VM_BOOL,{C_controller::ID_KEYBOARD, K_LALT},
 

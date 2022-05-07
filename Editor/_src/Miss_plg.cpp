@@ -1514,6 +1514,7 @@ public:
         ed->AddShortcut(this, E_MISSION_SAVE, MENU_BASE"%0 &Save mission\tCtrl+S", K_S, SKEY_CTRL);
         ed->AddShortcut(this, E_MISSION_MERGE, MENU_BASE"%0 &Merge mission", K_NOKEY, 0);
         ed->AddShortcut(this, E_MISSION_RELOAD, MENU_BASE"%0 &Reload mission\tL", K_L, 0);
+        ed->AddShortcut(this, E_MISSION_RELOAD, 0, K_F7, 0);
         ed->AddShortcut(this, E_MISSION_SAVE_ASK_TOGGLE, MENU_BASE"%0 As&k to save", K_NOKEY, 0);
         ed->AddShortcut(this, E_MISSION_SMART_RELOAD, MENU_BASE"%0 Fast reload mode", K_NOKEY, 0);
         ed->AddShortcut(this, E_MISSION_AUTOSAVE_CONFIG, MENU_BASE"%0 &Autosave config", K_NOKEY, 0);
@@ -1772,6 +1773,15 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
         break;
 
         case E_MISSION_RELOAD:
+            if (mission->IsInGame()) {
+                mission->GameEnd();
+                SetupCameraRange();
+            }
+
+            ed->SetActive(true);
+            ed->Message("Edit mode");
+            e_mouseedit->SetEditMode();
+            SetTickClass(mission);
             Reload();
             break;
 

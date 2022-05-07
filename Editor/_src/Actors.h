@@ -126,6 +126,9 @@ public:
 // Setup sector of actor's frame. Overridable version.
    virtual bool SetFrameSector();
 
+   //-------------------------
+   virtual bool HasPhysics() const { return false; }
+
 //----------------------------
 // Watch - test collision between 2 3D points.
 // If a collision with actor is detected and the actor is friend of us,

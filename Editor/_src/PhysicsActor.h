@@ -92,10 +92,18 @@ public:
 
 //----------------------------
    void AddForceAtPos(const S_vector &pos, const S_vector &dir, CPI3D_volume at_vol = NULL);
+
+   //--------------------------
+   virtual bool CanGrab() const { return true; }
+
+   bool HasPhysics() const override{ return true; }
+
+   virtual IPH_body *GetBody(dword slot=0){ assert(slot < bodies.size()); return bodies[slot]; }
 };
 
 typedef C_actor_physics *PC_actor_physics;
 
+PC_actor_physics CastPhysicsActor(PC_actor act);
 //----------------------------
 
 #endif

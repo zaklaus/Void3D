@@ -102,6 +102,9 @@ class C_vehicle_imp: public C_actor_physics{
       idle_count = 0;
    }
 
+   //--------------------------
+   bool CanGrab() const override{ return false; }
+
    //----------------------------
 
    bool ContactReport(PI3D_frame dst_frm, const S_vector &pos, const S_vector &normal, float depth,

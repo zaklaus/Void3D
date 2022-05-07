@@ -518,6 +518,7 @@ enum E_CONTROLLER_SLOT{
    //CS_INV_USE,
    CS_INV_HIDE,
    CS_USE,
+   CS_GRAB,
 //   CS_SHIELD,
 
    //CS_PLAYER_SWITCH,

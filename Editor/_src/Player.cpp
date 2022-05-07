@@ -3,6 +3,7 @@
 #include "actors.h"
 #include "GameMission.h"
 #include "Game_cam.h"
+#include "PhysicsActor.h"
 
 
 //----------------------------
@@ -53,6 +54,9 @@ class C_player_imp : public C_actor {
     // player use highlight temp
     C_str last_hit_frm_name;
     float last_hit_frm_lit;
+
+    // grab mode vars
+    C_smart_ptr<C_actor_physics> grab_act;
 
     void SetFocus(bool b) {
         PI3D_camera cam = mission.GetGameCamera()->GetCamera();
@@ -491,6 +495,8 @@ public:
         }
         SetupVolumes();
         ResetMoveValues();
+
+        grab_act = NULL;
     }
 
 
@@ -548,16 +554,15 @@ public:
         }
     }
 
-    void CheckPlayerUse(const struct S_tick_context& tc) {
+    bool CheckPlayerActorInteractive(const struct S_tick_context& tc, I3D_collision_data& cd){
         C_game_camera* cam = mission.GetGameCamera();
-        if (!cam) return;
+        if (!cam) return false;
 
         LPC_controller ctrl = tc.p_ctrl;
         const S_matrix& m0 = cam->GetCamera()->GetMatrix();
         S_vector from = m0(3);
         S_vector dir = m0(2);
 
-        I3D_collision_data cd;
         cd.from = from;
         cd.dir = dir * DEFAULT_MAX_USE_DIST;
         cd.flags = I3DCOL_MOVING_SPHERE;
@@ -566,44 +571,113 @@ public:
         //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
         //DebugPoint(from + dir * 2.0f, 0.25f, 1);
 
+        return mission.GetScene()->TestCollision(cd);
+    }
+
+    void HighlightUsableActor(PI3D_frame frm){
         RestoreHitBrightness();
+        if (frm->GetType() == FRAME_VISUAL){
+            PI3D_visual vis = I3DCAST_VISUAL(frm);
+            last_hit_frm_name = frm->GetName();
+            last_hit_frm_lit = vis->GetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE);
+            vis->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, 0.5f);
+        }else if (frm->GetType() == FRAME_MODEL){
+            PI3D_model mod = I3DCAST_MODEL(frm);
+            last_hit_frm_name = frm->GetName();
+            SetModelBrightness(mod, 0.5f, I3D_VIS_BRIGHTNESS_EMISSIVE);
+        }
+    }
 
-        if (mission.GetScene()->TestCollision(cd)) {
-            PI3D_frame hit_frm = cd.GetHitFrm();
-            PI3D_frame old_frm = hit_frm;
-            while (GetFrameActor(hit_frm) == nullptr) {
-                if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
-                    break;
-                hit_frm = hit_frm->GetParent();
-            }
+    PI3D_frame GetRootFrameOfHitVolume(PI3D_frame hit_frm, PI3D_frame& old_frm){
+        while (GetFrameActor(hit_frm) == nullptr) {
+            if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
+                break;
+            hit_frm = hit_frm->GetParent();
+        }
 
-            if (old_frm->GetParent() != mission.GetScene()->GetPrimarySector())
-                old_frm = old_frm->GetParent();
+        if (old_frm->GetParent() != mission.GetScene()->GetPrimarySector())
+            old_frm = old_frm->GetParent();
 
-            PC_actor act = GetFrameActor(hit_frm);
-            if (act) {
-                if (act->Use(USE_PEEK, this, old_frm)) {
-                    if (old_frm->GetType() == FRAME_VISUAL){
-                        PI3D_visual vis = I3DCAST_VISUAL(old_frm);
-                        last_hit_frm_name = old_frm->GetName();
-                        last_hit_frm_lit = vis->GetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE);
-                        vis->SetBrightness(I3D_VIS_BRIGHTNESS_EMISSIVE, 1.0f);
-                    }else if (old_frm->GetType() == FRAME_MODEL){
-                        PI3D_model mod = I3DCAST_MODEL(old_frm);
-                        last_hit_frm_name = old_frm->GetName();
-                        SetModelBrightness(mod, 1.0f, I3D_VIS_BRIGHTNESS_EMISSIVE);
-                    }
-                    
-                    DEBUG("Press F to use");
-                    if (ctrl->Get(CS_USE, true)) {
-                        if (act) {
-                            RestoreHitBrightness();
-                            act->Use(USE_TOGGLE, this, old_frm);
-                        }
+        return hit_frm;
+    }
+
+    void CheckPlayerUse(const struct S_tick_context& tc, I3D_collision_data& cd) {
+        PI3D_frame hit_frm = cd.GetHitFrm();
+        PI3D_frame old_frm = hit_frm;
+        hit_frm = GetRootFrameOfHitVolume(hit_frm, old_frm);
+
+        PC_actor act = GetFrameActor(hit_frm);
+        if (act) {
+            if (act->Use(USE_PEEK, this, old_frm)) {
+                HighlightUsableActor(old_frm);
+                
+                DEBUG("Press F to use");
+                if (tc.p_ctrl->Get(CS_USE, true)) {
+                    if (act) {
+                        RestoreHitBrightness();
+                        act->Use(USE_TOGGLE, this, old_frm);
                     }
                 }
             }
         }
+    }
+
+    void CheckPlayerGrab(const S_tick_context& tc, I3D_collision_data& cd){
+        PI3D_frame hit_frm = cd.GetHitFrm();
+        PI3D_frame old_frm = hit_frm;
+        hit_frm = GetRootFrameOfHitVolume(hit_frm, old_frm);
+
+        PC_actor act = GetFrameActor(hit_frm);
+        if (act) {
+            PC_actor_physics phys_act = CastPhysicsActor(act);
+            if (phys_act && phys_act->CanGrab()){
+                HighlightUsableActor(old_frm);
+                
+                DEBUG("Press G to grab");
+                if (tc.p_ctrl->Get(CS_GRAB, true)) {
+                    grab_act = phys_act;
+                }
+            }
+        }
+    }
+
+    void ManipulateGrabbedActor(const S_tick_context& tc){
+        if (!grab_act) return;
+        C_game_camera* cam = mission.GetGameCamera();
+        if (!cam) return;
+
+        const S_matrix& m0 = cam->GetCamera()->GetMatrix();
+        S_vector from = m0(3);
+        S_vector dir = m0(2);
+
+        I3D_collision_data cd;
+        cd.from = from;
+        cd.dir = dir * DEFAULT_MAX_USE_DIST*2.0f;
+        cd.flags = I3DCOL_MOVING_SPHERE;
+        cd.radius = 0.5f;
+        cd.frm_ignore = frame;
+
+        S_vector dest = cd.from + cd.dir;
+
+        PI3D_frame frm = grab_act->GetFrame();
+        frm->SetOn(false);
+        if (mission.GetScene()->TestCollision(cd)){
+            dest = cd.GetDestination();
+        }
+        frm->SetOn(true);
+
+        S_vector obj_dir = dest - grab_act->GetCenterPos();
+        //grab_act->AddForceAtPos(grab_act->GetCenterPos(), obj_dir*1000.0f);
+        grab_act->GetBody(0)->SetLinearVelocity(obj_dir);
+        grab_act->GetBody(0)->SetAngularVelocity(S_vector(0,0,0));
+
+        if (obj_dir.Magnitude() < 1.0f){
+            //grab_act->GetBody(0)->SetLinearVelocity(S_vector(0,0,0));
+        }        
+
+        RestoreHitBrightness();
+        HighlightUsableActor(frm);
+        DEBUG("Grab mode activated!");
     }
 
     //----------------------------
@@ -634,11 +708,27 @@ public:
             if (ctrl && ctrl->GetConfigValue(C_controller::CFG_ALWAYS_RUN))
                 is_running = !is_running;
 
-            if (ctrl->Get(CS_FIRE)) {
-                DEBUG("Fire!");
+            RestoreHitBrightness();
+
+            if (grab_act){
+                if (tc.p_ctrl->Get(CS_GRAB, true)) {
+                    grab_act = NULL;
+                }
             }
 
-            CheckPlayerUse(tc);
+            if (!grab_act){
+                I3D_collision_data cd;
+                if (CheckPlayerActorInteractive(tc, cd)){
+                    CheckPlayerUse(tc, cd);
+                    CheckPlayerGrab(tc, cd);
+                }
+
+                if (ctrl->Get(CS_FIRE)) {
+                    DEBUG("Fire!");
+                }
+            }
+
+            ManipulateGrabbedActor(tc);
 
             if (ctrl->Get(CS_JUMP)) {
                 if (!bench_ratio && floor_link && jump_released) {

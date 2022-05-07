@@ -258,6 +258,15 @@ bool C_actor_physics::Init(const S_phys_template *templ, float weight, PI3D_fram
    return true;
 }
 
+
+PC_actor_physics CastPhysicsActor(PC_actor act){
+   assert(act);
+   if (act->HasPhysics()){
+      return reinterpret_cast<PC_actor_physics>(act);
+   } else{
+      return NULL;
+   }
+}
 //----------------------------
 //----------------------------
 
