@@ -558,7 +558,6 @@ public:
         C_game_camera* cam = mission.GetGameCamera();
         if (!cam) return false;
 
-        LPC_controller ctrl = tc.p_ctrl;
         const S_matrix& m0 = cam->GetCamera()->GetMatrix();
         S_vector from = m0(3);
         S_vector dir = m0(2);
@@ -568,8 +567,6 @@ public:
         cd.flags = I3DCOL_MOVING_SPHERE;
         cd.radius = 0.5f;
         cd.frm_ignore = frame;
-        //DebugLine(from, from + dir*2.0f, 1, 0x88FF00ff);
-        //DebugPoint(from + dir * 2.0f, 0.25f, 1);
 
         return mission.GetScene()->TestCollision(cd);
     }
@@ -588,7 +585,8 @@ public:
         }
     }
 
-    PI3D_frame GetRootFrameOfHitVolume(PI3D_frame hit_frm, PI3D_frame& old_frm){
+    PI3D_frame GetRootFrameOfHitVolume(PI3D_frame hit_frm, PI3D_frame& old_frm) const{
+        old_frm = hit_frm;
         while (GetFrameActor(hit_frm) == nullptr) {
             if (hit_frm->GetParent() == mission.GetScene()->GetPrimarySector())
                 break;
@@ -603,7 +601,7 @@ public:
 
     void CheckPlayerUse(const struct S_tick_context& tc, I3D_collision_data& cd) {
         PI3D_frame hit_frm = cd.GetHitFrm();
-        PI3D_frame old_frm = hit_frm;
+        PI3D_frame old_frm;
         hit_frm = GetRootFrameOfHitVolume(hit_frm, old_frm);
 
         PC_actor act = GetFrameActor(hit_frm);
@@ -624,7 +622,7 @@ public:
 
     void CheckPlayerGrab(const S_tick_context& tc, I3D_collision_data& cd){
         PI3D_frame hit_frm = cd.GetHitFrm();
-        PI3D_frame old_frm = hit_frm;
+        PI3D_frame old_frm;
         hit_frm = GetRootFrameOfHitVolume(hit_frm, old_frm);
 
         PC_actor act = GetFrameActor(hit_frm);
