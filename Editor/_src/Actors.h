@@ -203,6 +203,9 @@ struct S_effect_init{
 
 #define DEFAULT_MAX_USE_DIST 1.5f   //default maximal use distance
 #define DEFAULT_MAX_USE_ANGLE (PI*.4f) //default maximal use angle
+#define DEFAULT_MAX_GRAB_DIST 3.0f   //default maximal grab distance
+#define DEFAULT_MAX_GRAB_POWER 400.0f   //default grab power
+#define DEFAULT_MAX_GRAB_LOOSE_DIST 2.5f   //default grab max distance
 
 
 #endif

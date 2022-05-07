@@ -652,7 +652,7 @@ public:
 
         I3D_collision_data cd;
         cd.from = from;
-        cd.dir = dir * DEFAULT_MAX_USE_DIST*2.0f;
+        cd.dir = dir * DEFAULT_MAX_GRAB_DIST;
         cd.flags = I3DCOL_MOVING_SPHERE;
         cd.radius = 0.5f;
         cd.frm_ignore = frame;
@@ -667,17 +667,18 @@ public:
         frm->SetOn(true);
 
         S_vector obj_dir = dest - grab_act->GetCenterPos();
-        //grab_act->AddForceAtPos(grab_act->GetCenterPos(), obj_dir*1000.0f);
-        grab_act->GetBody(0)->SetLinearVelocity(obj_dir);
-        grab_act->GetBody(0)->SetAngularVelocity(S_vector(0,0,0));
-
-        if (obj_dir.Magnitude() < 1.0f){
-            //grab_act->GetBody(0)->SetLinearVelocity(S_vector(0,0,0));
-        }        
+        IPH_body *body = grab_act->GetBody(0);
+        assert(body);
+        body->SetLinearVelocity(obj_dir*(DEFAULT_MAX_GRAB_POWER/body->GetWeight()));
+        body->SetAngularVelocity(S_vector(0,0,0));
 
         RestoreHitBrightness();
         HighlightUsableActor(frm);
         DEBUG("Grab mode activated!");
+
+        if (obj_dir.Magnitude() > DEFAULT_MAX_GRAB_LOOSE_DIST){
+            grab_act = NULL;
+        }
     }
 
     //----------------------------
