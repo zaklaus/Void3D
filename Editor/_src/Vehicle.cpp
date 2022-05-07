@@ -475,7 +475,10 @@ public:
             PIPH_joint_hinge2 jnt = wheel->jnt;
             if(wheel->powered){
                float curr_angle = jnt->GetAngle();
-               float v = steer - curr_angle;
+               float correctional_speed = Min(curr_speed / 5.0f, 5.0f)*tsec;
+               // DEBUG(curr_speed);
+               // DEBUG(correctional_speed);
+               float v = steer - (curr_angle*correctional_speed);
                float k = tsec * 2.0f;
                if(curr_angle * steer < 0.0f)
                   k *= 2.0f;
