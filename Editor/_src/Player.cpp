@@ -10,8 +10,8 @@
 //----------------------------
 
 #define MOVE_SPEED_FORWARD 4.0f
-#define MOVE_SPEED_BACK MOVE_SPEED_FORWARD
-#define MOVE_SPEED_SIDE MOVE_SPEED_FORWARD
+#define MOVE_SPEED_BACK 1.5f
+#define MOVE_SPEED_SIDE 2.5f
 
 #define MOVE_RUN_MULTIPLIER 3.0f //when running, speed is multiplied by this
 #define MOVE_BENCH_MULTIPLIER .5f   //when in bench, speed is multiplied by this
@@ -30,6 +30,12 @@
 #define SMALL_STEP_HEIGHT .6f //height of climbable small step
 #define SMALL_STEP_TEST_DEPTH (vol_radius[0]*2.0f) //depth if collision testing for small testing (from body center line)
 #define SMALL_STEP_CLIMB_Y 2.0f//speed of climbing small steps (per second) 
+
+#define DEFAULT_MAX_USE_DIST 1.5f   //default maximal use distance
+//#define DEFAULT_MAX_USE_ANGLE (PI*.4f) //default maximal use angle
+#define DEFAULT_MAX_GRAB_DIST 3.0f   //default maximal grab distance
+#define DEFAULT_MAX_GRAB_POWER 400.0f   //default grab power
+#define DEFAULT_MAX_GRAB_LOOSE_DIST 2.5f   //default grab max distance
 
 //----------------------------
 
@@ -743,7 +749,7 @@ public:
 
             //update movement
             if (ctrl->Get(CS_MOVE_FORWARD))
-                want_move_dir.z += MOVE_SPEED_BACK;
+                want_move_dir.z += MOVE_SPEED_FORWARD;
 
             if (ctrl->Get(CS_MOVE_BACK))
                 want_move_dir.z -= MOVE_SPEED_BACK;
