@@ -100,6 +100,7 @@ class C_edit_LightMap: public C_editor_item{
             if(prm2==2){
                               //show user what he's done
                lmh.e_lmap->ed->GetScene()->Render();
+               lmh.e_lmap->ed->GetScene()->GetDriver()->RenderPostFX();
                lmh.e_lmap->ed->GetIGraph()->UpdateScreen();
                ++lmh.curr_lmap;
             }

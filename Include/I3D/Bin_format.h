@@ -249,7 +249,7 @@ enum E_INSANITY_EDITOR_CHUNK_TYPE{
          //plugin custom data
 //----------------------------
                               //FREE: E000 - FFFF
-
+   CT_POSTFX_STACK = 0xe001,        //I3D_postfx_info
 };
 
 //----------------------------

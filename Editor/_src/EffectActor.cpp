@@ -255,14 +255,13 @@ private:
 public:
    C_effect(C_game_mission &m1, PI3D_frame in_frm):
       C_actor(m1, in_frm ? in_frm : m1.GetScene()->CreateFrame(FRAME_VISUAL, I3D_VISUAL_PARTICLE), ACTOR_EFFECT),
-      life_time(0),
       mode_flags(0),
-      r_fade_come(1.0f), fade_come_count(0),
-      fade_stay(0),
-      r_fade_leave(1.0f), fade_leave_count(0),
-      auto_destroy_count(0),
-      scale_add(0.0f)
-   {
+      scale_add(0.0f),
+      auto_destroy_count(0), r_fade_come(1.0f),
+      r_fade_leave(1.0f),
+      fade_come_count(0), fade_stay(0),
+      fade_leave_count(0),
+      life_time(0){
       if(!in_frm)
          frame->Release();       //release one ref of CreateModel used above
 

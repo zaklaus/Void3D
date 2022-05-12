@@ -220,6 +220,8 @@ protected:
    mutable dword mission_crc;
    C_str mission_name;        //filename of currently loaded mission
 
+   I3D_postfx_info postfx;
+
 
                               //temp (counters, etc)
                               //loader progress indicator data

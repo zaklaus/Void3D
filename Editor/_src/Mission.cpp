@@ -153,6 +153,9 @@ void C_mission::InitializeLoadProgress() {
     else
         igraph->ClearViewport();
 
+    postfx={};
+    driver->SetPostFX(postfx);
+
     assert(!load_progress.back_img);
     float sx = (float)igraph->Scrn_sx(), sy = (float)igraph->Scrn_sy();
     {
@@ -821,6 +824,11 @@ bool C_mission::LoadChunk(CK_TYPE ck_t, S_load_context& lc) {
         }
         break;
 
+    case CT_POSTFX_STACK:
+        {
+            lc.ck.Read(&postfx, sizeof(postfx));
+            driver->SetPostFX(postfx);
+        }break;
     case CT_CAMERA_FOV:
     case CT_CAMERA_RANGE:
     case CT_CAMERA_EDIT_RANGE:

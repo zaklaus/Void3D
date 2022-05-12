@@ -38,7 +38,7 @@ inline int FloatToInt(float f){
       fld f
       fistp f 
    }
-   return *(int*)&f;
+   return *reinterpret_cast<int*>(&f);  // NOLINT(clang-diagnostic-undefined-reinterpret-cast)
 }
 
 #else

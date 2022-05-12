@@ -1213,14 +1213,14 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
                strcpy(fn+i, !j ? "vertex.shd" : "pixel.shd");
                PC_dta_stream dta = DtaCreateStream(fn);
                if(!dta)
-                  break;
-               int sz = dta->GetSize();
-               char *buf = new char[sz];
-               dta->Read(buf, sz);
-               dta->Release();
+                     break;
+                  int sz = dta->GetSize();
+                  char *buf = new char[sz];
+                  dta->Read(buf, sz);
+                  dta->Release();
 
-               hr = nv_linker[j]->AddFragments(buf, sz);
-               delete[] buf;
+                  hr = nv_linker[j]->AddFragments(buf, sz);
+                  delete[] buf;
                CHECK_D3D_RESULT("AddFragments", hr);
                if(FAILED(hr))
                   break;
@@ -1377,6 +1377,10 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "r0_b_2_a",
          "blend_by_alpha",
          "night_view",
+         "tonemap_linear",
+         "tonemap_aces",
+         "tonemap_reinhard",
+         "colorgrade",
          "ps_test_bump",
          "ps_test_bump_env",
       };
@@ -1422,10 +1426,10 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "dcl_normal2 v6",
          "dcl_normal3 v7",
       };
-      for(int sv=0; sv<1; sv++){
+      for(int sv=0; sv<2; sv++){
          LPD3DXBUFFER buf_shd;
          for(dword i=0; i<VSDECL_LAST; i++){
-            C_fstr src("%s\n%s\nmov oPos.xyzw,c0.xxxx\n", !sv ? "vs_1_1" : "vs_3_0", decl_srcs[i]);
+            C_fstr src("%s\n%s\nmov oPos.xyzw,c0.xxxx\n", !sv ? "vs_1_1" : "vs_1_1", decl_srcs[i]);
             buf_shd = NULL;
             HRESULT hr = D3DXAssembleShader(src, src.Size(), NULL, NULL,
                0,//D3DXSHADER_SKIPVALIDATION,
@@ -5453,6 +5457,120 @@ I3D_RESULT I3D_driver::EndNightVisionRender(){
 
    return I3D_OK;
 }
+
+LPDIRECT3DTEXTURE9 I3D_driver::GetRTTexture(IDirect3DSurface9 *rt){
+   const auto graph = GetGraphInterface();
+   LPDIRECT3DTEXTURE9 texture_map;
+   D3DXCreateTexture(GetDevice1(), graph->Scrn_sx(), graph->Scrn_sy(), D3DX_DEFAULT,  D3DUSAGE_RENDERTARGET, D3DFMT_X8R8G8B8, D3DPOOL_DEFAULT,&texture_map);
+   LPDIRECT3DSURFACE9 surf;
+   texture_map->GetSurfaceLevel(0, &surf);
+   GetDevice1()->StretchRect(rt, nullptr, surf, nullptr, D3DTEXF_NONE);
+
+   surf->Release();
+   return texture_map;
+}
+
+void I3D_driver::RenderToTexture(C_render_target<> &rt, S_ps_shader_entry_in &se_ps){
+   SetRenderTarget(rt);
+
+   EnableZBUsage(false);
+   d3d_dev->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+
+   S_vs_shader_entry_in se;
+   se.AddFragment(VSF_MUL_TRANSFORM);
+   se.AddFragment(VSF_MAKE_RECT_UV);
+
+   SetPixelShader(se_ps);
+   SetVertexShader(GetVSHandle(se)->vs);
+
+   SetStreamSource(vb_rectangle, sizeof(S_vertex_rectangle));
+   SetVSDecl(vs_decl_rectangle);
+                           //setup position multiplication constant
+   S_vectorw vc(-2, 2, 0, 1);
+   SetVSConstant(VSC_MAT_TRANSFORM_0, &vc);
+   SetupBlend(I3DBLEND_OPAQUE);
+   SetupAlphaTest(false);
+   EnableNoCull(true);
+
+   if(drv_flags&DRVF_WIREFRAME)
+      d3d_dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
+   HRESULT hr;
+   hr = d3d_dev->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
+   CHECK_D3D_RESULT("DrawPrimitive", hr);
+
+   if(drv_flags&DRVF_WIREFRAME)
+      d3d_dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+   EnableZBUsage(true);
+   EndScene();
+}
+
+// Tonemapping
+I3D_RESULT I3D_driver::RenderPostFX(){
+   if (postfx.mode == 0)
+      return I3D_OK;
+
+   HRESULT hr;
+
+   auto texture_map = GetRTTexture(default_render_target.rt[0]);
+   d3d_dev->SetTexture(0, texture_map);  // t0 reg will be our final raw render
+   CHECK_D3D_RESULT("SetTexture", hr);
+
+   DisableTextures(1);
+   S_ps_shader_entry_in se_ps;
+   se_ps.Tex(0);
+
+   if (postfx.mode==1) se_ps.AddFragment(PSF_TONEMAP_LINEAR);
+   if (postfx.mode==2) se_ps.AddFragment(PSF_TONEMAP_ACES);
+   else if (postfx.mode==3) se_ps.AddFragment(PSF_TONEMAP_REINHARD);
+
+   S_vectorw psc[] = {
+      S_vectorw(2.51f, 2.51f, 2.51f, 1),     //a
+      S_vectorw(.03f, .03f, .03f, 1),        //b
+      S_vectorw(2.43f, 2.43f, 2.43f, 1),     //c
+      S_vectorw(0.59f, 0.59f, 0.59f, 1),     //d
+      S_vectorw(0.14f, 0.14f, 0.14f, 1),     //e
+      S_vectorw(postfx.gamma, postfx.gamma, postfx.gamma, 1),     //gamma
+   };
+   SetPSConstant(PSC_FACTOR, psc, 6);
+
+   RenderToTexture(default_render_target, se_ps);
+
+   texture_map->Release();
+
+   texture_map = GetRTTexture(default_render_target.rt[0]);
+   d3d_dev->SetTexture(0, texture_map);  // t0 reg will be our final raw render
+   CHECK_D3D_RESULT("SetTexture", hr);
+
+   DisableTextures(1);
+
+   se_ps={};
+   se_ps.Tex(0);
+
+   se_ps.AddFragment(PSF_COLOR_GRADE);
+
+   S_vectorw psc2[] = {
+      S_vectorw(postfx.color[0], postfx.color[1], postfx.color[2], 1),     //color grading
+      S_vectorw(postfx.power, postfx.power, postfx.power, 1),     //boost intensity
+   };
+   SetPSConstant(PSC_FACTOR, psc2, 2);
+
+   RenderToTexture(default_render_target, se_ps);
+
+   texture_map->Release();
+
+   return I3D_OK;
+}
+
+void I3D_driver::SetPostFX(I3D_postfx_info info){
+   postfx = info;
+}
+
+I3D_postfx_info I3D_driver::GetPostFX() const{
+   return postfx;
+}
+
+
 #endif
 //----------------------------
 //----------------------------

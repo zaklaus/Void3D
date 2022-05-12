@@ -1,0 +1,337 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 10 (filtered)">
+<title>NVASM - Vertex and Pixel Shader Macro Assembler</title>
+
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:Arial;}
+p.Code, li.Code, div.Code
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:.75in 1.0in .75in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US>
+
+<div class=Section1>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:14.0pt'>NVASM - Vertex and Pixel Shader Macro Assembler</span></b></p>
+
+<p class=MsoNormal align=center style='text-align:center'><b><span
+style='font-size:14.0pt'>&nbsp;</span></b></p>
+
+<p class=MsoNormal><b>Overview</b></p>
+
+<p class=MsoNormal style='text-align:justify'><b>&nbsp;</b></p>
+
+<p class=MsoNormal>NVASM was developed for a variety of reasons. Allowing
+developers to assemble their Vertex and Pixel Shader source code into object
+code that can be loaded directly into DX8.  Better error reporting
+functionality was included so that you can double click on the error and be
+taken directly to the line of the error, inside of Microsoft<span
+style='font-family:Symbol'>â</span> Visual Studio<span style='font-family:Symbol'>â</span>. 
+Listing file support is included so that you can look at the output generated
+by the assembler.  Finally it was written so that it is easily extensible, so
+that when new assembly opcodes are defined, they can be integrated.</p>
+
+<p class=MsoNormal style='text-align:justify'>&nbsp;</p>
+
+<p class=MsoNormal><b>Features</b></p>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal>Command line program for easy integration into Microsoft<span
+     style='font-family:Symbol'>â</span> Visual Studio<span style='font-family:
+     Symbol'>â</span></li>
+ <li class=MsoNormal>Built-in #define capability</li>
+ <li class=MsoNormal>Macro functions</li>
+ <li class=MsoNormal>Integrated Vertex and Pixel Shader assembler</li>
+ <li class=MsoNormal>Robust error reporting</li>
+ <li class=MsoNormal>Listing file support</li>
+ <li class=MsoNormal>Output to .h files or object code</li>
+</ul>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>How to use NVASM</b></p>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<p class=MsoNormal>NVASM can either be used from the command line or integrated
+inside of Microsoft<span style='font-family:Symbol'>â</span> Visual Studio<span
+style='font-family:Symbol'>â</span>.  Integration inside Visual Studio<span
+style='font-family:Symbol'>â</span> will be explained later in this document. 
+You can invoke NVASM from the command line.  Here is an example of how to do
+that.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code>      nvasm -lxh test.psa testpsa.h testpsa.lst</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=MsoNormal>NVASM takes options first followed by the source file, then
+the output file and finally followed by the listing filename.  The output and
+listing filenames are optional and will be auto generated from the source file
+name if they are not specified.  Output take the base filename of the source
+file and append either .vso , .pso or .h for a vertex shader object file, pixel
+shader object file or output of a .h file, respectively.  The listing file is
+auto generated from the base filename of the source file with .lst appended. 
+This only is done if the -l option is specified.</p>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<p class=MsoNormal><b>NVASM Options</b></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal>-b Suppresses banner when the nvasm.exe program is called.</li>
+ <li class=MsoNormal>-d Suppresses debug info inside of the object code</li>
+ <li class=MsoNormal>-h Generates a .h file instead of the default .pso or .vso
+     file</li>
+ <li class=MsoNormal>-l Generates a listing file that can be viewed</li>
+ <li class=MsoNormal>-x Expands macros inside the listing file</li>
+</ul>
+
+<p class=MsoNormal style='margin-left:.25in'>&nbsp;</p>
+
+<p class=MsoNormal><b>NVASM Error Reporting</b></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>NVASM has robust error reporting built in to it.  It will
+not only tell you what line the error was on, so that Visual Studio<span
+style='font-family:Symbol'>â</span> can understand it, it will tell you where
+the source line is even back tracking though macros.  This is a very powerful
+feature, because now you can just double click on the error and be taken
+directly to the macro that generated it and you still know the line where the
+macro was invoked.  Here is an example of the error output from NVASM:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code>.\test.vsa(41) : error Can't use vertex register as destination
+argument.</p>
+
+<p class=Code>.\test.vsa(44) : References -&gt;</p>
+
+<p class=Code>constants.h(6) : error Can't use swizzle modifier on the address
+register.</p>
+
+<p class=Code>----- Assembly unsuccessful, 68 line assembled, 10 errors, 3
+warnings -----</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=Code><span style='font-family:Arial'>As you can see from the above
+example, Line 44 in test.vsa has an error.  Sine Line 44 was a macro, the next
+line tells you that it came from constants.h at line(6).  If you double click
+on this line, you will taken directly to the macro line that generated the
+error.</span></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code><b><span style='font-family:Arial'>Macros</span></b></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code><span style='font-family:Arial'>NVASM has several ways to use
+macros.  You can use the #define type of macros that are used in C/C++ or you
+can use the &quot;macro/endm&quot; keywords.  #define macros do not have all
+the capabilities of the &quot;macro/endm&quot; type of macros.</span></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code><span style='font-family:Arial'>Here is an example of how to use
+the &quot;macro/endm&quot; keywords:</span></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code>macro Test  x,y</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=Code>      dp3   r0, %x.x, %y</p>
+
+<p class=Code>      dp3   r0, %x.y, %inc(%y)</p>
+
+<p class=Code>endm</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=MsoNormal>The &quot;macro&quot; line has the word &quot;Test&quot; on
+it and this is the name of the macro.  The next two items on the line are the
+parameters for the macro, if there are any.  The macro body is defined until
+the assembler reaches the &quot;endm&quot; keyword.  When the macro is invoked
+the assembler looks for the % sign to replace the parameters you specified
+inside of the macro body.  There are four special % macro functions that are
+available, the %inc(), %dec(), %add() and %sub() macro functions.  These take
+the string between the parentheses and do one of two things.  If the text
+between the parentheses has an explicit number in it, it will replace that number
+with another number that is either +1 or -1 for %inc and %dec, respectively. If
+there isn't an explicit number in the text between the parenthesis, then the
+functions look for the inner most brackets/ parenthesis or scans to the end of
+the line and inserts the text &quot;+1&quot; or&quot;-1&quot; for %inc and
+%dec, respectively.  The macros %add and %sub take one other argument that is
+the amount to offset the text.  So for example %add(%y, 5) would add 5 to the
+text.  The %add and %sub work in the exact same way as the %inc, %dec macros in
+terms of text replacement.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Now to invoke the macro in the source you would do the
+following</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code>      Text  r1, c[EYE_NORMAL]</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=MsoNormal>This would expand to the following inside the macro:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code>      dp3   r0, r1.x, c[EYE_NORMAL]</p>
+
+<p class=Code>      dp3   r0, r1.y, c[EYE_NORMAL+1]</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>If you invoked the macro with the following parameters:</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=Code>      Text  r1, r5</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=MsoNormal>This would expand to the following inside the macro</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code>      dp3   r0, r1.x, r5</p>
+
+<p class=Code>      dp3   r0, r1.y, r6</p>
+
+<p class=Code>&nbsp;</p>
+
+<p class=MsoNormal><b>Integration into Microsoft</b><b><span style='font-family:
+Symbol'>â</span></b><b> Visual Studio</b><b><span style='font-family:Symbol'>â</span></b></p>
+
+<p class=MsoNormal><b>&nbsp;</b></p>
+
+<p class=MsoNormal>The assembler can be integrated into your existing Visual
+Studio<span style='font-family:Symbol'>â</span> Project.  To include Vertex
+Assembly or Pixel Shader Assembly files into your project, follow these steps:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Add
+files to the project with the Project-&gt;Add To Project-&gt;Files… menu
+options</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Setup
+the Custom Build settings by selecting Project-&gt;Settings… menu options and
+then selecting the assembly files. </p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Click
+on the Custom Build tab</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><img width=577 height=372 src="NVASM_files/image001.jpg"></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Set
+the Description box to anything you like</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>5.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Put
+the NVASM command line in the Commands box.  You should specify any options you
+would like on this line also.  The above example uses the listing, expand
+macros and generate .h file options that will be explained later</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>6.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Set
+the Outputs box to be the name of the output file you would like generated. 
+The above example says the output file will be named testvsa.h.  The
+$(TargetPath) in the Command box will use this name when calling the NVASM
+program.</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>7.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Set
+any Dependencies by clicking on the Dependencies… button.  You should put any
+.h files that are included in the assembly language file in this dialog box.
+This will ensure that if you update the .h file, Visual Studio<span
+style='font-family:Symbol'>â</span> will re-assemble the assembler file.</p>
+
+<p class=MsoNormal style='margin-left:.75in;text-indent:-.25in'>8.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Click
+OK.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=Code><b><span style='font-family:Arial'>Contact</span></b></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code><span style='font-family:Arial'>If you have any questions or
+comments regarding NVASM, contact:</span></p>
+
+<p class=Code><span style='font-family:Arial'>&nbsp;</span></p>
+
+<p class=Code><span style='font-family:Arial'>Kenneth Hurley</span></p>
+
+<p class=Code><span style='font-family:Arial'>NVIDIA Corporation</span></p>
+
+<p class=Code><span style='font-family:Arial'>2701 San Thomas Expressway</span></p>
+
+<p class=Code><span style='font-family:Arial'>Santa Clara</span><span
+style='font-family:Arial'>, CA. 95050</span></p>
+
+<p class=Code><span style='font-family:Arial'>khurley@nvidia.com</span></p>
+
+</div>
+
+</body>
+
+</html>

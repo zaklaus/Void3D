@@ -1,6 +1,6 @@
 #include "pixel.h"
 
-ps.1.1
+ps.1.3
 
 ;----------------------------
 #beginfragment tex_1
@@ -267,6 +267,54 @@ mad r0, 1-r0, r1, CP_COLOR
 
 #endfragment
 
+#beginfragment tonemap_linear
+
+add r0, t0, c0  ; (y = x)
+add r0, r0, c7
+
+#endfragment
+
+#beginfragment tonemap_aces
+
+; https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/
+; saturate((x*(a*x+b))/(x*(c*x+d)+e))
+
+; Prepare left side of rational
+mad r0, c2, t0, c3 ; (y1 = a*x+b)
+mul r0, r0, t0     ; (y1 = x*y1)
+
+; Prepare right side of rational
+mad r1, c4, t0, c5 ; (y2 = c*x+d)
+mul r1, r1, t0     ; (y2 = x*y2)
+add r1, r1, c6 ; (y2 = y2+e)
+mov_d2 r1, r1 ; (y2 = y2/2)
+
+; Divide y1/y2
+mul r0, r0, r1     ; (y1 = saturate(y1*y2))
+
+; Raise gamma
+add r0, r0, c7
+#endfragment
+
+#beginfragment tonemap_reinhard
+
+; (y / (1.0f + y)
+
+add_d2 r1, t0, CP_ONE  ; (y2 = 1/(1.0 + x))
+mul r0, t0, r1         ; (y1 = x + y2)
+
+; Raise gamma
+add r0, r0, c7
+
+#endfragment
+
+#beginfragment colorgrade
+
+mov_x4 r1, c3
+mul r0, t0, c2
+mul r0, r0, r1  ; (y = y * c)
+
+#endfragment
 
 ;----------------------------
 ; Test fragment.

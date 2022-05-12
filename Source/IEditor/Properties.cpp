@@ -286,6 +286,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
    
                         ep->ed->SetModified();
                         ep->ed->GetScene()->Render();
+                        ep->ed->GetScene()->GetDriver()->RenderPostFX();
                         ep->ed->GetIGraph()->UpdateScreen();
                      }
                   }

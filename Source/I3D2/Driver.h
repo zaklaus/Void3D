@@ -8,8 +8,9 @@
 #endif
 #include "database.h"
 #include "common.h"
+#include "i3d/i3d2.h"
 
-                              //define type for nvlinker compatibility with DX8
+//define type for nvlinker compatibility with DX8
 typedef struct IDirect3DDevice9 *LPDIRECT3DDEVICE8;
 
 #include "nvidia\nvlink\nvlink.h"   //vertex shader stuff
@@ -237,6 +238,10 @@ enum E_PS_FRAGMENT{
    PSF_r0_B_2_A,              //copy r0.b to r0.a
    PSF_BLEND_BY_ALPHA,        //blend between t1 and t2 using t0.a
    PSF_NIGHT_VIEW,            //using t0 as input, generate black-green-white gamma-raised night-vision look
+   PSF_TONEMAP_LINEAR,          //using t0 as input, apply tonemapping curve to colors
+   PSF_TONEMAP_ACES,          //using t0 as input, apply tonemapping curve to colors
+   PSF_TONEMAP_REINHARD,      //using t0 as input, apply tonemapping curve to colors
+   PSF_COLOR_GRADE,           // apply color grading
    PSF_TEST_BUMP,             // TEST
    PSF_TEST_BUMP_ENV,            
    PSF_LAST
@@ -249,6 +254,7 @@ enum E_PS_FIXED_CONSTANT{
    PSC_FACTOR1 = 3,
    PSC_COLOR = 4,             //fixed constant color
    PSC_COLOR1 = 5,
+   PSC_COLOR2 = 6,
    PSC_DEBUG = 7,             //value used for debugging
 };
 
@@ -421,6 +427,8 @@ class I3D_driver{
    bool debug_draw_mats;
 
    dword reapply_volume_count;//override dsound bug - reapply volume after some several rendered frames after SetFocus
+
+   I3D_postfx_info postfx;
 
 #ifndef GL
    bool is_hal;
@@ -1460,6 +1468,9 @@ public:
       }
    }
 
+   LPDIRECT3DTEXTURE9 GetRTTexture(IDirect3DSurface9 *rt);
+   void RenderToTexture(C_render_target<> &rt, S_ps_shader_entry_in &se_ps);
+
 //----------------------------
 
    inline void EnableZBUsage(bool on){
@@ -1630,6 +1641,11 @@ public:
    I3DMETHOD_(I3D_RESULT,SetNightVision)(bool on);
    I3DMETHOD_(I3D_RESULT,BeginNightVisionRender)();
    I3DMETHOD_(I3D_RESULT,EndNightVisionRender)();
+
+   // Tonemapping
+   I3DMETHOD_(I3D_RESULT,RenderPostFX)();
+   I3DMETHOD_(void,SetPostFX)(I3D_postfx_info);
+   I3DMETHOD_(I3D_postfx_info,GetPostFX)() const;
 #endif
 };
 

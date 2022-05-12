@@ -12,7 +12,7 @@
 #define CP_FACTOR1 c3
 #define CP_COLOR c4
 #define CP_COLOR1 c5
-
+#define CP_COLOR2 c6
 
 // value used for debugging
 #define CP_DEBUG c7

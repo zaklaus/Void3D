@@ -1364,6 +1364,11 @@ void C_game_mission_imp::Render() {
 
     C_mission::Render();
 
+      // Tonemapping
+      {
+         driver->RenderPostFX();
+      }
+
 #ifdef EDITOR
     if (editor) editor->Render();
 #endif

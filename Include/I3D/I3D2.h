@@ -2214,6 +2214,22 @@ struct I3D_collision_mat{
    dword color;               //visualization color
 };
 
+#pragma pack(push, 1)
+struct I3D_postfx_info{
+   S_vector color;
+   int mode; // 0 - None, 1 - ACES, 2 - Reinhard
+   float gamma;
+   float power;
+
+   I3D_postfx_info(){
+      mode = 0;
+      color.f[0] = color.f[1] = color.f[2] = 1.0f;
+      gamma = 0.1f;
+      power = 0.5f;
+   }
+};
+#pragma pack(pop)
+
 #ifndef I3D_FULL
 class I3D_driver{
 public:
@@ -2277,6 +2293,11 @@ public:
    I3DMETHOD_(I3D_RESULT,SetNightVision)(bool on) = 0;
    I3DMETHOD_(I3D_RESULT,BeginNightVisionRender)() = 0;
    I3DMETHOD_(I3D_RESULT,EndNightVisionRender)() = 0;
+
+   // Tonemapping
+   I3DMETHOD_(I3D_RESULT,RenderPostFX)() = 0;
+   I3DMETHOD_(void,SetPostFX)(I3D_postfx_info) = 0;
+   I3DMETHOD_(I3D_postfx_info,GetPostFX)() const = 0;
 #endif
 };
 

@@ -791,6 +791,10 @@ class C_edit_Mission : public C_editor_item_Mission {
         TAB_F_SCN_CAM_ORTHO_SCL = 5,  //orthogonal camera scale
         TAB_F_SCN_BDROP_RANGE_N = 6,  //backdrop near range
         TAB_F_SCN_BDROP_RANGE_F = 7,  //backdrop far range
+        TAB_F_SCN_POSTFX_TONEMAP_MODE = 8, // tonemapping mode
+        TAB_F_SCN_POSTFX_COLOR = 9, // color grading
+        TAB_F_SCN_POSTFX_GAMMA_F = 10, // gamma ramp
+        TAB_F_SCN_POSTFX_CONTRAST_F = 11, // image contrast
     };
 
     static CPC_table_template GetPropTemplate() {
@@ -807,6 +811,11 @@ class C_edit_Mission : public C_editor_item_Mission {
               {TE_BRANCH, 0, "Backdrop range", 2, (dword)"n: %[0], f: %[1]", 0, "Range of camera in backdrop sector. Setting this value is usabvle only if you have visuals linked to backdrop sector."},
                  {TE_FLOAT, TAB_F_SCN_BDROP_RANGE_N, "near", 0, 0, 1},
                  {TE_FLOAT, TAB_F_SCN_BDROP_RANGE_F, "far", 0, 0, 100},
+            {TE_BRANCH, 0, "Post-processing", 4, 0, 0, "Post-processing stack."},
+                {TE_ENUM, TAB_F_SCN_POSTFX_TONEMAP_MODE, "Tonemapping mode", (dword)"None\0Linear\0ACES\0Reinhard\0", 0, 0, "Tonemapping mode to select from."},
+                {TE_COLOR_VECTOR, TAB_F_SCN_POSTFX_COLOR, "Color filter", 1, 1, 1, "Color grading modulator."},
+                {TE_FLOAT, TAB_F_SCN_POSTFX_GAMMA_F, "Gamma ramp", 0.0f, 1.0f, 0.1f, "Gamma boost modifier."},
+                {TE_FLOAT, TAB_F_SCN_POSTFX_CONTRAST_F, "Contrast", 0.0f, 1.0f, 0.5f, "Contrast modifier."},
            {TE_NULL}
         };
         static const C_table_template templ_scene_property = { "Scene properties", te };
@@ -874,7 +883,8 @@ class C_edit_Mission : public C_editor_item_Mission {
             switch (prm2) {
             case TAB_CV_SCN_BGND:
                 scene->SetBgndColor(tab->ItemV(TAB_CV_SCN_BGND));
-                scene->Render(); em->ed->GetIGraph()->UpdateScreen();
+                scene->Render(); scene->GetDriver()->RenderPostFX();
+                em->ed->GetIGraph()->UpdateScreen();
                 em->ed->SetModified();
                 break;
             case TAB_I_SCN_CAM_FOV:
@@ -914,6 +924,32 @@ class C_edit_Mission : public C_editor_item_Mission {
                 scene->SetBackdropRange(tab->ItemF(TAB_F_SCN_BDROP_RANGE_N), tab->ItemF(TAB_F_SCN_BDROP_RANGE_F));
                 em->ed->SetModified();
                 scene->Render(); em->ed->GetIGraph()->UpdateScreen();
+            }
+            break;
+            case TAB_F_SCN_POSTFX_TONEMAP_MODE:
+            case TAB_F_SCN_POSTFX_COLOR:
+            case TAB_F_SCN_POSTFX_GAMMA_F:
+            case TAB_F_SCN_POSTFX_CONTRAST_F:
+            {
+                switch (prm2){
+                case TAB_F_SCN_POSTFX_TONEMAP_MODE:
+                    em->mission->postfx.mode = tab->ItemE(TAB_F_SCN_POSTFX_TONEMAP_MODE);
+                    break;
+                case TAB_F_SCN_POSTFX_COLOR:
+                    em->mission->postfx.color = tab->ItemV(TAB_F_SCN_POSTFX_COLOR);
+                    break;
+                case TAB_F_SCN_POSTFX_GAMMA_F:
+                    em->mission->postfx.gamma = tab->ItemF(TAB_F_SCN_POSTFX_GAMMA_F);
+                    break;
+                case TAB_F_SCN_POSTFX_CONTRAST_F:
+                    em->mission->postfx.power = tab->ItemF(TAB_F_SCN_POSTFX_CONTRAST_F);
+                    break;
+                }
+
+                driver->SetPostFX(em->mission->postfx);
+                scene->Render(); scene->GetDriver()->RenderPostFX();
+                em->ed->GetIGraph()->UpdateScreen();
+                em->ed->SetModified();
             }
             break;
             }
@@ -1347,6 +1383,10 @@ class C_edit_Mission : public C_editor_item_Mission {
             //save mission table
             ck <<= CT_MISSION_TABLE;
             mission->GetConfigTab()->Save(ck.GetHandle(), TABOPEN_FILEHANDLE);
+            --ck;
+
+            ck <<= CT_POSTFX_STACK;
+            ck.Write(&mission->postfx, sizeof(mission->postfx));
             --ck;
         }
         else
@@ -2083,6 +2123,11 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                 tab_prop->ItemF(TAB_F_SCN_CAM_RANGE) = mission->cam_range;
                 tab_prop->ItemF(TAB_F_SCN_CAM_EDIT_RANGE) = mission->cam_edit_range;
 
+                tab_prop->ItemE(TAB_F_SCN_POSTFX_TONEMAP_MODE) = mission->postfx.mode;
+                tab_prop->ItemV(TAB_F_SCN_POSTFX_COLOR) = mission->postfx.color;
+                tab_prop->ItemF(TAB_F_SCN_POSTFX_GAMMA_F) = mission->postfx.gamma;
+                tab_prop->ItemF(TAB_F_SCN_POSTFX_CONTRAST_F) = mission->postfx.power;
+
                 PI3D_camera cam = ed->GetScene()->GetActiveCamera();
                 if (cam) {
                     //tab_prop->ItemI(TAB_I_SCN_CAM_FOV) = FloatToInt(cam->GetFOV() * 180.0f/PI);
@@ -2301,7 +2346,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                     hwnd_tab_edit = (HWND)conjuct_tab->Edit(tt, igraph->GetHWND(),
                         cbTable,
                         (dword)this,
-                        TABEDIT_CENTER | TABEDIT_MODELESS | TABEDIT_IMPORT | TABEDIT_EXPORT,
+                        TABEDIT_CENTER | /*TABEDIT_MODELESS |*/ TABEDIT_IMPORT | TABEDIT_EXPORT,
                         tab_pos_size);
                     if (hwnd_tab_edit) {
                         igraph->AddDlgHWND(hwnd_tab_edit);
