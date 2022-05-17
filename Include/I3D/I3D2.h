@@ -2224,7 +2224,7 @@ struct I3D_postfx_info{
    I3D_postfx_info(){
       mode = 0;
       color.f[0] = color.f[1] = color.f[2] = 1.0f;
-      gamma = 0.1f;
+      gamma = 0.035f;
       power = 0.5f;
    }
 };

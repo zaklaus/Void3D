@@ -814,7 +814,7 @@ class C_edit_Mission : public C_editor_item_Mission {
             {TE_BRANCH, 0, "Post-processing", 4, 0, 0, "Post-processing stack."},
                 {TE_ENUM, TAB_F_SCN_POSTFX_TONEMAP_MODE, "Tonemapping mode", (dword)"None\0Linear\0ACES\0Reinhard\0", 0, 0, "Tonemapping mode to select from."},
                 {TE_COLOR_VECTOR, TAB_F_SCN_POSTFX_COLOR, "Color filter", 1, 1, 1, "Color grading modulator."},
-                {TE_FLOAT, TAB_F_SCN_POSTFX_GAMMA_F, "Gamma ramp", 0.0f, 1.0f, 0.1f, "Gamma boost modifier."},
+                {TE_FLOAT, TAB_F_SCN_POSTFX_GAMMA_F, "Gamma ramp", 0.0f, 1.0f, 0.035f, "Gamma boost modifier."},
                 {TE_FLOAT, TAB_F_SCN_POSTFX_CONTRAST_F, "Contrast", 0.0f, 1.0f, 0.5f, "Contrast modifier."},
            {TE_NULL}
         };
