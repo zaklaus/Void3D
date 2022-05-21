@@ -1052,10 +1052,8 @@ static void __stdcall StopAnimation(int stage){
 
 //----------------------------
 
-static int __stdcall NewSpriteImage(t_string prj_name1, t_string diff_name1, t_string op_name1){
+static int __stdcall NewSpriteImage(t_string prj_name1, t_string diff_name1=NULL, t_string op_name1=NULL){
    C_str prj_name = C_fstr("tables\\%s", prj_name1);
-   C_str diff_name = diff_name1;
-   C_str op_name = op_name1;
 
    PC_game_mission gm = script_man_imp.GetCurrMission();
    PI3D_frame frm = script_man_imp.GetCurrFrame();
@@ -1063,7 +1061,7 @@ static int __stdcall NewSpriteImage(t_string prj_name1, t_string diff_name1, t_s
    assert(frm && fi);
 
    C_smart_ptr<C_sprite_image> img = CreateSpriteImage();
-   auto ir = img->Init(gm->GetScene()->GetDriver(), prj_name, diff_name.Size() ? diff_name1 : NULL, op_name.Size() ? op_name1 : NULL, TEXTMAP_NOMIPMAP, true);
+   auto ir = img->Init(gm->GetScene()->GetDriver(), prj_name, strlen(diff_name1) ? diff_name1 : NULL, strlen(op_name1) ? op_name1 : NULL, TEXTMAP_NOMIPMAP, true);
    switch(ir){
    case SPRINIT_CANT_OPEN_PROJECT: ErrReport(C_fstr("NewSpriteImage: can't open sprite project '%s'", prj_name1), editor); return -1;
    case SPRINIT_CANT_OPEN_DIFFUSE: ErrReport(C_fstr("NewSpriteImage: can't open diffuse texture '%s'", diff_name1), editor); return -1;
@@ -1076,8 +1074,6 @@ static int __stdcall NewSpriteImage(t_string prj_name1, t_string diff_name1, t_s
    img->Release();
    return fi->img.size()-1;
 }
-
-extern float __stdcall ScreenAspect();
 
 static int __stdcall NewSprite(dword img_idx, dword rect_idx, float x, float y, int z, bool set_on){
    PC_game_mission gm = script_man_imp.GetCurrMission();
@@ -1165,10 +1161,24 @@ static void __stdcall SpriteShear(dword spr_idx, float angle, float y){
    }
 }
 
-static void __stdcall SpriteSetUV(dword spr_idx, float u, float v, float t, float l){
+static void __stdcall SpriteSetUV(dword spr_idx, float l, float t, float r, float b){
    auto spr = GetSprite(spr_idx);
    if (spr){
-      spr->SetUV(S_vector2(u, v), S_vector2(t, l));
+      spr->SetUV(S_vector2(l, t), S_vector2(r, b));
+   }
+}
+
+static void __stdcall SpriteSetCoords(dword spr_idx, float l, float t, float r, float b){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetCoords(S_vector2(l, t), S_vector2(r, b));
+   }
+}
+
+static void __stdcall SpriteSetSize(dword spr_idx, float r, float b){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetSize(S_vector2(r, b));
    }
 }
 
@@ -1238,6 +1248,8 @@ const VM_LOAD_SYMBOL script_symbols[] = {
    DEFINE_SYMBOL(SpriteRotate),
    DEFINE_SYMBOL(SpriteShear),
    DEFINE_SYMBOL(SpriteSetUV),
+   DEFINE_SYMBOL(SpriteSetCoords),
+   DEFINE_SYMBOL(SpriteSetSize),
 
    DEFINE_SYMBOL(ScreenSx),
    DEFINE_SYMBOL(ScreenSy),

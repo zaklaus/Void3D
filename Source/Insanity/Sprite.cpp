@@ -283,7 +283,6 @@ class C_sprite_imp: public C_sprite{
 //----------------------------
 
    void PrepareDraw(){
-
       CPIGraph igraph = img->GetTexture()->GetDriver()->GetGraphInterface();
                               //deform by resolution
       float screen_aspect_ratio = ((float)igraph->Scrn_sy()/(float)igraph->Scrn_sx());
@@ -536,12 +535,12 @@ public:
 //----------------------------
 
    virtual void SetScale(const S_vector2 &scl){
-
       CPIGraph igraph = img->GetTexture()->GetDriver()->GetGraphInterface();
       float scrn_sx = (float)igraph->Scrn_sx();
+      float scrn_sy = (float)igraph->Scrn_sy();
       size = scl;
       screen_rect[3].x = screen_rect[1].x = screen_rect[0].x + size.x * scrn_sx;
-      screen_rect[3].y = screen_rect[2].y = screen_rect[0].y + size.y * scrn_sx;
+      screen_rect[3].y = screen_rect[2].y = screen_rect[0].y + size.y * scrn_sy;
 
       PrepareDraw();
    }
@@ -555,6 +554,52 @@ public:
 
       tlv[1].tx.x = uv_rb.x; tlv[1].tx.y = uv_lt.y;
       tlv[2].tx.x = uv_lt.x; tlv[2].tx.y = uv_rb.y;
+   }
+
+   virtual void SetCoords(const S_vector2 &lt, const S_vector2 &rb){
+      CPIGraph igraph = img->GetTexture()->GetDriver()->GetGraphInterface();
+      float scrn_sx = (float)igraph->Scrn_sx();
+      float scrn_sy = (float)igraph->Scrn_sy();
+
+      const float x = lt.x * scrn_sx;
+      const float y = lt.y * scrn_sy;
+      SetPos(S_vector2(x, y));
+
+      const float w = rb.x*scrn_sx - lt.x;
+      const float h = rb.y*scrn_sy - lt.y;
+
+      size = S_vector2(w, h);
+      screen_rect[3].x = screen_rect[1].x = screen_rect[0].x + size.x * scrn_sx;
+      screen_rect[3].y = screen_rect[2].y = screen_rect[0].y + size.y * scrn_sy;
+
+      for(int j=0; j<4; j++){
+         S_vertex &v = tlv[j];
+         v.v.x = (screen_pos.x + screen_rect[j].x);
+         v.v.y = (screen_pos.y + screen_rect[j].y);
+      }
+
+      vis_contents_dirty = true;
+   }
+
+   virtual void SetSize(const S_vector2 &rb){
+      CPIGraph igraph = img->GetTexture()->GetDriver()->GetGraphInterface();
+      float scrn_sx = (float)igraph->Scrn_sx();
+      float scrn_sy = (float)igraph->Scrn_sy();
+
+      const float w = rb.x*scrn_sx - screen_pos.x*scrn_sx;
+      const float h = rb.y*scrn_sy - screen_pos.y*scrn_sy;
+
+      size = S_vector2(w, h);
+      screen_rect[3].x = screen_rect[1].x = screen_rect[0].x + size.x * scrn_sx;
+      screen_rect[3].y = screen_rect[2].y = screen_rect[0].y + size.y * scrn_sy;
+
+      for(int j=0; j<4; j++){
+         S_vertex &v = tlv[j];
+         v.v.x = (screen_pos.x + screen_rect[j].x);
+         v.v.y = (screen_pos.y + screen_rect[j].y);
+      }
+
+      vis_contents_dirty = true;
    }
 };
 

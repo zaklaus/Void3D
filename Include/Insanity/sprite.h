@@ -124,10 +124,13 @@ public:
 //----------------------------
 // Set scale of sprite (scale specified in normalized screen coordinates).
    virtual void SetScale(const S_vector2&) = 0;
+   virtual void SetSize(const S_vector2&) = 0;
 
 //----------------------------
 // Set sprite's UV coordinates directly (values specified for left-top and right-bottom corner).
    virtual void SetUV(const S_vector2 &uv_left_top, const S_vector2 &uv_right_bottom) = 0;
+
+   virtual void SetCoords(const S_vector2 &lt, const S_vector2 &rb) = 0;
 };
 
 typedef C_sprite *PC_sprite;

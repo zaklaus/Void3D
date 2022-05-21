@@ -1,6 +1,9 @@
 int menu_img;
-
+int menu_bg;
 void Main(){
-    menu_img = CreateSpriteImage("ui/samplemenu.txt", "ui/samplemenu.png", "ui/samplemenu_o.png");
+    menu_bg = CreateSolid(zlayer: -1);
+    SpriteSetSize(menu_bg, 1, 1);
+    SpriteSetColor(menu_bg, 0xff335588);
+    //menu_img = CreateSpriteImage("ui/samplemenu.txt", "ui/samplemenu.png", "ui/samplemenu_o.png");
 
 }

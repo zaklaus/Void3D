@@ -1,6 +1,6 @@
 //----------------------------
 // Script general header file, automatically included into all compiled scripts.
-// Copyright (c) 2001 Lonely Cat Games
+// Copyright (c) 2022 V4 Games
 //----------------------------
 
 const dword NULL = 0;
@@ -269,7 +269,7 @@ void SendSignal(string receiver, int signal_id = 0);
 
 //----------------------------// ui rendering //----------------------------
 
-int CreateSpriteImage(string prj_name, string diff_name, string op_name);
+int CreateSpriteImage(string prj_name, string diff_name = 0, string op_name = 0);
 
 int CreateSprite(dword img_idx, dword rect_idx, float x, float y, int z, bool on);
 
@@ -289,16 +289,35 @@ void SpriteRotate(dword spr_idx, float angle, float px, float py);
 
 void SpriteShear(dword spr_idx, float angle, float y);
 
-void SpriteSetUV(dword spr_idx, float u, float v, float t, float l);
+void SpriteSetUV(dword spr_idx, float l, float t, float r, float b);
+
+void SpriteSetCoords(dword spr_idx, float l, float t, float r, float b);
+
+void SpriteSetSize(dword spr_idx, float r, float b);
 
 dword ScreenSx();
 dword ScreenSy();
 float ScreenAspect();
 dword ScreenAspectMode();
 
-dword I3DASPECT_16_10 = 5;
-dword I3DASPECT_5_4 = 4;
-dword I3DASPECT_34_9 = 3;
-dword I3DASPECT_21_9 = 2;
-dword I3DASPECT_16_9 = 1;
-dword I3DASPECT_4_3 = 0;
+const dword I3DASPECT_16_10 = 5;
+const dword I3DASPECT_5_4 = 4;
+const dword I3DASPECT_34_9 = 3;
+const dword I3DASPECT_21_9 = 2;
+const dword I3DASPECT_16_9 = 1;
+const dword I3DASPECT_4_3 = 0;
+
+int solid_img = -1;
+
+int CreateSolid(dword color = 0xffffffff, int zlayer = 0){
+    int solid_spr = -1;
+    if (solid_img == -1)
+        solid_img = CreateSpriteImage("ui/blank.txt", "ui/blank.png");
+
+    if (solid_img == -1)
+        return -1;
+
+    solid_spr = CreateSprite(solid_img, 0, 0, 0, zlayer, 1);
+    SpriteSetColor(solid_spr, color);
+    return solid_spr;
+}
