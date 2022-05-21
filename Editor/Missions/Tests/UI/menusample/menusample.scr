@@ -1,0 +1,6 @@
+int menu_img;
+
+void Main(){
+    menu_img = CreateSpriteImage("ui/samplemenu.txt", "ui/samplemenu.png", "ui/samplemenu_o.png");
+
+}

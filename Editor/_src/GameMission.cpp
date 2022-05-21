@@ -1225,7 +1225,7 @@ void C_game_mission_imp::GameEnd() {
             if (fi && fi->vm) {
                 script_man->RunFunction(frm, "GameEnd", hp->_this);
                 //remove any running threads of this frame
-                script_man->ClearAllThreads(frm);
+                script_man->ReloadScript(frm);
             }
             /*
             if(fi && (fi->flags&FRM_INFO_ACTIVE_OBJECT)){
@@ -1372,6 +1372,7 @@ void C_game_mission_imp::Render() {
 #ifdef EDITOR
     if (editor) editor->Render();
 #endif
+    script_man->Render(this);
 
     driver->EndScene();
 }

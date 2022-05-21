@@ -1565,9 +1565,9 @@ void I3D_driver::Close(){
          str += C_fstr("%s:\t%i\n", inteface_name[i], interface_count[i]);
       }
       if(str.Size()){
-         GetGraphInterface()->FlipToGDI();
-         MessageBox((HWND)GetGraphInterface()->GetHWND(), str, "I3D Driver Destruction", MB_OK);
+         MessageBox(NULL, str, "I3D Driver Destruction", MB_OK);
          rel_warned = true;
+         //GetGraphInterface()->FlipToGDI();
       }
    }
    if(!rel_warned){

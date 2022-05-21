@@ -79,6 +79,7 @@ public:
 //    run_main - flag specifying if Main function should be run
    virtual E_SCRIPT_RESULT LoadScript(PI3D_frame frm, const char *scriptname, C_game_mission *gm, bool run_main) = 0;
    virtual E_SCRIPT_RESULT UnloadScript(PI3D_frame frm) = 0;
+   virtual E_SCRIPT_RESULT ReloadScript(PI3D_frame frm) = 0;
 
 //----------------------------
 // Shut down everything.
@@ -127,6 +128,8 @@ public:
 //----------------------------
 // Update all scripts.
    virtual void Tick(int time, C_game_mission* = NULL) = 0;
+
+   virtual void Render(C_game_mission* = NULL) = 0;
 
 //----------------------------
 // Report script error - display name of currently run frame, function name, error message, etc.

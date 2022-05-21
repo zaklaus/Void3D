@@ -405,10 +405,19 @@ private:
          char cwd[MAX_PATH];
          getcwd(cwd, sizeof(cwd));
                               //append script dir
-         C_fstr dir("%s\\%s\\", cwd, SCRIPT_DIR);
+         C_fstr dir("%s\\scripts\\", cwd);
          int i = 0;
-         if(!strnicmp(dir, buf, dir.Size())) i = dir.Size();
-         str = &buf[i];
+         if(!strnicmp(dir, buf, dir.Size())){
+            i = dir.Size();
+            str = &buf[i];
+         }
+
+         i=0;
+         dir = C_fstr("%s\\missions\\", cwd);
+         if(!strnicmp(dir, buf, dir.Size())){
+            i = dir.Size();
+            str = &buf[i];
+         }
                               //no extension in names
          for(dword ci=str.Size(); ci--; ){
             if(str[ci]=='.'){
@@ -706,6 +715,7 @@ private:
       for(i=scr_frms.size(); i--; ){
          PI3D_frame frm = scr_frms[i];
          script_man->ClearAllThreads(frm);
+         script_man->ReloadScript(frm);
          script_man->RunFunction(frm, "Exit", mission);
       }
 
@@ -1905,7 +1915,7 @@ public:
       e_slct->AddNotify(this, E_SCRIPT_SLCT_NOTIFY);
 
 #define MB "%i %78 Sc&ript\\"
-      ed->AddShortcut(this, E_SCRIPT_LIST, MB"&List\tAlt+S", K_S, SKEY_ALT);
+      ed->AddShortcut(this, E_SCRIPT_LIST, MB"&List\tShift+E", K_E, SKEY_SHIFT);
       ed->AddShortcut(this, E_SCRIPT_LIST, "%90 &Editors\\&Scripts editor", K_NOKEY, 0);
       ed->AddShortcut(this, E_SCRIPT_EDIT_SELECTION, MB"&Edit script (&assign)\tE", K_E, 0);
       ed->AddShortcut(this, E_SCRIPT_ASSIGN_EDITTAB, MB"Edit table\tT", K_T, 0);
@@ -1998,7 +2008,7 @@ public:
                if(!ed->CanModify()) break;
 
                C_str str;
-               str = C_fstr("%s\\%s", SCRIPT_DIR, (const char*)mission->GetName());
+               str = C_fstr("Missions\\%s", (const char*)mission->GetName());
                str.ToLower();
                if(GetCreateFileName(str, "Assign script to selected frames")){
                               //check if such script is already open

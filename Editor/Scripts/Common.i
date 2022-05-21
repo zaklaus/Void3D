@@ -266,3 +266,39 @@ void SetAnimation(string name, int stage = 0, int blend_op = 0, float scale = 1.
 void SendSignal(string receiver, int signal_id = 0);
 
 //----------------------------
+
+//----------------------------// ui rendering //----------------------------
+
+int CreateSpriteImage(string prj_name, string diff_name, string op_name);
+
+int CreateSprite(dword img_idx, dword rect_idx, float x, float y, int z, bool on);
+
+void SpriteSetOn(dword spr_idx, bool on);
+
+bool SpriteIsOn(dword spr_idx);
+
+void SpriteSetPos(dword spr_idx, float x, float y);
+
+void SpriteSetScreenPos(dword spr_idx, float x, float y);
+
+void SpriteSetScale(dword spr_idx, float sx, float sy);
+
+void SpriteSetColor(dword spr_idx, dword color);
+
+void SpriteRotate(dword spr_idx, float angle, float px, float py);
+
+void SpriteShear(dword spr_idx, float angle, float y);
+
+void SpriteSetUV(dword spr_idx, float u, float v, float t, float l);
+
+dword ScreenSx();
+dword ScreenSy();
+float ScreenAspect();
+dword ScreenAspectMode();
+
+dword I3DASPECT_16_10 = 5;
+dword I3DASPECT_5_4 = 4;
+dword I3DASPECT_34_9 = 3;
+dword I3DASPECT_21_9 = 2;
+dword I3DASPECT_16_9 = 1;
+dword I3DASPECT_4_3 = 0;

@@ -55,6 +55,7 @@ class C_editor_item_Stats_imp: public C_editor_item_Stats{
 //----------------------------
 
    void DrawRect(float x, float y, float sx1, float sy1) const{
+      return;
 
       PI3D_driver drv = ed->GetDriver();
       bool is_zb = drv->GetState(RS_USEZB);
@@ -659,7 +660,7 @@ public:
       if(!was_txt) drv->SetState(RS_DRAWTEXTURES, true);
 
       float y = .005f;
-      const float SIZE = .0185f;
+      const float SIZE = .0285f;
       if(show_fps && curr_fps_count){
          DrawRect(.005f, y, .16f, .0262f);
          float rect_sy;

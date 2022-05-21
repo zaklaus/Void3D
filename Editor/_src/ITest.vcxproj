@@ -477,6 +477,10 @@
       <Project>{9138bbb5-83d6-4bdb-840f-7935f442d15c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\Insanity\Insanity.vcxproj">
+      <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
+      <Name>Insanity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Source\IEditor\res\bitmap1.bmp" />

@@ -1,0 +1,5 @@
+; aspect ratio testing sheet
+
+; full picture (4:3)
+0:    0, 0, 1024, 768, 0, 0
+

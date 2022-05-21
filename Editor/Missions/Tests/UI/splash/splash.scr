@@ -1,0 +1,14 @@
+int spr_img;
+
+void GameBegin(){
+    if (ScreenAspectMode() == I3DASPECT_21_9){
+        spr_img = CreateSpriteImage("ui/splash_219.txt", "ui/splash_219.png", "");
+    }
+    else if (ScreenAspectMode() == I3DASPECT_16_9){
+        spr_img = CreateSpriteImage("ui/splash_169.txt", "ui/splash_169.png", "");
+    } else {
+        spr_img = CreateSpriteImage("ui/splash_43.txt", "ui/splash_43.png", "");
+    }
+
+    CreateSprite(spr_img, 0, 0, 0, 0, 1);
+}

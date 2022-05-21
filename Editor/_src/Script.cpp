@@ -3,13 +3,14 @@
 #include "script.h"
 #include "game_cam.h"
 #include "GameMission.h"
+#include "Insanity/Sprite.h"
 #include <c_linklist.h>
 #include <list>
 
 //----------------------------
 
 extern const char SCRIPT_CMDLINE[];
-const char SCRIPT_CMDLINE[] = "/iMissions /ICommon.i";
+const char SCRIPT_CMDLINE[] = "/iMissions /iScripts /ICommon.i";
 
 //----------------------------
 
@@ -20,7 +21,7 @@ const char SCRIPT_CMDLINE[] = "/iMissions /ICommon.i";
 
 #define SCRIPT_ERR(fnc_name, msg) script_man->ReportError(fnc_name, msg)
 
-static const char SCRIPT_DIR[] = "Missions";
+static const char SCRIPT_DIR[] = "Scripts";
 
 #define INIT_FUNCTION(fnc_name) PI3D_frame frm = script_man_imp.GetCurrFrame();\
    if(!frm){ SCRIPT_ERR(fnc_name, "no current frame"); return; }
@@ -269,7 +270,6 @@ private:
 public:
 
    ~C_script_manager_imp(){
-
       ClearAllThreads(NULL);
    }
 
@@ -299,6 +299,12 @@ public:
          ss = &(*script_map.insert(pair<C_str, S_script_source>(orig_name, S_script_source())).first).second;
                                  //load script now
          C_fstr filename("%s\\%s.scr", SCRIPT_DIR, scriptname);
+         if (!OsIsDirExist(filename)){
+            C_fstr missions_filename("Missions\\%s.scr", scriptname);
+            if (OsIsDirExist(missions_filename)){
+               filename = missions_filename;
+            }
+         }
          PC_script scr = CreateScript();
 
          scr->SetName(orig_name);
@@ -340,6 +346,10 @@ public:
       }
       vm->Release();
 
+      //init sprite data
+      fi->img.clear();
+      fi->sprites = CreateSpriteGroup();
+
       if(ret)
          return ret;
 
@@ -351,7 +361,6 @@ public:
 //----------------------------
 
    virtual E_SCRIPT_RESULT UnloadScript(PI3D_frame frm){
-
       E_SCRIPT_RESULT sr = ClearAllThreads(frm);
       if(sr<0)
          return sr;
@@ -367,7 +376,32 @@ public:
       if(!--ss.use_count){
          script_map.erase(it);
       }
+
+      // unload sprite data
+      fi->img.clear();
+      if (fi->sprites)
+         fi->sprites->Release();
+
       fi->vm = NULL;
+      SetFrameInfo(frm, fi);
+      return SR_OK;
+   }
+
+   virtual E_SCRIPT_RESULT ReloadScript(PI3D_frame frm){
+      E_SCRIPT_RESULT sr = ClearAllThreads(frm);
+      if(sr<0)
+         return sr;
+
+      PS_frame_info fi = GetFrameInfo(frm);
+      assert(fi && fi->vm);
+
+      // unload sprite data
+      fi->img.clear();
+      if (fi->sprites){
+         fi->sprites->Release();
+         fi->sprites = CreateSpriteGroup();
+      }
+
       SetFrameInfo(frm, fi);
       return SR_OK;
    }
@@ -382,6 +416,21 @@ public:
 
    virtual void ShutDown(){
       ClearAllThreads(NULL);
+
+      // struct S_hlp{
+      //       C_game_mission *gm;
+      //       C_script_manager_imp *_this;
+      //       static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c){
+      //          S_hlp *hp = (S_hlp*)c;
+      //
+      //          PS_frame_info fi = GetFrameInfo(frm);
+      //          if(fi && fi->sprites)
+      //             fi->sprites->Render(hp->gm->GetScene());
+      //          return I3DENUMRET_OK;
+      //       }
+      //    } hlp = {curr_run_mission, this};
+      //
+      // curr_run_mission->GetScene()->EnumFrames(S_hlp::cbEnum, (dword)&hlp);
    }
 
 //----------------------------
@@ -576,6 +625,27 @@ public:
                ResumeThread(tc, gm);
          }
       }
+   }
+
+   void Render(C_game_mission* gm) override{
+      struct S_hlp{
+            C_game_mission *gm;
+            C_script_manager_imp *_this;
+            static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c){
+               S_hlp *hp = (S_hlp*)c;
+
+               PS_frame_info fi = GetFrameInfo(frm);
+               if(fi && fi->sprites)
+                  fi->sprites->Render(hp->gm->GetScene());
+               return I3DENUMRET_OK;
+            }
+         } hlp = {gm, this};
+
+      auto driver = gm->GetScene()->GetDriver();
+      auto use_zb = driver->GetState(RS_USEZB);
+      driver->SetState(RS_USEZB, false);
+      gm->GetScene()->EnumFrames(S_hlp::cbEnum, (dword)&hlp);
+      driver->SetState(RS_USEZB, use_zb);
    }
 
 //----------------------------
@@ -981,6 +1051,160 @@ static void __stdcall StopAnimation(int stage){
 }
 
 //----------------------------
+
+static int __stdcall NewSpriteImage(t_string prj_name1, t_string diff_name1, t_string op_name1){
+   C_str prj_name = C_fstr("tables\\%s", prj_name1);
+   C_str diff_name = diff_name1;
+   C_str op_name = op_name1;
+
+   PC_game_mission gm = script_man_imp.GetCurrMission();
+   PI3D_frame frm = script_man_imp.GetCurrFrame();
+   PS_frame_info fi = GetFrameInfo(frm);
+   assert(frm && fi);
+
+   C_smart_ptr<C_sprite_image> img = CreateSpriteImage();
+   auto ir = img->Init(gm->GetScene()->GetDriver(), prj_name, diff_name.Size() ? diff_name1 : NULL, op_name.Size() ? op_name1 : NULL, TEXTMAP_NOMIPMAP, true);
+   switch(ir){
+   case SPRINIT_CANT_OPEN_PROJECT: ErrReport(C_fstr("NewSpriteImage: can't open sprite project '%s'", prj_name1), editor); return -1;
+   case SPRINIT_CANT_OPEN_DIFFUSE: ErrReport(C_fstr("NewSpriteImage: can't open diffuse texture '%s'", diff_name1), editor); return -1;
+   case SPRINIT_CANT_OPEN_OPACITY: ErrReport(C_fstr("NewSpriteImage: can't open opacity texture '%s'", op_name1), editor); return -1;
+   case SPRINIT_CANT_CREATE_TEXTURE: ErrReport("NewSpriteImage: can't create textures", editor); return -1;
+   default: break;
+   }
+
+   fi->img.push_back(img);
+   img->Release();
+   return fi->img.size()-1;
+}
+
+extern float __stdcall ScreenAspect();
+
+static int __stdcall NewSprite(dword img_idx, dword rect_idx, float x, float y, int z, bool set_on){
+   PC_game_mission gm = script_man_imp.GetCurrMission();
+   PI3D_frame frm = script_man_imp.GetCurrFrame();
+   PS_frame_info fi = GetFrameInfo(frm);
+   assert(frm && fi);
+   assert(img_idx < fi->img.size());
+
+   PC_sprite img = CreateSprite(x, y, 1.0f, (CPC_sprite_image)fi->img[img_idx], rect_idx, z,  1.0f);
+   img->SetOn(set_on);
+   fi->sprites->AddSprite(img);
+   img->Release();
+   return fi->sprites->NumSprites()-1;
+}
+
+static PC_sprite GetSprite(dword spr_idx){
+   PC_game_mission gm = script_man_imp.GetCurrMission();
+   PI3D_frame frm = script_man_imp.GetCurrFrame();
+   PS_frame_info fi = GetFrameInfo(frm);
+   assert(frm && fi);
+   if (spr_idx >= fi->sprites->NumSprites()){
+      ErrReport(C_fstr("GetSprite: cannot find sprite by ID: '%d'", spr_idx), editor);
+      return NULL;
+   }
+
+   auto sprites = fi->sprites->GetSprites();
+
+   return (PC_sprite)(sprites[spr_idx]);
+}
+
+static void __stdcall SpriteSetOn(dword spr_idx, bool on){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetOn(on);
+   }
+}
+
+static bool __stdcall SpriteIsOn(dword spr_idx){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      return spr->IsOn();
+   }
+   return false;
+}
+
+static void __stdcall SpriteSetPos(dword spr_idx, float x, float y){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetPos(S_vector2(x, y));
+   }
+}
+
+static void __stdcall SpriteSetScreenPos(dword spr_idx, float x, float y){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetScreenPos(S_vector2(x, y));
+   }
+}
+
+static void __stdcall SpriteSetScale(dword spr_idx, float sx, float sy){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetScale(S_vector2(sx, sy));
+   }
+}
+
+static void __stdcall SpriteSetColor(dword spr_idx, dword color){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetColor(color);
+   }
+}
+
+static void __stdcall SpriteRotate(dword spr_idx, float angle, float px, float py){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->Rotate(angle, S_vector2(px, py));
+   }
+}
+
+static void __stdcall SpriteShear(dword spr_idx, float angle, float y){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->Shear(angle, y);
+   }
+}
+
+static void __stdcall SpriteSetUV(dword spr_idx, float u, float v, float t, float l){
+   auto spr = GetSprite(spr_idx);
+   if (spr){
+      spr->SetUV(S_vector2(u, v), S_vector2(t, l));
+   }
+}
+
+static dword __stdcall ScreenSx(){
+   auto igraph = script_man_imp.GetCurrMission()->GetScene()->GetDriver()->GetGraphInterface();
+   return igraph->Scrn_sx();
+}
+static dword __stdcall ScreenSy(){
+   auto igraph = script_man_imp.GetCurrMission()->GetScene()->GetDriver()->GetGraphInterface();
+   return igraph->Scrn_sy();
+}
+static float __stdcall ScreenAspect(){
+   auto igraph = script_man_imp.GetCurrMission()->GetScene()->GetDriver()->GetGraphInterface();
+   return igraph->Scrn_sx()/(float)igraph->Scrn_sy();
+}
+
+static dword __stdcall ScreenAspectMode(){
+   auto aspect = ScreenAspect();
+   aspect *= 100;
+   aspect = (int)aspect;
+   aspect /= 100;
+
+   if (aspect == 1.60f)
+      return 5; /* 16:10 */
+   if (aspect == 1.25f)
+      return 4; /* 5:4 */
+   if (aspect == 3.77f)
+      return 3; /* 34:9 */
+   if (aspect >= 2.33f && aspect <= 2.38f)
+      return 2; /* 21:9 */
+   if (aspect == 1.77f)
+      return 1; /* 16:9 */
+
+   return 0; /* 4:3 */
+}
+
 //----------------------------
 #define DEFINE_SYMBOL(name) {&name, #name}
 
@@ -1002,6 +1226,23 @@ const VM_LOAD_SYMBOL script_symbols[] = {
    DEFINE_SYMBOL(SendSignal),
    DEFINE_SYMBOL(SetAnimation),
    DEFINE_SYMBOL(StopAnimation),
+
+   {&NewSpriteImage, "CreateSpriteImage"},
+   {&NewSprite, "CreateSprite"},
+   DEFINE_SYMBOL(SpriteSetOn),
+   DEFINE_SYMBOL(SpriteIsOn),
+   DEFINE_SYMBOL(SpriteSetPos),
+   DEFINE_SYMBOL(SpriteSetScreenPos),
+   DEFINE_SYMBOL(SpriteSetScale),
+   DEFINE_SYMBOL(SpriteSetColor),
+   DEFINE_SYMBOL(SpriteRotate),
+   DEFINE_SYMBOL(SpriteShear),
+   DEFINE_SYMBOL(SpriteSetUV),
+
+   DEFINE_SYMBOL(ScreenSx),
+   DEFINE_SYMBOL(ScreenSy),
+   DEFINE_SYMBOL(ScreenAspect),
+   DEFINE_SYMBOL(ScreenAspectMode),
 
    DEFINE_SYMBOL(MissionOver),
 

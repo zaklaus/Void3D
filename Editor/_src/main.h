@@ -1,5 +1,6 @@
 #ifndef __MAIN_H_
 #define __MAIN_H_
+#include "insanity/sprite.h"
 
 
 #ifdef _MSC_VER
@@ -447,6 +448,10 @@ extern C_I3D_model_cache_special model_cache;
 struct S_frame_info{
    C_smart_ptr<C_v_machine> vm;
    class C_actor *actor;      //NULL if no actor set on frame
+
+   // sprite ui rendering
+   C_vector<C_smart_ptr<C_sprite_image>> img;
+   C_smart_ptr<C_sprite_group> sprites;
 
    S_frame_info():
       actor(NULL)

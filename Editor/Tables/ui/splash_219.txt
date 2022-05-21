@@ -1,0 +1,5 @@
+; aspect ratio testing sheet
+
+; full picture (21:9)
+0:    0, 0, 2560, 1080, 0, 0
+

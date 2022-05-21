@@ -78,7 +78,6 @@ public:
 E_SPRITE_IMAGE_INIT_RESULT C_sprite_image_imp::Init(PI3D_driver driver, const char *prjname, const char *diff_name,
    const char *opt_name, dword txt_create_flags,
    bool use_new_prj_format, float border_offset){
-
    int i;
    C_cache *ck, tmp_cache;
    int ck_prj_offs = 0;
@@ -226,10 +225,10 @@ E_SPRITE_IMAGE_INIT_RESULT C_sprite_image_imp::Init(PI3D_driver driver, const ch
          spr_rects.push_back(S_sprite_rectangle());
          S_sprite_rectangle &src = spr_rects.back();
          src.l = (float(x) - border_offset)/float(img_sx);
-         src.t = (float(y) - border_offset)/float(img_sy),
-         src.sx = (float(sx) + border_offset * 2.0f)/float(img_sx),
-         src.sy = (float(sy) + border_offset * 2.0f)/float(img_sy),
-         src.cx = (float)cx/(float)sx,
+         src.t = (float(y) - border_offset)/float(img_sy);
+         src.sx = (float(sx) + border_offset * 2.0f)/float(img_sx);
+         src.sy = (float(sy) + border_offset * 2.0f)/float(img_sy);
+         src.cx = (float)cx/(float)sx;
          src.cy = (float)cy/(float)sy;
          src.ix = x;
          src.iy = y;
@@ -287,10 +286,10 @@ class C_sprite_imp: public C_sprite{
 
       CPIGraph igraph = img->GetTexture()->GetDriver()->GetGraphInterface();
                               //deform by resolution
-      float screen_aspect_ratio = 1.3333333333f*((float)igraph->Scrn_sy()/(float)igraph->Scrn_sx());
+      float screen_aspect_ratio = ((float)igraph->Scrn_sy()/(float)igraph->Scrn_sx());
       for(int j=0; j<4; j++){
          S_vertex &v = tlv[j];
-         v.v.x = (screen_pos.x + screen_rect[j].x);
+         v.v.x = (screen_pos.x + screen_rect[j].x) * screen_aspect_ratio;
          v.v.y = (screen_pos.y + screen_rect[j].y) * screen_aspect_ratio;
       }
       vis_contents_dirty = true;

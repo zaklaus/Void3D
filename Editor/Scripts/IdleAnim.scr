@@ -1,0 +1,10 @@
+
+table "Idle anim"{
+   string str "Name"(240);
+   int stage "Stage";
+}
+
+void Main(){
+   if(str)
+      SetAnimation(str, stage, I3DANIMOP_BLEND);
+}
