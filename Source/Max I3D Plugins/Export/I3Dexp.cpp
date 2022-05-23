@@ -1387,7 +1387,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, ULONG fdwReason, LPVOID lpvReserved){
    if(!controlsInit){
       controlsInit = true;
       
-      InitCustomControls(hinstDLL);
+      //InitCustomControls(hinstDLL);
       InitCommonControls();
    }
    return true;

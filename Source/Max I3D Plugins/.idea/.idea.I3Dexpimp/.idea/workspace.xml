@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2058a22c-9a8d-4bde-9ab0-594746bbada3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Editor/Editor/editctrl.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/../../Editor/Editor/editctrl.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Editor/Missions/_Null/scene.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../Editor/Missions/_Null/scene.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Editor/Scripts/idleanim.pcp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Editor/Scripts/idleanim.pcp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Editor/Scripts/welcome.pcp" beforeDir="false" afterPath="$PROJECT_DIR$/../../Editor/Scripts/welcome.pcp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Editctrl/Editctrl.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Editctrl/Editctrl.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../I3D2/Texture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../I3D2/Texture.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IEditor/IEditor.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../IEditor/IEditor.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IEditor/_Release/IEditor.lib.recipe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IEditor/_Release/IEditor.vcxproj.FileListAbsolute.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IEditor/_Release/main.res" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="29YcM15JkV5dzEZmKKvS5S7cowE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2058a22c-9a8d-4bde-9ab0-594746bbada3" name="Changes" comment="" />
+      <created>1653293408604</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653293408604</updated>
+      <workItem from="1653293420095" duration="661000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
