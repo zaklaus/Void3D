@@ -15,7 +15,7 @@
 
 #define USE_BALLANCE_DEPTH 7
                               //building:
-#define TREE_SAFE_MAX_DEPTH 2000 //cancel build if tree depth overruns this
+#define TREE_SAFE_MAX_DEPTH 60000 //cancel build if tree depth overruns this
 
                               //enable simplify vertices pool in bsp tree (vertices on same position or similar are unified)
 #define REMOVE_REDUNDANT_VERTICES

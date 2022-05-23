@@ -373,6 +373,10 @@
     <ResourceCompile Include="main.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Editctrl\editctrl.vcxproj">
+      <Project>{aafcf850-bc61-441f-b275-8b8bdd24ae7d}</Project>
+      <Name>editctrl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\I3D2\i3d_2.vcxproj">
       <Project>{09640ee2-1600-4e8a-a03a-2faca4079e8d}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

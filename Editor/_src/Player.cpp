@@ -19,7 +19,7 @@
 #define MAX_SPEED_CHANGE 40.0f //speed change per second
 
 #define INIT_FALL_SPEED .01f  //initial
-#define FALL_SPEED 40.0f      //fall down acceleration
+#define FALL_SPEED 20.0f      //fall down acceleration
 #define JUMP_SPEED 10.0f      //speed of jump up
 
 #define LOOK_DIR_SPEED .005f  //mapping of mouse units to rotation angle
@@ -27,9 +27,9 @@
 
 #define BENCH_ANIM_TIME .3f   //time how long bench is animated, in seconds
 
-#define SMALL_STEP_HEIGHT .6f //height of climbable small step
+#define SMALL_STEP_HEIGHT .8f //height of climbable small step
 #define SMALL_STEP_TEST_DEPTH (vol_radius[0]*2.0f) //depth if collision testing for small testing (from body center line)
-#define SMALL_STEP_CLIMB_Y 2.0f//speed of climbing small steps (per second) 
+#define SMALL_STEP_CLIMB_Y 1.0f//speed of climbing small steps (per second)
 
 #define DEFAULT_MAX_USE_DIST 1.5f   //default maximal use distance
 //#define DEFAULT_MAX_USE_ANGLE (PI*.4f) //default maximal use angle
@@ -218,30 +218,18 @@ class C_player_imp : public C_actor {
 
         const S_vector& limit_normal = rd.GetHitNormal();
         float angle_cos = limit_normal.y;
-#define FLOOR_ANGLE .75f
-#define STAIRS_ANGLE .5f
+#define FLOOR_ANGLE .95f
+#define STAIRS_ANGLE .75f
 
+        DEBUG(angle_cos);
         if (angle_cos >= FLOOR_ANGLE) {
             cc.col_floor = rd.GetHitFrm();
             if (cc.is_idle)
                 rd.ModifyNormal(AXIS_Y);
         }
-        else {
-            //the collision is considered to be wall
-            if (angle_cos < .0f) {
-                //make the collision normal horizontal
-                S_vector n = limit_normal;
-                n.y = .0f;
-                n.Normalize();
-                rd.ModifyNormal(n);
-            }
-            else {
-                //remember first wall for step/climb handle
-                if (!cc.wall_hit && rd.vol_source == vols[0]) {
-                    cc.wall_normal = limit_normal;
-                    cc.wall_hit = true;
-                }
-            }
+        else if (!cc.wall_hit && rd.vol_source == vols[0] && angle_cos <= STAIRS_ANGLE) {
+            cc.wall_normal = limit_normal;
+            cc.wall_hit = true;
         }
         return true;
     }
@@ -282,7 +270,7 @@ class C_player_imp : public C_actor {
         C_collision_context cc(this);
         cc.is_idle = IsAbsMrgZero(move_delta.x * move_delta.z);
 
-        I3D_collision_data cd, cd2;
+        I3D_collision_data cd;
         cd.from = from;
         cd.dir = move_delta;
         cd.flags = I3DCOL_MOVING_GROUP | I3DCOL_SOLVE_SLIDE;
@@ -290,8 +278,6 @@ class C_player_imp : public C_actor {
         cd.frm_root = frame;
         cd.callback = ColResp_thunk;
         cd.cresp_context = &cc;
-        cd2 = cd;
-        cd2.dir = move_delta * 8.0f;
         if (scene->TestCollision(cd)) {
             move_delta = cd.GetDestination() - from;
 
@@ -315,13 +301,13 @@ class C_player_imp : public C_actor {
             }
 #endif
         }
-        scene->TestCollision(cd2);
-
         SetupFloorLink(cc.col_floor);
 
         DEBUG(floor_link ? floor_link->GetName() : "-");
         float curr_speed = curr_move_dir.Magnitude();
         S_vector pos = from + move_delta;
+
+        DEBUG(curr_speed);
 
         if (cc.wall_hit && !IsMrgZeroLess(curr_speed)) {
             //detect small steps

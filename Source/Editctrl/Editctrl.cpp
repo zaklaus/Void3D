@@ -893,8 +893,8 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
                cf.lStructSize = sizeof(cf);
                cf.hwndOwner = hwnd;
                cf.lpLogFont = &lf;
-               cf.Flags = CF_FIXEDPITCHONLY | CF_FORCEFONTEXIST | CF_INITTOLOGFONTSTRUCT |
-                  CF_APPLY | CF_SCREENFONTS | CF_ENABLEHOOK;
+               cf.Flags = CF_FORCEFONTEXIST | CF_INITTOLOGFONTSTRUCT |
+                  CF_APPLY | CF_BOTH | CF_ENABLEHOOK;
                cf.nFontType = SCREEN_FONTTYPE;
                cf.lpfnHook = FontChooseHook;
                cf.lCustData = (LPARAM)ec;

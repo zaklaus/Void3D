@@ -22,11 +22,11 @@
 #define FADE_VIEW_DIST_MIN .5f
 #define FADE_VIEW_DIST_MAX .75f
 
-//#define NEW_STYLE
+#define NEW_STYLE
 
 #ifdef _DEBUG
 //#define DEBUG_DRAW_LINES        //when defined, draw camera's movement and aim lines
-//#define DISABLE_ADD_ANIM          //additional animation like shaking, etc.
+#define DISABLE_ADD_ANIM          //additional animation like shaking, etc.
 
 # ifdef EDITOR
 #  define CAM_DEBUG_MODEL
