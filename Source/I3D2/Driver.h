@@ -221,6 +221,10 @@ enum E_PS_FRAGMENT{
    PSF_t1_COPY,               //simple copy of texture 1
    PSF_MOD_t0_v0,             //modulation t0 * v0
    PSF_MOD_r0_t1,             //modulation r0 * t1
+   PSF_LRP_r0_t0,             //lerp t0 to r0 by a factor
+   PSF_LRP_r0_t1,             //lerp t1 to r0 by a factor
+   PSF_LRP_r0_t2,             //lerp t2 to r0 by a factor
+   PSF_LRP_r0_t3,             //lerp t3 to r0 by a factor
    PSF_MODX2_t0_v0,           //modulation_x2 t0 * v0
    PSF_MODX2_r0_t0,           //modulation_x2 r0 * t1
    PSF_MODX2_r0_t1,           //modulation_x2 r0 * t1
@@ -243,7 +247,6 @@ enum E_PS_FRAGMENT{
    PSF_TONEMAP_REINHARD,      //using t0 as input, apply tonemapping curve to colors
    PSF_COLOR_GRADE,           // apply color grading
    PSF_TEST_BUMP,             // TEST
-   PSF_TEST_BUMP_ENV,            
    PSF_LAST
 };
 
@@ -588,6 +591,7 @@ public:
       inline void TexBeml(dword stage){ assert(stage<4); AddFragment((E_PS_FRAGMENT)(PSF_TEX_1_BEML + stage - 1)); }
       inline void TexKill(dword stage){ assert(stage<4); AddFragment((E_PS_FRAGMENT)(PSF_TEXKILL_0 + stage)); }
       inline void Mod2X(dword stage){ assert(stage<4); AddFragment((E_PS_FRAGMENT)(PSF_MODX2_r0_t0 + stage)); }
+      inline void Lrp(dword stage){ assert(stage<4); AddFragment((E_PS_FRAGMENT)(PSF_LRP_r0_t0 + stage));  }
    };
 
    struct S_ps_shader_entry: public S_shader_entry_base{

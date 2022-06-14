@@ -1,3 +1,6 @@
 /_tmp
 /*.log
 /Editor/editor.bin
+/scenes
+/import
+/export

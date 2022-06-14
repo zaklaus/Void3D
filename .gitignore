@@ -456,3 +456,5 @@ Source/ISnd2/OggVorbis/Lib/*.lib
 Editor/Editor/editctrl.cfg
 
 *.pcp
+
+Editor/scenes/

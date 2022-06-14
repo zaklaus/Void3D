@@ -26,6 +26,7 @@
 #define IDC_CHECK_VIS                   1009
 #define IDC_CHECK_LIGHT                 1010
 #define IDC_CHECK_SND                   1011
+#define IDC_CHECK_VIS2                  1012
 #define IDC_CHECK_MODEL                 1013
 #define IDC_RADIO_COLBOX                1014
 #define IDC_CHECK_HIER                  1015

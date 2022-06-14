@@ -24,3 +24,4 @@ Wood
 Vehicles
 _test
 ui
+sponza

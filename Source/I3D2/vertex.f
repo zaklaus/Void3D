@@ -364,28 +364,12 @@ mul oPos, INPUT_POSITION, CV_MAT_TRANSFORM
 //----------------------------
 #beginfragment bump_os
 
-; directional light
-;mov oD1.xyz, c[95].xyz
-
 #define CV_LIGHT_DIR c[95].xyz
 dp3 r_ldir.x, CV_LIGHT_DIR, INPUT_TEXTURE_SPACE_S.xyz
 dp3 r_ldir.y, CV_LIGHT_DIR, INPUT_TEXTURE_SPACE_T.xyz
 dp3 r_ldir.z, CV_LIGHT_DIR, INPUT_TEXTURE_SPACE_SxT.xyz
-
-                              //put to 0...1 range
 mad r_ldir.xyz, -r_ldir, CV_HALF, CV_HALF
-
 mov oD1.xyz, r_ldir.xyz
-
-; point light
-;sub r_dir.xyz, INPUT_POSITION.xyz, c[94]
-;dp3 r_dir.w, r_dir, r_dir
-;rsq r_dir.w, r_dir.w
-;mul r_dir.xyz, r_dir.xyz, r_dir.w
-;mul r_dir.xyz, r_dir.xyz, CV_HALF
-;add oD1.xyz, r_dir.xyz, CV_HALF
-;mul oD1.xyz, r_dir.xyz, r_dir.w
-
 #endfragment
 
 //----------------------------

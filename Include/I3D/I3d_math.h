@@ -18,7 +18,7 @@
 //----------------------------
 
                               //checking against marginal zero
-#if defined _MSC_VER
+#if defined _MSC_VER && 0
 
 #define MRG_ZERO_BITMASK 0x322BCC77
 #pragma warning(disable:4035) //disable func returns no value, we're returning in eax

@@ -1104,9 +1104,9 @@ bool C_mission::LoadChunk(CK_TYPE ck_t, S_load_context& lc) {
                                     case CT_LIGHT_TYPE:
                                     {
                                         I3D_LIGHTTYPE lt = (I3D_LIGHTTYPE)lc.ck.RIntChunk();
-                                        if (lt == I3DLIGHT_SPOT) {
-                                            lc.ErrLog(C_fstr("Light '%s': spotlight is obsolete", (const char*)lp->GetName()), lp);
-                                        }
+                                        // if (lt == I3DLIGHT_SPOT) {
+                                        //     lc.ErrLog(C_fstr("Light '%s': spotlight is obsolete", (const char*)lp->GetName()), lp);
+                                        // }
                                         lp->SetLightType(lt);
                                     }
                                     break;

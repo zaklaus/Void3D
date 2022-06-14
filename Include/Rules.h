@@ -54,7 +54,11 @@ typedef unsigned long ulong;
 
 #ifndef _SIZE_T_DEFINED_
 #define _SIZE_T_DEFINED_
+#ifdef _WIN64
+typedef unsigned long long size_t;
+#else
 typedef unsigned size_t;
+#endif
 #endif
 
 #ifndef NULL

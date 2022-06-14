@@ -67,6 +67,7 @@ protected:
    S_vector2 detail_scale;    //scale of detail map
    float embm_scale;          //scale of embm map
    float embm_opacity;        //opacity of embm map
+   float env_opacity;         //opacity of env map
 
    PI3D_driver drv;
 
@@ -92,6 +93,7 @@ public:
    inline void SetAddMode(bool b){ mat_flags &= ~MATF_ADD_MODE; if(b) mat_flags |= MATF_ADD_MODE; }
 
    inline float GetEMBMOpacity1() const{ return embm_opacity; }
+   inline float GetEnvOpacity1() const{ return env_opacity; }
 
    inline void SetDetailScale(const S_vector2 &s){ detail_scale = s; }
    inline const S_vector2 &GetDetailScale() const{ return detail_scale; }
@@ -154,6 +156,9 @@ public:
 
    I3DMETHOD_(void,SetEMBMOpacity)(float f){ embm_opacity = f; }
    I3DMETHOD_(float,GetEMBMOpacity)() const{ return embm_opacity; }
+
+   I3DMETHOD_(void,SetEnvOpacity)(float f) {env_opacity = f;}
+   I3DMETHOD_(float,GetEnvOpacity)() const{ return env_opacity;}
 
    I3DMETHOD_(void,SetName)(const C_str &n){ name = n; }
    I3DMETHOD_(const C_str&,GetName)() const{ return name; }

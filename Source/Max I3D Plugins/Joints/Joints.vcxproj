@@ -131,7 +131,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>comctl32.lib;dta_read.lib;zlib.lib;core.lib;geom.lib;gfx.lib;mesh.lib;maxutil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;dta_read.lib;zlib.lib;acap.lib;amodeler.lib;assetmanagement.lib;atscore.lib;biped.lib;bmm.lib;composite.lib;core.lib;crowd.lib;custdlg.lib;edmodel.lib;expr.lib;flt.lib;geom.lib;geomimp.lib;gfx.lib;gup.lib;helpsys.lib;igame.lib;imageviewers.lib;manipsys.lib;maxnet.lib;maxscrpt.lib;maxutil.lib;menuman.lib;menus.lib;mesh.lib;mnmath.lib;paramblk2.lib;particle.lib;ParticleFlow.lib;physique.lib;poly.lib;renderutil.lib;rtmax.lib;springsys.lib;tessint.lib;viewfile.lib;zlibdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\..\Tools\Plugins.max\4\joints.dlo</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>$(SolutionDir)maxsdk\lib;$(SolutionDir)..\..\lib%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

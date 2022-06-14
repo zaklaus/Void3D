@@ -140,6 +140,9 @@
     <ClInclude Include="..\..\Source\IEditor\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Ragdoll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\IEditor\main.rc">
@@ -150,6 +153,7 @@
     <Text Include="..\TEXT\English\SYSTEM.TXT">
       <Filter>Texts</Filter>
     </Text>
+    <Text Include="..\..\Source\IEditor\res\font.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\IEditor\res\cursor1.cur">
@@ -298,5 +302,25 @@
     <Image Include="..\..\Source\IEditor\res\tb_play.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\Source\IEditor\res\Checkpoint.png" />
+    <Image Include="..\..\Source\IEditor\res\camera.png" />
+    <Image Include="..\..\Source\IEditor\res\sound_a.png" />
+    <Image Include="..\..\Source\IEditor\res\light_f.png" />
+    <Image Include="..\..\Source\IEditor\res\light_a.png" />
+    <Image Include="..\..\Source\IEditor\res\light_s.png" />
+    <Image Include="..\..\Source\IEditor\res\light_d.png" />
+    <Image Include="..\..\Source\IEditor\res\sound_p.png" />
+    <Image Include="..\..\Source\IEditor\res\target.png" />
+    <Image Include="..\..\Source\IEditor\res\bmp13.png" />
+    <Image Include="..\..\Source\IEditor\res\bmp12.png" />
+    <Image Include="..\..\Source\IEditor\res\bone.png" />
+    <Image Include="..\..\Source\IEditor\res\dummy.png" />
+    <Image Include="..\..\Source\IEditor\res\light_p.png" />
+    <Image Include="..\..\Source\IEditor\res\sphere.png" />
+    <Image Include="..\..\Source\IEditor\res\letters.png" />
+    <Image Include="..\..\Source\IEditor\res\Font1_a.png" />
+    <Image Include="..\..\Source\IEditor\res\Font1.png" />
+    <Image Include="..\..\Source\IEditor\res\envmap.png" />
+    <Image Include="..\..\Source\IEditor\res\axes.png" />
   </ItemGroup>
 </Project>

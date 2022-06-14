@@ -154,6 +154,34 @@ mul r0, r0, t1
 #endfragment
 
 ;----------------------------
+#beginfragment lrp_r0_t0
+lrp r1, CP_COLOR1.a, t0, CP_COLOR2
+mul_x2 r0.rgb, r0, r1
++mul r0.a, r0.a, t0.a
+#endfragment
+
+;----------------------------
+#beginfragment lrp_r0_t1
+lrp r1, CP_COLOR1.a, t1, CP_COLOR2
+mul_x2 r0.rgb, r0, r1
++mul r0.a, r0.a, t1.a
+#endfragment
+
+;----------------------------
+#beginfragment lrp_r0_t2
+lrp r1, CP_COLOR1.a, t2, CP_COLOR2
+mul_x2 r0.rgb, r0, r1
++mul r0.a, r0.a, t1.a
+#endfragment
+
+;----------------------------
+#beginfragment lrp_r0_t3
+lrp r1, CP_COLOR1.a, t3, CP_COLOR2
+mul_x2 r0.rgb, r0, r1
++mul r0.a, r0.a, t3.a
+#endfragment
+
+;----------------------------
 #beginfragment grayscale
 dp3 r_gray, r0, CP_FACTOR
 lrp r0, CP_FACTOR.a, r0, r_gray
@@ -321,39 +349,13 @@ mul r0, r0, r1  ; (y = y * c)
 #beginfragment ps_test_bump
 
 dp3_sat r1, t1_bx2, v1_bx2
-;mul r1, t2, r1.a
-
-;add r0.rgb, r0, r1
-;mul r1, r1, t1.a
-;mad r0, r1, t2, r0
-;add_d2 r1, r1, CP_ONE
-
-lrp r1, t1.a, r1, CP_ONE
-
-mad r1, r1, t0, r0
-
-                              //environment
-;mul_x2 r1, r1, t2
-;mul r1, r1, t2
-
-mul r0, r0, r1
+add r1, r1, v0
+mul_x2 r0, r0, r1
 
 ;mov r0, t1.a
 
 
 #endfragment
-
-#beginfragment ps_test_bump_env
-
-dp3_sat r1, t1_bx2, v1_bx2
-lrp r1, t1.a, r1, CP_ONE
-mad r1, r1, t0, r0
-                              //environment
-mul r1, r1, t2
-mul r0, r0, r1
-
-#endfragment
-
 
 ;----------------------------
 ; Test fragment.

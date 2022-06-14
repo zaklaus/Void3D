@@ -83,6 +83,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         LM_OCCLUDER,
         LM_JOINT,
         LM_USER,
+        LM_VIS_LM,
+
         //other (modes)
         LM_HIERARCHY,
         LM_HIDE,
@@ -123,7 +125,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
            true, true, true, true,
            true, true, true, true,
            true, true, true, true,
-           true, false,
+           false, true, false,
         };
         return list_mode;
     }
@@ -146,121 +148,105 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     bool AddFrame_Tree(HWND hwnd, PI3D_frame frm, const C_vector<C_smart_ptr<I3D_frame> >& sel_list,
         int& focused, bool also_hidden, HTREEITEM root, HTREEITEM& out_item) {
 
-        bool add = false;
+        HWND hwnd_tree = GetDlgItem(hwnd, IDC_TREE1);
+
+        E_FRM_IMAGE ti = FI_UNKNOWN;
+        dword tmp[2];
+        const char* st = nullptr;
+
         switch (frm->GetType()) {
-        case FRAME_VISUAL: if (list_mode[LM_VISUAL]) add = also_hidden || frm->IsOn(); break;
-        case FRAME_LIGHT: if (list_mode[LM_LIGHT]) add = true; break;
-        case FRAME_SOUND: if (list_mode[LM_SOUND]) add = true; break;
-        case FRAME_MODEL: if (list_mode[LM_MODEL]) add = also_hidden || frm->IsOn(); break;
-        case FRAME_SECTOR: if (list_mode[LM_SECTOR]) add = also_hidden || frm->IsOn(); break;
-        case FRAME_DUMMY: if (list_mode[LM_DUMMY]) add = also_hidden || frm->IsOn(); break;
-        case FRAME_VOLUME: if (list_mode[LM_VOLUME]) add = true; break;
-        case FRAME_CAMERA: if (list_mode[LM_CAMERA]) add = true; break;
-        case FRAME_OCCLUDER: if (list_mode[LM_OCCLUDER]) add = true; break;
-        case FRAME_JOINT: if (list_mode[LM_JOINT]) add = true; break;
-        case FRAME_USER: if (list_mode[LM_USER]) add = true; break;
-        }
-        if (add) {
-            HWND hwnd_tree = GetDlgItem(hwnd, IDC_TREE1);
-
-            E_FRM_IMAGE ti = FI_UNKNOWN;
-            dword tmp[2];
-            const char* st = nullptr;
-
-            switch (frm->GetType()) {
-            case FRAME_VISUAL:
-                ti = FI_VISUAL;
-                tmp[0] = I3DCAST_VISUAL(frm)->GetVisualType();
-                tmp[1] = 0;
-                st = (const char*)tmp;
-                break;
-            case FRAME_LIGHT:
-                ti = FI_LIGHT_POINT;
-                switch (I3DCAST_LIGHT(frm)->GetLightType()) {
-                case I3DLIGHT_POINT: ti = FI_LIGHT_POINT; st = "Point"; break;
-                case I3DLIGHT_SPOT: ti = FI_LIGHT_SPOT; st = "Spot"; break;
-                case I3DLIGHT_DIRECTIONAL: ti = FI_LIGHT_DIR; st = "Dir"; break;
-                case I3DLIGHT_AMBIENT: ti = FI_LIGHT_AMB; st = "Amb"; break;
-                case I3DLIGHT_POINTAMBIENT: ti = FI_LIGHT_AMB; st = "PAmb"; break;
-                case I3DLIGHT_FOG: ti = FI_LIGHT_FOG; st = "Fog"; break;
-                case I3DLIGHT_LAYEREDFOG: ti = FI_LIGHT_LAYERFOG; st = "LFog"; break;
-                }
-                break;
-            case FRAME_SOUND:
-                ti = FI_SOUND_POINT;
-                switch (I3DCAST_SOUND(frm)->GetSoundType()) {
-                case I3DSOUND_POINT: ti = FI_SOUND_POINT; st = "Point"; break;
-                case I3DSOUND_SPOT: ti = FI_SOUND_SPOT; st = "Spot"; break;
-                case I3DSOUND_AMBIENT: ti = FI_SOUND_AMB; st = "Amb"; break;
-                case I3DSOUND_POINTAMBIENT: ti = FI_SOUND_POINTAMB; st = "PAmb"; break;
-                }
-                break;
-            case FRAME_MODEL:
-            {
-                ti = FI_MODEL;
-                st = I3DCAST_MODEL(frm)->GetFileName();
-                for (int i = strlen(st); i--; ) {
-                    if (st[i] == '\\') {
-                        st += i + 1;
-                        break;
-                    }
-                }
+        case FRAME_VISUAL:
+            ti = FI_VISUAL;
+            tmp[0] = I3DCAST_VISUAL(frm)->GetVisualType();
+            tmp[1] = 0;
+            st = (const char*)tmp;
+            break;
+        case FRAME_LIGHT:
+            ti = FI_LIGHT_POINT;
+            switch (I3DCAST_LIGHT(frm)->GetLightType()) {
+            case I3DLIGHT_POINT: ti = FI_LIGHT_POINT; st = "Point"; break;
+            case I3DLIGHT_SPOT: ti = FI_LIGHT_SPOT; st = "Spot"; break;
+            case I3DLIGHT_DIRECTIONAL: ti = FI_LIGHT_DIR; st = "Dir"; break;
+            case I3DLIGHT_AMBIENT: ti = FI_LIGHT_AMB; st = "Amb"; break;
+            case I3DLIGHT_POINTAMBIENT: ti = FI_LIGHT_AMB; st = "PAmb"; break;
+            case I3DLIGHT_FOG: ti = FI_LIGHT_FOG; st = "Fog"; break;
+            case I3DLIGHT_LAYEREDFOG: ti = FI_LIGHT_LAYERFOG; st = "LFog"; break;
             }
             break;
-            case FRAME_SECTOR: ti = FI_SECTOR; break;
-            case FRAME_USER: ti = FI_USER; break;
-            case FRAME_DUMMY: ti = FI_DUMMY; break;
-            case FRAME_JOINT: ti = FI_JOINT; break;
-            case FRAME_VOLUME:
-                st = "<unknown>";
-                ti = FI_VOLUME_BOX;
-                switch (I3DCAST_VOLUME(frm)->GetVolumeType()) {
-                case I3DVOLUME_BOX: ti = FI_VOLUME_BOX; st = "Box"; break;
-                case I3DVOLUME_RECTANGLE: ti = FI_VOLUME_RECT; st = "Rect"; break;
-                case I3DVOLUME_SPHERE: ti = FI_VOLUME_SPHERE; st = "Sphere"; break;
-                case I3DVOLUME_CYLINDER: ti = FI_VOLUME_CAPCYL; st = "Cylinder"; break;
-                case I3DVOLUME_CAPCYL: ti = FI_VOLUME_CAPCYL; st = "CapCyl"; break;
-                }
-                break;
-            case FRAME_CAMERA: ti = FI_CAMERA; break;
-            case FRAME_OCCLUDER:
-                ti = FI_OCCLUDER;
-                switch (I3DCAST_OCCLUDER(frm)->GetOccluderType()) {
-                case I3DOCCLUDER_MESH: st = "Mesh"; break;
-                case I3DOCCLUDER_SPHERE: st = "Sphere"; break;
-                }
-                break;
+        case FRAME_SOUND:
+            ti = FI_SOUND_POINT;
+            switch (I3DCAST_SOUND(frm)->GetSoundType()) {
+            case I3DSOUND_POINT: ti = FI_SOUND_POINT; st = "Point"; break;
+            case I3DSOUND_SPOT: ti = FI_SOUND_SPOT; st = "Spot"; break;
+            case I3DSOUND_AMBIENT: ti = FI_SOUND_AMB; st = "Amb"; break;
+            case I3DSOUND_POINTAMBIENT: ti = FI_SOUND_POINTAMB; st = "PAmb"; break;
             }
-            {
-                dword j;
-                char buf[256];
-                strcpy(buf, frm->GetName());
-                int count = SendMessage(hwnd_tree, LVM_GETITEMCOUNT, 0, 0);
-
-                TVINSERTSTRUCT tvins;
-                memset(&tvins, 0, sizeof(tvins));
-                TVITEM tvi = {};
-                tvi.pszText = buf;
-                tvi.lParam = (LPARAM)frm;
-                tvi.state = TVIS_EXPANDED | TVIS_BOLD;
-                tvi.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_PARAM | TVIF_STATE | TVIF_STATEEX;
-                tvi.iImage = ti;
-                tvi.iSelectedImage = ti;
-                for (j = sel_list.size(); j-- > 0; )
-                    if (frm == sel_list[j]) break;
-                if (j != -1) {
-                    tvi.state |= TVIS_BOLD;
-                    focused = j;
+            break;
+        case FRAME_MODEL:
+        {
+            ti = FI_MODEL;
+            st = I3DCAST_MODEL(frm)->GetFileName();
+            for (int i = strlen(st); i--; ) {
+                if (st[i] == '\\') {
+                    st += i + 1;
+                    break;
                 }
-
-                tvins.item = tvi;
-                tvins.hInsertAfter = TVI_SORT;
-                tvins.hParent = root;
-
-                out_item = (HTREEITEM)SendMessage(hwnd_tree, TVM_INSERTITEM, 0, (LPARAM)(LPTVINSERTSTRUCT)&tvins);
             }
         }
-        return add;
+        break;
+        case FRAME_SECTOR: ti = FI_SECTOR; break;
+        case FRAME_USER: ti = FI_USER; break;
+        case FRAME_DUMMY: ti = FI_DUMMY; break;
+        case FRAME_JOINT: ti = FI_JOINT; break;
+        case FRAME_VOLUME:
+            st = "<unknown>";
+            ti = FI_VOLUME_BOX;
+            switch (I3DCAST_VOLUME(frm)->GetVolumeType()) {
+            case I3DVOLUME_BOX: ti = FI_VOLUME_BOX; st = "Box"; break;
+            case I3DVOLUME_RECTANGLE: ti = FI_VOLUME_RECT; st = "Rect"; break;
+            case I3DVOLUME_SPHERE: ti = FI_VOLUME_SPHERE; st = "Sphere"; break;
+            case I3DVOLUME_CYLINDER: ti = FI_VOLUME_CAPCYL; st = "Cylinder"; break;
+            case I3DVOLUME_CAPCYL: ti = FI_VOLUME_CAPCYL; st = "CapCyl"; break;
+            }
+            break;
+        case FRAME_CAMERA: ti = FI_CAMERA; break;
+        case FRAME_OCCLUDER:
+            ti = FI_OCCLUDER;
+            switch (I3DCAST_OCCLUDER(frm)->GetOccluderType()) {
+            case I3DOCCLUDER_MESH: st = "Mesh"; break;
+            case I3DOCCLUDER_SPHERE: st = "Sphere"; break;
+            }
+            break;
+        }
+        {
+            dword j;
+            char buf[256];
+            strcpy(buf, frm->GetName());
+            int count = SendMessage(hwnd_tree, LVM_GETITEMCOUNT, 0, 0);
+
+            TVINSERTSTRUCT tvins;
+            memset(&tvins, 0, sizeof(tvins));
+            TVITEM tvi = {};
+            tvi.pszText = buf;
+            tvi.lParam = (LPARAM)frm;
+            tvi.state = TVIS_EXPANDED | TVIS_BOLD;
+            tvi.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_PARAM | TVIF_STATE | TVIF_STATEEX;
+            tvi.iImage = ti;
+            tvi.iSelectedImage = ti;
+            for (j = sel_list.size(); j-- > 0; )
+                if (frm == sel_list[j]) break;
+            if (j != -1) {
+                tvi.state |= TVIS_BOLD;
+                focused = j;
+            }
+
+            tvins.item = tvi;
+            tvins.hInsertAfter = TVI_SORT;
+            tvins.hParent = root;
+
+            out_item = (HTREEITEM)SendMessage(hwnd_tree, TVM_INSERTITEM, 0, (LPARAM)(LPTVINSERTSTRUCT)&tvins);
+        }
+        return true;
     }
 
     //----------------------------
@@ -471,7 +457,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         bool add = false;
         switch (frm->GetType()) {
-        case FRAME_VISUAL: if (list_mode[LM_VISUAL]) add = also_hidden || frm->IsOn(); break;
+        case FRAME_VISUAL: if (list_mode[LM_VISUAL] || list_mode[LM_VIS_LM]) add = also_hidden || frm->IsOn(); break;
         case FRAME_LIGHT: if (list_mode[LM_LIGHT]) add = true; break;
         case FRAME_SOUND: if (list_mode[LM_SOUND]) add = true; break;
         case FRAME_MODEL: if (list_mode[LM_MODEL]) add = also_hidden || frm->IsOn(); break;
@@ -496,6 +482,10 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 tmp[0] = I3DCAST_VISUAL(frm)->GetVisualType();
                 tmp[1] = 0;
                 st = (const char*)tmp;
+
+                if (!list_mode[LM_VISUAL] && list_mode[LM_VIS_LM] && tmp[0] != I3D_VISUAL_LIT_OBJECT){
+                    return false;
+                }
                 break;
             case FRAME_LIGHT:
                 ti = FI_LIGHT_POINT;
@@ -686,6 +676,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     static void ShowGroupButtons(HWND hwnd, bool enable_hierarchy = true) {
 
         CheckDlgButton(hwnd, IDC_CHECK_VIS, list_mode[LM_VISUAL]);
+        CheckDlgButton(hwnd, IDC_CHECK_VIS2, list_mode[LM_VIS_LM]);
         CheckDlgButton(hwnd, IDC_CHECK_LIGHT, list_mode[LM_LIGHT]);
         CheckDlgButton(hwnd, IDC_CHECK_MODEL, list_mode[LM_MODEL]);
         CheckDlgButton(hwnd, IDC_CHECK_SND, list_mode[LM_SOUND]);
@@ -1061,6 +1052,13 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_CHECK_VIS:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VISUAL] = IsDlgButtonChecked(hwnd, IDC_CHECK_VIS);
+                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
+                    }
+                    break;
+                case IDC_CHECK_VIS2:
+                    if (HIWORD(wParam) == BN_CLICKED) {
+                        list_mode[LM_VIS_LM] = IsDlgButtonChecked(hwnd, IDC_CHECK_VIS2);
                         auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
@@ -1459,6 +1457,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     EnableWindow(GetDlgItem(hwnd, IDC_CHECK_HIDE), IsDlgButtonChecked(hwnd, LOWORD(wParam)));
                     //flow...
                 case IDC_CHECK_VIS:
+                case IDC_CHECK_VIS2:
                 case IDC_CHECK_LIGHT:
                 case IDC_CHECK_MODEL:
                 case IDC_CHECK_SND:
@@ -1476,6 +1475,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                         E_SEL_GROUP grp;
                     } s_map[] = {
                        IDC_CHECK_VIS, LM_VISUAL,
+                       IDC_CHECK_VIS2, LM_VIS_LM,
                        IDC_CHECK_LIGHT, LM_LIGHT,
                        IDC_CHECK_MODEL, LM_MODEL,
                        IDC_CHECK_SND, LM_SOUND,
@@ -2710,8 +2710,7 @@ public:
         if (!scene_tree_on && hwnd_treeview) {
             DestroyTreeWindow();
         }
-
-        CreateTreeView();
+        else if (!hwnd_treeview) CreateTreeView();
         return true;
     }
 

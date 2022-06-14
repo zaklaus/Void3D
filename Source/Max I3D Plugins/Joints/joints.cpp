@@ -132,7 +132,7 @@ public:
    
 //----------------------------
 
-   RefTargetHandle Clone(RemapDir& remap = NoRemap()){
+   RefTargetHandle Clone(RemapDir& remap){
       JointObj* newob = new JointObj(false);
       newob->ReplaceReference(0, pblock2->Clone(remap));
       newob->ivalid.SetEmpty();  
@@ -887,7 +887,7 @@ class C_JointsCreateMode: public CommandMode{
                SetHideJointObject(curNode, true);
          
                // Reference the new node so we'll get notifications.
-               MakeRefByID( FOREVER, 0, curNode);
+               //MakeRefByID( FOREVER, 0, curNode);
 
                ignoreSelectionChange = true;
                createInterface->SelectNode( curNode);

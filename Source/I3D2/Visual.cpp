@@ -1326,18 +1326,41 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
               do_bumpmap = true;
 
               se_in.AddFragment(VSF_BUMP_OS);
-              CPI3D_frame lp = rp.scene->FindFrame("direct", ENUMF_LIGHT);
-              if (lp) {
-                  S_vectorw ldir = lp->GetWorldDir();
-                  S_vectorw lpos = lp->GetWorldPos();
-                  if (object_space) {
-                      (S_vector&)ldir %= GetInvMatrix1();
-                      (S_vector&)lpos *= GetInvMatrix1();
+
+              struct S_hlp{
+                  PI3D_frame frame = nullptr;
+                  const S_render_primitive *rp;
+
+                  static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c){
+                     const auto hlp = (S_hlp*)c;
+                     PI3D_light lit = I3DCAST_LIGHT(frm);
+
+                     if (lit->GetLightType1() == I3DLIGHT_DIRECTIONAL){
+                        if (!hlp->frame && lit->GetParent() == hlp->rp->scene->GetPrimarySector()){
+                           hlp->frame = lit;
+                        }
+
+                        const auto light_sectors = lit->GetLightSectorsVector();
+
+                        for(const auto& light_sector : light_sectors){
+                           if (hlp->rp->sector == light_sector){
+                              hlp->frame = lit;
+                              return I3DENUMRET_CANCEL;
+                           }
+                        }
+                     }
+
+                     return I3DENUMRET_OK;
                   }
-                  //ldir.x = 1.0f;
+               } hlp = {0, &rp};
+
+              rp.scene->EnumFrames(S_hlp::cbEnum, ENUMF_LIGHT);
+              if (hlp.frame) {
+                  S_vectorw ldir = hlp.frame->GetWorldDir();
+                  if (object_space) {
+                      ldir %= GetInvMatrix1();
+                  }
                   ldir.w = 0.0f;
-                  lpos.w = 0.0f;
-                  drv->SetVSConstant(94, &lpos);
                   drv->SetVSConstant(95, &ldir);
               }
           }
@@ -1551,38 +1574,46 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
                   if(!(tb_bump->GetTxtFlags()&TXTF_ALPHA)){
                      se_ps.TexBem(stage);
                   }else{
-                     //se_ps.TexBeml(stage);
-                     se_ps.TexBem(stage);
+                     se_ps.TexBeml(stage);
+                     // se_ps.TexBem(stage);
                   }
                   set_uv_scale = true;
                }else{
                   ++stage;
                   se_ps.Tex(stage);
                }
-               se_ps.Mod2X(stage);
+               se_ps.Lrp(stage);
             }else
             if((vis_flags&VISF_USE_BUMPMAP)){
                CPI3D_texture_base tp_normal = mat->GetTexture1(MTI_NORMAL);
                if(tp_normal){
                   se_ps.Tex(stage);
                   drv->SetTexture1(stage, tp_normal);
-                  se_ps.AddFragment(PSF_TEST_BUMP_ENV);
+                  se_ps.AddFragment(PSF_TEST_BUMP);
                   ++stage;
                   se_ps.Tex(stage);
+                  se_ps.Lrp(stage);
                }else{
                   ++stage;
                   se_ps.Tex(stage);
-                  se_ps.Mod2X(stage);
+                  se_ps.Lrp(stage);
                }
             }else{
                se_ps.Tex(stage);
-               se_ps.Mod2X(stage);
+               se_ps.Lrp(stage);
             }
          }else{
             se_ps.Tex(stage);
-            se_ps.Mod2X(stage);
+            se_ps.Lrp(stage);
          }
+
          drv->SetTexture1(stage, tp_env);
+
+         const auto opacity_num = mat->GetEnvOpacity1();
+         const S_vectorw opacity(opacity_num, opacity_num, opacity_num, opacity_num);
+         const S_vectorw gray(0.5f, 0.5f, 0.5f, 0.0f);
+         drv->SetPSConstant(PSC_COLOR1, &opacity);
+         drv->SetPSConstant(PSC_COLOR2, &gray);
       }else{
          //drv->SetTexture1(stage, NULL);
          if((vis_flags&(VISF_USE_EMBMMAP|VISF_USE_BUMPMAP)) && stage<=drv->NumSimultaneousTextures()-2){

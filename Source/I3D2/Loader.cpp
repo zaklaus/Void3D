@@ -436,7 +436,7 @@ I3D_RESULT C_loader::ReadMaterial(){
             case CT_MAP_DIFFUSE: map_src = &diff; break;
             case CT_MAP_OPACITY: map_src = &opt; break;
             case CT_MAP_BUMP: map_src = &embm; break;
-            case CT_MAP_REFLECTION: map_src = &env; break;
+            case CT_MAP_REFLECTION: map_src = &env; env.power = 0.0f; break;
             case CT_MAP_DETAIL: map_src = &det; break;
             case CT_MAP_AMBIENT: map_src = &secondmap; break;
             //case CT_MAP_SPECULAR: map_src = &specular; break;
@@ -691,6 +691,7 @@ I3D_RESULT C_loader::SetupMaterial(PI3D_material mat, dword ct_flags, dword txt_
       if((txt_flags&LOADF_TXT_CUBEMAP) && (driver->GetCaps()->TextureCaps&D3DPTEXTURECAPS_CUBEMAP))
          ctf |= TEXTMAP_CUBEMAP;
       CreateTexture(ctf, env, mat_name, mat, MTI_ENVIRONMENT);
+      mat->SetEnvOpacity(env.power);
    }
    if(embm.Size()){
                               //check conflict with alpha channel
@@ -1378,7 +1379,7 @@ bool C_loader::GenerateTextureSpace(const C_vector<S_vertex> &verts, const C_vec
       ts.sxt = ts.s.Cross(ts.t);
       ts.t.Invert();
       //assert(I3DFabs(1.0f - ts.sxt.Magnitude()) < 1e-2f);
-#if 1
+#if 0
       {
          const S_vertex &v = verts[vi];
          driver->DebugVector(v.xyz, ts.s, 0, 0xffff0000);

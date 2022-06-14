@@ -1360,6 +1360,10 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "t1_copy",
          "mod_t0_v0",
          "mod_r0_t1",
+         "lrp_r0_t0",
+         "lrp_r0_t1",
+         "lrp_r0_t2",
+         "lrp_r0_t3",
          "modx2_t0_v0",
          "modx2_r0_t0",
          "modx2_r0_t1",
@@ -1382,7 +1386,6 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "tonemap_reinhard",
          "colorgrade",
          "ps_test_bump",
-         "ps_test_bump_env",
       };
 
       for(i=0; i<PSF_LAST; i++){

@@ -27,6 +27,7 @@ I3D_material::I3D_material(PI3D_driver drv1):
    detail_scale(1.0f, 1.0f),
    embm_scale(1.0f),
    embm_opacity(1.0f),
+   env_opacity(0.0f),
    mat_flags(0),
    sort_id(0),
    mirror_id((dword)-1),

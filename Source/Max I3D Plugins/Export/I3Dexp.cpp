@@ -404,8 +404,12 @@ class C_SceneEnumProc: public ITreeEnumProc{
          */
          return TREE_CONTINUE;
       }
-
       SClass_ID scid = obj->SuperClassID();
+
+      /*MessageBox(GetForegroundWindow(),
+          C_fstr("name: %s id: (%x,%x) scid: %x", node->GetName(), id.PartA(), id.PartB(), scid),
+          "Insanity export plugin", MB_OK);*/
+
       if(scid==JOINT_SUPERCLASSID && id==JOINT_CLASSID){
          Append(node, obj, OBTYPE_JOINT);
       }else{

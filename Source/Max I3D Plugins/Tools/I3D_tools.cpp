@@ -291,7 +291,8 @@ class C_I3D_tools: public UtilityObj{
                   int n = root->GetXRefFileCount();
                   int ni;
                   for(int i=n; i--; ){
-                     TSTR fn = root->GetXRefFileName(i);
+                      auto fl = root->GetXRefFile(i);
+                      auto fn = fl.GetFileName();
                      for(ni=strlen(fn); ni--; ){
                         if(fn[ni]=='\\')
                            break;
@@ -546,7 +547,7 @@ public:
 //----------------------------
 
    void ShowSelectionText(HWND hwnd){
-
+       if (!ip) return;
       SetWindowText(GetDlgItem(hwnd, IDC_SEL), C_xstr("Objects selected: %") %ip->GetSelNodeCount());
    }
 
