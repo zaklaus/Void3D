@@ -6,6 +6,7 @@
 #include "Script.h"
 #include <IPhysics.h>
 
+#include "PhysicsActor.h"
 #include "TerrainDetail.h"
 #include "winstuff.h"
 
@@ -173,6 +174,10 @@ private:
 
     static bool PhysContactReport(CPI3D_volume src_vol, PIPH_body src_body, CPI3D_frame dst_frm, PIPH_body dst_body,
         const S_vector& pos, const S_vector& normal, float depth, void* context) {
+        const auto act = reinterpret_cast<PC_actor_physics>(src_body->GetUserData());
+        if (act){
+            return act->ContactReport(const_cast<PI3D_frame>(dst_frm), pos, normal, depth);
+        }
         return true;
     }
 
@@ -1383,6 +1388,7 @@ PC_actor CreateEffectActor(C_game_mission&, PI3D_frame, const S_effect_init*, C_
 PC_actor CreatePlayerActor(C_game_mission&, PI3D_frame, const void*);
 PC_actor CreateRagdollActor(C_game_mission& gm, PI3D_frame frm);
 PC_actor CreateActorPhysics(C_game_mission& gm, PI3D_frame frm);
+PC_actor CreateActorItem(C_game_mission &gm, PI3D_frame in_frm);
 PC_actor CreateVehicleActor(C_game_mission& gm1, PI3D_frame in_frm);
 
 //----------------------------
@@ -1396,6 +1402,7 @@ PC_actor C_game_mission_imp::CreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type
     case ACTOR_RAGDOLL: ap = CreateRagdollActor(*this, in_frm); break;
     case ACTOR_PHYSICS: ap = CreateActorPhysics(*this, in_frm); break;
     case ACTOR_VEHICLE: ap = CreateVehicleActor(*this, in_frm); break;
+    case ACTOR_ITEM: ap = CreateActorItem(*this, in_frm); break;
     default:
         ErrReport("C_game_mission::CreateActor: Cannot create actor!", editor);
     }

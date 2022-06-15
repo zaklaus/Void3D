@@ -19,13 +19,14 @@
 #include <integer.h>
 
 #define ANIM_FPS 100
-//#define AUTO_SMOOTH_ANGLE (50.0f*PI/180.0f)  //angle of autosmoothing - used when smoothgroups are not present
+#define AUTO_SMOOTH_ANGLE (50.0f*PI/180.0f)  //angle of autosmoothing - used when smoothgroups are not present
 #define FORCE_MIPMAPPING      //force using mipmapping, unless it is explicitly disabled
 #define REPORT_EMPTY_MESH_ERROR  //report meshes with no vertices or faces
-#define REPORT_EMPTY_SMOOTHGROUPS //report warning on meshes with faces with no smoothgroup set
-#define REPORT_INVALID_FACES  //report meshes with invalid (on line) faces
+//#define REPORT_EMPTY_SMOOTHGROUPS //report warning on meshes with faces with no smoothgroup set
+//#define REPORT_INVALID_FACES  //report meshes with invalid (on line) faces
 //#define FORCE_DETAILMAP_COMPRESSION
 //#define REPORT_UNUSED_VERTS  //report meshes with unused vertices
+//#define REPORT_REDUNDANT_VERTS
 //#define DETECT_DUPLICATED_MATERIALS //detect duplicated materials in one loaded file
 #define USE_DATABASE          //try to cache computation-expensive info in database
 #define MAX_VERTICES 0x7fff   //max vertices we may duplicate due to UV mapping and normal generation
@@ -1875,10 +1876,12 @@ I3D_RESULT C_loader::ReadMesh(PI3D_frame frm, PI3D_mesh_base mesh, const char *n
          if(vp[i]!=i)
             ++num_redundant;
       }
+      #ifdef REPORT_REDUNDANT_VERTS
       if(num_redundant){
          REPORT_ERR(C_fstr("Mesh '%s': %i redundant vertices", name, num_redundant));
          allow_cache = false;
       }
+      #endif
    }
 
                               //check multimats

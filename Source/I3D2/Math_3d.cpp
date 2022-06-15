@@ -1570,6 +1570,11 @@ void S_quat::Make(const S_vector &axis, float angle){
    }
 }
 
+void S_quat::Make(float pitch, float yaw, float roll){
+
+}
+
+
 //----------------------------
 static const int nxt[3] = {1, 2, 0};
 

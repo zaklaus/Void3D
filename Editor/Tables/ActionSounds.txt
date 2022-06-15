@@ -1,0 +1,4 @@
+Default Default gen_hit
+Default *hit gen_hit 0.8
+Default *step gen_step
+Default Glass glass_break

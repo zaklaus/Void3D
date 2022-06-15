@@ -165,7 +165,7 @@
     </Midl>
     <ClCompile>
       <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;PHYS_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>

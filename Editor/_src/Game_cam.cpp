@@ -28,11 +28,11 @@
 //#define DEBUG_DRAW_LINES        //when defined, draw camera's movement and aim lines
 #define DISABLE_ADD_ANIM          //additional animation like shaking, etc.
 
+#endif
+
 # ifdef EDITOR
 #  define CAM_DEBUG_MODEL
 # endif
-
-#endif
 
 //----------------------------
                               //camera height angles, 3 phases

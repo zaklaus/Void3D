@@ -2159,6 +2159,13 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
 
                 if (mission->LoadModel(mod, C_fstr("+models\\%s", &file_name[0]), 0, 0, true) == MIO_OK) {
                     char frm_name[256] = {};
+                    char *p, *frm_base = (char*)(const char*)file_name;
+                    p = frm_base;
+                    while (*p){
+                        if (*p == '\\') frm_base = ++p;
+                        ++p;
+                    }
+                    sprintf_s(frm_name, 256, "%s", (const char*)frm_base);
                     if (e_create->GetFrameName(ed->GetScene(), frm_name)) {
                         mod->SetName(frm_name);
                         mod->StoreFileName(C_str("+") + file_name);
@@ -2342,7 +2349,14 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
             }
             if (any_actor) {
                 if (conjuct_tab && tt) {
-
+                    //collect all selected frames and keep it in smart ptr
+                    multiple_edited_frames.clear();
+                    for (int k = sel_list.size(); k--; ) {
+                        PI3D_frame frm = sel_list[k];
+                        multiple_edited_frames.push_back(frm);
+                    }
+                    ed->GetIGraph()->EnableSuspend(false);
+                    edited_template = tt;
                     hwnd_tab_edit = (HWND)conjuct_tab->Edit(tt, igraph->GetHWND(),
                         cbTable,
                         (dword)this,
@@ -2350,14 +2364,6 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                         tab_pos_size);
                     if (hwnd_tab_edit) {
                         igraph->AddDlgHWND(hwnd_tab_edit);
-                        ed->GetIGraph()->EnableSuspend(false);
-                        edited_template = tt;
-                        //collect all selected frames and keep it in smart ptr
-                        multiple_edited_frames.clear();
-                        for (int k = sel_list.size(); k--; ) {
-                            PI3D_frame frm = sel_list[k];
-                            multiple_edited_frames.push_back(frm);
-                        }
                     }
                     break;
                 }

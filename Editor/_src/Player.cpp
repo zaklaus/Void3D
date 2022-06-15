@@ -1,8 +1,11 @@
 #include "all.h"
+
 #include "main.h"
 #include "actors.h"
+#include "Player.h"
 #include "GameMission.h"
 #include "Game_cam.h"
+#include "Item.h"
 #include "PhysicsActor.h"
 
 
@@ -43,7 +46,7 @@ static const S_vector AXIS_Y(0.0f, 1.0f, 0.0f);
 
 //----------------------------
 
-class C_player_imp : public C_actor {
+class C_player_imp : public C_player {
     S_vector curr_move_dir;
     S_vector want_move_dir;
     float look_angle;          //0=straight, positive = up, negative = down
@@ -63,6 +66,7 @@ class C_player_imp : public C_actor {
 
     // grab mode vars
     C_smart_ptr<C_actor_physics> grab_act;
+    C_smart_ptr<C_actor_item> equip_act;
 
     void SetFocus(bool b) {
         PI3D_camera cam = mission.GetGameCamera()->GetCamera();
@@ -459,7 +463,7 @@ class C_player_imp : public C_actor {
     //----------------------------
 public:
     C_player_imp(C_game_mission& gm, PI3D_frame in_frm) :
-        C_actor(gm, gm.GetScene()->CreateFrame(FRAME_MODEL), ACTOR_PLAYER)
+        C_player(gm, gm.GetScene()->CreateFrame(FRAME_MODEL))
     {
         frame->Release();
         {
@@ -563,6 +567,53 @@ public:
         return mission.GetScene()->TestCollision(cd);
     }
 
+    bool EquipItem(PC_actor_item item = NULL) override{
+        C_game_camera* cam = mission.GetGameCamera();
+        if (!cam) return false;
+
+        if (item && !equip_act){
+            equip_act = item;
+            equip_act->owner = this;
+            auto frm = equip_act->GetFrame();
+
+            frm->LinkTo(cam->GetCamera());
+            frm->SetPos(equip_act->pos);
+            frm->SetRot(equip_act->rot);
+            equip_act->EnableVolumes(false);
+            equip_act->GetBody()->Enable(false);
+            return true;
+        }else if (!item && equip_act){
+            I3D_collision_data cd;
+            const S_matrix& m0 = cam->GetCamera()->GetMatrix();
+            S_vector from = m0(3);
+            S_vector dir = m0(2);
+
+            cd.from = from;
+            cd.dir = dir * DEFAULT_MAX_USE_DIST;
+            cd.flags = I3DCOL_MOVING_GROUP;
+            cd.frm_root = equip_act->GetFrame();
+            cd.frm_ignore = frame;
+
+            if (mission.GetScene()->TestCollision(cd)){
+                from = cd.ComputeHitPos();
+            }else{
+                from += cd.dir;
+            }
+            equip_act->GetFrame()->LinkTo(nullptr);
+            equip_act->GetFrame()->SetPos(from);
+            mission.GetScene()->SetFrameSectorPos(equip_act->GetFrame(), from);
+            equip_act->EnableVolumes(true);
+            equip_act->GetBody()->SetPosRot(from, equip_act->GetFrame()->GetWorldRot());
+            equip_act->GetBody()->SetLinearVelocity(S_vector(0,0,0));
+            equip_act->GetBody()->Enable(true);
+            equip_act->owner = nullptr;
+            equip_act = nullptr;
+            return true;
+        }
+
+        return false;
+    }
+
     void HighlightUsableActor(PI3D_frame frm){
         RestoreHitBrightness();
         if (frm->GetType() == FRAME_VISUAL){
@@ -639,17 +690,17 @@ public:
         const S_matrix& m0 = cam->GetCamera()->GetMatrix();
         S_vector from = m0(3);
         S_vector dir = m0(2);
+        PI3D_frame frm = grab_act->GetFrame();
 
         I3D_collision_data cd;
         cd.from = from;
         cd.dir = dir * DEFAULT_MAX_GRAB_DIST;
-        cd.flags = I3DCOL_MOVING_SPHERE;
-        cd.radius = 0.5f;
+        cd.flags = I3DCOL_MOVING_GROUP;
+        cd.frm_root = frm;
         cd.frm_ignore = frame;
 
         S_vector dest = cd.from + cd.dir;
 
-        PI3D_frame frm = grab_act->GetFrame();
         frm->SetOn(false);
         if (mission.GetScene()->TestCollision(cd)){
             dest = cd.GetDestination();
@@ -713,10 +764,17 @@ public:
                     // DEBUG(cd.GetHitFrm()->GetName());
                     CheckPlayerUse(tc, cd);
                     CheckPlayerGrab(tc, cd);
+                }else{
+                    if (tc.p_ctrl->Get(CS_USE, true) && equip_act){
+                        EquipItem();
+                    }
                 }
+            }
 
+            if (equip_act){
+                DEBUG("Press LMB to use item");
                 if (ctrl->Get(CS_FIRE)) {
-                    DEBUG("Fire!");
+                    equip_act->Fire();
                 }
             }
 
@@ -780,6 +838,12 @@ public:
     virtual void Tick(const struct S_tick_context& tc) {
         float tsec = (float)tc.time * .001f;
         UpdateMovement(tsec);
+
+        if (equip_act){
+            bool on = mission.IsInputActor(this);
+            equip_act->GetFrame()->SetOn(on);
+            equip_act->Enable(on);
+        }
     }
 };
 
@@ -791,3 +855,10 @@ PC_actor CreatePlayerActor(C_game_mission& gm, PI3D_frame frm, const void*) {
 }
 
 //----------------------------
+
+C_player *CastPlayerActor(C_game_mission &gm, PC_actor act){
+    if (gm.IsInputActor(act)){
+        return reinterpret_cast<C_player*>(act);
+    }
+    return nullptr;
+}

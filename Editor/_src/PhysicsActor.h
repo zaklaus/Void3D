@@ -27,6 +27,11 @@ class C_actor_physics: public C_actor{
       dword count;
    };
    mutable C_vector<S_sound> sounds;
+public:
+   //----------------------------
+
+   virtual bool ContactReport(PI3D_frame dst_frm, const S_vector &pos, const S_vector &normal, float depth,
+      bool play_sounds = true);
 
 protected:
                               //body/joint container
@@ -61,10 +66,6 @@ protected:
       return true;
    }
 
-//----------------------------
-
-   virtual bool ContactReport(PI3D_frame dst_frm, const S_vector &pos, const S_vector &normal, float depth,
-      bool play_sounds = true);
 
 //----------------------------
 // Close physics - deactivate bodies and joints.
@@ -78,7 +79,8 @@ protected:
 public:
    C_actor_physics(C_game_mission &gm, PI3D_frame in_frm, E_ACTOR_TYPE at):
       C_actor(gm, in_frm ? in_frm : gm.GetScene()->CreateFrame(FRAME_MODEL), at),
-      idle_count(0)
+      idle_count(0),
+      idle(0 )
    {
       if(!in_frm)
          frame->Release();

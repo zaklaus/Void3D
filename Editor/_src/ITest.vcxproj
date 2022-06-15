@@ -388,6 +388,7 @@
     <ClCompile Include="Checkpoint.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="Common.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Ragdoll.cpp" />
     <ClCompile Include="EffectActor.cpp" />
     <ClCompile Include="GameMission.cpp" />
@@ -415,6 +416,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\IEditor\resource.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Actors.h" />
     <ClInclude Include="All.h" />
     <ClInclude Include="Checkpoint.h" />
@@ -425,6 +427,7 @@
     <ClInclude Include="Loader.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="PhysicsActor.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ragdoll.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="systables.h" />

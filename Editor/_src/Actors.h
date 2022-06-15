@@ -9,6 +9,7 @@ enum E_ACTOR_TYPE{            //actor class ID
    ACTOR_RAGDOLL,
    ACTOR_PHYSICS,
    ACTOR_VEHICLE,
+   ACTOR_ITEM,
 
    ACTOR_LAST
 };
@@ -66,6 +67,7 @@ public:
 // Setup actors children volumes info: category/collide bits.
 // This also sets up owner of all volumes to be the actor's frame.
    void SetupVolumes(dword category_bits, dword collide_bits = 0xffff);
+   void EnableVolumes(bool on);
 
 //----------------------------
 public:

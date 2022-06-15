@@ -17,6 +17,7 @@ const S_actor_type_info actor_type_info[ACTOR_LAST] = {
    {"Ragdoll",           1},
    {"Physics",        1},
    {"Vehicle",        1},
+   {"Item",           1},
 };
 
 
@@ -150,7 +151,6 @@ void C_actor::ReportActorError(const char *err_msg) const{
 //----------------------------
 
 void C_actor::SetupVolumes(dword category_bits, dword collide_bits){
-
    struct S_hlp{
       PI3D_frame owner;
       dword cat, col;
@@ -166,6 +166,21 @@ void C_actor::SetupVolumes(dword category_bits, dword collide_bits){
          return I3DENUMRET_OK;
       }
    } hlp = {frame, category_bits, collide_bits};
+   frame->EnumFrames(S_hlp::cbVol, (dword)&hlp, ENUMF_VOLUME);
+}
+
+void C_actor::EnableVolumes(bool on){
+   struct S_hlp{
+      bool on;
+
+      static I3DENUMRET I3DAPI cbVol(PI3D_frame frm, dword c){
+         S_hlp *hp = (S_hlp*)c;
+         PI3D_volume vol = I3DCAST_VOLUME(frm);
+         vol->SetOn(hp->on);
+
+         return I3DENUMRET_OK;
+      }
+   } hlp = {on};
    frame->EnumFrames(S_hlp::cbVol, (dword)&hlp, ENUMF_VOLUME);
 }
 

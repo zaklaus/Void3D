@@ -1177,7 +1177,7 @@ struct S_bsp_contact{
 };
 
 //----------------------------
-#define MAX_REPORT_CONTACTS 40
+#define MAX_REPORT_CONTACTS 80
 
 struct S_bsp_contact_context{
    const S_bsp_triface *marked_faces;

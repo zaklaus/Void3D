@@ -621,6 +621,7 @@ struct S_quat{
       S_quat(const S_matrix&);
 
    void Make(const S_vector &axis, float angle);
+   void Make(float pitch, float yaw, float roll);
    void Make(const S_matrix &m);
 
    S_matrix ToMatrix() const;

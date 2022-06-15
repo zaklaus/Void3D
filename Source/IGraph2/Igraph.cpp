@@ -3183,7 +3183,7 @@ bool IGraph::SetCursorProperties(const char *bitmap_name, dword hot_x, dword hot
 dword IGraph::EnableSuspend(bool b){
 
    if(b){
-      assert(suspend_disable_count);
+      //assert(suspend_disable_count);
       --suspend_disable_count;
    }else{
       if(!suspend_disable_count){
