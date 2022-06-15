@@ -35,6 +35,7 @@ void S_preprocess_context::Reset(){
    alpha_zwrite = 0;
    alpha_nozwrite = 0;
    alpha_noz = 0;
+   overlay = 0;
    prim_list.clear();
    prim_sort_list.Clear();
 #ifndef GL

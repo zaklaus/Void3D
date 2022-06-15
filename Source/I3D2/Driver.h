@@ -431,7 +431,7 @@ class I3D_driver{
 
    dword reapply_volume_count;//override dsound bug - reapply volume after some several rendered frames after SetFocus
 
-   I3D_postfx_info postfx;
+   I3D_postfx_info postfx{};
 
 #ifndef GL
    bool is_hal;

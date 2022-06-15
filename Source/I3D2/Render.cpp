@@ -518,7 +518,7 @@ void I3D_scene::Preprocess(S_preprocess_context &pc, dword prep_flags){
       PreprocessChildren(pc.curr_sector, pc, prep_flags);
    }
    //PreprocessSectors(pc.curr_sector, pc);
-   assert(pc.prim_list.size() == (pc.opaque + pc.ckey_alpha + pc.alpha_zwrite + pc.alpha_nozwrite + pc.alpha_noz));
+   assert(pc.prim_list.size() == (pc.opaque + pc.ckey_alpha + pc.alpha_zwrite + pc.alpha_nozwrite + pc.alpha_noz + pc.overlay));
 }
 
 //----------------------------
@@ -535,7 +535,7 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
       if(lf) drv->SetFogColor(lf->dw_color);
       ct.vis->DrawPrimitivePS(pc, ct);
    }
-                              
+
                               // --color-keyed--
    if(pc.ckey_alpha){
       //drv->SetupAlphaTest(true);
@@ -621,6 +621,26 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
       //if(use_zb) drv->SetState(RS_USEZB, true);
       drv->EnableZBUsage(true);
    }
+
+   if (pc.overlay){
+      drv->EnableZBUsage(false);
+      i = pc.overlay;
+      do{
+         --i;
+         const S_render_primitive &ct = pc.prim_list[pc.prim_sort_list[j+i]];
+                              //setup fog
+         PI3D_light lf = ct.sector->GetFogLight();
+                              //avoid blending ADD mode with fog
+         if(lf){
+            bool add_mode = ((ct.blend_mode&0xffff) == I3DBLEND_ADD);
+            drv->SetFogColor(add_mode ? 0 : lf->dw_color);
+         }
+         ct.vis->PropagateDirty();
+         ct.vis->DrawPrimitivePS(pc, ct);
+      }while(i);
+      drv->EnableZBUsage(true);
+   }
+
    drv->EnableFog(false);
 }
 

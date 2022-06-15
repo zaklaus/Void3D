@@ -116,6 +116,7 @@ class I3D_visual: public I3D_frame{
 //#define VISF_DIFFUSE_VALID    0x200 //diffuse written into oD0 (pixel-shader mode only)
 #define VISF_USE_OVERRIDE_LIGHT 0x400 //use user defined light instead of standart lighting
 #define VISF_DEST_PREPARED 0x800
+#define VISF_DRAW_OVERLAY 0x1000
 
                               //user-defined material ID
    dword material_id;
@@ -308,8 +309,15 @@ public:
 
    I3DMETHOD_(PI3D_shader, GetShader)() { return nullptr; }
 
-   //I3DMETHOD_(void,SetBrightness)(float f){ brightness = f; }
-   //I3DMETHOD_(float,GetBrightness)() const{ return brightness; }
+   I3DMETHOD_(void,EnableOverlay)(bool on){
+      if (on){
+         vis_flags |= VISF_DRAW_OVERLAY;
+         PropagateDirty();
+      }else{
+         vis_flags &= ~VISF_DRAW_OVERLAY;
+      }
+   }
+
 //----------------------------
                               //non-user methods
    virtual bool ComputeBounds() = 0;
@@ -334,7 +342,6 @@ public:
    I3DMETHOD_(void,VisReserved12)(){}
    I3DMETHOD_(void,VisReserved13)(){}
    I3DMETHOD_(void,VisReserved14)(){}
-   I3DMETHOD_(void,VisReserved15)(){}
 
    inline bool NeedPrepareDestVb() const{
       return

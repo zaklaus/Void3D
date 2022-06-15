@@ -75,17 +75,18 @@ enum I3D_BLENDMODE{
 
 //----------------------------
                               //sorting bits for render primitives
-                              //bits 29 - 31 - alpha blending type (signed)
+                              //bits 28 - 31 - alpha blending type (signed)
 #define PRIM_SORT_OPAQUE         0x80000000
 #define PRIM_SORT_CKEY_ALPHA     0xa0000000
 #define PRIM_SORT_ALPHA_ZWRITE   0xc0000000
 #define PRIM_SORT_ALPHA_NOZWRITE 0xe0000000
 #define PRIM_SORT_ALPHA_NOZ      0x20000000
-                              //bits 15-28 for - material sorting ID
-#define PRIM_SORT_MAT_MASK    0x1fffffff
+#define PRIM_SORT_OVERLAY        0x10000000
+                              //bits 15-27 for - material sorting ID
+#define PRIM_SORT_MAT_MASK    0x0fffffff
 #define PRIM_SORT_MAT_SHIFT   0
                               //bits 0-14 - distance (not combined with material - alpha only)
-#define PRIM_SORT_DIST_MASK   0x1fffffff
+#define PRIM_SORT_DIST_MASK   0x0fffffff
 #define PRIM_SORT_DIST_SHIFT  0
 
 //----------------------------
@@ -308,6 +309,7 @@ struct S_preprocess_context{
    dword alpha_zwrite;        //alpha with z-writes
    dword alpha_nozwrite;      //alpha, no z-writes
    dword alpha_noz;           //alpha, no z-buffering
+   dword overlay;             //overlay meshes
 
                               //read-only values
    //bool clip;

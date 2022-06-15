@@ -27,6 +27,18 @@ void C_actor_item::Fire(){
    #endif
 }
 
+void C_actor_item::Tick(const S_tick_context &tc){
+   C_actor_physics::Tick(tc);
+
+   struct S_hlp{
+      static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c){
+         I3DCAST_VISUAL(frm)->EnableOverlay((bool)c);
+         return I3DENUMRET_OK;
+      }
+   };
+   frame->EnumFrames(S_hlp::cbEnum, (owner != nullptr), ENUMF_VISUAL);
+}
+
 
 void C_actor_item::GameEnd(){
    owner = nullptr;

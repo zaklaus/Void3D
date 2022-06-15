@@ -39,6 +39,9 @@ public:
    void GameEnd() override;
 
    bool Use(E_USE_TYPE use_type, C_actor* instigator, PI3D_frame hit_frm) override;
+
+protected:
+      void Tick(const S_tick_context &tc) override;
 };
 
 typedef C_actor_item *PC_actor_item;

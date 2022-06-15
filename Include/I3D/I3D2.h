@@ -828,6 +828,8 @@ public:
 
    I3DMETHOD_(PI3D_shader, GetShader)() { return nullptr; }
 
+   I3DMETHOD_(void,EnableOverlay)(bool on) = 0;
+
 private:
    I3DMETHOD_(void,VisReserved00)() = 0;
    I3DMETHOD_(void,VisReserved01)() = 0;
@@ -844,7 +846,6 @@ private:
    I3DMETHOD_(void,VisReserved12)() = 0;
    I3DMETHOD_(void,VisReserved13)() = 0;
    I3DMETHOD_(void,VisReserved14)() = 0;
-   I3DMETHOD_(void,VisReserved15)() = 0;
 public:
 };
 #endif

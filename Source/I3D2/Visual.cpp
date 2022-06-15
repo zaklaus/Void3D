@@ -1735,39 +1735,43 @@ void I3D_visual::AddPrimitives1(I3D_mesh_base *mb, S_preprocess_context &pc){
          p.blend_mode = mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND;
          is_alpha = true;
          sort_value = PRIM_SORT_ALPHA_NOZWRITE;
-         ++pc.alpha_nozwrite;
+         if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) ++pc.alpha_nozwrite;
       }else
       if(!mat->IsTransl()){
          sort_value = PRIM_SORT_OPAQUE;
-         ++pc.opaque;
+         if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) ++pc.opaque;
       }else
       if(mat->IsCkeyAlpha1()){
          p.blend_mode = I3DBLEND_ALPHABLEND;
          sort_value = PRIM_SORT_CKEY_ALPHA;
-         ++pc.ckey_alpha;
+         if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) ++pc.ckey_alpha;
          is_alpha = true;
       }else
       if(mat->GetMirrorID1() != -1){
          if(drv->CanRenderMirrors()){
             pc.prim_list.pop_back();
-            AddMirrorData(pc, mat, curr_auto_lod);
+            if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) AddMirrorData(pc, mat, curr_auto_lod);
             //continue;
             return;
          }else{
             //p.blend_mode = I3DBLEND_OPAQUE;
             sort_value = PRIM_SORT_OPAQUE;
-            ++pc.opaque;
+            if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) ++pc.opaque;
          }
       }else{
          p.blend_mode = mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND;
          is_alpha = true;
          sort_value = PRIM_SORT_ALPHA_NOZWRITE;
-         ++pc.alpha_nozwrite;
-
+         if (!(GetVisFlags() & VISF_DRAW_OVERLAY)) ++pc.alpha_nozwrite;
       }
       //p.user = ii;
 
       //if(mp->IsDiffuseAlpha()) p.blend_mode |= I3DBLEND_VERTEXALPHA;
+
+      if (GetVisFlags() & VISF_DRAW_OVERLAY){
+         sort_value = PRIM_SORT_OVERLAY;
+         ++pc.overlay;
+      }
 
       if(!is_alpha){
                               //sort by material
