@@ -58,7 +58,7 @@ static const dword BREAK_ALLOC_VERTEX_ID = 0; //id of vertex in vb
                               //simulate low of video memory, the number specifies bytes
                               // to grab when initializing
                               // (undef to disable)
-//#define DEBUG_SIM_LOWVIDMEM (20*1024*1024)
+//#define DEBUG_SIM_LOWVIDMEM (2*1024*1024)
 //#define DEBUG_DISABLE_BUMPMAPPING  //disable using of bump texture formats
 
 #define DEBUG_FORCE_DIRECT_TRANSFORM   //direct transfrormations, force inclusion of DRVF2_DIRECT_TRANSFORM
