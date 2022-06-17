@@ -135,7 +135,7 @@ class C_player_imp : public C_player {
                     m_floor = m_floor_new;
                     //re-position frame
                     frame->SetPos(m_new(3));
-                    frame->SetDir1(m_new(2), m_new(1));
+                    frame->SetDir1(m_new(2), S_vector(0,1,0));
                     return true;
                 }
         }
@@ -677,6 +677,7 @@ public:
                 DEBUG("Press G to grab");
                 if (tc.p_ctrl->Get(CS_GRAB, true)) {
                     grab_act = phys_act;
+                    grab_act->SetGrabbed(true);
                 }
             }
         }
@@ -718,6 +719,7 @@ public:
         DEBUG("Grab mode activated!");
 
         if (obj_dir.Magnitude() > DEFAULT_MAX_GRAB_LOOSE_DIST){
+            grab_act->SetGrabbed(false);
             grab_act = NULL;
         }
     }
@@ -754,6 +756,7 @@ public:
 
             if (grab_act){
                 if (tc.p_ctrl->Get(CS_GRAB, true)) {
+                    grab_act->SetGrabbed(false);
                     grab_act = NULL;
                 }
             }

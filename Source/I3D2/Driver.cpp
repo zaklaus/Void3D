@@ -5517,9 +5517,9 @@ I3D_RESULT I3D_driver::RenderPostFX(){
 
    auto texture_map = GetRTTexture(default_render_target.rt[0]);
    d3d_dev->SetTexture(0, texture_map);  // t0 reg will be our final raw render
-   d3d_dev->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
-   d3d_dev->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
-   d3d_dev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+   // d3d_dev->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+   // d3d_dev->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+   // d3d_dev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
    CHECK_D3D_RESULT("SetTexture", hr);
 
    DisableTextures(1);

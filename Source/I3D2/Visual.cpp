@@ -1719,6 +1719,11 @@ void I3D_visual::AddPrimitives1(I3D_mesh_base *mb, S_preprocess_context &pc){
    if(NeedPrepareDestVb())
       PrepareDestVB(mb);
 
+   // don't draw overlay models in mirrors
+   if (pc.mode == RV_MIRROR && (GetVisFlags() & VISF_DRAW_OVERLAY)){
+      return;
+   }
+
                            //add primitives to sort list
    {
       const I3D_face_group &fg = fgrps->front();

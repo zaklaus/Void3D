@@ -174,7 +174,10 @@ private:
 
     static bool PhysContactReport(CPI3D_volume src_vol, PIPH_body src_body, CPI3D_frame dst_frm, PIPH_body dst_body,
         const S_vector& pos, const S_vector& normal, float depth, void* context) {
-        const auto act = reinterpret_cast<PC_actor_physics>(src_body->GetUserData());
+        if (!src_body->GetUserData()){
+            return true;
+        }
+        const auto act = CastPhysicsActor(reinterpret_cast<PC_actor>(src_body->GetUserData()));
         if (act){
             return act->ContactReport(const_cast<PI3D_frame>(dst_frm), pos, normal, depth);
         }

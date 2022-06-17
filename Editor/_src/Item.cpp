@@ -25,6 +25,20 @@ void C_actor_item::Fire(){
    #ifdef EDITOR
    DEBUG("Mock fire!");
    #endif
+
+   PI3D_frame childMesh = frame->FindChildFrame(0, ENUMF_MODEL);
+   if (!childMesh){
+      childMesh = frame;
+   }
+
+   PI3D_animation_set as;
+   I3D_RESULT ir = anim_cache.Create("\\hatchet_fire", &as, mission.GetScene());
+   if(I3D_FAIL(ir)){
+      return;
+   }
+   PI3D_model mod = I3DCAST_MODEL(childMesh);
+   mod->SetAnimation(0, as, I3DANIMOP_BLEND, 1.0f, 1.0f, 1.0f);
+   as->Release();
 }
 
 void C_actor_item::Tick(const S_tick_context &tc){

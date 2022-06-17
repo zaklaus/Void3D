@@ -27,11 +27,15 @@ class C_actor_physics: public C_actor{
       dword count;
    };
    mutable C_vector<S_sound> sounds;
+   bool is_grabbed;
 public:
    //----------------------------
 
    virtual bool ContactReport(PI3D_frame dst_frm, const S_vector &pos, const S_vector &normal, float depth,
       bool play_sounds = true);
+
+   bool IsGrabbed() const{return is_grabbed;}
+   void SetGrabbed(bool on) {is_grabbed = on;}
 
 protected:
                               //body/joint container
@@ -79,8 +83,9 @@ protected:
 public:
    C_actor_physics(C_game_mission &gm, PI3D_frame in_frm, E_ACTOR_TYPE at):
       C_actor(gm, in_frm ? in_frm : gm.GetScene()->CreateFrame(FRAME_MODEL), at),
+      is_grabbed(false),
       idle_count(0),
-      idle(0 )
+      idle(false)
    {
       if(!in_frm)
          frame->Release();

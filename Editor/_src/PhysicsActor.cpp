@@ -9,6 +9,9 @@
 
                               //time, after which idle physics freezes (actually calls OnIdle method)
 #define PHYS_IDLE_TIME 1000
+
+#define PHYS_SPECIAL_GRAB_SND 0xfee105
+
                               //distance, under which sounds are concantated
 const float SND_CONCAT_DIST = 1.0f;
                               //sound life len, under which concantation is to succeed
@@ -33,7 +36,12 @@ void C_actor_physics::Tick(const S_tick_context &tc){
       S_sound &s = sounds[i];
       if(!s.snd){
                               //create new sound
-         s.snd = mission.PlayActionSound(s.pos, s.mat_ids.first, s.mat_ids.second, this, s.volume);   
+         if (s.mat_ids.second != PHYS_SPECIAL_GRAB_SND){
+            s.snd = mission.PlayActionSound(s.pos, s.mat_ids.first, s.mat_ids.second, this, s.volume);
+         }else{ // HACK: Play a specific sound when object is being pushed around
+            const float MIN_DIST = 8.0f, MAX_DIST = 28.0f;
+            s.snd = mission.PlaySound("gen_push", MIN_DIST, MAX_DIST, NULL, s.pos, s.volume);
+         }
          if(!s.snd){
             s = sounds.back(); sounds.pop_back();
             continue;
@@ -137,6 +145,10 @@ bool C_actor_physics::ContactReport(PI3D_frame dst_frm, const S_vector &pos, con
          pair<dword, dword> mat_ids;
          mat_ids.first = GetMaterialID(dst_frm);
          mat_ids.second = GetMaterialID(b1->GetVolumes()[0]);
+
+         if (is_grabbed){
+            mat_ids.second = PHYS_SPECIAL_GRAB_SND;
+         }
 
                                  //check with sounds
          int closest_con = -1;

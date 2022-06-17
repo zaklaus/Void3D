@@ -11,7 +11,7 @@
 //#define USE_QUERYPERFORMANCECOUNTER
 
 //#ifdef NDEBUG
-// #define MOUSE_USE_EVENT      //it makes problems!
+//#define MOUSE_USE_EVENT      //it makes problems!
 //#endif
 
 //----------------------------
@@ -1711,7 +1711,7 @@ void IGraph::InitPresentStruct(int adapter_id, D3DDEVTYPE dev_type, D3DPRESENT_P
    }
    if(create_flags&IG_LOCKABLE_BACKBUFFER)
       pp.Flags |= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
-   //pp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
+   // pp.PresentationInterval = D3DPRESENT_INTERVAL_DEFAULT;
    pp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 }
 
@@ -2834,13 +2834,15 @@ dword IGraph::GetTimer(dword min, dword max){
    }
 
    dword time = ReadTimer() - last_timer;
-   int delta = (int)min - (int)time;
+   // int delta = (int)min - (int)time;
 #if 0
-   if (delta >= 4);
+   if (delta >= 4)
       Sleep(delta-3);
 #endif
    while(time < min){
+      timeBeginPeriod(1);
       Sleep(0);
+      timeEndPeriod(1);
       time = ReadTimer() - last_timer;
    }
 

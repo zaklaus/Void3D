@@ -876,9 +876,9 @@ bool C_loader::ReadTrackRot(PI3D_frame frm, const char *frm_name, PI3D_keyframe_
          (*animp)->GetRotationKeys(&keys, &nk);
          const S_vector &wp = frm->GetWorldPos();
          for(dword i=0; i<nk; i++){
-            driver->DebugLine(wp, wp + S_matrix(keys[i].q)(2) * 5, 0, S_vector(1, 0, 0));
-            driver->DebugLine(wp, wp + S_matrix(keys[i].out_tan)(2) * 5, 0, S_vector(0, 0, 1));
-            driver->DebugLine(wp, wp + S_matrix(keys[i].in_tan)(2) * 5, 0, S_vector(0, 0, 1));
+            driver->DebugLine(wp, wp + S_matrix(keys[i].q)(2) * 5, 0, 0xFF00FF00);
+            driver->DebugLine(wp, wp + S_matrix(keys[i].out_tan)(2) * 5, 0, 0xFF00FF00);
+            driver->DebugLine(wp, wp + S_matrix(keys[i].in_tan)(2) * 5, 0, 0xFF00FF00);
          }
       }
 #endif

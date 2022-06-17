@@ -1816,6 +1816,20 @@ PI3D_interpolator const *I3D_scene::GetInterpolators(){ return cont.GetInterpola
 CPI3D_interpolator const *I3D_scene::GetInterpolators() const{ return cont.GetInterpolators1(); }
 I3D_RESULT I3D_scene::Tick(int time, PI3D_CALLBACK cb, void *cbc){
    PROFILE(drv, PROF_ANIMS);
+   struct S_hlp{
+      int time;
+      PI3D_CALLBACK cb;
+      void *cbc;
+      void *cont;
+      static I3DENUMRET I3DAPI cbEnum(PI3D_frame frm, dword c){
+         S_hlp *hlp = (S_hlp*)c;
+         auto mod = I3DCAST_MODEL(frm);
+         if (hlp->cont != mod->GetContainer1())
+            mod->GetContainer1()->Tick(hlp->time, hlp->cb, hlp->cbc);
+         return I3DENUMRET_OK;
+      }
+   } hlp = {time, cb, cbc, &cont};
+   EnumFrames(S_hlp::cbEnum, (dword)&hlp, ENUMF_MODEL);
    return cont.Tick(time, cb, cbc);
 }
 const C_str &I3D_scene::GetUserData() const{ return cont.GetUserData(); }
