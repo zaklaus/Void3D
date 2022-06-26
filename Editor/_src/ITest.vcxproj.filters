@@ -93,6 +93,9 @@
     <ClCompile Include="Ragdoll.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actors.h">
@@ -143,6 +146,12 @@
     <ClInclude Include="Ragdoll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\IEditor\main.rc">
@@ -153,7 +162,9 @@
     <Text Include="..\TEXT\English\SYSTEM.TXT">
       <Filter>Texts</Filter>
     </Text>
-    <Text Include="..\..\Source\IEditor\res\font.txt" />
+    <Text Include="..\..\Source\IEditor\res\font.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\IEditor\res\cursor1.cur">
@@ -302,25 +313,65 @@
     <Image Include="..\..\Source\IEditor\res\tb_play.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\Source\IEditor\res\Checkpoint.png" />
-    <Image Include="..\..\Source\IEditor\res\camera.png" />
-    <Image Include="..\..\Source\IEditor\res\sound_a.png" />
-    <Image Include="..\..\Source\IEditor\res\light_f.png" />
-    <Image Include="..\..\Source\IEditor\res\light_a.png" />
-    <Image Include="..\..\Source\IEditor\res\light_s.png" />
-    <Image Include="..\..\Source\IEditor\res\light_d.png" />
-    <Image Include="..\..\Source\IEditor\res\sound_p.png" />
-    <Image Include="..\..\Source\IEditor\res\target.png" />
-    <Image Include="..\..\Source\IEditor\res\bmp13.png" />
-    <Image Include="..\..\Source\IEditor\res\bmp12.png" />
-    <Image Include="..\..\Source\IEditor\res\bone.png" />
-    <Image Include="..\..\Source\IEditor\res\dummy.png" />
-    <Image Include="..\..\Source\IEditor\res\light_p.png" />
-    <Image Include="..\..\Source\IEditor\res\sphere.png" />
-    <Image Include="..\..\Source\IEditor\res\letters.png" />
-    <Image Include="..\..\Source\IEditor\res\Font1_a.png" />
-    <Image Include="..\..\Source\IEditor\res\Font1.png" />
-    <Image Include="..\..\Source\IEditor\res\envmap.png" />
-    <Image Include="..\..\Source\IEditor\res\axes.png" />
+    <Image Include="..\..\Source\IEditor\res\axes.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bmp12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bmp13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\camera.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Checkpoint.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\dummy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\envmap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Font1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Font1_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\letters.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_d.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_f.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_p.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_s.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sound_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sound_p.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sphere.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\target.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

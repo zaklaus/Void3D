@@ -243,7 +243,9 @@
     <None Include="res\SEEDPUT.CUR">
       <Filter>Resources</Filter>
     </None>
-    <None Include="res\binary1.bin" />
+    <None Include="res\binary1.bin">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\axes.png">
@@ -351,11 +353,21 @@
     <Image Include="res\tb_validity.bmp">
       <Filter>Resources</Filter>
     </Image>
-    <Image Include="res\I_LOGO.bmp" />
-    <Image Include="res\bitmap3.bmp" />
-    <Image Include="res\tb_play.bmp" />
-    <Image Include="res\I_LOGO1.bmp" />
-    <Image Include="tb_play.bmp" />
+    <Image Include="res\bitmap3.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\I_LOGO.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\I_LOGO1.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="tb_play.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="res\tb_play.bmp">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\font.txt">

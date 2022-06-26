@@ -99,6 +99,7 @@ public:
    I3DMETHOD_(int,GetAnimCurrTime)(dword stage = 0) const = 0;
    I3DMETHOD_(I3D_RESULT,SetAnimCurrTime)(dword stage, dword time) = 0;
    I3DMETHOD_(I3D_RESULT,MoveAnimStage)(dword from, dword to) = 0;
+   I3DMETHOD_(bool, IsPlaying)() = 0;
 
    I3DMETHOD(StopAnimation)(dword stage) = 0;
    I3DMETHOD_(PI3D_animation_set,GetAnimationSet)() = 0;

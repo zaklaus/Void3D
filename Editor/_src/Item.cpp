@@ -26,19 +26,13 @@ void C_actor_item::Fire(){
    DEBUG("Mock fire!");
    #endif
 
-   PI3D_frame childMesh = frame->FindChildFrame(0, ENUMF_MODEL);
-   if (!childMesh){
-      childMesh = frame;
+   PI3D_animation_set as{};
+   const auto mod = GetAnimModel();
+   
+   if (!mod->IsPlaying() && GetAnimation("fire", &as)) {
+       mod->SetAnimation(0, as, I3DANIMOP_BLEND, 1.0f, 1.0f, 1.0f);
+       as->Release();
    }
-
-   PI3D_animation_set as;
-   I3D_RESULT ir = anim_cache.Create("\\hatchet_fire", &as, mission.GetScene());
-   if(I3D_FAIL(ir)){
-      return;
-   }
-   PI3D_model mod = I3DCAST_MODEL(childMesh);
-   mod->SetAnimation(0, as, I3DANIMOP_BLEND, 1.0f, 1.0f, 1.0f);
-   as->Release();
 }
 
 void C_actor_item::Tick(const S_tick_context &tc){
@@ -51,6 +45,35 @@ void C_actor_item::Tick(const S_tick_context &tc){
       }
    };
    frame->EnumFrames(S_hlp::cbEnum, (owner != nullptr), ENUMF_VISUAL);
+}
+
+bool C_actor_item::GetAnimation(C_str name, PI3D_animation_set* as)
+{
+	PI3D_model mod = GetAnimModel();
+	const char* fileName = (const char*)mod->GetFileName();
+	const char* p = fileName;
+	while (!*p) {
+		if (*p == '\\') {
+			fileName = p;
+		}
+		++p;
+	}
+    const auto animFileName = C_fstr("\\%s_%s", fileName, (const char*)name);
+	I3D_RESULT ir = anim_cache.Create((const char*)animFileName, as, mission.GetScene());
+	if (I3D_FAIL(ir)) {
+		return false;
+	}
+    return true;
+}
+
+PI3D_model C_actor_item::GetAnimModel()
+{
+	PI3D_frame childMesh = frame->FindChildFrame(0, ENUMF_MODEL);
+	if (!childMesh) {
+		childMesh = frame;
+	}
+
+	return I3DCAST_MODEL(childMesh);
 }
 
 

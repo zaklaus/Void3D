@@ -1641,6 +1641,8 @@ public:
 // Move given animation stage into new position.
    I3DMETHOD_(I3D_RESULT,MoveAnimStage)(dword from, dword to) = 0;
 
+   I3DMETHOD_(bool, IsPlaying)() = 0;
+
 //----------------------------
 // Stop animation playback on specified stage.
    I3DMETHOD_(I3D_RESULT,StopAnimation)(dword stage) = 0;

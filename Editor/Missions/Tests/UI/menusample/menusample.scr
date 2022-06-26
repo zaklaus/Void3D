@@ -5,5 +5,4 @@ void Main(){
     SpriteSetSize(menu_bg, 1, 1);
     SpriteSetColor(menu_bg, 0xff335588);
     //menu_img = CreateSpriteImage("ui/samplemenu.txt", "ui/samplemenu.png", "ui/samplemenu_o.png");
-
 }

@@ -1,11 +1,3 @@
-/*
-   Physics actor base class - this is a base actor for implementing any physically-modelled actors,
-   which are made of bodies and optionally joints.
-
-   This actor may be created directly (without inheriting from this, in which case it provides basic
-   physics behavior, and destroying itself when it becomes idle.
-*/
-
 #pragma once
 
 #include "GameMission.h"
@@ -14,8 +6,6 @@
 #include "PhysicsActor.h"
 
 //----------------------------
-
-class C_player;
 
 class C_actor_item: public C_actor_physics{
 public:
@@ -42,6 +32,9 @@ public:
 
 protected:
       void Tick(const S_tick_context &tc) override;
+
+      bool GetAnimation(C_str name, PI3D_animation_set*);
+      PI3D_model GetAnimModel();
 };
 
 typedef C_actor_item *PC_actor_item;

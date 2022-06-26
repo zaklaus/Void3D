@@ -24,7 +24,6 @@ const S_actor_type_info actor_type_info[ACTOR_LAST] = {
 //----------------------------
 // Function used by editor - retrieve user-friendly ACTOR name from a frame.
 const char *GetFrameActorName(PI3D_frame frm){
-
    S_frame_info *fi = GetFrameInfo(frm);
    if(fi && fi->actor)
       return actor_type_info[fi->actor->GetActorType()].friendly_name;

@@ -680,6 +680,10 @@ public:
       return I3D_frame::FindChildFrame(name, flags | ENUMF_MODEL_ORIG);
    }
 
+   I3DMETHOD_(bool, IsPlaying)(){
+       return anim_stages.size() > 0;
+   }
+
 //----------------------------
    I3DMETHOD_(dword,SetFlags)(dword new_flags, dword flags_mask){
 #ifndef GL
@@ -1380,7 +1384,6 @@ process_simple:
 }
 
 //----------------------------
-
 I3D_RESULT I3D_model_imp::Tick(int time, PI3D_CALLBACK cb, void *cbc){
 
    PROFILE(drv, PROF_ANIMS);
