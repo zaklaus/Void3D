@@ -782,7 +782,8 @@ public:
                " sct: %i\n"
                " occ: %i\n"
                " comp.: %i\n"
-               " shd: %i",
+               " shd: %i\n"
+               " dcl: %i",
                st.triangle,
                st.vert_trans,
                st1.frame_count[FRAME_VISUAL],
@@ -790,7 +791,8 @@ public:
                st1.frame_count[FRAME_SECTOR],
                st1.frame_count[FRAME_OCCLUDER],
                st1.num_vis_computed,
-               st1.dyn_shd_casters
+                st1.dyn_shd_casters,
+                st1.dyn_dcl_casters
                );
          }
          break;

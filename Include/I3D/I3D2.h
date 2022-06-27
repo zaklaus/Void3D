@@ -289,6 +289,7 @@ typedef struct{               //frames
    dword frame_count[FRAME_LAST];   //frames seen/heard
    dword num_vis_computed;    //visuals checked for on-screen
    dword dyn_shd_casters;     //dynamic shadow casters rendered
+   dword dyn_dcl_casters;     //dynamic decal casters rendered
 } I3D_stats_scene, *PI3D_stats_scene;
 
 typedef struct{               //textures
@@ -2162,6 +2163,7 @@ enum I3D_RENDERSTATE{
    RS_DEBUG_FLOAT7 = 65,
    RS_DEBUG_SHOW_OVERDRAW = 66,//show overdraw (how many times each pixel is drawn), using separate colors
    RS_DRAWDECALS = 67,
+   RS_DEBUGDRAWDECALS = 68,
 };
 
 //----------------------------

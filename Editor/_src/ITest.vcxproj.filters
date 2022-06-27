@@ -254,6 +254,9 @@
     <None Include="..\..\Source\IEditor\res\font.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\..\Source\IEditor\res\binary2.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Source\IEditor\res\game.ico">

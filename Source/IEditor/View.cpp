@@ -26,7 +26,7 @@ class C_edit_View: public C_editor_item{
       E_DRAWJOINTS, E_USE_OCLUSION, E_ENVMAPPING, E_EMBMPMAPPING,
       E_DRAWMIRRORS, E_USESHADOWS, E_DEBUGDRAWSHADOWS, E_DEBUGDRAWSHDREC,
       E_DEBUGDRAWBSP, E_DEBUGDRAWHRDYNAMIC, E_DEBUGDRAWSTATIC, E_DETAILMAPPING,
-      E_DRAWCOLS, E_DRAW_OVERDRAW,
+      E_DRAWCOLS, E_DRAW_OVERDRAW, E_DRAW_DECALS, E_DEBUGDRAW_DECALS,
       E_LAST
    };
    byte state[E_LAST];
@@ -58,8 +58,8 @@ class C_edit_View: public C_editor_item{
          true, true, false, false,
                               //bsp tree, dynamic tree, static frames, detailmapping
          false, false, false, true,
-                              //draw cols, overdraw
-         false, false,
+                              //draw cols, overdraw, decals, debug decals
+         false, false, true, true
       };
       return default_state;
    }
@@ -261,6 +261,8 @@ class C_edit_View: public C_editor_item{
 
       VIEW_COL_TESTS,
       VIEW_OVERDRAW,
+      VIEW_DECALS,
+      VIEW_DEBUGDECALS,
       VIEW_CRASH,
 
       VIEW_LOD_BETTER = 1100,
@@ -381,6 +383,8 @@ public:
       ed->AddShortcut(this, VIEW_SOUNDS, DS"&Sounds\tShift+Ctrl+S", K_S, SKEY_CTRL|SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_LM_TEXTURES, DS"&LM textures\tShift+Ctrl+Alt+L", K_L, SKEY_CTRL|SKEY_ALT|SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_JOINTS, DS"&Joints\tJ", K_J, 0);
+      ed->AddShortcut(this, VIEW_DECALS, DS"&Decals\tCtrl+Alt+D", K_D, SKEY_CTRL | SKEY_ALT);
+      ed->AddShortcut(this, VIEW_DEBUGDECALS, DS"&Debug decals\tCtrl+Alt+Shift+E", K_E, SKEY_CTRL | SKEY_ALT | SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_SHD_CASTERS, DS"Dynamic shadow casters\tCtrl+Shift+Alt+D", K_D, SKEY_CTRL|SKEY_SHIFT|SKEY_ALT);
       ed->AddShortcut(this, VIEW_SHD_RECEIVERS, DS"Dynamic shadow receivers\tCtrl+Shift+Alt+R", K_R, SKEY_CTRL|SKEY_SHIFT|SKEY_ALT);
       ed->AddShortcut(this, VIEW_BSP_TREE, DS"&Bsp tree\tCtrl+Shift+V", K_V, SKEY_CTRL|SKEY_SHIFT);
@@ -413,7 +417,7 @@ public:
       ed->AddShortcut(this, VIEW_ENV_MAPPING, QS"E&nvironment mapping\tCtrl+Shift+N", K_N, SKEY_CTRL|SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_EMBM_MAPPING, QS"&EMBM mapping\tCtrl+Shift+U", K_U, SKEY_CTRL|SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_MIRRORS, QS"&Mirrors\tCtrl+Shift+M", K_M, SKEY_CTRL|SKEY_SHIFT);
-      ed->AddShortcut(this, VIEW_SHADOWS, QS"&Shadows\tCtrl+Shift+D", K_D, SKEY_CTRL|SKEY_SHIFT);
+      ed->AddShortcut(this, VIEW_SHADOWS, QS"&Shadows\tCtrl+Shift+D", K_D, SKEY_CTRL | SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_USE_OCCLUSION, QS"&Use occlusion\tShift+Ctrl+Alt+O", K_O, SKEY_CTRL|SKEY_ALT|SKEY_SHIFT);
       ed->AddShortcut(this, VIEW_DETAIL_MAPPING, QS"D&etail mapping\tShift+Ctrl+E", K_E, SKEY_CTRL|SKEY_SHIFT);
 
@@ -441,6 +445,7 @@ public:
             {VIEW_DYN_COL_HR, 10, "Dynamic collisions"},
             {VIEW_STATIC_COLS, 11, "Static collisions"},
             {VIEW_VISUALS, 12, "Visuals"},
+            {VIEW_DECALS, 17, "Decals"},
             {0, -1},
          };
          toolbar->AddButtons(this, tbs, sizeof(tbs)/sizeof(tbs[0]), "IDB_TB_DEBUG", GetHInstance(), 10);
@@ -464,7 +469,7 @@ public:
       case VIEW_JOINTS: case VIEW_USE_OCCLUSION: case VIEW_ENV_MAPPING: case VIEW_EMBM_MAPPING:
       case VIEW_MIRRORS: case VIEW_SHADOWS: case VIEW_SHD_CASTERS: case VIEW_SHD_RECEIVERS:
       case VIEW_BSP_TREE: case VIEW_DYN_COL_HR: case VIEW_STATIC_COLS: case VIEW_DETAIL_MAPPING:
-      case VIEW_COL_TESTS: case VIEW_OVERDRAW:
+      case VIEW_COL_TESTS: case VIEW_OVERDRAW: case VIEW_DECALS: case VIEW_DEBUGDECALS:
          {
             int i = id - 1000;
             state[i] = !state[i];
@@ -488,7 +493,7 @@ public:
                "Draw joints", "Use occlusion", "Environment mapping", "Environment-bump mapping",
                "Draw mirrors", "Use shadows", "Debug shadows", "Draw shadow receivers",
                "Draw bsp tree", "Draw dynamic tree", "Draw static frames", "Detail mapping",
-               "Draw collision tests", "Show overdraw",
+               "Draw collision tests", "Show overdraw", "Draw decals", "Draw debug decals"
             };
             ed->Message(C_fstr("%s %s", state_text[i], state[i] ? "on" : "off"));
             toolbar->SetButtonPressed(this, id, state[i]);
@@ -805,7 +810,7 @@ public:
 
 //----------------------------
 
-#define STATE_VERSION 0x00d1
+#define STATE_VERSION 0x00d3
 
 //----------------------------
 
@@ -880,7 +885,7 @@ I3D_RENDERSTATE C_edit_View::i3d_map[E_LAST] = {
    RS_DRAWJOINTS, RS_USE_OCCLUSION, RS_ENVMAPPING, RS_USE_EMBM,
    RS_DRAWMIRRORS, RS_USESHADOWS, RS_DEBUGDRAWSHADOWS, RS_DEBUGDRAWSHDRECS,
    RS_DEBUGDRAWBSP, RS_DEBUGDRAWDYNAMIC, RS_DEBUGDRAWSTATIC, RS_DETAILMAPPING,
-   RS_DRAW_COL_TESTS, RS_DEBUG_SHOW_OVERDRAW,
+   RS_DRAW_COL_TESTS, RS_DEBUG_SHOW_OVERDRAW, RS_DRAWDECALS, RS_DEBUGDRAWDECALS
 };
 
 //----------------------------

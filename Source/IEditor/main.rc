@@ -1608,6 +1608,8 @@ CHECKPOINT.PNG          BINARY                  "res\\Checkpoint.png"
 
 2                       BINARY                  "res\\target.png"
 
+14			BINARY			"res\\decal.png"
+
 13                      BINARY                  "res\\bmp13.png"
 
 12                      BINARY                  "res\\bmp12.png"
@@ -1761,6 +1763,12 @@ IDD_OBJLINK AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PNG
+//
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

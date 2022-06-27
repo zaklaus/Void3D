@@ -1477,6 +1477,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
    SetState(RS_LOADMIPMAP, true);
    SetState(RS_DETAILMAPPING, true);
    SetState(RS_DRAWDECALS, true);
+   SetState(RS_DEBUGDRAWDECALS, false);
 
                               //init default sound environment
    env_properties.insert(pair<int, S_sound_env_properties>(0, S_sound_env_properties()));
@@ -4660,6 +4661,11 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
    case RS_DRAWDECALS:
        drv_flags2 &= ~DRVF2_USEDECALS;
        if (value) drv_flags2 |= DRVF2_USEDECALS;
+       break;
+
+   case RS_DEBUGDRAWDECALS:
+       drv_flags2 &= ~DRVF2_DEBUGDRAWDECALS;
+       if (value) drv_flags2 |= DRVF2_DEBUGDRAWDECALS;
        break;
 
    case RS_FOG:

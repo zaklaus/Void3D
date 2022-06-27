@@ -295,6 +295,7 @@
   <ItemGroup>
     <None Include="res\arrow.cur" />
     <None Include="res\binary1.bin" />
+    <None Include="res\binary2.bin" />
     <None Include="res\cur00001.cur" />
     <None Include="res\cur00002.cur" />
     <None Include="res\cur00003.cur" />
@@ -325,6 +326,8 @@
     <None Include="res\SEEDPUT.CUR" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap4.bmp" />
+    <Image Include="res\decal.png" />
     <Image Include="res\I_LOGO.bmp" />
     <Image Include="tb_play.bmp" />
     <Image Include="res\axes.png" />

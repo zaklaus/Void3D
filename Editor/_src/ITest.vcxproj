@@ -443,6 +443,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Source\IEditor\res\arrow.cur" />
+    <None Include="..\..\Source\IEditor\res\binary2.bin" />
     <None Include="..\..\Source\IEditor\res\cur00001.cur" />
     <None Include="..\..\Source\IEditor\res\cur00002.cur" />
     <None Include="..\..\Source\IEditor\res\cur00003.cur" />

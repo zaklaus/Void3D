@@ -246,6 +246,7 @@
     <None Include="res\binary1.bin">
       <Filter>Resources</Filter>
     </None>
+    <None Include="res\binary2.bin" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\axes.png">
@@ -368,6 +369,8 @@
     <Image Include="res\tb_play.bmp">
       <Filter>Resources</Filter>
     </Image>
+    <Image Include="res\bitmap4.bmp" />
+    <Image Include="res\decal.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="res\font.txt">

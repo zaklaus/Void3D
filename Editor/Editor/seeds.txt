@@ -1,0 +1,8 @@
+; This file was created by Insanity Editor.
+; Do not modify this file manualy!
+
+Set "decals"
+random_rotation 1
+align 2
+Model "Snow_Decal"
+

@@ -1067,7 +1067,7 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
 		//create decal affect cylinder
 		I3D_cylinder vc;
 		vc.pos = m_txt(3);
-		vc.dir = m_txt(2) * 2.0f;
+		vc.dir = m_txt(2);
 		vc.radius = 0.0f;
 		for (i = num_cpts; i--; )
 			vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
@@ -1104,6 +1104,8 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
         CHECK_D3D_RESULT("SetSamplerState", hr);
         hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
         CHECK_D3D_RESULT("SetSamplerState", hr);
+
+        ++scene_stats.dyn_dcl_casters;
     }
 }
 
@@ -2355,7 +2357,7 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
 
    if((drv->GetFlags2() & (DRVF2_DRAWLIGHTS | DRVF2_DRAWSOUNDS | DRVF2_DRAWCAMERAS|
       DRVF2_DRAWDUMMYS | DRVF2_DRAWOCCLUDERS | DRVF2_DRAWJOINTS | DRVF2_DRAWVOLUMES |
-      DRVF2_DEBUGDRAWSTATIC)) ||
+      DRVF2_DEBUGDRAWSTATIC | DRVF2_DEBUGDRAWDECALS)) ||
       (drv->GetFlags() & (DRVF_DRAWHRBBOX | DRVF_DRAWBBOX | 
 #ifndef GL
       DRVF_DEBUGDRAWSHDRECS |
@@ -2374,7 +2376,8 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
       if(f2&DRVF2_DRAWJOINTS) draw_flags |= ENUMF_JOINT | ENUMF_VISUAL;
       if(f2&DRVF2_DEBUGDRAWSTATIC) draw_flags |= ENUMF_VISUAL;
       if((f2&(DRVF2_DRAWVOLUMES|DRVF2_DEBUGDRAWSTATIC)) || (f&DRVF_DEBUGDRAWDYNAMIC)) draw_flags |= ENUMF_VOLUME;
-      if(f&DRVF_DRAWBBOX) draw_flags |= ENUMF_VISUAL;
+      if (f & DRVF_DRAWBBOX) draw_flags |= ENUMF_VISUAL;
+      if (f2 & DRVF2_DEBUGDRAWDECALS) draw_flags |= ENUMF_VISUAL;
       //if(f&DRVF_DRAWHRBBOX) draw_flags |= ENUMF_VISUAL | ENUMF_MODEL;
 #ifndef GL
       if(f&DRVF_DEBUGDRAWSHDRECS) draw_flags |= ENUMF_VISUAL;
@@ -2645,6 +2648,11 @@ I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
    case FRAME_VISUAL:
       {
          PI3D_visual vis = I3DCAST_VISUAL(frm);
+
+         if (vis->GetVisualType1() == I3D_VISUAL_DECAL && (vis->GetDriver1()->GetFlags2() & DRVF2_DEBUGDRAWDECALS)){
+             vis->DebugDraw(ddc->scene);
+             return I3DENUMRET_OK;
+         }
 
          if(!frm->IsOn1())
             return I3DENUMRET_SKIPCHILDREN;

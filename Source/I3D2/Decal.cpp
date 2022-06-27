@@ -18,8 +18,9 @@ public:
 	// Inherited via I3D_visual
 	virtual bool ComputeBounds() override
 	{
-		bound.bound_local.bbox.min = S_vector(-1.0f * .5f, -1.0f * .5f, -1.0f * .5f);
-		bound.bound_local.bbox.max = S_vector(1.0f * .5f, 1.0f * .5f, 1.0f * .5f);
+		const auto scl = 1.0f;
+		bound.bound_local.bbox.min = S_vector(-scl * .5f, -scl * .5f, -scl * .5f);
+		bound.bound_local.bbox.max = S_vector(scl * .5f, scl * .5f, scl * .5f);
 		bound.bound_local.bsphere.pos.Zero();
 		bound.bound_local.bsphere.radius = .5f;
 
@@ -94,6 +95,9 @@ public:
 
             scene->DrawLines(v, 5, indx, sizeof(indx) / sizeof(word), (alpha << 24) | 0xcccccc);
         }
+
+		float size = GetMatrix().GetScale().Magnitude() * .2f;
+		scene->DrawIcon(GetWorldPos(), 14, 0xffffffff, size);
 
 		return I3D_OK;
 	}
