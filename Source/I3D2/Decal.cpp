@@ -79,7 +79,7 @@ public:
             scene->SetRenderMatrix(m);
 
             S_vector v1;
-            float f = 25.f * .5f;
+            float f = 0.15f * .5f;
             v1.x = (float)sin(f);
             v1.z = (float)cos(f);
             v1.y = v1.x * .75f;

@@ -3092,6 +3092,8 @@ private:
             case I3D_VISUAL_PARTICLE:
             case I3D_VISUAL_BILLBOARD:
             case I3D_VISUAL_FLARE:
+            case I3D_VISUAL_SHADER:
+            case I3D_VISUAL_DECAL:
             case I3D_VISUAL_DISCHARGE:
                {
                   /*
