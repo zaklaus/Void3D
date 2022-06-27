@@ -1067,7 +1067,7 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
 		//create decal affect cylinder
 		I3D_cylinder vc;
 		vc.pos = m_txt(3);
-		vc.dir = m_txt(2) * 4.0f;
+		vc.dir = m_txt(2) * 2.0f;
 		vc.radius = 0.0f;
 		for (i = num_cpts; i--; )
 			vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
@@ -1080,7 +1080,6 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
 
 		drv->SetupBlend(mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND);
 		drv->DisableTextureStage(1);
-		drv->SetupTextureStage(0, D3DTOP_BLENDTEXTUREALPHAPM);
 		hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_BORDER);
         CHECK_D3D_RESULT("SetSamplerState", hr);
         hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_BORDER);
@@ -1088,7 +1087,6 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
         hr = d3d_dev->SetSamplerState(0, D3DSAMP_BORDERCOLOR, 0x000000);
 		CHECK_D3D_RESULT("SetSamplerState", hr);
 
-        drv->EnableNoCull(true);
 		//re-render all receivers using this shadow
 		for (int ri = num_receivers; ri--; ) {
 			PI3D_visual vis = hit_receivers[ri];
@@ -1099,9 +1097,13 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
 			drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
 			vis->RenderSolidMesh(this, false, true, mat, &vc);
 		}
-        drv->EnableNoCull(false);
-
         drv->SetTexture1(0, NULL);
+
+        //reset sampler states
+        hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
+        CHECK_D3D_RESULT("SetSamplerState", hr);
+        hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
+        CHECK_D3D_RESULT("SetSamplerState", hr);
     }
 }
 

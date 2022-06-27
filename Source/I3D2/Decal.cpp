@@ -71,8 +71,29 @@ public:
 	}
 
 	I3DMETHOD(DebugDraw)(PI3D_scene scene) const {
-		float size = GetMatrix().GetScale().Magnitude() * .2f;
-		scene->DrawIcon(GetWorldPos(), 10, 0x80ffffff, size);
+        byte alpha(byte(0xff));
+
+        const S_matrix& m = GetMatrix();
+        //draw cone
+        {
+            scene->SetRenderMatrix(m);
+
+            S_vector v1;
+            float f = 25.f * .5f;
+            v1.x = (float)sin(f);
+            v1.z = (float)cos(f);
+            v1.y = v1.x * .75f;
+            v1 *= 2.0f / v1.Magnitude();
+            S_vector v[5];
+            v[0].Zero();
+            v[1] = v1;
+            v[2] = v1, v[2].y = -v[2].y;
+            v[3] = v1, v[3].x = -v[3].x;
+            v[4] = v[3], v[4].y = -v[4].y;
+            static const word indx[] = { 0, 1, 0, 2, 0, 3, 0, 4, 1, 2, 2, 4, 4, 3, 3, 1 };
+
+            scene->DrawLines(v, 5, indx, sizeof(indx) / sizeof(word), (alpha << 24) | 0xcccccc);
+        }
 
 		return I3D_OK;
 	}
