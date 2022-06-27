@@ -180,6 +180,9 @@
     <ClCompile Include="Visual_shader.cpp">
       <Filter>Source Files\Visuals</Filter>
     </ClCompile>
+    <ClCompile Include="Decal.cpp">
+      <Filter>Source Files\Visuals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="All.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="vertex.h">
       <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Decal.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

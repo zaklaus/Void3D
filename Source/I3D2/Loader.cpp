@@ -62,6 +62,7 @@ enum E_PROP_KEYWORD{          //frame properties keyword IDs
    PROP_CAST_FLRE,
    PROP_CAST_OUVS,
    PROP_CAST_FIRE,
+   PROP_CAST_DECL,
 
    PROP_CAST_JTVB,
    PROP_CAST_JTBB,
@@ -101,6 +102,7 @@ static const struct S_PROP_keyword{ //properties keywords
    {PROP_CAST_MRPH, "MRPH"},
    {PROP_CAST_FLRE, "FLRE"},
    {PROP_CAST_OUVS, "OUVS"},
+   {PROP_CAST_DECL, "DECL"},
 
    {PROP_CAST_VOLS, "VOLS"},
    {PROP_CAST_VOLR, "VOLR"},

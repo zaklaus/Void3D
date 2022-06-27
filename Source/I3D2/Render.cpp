@@ -576,6 +576,12 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
 
       RenderShadows(pc);
    }
+
+   if ((drv->GetFlags2() & DRVF2_USEDECALS) &&
+	   pc.decal_casters.size()) {
+
+	   RenderDecals(pc);
+   }
 #endif
 
                               // --alpha without z-writes--
@@ -635,7 +641,6 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
             bool add_mode = ((ct.blend_mode&0xffff) == I3DBLEND_ADD);
             drv->SetFogColor(add_mode ? 0 : lf->dw_color);
          }
-         ct.vis->PropagateDirty();
          ct.vis->DrawPrimitivePS(pc, ct);
       }while(i);
       drv->EnableZBUsage(true);
@@ -910,6 +915,195 @@ static void GetBestShadowMatrix(const S_vector &normal, const S_vector *projecte
 
 //----------------------------
 #ifndef GL
+
+void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
+    PROFILE(drv, PROF_DECALS);
+
+    for (int dci = pc.decal_casters.size(); dci--;) {
+        PI3D_visual vis_dc = pc.decal_casters[dci];
+
+        const S_matrix& tm = vis_dc->GetMatrix();
+		if (!(vis_dc->frm_flags & FRMFLAGS_HR_BOUND_VALID))
+			vis_dc->hr_bound.MakeHierarchyBounds(vis_dc);
+		const I3D_bbox& bb = vis_dc->hr_bound.bound_local.bbox;
+		if (!bb.IsValid())
+			continue;
+
+		float opacity = 1.0f;
+		S_vector bb_center = ((bb.max + bb.min) * .5f) * tm;
+		//get distance to camera
+		float dist_to_cam_2 = (bb_center - pc.viewer_pos).Square();
+		//beyond the max range?
+		if (dist_to_cam_2 >= drv->shadow_range_f * drv->shadow_range_f) // todo: introduce decal range
+			continue;
+		float dist_to_cam = I3DSqrt(dist_to_cam_2);
+		//fade shadow depending on distance
+		if (dist_to_cam >= drv->shadow_range_n) {
+			opacity *= (drv->shadow_range_f - dist_to_cam) / (drv->shadow_range_f - drv->shadow_range_n);
+		}
+
+		PI3D_frame sct_prnt = vis_dc;
+		while ((sct_prnt = sct_prnt->GetParent(), sct_prnt) && sct_prnt->GetType1() != FRAME_SECTOR);
+		assert(sct_prnt);
+		PI3D_sector sct = I3DCAST_SECTOR(sct_prnt);
+
+        S_vector ldir = vis_dc->GetWorldDir();
+
+		int i;
+		//get bbox contour
+		S_vector contour_points[6];
+		dword num_cpts;
+		ComputeContour(bb, tm, ldir, contour_points, num_cpts, true);
+		assert(num_cpts);
+		//find matrix for smallest rectangle
+
+		//get projection plane, going through object's center
+		S_plane pl;
+		pl.normal = ldir;
+		pl.d = -bb_center.Dot(pl.normal);
+
+		//find bbox point fahrtest from the plane
+		S_vector bb_full[8], bb_trans[8];
+		bb.Expand(bb_full);
+		TransformVertexArray(bb_full, sizeof(S_vector), 8, bb_trans, sizeof(S_vector), vis_dc->GetMatrix());
+		float d_bb_min = 1e+16f;
+		for (i = 8; i--; ) {
+			const S_vector& v = bb_trans[i];
+			float d = v.DistanceToPlane(pl);
+			if (d_bb_min > d) {
+				d_bb_min = d;
+			}
+		}
+		d_bb_min = pl.d - d_bb_min;
+		//construct contour frustum
+		S_view_frustum vf;
+		vf.view_pos = ldir;
+		vf.num_clip_planes = 0;
+		for (i = num_cpts; i--; ) {
+			S_plane& cpl = vf.clip_planes[vf.num_clip_planes];
+			cpl.normal.GetNormal(contour_points[i], contour_points[(i + 1) % num_cpts],
+				contour_points[i] + ldir);
+			if (cpl.normal.Square() < .001f)
+				continue;
+			cpl.normal.Normalize();
+			cpl.d = -(contour_points[i].Dot(cpl.normal));
+			vf.frustum_pts[vf.num_clip_planes] = contour_points[i];
+			++vf.num_clip_planes;
+		}
+		//add front and back clipping planes
+		vf.clip_planes[vf.num_clip_planes].normal = -pl.normal;
+		vf.clip_planes[vf.num_clip_planes].d = -d_bb_min;
+		++vf.num_clip_planes;
+		vf.clip_planes[vf.num_clip_planes] = pl;
+		vf.clip_planes[vf.num_clip_planes].d -= SHADOW_LENGTH;
+		++vf.num_clip_planes;
+
+		PI3D_visual* hit_receivers = (PI3D_visual*)alloca(pc.prim_list.size() * sizeof(PI3D_visual*));
+		dword num_receivers = 0;
+
+		{
+			const S_render_primitive* prims = &pc.prim_list.front();
+			for (i = pc.prim_list.size(); i--; ) {
+				PI3D_visual vis = prims->vis;
+                prims++;
+				if (!(vis->vis_flags & VISF_BOUNDS_VALID))
+					vis->ComputeBounds();
+				const I3D_bsphere& bs = vis->bound.GetBoundSphereTrans(vis, FRMFLAGS_BSPHERE_TRANS_VALID);
+				bool clip;
+				bool in = SphereInVF(vf, bs, clip);
+				if (!in)
+					continue;
+				if (clip) {
+					//detailed bbox test
+					S_vector vis_countours[6];
+					dword num_vis_cpts;
+					ComputeContour(vis->bound.bound_local.bbox, vis->GetMatrix(), ldir, vis_countours, num_vis_cpts, true);
+					assert(num_vis_cpts);
+					//check only with contour clip planes of vf (last 2 are front and back planes)
+  //in = CheckFrustumIntersection(vf.clip_planes, vf.num_clip_planes - 2, vis_countours, num_vis_cpts);
+					in = CheckFrustumIntersection(vf.clip_planes, vf.num_clip_planes - 2, vf.frustum_pts, vis_countours, num_vis_cpts, vf.view_pos, true);
+					if (!in)
+						continue;
+				}
+				//hit_receivers.push_back(vis);
+				hit_receivers[num_receivers++] = vis;
+			}
+		}
+		//if there're no objects hit, skip this caster
+		if (!num_receivers)
+			continue;
+
+		//project bounding box onto the plane
+		S_vector projected_contour[6];
+		for (i = num_cpts; i--; )
+			pl.Intersection(contour_points[i], ldir, projected_contour[i]);
+
+		float mod_scale = vis_dc->GetWorldScale();
+		float bb_diag = (bb.max - bb.min).Magnitude() * mod_scale;
+
+		//compute scale
+		S_vector bb_size = bb.max - bb.min;
+		float fside = Max(bb_size.x, bb_size.y);
+		float ortho_scale = 2.0f / fside;
+
+		//re-compute texture matrix
+		// note: Y is swapped due to texture adressing from upper-left corner
+		S_matrix m_txt; m_txt.Identity();
+		m_txt(0) = tm(0) * fside;
+		m_txt(1) = tm(1) * (-fside);
+		m_txt(2) = pl.normal;
+		m_txt(3) = bb_center + ldir * (pl.d - d_bb_min);
+
+		//add half-texel to correct rounding errors
+        S_matrix m_txt_inv = ~m_txt;
+		m_txt_inv(3, 0) += .5f;
+		m_txt_inv(3, 1) += .5f;
+		m_txt_inv(3, 2) -= bb_diag * .35f;
+		const float r_sl = 1.0f / 8.0f;
+		for (i = 4; i--; ) {
+			m_txt_inv(i, 2) *= r_sl;
+		}
+
+		//create decal affect cylinder
+		I3D_cylinder vc;
+		vc.pos = m_txt(3);
+		vc.dir = m_txt(2) * 4.0f;
+		vc.radius = 0.0f;
+		for (i = num_cpts; i--; )
+			vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
+
+		drv->SetFogColor(0);
+        auto d3d_dev = drv->GetDevice1();
+        HRESULT hr;
+        auto mat = vis_dc->GetMaterial();
+		drv->SetTexture1(0, mat->GetTexture1(MTI_DIFFUSE));
+
+		drv->SetupBlend(mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND);
+		drv->DisableTextureStage(1);
+		drv->SetupTextureStage(0, D3DTOP_BLENDTEXTUREALPHAPM);
+		hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_BORDER);
+        CHECK_D3D_RESULT("SetSamplerState", hr);
+        hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_BORDER);
+		CHECK_D3D_RESULT("SetSamplerState", hr);
+        hr = d3d_dev->SetSamplerState(0, D3DSAMP_BORDERCOLOR, 0x000000);
+		CHECK_D3D_RESULT("SetSamplerState", hr);
+
+        drv->EnableNoCull(true);
+		//re-render all receivers using this shadow
+		for (int ri = num_receivers; ri--; ) {
+			PI3D_visual vis = hit_receivers[ri];
+			
+			S_matrix tm = vis->GetMatrix() * m_txt_inv;
+			tm.Transpose();
+			tm(3) = ldir % vis->GetInvMatrix1();
+			drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
+			vis->RenderSolidMesh(this, false, true, mat, &vc);
+		}
+        drv->EnableNoCull(false);
+
+        drv->SetTexture1(0, NULL);
+    }
+}
 
 void I3D_scene::RenderShadows(const S_preprocess_context &pc){
                               //no shadows in night-view (we've some bug with switching rendertargets)
@@ -1372,7 +1566,7 @@ void I3D_scene::RenderShadows(const S_preprocess_context &pc){
             drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
 
             //PR_BEG; //for(int i=100; i--; )
-            vis->RenderSolidMesh(this, false, &vc);
+            vis->RenderSolidMesh(this, false, false, NULL, &vc);
             //PR_END;
          }
          drv->EnableZWrite(true);
@@ -1560,7 +1754,7 @@ void I3D_scene::RenderShadows(const S_preprocess_context &pc){
             drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
 
             //PR_BEG; //for(int i=100; i--; )
-            vis->RenderSolidMesh(this, false, &vc);
+            vis->RenderSolidMesh(this, false, false, NULL, &vc);
             //PR_END;
          }
          drv->EnableZWrite(true);
@@ -1914,248 +2108,6 @@ struct S_dd_context{
    S_preprocess_context *pc;
 };
 
-
-//----------------------------
-
-I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
-
-   S_dd_context *ddc = (S_dd_context*)c;
-   switch(frm->GetType1()){
-
-   case FRAME_MODEL:
-      {
-         if(!frm->IsOn1())
-            return I3DENUMRET_SKIPCHILDREN;
-         PI3D_model mod = I3DCAST_MODEL(frm);
-         if((ddc->drv_flags&DRVF_DRAWHRBBOX) && (frm->num_hr_vis)){
-            if(!(frm->GetFlags()&FRMFLAGS_HR_BOUND_VALID))
-               mod->hr_bound.MakeHierarchyBounds(frm);
-            mod->hr_bound.GetBoundSphereTrans(frm, FRMFLAGS_HR_BSPHERE_VALID);
-            mod->hr_bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_HR_BSPHERE_VALID);
-         }
-      }
-      break;
-
-   case FRAME_VISUAL:
-      {
-         PI3D_visual vis = I3DCAST_VISUAL(frm);
-
-         if(!frm->IsOn1())
-            return I3DENUMRET_SKIPCHILDREN;
-
-         if((vis->GetDriver1()->GetFlags()&DRVF_DRAWVISUALS) && vis->last_render_time != ddc->render_time)
-            break;
-
-         if((ddc->drv_flags2&DRVF2_DRAWJOINTS) && (ddc->drv_flags2&DRVF2_DRAWVOLUMES) &&
-            vis->GetVisualType1()==I3D_VISUAL_SINGLEMESH){
-            ((I3D_object_singlemesh*)vis)->DebugDrawVolBox(ddc->scene);
-         }
-
-         if(ddc->drv_flags&(DRVF_DRAWBBOX | DRVF_DRAWHRBBOX)){
-            if(ddc->drv_flags&DRVF_DRAWBBOX){
-               if(!(vis->vis_flags&VISF_BOUNDS_VALID)) vis->ComputeBounds();
-               vis->bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_BSPHERE_TRANS_VALID);
-            }
-            if((ddc->drv_flags&DRVF_DRAWHRBBOX) && frm->num_hr_vis){
-               if(!(frm->frm_flags&FRMFLAGS_HR_BOUND_VALID))
-                  vis->hr_bound.MakeHierarchyBounds(frm);
-               vis->hr_bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_HR_BSPHERE_VALID);
-            }
-         }
-         if(
-#ifndef GL
-            ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE)) ||
-#endif
-             ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ||
-             //(ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
-             (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
-             )
-         {
-            bool b_shadow = 
-#ifndef GL
-               ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE));
-#else
-               false;
-#endif
-            bool b_static = ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION));
-            //bool b_debug_mat = (ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
-            bool b_debug_mat = (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
-            dword texture_factor;
-
-                              //debug_mat override static(becouse every visual with material IS static)
-            if(b_shadow&&b_debug_mat)
-               texture_factor = 0xc070a070;
-            else
-            if(b_shadow&&b_static)
-               texture_factor = 0xc080f000;
-            else
-            if(b_shadow)
-               texture_factor = 0xc0008000;
-            else
-            if(b_debug_mat){
-               //texture_factor = 0xc0800080;
-               texture_factor = 0xc0000000;  //default color
-               I3D_driver::t_col_mat_info::const_iterator it = ddc->col_mat_info->find(vis->GetCollisionMaterial());
-               if(it!=ddc->col_mat_info->end())
-                  texture_factor = it->second.color;
-            }else
-               texture_factor = 0xc0808000;
-
-                              //render shadow receiver
-            PI3D_driver drv = ddc->scene->GetDriver1();
-#ifndef GL
-            IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
-            if(!drv->CanUsePixelShader()){
-               drv->SetTexture1(0, NULL);
-               drv->DisableTextureStage(1);
-               //drv->SetupTextureStage(0, D3DTOP_MODULATE);
-               drv->SetupTextureStage(0, D3DTOP_SELECTARG1);
-               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
-
-               d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TFACTOR);
-               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TFACTOR);
-               drv->SetTextureFactor(texture_factor);
-            }else
-#endif
-            {
-               I3D_driver::S_ps_shader_entry_in se_ps;
-               se_ps.AddFragment(PSF_MOD_COLOR_v0);
-               drv->SetPixelShader(se_ps);
-
-               S_vectorw c4(((texture_factor>>16)&255)*R_255, ((texture_factor>>8)&255)*R_255, ((texture_factor>>0)&255)*R_255, (float)(texture_factor>>24)*R_255);
-               drv->SetPSConstant(PSC_COLOR, &c4);
-            }
-
-            drv->SetupBlend(I3DBLEND_ALPHABLEND);
-            
-                              //setup camera vector in visual's local coords
-            {
-               const S_matrix &m_cam = ddc->scene->GetActiveCamera1()->GetMatrix();
-               S_vectorw vw = m_cam(2);
-               vw.w = 0.0f;
-               vw.Invert();
-               vw %= vis->GetInvMatrix();
-               drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &vw);
-            }
-
-            vis->RenderSolidMesh(ddc->scene, true);
-#ifndef GL
-            if(!drv->CanUsePixelShader()){
-               d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-            }
-#endif
-         }
-      }
-      break;
-
-   case FRAME_LIGHT:
-      {
-         PI3D_light lp = I3DCAST_LIGHT(frm);
-         lp->Draw1(ddc->scene, ddc->vf, false);
-      }
-      break;
-   case FRAME_SOUND:
-      {
-         PI3D_sound snd = I3DCAST_SOUND(frm);
-         snd->Draw1(ddc->scene, ddc->vf, false);
-      }
-      break;
-
-   case FRAME_CAMERA:
-      I3DCAST_CAMERA(frm)->Draw1(ddc->scene, false);
-      break;
-
-   case FRAME_OCCLUDER:
-      I3DCAST_OCCLUDER(frm)->Draw1(ddc->scene, false);
-      break;
-
-   case FRAME_JOINT:
-      {
-                              //check if parent visual SM was rendered
-         for(PI3D_frame prnt = frm; prnt = prnt->GetParent1(), prnt; ){
-            if(prnt->GetType()==FRAME_VISUAL){
-               PI3D_visual vis = I3DCAST_VISUAL(prnt);
-               if(!(vis->GetDriver1()->GetFlags()&DRVF_DRAWVISUALS) || vis->last_render_time == ddc->render_time)
-                  I3DCAST_JOINT(frm)->Draw1(ddc->scene, false);
-               break;
-            }
-         }
-      }
-      break;
-
-   case FRAME_DUMMY:
-      if(!frm->IsOn1())
-         return I3DENUMRET_SKIPCHILDREN;
-      if(ddc->drv_flags2&DRVF2_DRAWDUMMYS)
-         I3DCAST_DUMMY(frm)->Draw1(ddc->scene, false);
-      break;
-
-   case FRAME_SECTOR:
-      {
-         PI3D_sector sct = I3DCAST_SECTOR(frm);
-         bool save_visible = ddc->sector_visible;
-         ddc->sector_visible = sct->IsVisible();
-                        //optim: skip drawing children if not visible
-         sct->EnumFrames(cbDebugDraw, c, ddc->enum_mask);
-         ddc->sector_visible = save_visible;
-         return I3DENUMRET_SKIPCHILDREN;
-      }
-      break;
-   case FRAME_VOLUME:
-      {
-         PI3D_volume vol = I3DCAST_VOLUME(frm);
-                              //check if this, or parent frames are visible
-         bool on = vol->IsOn1();
-         for(PI3D_frame prnt=vol; prnt=prnt->GetParent1(), prnt; ){
-            if(!prnt->IsOn1()){
-               on = false;
-               break;
-            }
-         }
-         if(on && vol->Prepare()){
-
-            bool clip;
-                              //view frustum check
-            bool out = !SphereInVF(*ddc->vf,
-               vol->GetBoundSphere(), clip);
-            if(out)
-               break;
-                              //occlusion test (front to back!)
-            for(dword i=0; i<ddc->occ_list->size(); i++){
-               PI3D_occluder occ = (*ddc->occ_list)[i];
-
-               bool occluded = occ->IsOccluding(vol->GetBoundSphere(), clip);
-               if(occluded)
-                  break;
-            }
-            if(i != ddc->occ_list->size())
-               break;
-
-            if(ddc->col_mat_info){
-               dword color = 0x40000000;  //default color
-               I3D_driver::t_col_mat_info::const_iterator it = ddc->col_mat_info->find(vol->GetCollisionMaterial());
-               if(it!=ddc->col_mat_info->end())
-                  color = it->second.color;
-               vol->Draw1(ddc->scene, false, false, &color);
-            }else
-            if((ddc->drv_flags2&DRVF2_DRAWVOLUMES) ||
-                              //draw dynamic volimes when DRVF_DEBUGDRAWDYNAMIC is set
-               ((ddc->drv_flags&DRVF_DEBUGDRAWDYNAMIC) && !(frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ||
-                              //draw static volumes when DRVF2_DEBUGDRAWSTATIC is set
-               ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ){
-
-               vol->Draw1(ddc->scene, false);
-            }
-         }
-      }
-      break;
-   default:
-      frm->DebugDraw(ddc->scene);
-   }
-   return I3DENUMRET_OK;
-}
 
 //----------------------------
 
@@ -2666,3 +2618,245 @@ I3D_RESULT I3D_scene::Render(dword flags){
 
 //----------------------------
 
+
+//----------------------------
+
+I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
+
+   S_dd_context *ddc = (S_dd_context*)c;
+   switch(frm->GetType1()){
+
+   case FRAME_MODEL:
+      {
+         if(!frm->IsOn1())
+            return I3DENUMRET_SKIPCHILDREN;
+         PI3D_model mod = I3DCAST_MODEL(frm);
+         if((ddc->drv_flags&DRVF_DRAWHRBBOX) && (frm->num_hr_vis)){
+            if(!(frm->GetFlags()&FRMFLAGS_HR_BOUND_VALID))
+               mod->hr_bound.MakeHierarchyBounds(frm);
+            mod->hr_bound.GetBoundSphereTrans(frm, FRMFLAGS_HR_BSPHERE_VALID);
+            mod->hr_bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_HR_BSPHERE_VALID);
+         }
+      }
+      break;
+
+   case FRAME_VISUAL:
+      {
+         PI3D_visual vis = I3DCAST_VISUAL(frm);
+
+         if(!frm->IsOn1())
+            return I3DENUMRET_SKIPCHILDREN;
+
+         if((vis->GetDriver1()->GetFlags()&DRVF_DRAWVISUALS) && vis->last_render_time != ddc->render_time)
+            break;
+
+         if((ddc->drv_flags2&DRVF2_DRAWJOINTS) && (ddc->drv_flags2&DRVF2_DRAWVOLUMES) &&
+            vis->GetVisualType1()==I3D_VISUAL_SINGLEMESH){
+            ((I3D_object_singlemesh*)vis)->DebugDrawVolBox(ddc->scene);
+         }
+
+         if(ddc->drv_flags&(DRVF_DRAWBBOX | DRVF_DRAWHRBBOX)){
+            if(ddc->drv_flags&DRVF_DRAWBBOX){
+               if(!(vis->vis_flags&VISF_BOUNDS_VALID)) vis->ComputeBounds();
+               vis->bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_BSPHERE_TRANS_VALID);
+            }
+            if((ddc->drv_flags&DRVF_DRAWHRBBOX) && frm->num_hr_vis){
+               if(!(frm->frm_flags&FRMFLAGS_HR_BOUND_VALID))
+                  vis->hr_bound.MakeHierarchyBounds(frm);
+               vis->hr_bound.DebugDrawBounds(ddc->scene, frm, FRMFLAGS_HR_BSPHERE_VALID);
+            }
+         }
+         if(
+#ifndef GL
+            ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE)) ||
+#endif
+             ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ||
+             //(ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
+             (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
+             )
+         {
+            bool b_shadow = 
+#ifndef GL
+               ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE));
+#else
+               false;
+#endif
+            bool b_static = ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION));
+            //bool b_debug_mat = (ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
+            bool b_debug_mat = (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
+            dword texture_factor;
+
+                              //debug_mat override static(becouse every visual with material IS static)
+            if(b_shadow&&b_debug_mat)
+               texture_factor = 0xc070a070;
+            else
+            if(b_shadow&&b_static)
+               texture_factor = 0xc080f000;
+            else
+            if(b_shadow)
+               texture_factor = 0xc0008000;
+            else
+            if(b_debug_mat){
+               //texture_factor = 0xc0800080;
+               texture_factor = 0xc0000000;  //default color
+               I3D_driver::t_col_mat_info::const_iterator it = ddc->col_mat_info->find(vis->GetCollisionMaterial());
+               if(it!=ddc->col_mat_info->end())
+                  texture_factor = it->second.color;
+            }else
+               texture_factor = 0xc0808000;
+
+                              //render shadow receiver
+            PI3D_driver drv = ddc->scene->GetDriver1();
+#ifndef GL
+            IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
+            if(!drv->CanUsePixelShader()){
+               drv->SetTexture1(0, NULL);
+               drv->DisableTextureStage(1);
+               //drv->SetupTextureStage(0, D3DTOP_MODULATE);
+               drv->SetupTextureStage(0, D3DTOP_SELECTARG1);
+               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+
+               d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TFACTOR);
+               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TFACTOR);
+               drv->SetTextureFactor(texture_factor);
+            }else
+#endif
+            {
+               I3D_driver::S_ps_shader_entry_in se_ps;
+               se_ps.AddFragment(PSF_MOD_COLOR_v0);
+               drv->SetPixelShader(se_ps);
+
+               S_vectorw c4(((texture_factor>>16)&255)*R_255, ((texture_factor>>8)&255)*R_255, ((texture_factor>>0)&255)*R_255, (float)(texture_factor>>24)*R_255);
+               drv->SetPSConstant(PSC_COLOR, &c4);
+            }
+
+            drv->SetupBlend(I3DBLEND_ALPHABLEND);
+            
+                              //setup camera vector in visual's local coords
+            {
+               const S_matrix &m_cam = ddc->scene->GetActiveCamera1()->GetMatrix();
+               S_vectorw vw = m_cam(2);
+               vw.w = 0.0f;
+               vw.Invert();
+               vw %= vis->GetInvMatrix();
+               drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &vw);
+            }
+
+            vis->RenderSolidMesh(ddc->scene, true);
+#ifndef GL
+            if(!drv->CanUsePixelShader()){
+               d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+               d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            }
+#endif
+         }
+      }
+      break;
+
+   case FRAME_LIGHT:
+      {
+         PI3D_light lp = I3DCAST_LIGHT(frm);
+         lp->Draw1(ddc->scene, ddc->vf, false);
+      }
+      break;
+   case FRAME_SOUND:
+      {
+         PI3D_sound snd = I3DCAST_SOUND(frm);
+         snd->Draw1(ddc->scene, ddc->vf, false);
+      }
+      break;
+
+   case FRAME_CAMERA:
+      I3DCAST_CAMERA(frm)->Draw1(ddc->scene, false);
+      break;
+
+   case FRAME_OCCLUDER:
+      I3DCAST_OCCLUDER(frm)->Draw1(ddc->scene, false);
+      break;
+
+   case FRAME_JOINT:
+      {
+                              //check if parent visual SM was rendered
+         for(PI3D_frame prnt = frm; prnt = prnt->GetParent1(), prnt; ){
+            if(prnt->GetType()==FRAME_VISUAL){
+               PI3D_visual vis = I3DCAST_VISUAL(prnt);
+               if(!(vis->GetDriver1()->GetFlags()&DRVF_DRAWVISUALS) || vis->last_render_time == ddc->render_time)
+                  I3DCAST_JOINT(frm)->Draw1(ddc->scene, false);
+               break;
+            }
+         }
+      }
+      break;
+
+   case FRAME_DUMMY:
+      if(!frm->IsOn1())
+         return I3DENUMRET_SKIPCHILDREN;
+      if(ddc->drv_flags2&DRVF2_DRAWDUMMYS)
+         I3DCAST_DUMMY(frm)->Draw1(ddc->scene, false);
+      break;
+
+   case FRAME_SECTOR:
+      {
+         PI3D_sector sct = I3DCAST_SECTOR(frm);
+         bool save_visible = ddc->sector_visible;
+         ddc->sector_visible = sct->IsVisible();
+                        //optim: skip drawing children if not visible
+         sct->EnumFrames(cbDebugDraw, c, ddc->enum_mask);
+         ddc->sector_visible = save_visible;
+         return I3DENUMRET_SKIPCHILDREN;
+      }
+      break;
+   case FRAME_VOLUME:
+      {
+         PI3D_volume vol = I3DCAST_VOLUME(frm);
+                              //check if this, or parent frames are visible
+         bool on = vol->IsOn1();
+         for(PI3D_frame prnt=vol; prnt=prnt->GetParent1(), prnt; ){
+            if(!prnt->IsOn1()){
+               on = false;
+               break;
+            }
+         }
+         if(on && vol->Prepare()){
+
+            bool clip;
+                              //view frustum check
+            bool out = !SphereInVF(*ddc->vf,
+               vol->GetBoundSphere(), clip);
+            if(out)
+               break;
+                              //occlusion test (front to back!)
+            for(dword i=0; i<ddc->occ_list->size(); i++){
+               PI3D_occluder occ = (*ddc->occ_list)[i];
+
+               bool occluded = occ->IsOccluding(vol->GetBoundSphere(), clip);
+               if(occluded)
+                  break;
+            }
+            if(i != ddc->occ_list->size())
+               break;
+
+            if(ddc->col_mat_info){
+               dword color = 0x40000000;  //default color
+               I3D_driver::t_col_mat_info::const_iterator it = ddc->col_mat_info->find(vol->GetCollisionMaterial());
+               if(it!=ddc->col_mat_info->end())
+                  color = it->second.color;
+               vol->Draw1(ddc->scene, false, false, &color);
+            }else
+            if((ddc->drv_flags2&DRVF2_DRAWVOLUMES) ||
+                              //draw dynamic volimes when DRVF_DEBUGDRAWDYNAMIC is set
+               ((ddc->drv_flags&DRVF_DEBUGDRAWDYNAMIC) && !(frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ||
+                              //draw static volumes when DRVF2_DEBUGDRAWSTATIC is set
+               ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ){
+
+               vol->Draw1(ddc->scene, false);
+            }
+         }
+      }
+      break;
+   default:
+      frm->DebugDraw(ddc->scene);
+   }
+   return I3DENUMRET_OK;
+}

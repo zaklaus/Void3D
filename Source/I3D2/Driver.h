@@ -415,6 +415,8 @@ class I3D_driver{
 #define DRVF2_DEBUG_SHOW_OVERDRAW 0x800000 //show overdraw in colors
 #define DRVF2_NIGHT_VISION    0x1000000   //use night-vision effect for rendering
 #define DRVF2_IN_NIGHT_VISION 0x2000000   //inside of night-vision rendering
+#define DRVF2_USEDECALS        0x4000000  // decal support
+
 #endif
 
 //----------------------------

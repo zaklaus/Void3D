@@ -261,6 +261,7 @@
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="D3d_err.cpp" />
     <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="Decal.cpp" />
     <ClCompile Include="Discharge.cpp" />
     <ClCompile Include="Driver.cpp" />
     <ClCompile Include="Dummy.cpp" />
@@ -322,6 +323,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="CPU.h" />
     <ClInclude Include="DataBase.h" />
+    <ClInclude Include="Decal.h" />
     <ClInclude Include="Driver.h" />
     <ClInclude Include="Dummy.h" />
     <ClInclude Include="Frame.h" />

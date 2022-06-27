@@ -113,6 +113,7 @@ I3D_visual *CreateParticle(PI3D_driver drv);
 I3D_visual *CreateSingleMesh(PI3D_driver drv);
 I3D_visual* CreateDynamic(PI3D_driver drv);
 I3D_visual* CreateShader(PI3D_driver drv);
+I3D_visual* CreateDecal(PI3D_driver drv);
 
 extern const S_visual_property props_Atmospheric[],
    props_Billboard[],
@@ -139,6 +140,7 @@ const S_visual_plugin_entry visual_plugins[] = {
    { &CreateShader, "Shader", I3D_VISUAL_SHADER, props_Shader },
    { &CreateObjectUVshift, "Object (UV shift)", I3D_VISUAL_UV_SHIFT, props_ObjectUVshift},
    { &CreateParticle, "Particle", I3D_VISUAL_PARTICLE, props_Particle},
+   { &CreateDecal, "Decal", I3D_VISUAL_DECAL }
 };
 const int num_visual_plugins = sizeof(visual_plugins)/sizeof(*visual_plugins);
 
@@ -1474,6 +1476,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
    SetState(RS_USESHADOWS, true);
    SetState(RS_LOADMIPMAP, true);
    SetState(RS_DETAILMAPPING, true);
+   SetState(RS_DRAWDECALS, true);
 
                               //init default sound environment
    env_properties.insert(pair<int, S_sound_env_properties>(0, S_sound_env_properties()));
@@ -4653,6 +4656,11 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
       drv_flags &= ~DRVF_DRAWVISUALS;
       if(value) drv_flags |= DRVF_DRAWVISUALS;
       break;
+
+   case RS_DRAWDECALS:
+       drv_flags2 &= ~DRVF2_USEDECALS;
+       if (value) drv_flags2 |= DRVF2_USEDECALS;
+       break;
 
    case RS_FOG:
       drv_flags &= ~DRVF_USEFOG;

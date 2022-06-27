@@ -210,7 +210,7 @@ public:
 
 //----------------------------
 // Render mesh without setting anything (for shadow rendering and debugging purposes).
-   void RenderSolidMesh(PI3D_scene, bool debug = false, const I3D_cylinder* = NULL) const;
+   void RenderSolidMesh(PI3D_scene, bool debug = false, bool use_lights = false, PI3D_material mat = NULL, const I3D_cylinder* = NULL) const;
 
 //----------------------------
 // Set up additional mapping params right before rendering (envmap, detailmap, etc).
@@ -323,11 +323,11 @@ public:
    virtual bool ComputeBounds() = 0;
    virtual void AddPrimitives(S_preprocess_context&) = 0;
 #ifndef GL
-   virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&) = 0;
+   virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&) {};
 #else
    I3DMETHOD_(void,VisReserved10)(){}
 #endif
-   virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&) = 0;
+   virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&) {};
 
 //----------------------------
 // Prepare destination VB for transforming. 'num_txt_stages' specifies # of stages used by visual core.

@@ -41,6 +41,7 @@ void S_preprocess_context::Reset(){
 #ifndef GL
    shadow_casters.clear();
    shadow_receivers.clear();
+   decal_casters.clear();
 #endif
    mirror_data.clear();
    occ_list.clear();

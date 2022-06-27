@@ -50,7 +50,7 @@ protected:
 
    int proposed_num_shd_receivers;  //number of shd recs from last rendering
 
-   S_preprocess_context pc_main, pc_backdrop, pc_shadows;
+   S_preprocess_context pc_main, pc_backdrop, pc_shadows, pc_decals;
 
 #if defined _DEBUG && 0
                               //render target utilizing cube texture
@@ -111,6 +111,7 @@ private:
 
 #ifndef GL
    void RenderShadows(const S_preprocess_context&);
+   void RenderDecals(const S_preprocess_context&);
    void RenderMirrors(const S_preprocess_context&);
 #endif
 //----------------------------

@@ -2076,7 +2076,7 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
 
 //----------------------------
 
-void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, const I3D_cylinder *volume_cylinder) const{
+void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, bool use_lights, PI3D_material mat, const I3D_cylinder *volume_cylinder) const{
 
                               //re-render all our primitives,
    CPI3D_mesh_base mb = GetMesh();
@@ -2101,12 +2101,17 @@ void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, const I3D_cylinde
       rp.scene = scene;
       rp.sector = NULL;
       dword flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX | VSPREP_NO_COPY_UV | VSPREP_NO_DETAIL_MAPS;
+      if (use_lights){
+          assert(mat);
+          flags |= VSPREP_MAKELIGHTING;
+          vis_flags |= VISF_DEST_LIGHT_VALID;
+      }
       //if(!debug){
          for(PI3D_frame f=GetParent1(); f && f->GetType1()!=FRAME_SECTOR; f = f->GetParent1());
          if(f)
             rp.sector = I3DCAST_SECTOR(f);
       //}
-      PrepareVertexShader(NULL, 1, se, rp, RV_NORMAL, flags);
+      PrepareVertexShader(mat, 1, se, rp, RV_NORMAL, flags);
 #ifndef GL
       if(drv->GetFlags2()&DRVF2_TEXCLIP_ON){
                               //feed in texkill plane transformed to local coordinates

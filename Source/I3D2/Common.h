@@ -324,6 +324,8 @@ struct S_preprocess_context{
                               //frames which may potentionally receive shadow
    C_vector<PI3D_visual> shadow_receivers;
    float shadow_opacity;      //opacity of currently renderes shadow caster
+
+   C_vector<PI3D_visual> decal_casters;
 #endif
 
                               //data of mirrors rendered in current frame
@@ -1011,6 +1013,7 @@ enum E_PROFILE_BLOCK{         //block identifiers
    PROF_CLEAR,
    PROF_MIRROR,
    PROF_SHADOWS,
+   PROF_DECALS,
    PROF_PREPROCESS,
    PROF_DRAW,
    PROF_COLLISIONS,

@@ -194,6 +194,7 @@ enum I3D_FRAME_TYPE{
 #define I3D_VISUAL_BILLBOARD  0x44524242  //BBRD
 #define I3D_VISUAL_FIRE       'ERIF'      //FIRE
 #define I3D_VISUAL_SHADER     'RDHS'      //SHDR
+#define I3D_VISUAL_DECAL      'LCED'      //DECL
 #define I3D_VISUAL_MORPH      0x4850524d  //MRPH
 #define I3D_VISUAL_DYNAMIC    0x434d4e44  //DNMC
 #define I3D_VISUAL_UV_SHIFT   0x5356554f  //OUVS
@@ -2160,6 +2161,7 @@ enum I3D_RENDERSTATE{
    RS_DEBUG_FLOAT6 = 64,
    RS_DEBUG_FLOAT7 = 65,
    RS_DEBUG_SHOW_OVERDRAW = 66,//show overdraw (how many times each pixel is drawn), using separate colors
+   RS_DRAWDECALS = 67,
 };
 
 //----------------------------

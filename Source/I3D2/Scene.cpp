@@ -97,12 +97,14 @@ I3D_scene::I3D_scene(PI3D_driver d):
    scn_flags(0),
    pc_main(NULL),
    pc_backdrop(NULL),
-   pc_shadows(NULL)
+   pc_shadows(NULL),
+    pc_decals(NULL)
 {
    drv->AddCount(I3D_CLID_SCENE);
    pc_main.scene = this;
    pc_backdrop.scene = this;
    pc_shadows.scene = this;
+   pc_decals.scene = this;
 
    cont.master_interface = (C_unknown*)this;
    cont.vcall = &vc_container_scene;
