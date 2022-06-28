@@ -177,7 +177,7 @@
       <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
@@ -198,7 +198,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\bin\test.exe</OutputFile>
+      <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -259,7 +259,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>legacy_stdio_definitions.lib;base_lib.lib;Dta_read.lib;Physics.lib;IGraph.lib;Script.lib;comctl32.lib;Msimg32.lib;Zlib.lib;winmm.lib;DXGuid.lib;PNG.lib;DInput.lib;D3DX9.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\bin\test.exe</OutputFile>
+      <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -291,7 +291,7 @@
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -318,7 +318,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>legacy_stdio_definitions.lib;base_lib.lib;Dta_read.lib;Physics.lib;IGraph.lib;Script.lib;comctl32.lib;Msimg32.lib;Zlib.lib;winmm.lib;DXGuid.lib;PNG.lib;DInput.lib;D3DX9.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\bin\test.exe</OutputFile>
+      <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -368,7 +368,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;I3D2_gl_d.lib;IGraph_gl_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;D3DX9d.lib;DXGuid.lib;PNG_d.lib;libGLESv2.lib;libEGL.lib;Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>..\bin\test.exe</OutputFile>
+      <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib; ..\..\OpenGL_ES_2.0\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
