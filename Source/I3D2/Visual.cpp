@@ -1247,7 +1247,7 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
         ++stage;
     }
    else
-    if(tb_bump){
+    if(tb_bump && stage < drv->NumSimultaneousTextures() - 1){
         se_ps.PopFragment();
         se_ps.PopFragment();
         if (stage == 2) {
@@ -1270,7 +1270,7 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
             ++stage;
         }
         set_uv_scale = true;
-    }else{
+    }else if (stage < drv->NumSimultaneousTextures() - 1){
         ++stage;
         se_ps.Tex(stage);
     }
