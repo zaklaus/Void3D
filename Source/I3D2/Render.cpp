@@ -578,9 +578,9 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
    }
 
    if ((drv->GetFlags2() & DRVF2_USEDECALS) &&
-	   pc.decal_casters.size()) {
+       pc.decal_casters.size()) {
 
-	   RenderDecals(pc);
+       RenderDecals(pc);
    }
 #endif
 
@@ -923,180 +923,174 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
         PI3D_visual vis_dc = pc.decal_casters[dci];
 
         const S_matrix& tm = vis_dc->GetMatrix();
-		if (!(vis_dc->frm_flags & FRMFLAGS_HR_BOUND_VALID))
-			vis_dc->hr_bound.MakeHierarchyBounds(vis_dc);
-		const I3D_bbox& bb = vis_dc->hr_bound.bound_local.bbox;
-		if (!bb.IsValid())
-			continue;
+        if (!(vis_dc->frm_flags & FRMFLAGS_HR_BOUND_VALID))
+            vis_dc->hr_bound.MakeHierarchyBounds(vis_dc);
+        const I3D_bbox& bb = vis_dc->hr_bound.bound_local.bbox;
+        if (!bb.IsValid())
+            continue;
 
-		float opacity = 1.0f;
-		S_vector bb_center = ((bb.max + bb.min) * .5f) * tm;
-		//get distance to camera
-		float dist_to_cam_2 = (bb_center - pc.viewer_pos).Square();
-		//beyond the max range?
-		if (dist_to_cam_2 >= drv->shadow_range_f * drv->shadow_range_f) // todo: introduce decal range
-			continue;
-		float dist_to_cam = I3DSqrt(dist_to_cam_2);
-		//fade shadow depending on distance
-		if (dist_to_cam >= drv->shadow_range_n) {
-			opacity *= (drv->shadow_range_f - dist_to_cam) / (drv->shadow_range_f - drv->shadow_range_n);
-		}
+        S_vector bb_center = ((bb.max + bb.min) * .5f) * tm;
+        //get distance to camera
+        float dist_to_cam_2 = (bb_center - pc.viewer_pos).Square();
+        //beyond the max range?
+        if (dist_to_cam_2 >= drv->decal_range_f * drv->decal_range_f)
+            continue;
 
-		PI3D_frame sct_prnt = vis_dc;
-		while ((sct_prnt = sct_prnt->GetParent(), sct_prnt) && sct_prnt->GetType1() != FRAME_SECTOR);
-		assert(sct_prnt);
-		PI3D_sector sct = I3DCAST_SECTOR(sct_prnt);
+        PI3D_frame sct_prnt = vis_dc;
+        while ((sct_prnt = sct_prnt->GetParent(), sct_prnt) && sct_prnt->GetType1() != FRAME_SECTOR);
+        assert(sct_prnt);
+        PI3D_sector sct = I3DCAST_SECTOR(sct_prnt);
 
         S_vector ldir = vis_dc->GetWorldDir();
 
-		int i;
-		//get bbox contour
-		S_vector contour_points[6];
-		dword num_cpts;
-		ComputeContour(bb, tm, ldir, contour_points, num_cpts, true);
-		assert(num_cpts);
-		//find matrix for smallest rectangle
+        int i;
+        //get bbox contour
+        S_vector contour_points[6];
+        dword num_cpts;
+        ComputeContour(bb, tm, ldir, contour_points, num_cpts, true);
+        assert(num_cpts);
 
-		//get projection plane, going through object's center
-		S_plane pl;
-		pl.normal = ldir;
-		pl.d = -bb_center.Dot(pl.normal);
+        //get projection plane, going through object's center
+        S_plane pl;
+        pl.normal = ldir;
+        pl.d = -bb_center.Dot(pl.normal);
 
-		//find bbox point fahrtest from the plane
-		S_vector bb_full[8], bb_trans[8];
-		bb.Expand(bb_full);
-		TransformVertexArray(bb_full, sizeof(S_vector), 8, bb_trans, sizeof(S_vector), vis_dc->GetMatrix());
-		float d_bb_min = 1e+16f;
-		for (i = 8; i--; ) {
-			const S_vector& v = bb_trans[i];
-			float d = v.DistanceToPlane(pl);
-			if (d_bb_min > d) {
-				d_bb_min = d;
-			}
-		}
-		d_bb_min = pl.d - d_bb_min;
-		//construct contour frustum
-		S_view_frustum vf;
-		vf.view_pos = ldir;
-		vf.num_clip_planes = 0;
-		for (i = num_cpts; i--; ) {
-			S_plane& cpl = vf.clip_planes[vf.num_clip_planes];
-			cpl.normal.GetNormal(contour_points[i], contour_points[(i + 1) % num_cpts],
-				contour_points[i] + ldir);
-			if (cpl.normal.Square() < .001f)
-				continue;
-			cpl.normal.Normalize();
-			cpl.d = -(contour_points[i].Dot(cpl.normal));
-			vf.frustum_pts[vf.num_clip_planes] = contour_points[i];
-			++vf.num_clip_planes;
-		}
-		//add front and back clipping planes
-		vf.clip_planes[vf.num_clip_planes].normal = -pl.normal;
-		vf.clip_planes[vf.num_clip_planes].d = -d_bb_min;
-		++vf.num_clip_planes;
-		vf.clip_planes[vf.num_clip_planes] = pl;
-		vf.clip_planes[vf.num_clip_planes].d -= SHADOW_LENGTH;
-		++vf.num_clip_planes;
+        //find bbox point furthest from the plane
+        S_vector bb_full[8], bb_trans[8];
+        bb.Expand(bb_full);
+        TransformVertexArray(bb_full, sizeof(S_vector), 8, bb_trans, sizeof(S_vector), vis_dc->GetMatrix());
+        float d_bb_min = 1e+16f;
+        for (i = 8; i--; ) {
+            const S_vector& v = bb_trans[i];
+            float d = v.DistanceToPlane(pl);
+            if (d_bb_min > d) {
+                d_bb_min = d;
+            }
+        }
+        d_bb_min = pl.d - d_bb_min;
+        
+        //construct contour frustum
+        S_view_frustum vf;
+        vf.view_pos = ldir;
+        vf.num_clip_planes = 0;
+        for (i = num_cpts; i--; ) {
+            S_plane& cpl = vf.clip_planes[vf.num_clip_planes];
+            cpl.normal.GetNormal(contour_points[i], contour_points[(i + 1) % num_cpts],
+                contour_points[i] + ldir);
+            if (cpl.normal.Square() < .001f)
+                continue;
+            cpl.normal.Normalize();
+            cpl.d = -(contour_points[i].Dot(cpl.normal));
+            vf.frustum_pts[vf.num_clip_planes] = contour_points[i];
+            ++vf.num_clip_planes;
+        }
+        //add front and back clipping planes
+        vf.clip_planes[vf.num_clip_planes].normal = -pl.normal;
+        vf.clip_planes[vf.num_clip_planes].d = -d_bb_min;
+        ++vf.num_clip_planes;
+        vf.clip_planes[vf.num_clip_planes] = pl;
+        vf.clip_planes[vf.num_clip_planes].d -= SHADOW_LENGTH;
+        ++vf.num_clip_planes;
 
-		PI3D_visual* hit_receivers = (PI3D_visual*)alloca(pc.prim_list.size() * sizeof(PI3D_visual*));
-		dword num_receivers = 0;
+        PI3D_visual* hit_receivers = (PI3D_visual*)alloca(pc.prim_list.size() * sizeof(PI3D_visual*));
+        dword num_receivers = 0;
 
-		{
-			const S_render_primitive* prims = &pc.prim_list.front();
-			for (i = pc.prim_list.size(); i--; ) {
-				PI3D_visual vis = prims->vis;
+        {
+            const S_render_primitive* prims = &pc.prim_list.front();
+            for (i = pc.prim_list.size(); i--; ) {
+                PI3D_visual vis = prims->vis;
                 prims++;
-				if (!(vis->vis_flags & VISF_BOUNDS_VALID))
-					vis->ComputeBounds();
-				const I3D_bsphere& bs = vis->bound.GetBoundSphereTrans(vis, FRMFLAGS_BSPHERE_TRANS_VALID);
-				bool clip;
-				bool in = SphereInVF(vf, bs, clip);
-				if (!in)
-					continue;
-				if (clip) {
-					//detailed bbox test
-					S_vector vis_countours[6];
-					dword num_vis_cpts;
-					ComputeContour(vis->bound.bound_local.bbox, vis->GetMatrix(), ldir, vis_countours, num_vis_cpts, true);
-					assert(num_vis_cpts);
-					//check only with contour clip planes of vf (last 2 are front and back planes)
+                if (!(vis->vis_flags & VISF_BOUNDS_VALID))
+                    vis->ComputeBounds();
+                const I3D_bsphere& bs = vis->bound.GetBoundSphereTrans(vis, FRMFLAGS_BSPHERE_TRANS_VALID);
+                bool clip;
+                bool in = SphereInVF(vf, bs, clip);
+                if (!in)
+                    continue;
+                if (clip) {
+                    //detailed bbox test
+                    S_vector vis_countours[6];
+                    dword num_vis_cpts;
+                    ComputeContour(vis->bound.bound_local.bbox, vis->GetMatrix(), ldir, vis_countours, num_vis_cpts, true);
+                    assert(num_vis_cpts);
+                    //check only with contour clip planes of vf (last 2 are front and back planes)
   //in = CheckFrustumIntersection(vf.clip_planes, vf.num_clip_planes - 2, vis_countours, num_vis_cpts);
-					in = CheckFrustumIntersection(vf.clip_planes, vf.num_clip_planes - 2, vf.frustum_pts, vis_countours, num_vis_cpts, vf.view_pos, true);
-					if (!in)
-						continue;
-				}
-				//hit_receivers.push_back(vis);
-				hit_receivers[num_receivers++] = vis;
-			}
-		}
-		//if there're no objects hit, skip this caster
-		if (!num_receivers)
-			continue;
+                    in = CheckFrustumIntersection(vf.clip_planes, vf.num_clip_planes - 2, vf.frustum_pts, vis_countours, num_vis_cpts, vf.view_pos, true);
+                    if (!in)
+                        continue;
+                }
+                //hit_receivers.push_back(vis);
+                hit_receivers[num_receivers++] = vis;
+            }
+        }
+        //if there're no objects hit, skip this caster
+        if (!num_receivers)
+            continue;
 
-		//project bounding box onto the plane
-		S_vector projected_contour[6];
-		for (i = num_cpts; i--; )
-			pl.Intersection(contour_points[i], ldir, projected_contour[i]);
+        //project bounding box onto the plane
+        S_vector projected_contour[6];
+        for (i = num_cpts; i--; )
+            pl.Intersection(contour_points[i], ldir, projected_contour[i]);
 
-		float mod_scale = vis_dc->GetWorldScale();
-		float bb_diag = (bb.max - bb.min).Magnitude() * mod_scale;
+        float mod_scale = vis_dc->GetWorldScale();
+        float bb_diag = (bb.max - bb.min).Magnitude() * mod_scale;
 
-		//compute scale
-		S_vector bb_size = bb.max - bb.min;
-		float fside = Max(bb_size.x, bb_size.y);
-		float ortho_scale = 2.0f / fside;
+        //compute scale
+        S_vector bb_size = bb.max - bb.min;
+        float fside = Max(bb_size.x, bb_size.y);
+        float ortho_scale = 2.0f / fside;
 
-		//re-compute texture matrix
-		// note: Y is swapped due to texture adressing from upper-left corner
-		S_matrix m_txt; m_txt.Identity();
-		m_txt(0) = tm(0) * fside;
-		m_txt(1) = tm(1) * (-fside);
-		m_txt(2) = pl.normal;
-		m_txt(3) = bb_center + ldir * (pl.d - d_bb_min);
+        //re-compute texture matrix
+        // note: Y is swapped due to texture adressing from upper-left corner
+        S_matrix m_txt; m_txt.Identity();
+        m_txt(0) = tm(0) * fside;
+        m_txt(1) = tm(1) * (-fside);
+        m_txt(2) = pl.normal;
+        m_txt(3) = bb_center + ldir * (pl.d - d_bb_min);
 
-		//add half-texel to correct rounding errors
+        //add half-texel to correct rounding errors
         S_matrix m_txt_inv = ~m_txt;
-		m_txt_inv(3, 0) += .5f;
-		m_txt_inv(3, 1) += .5f;
-		m_txt_inv(3, 2) -= bb_diag * .35f;
-		const float r_sl = 1.0f / 8.0f;
-		for (i = 4; i--; ) {
-			m_txt_inv(i, 2) *= r_sl;
-		}
+        m_txt_inv(3, 0) += .5f;
+        m_txt_inv(3, 1) += .5f;
+        m_txt_inv(3, 2) -= bb_diag * .35f;
+        const float r_sl = 1.0f / 8.0f;
+        for (i = 4; i--; ) {
+            m_txt_inv(i, 2) *= r_sl;
+        }
 
-		//create decal affect cylinder
-		I3D_cylinder vc;
-		vc.pos = m_txt(3);
-		vc.dir = m_txt(2);
-		vc.radius = 0.0f;
-		for (i = num_cpts; i--; )
-			vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
+        //create decal affect cylinder
+        I3D_cylinder vc;
+        vc.pos = m_txt(3);
+        vc.dir = m_txt(2);
+        vc.radius = 0.0f;
+        for (i = num_cpts; i--; )
+            vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
 
-		drv->SetFogColor(0);
+        drv->SetFogColor(0);
         auto d3d_dev = drv->GetDevice1();
         HRESULT hr;
         auto mat = vis_dc->GetMaterial();
-		drv->SetTexture1(0, mat->GetTexture1(MTI_DIFFUSE));
+        drv->SetTexture1(0, mat->GetTexture1(MTI_DIFFUSE));
 
-		drv->SetupBlend(mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND);
-		drv->DisableTextureStage(1);
-		hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_BORDER);
+        drv->SetupBlend(mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND);
+        drv->DisableTextureStage(1);
+        hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_BORDER);
         CHECK_D3D_RESULT("SetSamplerState", hr);
         hr = d3d_dev->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_BORDER);
-		CHECK_D3D_RESULT("SetSamplerState", hr);
+        CHECK_D3D_RESULT("SetSamplerState", hr);
         hr = d3d_dev->SetSamplerState(0, D3DSAMP_BORDERCOLOR, 0x000000);
-		CHECK_D3D_RESULT("SetSamplerState", hr);
+        CHECK_D3D_RESULT("SetSamplerState", hr);
 
-		//re-render all receivers using this shadow
-		for (int ri = num_receivers; ri--; ) {
-			PI3D_visual vis = hit_receivers[ri];
-			
-			S_matrix tm = vis->GetMatrix() * m_txt_inv;
-			tm.Transpose();
-			tm(3) = ldir % vis->GetInvMatrix1();
-			drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
-			vis->RenderSolidMesh(this, false, true, mat, &vc);
-		}
+        //re-render all receivers using this shadow
+        for (int ri = num_receivers; ri--; ) {
+            PI3D_visual vis = hit_receivers[ri];
+            
+            S_matrix tm = vis->GetMatrix() * m_txt_inv;
+            tm.Transpose();
+            tm(3) = ldir % vis->GetInvMatrix1();
+            drv->SetVSConstant(VSC_MAT_TRANSFORM_1, &tm, 4);
+            vis->RenderSolidMesh(this, false, true, mat, &vc);
+        }
         drv->SetTexture1(0, NULL);
 
         //reset sampler states

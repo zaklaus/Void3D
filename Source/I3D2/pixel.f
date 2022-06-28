@@ -171,7 +171,7 @@ mul_x2 r0.rgb, r0, r1
 #beginfragment lrp_r0_t2
 lrp r1, CP_COLOR1.a, t2, CP_COLOR2
 mul_x2 r0.rgb, r0, r1
-+mul r0.a, r0.a, t1.a
++mul r0.a, r0.a, t2.a
 #endfragment
 
 ;----------------------------

@@ -1547,6 +1547,8 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
    dword stage = num_txt_stages;
    bool set_uv_scale = false;
 
+   CPI3D_texture_base tb_bump = mat->GetTexture1(MTI_EMBM);
+
    if((vis_flags&VISF_USE_DETMAP) && stage<drv->NumSimultaneousTextures()){
       CPI3D_texture_base tp_det = mat->GetTexture1(MTI_DETAIL);
       if(tp_det){
@@ -1563,7 +1565,6 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
                            //setup bump-map
          if(stage<drv->NumSimultaneousTextures()-1){
             if((vis_flags&VISF_USE_EMBMMAP)){
-               CPI3D_texture_base tb_bump = mat->GetTexture1(MTI_EMBM);
                if(tb_bump){
                                        //use primary UV coords for bump mapping
                   se_ps.Tex(stage);
@@ -1633,21 +1634,34 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
         }
         ++stage;
     }
-   /*else
-   if(vis_flags&VISF_USE_EMBMMAP){
-      CPI3D_texture_base tb_bump = mat->GetTexture1(MTI_EMBM);
-      if(tb_bump){
-                              //use primary UV coords for bump mapping
-         se_ps.Tex(stage);
-         drv->SetTexture1(stage, tb_bump);
-         ++stage;
-         se_ps.TexBem(stage);
-         //set_uv_scale = true;
-      }else{
-         ++stage;
-         se_ps.Tex(stage);
-      }
-   }*/
+   else
+    if(tb_bump){
+        se_ps.PopFragment();
+        se_ps.PopFragment();
+        if (stage == 2) {
+            se_ps.PopFragment();
+            se_ps.PopFragment();
+        }
+        stage = 0;
+        se_ps.Tex(stage);
+        drv->SetTexture1(stage, tb_bump);
+        ++stage;
+
+        se_ps.TexBem(stage);
+        se_ps.AddFragment(PSF_t1_COPY);
+
+        CPI3D_texture_base tb_diff = mat->GetTexture1(MTI_DIFFUSE);
+        if (tb_diff) {
+            drv->SetEMBMScale(stage, mat->GetEMBMOpacity1());
+            drv->SetTexture1(stage, tb_diff);
+            drv->EnableAnisotropy(stage, true);
+            ++stage;
+        }
+        set_uv_scale = true;
+    }else{
+        ++stage;
+        se_ps.Tex(stage);
+    }
    if(set_uv_scale){
       S_vectorw uv_scale;
       (S_vector2&)uv_scale = mat->GetDetailScale();
@@ -1960,21 +1974,6 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
    }
 
 #ifdef GL
-   C_this_gl_program *glp = (C_this_gl_program*)(C_gl_program*)drv->gl_shader_programs[drv->GL_PROGRAM_VISUAL];
-   glUniform1i(glp->u_sampler, 0); CHECK_GL_RESULT("glUniform1i");
-   drv->SetStreamSource(mb->vertex_buffer.GetD3DVertexBuffer(), mb->vertex_buffer.GetSizeOfVertex());
-   drv->SetVSDecl(mb->vertex_buffer.vs_decl);
-   glBindBuffer(GL_ARRAY_BUFFER, mb->vertex_buffer.vbo);
-   
-   glUniformMatrix4fv(glp->u_mat_view_proj, 1, false, rp.scene->curr_render_matrix.m[0]);
-   glEnableVertexAttribArray(glp->a_pos);  CHECK_GL_RESULT("glEnableVertexAttribArray");
-   glEnableVertexAttribArray(glp->a_tex0);  CHECK_GL_RESULT("glEnableVertexAttribArray");
-   glVertexAttribPointer(glp->a_pos, 3, GL_FLOAT, false, mb->vertex_buffer.GetSizeOfVertex(), 0); CHECK_GL_RESULT("glVertexAttribPointer");
-   glVertexAttribPointer(glp->a_tex0, 2, GL_FLOAT, false, mb->vertex_buffer.GetSizeOfVertex(), (void*)GetVertexUvOffset(mb->vertex_buffer.GetFVFlags())); CHECK_GL_RESULT("glVertexAttribPointer");
-   if(glp->a_normal!=-1){
-      glEnableVertexAttribArray(glp->a_normal);  CHECK_GL_RESULT("glEnableVertexAttribArray");
-      glVertexAttribPointer(glp->a_normal, 3, GL_FLOAT, false, mb->vertex_buffer.GetSizeOfVertex(), (void*)GetVertexNormalOffset(mb->vertex_buffer.GetFVFlags())); CHECK_GL_RESULT("glVertexAttribPointer");
-   }
 #else
    drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
    drv->SetVSDecl(vertex_buffer.vs_decl);

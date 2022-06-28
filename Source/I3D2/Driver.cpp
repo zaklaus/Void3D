@@ -992,6 +992,7 @@ I3D_driver::I3D_driver():
    last_ib(NULL),
    shadow_range_n(20.0f),
    shadow_range_f(30.0f),
+    decal_range_f(90.0f),
    curr_anisotropy(0xffffffff)
 {
    memset(&d3d_caps, 0, sizeof(d3d_caps));

@@ -637,6 +637,7 @@ public:
    int force_lod_index;       //-1 = default
    float lod_scale;
    float shadow_range_n, shadow_range_f;
+   float decal_range_f;
 
                               //multiple VB managers for various vertex formats
 #ifndef GL

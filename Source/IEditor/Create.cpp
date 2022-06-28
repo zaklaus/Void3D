@@ -1384,7 +1384,7 @@ public:
             case E_CREATE_VISUAL:
                {
                               //let user select sub-type
-                  int id = ChooseItemFromList(ed->GetIGraph(), NULL, "Select visual type", "Particle\0Flare\0");
+                  int id = ChooseItemFromList(ed->GetIGraph(), NULL, "Select visual type", "Particle\0Flare\0CamView\0");
                   if(id==-1)
                      break;
                   dword sub_type = 0;
@@ -1392,6 +1392,7 @@ public:
                   switch(id){
                   case 0: sub_type = I3D_VISUAL_PARTICLE; fn = "particle"; break;
                   case 1: sub_type = I3D_VISUAL_FLARE; fn = "flare"; break;
+                  case 2: sub_type = I3D_VISUAL_CAMVIEW; fn = "camview"; break;
                   default: assert(0);
                   }
                   strcpy(frm_name, fn);

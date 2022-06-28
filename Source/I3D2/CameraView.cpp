@@ -431,7 +431,7 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
    }
 
                               //transform vertices
-   dword prep_flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX | VSPREP_NO_DETAIL_MAPS | VSPREP_COPY_UV |
+   dword prep_flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX | VSPREP_COPY_UV |
       VSPREP_MAKELIGHTING;
 
    I3D_driver::S_vs_shader_entry_in se;//(vs_decl_object);
@@ -499,16 +499,52 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
       if(is_wire) d3d_dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
       int stage = 0;
-      /*
-      if(mat->IsTextureAlpha()){
-         drv->SetupTextureStage(stage, drv->vertex_light_blend_op);
-         drv->SetRenderMat(mat, stage++, alpha);
-         drv->SetupBlend(I3DBLEND_ALPHABLEND);
-      }else*/
       drv->SetupBlend(I3DBLEND_OPAQUE);
-
       CPI3D_texture_base txt_embm = mat->GetTexture1(MTI_EMBM);
-      if(txt_embm){
+
+        CPI3D_texture_base tp_env = mat->GetTexture1(MTI_ENVIRONMENT);
+        if (tp_env) {
+            se_ps.Tex(stage);
+            se_ps.AddFragment(PSF_t0_COPY);
+            drv->SetTexture1(stage, rt);
+            ++stage;
+            
+            if (stage < drv->NumSimultaneousTextures() - 1) {
+                if ((vis_flags & VISF_USE_EMBMMAP)) {
+                    if (txt_embm) {
+                        //use primary UV coords for bump mapping
+                        se_ps.Tex(stage);
+                        drv->SetTexture1(stage, txt_embm);
+                        ++stage;
+                        drv->SetEMBMScale(stage, mat->GetEMBMOpacity1());
+
+                        if (!(txt_embm->GetTxtFlags() & TXTF_ALPHA)) {
+                            se_ps.TexBem(stage);
+                        }
+                        else {
+                            se_ps.TexBeml(stage);
+                        }
+                    }
+                    else {
+                        ++stage;
+                        se_ps.Tex(stage);
+                    }
+                    se_ps.Lrp(stage);
+                }
+            }
+            else {
+                se_ps.Tex(stage);
+                se_ps.Lrp(stage);
+            }
+            drv->SetTexture1(stage, tp_env);
+
+            const auto opacity_num = mat->GetEnvOpacity1();
+            const S_vectorw opacity(opacity_num, opacity_num, opacity_num, opacity_num);
+            const S_vectorw gray(0.5f, 0.5f, 0.5f, 0.0f);
+            drv->SetPSConstant(PSC_COLOR1, &opacity);
+            drv->SetPSConstant(PSC_COLOR2, &gray);
+        }
+      else if(txt_embm){
          se_ps.Tex(stage);
          drv->SetTexture1(stage, txt_embm);
          ++stage;
@@ -516,11 +552,11 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
          se_ps.TexBem(stage);
          se_ps.AddFragment(PSF_t1_COPY);
          drv->SetEMBMScale(stage, mat->GetEMBMOpacity1());
+
+         drv->SetTexture1(stage, rt);
       }else{
-         se_ps.Tex(stage);
-         se_ps.AddFragment(PSF_t0_COPY);
+         
       }
-      drv->SetTexture1(stage, rt);
 
       drv->SetPixelShader(se_ps);
 
