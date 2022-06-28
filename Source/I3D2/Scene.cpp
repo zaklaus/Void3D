@@ -21,9 +21,7 @@
 #include "soundi3d.h"
 #include "mesh.h"
 #include "sng_mesh.h"
-#ifndef GL
 #include "stripifier.h"
-#endif
 
 //----------------------------
 
@@ -124,9 +122,6 @@ I3D_scene::I3D_scene(PI3D_driver d):
    shd_camera = I3DCAST_CAMERA(CreateFrame(FRAME_CAMERA));
    shd_camera->Release();
 
-#if defined _DEBUG && 0
-   rt_env.Init(this, 128, TEXTMAP_NOMIPMAP | TEXTMAP_HINTDYNAMIC | TEXTMAP_RENDERTARGET | TEXTMAP_NO_SYSMEM_COPY);
-#endif
 
                               //reset stats count
    memset(&render_stats, 0, sizeof(render_stats));
@@ -159,90 +154,6 @@ I3D_scene::~I3D_scene(){
 
 //----------------------------
 
-#if defined _DEBUG && 0
-I3D_RESULT I3D_scene::C_cube_render_target::Init(PI3D_scene scn, dword size, dword ct_flags){
-
-   PI3D_driver drv = scn->GetDriver();
-   I3D_CREATETEXTURE ct;
-   memset(&ct, 0, sizeof(ct));
-   ct.flags = ct_flags;// | TEXTMAP_CUBEMAP;
-   ct.size_x = size;
-   ct.size_y = size;
-
-   I3D_RESULT ir;
-   PI3D_texture tp;
-   for(int i=0; i<6; i++){
-      ir = drv->CreateTexture(&ct, &tp);
-      if(I3D_FAIL(ir)){
-         Close();
-         return ir;
-      }
-      rt[i] = tp;
-      tp->Release();
-   }
-   IDirect3DSurface9 *_zb;
-   ir = drv->CreateDepthBuffer(size, size, rt[0]->GetPixelFormat(), &_zb);
-   if(SUCCEEDED(ir)){
-      zb = _zb;
-      _zb->Release();
-      cam = I3DCAST_CAMERA(scn->CreateFrame(FRAME_CAMERA));
-      cam->SetFOV(PI*.5f);
-      cam->Release();
-   }else{
-      Close();
-   }
-   return ir;
-}
-
-//----------------------------
-
-void I3D_scene::C_cube_render_target::SetupCamera(const S_vector &pos, E_SIDE side, const S_matrix *m_rot){
-
-   S_vector z, y;
-   switch(side){
-   case SIDE_LEFT: z = S_vector(-1, 0, 0); y = S_vector(0, 1, 0); break;
-   case SIDE_RIGHT: z = S_vector(1, 0, 0); y = S_vector(0, 1, 0); break;
-   case SIDE_DOWN: z = S_vector(0, -1, 0); y = S_vector(0, 0, 1); break;
-   case SIDE_UP: z = S_vector(0, 1, 0); y = S_vector(0, 0, -1); break;
-   case SIDE_FRONT: z = S_vector(0, 0, 1); y = S_vector(0, 1, 0); break;
-   case SIDE_BACK: z = S_vector(0, 0, -1); y = S_vector(0, 1, 0); break;
-   default: assert(0);
-   }
-   cam->SetPos(pos);
-   if(m_rot){
-      z %= *m_rot;
-      y %= *m_rot;
-   }
-   cam->SetDir1(z, y);
-}
-
-//----------------------------
-
-void I3D_scene::C_cube_render_target::SetupRenderTarget(PI3D_driver drv, E_SIDE side){
-
-   PI3D_texture tp = rt[side];
-   tp->Manage(I3D_texture::MANAGE_CREATE_ONLY);
-   /*
-   D3DCUBEMAP_FACES cm;
-   switch(side){
-   case SIDE_LEFT: cm = D3DCUBEMAP_FACE_NEGATIVE_X; break;
-   case SIDE_RIGHT: cm = D3DCUBEMAP_FACE_POSITIVE_X; break;
-   case SIDE_DOWN: cm = D3DCUBEMAP_FACE_NEGATIVE_Y; break;
-   case SIDE_UP: cm = D3DCUBEMAP_FACE_POSITIVE_Y; break;
-   case SIDE_BACK: cm = D3DCUBEMAP_FACE_POSITIVE_Z; break;
-   case SIDE_FRONT: cm = D3DCUBEMAP_FACE_NEGATIVE_Z; break;
-   default: assert(0); cm = D3DCUBEMAP_FACE_POSITIVE_X;
-   }
-   */
-   IDirect3DSurface9 *surf;
-   //((IDirect3DCubeTexture8*)tp->GetD3DTexture())->GetCubeMapSurface(cm, 0, &surf);
-   ((IDirect3DTexture8*)tp->GetD3DTexture())->GetSurfaceLevel(0, &surf);
-   assert(surf);
-   drv->SetRenderTarget(C_render_target<>(surf, zb));
-   surf->Release();
-}
-
-#endif
 
 //----------------------------
 
@@ -257,14 +168,6 @@ bool I3D_scene::Init(){
    if(isp){
       isp->SetListenerRolloffFactor(0.0f);
       {
-#if defined USE_EAX && defined _DEBUG && 0
-      isp->SetEAXProperty(DSPROPERTY_EAXLISTENER_ENVIRONMENT,
-         //EAX_ENVIRONMENT_BATHROOM);
-         EAX_ENVIRONMENT_DRUGGED);
-         //EAX_ENVIRONMENT_GENERIC);
-         //EAX_ENVIRONMENT_PADDEDCELL);
-      //isp->UpdateListener();
-#endif
       }
    }
    return true;
@@ -277,10 +180,6 @@ I3D_RESULT I3D_scene::SetBgndColor(const S_vector &c){
    color_bgnd = c;
    S_vector v;
    LightUpdateColor(drv, c, 1.0f, &v, &dw_color_bgnd, true);
-#ifdef GL
-   glClearColor(color_bgnd.x, color_bgnd.y, color_bgnd.z, 0);
-   CHECK_GL_RESULT("ClearColor");
-#endif
    return I3D_OK;
 }
 
@@ -889,10 +788,6 @@ void I3D_scene::SetMViewProj(const I3D_camera *cam, bool z_bias){
    const S_projection_matrix &m_proj_simple = !z_bias ? cam->GetProjectionMatrixSimple() : cam->GetProjectionMatrixBiasedSimple();
    m_view_proj_hom = m_view.MultByProj(m_proj_simple);
    mt_view_proj_hom.CopyTransposed(m_view_proj_hom);
-#ifdef GL
-   const S_projection_matrix &gl_m_proj_simple = !z_bias ? cam->GlGetProjectionMatrixSimple() : cam->GlGetProjectionMatrixBiasedSimple();
-   gl_m_view_proj_hom = m_view.MultByProj(gl_m_proj_simple);
-#endif
 }
 
 //----------------------------
@@ -1040,9 +935,6 @@ I3D_RESULT I3D_scene::SetRenderMatrix(const S_matrix &m){
    S_matrix mt;
    mt.Make4X4Transposed(m, m_view_proj_hom);
    drv->SetVSConstant(VSC_MAT_TRANSFORM_0, &mt, 4);
-#ifdef GL
-   curr_render_matrix.Make4X4(m, gl_m_view_proj_hom);
-#endif
    return I3D_OK;
 }
 
@@ -1092,7 +984,6 @@ I3D_RESULT I3D_scene::DrawLines(const S_vector *v, dword numv, const word *indx,
 
       drv->SetPSConstant(PSC_COLOR, &c4);
    }
-#ifndef GL
    else{
       drv->SetupTextureStage(0, D3DTOP_MODULATE);
       drv->DisableTextureStage(1);
@@ -1102,7 +993,6 @@ I3D_RESULT I3D_scene::DrawLines(const S_vector *v, dword numv, const word *indx,
       se.AddFragment(VSF_LIGHT_END);
       drv->SetVSConstant(VSC_AMBIENT, &c4);
    }
-#endif
 
    //drv->SetClipping(true);
    drv->SetFVF(D3DFVF_XYZ);
@@ -1141,47 +1031,6 @@ I3D_RESULT I3D_scene::DrawLines(const S_vector *v, dword numv, const word *indx,
       hr = d3d_dev->DrawIndexedPrimitive(D3DPT_LINELIST, 0, 0, numv, 0, numi/2);
       CHECK_D3D_RESULT("DrawIndexedPrimitive", hr);
    }
-#ifdef GL
-   class C_lines_gl_program: public C_gl_program{
-      virtual void BuildStoreAttribId(dword index, dword id){
-         *(((int*)&u_mat_view_proj)+index) = id;
-      }
-   public:
-      C_lines_gl_program(I3D_driver &d):
-         C_gl_program(d)
-      {}
-      int u_mat_view_proj, a_pos, u_color;
-   };
-   C_lines_gl_program *glp = (C_lines_gl_program*)(C_gl_program*)drv->gl_shader_programs[drv->GL_PROGRAM_DRAW_LINES];
-   if(!glp){
-      glp = new C_lines_gl_program(*drv);
-      drv->gl_shader_programs[drv->GL_PROGRAM_DRAW_LINES] = glp;
-      glp->Release();
-      glp->Build(
-         "attribute vec4 a_pos;"
-         "uniform mat4 u_mat_view_proj;"
-         "void main(){"
-         "  gl_Position = u_mat_view_proj * a_pos;"
-         "}"
-         ,
-         "precision lowp float;"
-         "uniform vec4 u_color;"
-         "void main() {"
-         "  gl_FragColor = u_color;"
-         "}"
-         ,
-         "u_mat_view_proj\0" "a_pos\0" "u_color\0"
-         );
-   }
-   glp->Use();
-   glBindBuffer(GL_ARRAY_BUFFER, 0);
-   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-   glUniformMatrix4fv(glp->u_mat_view_proj, 1, false, curr_render_matrix.m[0]); CHECK_GL_RESULT("glUniformMatrix4fv");
-   glUniform4fv(glp->u_color, 1, c4.f); CHECK_GL_RESULT("glUniform4fv");
-   glEnableVertexAttribArray(glp->a_pos);  CHECK_GL_RESULT("glEnableVertexAttribArray");
-   glVertexAttribPointer(glp->a_pos, 3, GL_FLOAT, false, 0, v); CHECK_GL_RESULT("glVertexAttribPointer");
-   glDrawElements(GL_LINES, numi, GL_UNSIGNED_SHORT, indx); CHECK_GL_RESULT("glDrawElements");
-#endif
    return I3D_OK;
 }
 
@@ -1243,12 +1092,10 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
 
    I3D_driver::S_ps_shader_entry_in se_ps;
 
-#ifndef GL
    if(!drv->CanUsePixelShader()){
       drv->SetupTextureStage(0, D3DTOP_MODULATE);
       drv->DisableTextureStage(1);
    }
-#endif
 
    if(!(vc_flags&I3DVC_XYZRHW)){
       I3D_driver::S_vs_shader_entry_in se;
@@ -1266,7 +1113,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
          }
          drv->SetPixelShader(se_ps);
       }else
-#ifndef GL
       {
          if(vc_flags&I3DVC_DIFFUSE)
             se.AddFragment(VSF_DIFFUSE_COPY);
@@ -1277,7 +1123,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
             drv->SetVSConstant(VSC_AMBIENT, &c4);
          }
       }
-#endif
       if(vc_flags&I3DVC_TEXCOUNT_MASK)
          se.CopyUV(0, 0);
       drv->SetVertexShader(drv->GetVSHandle(se)->vs);
@@ -1285,7 +1130,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
       hr = d3d_dev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, numv, 0, numf);
       CHECK_D3D_RESULT("DrawIndexedPrimitive", hr);
    }else{
-#ifndef GL
       if(!drv->CanUsePixelShader()){
          if(!(vc_flags&I3DVC_DIFFUSE)){
                            //setup color factor
@@ -1300,7 +1144,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
             }
          }
       }else
-#endif
       {
          if(drv->last_texture[0]){
             se_ps.Tex(0);
@@ -1323,7 +1166,6 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
 
       hr = d3d_dev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, numv, 0, numf);
       CHECK_D3D_RESULT("DrawIndexedPrimitive", hr);
-#ifndef GL
       if(!(vc_flags&I3DVC_DIFFUSE) && !drv->CanUsePixelShader()){
          if(drv->last_texture[0]){
             d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_CURRENT);
@@ -1333,66 +1175,7 @@ I3D_RESULT I3D_scene::DrawTriangles(const void *v, dword numv, dword vc_flags, c
             d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
          }
       }
-#endif
    }
-#ifdef GL
-   class C_this_gl_program: public C_gl_program{
-      virtual void BuildStoreAttribId(dword index, dword id){
-         *(((int*)&a_pos)+index) = id;
-      }
-   public:
-      C_this_gl_program(I3D_driver &d):
-         C_gl_program(d)
-      {}
-      int a_pos, u_color;
-      int u_mat_view_proj;
-   };
-   C_this_gl_program *glp = (C_this_gl_program*)(C_gl_program*)drv->gl_shader_programs[drv->GL_PROGRAM_DRAW_TRIANGLES];
-   if(!glp){
-      glp = new C_this_gl_program(*drv);
-      drv->gl_shader_programs[drv->GL_PROGRAM_DRAW_TRIANGLES] = glp;
-      glp->Release();
-      glp->Build(
-         "attribute vec4 a_pos;"
-         "uniform mat4 u_mat_view_proj;"
-         "void main(){"
-         "  gl_Position = u_mat_view_proj * a_pos;"
-         "}"
-         ,
-         "precision lowp float;"
-         "uniform vec4 u_color;"
-         "void main() {"
-         "  gl_FragColor = u_color;"
-         "}"
-         ,
-         "a_pos\0" "u_color\0"
-         "u_mat_view_proj\0"
-         );
-   }
-   glp->Use();
-   //glBindTexture(GL_TEXTURE_2D, 0);
-   if(vc_flags&I3DVC_XYZRHW){
-                           //undo points from screen space to viewport space
-      S_matrix mat;
-      mat.Identity();
-      float sx = drv->GetGraphInterface()->Scrn_sx(), sy = drv->GetGraphInterface()->Scrn_sy();
-      mat(0, 0) = 2.0f / sx;
-      mat(1, 1) = -2.0f / sy;
-      mat(3, 0) = -1.0f;
-      mat(3, 1) = 1.0f;
-      glUniformMatrix4fv(glp->u_mat_view_proj, 1, false, mat.m[0]); CHECK_GL_RESULT("glUniformMatrix4fv");
-   }else
-      glUniformMatrix4fv(glp->u_mat_view_proj, 1, false, curr_render_matrix.m[0]); CHECK_GL_RESULT("glUniformMatrix4fv");
-
-   glBindBuffer(GL_ARRAY_BUFFER, 0);
-   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-   S_vectorw c4(((color>>16)&255)*R_255, ((color>>8)&255)*R_255, ((color>>0)&255)*R_255, ((color>>24)&255)*R_255);
-   glUniform4fv(glp->u_color, 1, c4.f); CHECK_GL_RESULT("glUniform4fv");
-   glEnableVertexAttribArray(glp->a_pos);  CHECK_GL_RESULT("glEnableVertexAttribArray");
-   glVertexAttribPointer(glp->a_pos, (vc_flags&I3DVC_XYZ) ? 3 : 4, GL_FLOAT, false, vstride, v); CHECK_GL_RESULT("glVertexAttribPointer");
-   glDrawElements(GL_TRIANGLES, numi, GL_UNSIGNED_SHORT, indx); CHECK_GL_RESULT("glDrawElements");
-#endif
    return I3D_OK;
 }
 
@@ -1468,7 +1251,6 @@ I3D_RESULT I3D_scene::DrawSprite(const S_vector &pos, PI3D_material mat, dword c
 
       drv->SetPSConstant(PSC_COLOR, &c4);
    }
-#ifndef GL
    else{
       drv->SetupTextureStage(0, D3DTOP_MODULATE);
       drv->DisableTextureStage(1);
@@ -1477,7 +1259,6 @@ I3D_RESULT I3D_scene::DrawSprite(const S_vector &pos, PI3D_material mat, dword c
       se.AddFragment(VSF_LIGHT_END);
       drv->SetVSConstant(VSC_AMBIENT, &c4);
    }
-#endif
 
    drv->SetupBlend((alpha!=0xff) ? I3DBLEND_ALPHABLEND : (mat && mat->IsTransl() ? I3DBLEND_ALPHABLEND : I3DBLEND_OPAQUE));
    
@@ -1898,9 +1679,6 @@ class I3D_scene_imp: public I3D_scene, public I3D_driver::C_reset_callback{
    virtual void ResetCallback(I3D_driver::E_RESET_MSG msg){
       switch(msg){
       case I3D_driver::RESET_RECREATE:
-#ifdef GL
-         glClearColor(color_bgnd.x, color_bgnd.y, color_bgnd.z, 0);
-#endif
          break;
       }
    }
@@ -2616,9 +2394,6 @@ private:
       bb.max += S_vector(r, r, r);
                               //do actual testing
       tester.Test();
-#if defined _DEBUG && 0
-      tester.DumpStats(drv);
-#endif
    }
 
 //----------------------------
@@ -3567,9 +3342,6 @@ private:
                }
             }
          }
-#if defined _DEBUG && 0
-         tester.DumpStats(drv);
-#endif
 #endif
       }
    }
@@ -3719,13 +3491,6 @@ private:
 #endif
                */
             }
-#if defined _DEBUG && 0
-                                 //validity check - make sure the top level is clean
-            for(j=l.HAS_TAB_SIZE; j--; ){
-               assert(!l.hash_table[j]);
-            }
-            assert(!l.num_volumes);
-#endif
          }
          dyn_cols.SetNumLevels(i);
       }
@@ -3818,19 +3583,6 @@ private:
       assert(!dirty_volumes);
       scn_flags &= ~SCNF_IN_DYN_TREE_UPDATE;
 
-#if defined _DEBUG && 0
-      {
-         for(int i=dyn_cols.levels.size(); i--; ){
-            const t_level &l = dyn_cols.levels[i];
-            for(int j=t_level::HAS_TAB_SIZE; j--; ){
-               for(const t_cell *cp=l.hash_table[j]; cp; cp = ++*cp){
-                  CPI3D_volume vol = cp->vol;
-                  assert(vol->curr_octtree_level <= i);
-               }
-            }
-         }
-      }
-#endif
    }
 
 
@@ -3858,18 +3610,6 @@ private:
          }
          vol->curr_octtree_level = -1;
                                  //make sure no level references this volume now
-#if defined _DEBUG && 0
-         {
-            for(int i=dyn_cols.levels.size(); i--; ){
-               const t_level &l = dyn_cols.levels[i];
-               for(int j=t_level::HAS_TAB_SIZE; j--; ){
-                  for(const t_cell *cp=l.hash_table[j]; cp; cp = ++*cp){
-                     assert(cp->vol != vol);
-                  }
-               }
-            }
-         }
-#endif
       }
       if(!smart){
                               //also forget 'dirty' volume

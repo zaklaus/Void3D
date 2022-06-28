@@ -1467,11 +1467,6 @@ external_declaration
    {
                               //function
       RESET_CURRENT;
-#if !defined _DEBUG && 0
-                              //align code segment to dword
-      while(tmp_code.size()&3)
-         tmp_code.push_back(BRK);
-#endif
                               //$$ is func type, list() are parameters, list(n) is compound statement
       C_c_type &fnc_def = $1;
       dword num_params = fnc_def->GetFrameSize();

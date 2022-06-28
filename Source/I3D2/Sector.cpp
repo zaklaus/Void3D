@@ -1657,12 +1657,7 @@ bool I3D_sector::IsBoundSphereVisible(const I3D_bsphere &bs_world, CPI3D_sector 
       if(!in)
          return false;
 #endif
-#if defined _DEBUG && 0
-      in = SphereInFrustum(pc.exp_frustum, bs_world, *clip_vf);
-      //assert(in==SphereInVF(pc.view_frustum, bs_world, *clip_vf));
-#else
       in = SphereInVF(pc.view_frustum, bs_world, *clip_vf);
-#endif
       if(!in)
          return false;
    }

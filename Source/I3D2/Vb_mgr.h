@@ -10,9 +10,6 @@
 #define RB_MANAGER_MEM_SIZE 0x20000
 
                               //debugging:
-#ifdef GL
-#define DEBUG_DISABLE_MULTIPLE      //single RB in each cache
-#endif
 
 #ifdef _DEBUG
 //#define DEBUG_VB_ALLOC        //assign alloc id for each vb, to help find which was not freed

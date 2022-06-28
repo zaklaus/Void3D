@@ -462,7 +462,6 @@ class I3D_lit_object: public I3D_visual{
    t_DP I3D_lit_object::*DrawPrim;
 
                               //various techniques
-#ifndef GL
                               // notation:
                               // Direct, Indirect = mode how verticess are processed
                               // B=base texture, L=lightmap, S=secondary, D=detailmap (lower case = optional)
@@ -477,7 +476,6 @@ class I3D_lit_object: public I3D_visual{
    t_DP DPDirect_B_L_D, DPIndirect_B_L_D; //B | L | D
    t_DP DPDirect_D, DPIndirect_D;         //? | D
 
-#endif
                               //and pixel-shader counterparts
    t_DP DPUnconstructed_PS;               //LM unconstructed
    t_DP DP_B_PS;                          //B (base only)
@@ -1300,14 +1298,6 @@ private:
       }
 
                            //debug - breakpoint on specified lumel
-#if defined _DEBUG && 0
-#define DEBUG_LX 4
-#define DEBUG_LY 0
-      if(lmrc_i==0 && x==DEBUG_LX && y==DEBUG_LY){
-         lumel[2] = 2.0f;
-         drv->DebugLine(pt_xyz, pt_xyz+pt_normal, 0, S_vector(1, 0, 0));
-      }
-#endif
 
                            //light computation goes from collision point,
                            // not recommended - just test
@@ -1315,13 +1305,6 @@ private:
 
 #ifdef DEBUG_DRAW_LUMEL_NORMAL
       drv->DebugLine(pt_pos, pt_pos+pt_normal, 0, 0xff0000ff);
-#endif
-#if defined _DEBUG && 0
-      if(in_face_i==4){
-         lumel.SetInvalid(0, 0, 2);
-         is_valid_lumel = false;
-         break;
-      }
 #endif
       return true;
    }
@@ -2032,9 +2015,6 @@ private:
                      }
                   }
                }
-#if defined _DEBUG && 0
-               drv->PRINT(C_fstr("LM: total: %i, aa: %i, cols: %i", size_x*size_y, num_aa, num_comp_count));
-#endif
                progress_base += this_rect_progress;
             }while(false);
 #else
@@ -2328,9 +2308,7 @@ public:
    }
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
    void SetMesh(PI3D_mesh_base mb){
 
@@ -2342,14 +2320,10 @@ public:
       dword lmap_mesh_fvf = D3DFVF_XYZ | D3DFVF_NORMAL;
 
       dword num_uvs = 1;
-#ifndef GL
       if(!drv->IsDirectTransform()){
                               //keep lmap secondary uvs in source mesh
          ++num_uvs;
       }
-#else
-      ++num_uvs;
-#endif
       lmap_mesh_fvf |= num_uvs << D3DFVF_TEXCOUNT_SHIFT;//D3DFVF_TEXCOUNT_MASK;
 
       if(mb->vertex_buffer.GetFVFlags() == lmap_mesh_fvf){
@@ -2377,9 +2351,7 @@ public:
       any_rect_dirty = true;
 
       lmap_flags &= ~LMAPF_CONSTRUCTED;
-#ifndef GL
       vertex_buffer.DestroyD3DVB();
-#endif
       return I3D_OK;
    }
 
@@ -2555,7 +2527,6 @@ void I3D_lit_object::PrepareDestVB(I3D_mesh_base *mb, dword){
             DrawPrim = &I3D_lit_object::DP_BLSd_PS;
       }
    }
-#ifndef GL
    else{
 
       if(!(lmap_flags&LMAPF_CONSTRUCTED))
@@ -2608,7 +2579,6 @@ void I3D_lit_object::PrepareDestVB(I3D_mesh_base *mb, dword){
          }
       }
    }
-#endif
 
    vis_flags &= ~VISF_DEST_UV0_VALID;
 
@@ -3118,22 +3088,18 @@ I3D_RESULT I3D_lit_object::Load(C_cache *cp){
          face_lmap_use[i].resize(nf);
          cp->read((byte*)&face_lmap_use[i][0], sizeof(word)*nf);
 
-#if defined _DEBUG || 1
                               //make sanity check
          for(dword ii=nf; ii--; ){
             if(face_lmap_use[i][ii] >= lm_rects.size())
                goto fail;
          }
-#endif
       }
       lmap_flags |= LMAPF_CONSTRUCTED;
    }
 
    CheckUV();
    lmap_flags |= LMAPF_CONSTRUCTED;
-#ifndef GL
    vertex_buffer.DestroyD3DVB();
-#endif
    vis_flags &= ~VISF_DEST_PREPARED;
    return I3D_OK;
 
@@ -3249,9 +3215,7 @@ void I3D_lit_object::CheckUV(){
       mesh->vertex_buffer.DuplicateVertices(&vertex_dup_info.front(), vertex_dup_info.size());
       mesh->SetFaces(face_buf.begin(), false);
 
-#ifndef GL
       vertex_buffer.DestroyD3DVB();
-#endif
       vis_flags &= ~VISF_DEST_UV0_VALID;
    }
    //mesh->GetIndexBuffer().Unlock();
@@ -3270,12 +3234,10 @@ void I3D_lit_object::MapVertices(){
    void *dst_ptr;             //pointer to destination uv vertices
    dword dst_stride;          //stride of dest vertex
 
-#ifndef GL
    if(drv->IsDirectTransform()){
       dst_ptr = ((byte*)vertex_buffer.Lock(0)) + GetVertexComponentOffset(vertex_buffer.GetFVFlags(), 1<<D3DFVF_TEXCOUNT_SHIFT);
       dst_stride = vertex_buffer.GetSizeOfVertex();
    }else
-#endif
    {
       dst_ptr = ((byte*)v_src) + GetVertexComponentOffset(mesh->vertex_buffer.GetFVFlags(), 1<<D3DFVF_TEXCOUNT_SHIFT);
       dst_stride = vstride;
@@ -3340,11 +3302,9 @@ void I3D_lit_object::MapVertices(){
    //mesh->GetIndexBuffer().Unlock();
    mesh->vertex_buffer.Unlock();
 
-#ifndef GL
    if(drv->IsDirectTransform())
       vertex_buffer.Unlock();
    //else
-#endif
       //mesh->vertex_buffer.Unlock();
 }
 
@@ -3431,10 +3391,8 @@ void I3D_lit_object::UploadLMaps(){
 
 void I3D_lit_object::AddPrimitives(S_preprocess_context &pc){
 
-#ifndef GL
    if(pc.mode==RV_SHADOW_CASTER)
       return;
-#endif
    if(!mesh)
       return;
 
@@ -3462,9 +3420,7 @@ void I3D_lit_object::AddPrimitives(S_preprocess_context &pc){
             any_rect_dirty = true;
          }
       }
-#ifndef GL
       vertex_buffer.DestroyD3DVB();
-#endif
       vis_flags &= ~VISF_DEST_PREPARED;
    }
    I3D_visual::AddPrimitives1(mesh, pc);
@@ -3474,7 +3430,6 @@ void I3D_lit_object::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_lit_object::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    PI3D_mesh_base mb = mesh;
@@ -3520,7 +3475,6 @@ void I3D_lit_object::DrawPrimitive(const S_preprocess_context &pc, const S_rende
 
    (this->*DrawPrim)(pc, rp, fgrps, num_fg, vertex_count, base_index);
 }
-#endif
 //----------------------------
 
 void I3D_lit_object::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -3532,18 +3486,11 @@ void I3D_lit_object::DrawPrimitivePS(const S_preprocess_context &pc, const S_ren
    dword vertex_count = mesh->vertex_buffer.NumVertices();
    dword base_index = mb->GetIndexBuffer().D3D_index_buffer_index;
    drv->SetIndices(mb->GetIndexBuffer().GetD3DIndexBuffer());
-#ifndef GL
    assert(pc.mode!=RV_SHADOW_CASTER);
-#endif
                               //perform typical settings
    drv->SetupBlend(rp.blend_mode);
-#ifndef GL
    drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
    drv->SetVSDecl(vertex_buffer.vs_decl);
-#else
-   drv->SetStreamSource(mesh->vertex_buffer.GetD3DVertexBuffer(), mesh->vertex_buffer.GetSizeOfVertex());
-   drv->SetVSDecl(mesh->vertex_buffer.vs_decl);
-#endif
 
    (this->*DrawPrim)(pc, rp, fgrps, num_fg, vertex_count, base_index);
 }
@@ -3565,7 +3512,6 @@ void I3D_lit_object::DrawPrimitivePS(const S_preprocess_context &pc, const S_ren
       drv->EnableNoCull(mat->Is2Sided1()); \
       HRESULT hr; hr = 0;
 
-#ifndef GL
 //----------------------------
 // Absolute failback - should be never executed on most cards.
 void I3D_lit_object::DPDirect_B_L(const S_preprocess_context &pc, const S_render_primitive &rp,
@@ -4192,7 +4138,6 @@ void I3D_lit_object::DP_B(const S_preprocess_context &pc, const S_render_primiti
       CHECK_D3D_RESULT("DrawIP", hr); \
    }
 }
-#endif
 //----------------------------
 
 void I3D_lit_object::DPUnconstructed_PS(const S_preprocess_context &pc, const S_render_primitive &rp,
@@ -4207,10 +4152,8 @@ void I3D_lit_object::DPUnconstructed_PS(const S_preprocess_context &pc, const S_
       I3D_driver::S_ps_shader_entry_in se_ps;
       se_ps.Tex(0);
       se_ps.AddFragment(PSF_MOD_t0_CONSTCOLOR);
-#ifndef GL
       if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
          se_ps.TexKill(1);
-#endif
       drv->DisableTextures(1);
 
       drv->SetPixelShader(se_ps);
@@ -4221,13 +4164,8 @@ void I3D_lit_object::DPUnconstructed_PS(const S_preprocess_context &pc, const S_
 
    FACE_GROUP_RENDER_LOOP1
       drv->SetTexture1(0, mat->GetTexture1(MTI_DIFFUSE));
-#ifndef GL
       hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, vertex_buffer.D3D_vertex_buffer_index, 0, vertex_count,
          (base_index + fg->base_index) * 3, fg->num_faces);
-#else
-      hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, mesh->vertex_buffer.D3D_vertex_buffer_index, 0, vertex_count,
-         (base_index + fg->base_index) * 3, fg->num_faces);
-#endif
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
@@ -4258,11 +4196,7 @@ void I3D_lit_object::DP_B_PS(const S_preprocess_context &pc, const S_render_prim
          SetupSpecialMappingPS(mat, se_ps, 1);
       }
       drv->SetPixelShader(se_ps);
-#ifndef GL
       hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, vertex_buffer.D3D_vertex_buffer_index, 0, vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
-#else
-      hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, mesh->vertex_buffer.D3D_vertex_buffer_index, 0, vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
-#endif
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
@@ -4303,13 +4237,8 @@ void I3D_lit_object::DP_BLd_PS(const S_preprocess_context &pc, const S_render_pr
          se_ps.AddFragment(PSF_t0_COPY);
       SetupSpecialMappingPS(mat, se_ps, 2);
       drv->SetPixelShader(se_ps);
-#ifndef GL
       hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, vertex_buffer.D3D_vertex_buffer_index, 0,
          vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
-#else
-      hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, mesh->vertex_buffer.D3D_vertex_buffer_index, 0,
-         vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
-#endif
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
@@ -4360,11 +4289,9 @@ void I3D_lit_object::DP_BLSd_PS(const S_preprocess_context &pc, const S_render_p
          se_ps.AddFragment(PSF_t0_COPY);
       SetupSpecialMappingPS(mat, se_ps, 3);
       drv->SetPixelShader(se_ps);
-#ifndef GL
       hr = drv->GetDevice1()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, vertex_buffer.D3D_vertex_buffer_index, 0,
          vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
       CHECK_D3D_RESULT("DrawIP", hr);
-#endif
    }
 }
 
@@ -4670,11 +4597,9 @@ void I3D_driver::DrawLMaps(const I3D_rectangle &viewport){
    if(is_filter) SetState(RS_LINEARFILTER, false);
    SetupBlend(I3DBLEND_OPAQUE);
 
-#ifndef GL
    if(!CanUsePixelShader()){
       SetupTextureStage(0, D3DTOP_SELECTARG1);
    }else
-#endif
    {
       S_ps_shader_entry_in se_ps;
       se_ps.Tex(0);

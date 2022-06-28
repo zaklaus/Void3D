@@ -47,9 +47,7 @@ public:
    virtual bool ComputeBounds();
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
    I3DMETHOD(Duplicate)(CPI3D_frame);
    I3DMETHOD(SetProperty)(dword index, dword value);
@@ -202,17 +200,14 @@ dword I3D_object_billboard::GetProperty(dword index) const{
 
 void I3D_object_billboard::AddPrimitives(S_preprocess_context &pc){
 
-#ifndef GL
    if(pc.mode==RV_SHADOW_CASTER)
       return;
-#endif
    if(!mesh)
       return;
    AddPrimitives1(mesh, pc);
 }
 
 //----------------------------
-#ifndef GL
 void I3D_object_billboard::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    PI3D_mesh_base mb = mesh;
@@ -324,7 +319,6 @@ void I3D_object_billboard::DrawPrimitive(const S_preprocess_context &pc, const S
    }
    DrawPrimitiveVisual(mb, pc, rp);
 }
-#endif
 //----------------------------
 
 void I3D_object_billboard::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){

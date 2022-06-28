@@ -39,9 +39,6 @@ I3D_texture::I3D_texture(PI3D_driver d):
    I3D_texture_base(d),
    img_open_flags(0),
    last_render_time(0),
-#ifdef GL
-   txt_id(0),
-#endif
    create_flags(0)
 {
    drv->RegisterManagedTexture(this);
@@ -54,11 +51,6 @@ I3D_texture::~I3D_texture(){
 
    drv->UnregisterManagedTexture(this);
    drv->DecCount(I3D_CLID_TEXTURE);
-#ifdef GL
-   if(txt_id){
-      glDeleteTextures(1, &txt_id);
-   }
-#endif
 }
 
 //----------------------------
@@ -72,11 +64,6 @@ IDirect3DBaseTexture9 *I3D_texture::GetD3DTexture() const{
 }
 
 //----------------------------
-#ifdef GL
-dword I3D_texture::GetGlId() const{
-   return txt_id;
-}
-#endif
 //----------------------------
 
 bool I3D_texture::Match(const I3D_CREATETEXTURE &ct){
@@ -85,9 +72,7 @@ bool I3D_texture::Match(const I3D_CREATETEXTURE &ct){
    const dword match_flags = TEXTMAP_DIFFUSE | TEXTMAP_OPACITY | TEXTMAP_EMBMMAP | TEXTMAP_NORMALMAP |
       TEXTMAP_TRANSP | /*TEXTMAP_INVALPHA | */TEXTMAP_CUBEMAP |
       TEXTMAP_NOMIPMAP |
-#ifndef GL
       TEXTMAP_COMPRESS |
-#endif
       TEXTMAP_HINTDYNAMIC | TEXTMAP_TRUECOLOR;
    if((create_flags&match_flags) != (ct.flags&match_flags))
       return false;
@@ -279,26 +264,19 @@ I3D_RESULT I3D_texture::Open(const I3D_CREATETEXTURE &ct, I3D_LOAD_CB_PROC *cb_l
                   }
                //}
             }else{ 
-#ifndef GL
                if(src_bpp==1)
                   find_texture_flags = FINDTF_PALETIZED;
-#endif
             }
          }else{
-#ifndef GL
             if(src_bpp==1)
                find_texture_flags = FINDTF_PALETIZED;
-#endif
          }
          if(flags&TEXTMAP_TRUECOLOR){
             find_texture_flags |= FINDTF_TRUECOLOR;
-#ifndef GL
                               //forget compressed format
             //flags &= ~TEXTMAP_COMPRESS;
             find_texture_flags &= ~FINDTF_PALETIZED;
-#endif
          }
-#ifndef GL
          else
          if(flags&TEXTMAP_COMPRESS){
                               //may be compressed if both sides greater than 4
@@ -307,7 +285,6 @@ I3D_RESULT I3D_texture::Open(const I3D_CREATETEXTURE &ct, I3D_LOAD_CB_PROC *cb_l
             //else
                //flags &= ~TEXTMAP_COMPRESS;
          }
-#endif
 
          I3D_RESULT ir = drv->FindTextureFormat(pf, find_texture_flags);
          if(I3D_FAIL(ir))
@@ -330,13 +307,11 @@ I3D_RESULT I3D_texture::Open(const I3D_CREATETEXTURE &ct, I3D_LOAD_CB_PROC *cb_l
                pf = pf1;
             }
          }
-#ifndef GL
                               //compressed mipmaps don't go below side size of 4 texels
          if((flags&TEXTMAP_MIPMAP) && (flags&TEXTMAP_COMPRESS)){
             if(img_sx<=4 || img_sy<=4)
                flags &= ~TEXTMAP_MIPMAP;
          }
-#endif
                               //no color-keyed mipmaps
          if((flags&TEXTMAP_TRANSP) &&
             //!(flags&TEXTMAP_COMPRESS) &&
@@ -349,9 +324,7 @@ I3D_RESULT I3D_texture::Open(const I3D_CREATETEXTURE &ct, I3D_LOAD_CB_PROC *cb_l
             ir = drv->FindTextureFormat(pf1,
                //((flags&TEXTMAP_MIPMAP) ? FINDTF_ALPHA : FINDTF_ALPHA1) |
                FINDTF_ALPHA |
-#ifndef GL
                ((flags&TEXTMAP_COMPRESS) ? FINDTF_COMPRESSED : 0) |
-#endif
                ftf
                );
             if(SUCCEEDED(ir) && //pf1.bytes_per_pixel==2 &&
@@ -1010,12 +983,6 @@ void I3D_texture::Manage(E_manage_cmd cmd) const{
             sysmem_image->GetDirectXTexture()->AddDirtyRect(NULL);
          SetDirty();
       }
-#ifdef GL
-      if(txt_id){
-         glDeleteTextures(1, &txt_id);
-         txt_id = 0;
-      }
-#endif
       break;
    case MANAGE_UPLOAD:
    case MANAGE_UPLOAD_IF_FREE:
@@ -1120,92 +1087,6 @@ void I3D_texture::Manage(E_manage_cmd cmd) const{
             CHECK_D3D_RESULT("UpdateTexture", hr);
          }
          txt_flags &= ~TXTF_UPLOAD_NEEDED;
-#ifdef GL
-         if(!txt_id){
-            glGenTextures(1, &txt_id);
-            glBindTexture(GL_TEXTURE_2D, txt_id);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (txt_flags&TXTF_MIPMAP) && drv->GetState(RS_MIPMAP) ? GL_LINEAR_MIPMAP_LINEAR : GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, drv->GetState(RS_LINEARFILTER) ? GL_LINEAR : GL_NEAREST);
-
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-         }
-         if(txt_id && sysmem_image){
-            void *mem;
-            dword pitch;
-            sysmem_image->Lock(&mem, &pitch, true);
-            const S_pixelformat *pf = sysmem_image->GetPixelFormat();
-
-            int gl_type = 0;
-            int gl_fmt = GL_RGBA;
-            switch(pf->bytes_per_pixel){
-            case 4:
-               assert(pf->r_mask == 0xff0000);
-               gl_type = GL_UNSIGNED_BYTE;
-               break;
-            case 2:
-               switch(pf->r_mask){
-               case 0xf00:
-               case 0xff:   //!! bumbmap
-               case 0x1f:   //!! bumbmap
-                  gl_type = GL_UNSIGNED_SHORT_4_4_4_4;
-                  break;
-               case 0x7c00:
-                  gl_type = GL_UNSIGNED_SHORT_5_5_5_1;
-                  break;
-               case 0xf800:
-                  gl_type = GL_UNSIGNED_SHORT_5_6_5;
-                  gl_fmt = GL_RGB;
-                  break;
-               default:
-                  assert(0);
-               }
-               break;
-            default:
-               assert(0);
-            }
-            glBindTexture(GL_TEXTURE_2D, txt_id); CHECK_GL_RESULT("glBindTexture");
-            byte *tmp = NULL;
-            switch(pf->bytes_per_pixel){
-            case 4:
-               tmp = new byte[size_x*size_y*4];
-               memcpy(tmp, mem, size_x*size_y*4);
-               {
-                  struct S_rgb{
-                     byte r, g, b, a;
-                  };
-                  S_rgb *rgb = (S_rgb*)tmp;
-                  for(int i=size_x*size_y; i--; ){
-                     Swap(rgb[i].r, rgb[i].b);
-                  }
-                  mem = tmp;
-               }
-               break;
-            case 2:
-               switch(pf->r_mask){
-               case 0xf00:
-                  tmp = new byte[size_x*size_y*2];
-                  memcpy(tmp, mem, size_x*size_y*2);
-                  {
-                     word *rgb = (word*)tmp;
-                     for(int i=size_x*size_y; i--; ){
-                        word &p = rgb[i];
-                        p = (p<<4) | (p>>12);
-                     }
-                     mem = tmp;
-                  }
-                  break;
-               }
-               break;
-            }
-            glTexImage2D(GL_TEXTURE_2D, 0, gl_fmt, size_x, size_y, 0, gl_fmt, gl_type, mem); CHECK_GL_RESULT("glTexImage2D");
-            delete[] tmp;
-            sysmem_image->Unlock();
-
-            if(txt_flags&TXTF_MIPMAP)
-               glGenerateMipmap(GL_TEXTURE_2D);
-         }
-#endif
       }
       break;
    }

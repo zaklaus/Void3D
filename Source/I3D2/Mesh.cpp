@@ -9,17 +9,13 @@
 #include "all.h"
 #include "mesh.h"
 #include "visual.h"
-#ifndef GL
 #include "stripifier.h"
-#endif
 #include <list>
 #include <algorithm>
 
 //----------------------------
 
-#ifndef GL
 #define USE_SHARED_DEST_VB
-#endif
 
 #ifdef USE_STRIPS
 #define DBASE_VERSION 0x003c  //version of I3D_mesh::SaveCachedInfo
@@ -40,56 +36,6 @@ void MakeVertexMapping(const S_vector *vp, dword pitch, dword numv, word *v_map,
 
    if(!numv)
       return;
-#if defined _MSC_VER && 0
-
-   __asm{
-      push ecx
-
-      mov ecx, 0
-      mov esi, vp
-      mov ebx, v_map
-      push eax
-      mov eax, thresh
-   l1:
-      mov edx, 0
-      cmp edx, ecx
-      jz sk1
-      mov edi, vp
-   l2:
-      fld dword ptr[esi+0]
-      fsub dword ptr[edi+0]
-      fabs
-      
-      fld dword ptr[esi+4]
-      fsub dword ptr[edi+4]
-      fabs
-      faddp st(1), st
-      
-      fld dword ptr[esi+8]
-      fsub dword ptr[edi+8]
-      fabs
-      faddp st(1), st
-      fstp dword ptr[esp]
-
-      cmp eax, [esp]
-      ja sk1
-
-      add edi, pitch
-      inc edx
-      cmp edx, ecx
-      jnz l2
-   sk1:
-      mov [ebx+ecx*2], dx
-      add esi, pitch
-      inc ecx
-      cmp ecx, numv
-      jne l1
-      pop eax
-
-      pop ecx
-   }
-
-#else
                               //sort vertices by one axis
    C_sort_list<int> sorted_vertes(numv);
    for(dword i=numv; i--; ){
@@ -164,7 +110,6 @@ void MakeVertexMapping(const S_vector *vp, dword pitch, dword numv, word *v_map,
    }
    */
 
-#endif
 }
 
 //----------------------------
@@ -528,13 +473,6 @@ bool LoadCachedInfoLods(C_cache *ck, C_buffer<C_auto_lod> &auto_lods, C_vector<C
       ib.AllocFaces(num1);
       PI3D_triface faces = ib.Lock(0);
       rl = ck->read(faces, num1 * sizeof(I3D_triface));
-#ifdef GL
-      if(num1){
-         assert(ib.ibo);
-         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ib.ibo);
-         glBufferData(GL_ELEMENT_ARRAY_BUFFER, num1*sizeof(I3D_triface), faces, GL_STATIC_DRAW);
-      }
-#endif
       ib.Unlock();
       if(rl!=num1 * sizeof(I3D_triface))
          return false;
@@ -1182,13 +1120,6 @@ void I3D_mesh_base::CreateLODs(dword min_num_faces, dword num_lods_requested, fl
 
             assert(ei.IsValid());
          }else{
-#if defined _DEBUG && 0
-            for(int i=ei.split_pairs.size(); i--; ){
-               const I3D_edge e = ei.split_pairs[i];
-               assert(vertex_info[e[0]].used);
-               assert(vertex_info[e[1]].used);
-            }
-#endif
          }
 
                               //keep edge with lowest cost
@@ -1426,54 +1357,6 @@ void I3D_mesh_base::CreateLODs(dword min_num_faces, dword num_lods_requested, fl
          */
       }
 
-#if defined _DEBUG && 0
-                              //make sure all 'used' verts are really used
-      {
-         C_vector<bool> v_use(num_verts, false);
-         for(int i=num_faces; i--; ){
-            const I3D_triface &fc = faces[i];
-            if(fc.IsValid()){
-               v_use[fc[0]] = true;
-               v_use[fc[1]] = true;
-               v_use[fc[2]] = true;
-            }
-         }
-         for(i=num_verts; i--; )
-            assert(v_use[i] == vertex_info[i].used);
-      }
-      {
-                              //validate edge connections
-         for(int i=num_verts; i--; ){
-            const S_vertex_info &vi = vertex_info[i];
-            for(int j=vi.edge_verts.size(); j--; ){
-               word w = vi.edge_verts[j];
-               const S_vertex_info &vi1 = vertex_info[w];
-               for(int k=vi1.edge_verts.size(); k--; ){
-                  if(vi1.edge_verts[k]==i)
-                     break;
-               }
-               assert(k!=-1);
-            }
-         }
-      }
-      {
-                              //make sure mesh edge list is valid
-         for(t_mesh_edges::iterator e_it = mesh_edges.begin(); e_it!=mesh_edges.end(); e_it++){
-            const I3D_edge edge = (*e_it).first;
-            //assert(vertex_info[edge[0]].all_verts.size());
-            //assert(vertex_info[edge[1]].all_verts.size());
-            for(int i=num_faces; i--; ){
-               I3D_triface fc = faces[i];
-               if(!fc.IsValid())
-                  continue;
-               fc.Remap(v_map);
-               if(fc.ContainsIndices(edge[0], edge[1]))
-                  break;
-            }
-            assert(i!=-1);
-         }
-      }
-#endif
                               //store LOD now
       //if(curr_valid_faces < min_num_faces)
          //break;
@@ -1496,10 +1379,6 @@ void I3D_mesh_base::CreateLODs(dword min_num_faces, dword num_lods_requested, fl
          lod_i.num_valid_faces = curr_valid_faces;
          lod_i.vertex_count = num_verts - vertex_remove_order.size();
          lod_i.quality = (float)curr_valid_faces / (float)num_faces;
-#if defined _DEBUG && 0
-         if(work_lods.size()==3)
-            break;
-#endif
          if(curr_valid_faces <= min_num_faces)
             break;
 #ifdef DEBUG_STORE_SINGLE_LOD
@@ -1615,11 +1494,6 @@ I3D_source_vertex_buffer::~I3D_source_vertex_buffer(){
       D3D_vertex_buffer->Release();
 #endif
    }
-#ifdef GL
-   vs_decl = NULL;
-   if(vbo)
-      glDeleteBuffers(1, &vbo);
-#endif
 }
 
 //----------------------------
@@ -1641,13 +1515,11 @@ void I3D_source_vertex_buffer::AllocVertices(dword num_verts1){
       //D3DUSAGE_WRITEONLY |
    D3DPOOL d3d_pool_flags = D3DPOOL_SYSTEMMEM;
 
-#ifndef GL
    if(drv->IsDirectTransform()){
       //d3d_pool_flags = D3DPOOL_DEFAULT;
    }else{
       d3d_usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
    }
-#endif
 
                               //alloc vertex buffer
    if(!D3D_vertex_buffer || num_vertices != num_verts1){
@@ -1660,13 +1532,6 @@ void I3D_source_vertex_buffer::AllocVertices(dword num_verts1){
          D3D_vertex_buffer = NULL;
          D3D_vertex_buffer_index = 0;
       }
-#ifdef GL
-      vs_decl = NULL;
-      if(vbo){
-         glDeleteBuffers(1, &vbo);
-         vbo = 0;
-      }
-#endif
                            //alloc raw VB
 #ifdef USE_SHARED_DEST_VB
                            //// specify size in dwords (???)
@@ -1682,10 +1547,6 @@ void I3D_source_vertex_buffer::AllocVertices(dword num_verts1){
       D3D_vertex_buffer_index = 0;
 #endif
       num_vertices = num_verts1;
-#ifdef GL
-      vs_decl = drv->GetVSDeclaration(fvflags);
-      glGenBuffers(1, &vbo);
-#endif
    }
    assert((!num_vertices && !D3D_vertex_buffer) || (D3D_vertex_buffer && num_vertices));
 }
@@ -1702,11 +1563,6 @@ void I3D_source_vertex_buffer::SetVertices(const void *src_vp, dword nv){
       return;
    memcpy(vp, src_vp, num_vertices * vstride);
    Unlock();
-#ifdef GL
-   assert(vbo);
-   glBindBuffer(GL_ARRAY_BUFFER, vbo);
-   glBufferData(GL_ARRAY_BUFFER, num_vertices*vstride, src_vp, GL_STATIC_DRAW);
-#endif
 }
 
 //----------------------------
@@ -1718,13 +1574,11 @@ void I3D_source_vertex_buffer::DuplicateVertices(word *dvi, dword num_dup_verts)
       //D3DUSAGE_WRITEONLY |
    D3DPOOL d3d_pool_flags = D3DPOOL_SYSTEMMEM;
 
-#ifndef GL
    if(drv->IsDirectTransform()){
       //d3d_pool_flags = D3DPOOL_DEFAULT;
    }else{
       d3d_usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
    }
-#endif
    int num_orig_verts = num_vertices - vertex_map.size();
    vertex_map.reserve(num_vertices + num_dup_verts);
 
@@ -1791,9 +1645,6 @@ void I3D_source_vertex_buffer::DuplicateVertices(word *dvi, dword num_dup_verts)
 I3D_source_index_buffer::I3D_source_index_buffer(PI3D_driver drv1):
    drv(drv1),
    D3D_index_buffer(NULL),
-#ifdef GL
-   ibo(0),
-#endif
    num_faces(0)
 {
 }
@@ -1809,10 +1660,6 @@ I3D_source_index_buffer::~I3D_source_index_buffer(){
       D3D_index_buffer->Release();
 #endif
    }
-#ifdef GL
-   if(ibo)
-      glDeleteBuffers(1, &ibo);
-#endif
 }
 
 //----------------------------
@@ -1830,24 +1677,16 @@ void I3D_source_index_buffer::AllocFaces(dword num){
          D3D_index_buffer = NULL;
          D3D_index_buffer_index = 0;
       }
-#ifdef GL
-      if(ibo){
-         glDeleteBuffers(1, &ibo);
-         ibo = 0;
-      }
-#endif
       if(num){
          dword d3d_usage_flags = 0;
          D3DPOOL d3d_pool_flags = D3DPOOL_SYSTEMMEM;
 
-#ifndef GL
          if(drv->IsDirectTransform()){
                               //don't use default now, we need a static copy!
             //d3d_pool_flags = D3DPOOL_DEFAULT;
          }else{
             d3d_usage_flags |= D3DUSAGE_SOFTWAREPROCESSING;
          }
-#endif
 #ifdef USE_SHARED_DEST_VB
          bool b;
          b = drv->AllocIndexBuffer(d3d_pool_flags, d3d_usage_flags, num, &D3D_index_buffer, &D3D_index_buffer_index);
@@ -1857,9 +1696,6 @@ void I3D_source_index_buffer::AllocFaces(dword num){
          hr = drv->GetDevice1()->CreateIndexBuffer(num*6, d3d_usage_flags, D3DFMT_INDEX16, d3d_pool_flags, (IDirect3DIndexBuffer9**)&D3D_index_buffer, NULL);
          CHECK_D3D_RESULT("CreateIndexBuffer", hr);
          D3D_index_buffer_index = 0;
-#endif
-#ifdef GL
-         glGenBuffers(1, &ibo);
 #endif
       }
       num_faces = num;
@@ -1879,11 +1715,6 @@ void I3D_source_index_buffer::SetFaces(const I3D_triface *faces, dword num_faces
          return;
       memcpy(ip, faces, num_faces * sizeof(I3D_triface));
       Unlock();
-#ifdef GL
-      assert(ibo);
-      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-      glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_faces*sizeof(I3D_triface), faces, GL_STATIC_DRAW);
-#endif
    }
 }
 
@@ -2086,11 +1917,6 @@ bool I3D_mesh_base::LoadCachedInfo(C_cache *ck, C_loader &lc, C_vector<C_smart_p
       vertex_buffer.AllocVertices(num);
       void *verts = vertex_buffer.Lock();
       rl = ck->read(verts, num * vertex_buffer.GetSizeOfVertex());
-#ifdef GL
-      assert(vertex_buffer.vbo);
-      glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer.vbo);
-      glBufferData(GL_ARRAY_BUFFER, num*vertex_buffer.GetSizeOfVertex(), verts, GL_STATIC_DRAW);
-#endif
       vertex_buffer.Unlock();
       if(rl!=num * vertex_buffer.GetSizeOfVertex())
          return false;
@@ -2114,11 +1940,6 @@ bool I3D_mesh_base::LoadCachedInfo(C_cache *ck, C_loader &lc, C_vector<C_smart_p
       I3D_triface *faces = index_buffer.Lock();
       rl = ck->read(faces, num * sizeof(I3D_triface));
 
-#ifdef GL
-      assert(index_buffer.ibo);
-      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer.ibo);
-      glBufferData(GL_ELEMENT_ARRAY_BUFFER, num*sizeof(I3D_triface), faces, GL_STATIC_DRAW);
-#endif
 
       index_buffer.Unlock();
       if(rl!=num * sizeof(I3D_triface))
@@ -2392,9 +2213,6 @@ void I3D_mesh_base::SetFaces(const I3D_triface *faces, bool allow_strips){
          const I3D_face_group &fg = fgroups[i];
          C_vector<word> strips;
          MakeStrips(&faces[fg.base_index], fg.num_faces, strips, face_remap.begin());
-#if defined _DEBUG && 0
-         ShowStrips(drv, strips.begin(), strips.size(), vertex_buffer);
-#endif
 
          S_fgroup_strip_info &si = strip_info[i];
          si.base_index = all_strips.size();

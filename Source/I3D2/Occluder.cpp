@@ -346,9 +346,6 @@ bool I3D_occluder::ComputeMeshOccludingFrustum(PI3D_scene scene){
       }
 #endif
    }
-#if defined DEBUG_OUTPUT && 0
-   drv->DEBUG(vf.num_clip_planes);
-#endif
 
    assert(vf.num_clip_planes<MAX_FRUSTUM_CLIP_PLANES-1);
 

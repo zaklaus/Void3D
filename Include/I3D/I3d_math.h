@@ -18,43 +18,11 @@
 //----------------------------
 
                               //checking against marginal zero
-#if defined _MSC_VER && 0
-
-#define MRG_ZERO_BITMASK 0x322BCC77
-#pragma warning(disable:4035) //disable func returns no value, we're returning in eax
-
-//Return true if f is less then MRG_ZERO. interval(-inf, MRG_ZERO)
-inline bool IsMrgZeroLess(float f){
-   __asm{
-      xor eax, eax
-      cmp f, MRG_ZERO_BITMASK
-      setl al
-   }
-}
-
-//Return true if f is above MRG_ZERO. interval (-MRG_ZERO, MRG_ZERO).
-inline bool IsAbsMrgZero(float f){
-   __asm{
-      fld f
-      fabs
-      fstp f
-      xor eax, eax
-      cmp f, MRG_ZERO_BITMASK
-      setl al
-   }
-}
-inline float I3DFabs(float f){
-   *(dword*)&f &= 0x7fffffff;
-   return f;
-}
-#pragma warning(default:4035)
-#else                         //_MSC_VER
                               //compare float value againt near-zero
 inline bool IsMrgZeroLess(float f){ return (f<MRG_ZERO); }
                               //compare absolute float value againt near-zero
 inline bool IsAbsMrgZero(float f){ return ((float)fabs(f)<MRG_ZERO); }
 inline float I3DFabs(float f){ return (float)fabs(f); }
-#endif                        //!_MSC_VER
 
 inline float I3DSqrt(float f){ return (float)sqrt(f); }
 

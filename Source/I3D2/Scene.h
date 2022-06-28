@@ -42,9 +42,6 @@ protected:
                               //transformations
    S_matrix m_view_proj_hom;  //result of view and projection matrices, 4x4, in homogeneous space (x and y in range -1 ... 1, z in range 0 .. 1)
    S_matrix mt_view_proj_hom;
-#ifdef GL
-   S_matrix gl_m_view_proj_hom;
-#endif
 
    dword last_render_time;    //counter set to current time (IGraph::ReadTimer) each time a scene is rendered
 
@@ -52,38 +49,6 @@ protected:
 
    S_preprocess_context pc_main, pc_backdrop, pc_shadows, pc_decals;
 
-#if defined _DEBUG && 0
-                              //render target utilizing cube texture
-   class C_cube_render_target: public C_render_target<6, I3D_texture>{
-   public:
-      C_smart_ptr<I3D_camera> cam;
-      enum E_SIDE{
-         SIDE_LEFT,
-         SIDE_RIGHT,
-         SIDE_DOWN,
-         SIDE_UP,
-         SIDE_BACK,
-         SIDE_FRONT,
-      };
-
-      void Close(){
-         C_render_target<6, I3D_texture>::Close();
-         cam = NULL;
-      }
-
-//----------------------------
-// Initalize camera, rtt, etc.
-   I3D_RESULT Init(PI3D_scene, dword size, dword ct_flags);
-
-//----------------------------
-// Setup camera to look to particular side.
-      void SetupCamera(const S_vector &pos, E_SIDE, const S_matrix *m_rot = NULL);
-
-//----------------------------
-// etup render target to be set to appropriate side texture.
-      void SetupRenderTarget(PI3D_driver, E_SIDE);
-   } rt_env;
-#endif
    C_smart_ptr<I3D_model> debug_mesh_model;  //model containing meshes for debug rendering
 
 public:
@@ -109,11 +74,9 @@ private:
    void PreprocessSounds(int time);
    void UpdateSoundProperties(int time, PI3D_sector prev_sector);
 
-#ifndef GL
    void RenderShadows(const S_preprocess_context&);
    void RenderDecals(const S_preprocess_context&);
    void RenderMirrors(const S_preprocess_context&);
-#endif
 //----------------------------
 // Select which light will be used for making shadow on given visual.
    PI3D_light SelectShadowLight(PI3D_sector sct, const S_vector &visual_pos,
@@ -141,9 +104,7 @@ public:
 //----------------------------
 // Render single view from currently active camera.
    void RenderView(dword render_flags, E_RENDERVIEW_MODE,
-#ifndef GL
       const S_plane *add_clip_planes = NULL, dword num_add_clip_planes = 0,
-#endif
       S_preprocess_context *use_pc = NULL);
 
    static I3DENUMRET I3DAPI cbDebugDraw(PI3D_frame, dword);

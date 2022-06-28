@@ -3,9 +3,7 @@
 
 #include "texture.h"
 #include "material.h"
-#ifndef GL
 #include "vb_mgr.h"
-#endif
 #include "database.h"
 #include "common.h"
 #include "i3d/i3d2.h"
@@ -262,46 +260,6 @@ enum E_PS_FIXED_CONSTANT{
 };
 
 //----------------------------
-#ifdef GL
-
-class C_gl_shader: public C_unknown{
-public:
-   enum E_TYPE{
-      TYPE_VERTEX,
-      TYPE_FRAGMENT,
-   };
-   int gl_id;
-   C_gl_shader():
-      gl_id(0)
-   {}
-   ~C_gl_shader(){
-      if(gl_id)
-         glDeleteShader(gl_id);
-   }
-   bool Build(E_TYPE type, const char *src, dword len = 0);
-   inline operator int() const{ return gl_id; }
-};
-
-//----------------------------
-
-class C_gl_program: public C_unknown{
-   C_gl_shader shd_vertex, shd_fragment;
-   I3D_driver &drv;
-public:
-   int gl_prg_id;
-   C_gl_program(I3D_driver &d):
-      drv(d),
-      gl_prg_id(0)
-   {}
-   ~C_gl_program();
-   bool Build(const char *v_shader, const char *f_shader, const char *attr_names, dword v_len = 0, dword f_len = 0);
-   virtual void BuildStoreAttribId(dword index, dword id) = 0;
-
-   void Use();
-   inline operator int() const{ return gl_prg_id; }
-};
-
-#endif
 
 typedef void I3DAPI I3D_SHDRCOMPPROC(const char* msg, void* context, int l, int r, bool warn);
 
@@ -356,11 +314,9 @@ class I3D_driver{
 #define DRVF_CANRENDERSHADOWS 0x40000     //hardware is capable to render shadows
 #define DRVF_USE_ANISO_FILTER 0x80000     //use anisotropic filtering (RS_ANISO_FILTERING)
 
-#ifndef GL
 #define DRVF_USESHADOWS       0x100000
 #define DRVF_DEBUGDRAWSHADOWS 0x200000
 #define DRVF_DEBUGDRAWSHDRECS 0x400000
-#endif
 #define DRVF_DEBUGDRAWBSP     0x800000
 
 #define DRVF_DEBUGDRAWDYNAMIC 0x1000000
@@ -382,10 +338,8 @@ class I3D_driver{
 
 #define DRVF2_DRAWTEXTURES    0x10
 #define DRVF2_DRAWVOLUMES     0x20
-#ifndef GL
 #define DRVF2_CAN_MODULATE2X  0x40     //can set D3DTSS_COLOROP = D3DTOP_MODULATE2X
 #define DRVF2_CAN_TXTOP_ADD   0x80     //can set D3DTSS_COLOROP = D3DTOP_ADD
-#endif
 
 #define DRVF2_DRAWSOUNDS      0x100
 #define DRVF2_DRAWLIGHTS      0x200
@@ -393,32 +347,24 @@ class I3D_driver{
 #define DRVF2_LMDITHER        0x800    //dither highcolor lightmaps
 
 #define DRVF2_DRAWJOINTS      0x1000    
-#ifndef GL
 #define DRVF2_DIRECT_TRANSFORM 0x2000  //using direct transforming, no intermediate ProcessVertices calls
-#endif
 #define DRVF2_CAN_USE_UBYTE4  0x4000   //vertex declarator type D3DVSDT_UBYTE4 can be used
 #define DRVF2_USE_OCCLUSION   0x8000   //use occlusion testing
 
-#ifndef GL
 #define DRVF2_USE_PS          0x10000  //use pixel shader
-#endif
 #define DRVF2_ENVMAPPING      0x20000  //use environment mapping
 #define DRVF2_USE_EMBM        0x40000  //use embm mapping
 #define DRVF2_DEBUGDRAWSTATIC 0x80000  //draw frames which are collision static
 
 #define DRVF2_DRAWCOLTESTS    0x100000 //draw collision testing by lines
-#ifndef GL
 #define DRVF2_TEXCLIP_ON      0x200000 //simulate clip planes by texture
-#endif
 #define DRVF2_CAN_RENDER_MIRRORS 0x400000 //set if mirrors can be rendered
-#ifndef GL
 #define DRVF2_DEBUG_SHOW_OVERDRAW 0x800000 //show overdraw in colors
 #define DRVF2_NIGHT_VISION    0x1000000   //use night-vision effect for rendering
 #define DRVF2_IN_NIGHT_VISION 0x2000000   //inside of night-vision rendering
 #define DRVF2_USEDECALS        0x4000000  // decal support
 #define DRVF2_DEBUGDRAWDECALS  0x8000000  // decal debug draw
 
-#endif
 
 //----------------------------
 
@@ -436,38 +382,26 @@ class I3D_driver{
 
    I3D_postfx_info postfx{};
 
-#ifndef GL
    bool is_hal;
-#endif
    float global_sound_volume;
 public:
 
    inline float GetGlobalSoundVolume() const{ return global_sound_volume; }
 
-#ifndef GL
 //----------------------------
 // Check if hardware device is being used.
    inline bool IsHardware() const{ return is_hal; }
-#endif
 
 //----------------------------
 // Check if device supports hardware vertex processing.
    inline bool IsDirectTransform() const{
-#ifndef GL
       return (drv_flags2&DRVF2_DIRECT_TRANSFORM);
-#else
-      return true;
-#endif
    }
 
 //----------------------------
 // Check if devide has support for pixel shader.
    inline bool CanUsePixelShader() const{
-#ifdef GL
-      return true;
-#else
       return (drv_flags2&DRVF2_USE_PS);
-#endif
    }
 
    inline const D3DCAPS9 *GetCaps() const{ return &d3d_caps; }
@@ -620,15 +554,6 @@ public:
    S_ps_shader_entry *GetPSHandle(S_ps_shader_entry_in &se);
 
 //----------------------------
-#ifdef GL
-   enum E_GL_PROGRAM{
-      GL_PROGRAM_DRAW_LINES,
-      GL_PROGRAM_DRAW_TRIANGLES,
-      GL_PROGRAM_VISUAL,
-      GL_PROGRAM_LAST
-   };
-   C_smart_ptr <C_gl_program> gl_shader_programs[GL_PROGRAM_LAST];
-#endif
 //----------------------------
                               //callback
    void *cb_context;
@@ -640,10 +565,8 @@ public:
    float decal_range_f;
 
                               //multiple VB managers for various vertex formats
-#ifndef GL
    C_vector<C_smart_ptr<C_RB_manager<IDirect3DVertexBuffer9> > > vb_manager_list;
    C_vector<C_smart_ptr<C_RB_manager<IDirect3DIndexBuffer9> > > ib_manager_list;
-#endif
    C_smart_ptr<IDirect3DVertexBuffer9> vb_rectangle;  //initialized vertex buffer for rendering rectangle primitives
    C_smart_ptr<IDirect3DVertexDeclaration9> vs_decl_rectangle; //vs declaration for above
    C_smart_ptr<IDirect3DVertexBuffer9> vb_particle;   //initialized vertex buffer for rendering particles
@@ -735,7 +658,6 @@ public:
    dword *RegisterVSDeclarator(dword fvf);
    void BuildVSDeclarator(dword fvf, dword decl[11]);
    */
-#ifndef GL
                               //shadow rendering:
    C_smart_ptr<I3D_texture> tp_shadow; //range texture
    C_render_target<2, I3D_texture_base> rt_shadow; //[rendertarget|blurred]
@@ -752,7 +674,6 @@ public:
 
                               //clipping by texture:
    S_plane pl_clip;
-#endif
 
                               //temp vertex and index buffers:
 #define IB_TEMP_SIZE 0xc000   //number of bytes
@@ -814,9 +735,7 @@ public:
       hr = d3d_dev->SetPixelShaderConstantF(index, (const float*)data, num);
       CHECK_D3D_RESULT("SetPixelShaderConstantF", hr);
    }
-#ifndef GL
    inline const S_plane &GetTexkillPlane() const{ return pl_clip; }
-#endif
 //----------------------------
 // Update D3D viewport. The rectangle must fit withing current render target (no check made).
    void UpdateViewport(const I3D_rectangle &rc_ltrb);
@@ -860,9 +779,6 @@ private:
    D3DBLEND blend_table[2][14];    //[src/dest][D3DBLEND]
                               //blending cache
    dword srcblend, dstblend;
-#ifdef GL
-   dword gl_srcblend, gl_dstblend;
-#endif
    bool alpha_blend_on;
    dword num_available_txt_stages;
 
@@ -883,19 +799,15 @@ private:
 // Initialize light-map pixel format convertor.
    void InitLMConvertor();
 
-#ifndef GL
 //----------------------------
 // Init all resources associated with real-time shadow rendering.
    void InitShadowResources();
-#endif
                               //internal resource lists
    C_vector<PI3D_texture> managed_textures;
    C_vector<PI3D_sound> sounds;
 
-#ifndef GL
                               //list of hardware vertex buffers and their references
    C_vector<class I3D_dest_vertex_buffer*> hw_vb_list;
-#endif
 
 //----------------------------
                               //directories
@@ -1030,10 +942,8 @@ private:
 
 public:
 
-#ifndef GL
                               //vertex lighting mode
    D3DTEXTUREOP vertex_light_blend_op;    //MODULATE or MODULATE2X, depending on caps
-#endif
    float vertex_light_mult;               //multiplier for vertex lighting
 
 //----------------------------
@@ -1065,15 +975,10 @@ public:
          HRESULT hr;
          hr = d3d_dev->SetTexture(i, new_t);
          CHECK_D3D_RESULT("SetTexture", hr);
-#ifdef GL
-         dword tid = tb ? tb->GetGlId() : 0;
-         glBindTexture(GL_TEXTURE_2D, tid);
-#endif
       }
    }
 
 //----------------------------
-#ifndef GL
    inline void SetDefaultCullMode(D3DCULL cm){
 
       cull_default = cm;
@@ -1084,7 +989,6 @@ public:
       }
    }
 
-#endif
 //----------------------------
 
    inline D3DCULL GetDefaultCullMode() const{ return cull_default; }
@@ -1097,12 +1001,6 @@ public:
          HRESULT hr;
          hr = d3d_dev->SetRenderState(D3DRS_CULLMODE, b_cullnone ? D3DCULL_NONE : cull_default);
          CHECK_D3D_RESULT("SetRenderState", hr);
-#ifdef GL
-         if(b)
-            glDisable(GL_CULL_FACE);
-         else
-            glEnable(GL_CULL_FACE);
-#endif
       }
    }
 
@@ -1135,7 +1033,6 @@ public:
    }
 
 //----------------------------
-#ifndef GL
    inline void SetTextureFactor(dword tf){
 
       //assert(!CanUsePixelShader());
@@ -1145,7 +1042,6 @@ public:
          CHECK_D3D_RESULT("SetRenderState", hr);
       }
    }
-#endif
 //----------------------------
 
    inline void SetEMBMScale(int stage, float bs){
@@ -1161,7 +1057,6 @@ public:
    }
 
 //----------------------------
-#ifndef GL
    inline void SetTextureCoordIndex(int stage, dword index){
 
       if(last_txt_coord_index[stage] != index){
@@ -1172,14 +1067,11 @@ public:
          CHECK_D3D_RESULT("SetTextureStageState", hr);
       }
    }
-#endif
 //----------------------------
 // Return the number of texture stages maximally available.
    inline dword MaxSimultaneousTextures() const{
-#ifndef GL
       if(!CanUsePixelShader())
          return Min(d3d_caps.MaxTextureBlendStages, d3d_caps.MaxSimultaneousTextures);
-#endif
       return 4;
    }
 
@@ -1256,10 +1148,8 @@ public:
 
       if(drv_flags2&DRVF2_CAN_RENDER_MIRRORS){
          if(drv_flags&DRVF_DRAWMIRRORS){
-#ifndef GL
             if(drv_flags2&DRVF2_DEBUG_SHOW_OVERDRAW)
                return false;
-#endif
             return true;
          }
       }
@@ -1267,7 +1157,6 @@ public:
    }
 
 //----------------------------
-#ifndef GL
    inline void SetupTextureStage(int stage, D3DTEXTUREOP op){
 
       //assert(!CanUsePixelShader());
@@ -1304,7 +1193,6 @@ public:
          }
       }
    }
-#endif
 //----------------------------
 
    inline void DisableTextures(dword stage){
@@ -1324,12 +1212,10 @@ public:
       }
    }
 
-#ifndef GL
 //----------------------------
 // Clipping planes - using either D3D clipping plane, or emulated clipping by alpha texture.
    void SetClippingPlane(const S_plane &pl, const S_matrix &_m_view_proj_hom);
    void DisableClippingPlane();
-#endif
 
    inline dword GetTextureSortID(){
       return texture_sort_id++;
@@ -1455,14 +1341,12 @@ public:
 //----------------------------
    inline IDirect3DDevice9 *GetDevice1() const{ return d3d_dev; }
 
-#ifndef GL
                               //resource buffers
    bool AllocVertexBuffer(dword fvf_flags, D3DPOOL mem_pool, dword d3d_usage, dword num_verts,
       IDirect3DVertexBuffer9 **vb_ret, dword *beg_indx_ret, class I3D_dest_vertex_buffer *vb_d, bool allow_cache = true);
    bool FreeVertexBuffer(IDirect3DVertexBuffer9 *vb, dword vertex_indx, I3D_dest_vertex_buffer*);
    bool AllocIndexBuffer(D3DPOOL mem_pool, dword d3d_usage, dword num_faces, IDirect3DIndexBuffer9 **ib_ret, dword *beg_face_ret);
    bool FreeIndexBuffer(IDirect3DIndexBuffer9 *vb, dword face_indx);
-#endif
 //#endif
 //----------------------------
 
@@ -1470,9 +1354,6 @@ public:
       if(zw_enable!=b){
          zw_enable = b;
          d3d_dev->SetRenderState(D3DRS_ZWRITEENABLE, b);
-#ifdef GL
-         glDepthMask(b);
-#endif
       }
    }
 
@@ -1484,9 +1365,6 @@ public:
    inline void EnableZBUsage(bool on){
       EnableZWrite(on);
       d3d_dev->SetRenderState(D3DRS_ZFUNC, !on ? D3DCMP_ALWAYS : D3DCMP_LESSEQUAL);
-#ifdef GL
-      on ? glEnable(GL_DEPTH_TEST) : glDisable(GL_DEPTH_TEST);
-#endif
    }
 
 //----------------------------
@@ -1645,7 +1523,6 @@ public:
    I3DMETHOD_(void,SetCollisionMaterial)(dword index, const I3D_collision_mat&);
    I3DMETHOD_(void,ClearCollisionMaterials)();
 
-#ifndef GL
    I3DMETHOD_(I3D_RESULT,SetNightVision)(bool on);
    I3DMETHOD_(I3D_RESULT,BeginNightVisionRender)();
    I3DMETHOD_(I3D_RESULT,EndNightVisionRender)();
@@ -1654,7 +1531,6 @@ public:
    I3DMETHOD_(I3D_RESULT,RenderPostFX)();
    I3DMETHOD_(void,SetPostFX)(I3D_postfx_info);
    I3DMETHOD_(I3D_postfx_info,GetPostFX)() const;
-#endif
 };
 
 //----------------------------

@@ -242,9 +242,7 @@ public:
                               //visual methods
    virtual bool ComputeBounds();
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 //----------------------------
 
@@ -634,11 +632,6 @@ void I3D_particle_imp::TickInternal(int time){
          elem_ptr = &elems.front();
          continue;
       }
-#if defined USE_PREFETCH && 0
-      if(it_next!=it_end){
-         Prefetch64Bytes(&(*it_next));
-      }
-#endif
                               //compute opacity
       float ft = 1.0f - ((float)si.life_cnt * si.r_life_time);
       si.opacity = ft<data.opt_range[0] ? ft/data.opt_range[0] :
@@ -834,11 +827,9 @@ void I3D_particle_imp::AddPrimitives(S_preprocess_context &pc){
       if(time)
          TickInternal(time);
    }
-#ifndef GL
                               //don't allow in shadow casting
    if(pc.mode==RV_SHADOW_CASTER)
       return;
-#endif
    if(!elems.size() || !mat)
       return;
 
@@ -887,7 +878,6 @@ static void CopyMatrixTransposed4x3(S_matrix &dst, const S_matrix &src){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_particle_imp::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    drv->SetupBlend(data.blend_mode);
@@ -976,7 +966,6 @@ void I3D_particle_imp::DrawPrimitive(const S_preprocess_context &pc, const S_ren
       CHECK_D3D_RESULT("DrawIndexedPrimitive", hr);
    }
 }
-#endif
 //----------------------------
 
 void I3D_particle_imp::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -1017,10 +1006,8 @@ void I3D_particle_imp::DrawPrimitivePS(const S_preprocess_context &pc, const S_r
                               //store transposed projection matrix
    drv->SetVSConstant(VSC_MAT_TRANSFORM_0, &rp.scene->GetViewProjHomMatTransposed(), 4);
    drv->SetIndices(drv->ib_particle);
-#ifndef GL
    if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
       se_ps.TexKill(1);
-#endif
    drv->SetPixelShader(se_ps);
 
    PI3D_camera cam = rp.scene->GetActiveCamera1();

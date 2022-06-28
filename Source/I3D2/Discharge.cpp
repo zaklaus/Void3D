@@ -56,9 +56,6 @@ class I3D_discharge: public I3D_visual{
          opacity = 1.0f;
       }
    } data;
-#ifdef GL
-   I3D_dest_vertex_buffer vertex_buffer;
-#endif
 
    struct S_ray{
       float r_init_life_time; //reciprocal of initial life counter
@@ -176,9 +173,6 @@ class I3D_discharge: public I3D_visual{
 //----------------------------
 public:
    I3D_discharge(PI3D_driver d):
-#ifdef GL
-      vertex_buffer(d),
-#endif
       I3D_visual(d)
    {
       visual_type = I3D_VISUAL_DISCHARGE;
@@ -186,9 +180,7 @@ public:
    }
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive &rp);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive &rp);
    virtual bool ComputeBounds(){
       bound.bound_local.bbox.min.Zero();
@@ -217,14 +209,12 @@ public:
       HRESULT hr;
       dword d3d_usage = D3DUSAGE_WRITEONLY;
       D3DPOOL mem_pool = D3DPOOL_DEFAULT;
-#ifndef GL
       if(!drv->IsHardware()){
          if(!drv->IsDirectTransform()){
             d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
             mem_pool = D3DPOOL_SYSTEMMEM;
          }
       }
-#endif
       dword max_verts = data.num_steps * 2;
       {
          IDirect3DVertexBuffer9 *vb_tmp;
@@ -365,10 +355,8 @@ public:
 
 void I3D_discharge::AddPrimitives(S_preprocess_context &pc){
 
-#ifndef GL
    if(pc.mode==RV_SHADOW_CASTER) return;
    if(drv->GetFlags2()&DRVF2_TEXCLIP_ON) return;
-#endif
 
    if(!mat)
       return;
@@ -406,7 +394,6 @@ void I3D_discharge::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_discharge::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    HRESULT hr;
@@ -473,7 +460,6 @@ void I3D_discharge::DrawPrimitive(const S_preprocess_context &pc, const S_render
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
-#endif
 //----------------------------
 
 void I3D_discharge::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){

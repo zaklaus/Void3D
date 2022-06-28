@@ -1156,28 +1156,6 @@ void MakeStrips(const I3D_triface *faces, dword num_faces, C_vector<word> &out_s
 	}
 #endif
 
-#if defined _DEBUG && 0
-                              //validity check
-   {
-      C_vector<I3D_triface> fb;
-      fb.reserve(num_faces);
-      GetPackedFaces(out_strips.begin(), out_strips.size(), fb);
-      assert(fb.size()==num_faces);
-                              //make sure each input face appears in decompressed faces
-      C_buffer<bool> ok(num_faces, false);
-      for(dword i=num_faces; i--; ){
-         const I3D_triface &fc = faces[i];
-                              //search in decompressed faces
-         for(int j=num_faces; j--; ){
-            if(!ok[j] && Equals(fb[j], fc))
-               break;
-         }
-         assert(j!=-1);
-         assert(!ok[j]);
-         ok[j] = true;
-      }
-   }
-#endif
                               //clean up
    //for(i=all_faces.size(); i--; )
       //delete all_faces[i];

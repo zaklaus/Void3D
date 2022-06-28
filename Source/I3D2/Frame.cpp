@@ -537,11 +537,6 @@ void I3D_frame::ComputeHRBoundVolume(PI3D_bound_volume bvol) const{
    const PI3D_frame *chldp = children.size() ? &children.front() : NULL;
    for(int i = children.size(); i--; ){
       PI3D_frame frm = *chldp++;
-#if defined USE_PREFETCH && 0
-      if(i){
-         Prefetch1(*chldp);
-      }
-#endif
       I3D_bound_volume bvol_tmp;
       const I3D_bound_volume *bvol_children;
 

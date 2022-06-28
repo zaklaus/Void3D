@@ -38,11 +38,9 @@ void S_preprocess_context::Reset(){
    overlay = 0;
    prim_list.clear();
    prim_sort_list.Clear();
-#ifndef GL
    shadow_casters.clear();
    shadow_receivers.clear();
    decal_casters.clear();
-#endif
    mirror_data.clear();
    occ_list.clear();
 
@@ -118,9 +116,6 @@ bool CheckFrustumIntersection(const S_plane *planes, dword num_planes, const S_v
          if(!ortho_proj){
                               //perspective projection, use viewer point
             pl.normal.GetNormal(view_pos, v_p2, v_p2+dir_p2);
-#if defined _DEBUG && 0
-            pl.normal.Normalize();
-#endif
             pl.d = -pl.normal.Dot(view_pos);
          }else{
                               //orthogonal projection, use look direction
@@ -153,40 +148,6 @@ dword CountBits(const S_pixelformat &fmt){
 
 //----------------------------
 
-#if defined _MSC_VER && 0
-
-#pragma warning(disable:4035)
-__declspec(naked) bool SphereCollide(const I3D_bsphere &vf_bs, const I3D_bsphere &bs2){
-   __asm{
-      push edi
-      mov eax, [esp+4+4]
-      mov edi, [esp+8+4]
-      push eax                //make stack variable
-      fld dword ptr[eax+0]
-      fsub dword ptr[edi+0]
-      fmul st, st
-      fld dword ptr[eax+4]
-      fsub dword ptr[edi+4]
-      fmul st, st
-      faddp st(1), st
-      fld dword ptr[eax+8]
-      fsub dword ptr[edi+8]
-      fmul st, st
-      faddp st(1), st
-      fld dword ptr[eax+12]
-      fadd dword ptr[edi+12]
-      fmul st, st
-      fsubp st(1), st
-      fstp dword ptr[esp]
-      pop eax
-      pop edi
-      shr eax, 31
-      ret 8
-   }
-}
-#pragma warning(default:4035)
-
-#endif
 
 //----------------------------
 
@@ -639,59 +600,6 @@ bool AreAllVerticesInVF(const S_view_frustum_base &vf, const S_vector *verts, dw
 
                               //transform input vertices
 
-#if defined _MSC_VER && 0
-
-   byte rtn = true;
-   __asm{
-      push ecx
-                              //eax = current status
-                              //ebx = current vertex
-                              //ecx = vertex count
-                              //edx = plane counter
-                              //esi = current vertex
-                              //edi = current plane
-      push eax                //local variable
-      mov esi, verts
-      mov ecx, num_verts
-   l:
-                              //check all planes
-      mov edi, vf
-      mov edx, [edi + SIZE S_plane * MAX_FRUSTUM_CLIP_PLANES]
-   ll1:
-                              //compute dot-product
-      fld dword ptr[esi + 0]
-      fmul dword ptr[edi + 0]
-      fld dword ptr[esi + 4]
-      fmul dword ptr[edi + 4]
-      faddp st(1), st
-      fld dword ptr[esi + 8]
-      fmul dword ptr[edi + 8]
-      faddp st(1), st
-      fadd dword ptr[edi + 12]
-                              //compare to zero
-      fstp dword ptr[esp]
-      add edi, SIZE S_plane
-      test byte ptr[esp+3], 0x80
-      jnz ok1
-
-      mov rtn, 0
-      jmp end
-   ok1:
-      dec edx
-      jnz ll1
-
-      add esi, SIZE S_vector
-      dec ecx
-      jnz l
-   end:
-
-      pop eax                 //clean stack
-
-      pop ecx
-   }
-   return rtn;
-
-#else
 
    for(dword i=0; i<num_verts; i++){
       const S_plane *pp = vf.clip_planes;
@@ -703,7 +611,6 @@ bool AreAllVerticesInVF(const S_view_frustum_base &vf, const S_vector *verts, dw
       }while(++pp, --j);
    }
 
-#endif
    return true;
 }
 
@@ -713,59 +620,6 @@ bool IsAnyVertexInVF(const S_view_frustum &vf, const S_vector *verts, dword num_
 
                               //transform input vertices
 
-#if defined _MSC_VER && 0
-
-   byte rtn = false;
-   __asm{
-      push ecx
-                              //eax = current status
-                              //ebx = current vertex
-                              //ecx = vertex count
-                              //edx = plane counter
-                              //esi = current vertex
-                              //edi = current plane
-      push eax                //local variable
-      mov esi, verts
-      mov ecx, num_verts
-   l:
-                              //check all planes
-      mov edi, vf
-      mov edx, [edi + SIZE S_plane * MAX_FRUSTUM_CLIP_PLANES]
-   ll1:
-                              //compute dot-product
-      fld dword ptr[esi + 0]
-      fmul dword ptr[edi + 0]
-      fld dword ptr[esi + 4]
-      fmul dword ptr[edi + 4]
-      faddp st(1), st
-      fld dword ptr[esi + 8]
-      fmul dword ptr[edi + 8]
-      faddp st(1), st
-      fadd dword ptr[edi + 12]
-                              //compare to zero
-      fstp dword ptr[esp]
-      add edi, SIZE S_plane
-      test byte ptr[esp+3], 0x80
-      jz ok1
-
-      mov rtn, 1
-      jmp end
-   ok1:
-      dec edx
-      jnz ll1
-
-      add esi, SIZE S_vector
-      dec ecx
-      jnz l
-   end:
-
-      pop eax                 //clean stack
-
-      pop ecx
-   }
-   return rtn;
-
-#else
 
    for(dword i=0; i<num_verts; i++){
       const S_plane *pp = vf.clip_planes;
@@ -779,7 +633,6 @@ bool IsAnyVertexInVF(const S_view_frustum &vf, const S_vector *verts, dword num_
    next:{}
    }
 
-#endif
    return false;
 }
 

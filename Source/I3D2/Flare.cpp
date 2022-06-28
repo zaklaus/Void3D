@@ -84,9 +84,7 @@ public:
 //----------------------------
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 //----------------------------
 
@@ -362,7 +360,6 @@ void I3D_flare::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_flare::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    S_user_context *uc = (S_user_context*)rp.user1;
@@ -396,7 +393,6 @@ void I3D_flare::DrawPrimitive(const S_preprocess_context &pc, const S_render_pri
 
    delete uc;
 }
-#endif
 //----------------------------
 
 void I3D_flare::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -422,10 +418,8 @@ void I3D_flare::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_p
       se_ps.AddFragment(PSF_COLOR_COPY);
       drv->DisableTextures(0);
    }
-#ifndef GL
    if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
       se_ps.TexKill(1);
-#endif
    drv->SetPixelShader(se_ps);
 
    drv->SetupBlend(rp.blend_mode);

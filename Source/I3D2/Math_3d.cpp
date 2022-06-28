@@ -122,11 +122,6 @@ void S_matrix::RotationZ(const float angle){
 bool S_matrix::Invert(){
 
                               //do not use D3DX, it divides by zero
-#if defined USE_D3DX && 0
-
-   return (D3DXMatrixInverse((D3DXMATRIX*)this, NULL, (D3DXMATRIX*)this)!=NULL);
-
-#else
 
 #define x03 x01
 #define x13 x11
@@ -246,7 +241,6 @@ bool S_matrix::Invert(){
    m[3][2] = z23 * rcp;
    m[2][3] = z32 * rcp;
    m[3][3] = z33 * rcp;
-#endif
 
    return true;
 }
@@ -347,11 +341,6 @@ S_matrix S_matrix::operator *(const S_matrix &mat) const{
 S_matrix &S_matrix::Make(const S_matrix &m1, const S_matrix &m2){
 
                               //do not use D3DX version, ours is faster (operates on 3x4 matrix)
-#if defined USE_D3DX && 0
-
-   D3DXMatrixMultiply((D3DXMATRIX*)this, (D3DXMATRIX*)&m1, (D3DXMATRIX*)&m2);
-
-#else
 
 #if defined _MSC_VER && defined USE_ASM
 
@@ -517,7 +506,6 @@ S_matrix &S_matrix::Make(const S_matrix &m1, const S_matrix &m2){
 
 #endif
 
-#endif//USE_D3DX
 
    return *this;
 }
@@ -1414,14 +1402,6 @@ S_vector &S_vector::operator *=(const S_matrix &m){
 
 S_vector S_vector::operator *(const struct S_matrix &m) const{
 
-#if defined _DEBUG && 0
-   if(LogCallStack){
-                              //call-stack logging
-      t_call_stack cs;
-      GetCallStack(cs);
-      LogCallStack(&cs);
-   }
-#endif
 
    S_vector rtn;
 

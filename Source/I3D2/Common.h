@@ -43,14 +43,6 @@ void D3D_Fatal(const char *text, dword hr, const char *file, dword line);
 #define CHECK_D3D_RESULT(text, hr)
 #endif
 
-#ifdef GL
-#ifdef _DEBUG
-void GL_Fatal(const char *text, dword code, const char *file, dword line);
-#define CHECK_GL_RESULT(text) { dword err = glGetError(); if(err!=GL_NO_ERROR) GL_Fatal(text, err, __FILE__, __LINE__); }
-#else
-#define CHECK_GL_RESULT(text)
-#endif
-#endif
 //----------------------------
 
 enum I3D_BLENDMODE{
@@ -255,9 +247,7 @@ enum{
 enum E_RENDERVIEW_MODE{
    RV_NORMAL,                 //normal mode
    RV_MIRROR,                 //from behind mirror
-#ifndef GL
    RV_SHADOW_CASTER,          //shadow caster from light's position
-#endif
    RV_CAM_TO_TEXTURE,         //CamView visual rendering into texture
 };
 
@@ -318,7 +308,6 @@ struct S_preprocess_context{
    C_sort_list<dword> prim_sort_list;
    PI3D_sector curr_sector;
    S_vector viewer_pos;
-#ifndef GL
                               //frames which may cast shadows
    C_vector<PI3D_model> shadow_casters;
                               //frames which may potentionally receive shadow
@@ -326,7 +315,6 @@ struct S_preprocess_context{
    float shadow_opacity;      //opacity of currently renderes shadow caster
 
    C_vector<PI3D_visual> decal_casters;
-#endif
 
                               //data of mirrors rendered in current frame
    t_mirror_data mirror_data;
@@ -359,10 +347,8 @@ struct S_preprocess_context{
 
    inline void Reserve(int num_items){
       prim_list.reserve(num_items);
-#ifndef GL
       shadow_casters.reserve(32);
       shadow_receivers.reserve(num_items/2);
-#endif
    }
 
    S_preprocess_context(PI3D_scene s):
@@ -395,16 +381,12 @@ inline S_render_primitive::S_render_primitive(int auto_lod, byte al, PI3D_visual
 
 //----------------------------
 
-#if defined _MSC_VER && 0
-bool SphereCollide(const I3D_bsphere &vf_bs, const I3D_bsphere &bs2);
-#else
 inline bool SphereCollide(const I3D_bsphere &vf_bs, const I3D_bsphere &bs2){
    S_vector dir = vf_bs.pos - bs2.pos;
    float dist_2 = dir.Dot(dir);
    float radius_sum_2 = vf_bs.radius + bs2.radius; radius_sum_2 *= radius_sum_2;
    return (dist_2 < radius_sum_2);
 }
-#endif
 
 //----------------------------
 // Get index of the most significant bit in the mask,

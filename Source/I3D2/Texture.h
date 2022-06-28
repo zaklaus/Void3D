@@ -61,10 +61,6 @@ public:
 // Get RLE compression mask keeping colorkey info. Optional.
    virtual const byte *GetRLEMask() const{ return NULL; }
 
-#ifdef GL
-//----------------------------
-   virtual dword GetGlId() const = 0;
-#endif
 
 //----------------------------
 // Get pixel format in which texture is initialized.
@@ -93,9 +89,6 @@ class I3D_texture: public I3D_texture_base{
 
 #define TXTF_UPLOAD_NEEDED 0x10000  //need uploading (Manage)
 
-#ifdef GL
-   mutable unsigned int txt_id;
-#endif
 
 protected:
    dword ref;
@@ -136,9 +129,6 @@ public:
    virtual const byte *GetRLEMask() const{
       return (const byte*)sysmem_image->GetColorkeyInfo();
    }
-#ifdef GL
-   virtual dword GetGlId() const;
-#endif
 public:
    I3DMETHOD_(dword,AddRef)(){ return ++ref; }
    I3DMETHOD_(dword,Release)(){ if(--ref) return ref; delete this; return 0; }
@@ -187,9 +177,6 @@ public:
    inline void SetAnimSpeed(int as){ anim_delay = as; }
 
    virtual IDirect3DBaseTexture9 *GetD3DTexture() const;
-#ifdef GL
-   virtual dword GetGlId() const{ return 0; }
-#endif
 public:
    I3DMETHOD_(dword,AddRef)(){ return ++ref; }
    I3DMETHOD_(dword,Release)(){ if(--ref) return ref; delete this; return 0; }
@@ -215,9 +202,6 @@ public:
    I3DMETHOD_(dword,Release)(){ if(--ref) return ref; delete this; return 0; }
    virtual IDirect3DBaseTexture9 *GetD3DTexture() const;
    virtual E_TEXTURE_TYPE GetTextureType() const{ return TEXTURE_2D; }
-#ifdef GL
-   virtual dword GetGlId() const{ return 0; }
-#endif
 };
 
 //----------------------------

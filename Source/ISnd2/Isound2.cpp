@@ -676,16 +676,6 @@ static HRESULT CreateDSBuffer(LPDIRECTSOUND8 lpDS, S_wave_format &wf, dword flag
    if(SUCCEEDED(hr)){
       hr = lpDStmp->QueryInterface(IID_IDirectSoundBuffer8, (void**)buf);
       lpDStmp->Release();
-#if defined _DEBUG && 0
-      {                       //debug! clear buffer
-         void *bl1, *bl2;
-         ulong bl1s, bl2s;
-         (*buf)->Lock(0, 0, &bl1, &bl1s, &bl2, &bl2s, DSBLOCK_ENTIREBUFFER);
-         memset(bl1, 0, bl1s);
-         memset(bl2, 0, bl2s);
-         (*buf)->Unlock(bl1, bl1s, bl2, bl2s);
-      }
-#endif
    }
    if(FAILED(hr))
       *buf = NULL;
@@ -1008,17 +998,6 @@ void ISND_sound::NotifyThreadStream(){
       dword dw_wait;
       dw_wait = WaitForSingleObject(stream->h_notify, INFINITE);
       assert(dw_wait==WAIT_OBJECT_0);
-#if defined _DEBUG && 0
-      {                       //ignore non-playing buffers - override DS bug
-         dword status;
-         lpDSB8->GetStatus(&status);
-         if(!(status&(DSBSTATUS_PLAYING|DSBSTATUS_LOOPING))){
-            DEBUG_LOG(C_fstr("Stream thread 0x%x: signalled although not playing..?", stream->id_thread));
-            //assert(0);
-            continue;
-         }
-      }
-#endif
       DEBUG_LOG(C_fstr("Stream thread 0x%x: reading data to buffer half %i.", stream->id_thread, stream->buffer_half));
 
       EnterCriticalSection(&drv->lock);

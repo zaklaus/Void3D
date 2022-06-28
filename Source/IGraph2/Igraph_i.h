@@ -20,14 +20,6 @@ void D3D_Fatal(const char *text, dword hr, const char *file, dword line);
 
 #endif
 
-#ifdef GL
-#ifdef _DEBUG
-void GL_Fatal(const char *text, dword code, const char *file, dword line);
-#define CHECK_GL_RESULT(text) { dword err = glGetError(); if(err!=GL_NO_ERROR) GL_Fatal(text, err, __FILE__, __LINE__); }
-#else
-#define CHECK_GL_RESULT(text)
-#endif
-#endif
 
 //----------------------------
 
@@ -190,11 +182,6 @@ class IGraph: public C_unk<IGraph>{
    HINSTANCE h_d3d9;          //d3d9.dll
    IDirect3D9 *lpD3D9;
    IDirect3DDevice9 *lpDev9;
-#ifdef GL
-   EGLDisplay egl_display;
-   EGLSurface egl_surface;
-   EGLContext egl_context;
-#endif
 
                               //keep internal list of convertors,
                               // to avoid duplication of their initialization

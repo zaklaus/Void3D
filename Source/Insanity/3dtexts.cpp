@@ -544,11 +544,9 @@ C_wide_text::C_wide_text(const wchar_t *wcp, dword color, float x, float y, floa
          {
             S_pixelformat pf;
             dword find_flags = FINDTF_ALPHA1;
-#ifndef GL
    //#ifndef DEBUG_MODE
             find_flags |= FINDTF_COMPRESSED;
    //#endif
-#endif
             I3D_RESULT ir = drv->FindTextureFormat(pf, find_flags);
             if(I3D_SUCCESS(ir)){
                assert(0);

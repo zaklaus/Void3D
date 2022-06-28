@@ -87,7 +87,6 @@ static void DI_Fatal(const char *text, HRESULT hr){
 #endif
 
 //----------------------------
-#ifndef GL
 static void DumpCaps(IDirect3D9 *lpD3D9, IDirect3DDevice9 *lpDev9,
    IG_INIT::t_log_func *log_func){
 
@@ -697,7 +696,6 @@ static void DumpCaps(IDirect3D9 *lpD3D9, IDirect3DDevice9 *lpDev9,
    }
    (*log_func)("----------------------");
 }
-#endif
 //----------------------------
                               //keyboard hook
 static PIGraph lpg_key_hooked;
@@ -1302,11 +1300,6 @@ static bool WriteConfig(const RECT &rc){
 IGraph::IGraph():
    ig_flags(0),
    want_close_app(false),
-#ifdef GL
-   egl_display(NULL),
-   egl_surface(NULL),
-   egl_context(NULL),
-#endif
    suspend_disable_count(0)
 {
 }
@@ -1338,12 +1331,6 @@ IGraph::~IGraph(){
       }
    }
 
-#ifdef GL
-   if(egl_context){
-      eglDestroyContext(egl_display, egl_context);
-      eglDestroySurface(egl_display, egl_surface);
-   }
-#endif
    if(lpDI8){
       lpDI8->Release();
       lpDI8 = NULL;
@@ -1500,20 +1487,6 @@ static void ConvertD3DpfToI3Dpf(const D3DFORMAT d3d_fmt, S_pixelformat &pf){
 }
 
 //----------------------------
-#ifdef GL
-
-static void GlInitPixelFormat(PIXELFORMATDESCRIPTOR &pf){
-   memset(&pf, 0, sizeof(pf));
-   pf.nSize = sizeof(pf);
-	pf.nVersion = 1;
-	pf.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL;
-	pf.dwFlags |= PFD_DOUBLEBUFFER;
-	pf.iPixelType = PFD_TYPE_RGBA;
-	//pf.cColorBits = 16;
-	pf.cDepthBits = 16;
-	pf.cStencilBits = 0;
-}
-#endif
 //----------------------------
 
 HRESULT IGraph::InitRGBConv(){
@@ -1526,19 +1499,6 @@ HRESULT IGraph::InitRGBConv(){
    S_pixelformat pf;
    memset(&pf, 0, sizeof(pf));
 
-#ifdef GL
-   HDC hdc = GetDC(hwnd);
-   //int pf = ChoosePixelFormat(GL_hdc, &GL_pfd);
-   PIXELFORMATDESCRIPTOR pfd;
-   GlInitPixelFormat(pfd);
-   int pfi = ChoosePixelFormat(hdc, &pfd);
-   DescribePixelFormat(hdc, pfi, sizeof(pfd), &pfd);
-   pf.bytes_per_pixel = (pfd.cRedBits+pfd.cGreenBits+pfd.cBlueBits+pfd.cAlphaBits)/8;
-   pf.r_mask = ((1<<pfd.cRedBits)-1)<<pfd.cRedShift;
-   pf.g_mask = ((1<<pfd.cGreenBits)-1)<<pfd.cGreenShift;
-   pf.b_mask = ((1<<pfd.cBlueBits)-1)<<pfd.cBlueShift;
-   pf.a_mask = 0;//((1<<pfd.cAlphaBits)-1)<<pfd.cAlphaShift;
-#endif
    {
                               //get current color model
       D3DDISPLAYMODE dm;
@@ -1845,43 +1805,6 @@ bool IGraph::Initialize(dword pos_x, dword pos_y, dword sx1, dword sy1,
    if(!InitWindow(pos_x, pos_y))
       goto fail;
 
-#ifdef GL
-   HDC hdc = GetDC(hwnd);
-   /*
-   PIXELFORMATDESCRIPTOR pf;
-   GlInitPixelFormat(pf);
-   int pfi = ChoosePixelFormat(hdc, &pf);
-   SetPixelFormat(hdc, pfi, &pf);
-   hglrc = wglCreateContext(hdc);
-   wglMakeCurrent(hdc, hglrc);
-   ReleaseDC(hwnd, hdc);
-
-   int _dgles_load_library(void *(*)(const char *));
-   _dgles_load_library(proc_loader);
-   */
-   egl_display = eglGetDisplay(hdc);
-   if(!eglInitialize(egl_display, NULL, NULL))
-      assert(0);
-   static const EGLint pi32ConfigAttribs[] = {
-      EGL_LEVEL, 0,
-      //EGL_BUFFER_SIZE, 32,
-      EGL_DEPTH_SIZE, EGL_DONT_CARE,
-		EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-		EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-		EGL_NATIVE_RENDERABLE, false,
-		EGL_NONE
-	};
-	int iConfigs;
-   EGLConfig eglConfig = 0;
-	if(!eglChooseConfig(egl_display, pi32ConfigAttribs, &eglConfig, 1, &iConfigs))
-      assert(0);
-   egl_surface = eglCreateWindowSurface(egl_display, eglConfig, hwnd, NULL);
-   eglBindAPI(EGL_OPENGL_ES_API);
-
-   static const EGLint ai32ContextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
-   EGLContext egl_context = eglCreateContext(egl_display, eglConfig, EGL_NO_CONTEXT, ai32ContextAttribs);
-   eglMakeCurrent(egl_display, egl_surface, egl_surface, egl_context);
-#endif
 
    assert(hwnd);
 
@@ -1931,9 +1854,7 @@ bool IGraph::Initialize(dword pos_x, dword pos_y, dword sx1, dword sy1,
       IG_log.Ok();
 #endif                        //LOG_MODE
       D3DDEVTYPE dev_type = 
-#ifndef GL
          (flags&IG_REF_DEVICE) ? D3DDEVTYPE_REF :
-#endif
          D3DDEVTYPE_HAL;
 
       D3DPRESENT_PARAMETERS pp;
@@ -1992,11 +1913,9 @@ retry_caps:
 
       backbuffer_count = 0;
       num_swap_buffers = pp.BackBufferCount + 1;
-#ifndef GL
       if((flags&IG_VERBOSE) && log_func1){
          DumpCaps(lpD3D9, lpDev9, log_func1);
       }
-#endif
    }
 
    InitRGBConv();
@@ -2006,12 +1925,6 @@ retry_caps:
                               //success
    init_ok = true;
 
-#if defined _DEBUG && 0
-   if(SetCursorProperties("test1.png")){
-      ShowCursor(true);
-      SetCursorPos(100, 100);
-   }
-#endif
    return true;
 
 fail:
@@ -2158,13 +2071,6 @@ bool IGraph::UpdateScreen(dword flags, void *dest_hwnd){
 
    HRESULT hr = 0;
    if(!dest_hwnd){
-#ifdef GL
-      if(GetAsyncKeyState(VK_TAB)){
-   	   //glFlush();
-	      //glFinish();
-         eglSwapBuffers(egl_display, egl_surface);
-      }else
-#endif
       if(create_flags&IG_FULLSCREEN){
          hr = lpDev9->Present(NULL, NULL, NULL, NULL);
          ++backbuffer_count %= num_swap_buffers;
@@ -2273,14 +2179,9 @@ bool IGraph::ClearViewport(){
       return true;
    if(b <= 0)
       return true;
-#ifdef GL
-   glClearColor(0, 0, 0, 0);
-   glClear(GL_COLOR_BUFFER_BIT);
-#else
                               //clear to color
    D3DRECT rc = {l, t, r, b};
    lpDev9->Clear(1, &rc, D3DCLEAR_TARGET, 0, 0.0f, 0);
-#endif
    return true;
 }
 
@@ -3046,49 +2947,6 @@ PIImage IGraph::CreateBackbufferCopy(dword sx, dword sy, bool lockable) const{
       sy = Scrn_sy();
 
    IImage *img = NULL;
-#ifdef GL
-   img = CreateImage();
-   S_pixelformat pf;
-   pf.bytes_per_pixel = 4;
-   pf.r_mask = 0x00ff0000;
-   pf.g_mask = 0x0000ff00;
-   pf.b_mask = 0x000000ff;
-   pf.a_mask = 0x00000000;
-   pf.flags = 0;//PIXELFORMAT_ALPHA;
-   bool b = img->Open(NULL, IMGOPEN_EMPTY | IMGOPEN_SYSMEM, Scrn_sx(), Scrn_sy(), &pf);
-   if(b){
-      dword pitch;
-      void *mem;
-      if(img->Lock(&mem, &pitch, false)){
-         RECT wrc;
-         GetClientRect(hwnd, &wrc);
-         dword offs = wrc.bottom-Scrn_sy();
-         struct S_rgb{
-            byte r, g, b, a;
-         };
-         for(int y=Scrn_sy(); y--; ){
-            glReadPixels(0, offs+y, Scrn_sx(), 1, GL_RGBA, GL_UNSIGNED_BYTE, mem);
-            S_rgb *rgb = (S_rgb*)mem;
-            for(int x=Scrn_sx(); x--; ){
-               S_rgb &p = rgb[x];
-               Swap(p.r, p.b);
-            }
-            (byte*&)mem += pitch;
-         }
-         img->Unlock();
-         if(sx!=Scrn_sx() || sy!=Scrn_sy()){
-            IImage *img1 = CreateImage();
-            img1->Open(NULL, IMGOPEN_EMPTY, sx, sy, img->GetPixelFormat());
-            img1->CopyStretched(img);
-            img->Release();
-            img = img1;
-         }
-      }
-   }else{
-      img->Release();
-      img = NULL;
-   }
-#else
    IDirect3DSurface9 *bbuf;
    HRESULT hr = lpDev9->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &bbuf);
    //HRESULT hr = lpDev9->GetFrontBufferData(0, &bbuf);
@@ -3154,7 +3012,6 @@ PIImage IGraph::CreateBackbufferCopy(dword sx, dword sy, bool lockable) const{
       D3D_Fatal("Can't copy buffer", hr, __FILE__, __LINE__);
 #endif
    }
-#endif
    return img;
 }
 

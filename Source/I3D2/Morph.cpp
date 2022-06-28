@@ -234,9 +234,7 @@ public:
 
 //----------------------------
 
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 //----------------------------
 
@@ -324,7 +322,6 @@ public:
 
 //----------------------------
 //----------------------------
-#ifndef GL
 void I3D_object_morph::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    HRESULT hr;
@@ -419,7 +416,6 @@ void I3D_object_morph::DrawPrimitive(const S_preprocess_context &pc, const S_ren
    }
    DrawPrimitiveVisual(mesh, pc, rp);
 }
-#endif
 //----------------------------
 
 void I3D_object_morph::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -439,11 +435,7 @@ void I3D_object_morph::DrawPrimitivePS(const S_preprocess_context &pc, const S_r
    I3D_driver::S_vs_shader_entry_in se;
 
    bool object_space =
-#ifndef GL
       !(drv->GetFlags2()&DRVF2_TEXCLIP_ON);
-#else
-      false;
-#endif
 #ifdef _DEBUG
    //if(drv->debug_int[0]) object_space = false;
 #endif

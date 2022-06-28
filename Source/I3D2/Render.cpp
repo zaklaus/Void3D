@@ -19,9 +19,7 @@
 #include "sng_mesh.h"
 #include "soundi3d.h"
 #include "mesh.h"
-#ifndef GL
 #include "stripifier.h"
-#endif
 
 
 #define MAX_COMPUTED_OCCLUDERS 14
@@ -36,9 +34,6 @@ const float HIDE_NEAR_DIST_RATIO = .8f;   //ratio of hide dist, from which visua
 
 //#define DEBUG_MIRROR_SPECIAL_BACKGROUND //fill mirror's background to special color
 
-#ifdef GL
-#define DEBUG_NO_CLIP_PLANES  //disable hw clipping planes
-#endif
 
 //----------------------------
 
@@ -51,9 +46,6 @@ void I3D_scene::PreprocessSounds(int time){
    PI3D_sound *sptr = &sounds.front();
    for(int i=sounds.size(); i--; ){
       PI3D_sound snd = *sptr++;
-#if defined USE_PREFETCH && 0
-      if(i) Prefetch1(*sptr);
-#endif
       PI3D_frame prnt = snd;
       while(prnt=prnt->parent, prnt){
          if(prnt==primary_sector){
@@ -219,7 +211,6 @@ void I3D_scene::PreprocessChildren(PI3D_frame root, S_preprocess_context &pc, dw
                         !(new_prep_flags&E_PREP_HR_NO_CLIP) ? &clip_vf : NULL,
                         (new_prep_flags&E_PREP_TEST_OCCLUDERS) ? &clip_occ : NULL);
                   if(!is_visible){
-#ifndef GL
                      if(is_caster){
                               //shadow casters may cast shadow even if their bounding box is out of view
                               // brief check - expanded bounding sphere, enclosing any possible shadow from the model
@@ -236,7 +227,6 @@ void I3D_scene::PreprocessChildren(PI3D_frame root, S_preprocess_context &pc, dw
                            new_prep_flags &= ~E_PREP_ADD_SHD_CASTERS;
                         }
                      }
-#endif
                      SAVE_LIGHT_MARK;
                      break;
                   }
@@ -246,7 +236,6 @@ void I3D_scene::PreprocessChildren(PI3D_frame root, S_preprocess_context &pc, dw
                      new_prep_flags &= ~E_PREP_TEST_OCCLUDERS;
                }
             }
-#ifndef GL
             if(is_caster){
                mod->frm_flags &= ~FRMFLAGS_SHD_CASTER_NONVIS;
                pc.shadow_casters.push_back(mod);
@@ -256,7 +245,6 @@ void I3D_scene::PreprocessChildren(PI3D_frame root, S_preprocess_context &pc, dw
                   break;
                }
             }
-#endif
             PROPAGATE_LIGHT_MARK;
             PreprocessChildren(frm, pc, new_prep_flags);
          }
@@ -376,15 +364,11 @@ void I3D_scene::PreprocessChildren(PI3D_frame root, S_preprocess_context &pc, dw
                   pc.force_alpha = save_force;
                }
 
-#ifndef GL
                if(pc.mode!=RV_SHADOW_CASTER)
-#endif
                {
                   vis->last_render_time = last_render_time;
-#ifndef GL
                   if(frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE)
                      pc.shadow_receivers.push_back(vis);
-#endif
                }
             }else{
                               //not visible (out of view)
@@ -569,7 +553,6 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
       }while(i);
       j += pc.alpha_zwrite;
    }
-#ifndef GL
    if((drv->GetFlags()&DRVF_USESHADOWS) &&
       pc.shadow_casters.size() && pc.shadow_receivers.size() &&
       (drv->GetFlags()&DRVF_CANRENDERSHADOWS)){
@@ -582,7 +565,6 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
 
        RenderDecals(pc);
    }
-#endif
 
                               // --alpha without z-writes--
    if(pc.alpha_nozwrite){
@@ -654,14 +636,11 @@ void I3D_scene::DrawListPS(const S_preprocess_context &pc){
 void I3D_scene::DrawList(const S_preprocess_context &pc){
 
    PROFILE(drv, PROF_DRAW);
-#ifndef GL
    if(drv->CanUsePixelShader())
-#endif
    {
       DrawListPS(pc);
       return;
    }
-#ifndef GL
    int i = 0;
    int j;
 
@@ -707,14 +686,12 @@ void I3D_scene::DrawList(const S_preprocess_context &pc){
       }while(i);
       j += pc.alpha_zwrite;
    }
-#ifndef GL
    if((drv->GetFlags()&DRVF_USESHADOWS) &&
       pc.shadow_casters.size() && pc.shadow_receivers.size() &&
       (drv->GetFlags()&DRVF_CANRENDERSHADOWS)){
 
       RenderShadows(pc);
    }
-#endif
                               // --alpha without z-writes--
    if(pc.alpha_nozwrite){
       drv->EnableZWrite(false);
@@ -761,7 +738,6 @@ void I3D_scene::DrawList(const S_preprocess_context &pc){
 
    drv->EnableFog(false);
    drv->DisableTextureStage(1);
-#endif
 }
 
 //----------------------------
@@ -914,7 +890,6 @@ static void GetBestShadowMatrix(const S_vector &normal, const S_vector *projecte
 }
 
 //----------------------------
-#ifndef GL
 
 void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
     PROFILE(drv, PROF_DECALS);
@@ -2089,7 +2064,6 @@ void I3D_scene::RenderMirrors(const S_preprocess_context &pc){
       drv->StencilEnable(false);
    }
 }
-#endif
 //----------------------------
 
 struct S_dd_context{
@@ -2143,9 +2117,7 @@ void I3D_scene::DebugDrawFrames(I3D_FRAME_TYPE ft, dword enum_mask, const S_view
 //----------------------------
 
 void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
-#ifndef GL
    const S_plane *add_clip_planes, dword num_add_clip_planes,
-#endif
    S_preprocess_context *use_pc){
 
    HRESULT hr;
@@ -2163,7 +2135,6 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
 
    if(!current_camera->PrepareViewFrustum(pc.view_frustum, pc.vf_sphere, GetInvAspectRatio()))
       return;
-#ifndef GL
    switch(rv_mode){
    case RV_NORMAL:
    case RV_SHADOW_CASTER:
@@ -2177,7 +2148,6 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
       pc.view_frustum.clip_planes[VF_FRONT] = add_clip_planes[0];
       break;
    }
-#endif
    /*
    for(dword i=0; i<num_add_clip_planes; i++){
       pc.view_frustum.clip_planes[pc.view_frustum.num_clip_planes++] = add_clip_planes[i];
@@ -2223,17 +2193,6 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
          hr = d3d_dev->Clear(0, NULL, clear_flags, dw_color_bgnd, 1.0f, 0);
          CHECK_D3D_RESULT("Clear", hr);
       }
-#ifdef GL
-      clear_flags = 0;
-      if(do_clear)
-         clear_flags |= GL_COLOR_BUFFER_BIT;
-      if(drv->drv_flags&DRVF_USEZB)
-         clear_flags |= GL_DEPTH_BUFFER_BIT;
-      if((drv->GetFlags()&DRVF_HASSTENCIL))
-         clear_flags |= GL_STENCIL_BUFFER_BIT;
-      glClear(clear_flags);
-      CHECK_GL_RESULT("Clear");
-#endif
    }
 
    const C_vector<C_smart_ptr<I3D_frame> > &frames = cont.GetFrameVector();
@@ -2301,10 +2260,6 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
    }
    //drv->SetClippingPlane(*(S_plane*)drv->debug_float, m_view_proj_hom);
 #endif
-#if defined _DEBUG && 0
-   drv->SetClippingPlane(S_plane(S_vector(-1, 0, 0), .5f), S_matrix());
-   num_add_clip_planes = 1;
-#endif
 
                               //update matrices
    const S_matrix &m_proj = current_camera->GetProjectionMatrix1();
@@ -2330,15 +2285,11 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
          primary_sector->UpdateAllLights();
          prep_flags |= E_PREP_SET_HR_LIGHT_DIRTY;
       }
-#ifndef GL
       pc.shadow_receivers.reserve(proposed_num_shd_receivers * 2);
-#endif
       Preprocess(pc, prep_flags | E_PREP_ADD_SHD_CASTERS);
       current_camera->GetCurrSector()->ResetRecursive();
-#ifndef GL
       proposed_num_shd_receivers = pc.shadow_receivers.size();
       RenderMirrors(pc);
-#endif
       pc.Sort();
       DrawList(pc);
    }else{
@@ -2353,9 +2304,7 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
       DRVF2_DRAWDUMMYS | DRVF2_DRAWOCCLUDERS | DRVF2_DRAWJOINTS | DRVF2_DRAWVOLUMES |
       DRVF2_DEBUGDRAWSTATIC | DRVF2_DEBUGDRAWDECALS)) ||
       (drv->GetFlags() & (DRVF_DRAWHRBBOX | DRVF_DRAWBBOX | 
-#ifndef GL
       DRVF_DEBUGDRAWSHDRECS |
-#endif
       DRVF_DEBUGDRAWDYNAMIC)) ||
       drv->debug_draw_mats){
 
@@ -2373,9 +2322,7 @@ void I3D_scene::RenderView(dword render_flags, E_RENDERVIEW_MODE rv_mode,
       if (f & DRVF_DRAWBBOX) draw_flags |= ENUMF_VISUAL;
       if (f2 & DRVF2_DEBUGDRAWDECALS) draw_flags |= ENUMF_VISUAL;
       //if(f&DRVF_DRAWHRBBOX) draw_flags |= ENUMF_VISUAL | ENUMF_MODEL;
-#ifndef GL
       if(f&DRVF_DEBUGDRAWSHDRECS) draw_flags |= ENUMF_VISUAL;
-#endif
       if(drv->debug_draw_mats)
          draw_flags |= ENUMF_VISUAL | ENUMF_VOLUME;
       //if(draw_flags&ENUMF_VOLUME)
@@ -2431,7 +2378,6 @@ I3D_RESULT I3D_scene::Render(dword flags){
    assert((render_time_delta >= 0) && (render_time_delta < 1000*60*60*72));
    last_render_time = drv->render_time;
 
-#ifndef GL
    if(!drv->CanUsePixelShader())
       drv->DisableTextureStage(1);
 
@@ -2446,12 +2392,10 @@ I3D_RESULT I3D_scene::Render(dword flags){
       drv->SetStencilFail(D3DSTENCILOP_KEEP);
       drv->SetStencilZFail(D3DSTENCILOP_INCRSAT);
    }
-#endif
                               //render the screen using current camera
    //drv->BeginNightVisionRender();
    RenderView(flags, RV_NORMAL);
    //drv->EndNightVisionRender();
-#ifndef GL
    if(drv->GetFlags2()&DRVF2_DEBUG_SHOW_OVERDRAW){
 
       d3d_dev->Clear(0, NULL, D3DCLEAR_TARGET, 0, 1.0f, 0);
@@ -2515,7 +2459,6 @@ I3D_RESULT I3D_scene::Render(dword flags){
       if(was_zb) drv->SetState(RS_USEZB, true);
       if(is_wire) drv->SetState(RS_WIREFRAME, true);
    }
-#endif
                               //re-compute sounds
    if(drv->GetSoundInterface()){
       //if(primary_sector->num_hr_snd)
@@ -2671,20 +2614,14 @@ I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
             }
          }
          if(
-#ifndef GL
             ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE)) ||
-#endif
              ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION)) ||
              //(ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
              (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION))
              )
          {
             bool b_shadow = 
-#ifndef GL
                ((ddc->drv_flags&DRVF_DEBUGDRAWSHDRECS) && (frm->frm_flags&I3D_FRMF_SHADOW_RECEIVE));
-#else
-               false;
-#endif
             bool b_static = ((ddc->drv_flags2&DRVF2_DEBUGDRAWSTATIC) && (frm->frm_flags&I3D_FRMF_STATIC_COLLISION));
             //bool b_debug_mat = (ddc->debug_draw_mat==vis->GetCollisionMaterial() && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
             bool b_debug_mat = (ddc->col_mat_info && (vis->GetFrameFlags()&I3D_FRMF_STATIC_COLLISION));
@@ -2711,7 +2648,6 @@ I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
 
                               //render shadow receiver
             PI3D_driver drv = ddc->scene->GetDriver1();
-#ifndef GL
             IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
             if(!drv->CanUsePixelShader()){
                drv->SetTexture1(0, NULL);
@@ -2724,7 +2660,6 @@ I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
                d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TFACTOR);
                drv->SetTextureFactor(texture_factor);
             }else
-#endif
             {
                I3D_driver::S_ps_shader_entry_in se_ps;
                se_ps.AddFragment(PSF_MOD_COLOR_v0);
@@ -2747,13 +2682,11 @@ I3DENUMRET I3DAPI I3D_scene::cbDebugDraw(PI3D_frame frm, dword c){
             }
 
             vis->RenderSolidMesh(ddc->scene, true);
-#ifndef GL
             if(!drv->CanUsePixelShader()){
                d3d_dev->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
                d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
                d3d_dev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
             }
-#endif
          }
       }
       break;

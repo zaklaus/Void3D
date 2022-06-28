@@ -86,9 +86,7 @@ class I3D_object_camview: public I3D_object, public I3D_driver::C_reset_callback
          scn->SetActiveCamera(cam);
          S_preprocess_context pc_rec(scn);
          scn->RenderView(render_flags, RV_CAM_TO_TEXTURE,
-#ifndef GL
             NULL, 0,
-#endif
             &pc_rec);
 
          IDirect3DDevice9 *pDev8 = drv->GetDevice1();
@@ -122,9 +120,7 @@ public:
 
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 public:
    I3DMETHOD_(dword,Release)(){ if(--ref) return ref; delete this; return 0; }
@@ -179,10 +175,8 @@ public:
 
 void I3D_object_camview::AddPrimitives(S_preprocess_context &pc){
 
-#ifndef GL
    if(pc.mode==RV_SHADOW_CASTER)
       return;
-#endif
    PI3D_mesh_base mb = GetMesh();
    if(!mb)
       return;
@@ -244,7 +238,6 @@ void I3D_object_camview::AddPrimitives(S_preprocess_context &pc){
    CHECK_D3D_RESULT("DrawIP", hr);
 #endif
 
-#ifndef GL
 void I3D_object_camview::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    I3D_mesh_base *mb = mesh;
@@ -413,7 +406,6 @@ void I3D_object_camview::DrawPrimitive(const S_preprocess_context &pc, const S_r
       DRAW_PRIM;
    }
 }
-#endif
 //----------------------------
 
 void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -482,13 +474,8 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
    */
 
    drv->SetupBlend(rp.blend_mode);
-#ifndef GL
    drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
    drv->SetVSDecl(vertex_buffer.vs_decl);
-#else
-   drv->SetStreamSource(mesh->vertex_buffer.GetD3DVertexBuffer(), mesh->vertex_buffer.GetSizeOfVertex());
-   drv->SetVSDecl(mesh->vertex_buffer.vs_decl);
-#endif
 
 #ifdef USE_STRIPS
    const S_fgroup_strip_info &si = strp_info[0];
@@ -560,9 +547,7 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
 
       drv->SetPixelShader(se_ps);
 
-#ifndef GL
       DRAW_PRIM;
-#endif
       if(is_wire) d3d_dev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
    }else{
       drv->SetupBlend(I3DBLEND_OPAQUE);
@@ -572,9 +557,7 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
       drv->SetPSConstant(PSC_COLOR, &c);
 
       drv->SetPixelShader(se_ps);
-#ifndef GL
       DRAW_PRIM;
-#endif
    }
                               //re-render with original texture
    if(mat->GetTexture1(MTI_DIFFUSE)){
@@ -588,9 +571,7 @@ void I3D_object_camview::DrawPrimitivePS(const S_preprocess_context &pc, const S
       drv->SetPixelShader(se_ps);
 
       drv->SetupBlend(I3DBLEND_ALPHABLEND);
-#ifndef GL
       DRAW_PRIM;
-#endif
    }
 }
 

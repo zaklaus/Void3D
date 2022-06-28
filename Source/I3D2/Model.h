@@ -9,7 +9,6 @@
 
 class I3D_model: public I3D_frame{
 public:
-#ifndef GL
    class C_shadow_info{
                                  //last light used to majke shadow
                                  // this pointer is not ref-counted, so it can't be referenced!
@@ -46,7 +45,6 @@ public:
          transition_count = 0;
       }
    };
-#endif
 protected:
    CPI3D_scene scn;
    I3D_container *in_container;//container which ticks us (may be NULL if we're not animated)
@@ -55,9 +53,7 @@ protected:
 
    C_bound_volume hr_bound;
 
-#ifndef GL
    C_shadow_info *shadow_info;
-#endif
    friend class I3D_scene;
    friend class I3D_scene_imp;
 
@@ -65,9 +61,7 @@ public:
    I3D_model(CPI3D_scene s):
       scn(s),
       in_container(NULL),
-#ifndef GL
       shadow_info(NULL),
-#endif
       I3D_frame(s->GetDriver1())
    {}
 

@@ -70,9 +70,6 @@ class I3D_atmos: public I3D_visual{
    dword draw_count;
    dword num_elements;        //at fov = 65 degrees
 
-#ifdef GL
-   I3D_dest_vertex_buffer vertex_buffer;
-#endif
 
 //----------------------------
 
@@ -514,9 +511,6 @@ public:
       fall_dir(0, 0, 0),
       draw_count(0),
       elem_scale(0, 0),
-#ifdef GL
-      vertex_buffer(d),
-#endif
       num_elements(100)
    {
       visual_type = I3D_VISUAL_ATMOS;
@@ -556,9 +550,7 @@ public:
 //----------------------------
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 //----------------------------
 
@@ -883,7 +875,6 @@ void I3D_atmos::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_atmos::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    dword num_elems = PrepareEffect(pc, rp.user1);
@@ -921,7 +912,6 @@ void I3D_atmos::DrawPrimitive(const S_preprocess_context &pc, const S_render_pri
       index_buffer.D3D_index_buffer_index * 3, num_elems*2);
    CHECK_D3D_RESULT("DrawIndexedPrimitive", hr);
 }
-#endif
 //----------------------------
 
 void I3D_atmos::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){

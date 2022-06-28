@@ -253,11 +253,6 @@ void I3D_volume::CheckCol_L_S_dyn(I3D_collision_data &cd){
                               //compute c (sphere center squared + line's P1 squared
                               // - 2 * line's p1 dot sphere center - squared radius
    float c = dir_to_sphere.Square() - (w_sphere.radius*w_sphere.radius);
-#if defined _DEBUG && 0
-   { float from_dot = cd.from.Square();
-      float c1 = sphere_pos_dot + from_dot - 2.0f * (cd.from.Dot(w_sphere.pos)) - (w_sphere.radius*w_sphere.radius);
-      assert(I3DFabs(c-c1) < 1e-3f); }
-#endif
 
 
                               //solve the equation (a is ommited, since it is 1.0)
@@ -827,10 +822,6 @@ void I3D_volume::CheckCol_S_S_dyn(const S_trace_help &th) const{
                               //compute c (sphere center squared + line's P1 squared
                               // - 2 * line's p1 dot sphere center - squared radius
    float c = dir_to_sphere.Square() - radius_sum*radius_sum;
-#if defined _DEBUG && 0
-   { float c1 = sphere_pos_dot + th.from_squared - 2.0f * (th.from.Dot(w_sphere.pos)) - (radius_sum*radius_sum);
-   assert(I3DFabs(c-c1) < 1e-2f); }
-#endif
    S_S_DEBUG_DYN(C_xstr("c = %") %c);
 
                               //solve the equation (a is ommited, since it is 1.0)

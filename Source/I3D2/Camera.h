@@ -15,9 +15,6 @@ class I3D_camera: public I3D_frame{
    mutable S_matrix m_proj;
    mutable S_projection_matrix m_proj_simple,
       m_proj_simple_biased;   //same as m_proj_simple, but used with z-bias rendering (to avoid z-fighting of coplanar polygons)
-#ifdef GL
-   mutable S_projection_matrix gl_m_proj_simple, gl_m_proj_simple_biased;
-#endif
    mutable S_matrix m_view;
                               //perspective transform
    float fov_a, ncp, fcp;     //fov angle & clipping planes
@@ -36,10 +33,6 @@ public:
    inline const S_matrix &GetViewMatrix1() const{ assert(!(cam_flags&CAMF_RESET_VIEW)); return m_view; }
    inline const S_matrix &GetProjectionMatrix1() const{ assert(!(cam_flags&CAMF_RESET_PROJ)); return m_proj; }
    inline const S_projection_matrix &GetProjectionMatrixSimple() const{ assert(!(cam_flags&CAMF_RESET_PROJ)); return m_proj_simple; }
-#ifdef GL
-   inline const S_projection_matrix &GlGetProjectionMatrixSimple() const{ assert(!(cam_flags&CAMF_RESET_PROJ)); return gl_m_proj_simple; }
-   inline const S_projection_matrix &GlGetProjectionMatrixBiasedSimple() const{ assert(!(cam_flags&CAMF_RESET_BIAS)); return gl_m_proj_simple_biased; }
-#endif
 
 //----------------------------
 // Get biased projection matrix. This matrix is used for rendering Z-biased geometry.

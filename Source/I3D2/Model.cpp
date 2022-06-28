@@ -25,13 +25,11 @@ static const S_container_vcall vc_container_model = {
 };
 
 //----------------------------
-#ifndef GL
 void I3D_model::C_shadow_info::SetLastLight(I3D_light *lp){
    if(lp) lp->AddRef();
    if(last_light) last_light->Release();
    last_light = lp;
 }
-#endif
 //----------------------------
 //----------------------------
                               //results of animation, used with animation blending
@@ -659,9 +657,7 @@ public:
    ~I3D_model_imp(){
 
       Close();
-#ifndef GL
       delete shadow_info;
-#endif
       drv->DecCount(I3D_CLID_MODEL);
       if(in_container)
          in_container->RemoveAnimFrame(this);
@@ -686,7 +682,6 @@ public:
 
 //----------------------------
    I3DMETHOD_(dword,SetFlags)(dword new_flags, dword flags_mask){
-#ifndef GL
 
       if(flags_mask&I3D_FRMF_SHADOW_CAST){
          if((frm_flags^new_flags)&I3D_FRMF_SHADOW_CAST){
@@ -700,7 +695,6 @@ public:
             }
          }
       }
-#endif
       return I3D_frame::SetFlags(new_flags, flags_mask);
    }
 //----------------------------

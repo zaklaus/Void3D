@@ -1243,19 +1243,6 @@ void ISND_music::Tick(void){
       }
    }
 
-#if defined _DEBUG && 0
-   {
-      cout<<(const char*)C_fstr(
-         "row: %i / %i, pos: %i, speed: %i, vol: %.2f      \r"
-         ,
-         current_row, num_rows_in_pat,
-         song_position,
-         curr_speed,
-         volume,
-         0
-         );
-   }
-#endif
 }
 
 //----------------------------

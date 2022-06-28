@@ -22,17 +22,10 @@
 #define EMULATE_ATTENUATION   //compute attenuation (by setting volume) ourselves
 
 
-#if defined _DEBUG && 0
-
-#define SND_DEBUG(msg) drv->DEBUG(msg)
-#define SND_PRINT(msg) drv->PRINT(msg)
-
-#else
 
 #define SND_DEBUG(n)
 #define SND_PRINT(msg)
 
-#endif
 
 
 //----------------------------

@@ -501,11 +501,9 @@ I3D_RESULT C_loader::ReadMaterial(){
          --ck;
       }
    }
-#ifndef GL
                               //use compression
    if(driver->GetState(RS_TEXTURECOMPRESS))
       ct_flags |= TEXTMAP_COMPRESS;
-#endif
 
    if(diff.Size()){
       if(!keep_diffuse){
@@ -557,10 +555,8 @@ I3D_RESULT C_loader::CreateTexture(dword ct_flags, const S_mat_src &mat_src, con
    }
    if(mat_src.flags&MAT_SRC_TRUECOLOR)
       ct.flags |= TEXTMAP_TRUECOLOR;
-#ifndef GL
    if(mat_src.flags&MAT_SRC_NOCOMPRESS)
       ct.flags &= ~TEXTMAP_COMPRESS;
-#endif
    if(mat_src.flags&MAT_SRC_NOMIPMAP){
       ct.flags &= ~TEXTMAP_MIPMAP;
       ct.flags |= TEXTMAP_NOMIPMAP;
@@ -723,9 +719,7 @@ I3D_RESULT C_loader::SetupMaterial(PI3D_material mat, dword ct_flags, dword txt_
       //if(driver->GetFlags()&DRVF_EMBMMAPPING)
       {
          dword ctf = ct_flags | TEXTMAP_NORMALMAP;
-#ifndef GL
          ctf &= ~TEXTMAP_COMPRESS;
-#endif
          CreateTexture(ctf, normalmap, mat_name, mat, MTI_NORMAL, &bump_level);
       }
    }
@@ -746,9 +740,7 @@ I3D_RESULT C_loader::SetupMaterial(PI3D_material mat, dword ct_flags, dword txt_
                               //setup material's detail map
          dword ctf = ct_flags;
          //ctf &= ~TEXTMAP_COMPRESS;
-#ifndef GL
          ctf |= TEXTMAP_COMPRESS;
-#endif
          //ctf |= TEXTMAP_TRUECOLOR;
          CreateTexture(ctf, detail, mat_name, mat, MTI_DETAIL);
          mat->SetDetailScale(detail.uv_scale);
@@ -812,20 +804,6 @@ bool C_loader::ReadTrackPos(PI3D_frame frm, const char *frm_name, PI3D_keyframe_
       if(track_time > anim_length)
          REPORT_ERR(C_fstr("Frame '%s': position track keys beyond time segment", frm_name));
       (*animp)->SetPositionKeys(akeys, header.num_keys);
-#if defined _DEBUG && 0
-      {
-         const I3D_anim_pos_bezier *keys;
-         dword nk;
-         (*animp)->GetPositionKeys(&keys, &nk);
-         for(dword i=0; i<nk; i++){
-            dword ni = (i+1)%nk;
-            driver->DebugLine(keys[i].v, keys[ni].v, 0, S_vector(1, 0, 0));
-            driver->DebugLine(keys[i].v, keys[i].out_tan, 0, S_vector(0, 0, 1));
-            driver->DebugLine(keys[i].out_tan, keys[ni].in_tan, 0, S_vector(0, 0, 1));
-            driver->DebugLine(keys[ni].in_tan, keys[ni].v, 0, S_vector(0, 0, 1));
-         }
-      }
-#endif
    }
    delete[] akeys;
    return true;
@@ -871,19 +849,6 @@ bool C_loader::ReadTrackRot(PI3D_frame frm, const char *frm_name, PI3D_keyframe_
       if(track_time > anim_length)
          REPORT_ERR(C_fstr("Frame '%s': rotation track keys beyond time segment", frm_name));
       (*animp)->SetRotationKeys(akeys, header.num_keys);
-#if defined _DEBUG && 0
-      {
-         const I3D_anim_quat_bezier *keys;
-         dword nk;
-         (*animp)->GetRotationKeys(&keys, &nk);
-         const S_vector &wp = frm->GetWorldPos();
-         for(dword i=0; i<nk; i++){
-            driver->DebugLine(wp, wp + S_matrix(keys[i].q)(2) * 5, 0, 0xFF00FF00);
-            driver->DebugLine(wp, wp + S_matrix(keys[i].out_tan)(2) * 5, 0, 0xFF00FF00);
-            driver->DebugLine(wp, wp + S_matrix(keys[i].in_tan)(2) * 5, 0, 0xFF00FF00);
-         }
-      }
-#endif
    }
    delete[] akeys;
    return true;
@@ -1571,14 +1536,6 @@ void C_loader::MakeVertexNormals(int num_orig_verts, C_vector<word> &vertex_map,
    delete[] vertex_info;
    delete[] face_area;
 
-#if defined _DEBUG && 0
-                              //validity check
-   for(i=v_verts.size(); i--; ){
-      const S_normal &n = v_verts[i].normal;
-      float len = n.Magnitude();
-      assert(IsAbsMrgZero(1.0f - len));
-   }
-#endif
 }
 
 //----------------------------
@@ -1631,15 +1588,6 @@ I3D_RESULT C_loader::ReadMesh(PI3D_frame frm, PI3D_mesh_base mesh, const char *n
 
             faces.assign(n);
             ck.Read(&faces.front(), sizeof(I3D_triface)*n);
-#if defined _DEBUG && 0
-            int nv = verts.size();
-            for(int i=0; i<n; i++){
-               I3D_triface &fc = faces[i];
-               assert(fc[0] < nv);
-               assert(fc[1] < nv);
-               assert(fc[2] < nv);
-            }
-#endif
          }
          --ck;
          break;
@@ -1975,11 +1923,6 @@ I3D_RESULT C_loader::ReadMesh(PI3D_frame frm, PI3D_mesh_base mesh, const char *n
       mesh->SetFGroups(&fgroups.front(), fgroups.size());
       mesh->SetSmoothGroups(smooth_groups);
       mesh->SetFaces(&faces.front());
-#if defined _DEBUG && 0
-      C_buffer<I3D_triface> fb(faces.size());
-      mesh->GetFaces(fb.begin());
-      mesh->SetFaces(fb.begin());
-#endif
    }
 
    if(vertex_map.size() > num_orig_verts)
@@ -2363,17 +2306,6 @@ void C_loader::SmoothSceneNormals(PI3D_scene scene, C_vector<S_smooth_info> &smo
          const S_vector *v_src = (S_vector*)(((byte*)sd0.verts) + sd0.vstride*vi_src);
          v[1] = v_src[1];
       }
-#if defined _DEBUG && 0
-      {
-         PI3D_driver drv = sd0.vis->GetDriver1();
-         for(dword i=sd0.num_verts; i--; ){
-            const S_vector *v = (S_vector*)(((byte*)sd0.verts) + sd0.vstride*i);
-            float len = v[1].Magnitude();
-            //assert(IsAbsMrgZero(1.0f - len));
-            drv->PRINT(C_fstr("%i: %.8f", i, len));
-         }
-      }
-#endif
       sd0.mb->UnlockVertices();
    }
 

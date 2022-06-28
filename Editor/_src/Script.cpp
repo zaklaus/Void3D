@@ -323,18 +323,6 @@ public:
       ++ss->use_count;
    
       if(ISL_SUCCESS(ss->load_result)){
-   #if defined _DEBUG && 0
-         C_vector<char> msg;
-         struct S_hlp{
-            static void Dump(const char *cp, void *c){
-               C_vector<char> &msg = *(C_vector<char>*)c;
-               msg.insert(msg.end(), cp, cp+strlen(cp));
-            }
-         };
-         scr->Dump(S_hlp::Dump, &msg);
-         msg.push_back(0);
-         ErrReport(msg.begin(), editor);
-   #endif
          ISL_RESULT ir = vm->Load(ss->scr, GetLinkSymbols());
          if(ISL_FAIL(ir)){
             ret = SR_LINK_ERROR;

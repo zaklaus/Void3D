@@ -474,11 +474,9 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
 
    if(flags&FINDTF_ALPHA1)
       flags &= ~FINDTF_ALPHA;
-#ifndef GL
                               //can't support paletized alpha-textures
    if(flags&FINDTF_ALPHA)
       flags &= ~FINDTF_PALETIZED;
-#endif
    const S_pixelformat *best_fmt = NULL;
 
    const C_vector<S_pixelformat> &fmts = texture_formats[!(flags&FINDTF_RENDERTARGET) ? 0 : 1];
@@ -547,7 +545,6 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
          continue;
 
       if(new_fmt.flags&PIXELFORMAT_COMPRESS){
-#ifndef GL
                               //that's compressed format
          if(flags&FINDTF_COMPRESSED){
             //if(i==6) break;  //debug - force using specified texture format
@@ -603,7 +600,6 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
                   best_fmt = &new_fmt;
             }
          }
-#endif
       }else{
 #if 0
          if(i==19){
@@ -611,13 +607,11 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
             break;  //debug - force using specified texture format
          }
 #endif
-#ifndef GL
          if(flags&FINDTF_COMPRESSED){
                               //if we have already compressed format, skip
             if(best_fmt && (best_fmt->flags&PIXELFORMAT_COMPRESS))
                continue;
          }
-#endif
          if(flags&FINDTF_ALPHA){
             if(new_fmt.flags&PIXELFORMAT_ALPHA){
                if(!best_fmt || !(best_fmt->flags&PIXELFORMAT_ALPHA)){
@@ -674,7 +668,6 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
                continue;
                                  //alpha not found yet, try non-alpha
          }
-#ifndef GL
          if(flags&FINDTF_PALETIZED){
             if(!best_fmt){
                               //1st found
@@ -744,7 +737,6 @@ I3D_RESULT I3D_driver::FindTextureFormat(S_pixelformat &pf, dword flags) const{
                }
             }
          }else
-#endif
          {
             if(!best_fmt){
                                  //any is good
@@ -960,9 +952,7 @@ I3D_driver::I3D_driver():
    global_sound_volume(1.0f),
    debug_draw_mats(false),
    pD3D_driver(NULL),
-#ifndef GL
    is_hal(false),
-#endif
    in_scene_count(0),
    texture_sort_id(0),
    force_lod_index(-1),
@@ -977,9 +967,6 @@ I3D_driver::I3D_driver():
                               //cache
    srcblend(D3DBLEND_ONE),
    dstblend(D3DBLEND_ZERO),
-#ifdef GL
-   gl_srcblend(GL_ONE), gl_dstblend(GL_ZERO),
-#endif
    alpha_blend_on(false),
    render_time(0),
                               //cache
@@ -1052,112 +1039,10 @@ __declspec(naked) long __cdecl _ftol (float f){
 
 //----------------------------
 
-#if defined _DEBUG && 0
-#pragma comment(lib, "cgd3d.lib")
-#pragma warning(push,1)
-#include "cg\cgd3d.h"
-#pragma warning(pop)
-#endif
 
 void SetBreakAlloc(dword);
 
 //----------------------------
-#ifdef GL
-
-//----------------------------
-
-bool C_gl_shader::Build(E_TYPE type, const char *src, dword len){
-   gl_id = glCreateShader(type==TYPE_VERTEX ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER); CHECK_GL_RESULT("glCreateShader");
-   if(gl_id){
-      glShaderSource(gl_id, 1, &src, len ? (int*)&len : NULL); CHECK_GL_RESULT("glShaderSource");
-      glCompileShader(gl_id); CHECK_GL_RESULT("glCompileShader");
-      GLint compiled = 0;
-      glGetShaderiv(gl_id, GL_COMPILE_STATUS, &compiled);
-      if(!compiled){
-         GLint infoLen = 0;
-         glGetShaderiv(gl_id, GL_INFO_LOG_LENGTH, &infoLen); CHECK_GL_RESULT("glGetShaderiv");
-         if(infoLen){
-            char *buf = new char[infoLen+1];
-            if(buf){
-               glGetShaderInfoLog(gl_id, infoLen, NULL, buf);
-               buf[infoLen] = 0;
-               OutputDebugString(buf);
-               delete[] buf;
-               assert(0);
-            }
-         }
-         glDeleteShader(gl_id); CHECK_GL_RESULT("glDeleteShader");
-         gl_id = 0;
-      }
-   }
-   return (gl_id!=0);
-}
-
-//----------------------------
-
-bool C_gl_program::Build(const char *v_shader, const char *f_shader, const char *attr_names, dword v_len, dword f_len){
-   if(!shd_vertex.Build(C_gl_shader::TYPE_VERTEX, v_shader, v_len))
-      return false;
-   if(!shd_fragment.Build(C_gl_shader::TYPE_FRAGMENT, f_shader, f_len))
-      return false;
-   gl_prg_id = glCreateProgram(); CHECK_GL_RESULT("glCreateProgram");
-   if(gl_prg_id){
-      glAttachShader(gl_prg_id, shd_fragment); CHECK_GL_RESULT("glAttachShader");
-      glAttachShader(gl_prg_id, shd_vertex); CHECK_GL_RESULT("glAttachShader");
-      glLinkProgram(gl_prg_id); CHECK_GL_RESULT("glLinkProgram");
-      GLint linkStatus = GL_FALSE;
-      glGetProgramiv(gl_prg_id, GL_LINK_STATUS, &linkStatus);
-      if(linkStatus != GL_TRUE){
-         GLint bufLength = 0;
-         glGetProgramiv(gl_prg_id, GL_INFO_LOG_LENGTH, &bufLength);
-         if(bufLength) {
-            char *buf = new char[bufLength+1];
-            if(buf){
-               glGetProgramInfoLog(gl_prg_id, bufLength, NULL, buf);
-               buf[bufLength] = 0;
-               OutputDebugString(buf);
-               delete[] buf;
-               assert(0);
-            }
-         }
-         glDeleteProgram(gl_prg_id);
-         gl_prg_id = 0;
-      }else{
-                              //collect attributes id's
-         dword indx = 0;
-         while(*attr_names){
-            int id = -1;
-            switch(*attr_names){
-            case 'u': id = glGetUniformLocation(gl_prg_id, attr_names); break;
-            case 'a': id = glGetAttribLocation(gl_prg_id, attr_names); break;
-            }
-            CHECK_GL_RESULT("glGet*Location");
-            //assert(id!=-1);
-            BuildStoreAttribId(indx, id);
-            attr_names += strlen(attr_names)+1;
-            ++indx;
-         }
-      }
-   }
-   return (gl_prg_id!=0);
-}
-
-//----------------------------
-
-C_gl_program::~C_gl_program(){
-   if(gl_prg_id)
-      glDeleteProgram(gl_prg_id);
-}
-
-//----------------------------
-
-void C_gl_program::Use(){
-   glUseProgram(gl_prg_id); CHECK_GL_RESULT("glUseProgram");
-}
-
-//----------------------------
-
-#endif
 //----------------------------
 
 I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
@@ -1170,10 +1055,6 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
       ir = I3DERR_INVALIDPARAMS;
       goto out;
    }
-#ifdef GL
-   glCullFace(GL_FRONT);
-   glEnable(GL_CULL_FACE);
-#endif
    {
       h_nvlinker = LoadLibrary("nvlinker.dll");
       if(!h_nvlinker){
@@ -1579,11 +1460,9 @@ void I3D_driver::Close(){
       }
    }
    if(!rel_warned){
-#ifndef GL
       assert(!vb_manager_list.size());
       assert(!ib_manager_list.size());
       assert(!hw_vb_list.size());
-#endif
 #ifdef DEBUG_VB_ALLOC
       if(vb_manager_list.size()){
          dword id = vb_manager_list[0]->GetAllocID();
@@ -1966,34 +1845,6 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
 
 I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se){
 
-#if defined _DEBUG && 0
-                              //make sure all higher textures are set to NULL
-   {
-      bool stage_used[4] = {false, false, false, false};
-      for(dword i=0; i<se.num_fragments; i++){
-         E_PS_FRAGMENT frg = se.fragment_code[i];
-         switch(frg){
-         case PSF_TEX_0:
-            stage_used[0] = true; break;
-         case PSF_TEX_1:
-         case PSF_TEX_1_BEM:
-         case PSF_TEX_1_BEML:
-            stage_used[1] = true; break;
-         case PSF_TEX_2:
-         case PSF_TEX_2_BEM:
-         case PSF_TEX_2_BEML:
-            stage_used[2] = true; break;
-         case PSF_TEX_3:
-         case PSF_TEX_3_BEM:
-         case PSF_TEX_3_BEML:
-            stage_used[3] = true; break;
-         }
-      }
-      for(i=4; i--; ){
-         if(!stage_used[i]) assert(!last_texture[i]);
-      }
-   }
-#endif
 
                               //find shader in cache
                               //a little trick here - pass in S_ps_shader_entry_in&
@@ -2128,7 +1979,6 @@ static void ConvertD3DpfToI3Dpf(const D3DFORMAT d3d_fmt, S_pixelformat &pf){
    }
                               //setup alpha/palette/compression/bump
    switch(d3d_fmt){
-#ifndef GL
    case D3DFMT_DXT1:
    case D3DFMT_DXT2:
    case D3DFMT_DXT3:
@@ -2152,7 +2002,6 @@ static void ConvertD3DpfToI3Dpf(const D3DFORMAT d3d_fmt, S_pixelformat &pf){
    case D3DFMT_P8:
       pf.flags = PIXELFORMAT_PALETTE;
       break;
-#endif
    case D3DFMT_A8R8G8B8:
    case D3DFMT_A1R5G5B5:
    case D3DFMT_A4R4G4B4:
@@ -2273,7 +2122,6 @@ static void ConvertD3DpfToI3Dpf(const D3DFORMAT d3d_fmt, S_pixelformat &pf){
 
 static D3DFORMAT ConvertI3DpfToD3Dpf(const S_pixelformat &pf){
 
-#ifndef GL
    if(pf.flags&PIXELFORMAT_COMPRESS){
       switch(pf.four_cc){
       case MAKEFOURCC('D', 'X', 'T', '1'):
@@ -2288,7 +2136,6 @@ static D3DFORMAT ConvertI3DpfToD3Dpf(const S_pixelformat &pf){
          return D3DFMT_DXT5;
       }
    }else
-#endif
    if(pf.flags&PIXELFORMAT_BUMPMAP){
       switch(pf.bytes_per_pixel){
       case 2:
@@ -2339,11 +2186,9 @@ static D3DFORMAT ConvertI3DpfToD3Dpf(const S_pixelformat &pf){
    switch(pf.bytes_per_pixel){
 
    case 1:
-#ifndef GL
       if(pf.flags&PIXELFORMAT_PALETTE)
          return D3DFMT_P8;
       else
-#endif
          return D3DFMT_R3G3B2;
 
    case 2:
@@ -2454,9 +2299,7 @@ I3D_RESULT I3D_driver::InitD3DResources(){
       blend_table[1][D3DBLEND_ZERO] = D3DBLEND_ZERO;
       blend_table[1][D3DBLEND_ONE] = caps&D3DPBLENDCAPS_ONE ? D3DBLEND_ONE : blend_table[1][D3DBLEND_INVSRCALPHA];
    }
-#ifndef GL
    drv_flags2 &= ~DRVF2_USE_PS;
-#endif
 
    d3d_dev->SetFVF(D3DFVF_XYZ);
 
@@ -2513,9 +2356,7 @@ I3D_RESULT I3D_driver::InitD3DResources(){
             rtt_zbuf_fmts[i] = rtt_zbuf_fmts.back(); rtt_zbuf_fmts.pop_back();
          }
       }
-#ifndef GL
       is_hal = (cp.DeviceType == D3DDEVTYPE_HAL);
-#endif
    }
 
                               //init D3D defaults
@@ -2616,7 +2457,6 @@ I3D_RESULT I3D_driver::InitD3DResources(){
    d3d_caps.MaxSimultaneousTextures = Min(d3d_caps.MaxSimultaneousTextures, (dword)DEBUG_MAX_TEXTURE_STAGES);
 #endif
 
-#ifndef GL
                               //check basic blending caps
    drv_flags2 &= ~(DRVF2_CAN_MODULATE2X | DRVF2_CAN_TXTOP_ADD);
 #ifndef DEBUG_NO_MODULATE2X
@@ -2655,19 +2495,13 @@ I3D_RESULT I3D_driver::InitD3DResources(){
    if(d3d_caps.TextureOpCaps&D3DTEXOPCAPS_ADD){
       drv_flags2 |= DRVF2_CAN_TXTOP_ADD;
    }
-#endif
                               //determine vertex blending mode
-#ifndef GL
    vertex_light_mult = 1.0f;
    vertex_light_blend_op = D3DTOP_MODULATE;
    if(drv_flags2&DRVF2_CAN_MODULATE2X){
       vertex_light_blend_op = D3DTOP_MODULATE2X;
       vertex_light_mult = .5f;
    }
-#else
-   vertex_light_mult = .5f;
-#endif
-#ifndef GL
                               //determine if device is capable of
                               // hardware transforming
    drv_flags2 &= ~DRVF2_DIRECT_TRANSFORM;
@@ -2684,18 +2518,15 @@ I3D_RESULT I3D_driver::InitD3DResources(){
 #endif
    if(init_data.flags&I3DINIT_DIRECT_TRANS)
       drv_flags2 |= DRVF2_DIRECT_TRANSFORM;
-#endif
 
    num_available_txt_stages = MaxSimultaneousTextures();
    InitLMConvertor();
-#ifndef GL
                               //determine if device is capable to use pixel shaders
    if(!(init_data.flags&I3DINIT_NO_PSHADER)){
       if(IsDirectTransform() && (d3d_caps.PixelShaderVersion&0xffff) >= 0x0101){
          drv_flags2 |= DRVF2_USE_PS;
       }
    }
-#endif
    num_available_txt_stages = MaxSimultaneousTextures();
 
 
@@ -2703,10 +2534,8 @@ I3D_RESULT I3D_driver::InitD3DResources(){
                               //init vertex buffer for rendering of rectangles
       HRESULT hr;
       dword d3d_usage = D3DUSAGE_WRITEONLY;
-#ifndef GL
       if(!IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
-#endif
       IDirect3DVertexBuffer9 *vb;
       dword buf_size = sizeof(S_vertex_rectangle) * 4;
       hr = d3d_dev->CreateVertexBuffer(buf_size, d3d_usage, 0, D3DPOOL_DEFAULT, &vb, NULL);
@@ -2732,10 +2561,8 @@ I3D_RESULT I3D_driver::InitD3DResources(){
                               //init vertex buffer for rendering of rectangles
       HRESULT hr;
       dword d3d_usage = D3DUSAGE_WRITEONLY;
-#ifndef GL
       if(!IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
-#endif
       IDirect3DVertexBuffer9 *vb;
       dword buf_size = sizeof(S_vectorw)*4;
       hr = d3d_dev->CreateVertexBuffer(buf_size, d3d_usage, 0, D3DPOOL_DEFAULT, &vb, NULL);
@@ -2749,10 +2576,8 @@ I3D_RESULT I3D_driver::InitD3DResources(){
                               //init vertex buffer for particles
       HRESULT hr;
       dword d3d_usage = D3DUSAGE_WRITEONLY;
-#ifndef GL
       if(!IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
-#endif
       IDirect3DVertexBuffer9 *vb;
       dword buf_size = sizeof(S_vertex_particle) * 4 * MAX_PARTICLE_RECTANGLES;
       hr = d3d_dev->CreateVertexBuffer(buf_size, d3d_usage, 0, D3DPOOL_DEFAULT, &vb, NULL);
@@ -2779,10 +2604,8 @@ I3D_RESULT I3D_driver::InitD3DResources(){
                               //init vertex buffer for particles
       HRESULT hr;
       dword d3d_usage = D3DUSAGE_WRITEONLY;
-#ifndef GL
       if(!IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
-#endif
       IDirect3DIndexBuffer9 *ib;
       dword buf_size = sizeof(I3D_triface)*MAX_PARTICLE_RECTANGLES*2;
       hr = d3d_dev->CreateIndexBuffer(buf_size, d3d_usage, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &ib, NULL);
@@ -2895,10 +2718,8 @@ I3D_RESULT I3D_driver::InitD3DResources(){
                               //create dynamic vertex and index buffer
       dword d3d_usage = D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY;
       D3DPOOL pool = D3DPOOL_DEFAULT;
-#ifndef GL
       if(!IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
-#endif
       {
          IDirect3DIndexBuffer9 *ib;
          hr = d3d_dev->CreateIndexBuffer(IB_TEMP_SIZE, d3d_usage, D3DFMT_INDEX16, pool, &ib, NULL);
@@ -2917,9 +2738,7 @@ I3D_RESULT I3D_driver::InitD3DResources(){
       }
    }
 
-#ifndef GL
    InitShadowResources();
-#endif
    drv_flags2 &= ~DRVF2_CAN_RENDER_MIRRORS;
    if(NumSimultaneousTextures() >= 2 && (drv_flags&DRVF_SINGLE_PASS_MODULATE2X)){
       if(d3d_caps.MaxUserClipPlanes || CanUsePixelShader()){
@@ -2955,18 +2774,6 @@ I3D_RESULT I3D_driver::InitD3DResources(){
 
    d3d_dev->SetFVF(NULL);
 
-#ifdef GL
-   glBlendFunc(gl_srcblend = GL_ONE, gl_dstblend = GL_ZERO); CHECK_GL_RESULT("glBlendFunc");
-   //glBlendEquation(GL_FUNC_ADD); CHECK_GL_RESULT("glBlendEquation");
-   glDisable(GL_BLEND);
-
-                              //we use different coordinate system, need to reverse depth buffer usage
-   glDepthFunc(GL_GREATER); CHECK_GL_RESULT("glDepthFunc");
-   glClearDepthf(0.0f); CHECK_GL_RESULT("glClearDepthf");
-   glEnable(GL_DEPTH_TEST);
-   //CHECK_GL_RESULT("!");
-
-#endif
 
    return I3D_OK;
 }
@@ -3009,7 +2816,6 @@ I3D_RESULT I3D_driver::CreateDepthBuffer(dword sx, dword sy, const S_pixelformat
 }
 
 //----------------------------
-#ifndef GL
 void I3D_driver::InitShadowResources(){
 
    HRESULT hr;
@@ -3210,7 +3016,6 @@ void I3D_driver::InitShadowResources(){
       ib_blur = NULL;
    }
 }
-#endif
 //----------------------------
 
 void I3D_driver::InitLMConvertor(){
@@ -3293,9 +3098,7 @@ void I3D_driver::InitLMConvertor(){
 
             SetTexture1(0, NULL);
             SetTexture1(1, NULL);
-#ifndef GL
             DisableTextureStage(1);
-#endif
             if(stage_txt_op[0]!=D3DTOP_SELECTARG1)
                d3d_dev->SetTextureStageState(0, D3DTSS_COLOROP, stage_txt_op[0]);
          }
@@ -3384,19 +3187,15 @@ void I3D_driver::CloseD3DResources(){
 
    ib_temp = NULL;
    vb_temp = NULL;
-#ifndef GL
    vb_blur = NULL;
    ib_blur = NULL;
    rt_shadow.Close();
    tp_shadow = NULL;
-#endif
    SetVertexShader(NULL);
    last_vs_decl = NULL;
    if(last_ps)
       SetPixelShader(NULL);
-#ifndef GL
    SetNightVision(false);
-#endif
    curr_render_target.Close();
    default_render_target.Close();
 
@@ -3438,7 +3237,6 @@ void I3D_driver::EvictResources(){
 
 void I3D_driver::ReleaseHWVertexBuffers(){
 
-#ifndef GL
                               //modify all references to HW vertex buffers
    for(dword i = hw_vb_list.size(); i--; ){
       I3D_dest_vertex_buffer *vb_d = hw_vb_list[i];
@@ -3453,12 +3251,6 @@ void I3D_driver::ReleaseHWVertexBuffers(){
 #endif
                               //forget all references, they'll be recreated
    hw_vb_list.clear();
-#endif
-#ifdef GL
-   for(int i=GL_PROGRAM_LAST; i--; ){
-      gl_shader_programs[i] = NULL;
-   }
-#endif
    SetStreamSource(NULL, 0);
 }
 
@@ -3846,7 +3638,6 @@ void I3D_driver::UnregisterManagedTexture(PI3D_texture tp){
 }
 
 //----------------------------
-#ifndef GL
 bool I3D_driver::AllocVertexBuffer(dword fvf_flags, D3DPOOL mem_pool, dword d3d_usage, dword num_verts,
    IDirect3DVertexBuffer9 **vb_ret, dword *beg_indx_ret, I3D_dest_vertex_buffer *vb_d, bool allow_cache){
 
@@ -4047,14 +3838,12 @@ bool I3D_driver::FreeIndexBuffer(IDirect3DIndexBuffer9 *ib, dword base_index){
    assert(0);
    return false;
 }
-#endif
 //----------------------------
 
 void I3D_driver::UpdateScreenViewport(const I3D_rectangle &rc1){
 
    I3D_rectangle rc = rc1;
    int rtsx, rtsy;
-#ifndef GL
    if(drv_flags2&DRVF2_IN_NIGHT_VISION){
       int sx1 = GetGraphInterface()->Scrn_sx();
       int sy1 = GetGraphInterface()->Scrn_sy();
@@ -4067,7 +3856,6 @@ void I3D_driver::UpdateScreenViewport(const I3D_rectangle &rc1){
       rc.t = rc.t*rtsy/sy1;
       rc.b = rc.b*rtsy/sy1;
    }else
-#endif
    {
       rtsx = GetGraphInterface()->Scrn_sx();
       rtsy = GetGraphInterface()->Scrn_sy();
@@ -4093,12 +3881,6 @@ void I3D_driver::UpdateViewport(const I3D_rectangle &rc){
    HRESULT hr;
    hr = d3d_dev->SetViewport(&vport);
    CHECK_D3D_RESULT("SetViewport", hr);
-#ifdef GL
-   HWND hwnd = (HWND)GetGraphInterface()->GetHWND();
-   RECT wrc;
-   GetClientRect(hwnd, &wrc);
-   glViewport(rc.l, wrc.bottom-rc.b, rc.r - rc.l, rc.b - rc.t);
-#endif
 }
 
 //----------------------------
@@ -4143,11 +3925,9 @@ I3D_RESULT I3D_driver::EndScene(){
 #endif
 
       SetStreamSource(NULL, 0);
-#ifndef GL
       if(!CanUsePixelShader()){
          DisableTextureStage(1);
       }else
-#endif
       {
          for(dword stage=0; stage < MAX_TEXTURE_STAGES; stage++){
             if(!last_texture[stage])
@@ -4254,18 +4034,12 @@ void I3D_driver::SetupBlendInternal(dword flags){
          alpha_blend_on = false;
          hr = d3d_dev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
          CHECK_D3D_RESULT("SetRenderState", hr);
-#ifdef GL
-         glDisable(GL_BLEND);
-#endif
       }
    }else{
       if(!alpha_blend_on){
          alpha_blend_on = true;
          hr = d3d_dev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
          CHECK_D3D_RESULT("SetRenderState", hr);
-#ifdef GL
-         glEnable(GL_BLEND);
-#endif
       }
    }
    if(srcblend != src){
@@ -4276,59 +4050,9 @@ void I3D_driver::SetupBlendInternal(dword flags){
       hr = d3d_dev->SetRenderState(D3DRS_DESTBLEND, dstblend=(D3DBLEND)dst);
       CHECK_D3D_RESULT("SetRenderState", hr);
    }
-#ifdef GL
-   switch(flags){
-   default:
-      //assert(0);
-   case I3DBLEND_OPAQUE:
-      src = GL_ONE;
-      dst = GL_ZERO;
-      break;
-   case I3DBLEND_ALPHABLEND:
-      src = GL_SRC_ALPHA;
-      dst = GL_ONE_MINUS_SRC_ALPHA;
-      break;
-   case I3DBLEND_ADD:
-      //src = blend_table[0][D3DBLEND_ONE];
-      src = GL_SRC_ALPHA;
-      dst = GL_ONE;
-      break;
-   case I3DBLEND_ADDALPHA:
-      src = GL_SRC_ALPHA;
-      dst = GL_ONE;
-      break;
-      /*
-   case I3DBLEND_INVMODULATE:
-      src = GL_ZERO;
-      dst = GL_ONE_MINUS_SRC_COLOR;
-      break;
-   case I3DBLEND_MODULATE2X:
-      src = GL_DST_COLOR;
-      dst = GL_SRC_COLOR;
-      break;
-   case I3DBLEND_MODULATE:
-      src = GL_ZERO;
-      dst = GL_SRC_COLOR;
-      break;
-   case I3DBLEND_INVMODULATE2X:
-      src = GL_DST_COLOR;
-      dst = GL_ONE_MINUS_SRC_COLOR;
-      break;
-   case I3DBLEND_TEST:
-      src = GL_SRC_ALPHA;
-      dst = GL_ONE_MINUS_SRC_ALPHA;
-      break;
-      */
-   }
-
-   if(gl_srcblend != src || gl_dstblend != dst){
-      glBlendFunc(gl_srcblend=src, gl_dstblend=dst); CHECK_GL_RESULT("glBlendFunc");
-   }
-#endif
 }
 
 //----------------------------
-#ifndef GL
 void I3D_driver::SetClippingPlane(const S_plane &pl, const S_matrix &_m_view_proj_hom){
 
                               //choose technique
@@ -4376,7 +4100,6 @@ void I3D_driver::DisableClippingPlane(){
       assert(0);
    }
 }
-#endif
 //----------------------------
 
 I3D_RESULT I3D_driver::SetTexture(CPI3D_texture tp){
@@ -4443,16 +4166,6 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
             }
          }
          curr_anisotropy = anisotropy;
-#ifdef GL
-         for(int i=managed_textures.size(); i--; ){
-            I3D_texture *tp = managed_textures[i];
-            dword tid = tp->GetGlId();
-            if(tid){
-               glBindTexture(GL_TEXTURE_2D, tid);
-               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, value ? GL_LINEAR : GL_NEAREST);
-            }
-         }
-#endif
       }
       break;
 
@@ -4490,16 +4203,6 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
             hr = d3d_dev->SetSamplerState(i, D3DSAMP_MIPFILTER, ft);
             CHECK_D3D_RESULT("SetSamplerState", hr);
          }
-#ifdef GL
-         for(int i=managed_textures.size(); i--; ){
-            I3D_texture *tp = managed_textures[i];
-            dword tid = tp->GetGlId();
-            if(tid && (tp->GetTxtFlags()&TXTF_MIPMAP)){
-               glBindTexture(GL_TEXTURE_2D, tid);
-               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, value ? GL_LINEAR_MIPMAP_LINEAR : GL_NEAREST);
-            }
-         }
-#endif
       }
       break;
 
@@ -4603,9 +4306,6 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
 
          hr = d3d_dev->SetRenderState(D3DRS_DITHERENABLE, value);
          CHECK_D3D_RESULT("SetRenderState", hr);
-#ifdef GL
-         value ? glEnable(GL_DITHER) : glDisable(GL_DITHER);
-#endif
       }
       break;
 
@@ -4673,7 +4373,6 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
       drv_flags &= ~DRVF_USEFOG;
       if(value) drv_flags |= DRVF_USEFOG;
       break;
-#ifndef GL
    case RS_USESHADOWS:
       drv_flags &= ~DRVF_USESHADOWS;
       if(value) drv_flags |= DRVF_USESHADOWS;
@@ -4688,7 +4387,6 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
       drv_flags &= ~DRVF_DEBUGDRAWSHDRECS;
       if(value) drv_flags |= DRVF_DEBUGDRAWSHDRECS;
       break;
-#endif
    case RS_DEBUGDRAWSTATIC:
       drv_flags2 &= ~DRVF2_DEBUGDRAWSTATIC;
       if(value) drv_flags2 |= DRVF2_DEBUGDRAWSTATIC;
@@ -4801,13 +4499,11 @@ I3D_RESULT I3D_driver::SetState(I3D_RENDERSTATE st, dword value){
          }
       }
       break;
-#ifndef GL
    case RS_DEBUG_SHOW_OVERDRAW:
       drv_flags2 &= ~DRVF2_DEBUG_SHOW_OVERDRAW;
       if(value)
          drv_flags2 |= DRVF2_DEBUG_SHOW_OVERDRAW;
       break;
-#endif
    case RS_LM_AA_RATIO:
       if((int)value <= 0 || value > 100)
          return I3DERR_INVALIDPARAMS;
@@ -4923,9 +4619,7 @@ dword I3D_driver::GetState(I3D_RENDERSTATE st) const{
    case RS_DRAWTEXTURES: return (bool)(drv_flags2&DRVF2_DRAWTEXTURES);
    case RS_LMTRUECOLOR: return (bool)(drv_flags2&DRVF2_LMTRUECOLOR);
    case RS_LMDITHER: return (bool)(drv_flags2&DRVF2_LMDITHER);
-#ifndef GL
    case RS_DEBUG_SHOW_OVERDRAW: return (bool)(drv_flags2&DRVF2_DEBUG_SHOW_OVERDRAW);
-#endif
    case RS_LM_AA_RATIO: return lm_create_aa_ratio;
    case RS_DRAWJOINTS: return (bool)(drv_flags2&DRVF2_DRAWJOINTS);
    case RS_DEBUG_INT0: case RS_DEBUG_INT1: case RS_DEBUG_INT2: case RS_DEBUG_INT3:
@@ -5324,7 +5018,6 @@ I3D_RESULT I3D_driver::ReloadTexture(PI3D_texture txt) const{
 */
 
 //----------------------------
-#ifndef GL
 I3D_RESULT I3D_driver::SetNightVision(bool on){
 
    if(drv_flags2&DRVF2_IN_NIGHT_VISION)
@@ -5592,7 +5285,6 @@ I3D_postfx_info I3D_driver::GetPostFX() const{
 }
 
 
-#endif
 //----------------------------
 //----------------------------
 dword GetTickTime(){

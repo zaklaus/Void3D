@@ -39,10 +39,6 @@
 #include <insanity\assert.h>
 #include <C_vector.h>
 
-#ifdef GL
-#include <Egl\Egl.h>
-#include <Gles2\gl2.h>
-#endif
 
 #ifdef _MSC_VER               //MB: need stack probes for debugging crashes
 #pragma optimize("y", off)

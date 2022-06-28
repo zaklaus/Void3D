@@ -669,7 +669,6 @@ class C_bsp_tree_builder: public C_bsp_tree{
             }
             break;
          }
-#ifndef GL
                                  //check cancellation
          if(!(i&0x3f)){
             PIGraph igraph = scene->GetDriver1()->GetGraphInterface();
@@ -678,7 +677,6 @@ class C_bsp_tree_builder: public C_bsp_tree{
                return BSP_BUILD_CANCEL;
             }
          }
-#endif
          if(cbP)
             (*cbP)(BM_GETTING_POLYGONS, planes.size(), 0, context);
       }
@@ -1226,7 +1224,6 @@ class C_bsp_tree_builder: public C_bsp_tree{
          return BSP_BUILD_FAIL;
       }
       //node->SetFaces(coincident_list.begin(), coincident_list.size());
-#ifndef GL
                                  //let check cancellation
       if(!--esc_check_count){
          esc_check_count = 200;
@@ -1236,7 +1233,6 @@ class C_bsp_tree_builder: public C_bsp_tree{
             return BSP_BUILD_CANCEL;
          }
       }
-#endif
 
       if(cbP!=NULL){
          (*cbP)(BM_BUILDING_NODES, build_stats.polygon_rest, 0, context);

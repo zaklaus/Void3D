@@ -1133,12 +1133,6 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
 
                   is_in = CheckFrustumIntersection(vf_loc, 4, hull_pts_loc, fv, 3, cpos_loc);
                   if(is_in){
-#if defined _DEBUG && 0
-                     DebugLine(ed, fv[0]*m, fv[1]*m, 0, 0xffff0000);
-                     DebugLine(ed, fv[1]*m, fv[2]*m, 0, 0xff00ff00);
-                     DebugLine(ed, fv[2]*m, fv[0]*m, 0, 0xff0000ff);
-                     DebugLine(ed, ((fv[0]+fv[1]+fv[2]) / 3.0f)*m, S_vector(0, 0, 0), 0);
-#endif
                      break;
                   }
                }

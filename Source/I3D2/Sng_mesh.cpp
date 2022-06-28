@@ -1253,10 +1253,8 @@ private:
             }
          }
       }
-#ifndef GL
                                  //destroy old vertex buffers (if any)
       vertex_buffer.DestroyD3DVB();
-#endif
 
       vis_flags &= ~(VISF_DEST_LIGHT_VALID | VISF_DEST_UV0_VALID);
       frm_flags &= ~(FRMFLAGS_HR_BOUND_VALID | FRMFLAGS_SM_BOUND_VALID);
@@ -1383,9 +1381,7 @@ public:
 //----------------------------
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
 //----------------------------
 
@@ -1715,7 +1711,6 @@ void I3D_object_singlemesh_imp::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_object_singlemesh_imp::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
@@ -1907,7 +1902,6 @@ void I3D_object_singlemesh_imp::DrawPrimitive(const S_preprocess_context &pc, co
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
-#endif
 //----------------------------
 
 void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -2006,13 +2000,8 @@ void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, 
       }
       pc.scene->render_stats.triangle += fg->num_faces;
 
-#ifndef GL
       drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
       drv->SetVSDecl(vertex_buffer.vs_decl);
-#else
-      drv->SetStreamSource(mesh->vertex_buffer.GetD3DVertexBuffer(), mesh->vertex_buffer.GetSizeOfVertex());
-      drv->SetVSDecl(mesh->vertex_buffer.vs_decl);
-#endif
 
       CPI3D_material mat = fg->GetMaterial1();
 
@@ -2020,7 +2009,6 @@ void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, 
 
       bool has_diffuse = (rp.flags&RP_FLAG_DIFFUSE_VALID);
    
-#ifndef GL
       if(pc.mode==RV_SHADOW_CASTER){
          if(mat->IsTextureAlpha() || mat->IsCkeyAlpha1()){
             se_ps.Tex(0);
@@ -2052,7 +2040,6 @@ void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, 
             continue;
          }
       }else
-#endif
       {
          drv->SetupBlend(rp.blend_mode);
 
@@ -2064,10 +2051,8 @@ void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, 
             SetupSpecialMappingPS(mat, se_ps, 1);
          }else{
             se_ps.AddFragment(has_diffuse ? PSF_v0_COPY : PSF_COPY_BLACK);
-#ifndef GL
             if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
                se_ps.TexKill(1);
-#endif
             drv->DisableTextures(0);
          }
       }
@@ -2081,11 +2066,7 @@ void I3D_object_singlemesh_imp::DrawPrimitivePS(const S_preprocess_context &pc, 
       }else
 #endif
          hr = d3d_dev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
-#ifndef GL
          vertex_buffer.D3D_vertex_buffer_index + base_segment_vertex,
-#else
-         mesh->vertex_buffer.D3D_vertex_buffer_index + base_segment_vertex,
-#endif
             0, vertex_count, (base_index + fg->base_index) * 3, fg->num_faces);
       CHECK_D3D_RESULT("DrawIP", hr);
    }

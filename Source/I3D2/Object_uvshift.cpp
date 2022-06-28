@@ -29,9 +29,7 @@ public:
    }
 
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
    virtual I3D_RESULT I3DAPI SetProperty(dword index, dword value){
       switch(index){
@@ -85,15 +83,12 @@ void I3D_object_uv_shift::AddPrimitives(S_preprocess_context &pc){
    AddPrimitives1(mesh, pc);
 
    if(
-#ifndef GL
       pc.mode!=RV_SHADOW_CASTER && 
-#endif
       mode==MODE_ANIMATE)
       ComputeShift();
 }
 
 //----------------------------
-#ifndef GL
 void I3D_object_uv_shift::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    PI3D_mesh_base mb = mesh;
@@ -166,7 +161,6 @@ void I3D_object_uv_shift::DrawPrimitive(const S_preprocess_context &pc, const S_
    }
    DrawPrimitiveVisual(mb, pc, rp);
 }
-#endif
 //----------------------------
 
 void I3D_object_uv_shift::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -185,9 +179,7 @@ void I3D_object_uv_shift::DrawPrimitivePS(const S_preprocess_context &pc, const 
    I3D_driver::S_vs_shader_entry_in se;
 
    dword prep_flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX | VSPREP_NO_COPY_UV;
-#ifndef GL
    if(pc.mode!=RV_SHADOW_CASTER)
-#endif
    {
       prep_flags |= VSPREP_MAKELIGHTING;
       se.AddFragment(VSF_SHIFT_UV);
@@ -209,9 +201,7 @@ void I3D_object_uv_shift::DrawPrimitivePS(const S_preprocess_context &pc, const 
    const I3D_driver::S_vs_shader_entry *se_out = PrepareVertexShader(mb->GetFGroups1()[0].GetMaterial1(), 1, se, rp, pc.mode, prep_flags);
 
                               //feed UV constants
-#ifndef GL
    if(pc.mode!=RV_SHADOW_CASTER)
-#endif
       drv->SetVSConstant(se_out->vscs_uv_shift, &curr_vals);
 
    DrawPrimitiveVisualPS(mb, pc, rp);

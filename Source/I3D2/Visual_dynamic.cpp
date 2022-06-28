@@ -19,9 +19,7 @@ class I3D_visual_dynamic: public I3D_visual{
 
       int curr_auto_lod = -1;
       const C_auto_lod *auto_lods = mb->GetAutoLODs();
-#ifndef GL
       if(pc.mode!=RV_SHADOW_CASTER)
-#endif
       {
          curr_auto_lod = drv->force_lod_index;
          if(curr_auto_lod==-1){
@@ -127,9 +125,7 @@ public:
    virtual bool ComputeBounds();
    virtual void PrepareDestVB(I3D_mesh_base*, dword num_txt_sets = 1);
    virtual void AddPrimitives(S_preprocess_context&);
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&);
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&);
    I3DMETHOD(Duplicate)(CPI3D_frame);
    I3DMETHOD_(PI3D_mesh_base,GetMesh)(){ return mesh; }
@@ -205,7 +201,6 @@ public:
       dyn_flags &= ~DYF_IN_LOCKED_VERTS;
 
       mesh->vertex_buffer.Unlock();
-#ifndef GL
       if(drv->IsDirectTransform() && vertex_buffer.GetD3DVertexBuffer()){
                               //in direct mode, re-copy changed values to vetex dest buffer now
                               // (not an optimal way to do it, but we must retain sysmem copy)
@@ -220,7 +215,6 @@ public:
          v_dst.AssureLock();
          memcpy(v_dst, v_src, numv*vertex_buffer.GetSizeOfVertex());
       }
-#endif
       return I3D_OK;
    }
 
@@ -304,10 +298,8 @@ public:
             }else{
                se_ps.AddFragment(PSF_v0_COPY);
             }
-#ifndef GL
             if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
                se_ps.TexKill(stage);
-#endif
                               //apply environment effect
             SetupSpecialMappingPS(mat, se_ps, 1);
             drv->SetPixelShader(se_ps);
@@ -315,7 +307,6 @@ public:
             CHECK_D3D_RESULT("DrawIP", hr);
          }
       }
-#ifndef GL
       else{
          if(fvf_flags&D3DFVF_DIFFUSE){
             drv->SetupTextureStage(0, D3DTOP_MODULATE);
@@ -340,7 +331,6 @@ public:
             CHECK_D3D_RESULT("DrawIP", hr);
          }
       }
-#endif
       return I3D_OK;
    }
 
@@ -444,9 +434,7 @@ I3D_RESULT I3D_visual_dynamic::Build(const void *verts, dword num_verts, dword v
          frm1a = frm1a->GetParent1();
       }while(frm1a);
    }
-#ifndef GL
    vertex_buffer.DestroyD3DVB();
-#endif
    return I3D_OK;
 }
 
@@ -472,7 +460,6 @@ bool I3D_visual_dynamic::ComputeBounds(){
 
 void I3D_visual_dynamic::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_sets){
 
-#ifndef GL
    dword numv = mb->NumVertices1();
    if(!numv)
       return;
@@ -509,7 +496,6 @@ void I3D_visual_dynamic::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_sets){
       memcpy(v_dst, v_src, numv*vertex_buffer.GetSizeOfVertex());
       vertex_buffer.vs_decl = drv->GetVSDeclaration(vertex_buffer.GetFVFlags());
    }
-#ifndef GL
    else{
 
       dword fvflags = num_txt_sets<<D3DFVF_TEXCOUNT_SHIFT;
@@ -521,8 +507,6 @@ void I3D_visual_dynamic::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_sets){
       vertex_buffer.CreateD3DVB(fvflags, numv, false, false);
       vertex_buffer.vs_decl = drv->GetVSDeclaration(mb->vertex_buffer.GetFVFlags());
    }
-#endif
-#endif
    vis_flags |= VISF_DEST_PREPARED;
 }
 
@@ -568,11 +552,9 @@ void I3D_visual_dynamic::AddPrimitives(S_preprocess_context &pc){
 
    if(!mesh)
       return;
-#ifndef GL
                               //don't allow in shadow casting
    if(pc.mode==RV_SHADOW_CASTER)
       return;
-#endif
 
    dword fvf = mesh->vertex_buffer.GetFVFlags();
    bool vertex_alpha = ((fvf&D3DFVF_POSITION_MASK)==D3DFVF_XYZB1);
@@ -581,7 +563,6 @@ void I3D_visual_dynamic::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_visual_dynamic::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    {
@@ -650,7 +631,6 @@ void I3D_visual_dynamic::DrawPrimitive(const S_preprocess_context &pc, const S_r
    }
    DrawPrimitiveVisual(mesh, pc, rp);
 }
-#endif
 //----------------------------
 
 void I3D_visual_dynamic::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -665,9 +645,7 @@ void I3D_visual_dynamic::DrawPrimitivePS(const S_preprocess_context &pc, const S
    I3D_driver::S_vs_shader_entry_in se;
 
    dword prep_flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX | VSPREP_COPY_UV;
-#ifndef GL
    if(pc.mode!=RV_SHADOW_CASTER)
-#endif
    {
       dword fvf = mesh->vertex_buffer.GetFVFlags();
       bool vertex_alpha = ((fvf&D3DFVF_POSITION_MASK)==D3DFVF_XYZB1);

@@ -150,9 +150,7 @@ public:
       assert(inited);
       return inited ? &pf : NULL;
    }
-#ifndef GL
    I2DMETHOD_(bool,IsPaletized)() const;
-#endif
    I2DMETHOD_(byte,Bpp)() const;
 };
 
@@ -176,9 +174,7 @@ void C_rgb_conversion_i::Init(const S_pixelformat &pf1, const dword *pal_argb1){
       int i;
       switch(pf.bytes_per_pixel){
       case 1:
-#ifndef GL
          if(!(pf.flags&PIXELFORMAT_PALETTE) || !pal_argb1)
-#endif
          {                       //8-bit rgb
                               //initialize byte tables
             r.bfield = new byte[256*3];
@@ -201,7 +197,6 @@ void C_rgb_conversion_i::Init(const S_pixelformat &pf1, const dword *pal_argb1){
                *bp = byte(Rol(i, b_pos) & pf.b_mask);
             }while(++bp, ++i<256);
          }
-#ifndef GL
          else{               //initialized by palette
                               //store pal
             init_pal_argb = new byte[256 * sizeof(dword)];
@@ -231,7 +226,6 @@ void C_rgb_conversion_i::Init(const S_pixelformat &pf1, const dword *pal_argb1){
                g.r2rgbi[i] = (byte)j;
             }while(++i<256);
          }
-#endif
          break;
       case 2:
                               //initialize word tables
@@ -285,7 +279,6 @@ void C_rgb_conversion_i::UnInit(){
    if(!(pf.flags&PIXELFORMAT_COMPRESS)){
       switch(pf.bytes_per_pixel){
       case 1:
-#ifndef GL
          if((pf.flags&PIXELFORMAT_PALETTE) && init_pal_argb){
             if(init_pal_argb){
                delete[] init_pal_argb;
@@ -293,7 +286,6 @@ void C_rgb_conversion_i::UnInit(){
                delete[] g.r2rgbi;
             }
          }else
-#endif
             delete[] r.bfield;
          break;
       case 2:
@@ -318,11 +310,9 @@ byte C_rgb_conversion_i::Bpp() const{
 }
 
 //----------------------------
-#ifndef GL
 bool C_rgb_conversion_i::IsPaletized() const{
    return (pf.flags&PIXELFORMAT_PALETTE);
 }
-#endif
 //----------------------------
 
 static const byte uni_pal[256][4] = {
@@ -703,7 +693,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
       case 1:
          switch(pf.bytes_per_pixel){
          case 1:
-#ifndef GL
             if(pf.flags&PIXELFORMAT_PALETTE){       //just copy
                /*
                if(flags&MCONV_PACKED){
@@ -721,7 +710,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                   }while(bp += src_pitch, p_bp += dst_pitch, --sy);
                }
             }else
-#endif
             {               //map paletized into 8-bit rgb
                //if(flags&MCONV_PACKED) return false;
                if(flags&MCONV_DITHER){
@@ -770,140 +758,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                if(!*pal_argb)
                   *pal_argb = (dword*)uni_pal[0];
                {
-   #if defined _MSC_VER && 0     //slower than C++ !
-                  word *tb = r.wfield;
-                  word *p_dst = p_wp;
-
-                                 //eax - free
-                                 //ebx - fetch RGB from palette
-                                 //ecx - row counter
-                                 //edx - source color index
-                                 //esi - source
-                                 //edi - dest
-                                 //ebp - rgb converson tables base
-                                 //esp[4] - palette*
-                                 //esp[8] - size_x
-                                 //esp[12] - src_pitch
-                                 //esp[16] - dst_pitch
-                                 //esp[20] - sy
-                                 //esp[24] - sx/2
-                  if(sx&1){
-                                 //version working with word-s
-                     __asm{
-                        push ecx
-
-                        mov esi, src
-                        mov edi, p_dst
-                        mov edx, pal_argb
-                        push [edx]
-                        push ebp
-                        xor edx, edx
-                     ly:
-                        mov ecx, sx
-                        mov ebp, tb
-                     lx:
-
-                        mov dl, [esi]
-                        inc esi
-                        lea ebx, [edx*4]
-                        add ebx, [esp+4]
-                        mov ebx, [ebx]
-                        mov dl, bl
-                        and ebx, 0ffffffh
-                        mov ax, [ebp+edx*2]
-                        mov dl, bh
-                        shr ebx, 16
-                        or ax, [ebp+200h+edx*2]
-                        or ax, [ebp+400h+ebx*2]
-                        mov [edi], ax
-                        add edi, 2
-                        dec ecx
-                        jnz lx
-
-                        mov ebp, [esp]
-                        sub esi, sx
-                        add esi, src_pitch
-                        sub edi, sx
-                        sub edi, sx
-                        add edi, dst_pitch
-
-                        dec sy
-                        jne ly
-
-                        pop ebp
-                        add esp, 4
-
-                        pop ecx
-                     }
-                  }else{
-                                 //version working with dword-s
-                     __asm{
-                        push ecx
-
-                        mov esi, src
-                        mov edi, p_dst
-                        mov edx, pal_argb
-                        push sx
-                        shr dword ptr [esp], 1
-                        push sy
-                        push dst_pitch
-                        push src_pitch
-                        push sx
-                        push [edx]
-                        push ebp
-                        xor edx, edx
-                        mov ebp, tb
-                     ly1:
-                        mov ecx, [esp+24]
-                     lx1:
-                        mov dl, [esi+1]
-                        lea ebx, [edx*4]
-                        add ebx, [esp+4]
-                        mov ebx, [ebx]
-                        mov dl, bl
-                        and ebx, 0ffffffh
-                        mov ax, [ebp+edx*2]
-                        mov dl, bh
-                        shr ebx, 16
-                        or ax, [ebp+200h+edx*2]
-                        mov dl, [esi]
-                        or ax, [ebp+400h+ebx*2]
-
-                        lea ebx, [edx*4]
-                        rol eax, 16
-                        add ebx, [esp+4]
-                        add esi, 2
-                        mov ebx, [ebx]
-                        mov dl, bl
-                        and ebx, 0ffffffh
-                        mov ax, [ebp+edx*2]
-                        mov dl, bh
-                        shr ebx, 16
-                        or ax, [ebp+200h+edx*2]
-                        add edi, 4
-                        or ax, [ebp+400h+ebx*2]
-                     
-                        dec ecx
-                        mov [edi-4], eax
-
-                        jnz lx1
-
-                        sub esi, [esp+8]
-                        add esi, [esp+12]
-                        sub edi, [esp+8]
-                        sub edi, [esp+8]
-                        add edi, [esp+16]
-
-                        dec dword ptr [esp+20]
-                        jne ly1
-
-                        pop ebp
-                        add esp, 24
-
-                        pop ecx
-                     }
-                  }
-   #else
                   for(; --sy; bp += src_pitch, p_bp += dst_pitch){
                      word *p_wp1 = p_wp;
                      const byte *bp1 = bp;
@@ -915,7 +769,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                            b.wfield[palp[2]];// | a_bit_mask;
                      }
                   }
-   #endif
                }
             }
             break;
@@ -1025,7 +878,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
       case 4:                    //32-bit (rgba) to...
          switch(pf.bytes_per_pixel){
          case 1:                 //... 8-bit
-#ifndef GL
             if(IsPaletized() && init_pal_argb){
                do{               //map into specified palette
                   const byte *bp1=bp;
@@ -1110,9 +962,7 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                   }while(bp1+=srcbpp, --xx);
                }while(bp += src_pitch, p_bp += dst_pitch, --sy);
             }else
-#endif
             {               //3-3-2 mode
-#ifndef GL
                if(IsPaletized()){
                                  //paletized mode, create 3-3-2 palette
                   byte *bp1;
@@ -1126,7 +976,6 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                      bp1[3] = 0xff;
                   }
                }
-#endif
                if(flags&MCONV_DITHER){
                   Dither(src, dst, src_pitch, dst_pitch, sx, sy, srcbpp, NULL);
                }else{
@@ -1718,9 +1567,7 @@ bool C_rgb_conversion_i::AlphaBlend(void *dst, void *src, const dword *pal_argb,
    dword flags) const{
 
    if(srcbpp==2
-#ifndef GL
       || (pf.flags&PIXELFORMAT_PALETTE)
-#endif
       )
       return false;
 
@@ -1867,12 +1714,10 @@ dword C_rgb_conversion_i::GetPixel(byte r, byte g, byte b, byte a, byte *pal_arg
 
    switch(pf.bytes_per_pixel){
    case 1:                    //remap to palette
-#ifndef GL
       if(pf.flags&PIXELFORMAT_PALETTE){
          if(!pal_argb) return 0;
          return SingleIndex(pal_argb, r, g, b);
       }else
-#endif
       {
          return
             (Rol(r, r_pos) & pf.r_mask) |
@@ -1958,13 +1803,11 @@ void C_rgb_conversion_i::Dither(const void *src, void *dst, dword pitch_src,
 
                               //shift RGB masks to 8-bit positions
    dword mask_8[4];
-#ifndef GL
    if(IsPaletized()){
       mask_8[0] = 0xe0;
       mask_8[1] = 0xe0;
       mask_8[2] = 0xc0;
    }else
-#endif
    {
       mask_8[3] = (byte)Ror(pf.a_mask, byte(FindLastBit(pf.a_mask)-7));
       mask_8[2] = (byte)Ror(pf.r_mask, byte(FindLastBit(pf.r_mask)-7));
@@ -2016,9 +1859,7 @@ void C_rgb_conversion_i::Dither(const void *src, void *dst, dword pitch_src,
             error_p[1] = error_x[1] = gs - gd;
             error_p[0] = error_x[0] = bs - bd;
                               //store destination pixel
-#ifndef GL
             if(!IsPaletized())
-#endif
                Swap(rd, bd);
             *dst_bp++ = byte(
                r.bfield[rd] |

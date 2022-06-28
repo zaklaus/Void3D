@@ -1685,9 +1685,7 @@ typedef const I3D_model *CPI3D_model;
 #define TEXTMAP_TRANSP           0x40     //texture with transparent (color-keyed) texels
 #define TEXTMAP_MIPMAP           0x100    //generate mipmap levels
 #define TEXTMAP_NOMIPMAP         0x200    //disable auto-mipmap feature
-#ifndef GL
 #define TEXTMAP_COMPRESS         0x800    //create compressed texture (if supported by hw)
-#endif
 #define TEXTMAP_USEPIXELFORMAT   0x1000   //use specified pixel format
 #define TEXTMAP_HINTDYNAMIC      0x2000   //dymanic texture
 #define TEXTMAP_TRUECOLOR        0x4000   //choose true-color pixel format, if available
@@ -1696,14 +1694,10 @@ typedef const I3D_model *CPI3D_model;
 #define TEXTMAP_NORMALMAP        0x20000  //text_name valid, specifying normal map
 
                               //find texture format flags (hint only)
-#ifndef GL
 #define FINDTF_PALETIZED   1        //paletized textures
-#endif
 #define FINDTF_ALPHA       2        
 #define FINDTF_ALPHA1      4
-#ifndef GL
 #define FINDTF_COMPRESSED  8
-#endif
 #define FINDTF_TRUECOLOR   0x10     //true-color
 #define FINDTF_EMBMMAP     0x20     //only embm-map formats
 #define FINDTF_RENDERTARGET 0x40    //render target surfaces
@@ -2083,9 +2077,7 @@ struct I3DINIT{
                               //init driver flags
 #define I3DINIT_NO_PSHADER    1     //disable usage of pixel shader
 #define I3DINIT_VERBOSE       2
-#ifndef GL
 #define I3DINIT_DIRECT_TRANS  4     //direct transformation, no ProcessVertices calls
-#endif
 #define I3DINIT_WBUFFER       8     //use w-buffer instead of z-buffer
 #define I3DINIT_WARN_OUT      0x10  //display warnings about unreleased interfaces
 
@@ -2296,7 +2288,6 @@ public:
    I3DMETHOD_(void,SetCollisionMaterial)(dword index, const I3D_collision_mat&) = 0;
    I3DMETHOD_(void,ClearCollisionMaterials)() = 0;
 
-#ifndef GL
    I3DMETHOD_(I3D_RESULT,SetNightVision)(bool on) = 0;
    I3DMETHOD_(I3D_RESULT,BeginNightVisionRender)() = 0;
    I3DMETHOD_(I3D_RESULT,EndNightVisionRender)() = 0;
@@ -2305,7 +2296,6 @@ public:
    I3DMETHOD_(I3D_RESULT,RenderPostFX)() = 0;
    I3DMETHOD_(void,SetPostFX)(I3D_postfx_info) = 0;
    I3DMETHOD_(I3D_postfx_info,GetPostFX)() const = 0;
-#endif
 };
 
 typedef class I3D_driver *PI3D_driver;

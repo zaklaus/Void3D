@@ -10,16 +10,9 @@
 //LPDIRECTSOUND lpDS;
 //LPDIRECTSOUNDBUFFER lpDSSBPrimary;
 
-#if defined NDEBUG && 0
-
-#include <iostream>
-#define LOG(n) cout<<(const char*)n
-
-#else
 
 #define LOG(n)
 
-#endif
 
 //-------------------------------------
 

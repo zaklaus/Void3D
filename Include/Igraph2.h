@@ -107,9 +107,7 @@ enum IG_KEY{
 #define IG_NOMINIMIZE      0x10
 #define IG_RESIZEABLE      0x20     //the window may be resized
 #define IG_NOTITLEBAR      0x40     //no titlebar on window
-#ifndef GL
 #define IG_REF_DEVICE      0x80     //use reference D3D device
-#endif
 #define IG_LOCKABLE_BACKBUFFER 0x200   //backbuffer will be lock-able (possible performance penaulty)
 #define IG_NOHIDEMOUSE     0x800    //for fullscreen only
 #define IG_LOADMENU        0x1000

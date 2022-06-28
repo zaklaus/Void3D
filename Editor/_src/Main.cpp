@@ -820,9 +820,6 @@ bool AppInit(PI3D_driver drv) {
     igraph->MouseInit();
 #endif
 
-#if (defined EDITOR || defined _DEBUG) && 0
-    script_man->SetDebugMode(true);
-#endif
 
     return true;
 }

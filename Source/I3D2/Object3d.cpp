@@ -65,9 +65,7 @@ void I3D_object::SetMeshInternal(I3D_mesh_base *mb){
       mesh->Clone(mb, true);
       //mesh->Release();
    }
-#ifndef GL
    vertex_buffer.DestroyD3DVB();
-#endif
    vis_flags &= ~(VISF_DEST_LIGHT_VALID | VISF_DEST_UV0_VALID | VISF_BOUNDS_VALID);
    frm_flags &= ~FRMFLAGS_HR_BOUND_VALID;
 }
@@ -105,9 +103,7 @@ void I3D_object::SetMesh(PI3D_mesh_base m){
    if(m) m->AddRef();
    if(mesh) mesh->Release();
    mesh = m;
-#ifndef GL
    vertex_buffer.DestroyD3DVB();
-#endif
    vis_flags &= ~(VISF_DEST_LIGHT_VALID | VISF_DEST_UV0_VALID | VISF_BOUNDS_VALID);
    frm_flags &= ~FRMFLAGS_HR_BOUND_VALID;
 }
@@ -158,7 +154,6 @@ void I3D_object::AddPrimitives(S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_object::DrawPrimitive(const S_preprocess_context &pc, const S_render_primitive &rp){
 
    {
@@ -215,21 +210,6 @@ void I3D_object::DrawPrimitive(const S_preprocess_context &pc, const S_render_pr
 
          drv->SetStreamSource(mesh->vertex_buffer.GetD3DVertexBuffer(), mesh->vertex_buffer.GetSizeOfVertex());
          drv->SetVSDecl(vertex_buffer.vs_decl);
-#if defined _DEBUG && 0
-         {
-            struct S_vertex{
-               S_vectorw xyzw;
-               dword diffuse;
-               dword specular;
-               S_vector2 uv;
-            };
-            D3D_lock<byte> v_dst(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.D3D_vertex_buffer_index, vertex_count,
-               sizeof(S_vertex), 0);
-            v_dst.AssureLock();
-            S_vertex *vp = (S_vertex*)(byte*)v_dst;
-            vp = vp;
-         }
-#endif
 
          HRESULT hr;
          hr = drv->GetDevice1()->ProcessVertices(mesh->vertex_buffer.D3D_vertex_buffer_index,
@@ -241,7 +221,6 @@ void I3D_object::DrawPrimitive(const S_preprocess_context &pc, const S_render_pr
    }
    DrawPrimitiveVisual(mesh, pc, rp);
 }
-#endif
 //----------------------------
 
 void I3D_object::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -255,41 +234,15 @@ void I3D_object::DrawPrimitivePS(const S_preprocess_context &pc, const S_render_
    }
    I3D_driver::S_vs_shader_entry_in se;
 
-#ifndef GL
    if(pc.mode==RV_SHADOW_CASTER){
       PrepareVertexShader(mesh->GetFGroups1()[0].GetMaterial1(), 1, se, rp, pc.mode, prep_flags);
    }else
-#endif
    {
       if(!(vis_flags&VISF_DEST_LIGHT_VALID)){
          prep_flags |= VSPREP_MAKELIGHTING;
          vis_flags |= VISF_DEST_LIGHT_VALID;
       }
-#if defined _DEBUG && 0
-                              //debug - test performing rotation by quaternion
-      IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
-
-      prep_flags &= ~(VSPREP_TRANSFORM | VSPREP_FEED_MATRIX);
-      se.AddFragment(VSF_TEST);
-      drv->SetVSConstant(VSC_MAT_TRANSFORM_0, &rp.scene->GetViewProjHomMatTransposed(), 4);
-
-      S_matrix m = matrix;
-      m.Transpose();
-      drv->SetVSConstant(40, &m, 4);
-
-      S_quat q = matrix;
-      S_vectorw vq = q.v;
-      vq.w = q.s;
-      S_vectorw pos = matrix(3);
-      pos.w = matrix(0).Magnitude();
-
-      drv->SetVSConstant(50, &vq);
-      drv->SetVSConstant(51, &pos);
-#endif
       PrepareVertexShader(mesh->GetFGroups1()[0].GetMaterial1(), 1, se, rp, pc.mode, prep_flags, NULL, &save_light_fragments, &save_light_params
-#ifdef GL
-         , &gl_save_light_params
-#endif
          );
    }
    DrawPrimitiveVisualPS(mesh, pc, rp);

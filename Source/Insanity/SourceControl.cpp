@@ -51,10 +51,6 @@ static bool SCCommand(const char *in_cmdline){
    lsa.lpSecurityDescriptor = NULL;
    lsa.bInheritHandle = true;
 
-#if defined _DEBUG && 0
-   AllocConsole();
-   CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-#endif
 
    char env[1024];
    int len = 0;

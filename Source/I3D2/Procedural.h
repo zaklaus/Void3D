@@ -171,9 +171,6 @@ public:
 
    virtual I3D_RESULT Initialize(C_cache &ck, PI3D_LOAD_CB_PROC cb_proc, void *cb_context);
    //virtual I3D_RESULT Initialize(C_cache &ck, const I3D_CREATETEXTURE &ct, PI3D_LOAD_CB_PROC cb_proc, void *cb_context);
-#ifdef GL
-   virtual dword GetGlId() const{ return 0; }
-#endif
    inline E_MODE GetMode() const{ return mode; }
 };
 

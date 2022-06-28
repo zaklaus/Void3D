@@ -35,9 +35,7 @@ public:
       size_of_vertex(0), fvf_flags(0)
    {}
    void CreateD3DVB(dword fvf_flags, dword max_vertices, bool force_xyz_format = false
-#ifndef GL
       , bool allow_hw_trans = true
-#endif
       );
    void DestroyD3DVB();
 
@@ -130,9 +128,7 @@ protected:
 
    dword visual_type;         //four-cc code
 
-#ifndef GL
    I3D_dest_vertex_buffer vertex_buffer;
-#endif
 
                               //last LOD used to transform vertices
                               // (help for non-direct transforms, to detect that dest VB is dirty when LOD changes)
@@ -180,20 +176,13 @@ public:
 
 //----------------------------
 // Render mesh using currently set shader.
-#ifndef GL
    void DrawPrimitiveVisual(I3D_mesh_base *mb, const S_preprocess_context &pc, const S_render_primitive &rp);
-#endif
    void DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_context &pc, const S_render_primitive &rp);
 //----------------------------
 // Prepare lighting info for vertex shader.
    dword PrepareVSLighting(CPI3D_material mat, I3D_driver::S_vs_shader_entry_in &se_in, const S_render_primitive &rp, const S_matrix &m_trans,
       const S_matrix &m_inv_trans, dword flags, S_vectorw light_params[], C_buffer<E_VS_FRAGMENT> *save_light_fragments, C_buffer<S_vectorw> *save_light_params) const;
 
-#ifdef GL
-// Returns number of lights.
-   dword GlPrepareVSLighting(CPI3D_material mat, const S_render_primitive &rp, const S_matrix &m_trans, const S_matrix &m_inv_trans, dword flags,
-      S_vectorw light_params[], C_buffer<S_vectorw> *save_light_params) const;
-#endif
 //----------------------------
 // Prepare VS for visual - add necessary fragments, create and setup shader,
 // fill-in constants.
@@ -203,9 +192,6 @@ public:
       I3D_driver::S_vs_shader_entry_in &se, const S_render_primitive &rp, E_RENDERVIEW_MODE rv_mode,
       dword flags = VSPREP_TRANSFORM | VSPREP_FEED_MATRIX, const S_matrix *m_trans = NULL,
       C_buffer<E_VS_FRAGMENT> *save_light_fragments = NULL, C_buffer<S_vectorw> *save_light_params = NULL
-#ifdef GL
-      , C_buffer<S_vectorw> *gl_save_light_params = NULL
-#endif
       ) const;
 
 //----------------------------
@@ -216,9 +202,7 @@ public:
 // Set up additional mapping params right before rendering (envmap, detailmap, etc).
 // This sets textures, stages, and disables stages beyond used stages.
 // 'num_txt_stages' means number of stages used by visual core.
-#ifndef GL
    void SetupSpecialMapping(CPI3D_material mat, const S_render_primitive *rp, dword num_txt_stages = 1) const;
-#endif
 
 //----------------------------
 // // PS version, returning number of texture stages utilized.
@@ -322,11 +306,7 @@ public:
                               //non-user methods
    virtual bool ComputeBounds() = 0;
    virtual void AddPrimitives(S_preprocess_context&) = 0;
-#ifndef GL
    virtual void DrawPrimitive(const S_preprocess_context&, const S_render_primitive&) {};
-#else
-   I3DMETHOD_(void,VisReserved10)(){}
-#endif
    virtual void DrawPrimitivePS(const S_preprocess_context&, const S_render_primitive&) {};
 
 //----------------------------
@@ -345,11 +325,7 @@ public:
 
    inline bool NeedPrepareDestVb() const{
       return
-#ifndef GL
          (!vertex_buffer.GetD3DVertexBuffer());
-#else
-         !(vis_flags&VISF_DEST_PREPARED);
-#endif
    }
 };
 

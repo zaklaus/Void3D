@@ -16,16 +16,12 @@
 //----------------------------
 
 #define ENABLE_ADVANCED_FOG
-#ifndef GL
 #define USE_SHARED_DEST_VB    //allocate dest VB on portions of huge VBs (VB alloc manager)
-#endif
 
 
                               //report if too many lights shine on visual
                               // undef to disable also in debug build
-#if defined _DEBUG || 1
 # define DEBUG_REPORT_TOO_MANY_LIGHTS
-#endif
 
 //----------------------------
 //----------------------------
@@ -43,9 +39,7 @@ static C_str LoadFile(const char *fn){
 //----------------------------
 
 void I3D_dest_vertex_buffer::CreateD3DVB(dword fvf_flags_in, dword max_vertices_in, bool force_xyz_format
-#ifndef GL
    , bool allow_hw_trans
-#endif
    ){
 
    DestroyD3DVB();
@@ -56,14 +50,11 @@ void I3D_dest_vertex_buffer::CreateD3DVB(dword fvf_flags_in, dword max_vertices_
    //d3d_usage |= D3DUSAGE_DYNAMIC;
    D3DPOOL mem_pool = D3DPOOL_DEFAULT;
 
-#ifndef GL
    allow_hw_trans = (allow_hw_trans && drv->IsDirectTransform());
-#endif
 
    if(!force_xyz_format){
                               //include transformed or untransformed 
                               // destination vertex format
-#ifndef GL
       if(!allow_hw_trans){
          fvf_flags &= ~D3DFVF_POSITION_MASK;
          fvf_flags |= D3DFVF_XYZRHW;
@@ -72,7 +63,6 @@ void I3D_dest_vertex_buffer::CreateD3DVB(dword fvf_flags_in, dword max_vertices_
                               // (and possibly specular effects)
          fvf_flags |= D3DFVF_SPECULAR;
       }else
-#endif
       {
          bool use_b1 = ((fvf_flags&D3DFVF_POSITION_MASK) == D3DFVF_XYZB1);
          fvf_flags &= ~D3DFVF_POSITION_MASK;
@@ -82,7 +72,6 @@ void I3D_dest_vertex_buffer::CreateD3DVB(dword fvf_flags_in, dword max_vertices_
             fvf_flags |= D3DFVF_XYZB1;
       }
    }
-#ifndef GL   
    if(!drv->IsHardware()){
       if(!drv->IsDirectTransform())
          d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
@@ -92,7 +81,6 @@ void I3D_dest_vertex_buffer::CreateD3DVB(dword fvf_flags_in, dword max_vertices_
       d3d_usage |= D3DUSAGE_SOFTWAREPROCESSING;
       mem_pool = D3DPOOL_SYSTEMMEM;
    }
-#endif
    size_of_vertex = byte(::GetSizeOfVertex(fvf_flags));
 
 #ifdef USE_SHARED_DEST_VB
@@ -130,9 +118,7 @@ I3D_visual::I3D_visual(PI3D_driver d):
    material_id(0),
    hide_dist(0.0f),
    alpha(255),
-#ifndef GL
    vertex_buffer(drv),
-#endif
    last_auto_lod(-1)
 {
    drv->AddCount(I3D_CLID_VISUAL);
@@ -155,9 +141,7 @@ I3D_visual::I3D_visual(PI3D_driver d):
 I3D_visual::~I3D_visual(){
 
    drv->DecCount(I3D_CLID_VISUAL);
-#ifndef GL
    vertex_buffer.DestroyD3DVB();
-#endif
 }
 
 //----------------------------
@@ -265,15 +249,8 @@ void I3D_visual::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_stages){
             ++i;
          }
       }
-#if defined _DEBUG && 0
-      if(!tp_env && txt_embm && i<drv->MaxSimultaneousTextures()){
-         vis_flags |= VISF_USE_EMBMMAP;
-         ++i;
-      }
-#endif
    }
 
-#ifndef GL
    if(drv->IsDirectTransform()){
       dword fvf = mb->vertex_buffer.GetFVFlags() & (D3DFVF_POSITION_MASK|D3DFVF_NORMAL|D3DFVF_PSIZE|D3DFVF_DIFFUSE|D3DFVF_SPECULAR);
       dword ntxt = num_txt_stages;
@@ -326,7 +303,6 @@ void I3D_visual::PrepareDestVB(I3D_mesh_base *mb, dword num_txt_stages){
          */
       vertex_buffer.vs_decl = drv->GetVSDeclaration(mb->vertex_buffer.GetFVFlags());
    }
-#endif
    vis_flags |= VISF_DEST_PREPARED;
 }
 
@@ -371,20 +347,6 @@ int I3D_visual::GetAutoLOD(const S_preprocess_context &pc, PI3D_mesh_base mb) co
 }
 
 //----------------------------
-#ifdef GL
-
-class C_this_gl_program: public C_gl_program{
-public:
-   C_this_gl_program(I3D_driver &d):
-      C_gl_program(d)
-   {}
-   int u_mat_view_proj, u_sampler, a_pos, a_normal, a_tex0, u_lights, u_num_lights;
-   virtual void BuildStoreAttribId(dword index, dword id){
-      *(((int*)&u_mat_view_proj)+index) = id;
-   }
-};
-
-#endif
 //----------------------------
 
 static void FillLightVSConstants(PI3D_driver drv, const I3D_driver::S_vs_shader_entry &se, dword num_light_params, const S_vectorw *light_params){
@@ -902,325 +864,11 @@ dword I3D_visual::PrepareVSLighting(CPI3D_material mat, I3D_driver::S_vs_shader_
 }
 
 //----------------------------
-#ifdef GL
-dword I3D_visual::GlPrepareVSLighting(CPI3D_material mat, const S_render_primitive &rp, const S_matrix &m_trans, const S_matrix &m_inv_trans, dword flags,
-   S_vectorw light_params[], C_buffer<S_vectorw> *save_light_params) const{
-
-   dword light_count = 0;
-
-   if(flags&VSPREP_MAKELIGHTING){
-      dword num_light_params = 0;
-
-      const I3D_bsphere &bsphere = bound.GetBoundSphereTrans(this, FRMFLAGS_BSPHERE_TRANS_VALID);
-      const I3D_bbox &bbox = bound.bound_local.bbox;
-      const S_vector &diffuse = mat->GetDiffuse1();
-
-      float f_tmp, *inv_scale = NULL;
-
-      S_vectorw light_value;
-      S_vector &light_base = light_value;
-      light_base = mat->GetEmissive1();
-      if(brightness[I3D_VIS_BRIGHTNESS_EMISSIVE]){
-         float em = float(brightness[I3D_VIS_BRIGHTNESS_EMISSIVE]) * R_128;
-         light_base.x += em;
-         light_base.y += em;
-         light_base.z += em;
-      }
-      light_value.w = mat->GetAlpha1() * (float)rp.alpha * R_255;
-                              //for VISF_USE_OVERRIDE_LIGHT set user defined lighr and compute only lm dynamic adjust
-      if(vis_flags&VISF_USE_OVERRIDE_LIGHT){
-         //S_vector light_color(override_light[0] * R_128, override_light[1] * R_128, override_light[2] * R_128);
-         S_vector light_color;
-         GetOverrideLight(light_color);
-         light_base += light_color;
-         flags |= VSPREP_LIGHT_LM_DYNAMIC;
-      }
-
-      const C_vector<PI3D_light> &sct_lights = !(flags&VSPREP_LIGHT_LM_DYNAMIC) ?
-         rp.sector->GetLights_vertex() : rp.sector->GetLights_dyn_LM();
-      const PI3D_light *lpptr = sct_lights.size() ? &sct_lights.front() : NULL;
-
-      for(int i=sct_lights.size(); i--; ){
-         PI3D_light lp = *lpptr++;
-         assert(!lp->IsFogType());
-
-                              //check if light is on
-         if(!lp->IsOn1())
-            continue;
-
-         I3D_LIGHTTYPE lt = lp->GetLightType1();
-         switch(lt){
-
-         case I3DLIGHT_AMBIENT:
-            light_base += lp->color * diffuse * (lp->power * float(brightness[I3D_VIS_BRIGHTNESS_AMBIENT]) * R_128);
-            break;
-
-         case I3DLIGHT_POINTAMBIENT:
-            {
-               const S_matrix &lmat = lp->GetMatrixDirect();
-
-               S_vector dir = lmat(3) - bsphere.pos;
-               float dist_2 = dir.Dot(dir);
-               if(dist_2 > lp->range_f_scaled_2)
-                  break;
-               float a;
-               if(dist_2 < (lp->range_n_scaled*lp->range_n_scaled)){
-                  a = 1.0f;
-               }else{
-                  if(IsAbsMrgZero(lp->range_delta_scaled))
-                     break;
-                  float dist = I3DSqrt(dist_2);
-                  a = (lp->range_f_scaled - dist) / lp->range_delta_scaled;
-               }
-               light_base += lp->color * diffuse * (a * lp->power * float(brightness[I3D_VIS_BRIGHTNESS_AMBIENT]) * R_128);
-            }
-            break;
-
-         case I3DLIGHT_DIRECTIONAL:
-         case I3DLIGHT_POINT:
-         //case I3DLIGHT_SPOT:
-            {
-               S_vector color = lp->color * diffuse * (lp->power * float(brightness[I3D_VIS_BRIGHTNESS_NOAMBIENT])*R_128);
-               if(color.IsNull())
-                  break;
-               switch(lt){
-               case I3DLIGHT_DIRECTIONAL:
-                  {
-#if 1
-                     if(mat->Is2Sided1()){
-                        light_base += color * .75f * .5f;
-                        continue;
-                     }
-#endif
-                     DEBUG_CHECK_LIGHT_COUNT;
-
-                     S_vectorw *vw = &light_params[num_light_params];
-                     if(!(flags&VSPREP_WORLD_SPACE)){
-                        vw[0] = lp->normalized_dir % m_inv_trans;
-                        vw[0].Normalize();
-                     }else{
-                        vw[0] = lp->normalized_dir;
-                     }
-                     vw[1] = color;
-                     vw[0].w = 0.0f;
-                     vw[1].w = 0.0f;
-                     num_light_params += 2;
-                     ++light_count;
-                  }
-                  break;
-
-               case I3DLIGHT_POINT:
-               //case I3DLIGHT_SPOT:
-                  {
-                     const S_matrix &lmat = lp->GetMatrix();
-                     S_vector light_dir = lmat(3) - bsphere.pos;
-                     float light_dist_2 = light_dir.Square();
-#if 1
-                     if(mat->Is2Sided1()){
-                              //treat as classical point light style
-                        if(light_dist_2 > lp->range_f_scaled_2)
-                           break;
-                        float a;
-                        if(light_dist_2 < (lp->range_n_scaled*lp->range_n_scaled)){
-                           a = 1.0f;
-                        }else{
-                           if(IsAbsMrgZero(lp->range_delta_scaled))
-                              continue;
-                           float dist = I3DSqrt(light_dist_2);
-                           a = (lp->range_f_scaled - dist) / lp->range_delta_scaled;
-                        }
-                        light_base += color * a * .75f * .5f;
-
-                        continue;
-                     }
-#endif
-
-                                 //fast reject lights too far from object
-                     float r_sum = lp->range_f_scaled + bsphere.radius;
-                     if((r_sum*r_sum) <= light_dist_2)
-                        continue;
-
-                     S_vector light_loc_pos = lmat(3) * m_inv_trans;
-                              //detailed bounding-box test
-                     {
-                        if(!inv_scale){
-                           f_tmp = m_inv_trans(0).Magnitude();
-                           inv_scale = &f_tmp;
-                        }
-                        float r = lp->range_f_scaled * *inv_scale;
-                        if(((bbox.min.x - light_loc_pos.x) > r) ||
-                           ((bbox.min.y - light_loc_pos.y) > r) ||
-                           ((bbox.min.z - light_loc_pos.z) > r) ||
-                           ((light_loc_pos.x - bbox.max.x) > r) ||
-                           ((light_loc_pos.y - bbox.max.y) > r) ||
-                           ((light_loc_pos.z - bbox.max.z) > r))
-                           continue;
-                     }
-                     /*
-                     if(lt==I3DLIGHT_SPOT && lp->cone_out<(PI*.99f)){
-                              //check if our bounding sphere is within the spot area
-                        if(light_dist_2 > bsphere.radius*bsphere.radius){
-                              //light pos is outside our bounding sphere, check cone
-                              //get closest point from sphere to cone's axis
-                           float f = -lp->normalized_dir.Dot(light_dir);
-                           S_vector p = lmat(3) + lp->normalized_dir * f;
-                           //drv->DebugPoint(p);
-
-                              //get point on line lying on cone's body,
-                              // which leads from cone's top and is closest to sphere
-                           S_vector dir = (bsphere.pos - p);
-                           float dir_size = dir.Magnitude();
-
-                           if(!IsAbsMrgZero(dir_size)){
-                              f *= lp->outer_tan;
-                              S_vector point_on_cone = p + dir * (f / dir_size);
-                              //drv->DebugPoint(point_on_cone);
-
-                              S_vector cone_line_dir = point_on_cone - lmat(3);
-                              float cone_line_dir_size_2 = cone_line_dir.Square();
-
-                              if(!IsAbsMrgZero(cone_line_dir_size_2)){
-                              //get closest point from sphere to this line
-                                 float f1 = -cone_line_dir.Dot(light_dir) / cone_line_dir_size_2;
-                                 S_vector closest_point_on_cone = lmat(3) + cone_line_dir * f1;
-
-                                 //drv->DebugPoint(closest_point_on_cone);
-                                 S_vector dir_tmp = closest_point_on_cone - bsphere.pos;
-                                 float d_sphere_to_cone_2 = dir_tmp.Square();
-                                 //drv->DEBUG(I3DSqrt(d_sphere_to_cone_2));
-                                 if(d_sphere_to_cone_2 > (bsphere.radius*bsphere.radius)){
-                                    if(f <= dir_size){
-                                       continue;
-                                    }
-                                 }
-                              }
-                           }
-                        }
-                     }
-                     */
-                     DEBUG_CHECK_LIGHT_COUNT;
-
-                     S_vectorw *vw = &light_params[num_light_params];
-                              //constant regs:
-                              // c[+0].xyz ... light pos
-                              // c[+0].w ... light far range
-                              // c[+1].xyz ... light color
-                              // c[+1].w ... light range delta
-                              //spot:
-                              // c[+2].xyz ... light normalized dir
-                              // c[+2].w ... light outer cone cos
-
-                     S_vector &c_color = vw[1];
-                     c_color = color;
-                     float range_delta = lp->range_delta_scaled;
-                     float &c_far_range = vw[0].w;
-                     if(!(flags&VSPREP_WORLD_SPACE)){
-                        if(!inv_scale){
-                           f_tmp = m_inv_trans(0).Magnitude();
-                           inv_scale = &f_tmp;
-                        }
-                        vw[0] = light_loc_pos;
-                        c_far_range = lp->range_f_scaled * (*inv_scale);
-                        range_delta *= (*inv_scale);
-                     }else{
-                        vw[0] = lmat(3);
-                        c_far_range = lp->range_f_scaled;
-                     }
-                     float &c_r_range_delta = vw[1].w;
-                     if(!IsAbsMrgZero(range_delta))
-                        c_r_range_delta = 1.0f / range_delta;
-                     else
-                        c_r_range_delta = 1e+8f;
-
-                     num_light_params += 2;
-                     ++light_count;
-                     /*
-                     if(lt==I3DLIGHT_SPOT){
-                        S_vectorw &vws = light_params[num_light_params++];
-                        S_vector &dir = vws;
-                        dir = lp->normalized_dir;
-                        if(!(flags&VSPREP_WORLD_SPACE)){
-                           dir %= m_inv_trans;
-                           dir.Normalize();
-                        }
-                              //get light multiplier causing maximal intensity to be at inner range
-                        float cone_delta = lp->inner_cos - lp->outer_cos;
-                        float dir_mult;
-                        if(!IsAbsMrgZero(cone_delta))
-                           dir_mult = 1.0f / cone_delta;
-                        else
-                           dir_mult = 1e+8f;
-                        //vws.w = (PI*2.0f) / lp->cone_out;
-                        vws.w = -lp->outer_cos * dir_mult;
-                              //pre-multiply by .5
-                        //dir *= .5f;
-                        dir *= dir_mult;
-                     }
-                     */
-                  }
-                  break;
-               }
-               /*
-                              //check for light count overflow
-   #ifndef DEBUG_REPORT_TOO_MANY_LIGHTS
-               if(light_count==MAX_VS_LIGHTS) i = 0;
-   #endif
-               */
-            }
-            break;
-         }
-      }
-      light_params[num_light_params++] = light_value;
-
-      if(light_count || !(light_base).IsNull() || light_value.w!=1.0f){
-         rp.flags |= RP_FLAG_DIFFUSE_VALID;
-      }
-
-      if(save_light_params){
-                              //save light params
-         save_light_params->assign(num_light_params);
-         memcpy(save_light_params->begin(), light_params, num_light_params*sizeof(S_vectorw));
-      }
-   }else
-   if(save_light_params && save_light_params->size()){
-                              //light count = num fragments minus 2 (VSF_LIGHT_BEGIN and VSF_LIGHT_END)
-      light_count = (save_light_params->size()-1)/2;
-      rp.flags |= RP_FLAG_DIFFUSE_VALID;
-   }
-   /*
-   if(drv->GetFlags()&DRVF_USEFOG){
-      PI3D_light lp = rp.sector->GetFogLight();
-      if(lp && lp->IsOn1() && (lp->I3D_light::GetLightFlags()&I3DLIGHTMODE_VERTEX)){
-         se_in.AddFragment(!(flags&VSPREP_WORLD_SPACE) ?
-            VSF_FOG_SIMPLE_OS :
-            VSF_FOG_SIMPLE_WS);
-         rp.flags |= RP_FLAG_FOG_VALID;
-                              //setup fog constants
-         S_vectorw v4;
-         float &fog_range_n = v4.x, &fog_range_f = v4.y, &fog_range_r_delta = v4.z;
-         v4.w = 0.0f;
-         fog_range_f = lp->range_f;
-         if(IsAbsMrgZero(fog_range_f))
-            fog_range_f = rp.scene->GetActiveCamera1()->GetFCP();
-         fog_range_n = lp->range_n * fog_range_f;
-         fog_range_r_delta = 1.0f / Max(.01f, fog_range_f - fog_range_n);
-         drv->SetVSConstant(VSC_FOGPARAMS, &v4);
-      }
-   }
-                              //enable fog, if it was computed
-   drv->EnableFog(rp.flags&RP_FLAG_FOG_VALID);
-   */
-   return light_count;
-}
-#endif
 //----------------------------
 
 const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_material mat, dword num_txt_stages, I3D_driver::S_vs_shader_entry_in &se_in,
    const S_render_primitive &rp, E_RENDERVIEW_MODE rv_mode, dword flags, const S_matrix *m_trans,
    C_buffer<E_VS_FRAGMENT> *save_light_fragments, C_buffer<S_vectorw> *save_light_params
-#ifdef GL
-   , C_buffer<S_vectorw> *gl_save_light_params
-#endif
    ) const{
 
    bool alt_m_trans = (m_trans!=NULL);
@@ -1235,13 +883,7 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
 
    S_vectorw light_params[MAX_VS_LIGHTS * 3];
    dword num_light_params = 0;
-#ifdef GL
-   S_vectorw gl_light_params[MAX_VS_LIGHTS * 2 + 1];
-   dword gl_num_lights = 0;
-#endif
-#ifndef GL
    if(rv_mode!=RV_SHADOW_CASTER)
-#endif
    {
                               //prepare lighting info
       S_matrix m_tmp;
@@ -1249,9 +891,6 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
          m_tmp = ~(*m_trans);
       const S_matrix &inv_matrix = !alt_m_trans ? GetInvMatrix1() : m_tmp;
       num_light_params = PrepareVSLighting(mat, se_in, rp, *m_trans, inv_matrix, flags, light_params, save_light_fragments, save_light_params);
-#ifdef GL
-      gl_num_lights = GlPrepareVSLighting(mat, rp, *m_trans, inv_matrix, flags, gl_light_params, gl_save_light_params);
-#endif
    }
 
    dword stage = num_txt_stages;
@@ -1262,9 +901,7 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
    bool do_detailmap = false;
    bool do_bumpmap = false;
    if(!(flags&VSPREP_NO_DETAIL_MAPS)
-#ifndef GL
       && rv_mode!=RV_SHADOW_CASTER
-#endif
       ){
       if(vis_flags&VISF_USE_DETMAP){
          do_detailmap = true;
@@ -1369,24 +1006,10 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
          se_in.CopyUV();
    }
 
-#ifndef GL
    if(drv->GetFlags2()&DRVF2_TEXCLIP_ON){
       se_in.AddFragment(object_space ? VSF_TEXKILL_PROJECT_OS : VSF_TEXKILL_PROJECT_WS);
       se_in.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UVW_0+stage));
    }
-#endif
-#ifdef GL
-   C_this_gl_program *glp = (C_this_gl_program*)(C_gl_program*)drv->gl_shader_programs[drv->GL_PROGRAM_VISUAL];
-   if(!glp){
-      glp = new C_this_gl_program(*drv);
-      drv->gl_shader_programs[drv->GL_PROGRAM_VISUAL] = glp;
-      glp->Release();
-      C_str vs = LoadFile("bin\\gl_visual.vs.c");
-      C_str ps = LoadFile("bin\\gl_visual.ps.c");
-      glp->Build(vs, ps, "u_mat_view_proj\0u_sampler\0a_pos\0a_normal\0a_tex0\0u_lights\0u_num_lights\0", vs.Size(), ps.Size());
-   }
-   glp->Use();
-#endif
 
                               //create/get shader and set to D3D
    I3D_driver::S_vs_shader_entry *se = drv->GetVSHandle(se_in);
@@ -1404,13 +1027,6 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
    if(num_light_params)
       FillLightVSConstants(drv, *se, num_light_params, (S_vectorw*)light_params);
 
-#ifdef GL
-   if(gl_save_light_params){
-      glUniform4fv(glp->u_lights, gl_save_light_params->size(), &gl_save_light_params->begin()->x);
-   }else
-      glUniform4fv(glp->u_lights, gl_num_lights*2+1, &gl_light_params[0].x);
-   glUniform1i(glp->u_num_lights, gl_num_lights);
-#endif
 
    if(do_env_mapping){
                            //environment mapping (camera position relative to object)
@@ -1424,7 +1040,6 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
                               //fill-in transformation matrix
    if(flags&VSPREP_FEED_MATRIX)
       rp.scene->SetRenderMatrix(*m_trans);
-#ifndef GL
    if(!drv->IsDirectTransform() && (vis_flags&VISF_USE_DETMAP)){
                               //upload detailmap uv scale now
       CPI3D_mesh_base mb = GetMesh();
@@ -1449,14 +1064,12 @@ const I3D_driver::S_vs_shader_entry *I3D_visual::PrepareVertexShader(CPI3D_mater
       }
       drv->SetVSConstant(VSC_TEXKILL, &pl);
    }
-#endif
                               //enable clipping, if requested
    //drv->SetClipping(rp.flags&RP_FLAG_CLIP);
    return se;
 }
 
 //----------------------------
-#ifndef GL
 void I3D_visual::SetupSpecialMapping(CPI3D_material mat, const S_render_primitive *rp, dword num_txt_stages) const{
 
    dword stage = num_txt_stages;
@@ -1539,7 +1152,6 @@ void I3D_visual::SetupSpecialMapping(CPI3D_material mat, const S_render_primitiv
    }
    drv->DisableTextureStage(stage);
 }
-#endif
 //----------------------------
 
 void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shader_entry_in &se_ps, dword num_txt_stages) const{
@@ -1670,10 +1282,8 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
       drv->SetVSConstant(VSC_UV_SHIFT_SCALE, &uv_scale);
    }
    drv->DisableTextures(stage);
-#ifndef GL
    if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
       se_ps.TexKill(stage);
-#endif
 }
 
 //----------------------------
@@ -1811,7 +1421,6 @@ void I3D_visual::AddPrimitives1(I3D_mesh_base *mb, S_preprocess_context &pc){
 }
 
 //----------------------------
-#ifndef GL
 void I3D_visual::DrawPrimitiveVisual(I3D_mesh_base *mb, const S_preprocess_context &pc, const S_render_primitive &rp){
 
    IDirect3DDevice9 *d3d_dev = drv->GetDevice1();
@@ -1930,7 +1539,6 @@ void I3D_visual::DrawPrimitiveVisual(I3D_mesh_base *mb, const S_preprocess_conte
       CHECK_D3D_RESULT("DrawIP", hr);
    }
 }
-#endif
 //----------------------------
 
 void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_context &pc, const S_render_primitive &rp){
@@ -1955,9 +1563,6 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
 #ifdef USE_STRIPS
       strp_info = mb->GetStripInfo();
 #endif
-#ifdef GL
-      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mb->GetIndexBuffer().ibo);
-#endif
    }else{
       const C_auto_lod &al = mb->GetAutoLODs()[rp.curr_auto_lod];
       fgrps = al.fgroups.begin();
@@ -1968,19 +1573,11 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
 #ifdef USE_STRIPS
       strp_info = al.GetStripInfo();
 #endif
-#ifdef GL
-      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, al.GetIndexBuffer().ibo);
-#endif
    }
 
-#ifdef GL
-#else
    drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
    drv->SetVSDecl(vertex_buffer.vs_decl);
-#endif
-#ifndef GL
    if(pc.mode!=RV_SHADOW_CASTER)
-#endif
       drv->SetupBlend(rp.blend_mode);
 
    bool has_diffuse = (rp.flags&RP_FLAG_DIFFUSE_VALID);
@@ -1994,7 +1591,6 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
 
       I3D_driver::S_ps_shader_entry_in se_ps;
 
-#ifndef GL
       if(pc.mode==RV_SHADOW_CASTER){
          if(mat->IsTextureAlpha() || mat->IsCkeyAlpha1()){
             se_ps.Tex(0);
@@ -2011,10 +1607,8 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
             se_ps.AddFragment(PSF_COLOR_COPY);
             drv->DisableTextures(0);
          }
-#ifndef GL
          if(drv->GetFlags2()&DRVF2_TEXCLIP_ON)
             se_ps.TexKill(1);
-#endif
          drv->EnableNoCull(mat->Is2Sided1());
          if(rp.alpha!=0xff){
             drv->SetPixelShader(se_ps);
@@ -2036,7 +1630,6 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
             continue;
          }
       }else
-#endif
       {
          if(mat->GetTexture1(MTI_DIFFUSE) && (drv->GetFlags2()&DRVF2_DRAWTEXTURES)){
             se_ps.Tex(0);
@@ -2047,9 +1640,6 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
          }else{
             se_ps.AddFragment(has_diffuse ? PSF_v0_MUL2X : PSF_COPY_BLACK);
             SetupSpecialMappingPS(mat, se_ps, 1);
-#ifdef GL
-            glBindTexture(GL_TEXTURE_2D, 0);
-#endif
          }
       }
       drv->SetPixelShader(se_ps);
@@ -2058,18 +1648,11 @@ void I3D_visual::DrawPrimitiveVisualPS(I3D_mesh_base *mb, const S_preprocess_con
          base_index * 3 + si.base_index, si.num_indicies-2);
 #else
       hr = d3d_dev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
-#ifndef GL
          vertex_buffer.D3D_vertex_buffer_index,
-#else
-         mb->vertex_buffer.D3D_vertex_buffer_index,
-#endif
          0, vertex_count,
          (base_index + fg->base_index) * 3, fg->num_faces);
 #endif
       CHECK_D3D_RESULT("DrawIP", hr);
-#ifdef GL
-      glDrawElements(GL_TRIANGLES, fg->num_faces*3, GL_UNSIGNED_SHORT, (void*)(fg->base_index*6)); CHECK_GL_RESULT("glDrawElements");
-#endif
    }
 }
 
@@ -2090,12 +1673,10 @@ void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, bool use_lights, 
       se.AddFragment(VSF_TEXT_PROJECT);
       if(debug)
          se.AddFragment(VSF_SIMPLE_DIR_LIGHT);
-#ifndef GL
       if(drv->GetFlags2()&DRVF2_TEXCLIP_ON){
          se.AddFragment(VSF_TEXKILL_PROJECT_OS);
          se.AddFragment((E_VS_FRAGMENT)(VSF_STORE_UVW_0+2));
       }
-#endif
       S_render_primitive rp;
       rp.scene = scene;
       rp.sector = NULL;
@@ -2111,13 +1692,11 @@ void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, bool use_lights, 
             rp.sector = I3DCAST_SECTOR(f);
       //}
       PrepareVertexShader(mat, 1, se, rp, RV_NORMAL, flags);
-#ifndef GL
       if(drv->GetFlags2()&DRVF2_TEXCLIP_ON){
                               //feed in texkill plane transformed to local coordinates
          S_plane pl = drv->GetTexkillPlane() * GetInvMatrix1();
          drv->SetVSConstant(VSC_TEXKILL, &pl);
       }
-#endif
    }
 
    //drv->SetClipping(true);
@@ -2171,26 +1750,15 @@ void I3D_visual::RenderSolidMesh(PI3D_scene scene, bool debug, bool use_lights, 
       drv->SetIndices(ib);
 
       dword base_index;
-#ifndef GL
       if(!drv->IsDirectTransform()){
          drv->SetStreamSource(mb->vertex_buffer.GetD3DVertexBuffer(), mb->vertex_buffer.GetSizeOfVertex());
          base_index = mb->vertex_buffer.D3D_vertex_buffer_index;
       }else
-#endif
       {
-#ifndef GL
          drv->SetStreamSource(vertex_buffer.GetD3DVertexBuffer(), vertex_buffer.GetSizeOfVertex());
          base_index = vertex_buffer.D3D_vertex_buffer_index;
-#else
-         drv->SetStreamSource(mb->vertex_buffer.GetD3DVertexBuffer(), mb->vertex_buffer.GetSizeOfVertex());
-         base_index = mb->vertex_buffer.D3D_vertex_buffer_index;
-#endif
       }
-#ifndef GL
       drv->SetVSDecl(const_cast<IDirect3DVertexDeclaration9*>((const IDirect3DVertexDeclaration9*)vertex_buffer.vs_decl));
-#else
-      drv->SetVSDecl(const_cast<IDirect3DVertexDeclaration9*>((const IDirect3DVertexDeclaration9*)mb->vertex_buffer.vs_decl));
-#endif
 
 #ifdef USE_STRIPS
       if(mb->HasStrips()){

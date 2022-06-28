@@ -94,10 +94,6 @@ class I3D_source_vertex_buffer{
    dword fvflags;
    dword vstride;             //stride of single vertex, in bytes
 public:
-#ifdef GL
-   GLuint vbo;
-   C_smart_ptr<IDirect3DVertexDeclaration9> vs_decl;
-#endif
 
    dword D3D_vertex_buffer_index;
    C_vector<word> vertex_map;
@@ -107,9 +103,6 @@ public:
       vstride(::GetSizeOfVertex(fvf1)),
       drv(drv1),
       num_vertices(0),
-#ifdef GL
-      vbo(0),
-#endif
       D3D_vertex_buffer(NULL)
    {}
    ~I3D_source_vertex_buffer();
@@ -173,16 +166,10 @@ class I3D_source_index_buffer{
    dword num_faces;
 public:
    dword D3D_index_buffer_index; //in sizeof(I3D_triface)
-#ifdef GL
-   GLuint ibo;
-#endif
 
    I3D_source_index_buffer(PI3D_driver);
    I3D_source_index_buffer():
       D3D_index_buffer(NULL),
-#ifdef GL
-      ibo(0),
-#endif
       num_faces(0)
    {}
    ~I3D_source_index_buffer();

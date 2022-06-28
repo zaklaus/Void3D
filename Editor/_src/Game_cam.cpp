@@ -202,9 +202,6 @@ class C_game_camera_imp: public C_game_camera{
       if(b){
          to = (cd.flags&I3DCOL_SOLVE_SLIDE) ? cd.GetDestination() : cd.ComputeHitPos();
          //DebugLine(cd.from, to, 1, 0xffff0000);
-#if defined _DEBUG && 0
-         DEBUG(C_fstr("frm: %s, dist: %.2f", (const char*)cd.GetHitFrm()->GetName(), cd.GetHitDistance()));
-#endif
       }
       return b;
    }

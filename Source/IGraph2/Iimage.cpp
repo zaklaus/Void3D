@@ -200,11 +200,9 @@ D3DFORMAT ConvertFormat(const S_pixelformat *pf){
    switch(pf->bytes_per_pixel){
 
    case 1:
-#ifndef GL
       if(pf->flags&PIXELFORMAT_PALETTE)
          return D3DFMT_P8;
       else
-#endif
          return D3DFMT_R3G3B2;
 
    case 2:
@@ -510,10 +508,8 @@ bool IImage::OpenInternal(C_cache &ck, const char *name, dword flags, dword sx1,
          }
          if(d3d_fmt==D3DFMT_UNKNOWN)
             throw C_except("unknown pixel format");
-#ifndef GL
          if(d3d_fmt==D3DFMT_P8)
             create_palette = true;
-#endif
          D3DPOOL pool_type = D3DPOOL_DEFAULT;
          if(flags&IMGOPEN_SYSMEM)
             pool_type = D3DPOOL_SYSTEMMEM;

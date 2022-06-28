@@ -152,12 +152,6 @@ void I3D_camera::UpdateCameraMatrices(float aspect_ratio) const{
          m(2, 2) = Q;
          m(2, 3) = 1.0f;
          m(3, 2) = -Q * ncp;
-#ifdef GL
-         gl_m_proj_simple.m0_0 = w;
-         gl_m_proj_simple.m1_1 = h;
-         gl_m_proj_simple.m2_2 = -(ncp+fcp)/range;
-         gl_m_proj_simple.m3_2 = ncp + fcp*ncp/range;
-#endif
       }else{
                               //orthogonal projection matrix
          m(0, 0) = ortho_scale;
@@ -165,21 +159,12 @@ void I3D_camera::UpdateCameraMatrices(float aspect_ratio) const{
          m(2, 2) = 1.0f / range;
          m(3, 2) = -ncp / range;
          m(3, 3) = 1.0f;
-#ifdef GL
-         gl_m_proj_simple.m0_0 = ortho_scale;
-         gl_m_proj_simple.m1_1 = ortho_scale / aspect_ratio;
-         gl_m_proj_simple.m2_2 = 2.0f / fcp;
-         gl_m_proj_simple.m3_2 = -fcp/range;
-#endif
       }
       m_proj_simple.m0_0 = m(0, 0);
       m_proj_simple.m1_1 = m(1, 1);
       m_proj_simple.m2_2 = m(2, 2);
       m_proj_simple.m3_2 = m(3, 2);
       m_proj_simple.orthogonal = (cam_flags&CAMF_ORTHOGONAL);
-#ifdef GL
-      gl_m_proj_simple.orthogonal = (cam_flags&CAMF_ORTHOGONAL);
-#endif
       cam_flags &= ~CAMF_RESET_PROJ;
    }
 
@@ -203,29 +188,14 @@ void I3D_camera::UpdateCameraMatrices(float aspect_ratio) const{
          m_proj_simple_biased.m1_1 = h;
          m_proj_simple_biased.m2_2 = Q;
          m_proj_simple_biased.m3_2 = -Q * n;
-#ifdef GL
-         gl_m_proj_simple_biased.m0_0 = w;
-         gl_m_proj_simple_biased.m1_1 = h;
-         gl_m_proj_simple_biased.m2_2 = -(n+f)/range;
-         gl_m_proj_simple_biased.m3_2 = n + f*n/range;
-#endif
       }else{
                               //orthogonal projection matrix
          m_proj_simple_biased.m0_0 = ortho_scale;
          m_proj_simple_biased.m1_1 = ortho_scale / aspect_ratio;
          m_proj_simple_biased.m2_2 = 1.0f / range;
          m_proj_simple_biased.m3_2 = -n / range;
-#ifdef GL
-         gl_m_proj_simple_biased.m0_0 = ortho_scale;
-         gl_m_proj_simple_biased.m1_1 = ortho_scale / aspect_ratio;
-         gl_m_proj_simple_biased.m2_2 = 2.0f / f;
-         gl_m_proj_simple_biased.m3_2 = -f/range;
-#endif
       }
       m_proj_simple_biased.orthogonal = (cam_flags&CAMF_ORTHOGONAL);
-#ifdef GL
-      gl_m_proj_simple_biased.orthogonal = (cam_flags&CAMF_ORTHOGONAL);
-#endif
 
       cam_flags &= ~CAMF_RESET_BIAS;
    }

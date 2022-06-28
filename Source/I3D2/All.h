@@ -65,10 +65,6 @@
 #include <c_linklist.h>
 #include <C_vector.h>
 
-#ifdef GL
-#include <Egl\Egl.h>
-#include <Gles2\gl2.h>
-#endif
 
 #pragma warning(push,3)
 #include <map>
