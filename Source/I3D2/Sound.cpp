@@ -16,9 +16,9 @@
 //#define DEBUG_NO_3D_HW        //disable use of 3D sound hardware
 //#define DEBUG_FORCE_SOFTWARE  //force sw sound buffer (also disables 3D hw usage)
 
-#define EMULATE_3DPOSITIONING //compute 3D positioning (by setting panning) ourselves
 #endif
 
+#define EMULATE_3DPOSITIONING //compute 3D positioning (by setting panning) ourselves
 #define EMULATE_ATTENUATION   //compute attenuation (by setting volume) ourselves
 
 

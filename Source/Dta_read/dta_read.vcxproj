@@ -22,6 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{D83CBF70-D43F-476D-9F4B-BF2AA934BEDB}</ProjectGuid>
     <RootNamespace>dta_read_static</RootNamespace>
+    <ProjectName>IDataRead</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
