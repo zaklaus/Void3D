@@ -1095,7 +1095,7 @@ C_str MakeCubicTextureName(const C_str &name, dword side);
 //----------------------------
 
                               //thunk into QHull library
-bool __cdecl qhCreateConvexHull(const C_vector<S_vector> &verts, C_vector<I3D_triface> *tri_faces,
+extern bool __cdecl qhCreateConvexHull(const C_vector<S_vector> &verts, C_vector<I3D_triface> *tri_faces,
    C_vector<I3D_face> *faces = NULL, C_vector<S_plane> *planes = NULL);
 
 #ifdef _DEBUG

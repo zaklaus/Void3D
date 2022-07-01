@@ -472,6 +472,7 @@
     <None Include="..\..\Source\IEditor\res\occluder.cur" />
     <None Include="..\..\Source\IEditor\res\SEEDPICK.CUR" />
     <None Include="..\..\Source\IEditor\res\SEEDPUT.CUR" />
+    <None Include="..\Scripts\Common.i" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\I3D2\i3d_2.vcxproj">

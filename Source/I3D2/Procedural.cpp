@@ -912,7 +912,7 @@ void I3D_procedural_texture::Tick(int time){
       float power = (1.0f-height_curve)*(float)sin(sin_part*PI) + height_curve*(1.0f+(float)sin(inv_sin_part*PI));
       float r_radius = 1.0f / radius;
 
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
                               //temp variables
       int i_tmp;
       const int fp_radius = FloatToInt(65536.0f * radius);
@@ -1301,7 +1301,7 @@ void I3D_procedural_texture::Tick(int time){
                case 1:
                   break;
                case 2:
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
                                        //optimize - most common case
                   __asm{
                      push ecx
@@ -1346,7 +1346,7 @@ void I3D_procedural_texture::Tick(int time){
                   break;
 
                case 4:
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
                                        //optimize - most common case
                   __asm{
                      push ecx
