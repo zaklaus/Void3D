@@ -226,7 +226,7 @@ class C_player_imp : public C_player {
 #define STAIRS_ANGLE .75f
 
         DEBUG(angle_cos);
-        if (angle_cos >= FLOOR_ANGLE) {
+        if (angle_cos >= STAIRS_ANGLE) {
             cc.col_floor = rd.GetHitFrm();
             if (cc.is_idle)
                 rd.ModifyNormal(AXIS_Y);
