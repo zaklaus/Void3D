@@ -2,32 +2,383 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <UniqueIdentifier>{980bf70e-24ef-4a9b-a3ab-2198bf8748b4}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Actors">
+      <UniqueIdentifier>{3e7a01b1-6951-43bf-a65b-7a8b4407ddf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{b9dbf1c6-26c0-4742-bccf-16d4e8418a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Plugins">
+      <UniqueIdentifier>{4c888464-1bf3-4144-9b8e-1aaf3178a149}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+      <UniqueIdentifier>{8904440d-8c96-4ae0-a7c2-62d918d85c6d}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+      <UniqueIdentifier>{a647ca5a-6449-4571-b426-26c8b643f91f}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Texts">
+      <UniqueIdentifier>{ce1352fb-cc3c-4174-978d-a7f92baa3b28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="Checkpoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_cam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathMovement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TerrainDetail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectActor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandLine.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Pch.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Systables.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Winstuff.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="miss_plg.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsStudio.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptEdit.cpp">
+      <Filter>Source Files\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="Ragdoll.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IGameFramework.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ResourceCompile Include="..\..\Source\IEditor\main.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\TEXT\English\SYSTEM.TXT">
+      <Filter>Texts</Filter>
+    </Text>
+    <Text Include="..\..\Source\IEditor\res\font.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\IEditor\res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\mesh_inf.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\SEEDPUT.CUR">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\SEEDPICK.CUR">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00012.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\occluder.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00011.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cursor_o.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00009.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00017.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cursor_t.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00008.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00016.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00001.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cursor_l.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00014.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00013.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00015.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00006.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00007.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00005.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00003.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cursor_c.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00002.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00004.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\arrow.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cur00010.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\cursor_h.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\font.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\Source\IEditor\res\binary2.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Scripts\Common.i">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Source\IEditor\res\game.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\icon_config.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_file.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_validity.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_undo.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_lmap.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_light.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_debug.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_create.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_bsp.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\I3d2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\iduck.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\zakla\Desktop\I_LOGO.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\I_LOGO.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\I_LOGO1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\tb_play.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\axes.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bmp12.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bmp13.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\bone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\camera.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Checkpoint.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\dummy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\envmap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Font1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\Font1_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\letters.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_d.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_f.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_p.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\light_s.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sound_a.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sound_p.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\sphere.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\target.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Source\IEditor\res\decal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\GameFramework\GameMission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\PhysicsActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Ragdoll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\systables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\TerrainDetail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Winstuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Actors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\All.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Checkpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\CommandLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Game_cam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
