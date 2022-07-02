@@ -411,12 +411,13 @@ private:
             i = dir.Size();
             str = &buf[i];
          }
-
-         i=0;
-         dir = C_fstr("%s\\missions\\", cwd);
-         if(!strnicmp(dir, buf, dir.Size())){
-            i = dir.Size();
-            str = &buf[i];
+         else {
+            i = 0;
+            dir = C_fstr("%s\\missions\\", cwd);
+            if (!strnicmp(dir, buf, dir.Size())) {
+               i = dir.Size();
+               str = &buf[i];
+            }
          }
                               //no extension in names
          for(dword ci=str.Size(); ci--; ){

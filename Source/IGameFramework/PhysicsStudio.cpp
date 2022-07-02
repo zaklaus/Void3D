@@ -131,7 +131,7 @@ private:
 
    enum E_ACTION{
       E_PHYS_NULL,
-      /*
+      
       E_PHYS_JOINT_BALL,
       E_PHYS_JOINT_HINGE,
       E_PHYS_JOINT_HINGE2,
@@ -139,7 +139,6 @@ private:
       E_PHYS_JOINT_UNIVERSAL,
       E_PHYS_JOINT_FIXED,
       E_PHYS_JOINT_AMOTOR,
-      */
 
       E_PHYS_ACTIVE,
       E_PHYS_DRAW_CONTACTS,
@@ -186,15 +185,8 @@ private:
          return false;
 
 #define MENU_BASE "%90 &Physics Studio\\"
-      /*
-      ed->AddShortcut(this, E_PHYS_JOINT_BALL, MENU_BASE"Joint B&all", K_NOKEY, 0);
-      ed->AddShortcut(this, E_PHYS_JOINT_HINGE, MENU_BASE"Joint &Hinge", K_NOKEY, 0);
-      ed->AddShortcut(this, E_PHYS_JOINT_HINGE2, MENU_BASE"Joint Hinge &2", K_NOKEY, 0);
-      ed->AddShortcut(this, E_PHYS_JOINT_SLIDER, MENU_BASE"Joint S&lider", K_NOKEY, 0);
-      ed->AddShortcut(this, E_PHYS_JOINT_UNIVERSAL, MENU_BASE"Joint &Universal", K_NOKEY, 0);
-      ed->AddShortcut(this, E_PHYS_JOINT_FIXED, MENU_BASE"%aJoint &Fixed", K_NOKEY, 0);
+      
       //ed->AddShortcut(this, E_PHYS_JOINT_AMOTOR, MENU_BASE"Joint &Motor", K_NOKEY, 0);
-      */
       ed->AddShortcut(this, E_ACTION_PHYS_STUDIO_TOGGLE, MENU_BASE"&Physics Studio", K_NOKEY, 0);
       ed->AddShortcut(this, E_ACTION_PHYS_STUDIO_TEST, MENU_BASE"%a &Test physics", K_NOKEY, 0);
       ed->AddShortcut(this, E_ACTION_PICK_MODE, MENU_BASE"P&ick mode", K_NOKEY, 0);
@@ -204,6 +196,13 @@ private:
       ed->AddShortcut(this, E_ACTION_EDIT_AUTO_CMD, MENU_BASE"&Edit start-up command", K_NOKEY, 0);
 
       ed->AddShortcut(this, E_ACTION_PHYS_STUDIO_TOGGLE, "%90 &Editors\\&Physics editor", K_NOKEY, 0);
+
+      ed->AddShortcut(this, E_PHYS_JOINT_BALL, MENU_BASE"Joints\\Joint B&all", K_NOKEY, 0);
+      ed->AddShortcut(this, E_PHYS_JOINT_HINGE, MENU_BASE"Joints\\Joint &Hinge", K_NOKEY, 0);
+      ed->AddShortcut(this, E_PHYS_JOINT_HINGE2, MENU_BASE"Joints\\Joint Hinge &2", K_NOKEY, 0);
+      ed->AddShortcut(this, E_PHYS_JOINT_SLIDER, MENU_BASE"Joints\\Joint S&lider", K_NOKEY, 0);
+      ed->AddShortcut(this, E_PHYS_JOINT_UNIVERSAL, MENU_BASE"Joints\\Joint &Universal", K_NOKEY, 0);
+      ed->AddShortcut(this, E_PHYS_JOINT_FIXED, MENU_BASE"Joints\\%aJoint &Fixed", K_NOKEY, 0);
       return true;
    }
 
@@ -1435,7 +1434,6 @@ public:
    virtual dword Action(int id, void *context = NULL){
 
       switch(id){
-         /*
       case E_PHYS_JOINT_BALL: Command("jb"); break;
       case E_PHYS_JOINT_HINGE: Command("jh"); break;
       case E_PHYS_JOINT_HINGE2: Command("j2"); break;
@@ -1443,7 +1441,6 @@ public:
       case E_PHYS_JOINT_UNIVERSAL: Command("ju"); break;
       case E_PHYS_JOINT_FIXED: Command("jf"); break;
       case E_PHYS_JOINT_AMOTOR: Command("jm"); break;
-      */
 
       case E_PHYS_ACTIVE:
          active = !active;
