@@ -612,6 +612,9 @@ public:
    I3DMETHOD_(void,SetEMBMOpacity)(float f) = 0;
    I3DMETHOD_(float,GetEMBMOpacity)() const = 0;
 
+   I3DMETHOD_(void, SetEnvOpacity)(float f) = 0;
+   I3DMETHOD_(float, GetEnvOpacity)() const = 0;
+
    I3DMETHOD_(void,SetName)(const C_str&) = 0;
    I3DMETHOD_(const C_str&,GetName)() const = 0;
 
