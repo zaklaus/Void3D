@@ -436,6 +436,7 @@
     <Text Include="..\TEXT\English\SYSTEM.TXT" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Editor\Scripts\Common.i" />
     <None Include="..\..\Source\IEditor\res\arrow.cur" />
     <None Include="..\..\Source\IEditor\res\binary2.bin" />
     <None Include="..\..\Source\IEditor\res\cur00001.cur" />
@@ -466,7 +467,6 @@
     <None Include="..\..\Source\IEditor\res\occluder.cur" />
     <None Include="..\..\Source\IEditor\res\SEEDPICK.CUR" />
     <None Include="..\..\Source\IEditor\res\SEEDPUT.CUR" />
-    <None Include="..\Scripts\Common.i" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\I3D2\i3d_2.vcxproj">

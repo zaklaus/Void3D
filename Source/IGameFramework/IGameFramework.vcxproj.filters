@@ -204,7 +204,7 @@
     <None Include="..\..\Source\IEditor\res\binary2.bin">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Scripts\Common.i">
+    <None Include="..\..\Editor\Scripts\Common.i">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

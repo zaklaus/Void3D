@@ -10,7 +10,7 @@
 //----------------------------
 
 extern const char SCRIPT_CMDLINE[];
-const char SCRIPT_CMDLINE[] = "/iMissions /iScripts /ICommon.i";
+const char SCRIPT_CMDLINE[] = "/iMissions /iScripts /ICommon.i /IGame.i";
 
 //----------------------------
 

@@ -8,7 +8,7 @@ S_application_data init_data = {
    "Void Demo",
    "Software\\V4 Games\\Void Demo\\",
 #ifdef _DEBUG
-   "W:\\!Void_Crashes\\",
+   "C:\\!Void_Crashes\\",
 #else
    "contact@madaraszd.net",
 #endif
@@ -16,7 +16,6 @@ S_application_data init_data = {
    200 * 1024 * 1024,
    &cmd_line,
    AppInit,
-   //AppRun,
    AppClose,
 #ifdef EDITOR
    EdCreate,
@@ -38,7 +37,7 @@ PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* da
 }
 
 static void RegisterGameInternals(){
-   //register script methods, new actors and change any game settings in here
+   //register script methods, new actors, editor plugins and change any game settings in here
 }
 
 //----------------------------
