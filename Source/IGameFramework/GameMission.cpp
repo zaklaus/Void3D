@@ -1407,7 +1407,10 @@ PC_actor C_game_mission_imp::CreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type
     case ACTOR_VEHICLE: ap = CreateVehicleActor(*this, in_frm); break;
     case ACTOR_ITEM: ap = CreateActorItem(*this, in_frm); break;
     default:
-        ErrReport("C_game_mission::CreateActor: Cannot create actor!", editor);
+       ap = GameCreateActor(in_frm, in_type, data);
+       if (!ap) {
+          ErrReport("C_game_mission::CreateActor: Cannot create actor!", editor);
+       }
     }
     if (ap) {
         actors.push_back(ap);

@@ -3,6 +3,7 @@
 #include "insanity/sprite.h"
 #include "insanity/AppInit.h"
 #include "commandline.h"
+#include "Actors.h"
 
 #ifdef _MSC_VER
 using namespace std;
@@ -602,6 +603,10 @@ extern PC_table game_data_table;
 
 void OpenGameDataEditor();
 bool SetupGameData(S_application_data& app_data, bool first_try = true);
+
+//required methods that need to be implemented in game executable
+
+extern PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* data);
 
 //----------------------------
 //----------------------------

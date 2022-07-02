@@ -9,7 +9,7 @@
 
 //----------------------------
 
-const S_actor_type_info actor_type_info[ACTOR_LAST] = {
+S_actor_type_info actor_type_info[ACTOR_LAST] = {
 // friendly name     create   
    {"NULL",           0},
    {"Effect",         0},
@@ -20,6 +20,9 @@ const S_actor_type_info actor_type_info[ACTOR_LAST] = {
    {"Item",           1},
 };
 
+void SetActorTypeInfo(int idx, S_actor_type_info info){
+   actor_type_info[idx] = info;
+}
 
 //----------------------------
 // Function used by editor - retrieve user-friendly ACTOR name from a frame.

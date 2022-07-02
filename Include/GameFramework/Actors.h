@@ -11,7 +11,9 @@ enum E_ACTOR_TYPE{            //actor class ID
    ACTOR_VEHICLE,
    ACTOR_ITEM,
 
-   ACTOR_LAST
+   ACTOR_NEXT_FREE_ID,
+
+   ACTOR_LAST = 256
 };
 
 enum E_USE_TYPE {
@@ -31,7 +33,9 @@ struct S_actor_type_info{
    bool allow_edit_creation;  //true to enable creation in editor
 };
                               //user-friendly names of actors
-extern const S_actor_type_info actor_type_info[];
+extern S_actor_type_info actor_type_info[];
+
+void SetActorTypeInfo(int idx, S_actor_type_info info);
 
 //----------------------------
                               //C_actor - base class for any interactive entity

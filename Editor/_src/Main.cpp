@@ -26,6 +26,16 @@ S_application_data init_data = {
    AppCrashInfo,
 };
 
+//required
+PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* data){
+   //allocate custom actors here
+   return NULL;
+}
+
+static void RegisterGameInternals(){
+   //register script methods, new actors and change any game settings in here
+}
+
 //----------------------------
 
 int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
@@ -73,10 +83,11 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
 #ifdef EDITOR
             if (app_data.EdCreate) {
                 editor = (*app_data.EdCreate)();
-                void InitPhysicsStudio(PC_editor editor);
-                InitPhysicsStudio(editor);
             }
 #endif
+
+            RegisterGameInternals();
+            
             AppRun();
         }
         if (app_data.Close)

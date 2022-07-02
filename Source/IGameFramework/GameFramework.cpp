@@ -893,6 +893,9 @@ PC_editor EdCreate() {
     model_cache.PushWorkMission((C_mission*)mission);
     mission->Release();
 
+    void InitPhysicsStudio(PC_editor editor);
+    InitPhysicsStudio(editor);
+
     return editor;
 }
 #endif
