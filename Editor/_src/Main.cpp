@@ -36,6 +36,13 @@ PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* da
    return NULL;
 }
 
+//required
+C_class_to_be_ticked* GameGetStartupClass(){
+   //return custom object if you want to handle your own game flow
+   //or leave the game flow to the game framework
+   return NULL;
+}
+
 static void RegisterGameInternals(){
    //register script methods, new actors, editor plugins and change any game settings in here
 }
@@ -62,7 +69,7 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
         *language = 0;
 
         if (cmd_line.run_config) {
-            return !RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
+            return !RunGameConfiguration(reg_base, true, language);
         }
         if (cmd_line.edit_game_data){
             OpenGameDataEditor();
@@ -70,7 +77,7 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
             return 0;
         }
         if (cmd_line.run_config) {
-            E_CONFIG_STATUS st = RunGameConfiguration(C_str(app_data.reg_base) + app_data.app_name, true, language);
+            E_CONFIG_STATUS st = RunGameConfiguration(reg_base, true, language);
             if (st != CONFIG_OK)
                 return 0;
         }

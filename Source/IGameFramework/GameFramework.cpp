@@ -954,7 +954,8 @@ void AppRun() {
             init_tc = new C_tick_class_begin(cmd_line);
         }
 #else
-        if (cmd_line.cmdline_mission.Size()) {
+        init_tc = GameGetStartupClass();
+        if (!init_tc && cmd_line.cmdline_mission.Size()) {
             PC_game_mission mission = CreateGameMission();
             E_MISSION_IO mio = mission->Open(cmd_line.cmdline_mission, 0);
             if (mio == MIO_OK) {
@@ -966,7 +967,7 @@ void AppRun() {
             mission->Release();
         }
         if (!init_tc) {
-            //@todo -- main menu
+           OsMessageBox(NULL, "No mission specified!", "Void player", MBOX_OK);
         }
 #endif//!EDITOR
         if (init_tc) {

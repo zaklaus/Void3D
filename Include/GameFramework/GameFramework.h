@@ -610,6 +610,8 @@ extern PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const v
 
 extern void GameRegisterSymbols();
 
+extern C_class_to_be_ticked* GameGetStartupClass();
+
 //----------------------------
 //----------------------------
 #ifdef _WINDOWS_
