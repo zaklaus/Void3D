@@ -1,7 +1,8 @@
 #ifndef __MAIN_H_
 #define __MAIN_H_
 #include "insanity/sprite.h"
-
+#include "insanity/AppInit.h"
+#include "commandline.h"
 
 #ifdef _MSC_VER
 using namespace std;
@@ -578,6 +579,29 @@ enum E_CONTROLLER_SLOT{
 
    CS_LAST
 };
+
+//game framework routines
+void OpenGameDataEditor();
+
+bool AppInit(PI3D_driver);
+void AppClose();
+void AppRun();
+
+bool InitSystem(const C_command_line& cmd_line);
+void CloseSystem();
+
+void SetupExceptionHandling();
+C_str AppCrashInfo();
+void __stdcall CrashCallback();
+
+C_editor* EdCreate();
+
+bool ReadConfigUntilOkCancel(const char* language);
+
+extern PC_table game_data_table;
+
+void OpenGameDataEditor();
+bool SetupGameData(S_application_data& app_data, bool first_try = true);
 
 //----------------------------
 //----------------------------

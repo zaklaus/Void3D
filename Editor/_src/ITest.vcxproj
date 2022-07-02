@@ -388,7 +388,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\IEditor\resource.h" />
-    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Source\IEditor\main.rc" />

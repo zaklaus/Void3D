@@ -1,6 +1,6 @@
 #include "all.h"
 #include "Common.h"
-#include "main.h"
+#include "GameFramework.h"
 #include <i3d\PoseAnim.h>
 
 //----------------------------

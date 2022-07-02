@@ -39,7 +39,7 @@
     <ClCompile Include="GameMission.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="GameFramework.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mission.cpp">
@@ -335,7 +335,7 @@
     <ClInclude Include="..\..\Include\GameFramework\Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Include\GameFramework\main.h">
+    <ClInclude Include="..\..\Include\GameFramework\GameFramework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\GameFramework\PhysicsActor.h">
@@ -378,6 +378,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Include\GameFramework\Game_cam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\GameFramework\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

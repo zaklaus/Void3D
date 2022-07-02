@@ -1,5 +1,5 @@
 #include "all.h"                                   
-#include "main.h"
+#include "GameFramework.h"
 #include "TerrainDetail.h"
 #include <list>
 

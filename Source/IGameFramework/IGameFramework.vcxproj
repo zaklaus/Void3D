@@ -400,7 +400,7 @@
     <ClCompile Include="EffectActor.cpp" />
     <ClCompile Include="GameMission.cpp" />
     <ClCompile Include="Game_cam.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameFramework.cpp" />
     <ClCompile Include="Mission.cpp" />
     <ClCompile Include="miss_plg.cpp" />
     <ClCompile Include="PathMovement.cpp" />
@@ -527,9 +527,10 @@
     <ClInclude Include="..\..\Include\GameFramework\Game_cam.h" />
     <ClInclude Include="..\..\Include\GameFramework\Item.h" />
     <ClInclude Include="..\..\Include\GameFramework\Loader.h" />
-    <ClInclude Include="..\..\Include\GameFramework\main.h" />
+    <ClInclude Include="..\..\Include\GameFramework\GameFramework.h" />
     <ClInclude Include="..\..\Include\GameFramework\PhysicsActor.h" />
     <ClInclude Include="..\..\Include\GameFramework\Player.h" />
+    <ClInclude Include="..\..\Include\GameFramework\Project.h" />
     <ClInclude Include="..\..\Include\GameFramework\Ragdoll.h" />
     <ClInclude Include="..\..\Include\GameFramework\resource.h" />
     <ClInclude Include="..\..\Include\GameFramework\Script.h" />

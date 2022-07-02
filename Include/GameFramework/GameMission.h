@@ -1,7 +1,7 @@
 #ifndef __GAMEMISSION_H
 #define __GAMEMISSION_H
 
-#include "main.h"
+#include "GameFramework.h"
 #include "actors.h"
 #include "checkpoint.h"
 #include <IPhysics.h>

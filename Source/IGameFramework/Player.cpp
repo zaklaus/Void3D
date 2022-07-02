@@ -1,6 +1,6 @@
 #include "all.h"
 
-#include "main.h"
+#include "GameFramework.h"
 #include "actors.h"
 #include "Player.h"
 #include "GameMission.h"

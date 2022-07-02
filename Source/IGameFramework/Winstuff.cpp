@@ -1,5 +1,5 @@
 #include "all.h"
-#include "main.h"
+#include "GameFramework.h"
 #include <windows.h>
 #include "winstuff.h"
 #include "..\..\Source\IEditor\resource.h"

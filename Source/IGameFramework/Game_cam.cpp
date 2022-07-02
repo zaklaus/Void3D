@@ -12,7 +12,7 @@
 
 #include "all.h"
 #include "game_cam.h"
-#include "main.h"
+#include "GameFramework.h"
 
 //----------------------------
 

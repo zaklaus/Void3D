@@ -1,7 +1,7 @@
 #include "all.h"
 #include "..\..\Source\IEditor\resource.h"
 #include "SysTables.h"
-#include "Main.h"
+#include "GameFramework.h"
 #include "gamemission.h"
 
 //----------------------------
