@@ -415,6 +415,13 @@
     <ClCompile Include="PhysicsStudio.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptEdit.cpp" />
+    <ClCompile Include="ScriptNatives.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug GL|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Systables.cpp" />
     <ClCompile Include="TerrainDetail.cpp" />
     <ClCompile Include="Vehicle.cpp" />

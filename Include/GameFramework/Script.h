@@ -144,6 +144,9 @@ public:
 
 extern C_script_manager *script_man;
 
+//register native method
+void RegisterSymbol(VM_LOAD_SYMBOL sym);
+
 //----------------------------
 //----------------------------
 

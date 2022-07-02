@@ -608,6 +608,8 @@ bool SetupGameData(S_application_data& app_data, bool first_try = true);
 
 extern PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* data);
 
+extern void GameRegisterSymbols();
+
 //----------------------------
 //----------------------------
 #ifdef _WINDOWS_

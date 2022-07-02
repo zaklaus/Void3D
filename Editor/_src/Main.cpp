@@ -27,6 +27,11 @@ S_application_data init_data = {
 };
 
 //required
+void GameRegisterSymbols(){
+   //call RegisterSymbol(VM_LOAD_SYMBOL) to hook up custom methods
+}
+
+//required
 PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* data){
    //allocate custom actors here
    return NULL;
