@@ -369,6 +369,9 @@ public:
       fi->img.clear();
       if (fi->sprites)
          fi->sprites->Release();
+      
+      // unload arrays
+      fi->arrays.clear();
 
       fi->vm = NULL;
       SetFrameInfo(frm, fi);
@@ -1204,6 +1207,108 @@ static dword __stdcall ScreenAspectMode(){
 }
 
 //----------------------------
+//Array support
+
+static inline C_DataVector* GetArrayPointer(dword idx){
+    PI3D_frame frm = script_man_imp.GetCurrFrame();
+    PS_frame_info fi = GetFrameInfo(frm);
+    assert(frm && fi);
+
+    if (idx < 0 || idx >= fi->arrays.size()){
+        ErrReport(C_fstr("GetArrayPointer: cannot find array by ID: '%d'", idx), editor);
+        return NULL;
+    }
+    
+    return &fi->arrays[idx];
+}
+
+dword __stdcall CreateArray(int reserved_size = -1){
+    PI3D_frame frm = script_man_imp.GetCurrFrame();
+    PS_frame_info fi = GetFrameInfo(frm);
+    assert(frm && fi);
+    fi->arrays.push_back(C_DataVector());
+
+    if (reserved_size != -1){
+        fi->arrays.back().reserve(reserved_size);
+    }
+    return fi->arrays.size() - 1;
+}
+void __stdcall ArrayClear(dword arr){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data) {
+        data->clear();
+    }
+}
+int __stdcall ArrayPush(dword arr, dword val){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data) {
+        data->push_back(val);
+        return data->size() - 1;
+    }
+    return -1;
+}
+dword __stdcall ArrayPop(dword arr){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data && data->size() > 0) {
+        dword val = data->back();
+        data->pop_back();
+        return val;
+    }else{
+        ErrReport("ArrayPop: Array is empty!", editor);
+        return 0xcececece;
+    }
+}
+int __stdcall ArrayLen(dword arr){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data) {
+        return data->size();
+    }
+    return 0;
+}
+void __stdcall ArraySet(dword arr, int idx, dword val){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data && data->size() > 0) {
+        if (idx < 0 || idx >= data->size()){
+            ErrReport(C_fstr("ArraySet: index out of range: '%d' !", idx), editor);
+        }else{
+            (*data)[idx] = val;
+        }
+    }else{
+        ErrReport("ArraySet: Array is empty!", editor);
+    }
+}
+dword __stdcall ArrayGet(dword arr, int idx){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data && data->size() > 0) {
+        if (idx < 0 || idx >= data->size()) {
+            ErrReport(C_fstr("ArrayGet: index out of range: '%d' !", idx), editor);
+        }
+        else {
+            return (*data)[idx];
+        }
+    }
+    else {
+        ErrReport("ArrayGet: Array is empty!", editor);
+        return 0xcececece;
+    }
+}
+void __stdcall ArrayDelete(dword arr, int idx){
+    C_DataVector* data = GetArrayPointer(arr);
+    if (data && data->size() > 0) {
+        if (idx < 0 || idx >= data->size()) {
+            ErrReport(C_fstr("ArrayDelete: index out of range: '%d' !", idx), editor);
+        }
+        else {
+            data->remove_index(idx);
+        }
+    }
+    else {
+        ErrReport("ArrayDelete: Array is empty!", editor);
+    }
+}
+
+
+//----------------------------
 #define DEFINE_SYMBOL(name) {&name, #name}
 
 const VM_LOAD_SYMBOL script_symbols[] = {
@@ -1250,6 +1355,16 @@ const VM_LOAD_SYMBOL script_symbols[] = {
    DEFINE_SYMBOL(SetBrightness),
 
    DEFINE_SYMBOL(EnableActor),
+
+   DEFINE_SYMBOL(CreateArray),
+   DEFINE_SYMBOL(ArrayClear),
+   DEFINE_SYMBOL(ArrayPush),
+   DEFINE_SYMBOL(ArrayPop),
+   DEFINE_SYMBOL(ArrayLen),
+   DEFINE_SYMBOL(ArraySet),
+   DEFINE_SYMBOL(ArrayGet),
+   DEFINE_SYMBOL(ArrayDelete),
+
 
    NULL
 };

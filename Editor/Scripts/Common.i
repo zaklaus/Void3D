@@ -321,3 +321,14 @@ int CreateSolid(dword color = 0xffffffff, int zlayer = 0){
     SpriteSetColor(solid_spr, color);
     return solid_spr;
 }
+
+//----------------------------// array library //----------------------------
+
+dword CreateArray(int reserved_size = -1);
+void ArrayClear(dword arr);
+int ArrayPush(dword arr, dword val);
+dword ArrayPop(dword arr);
+int ArrayLen(dword arr);
+void ArraySet(dword arr, int idx, dword val);
+dword ArrayGet(dword arr, int idx);
+void ArrayDelete(dword arr, int idx);

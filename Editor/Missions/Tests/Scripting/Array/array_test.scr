@@ -1,0 +1,16 @@
+void Main(){
+    dword arr = CreateArray();
+    LogS("Creating an empty array.");
+
+    ArrayPush(arr, 1); LogS("Pushing number 1.");
+    ArrayPush(arr, 2); LogS("Pushing number 2.");
+    ArrayPush(arr, 3); LogS("Pushing number 3.");
+
+    LogS("Array size:");
+    LogI(ArrayLen(arr));
+
+    //ArrayPush(arr, (dword)"Foo!"); LogS("Pushing string Foo!");
+
+    LogS("Last array element:");
+    LogI(ArrayPop(arr));
+}

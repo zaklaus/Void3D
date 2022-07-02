@@ -299,9 +299,10 @@ STYLE DS_SETFONT | DS_3DLOOK | DS_CONTROL | WS_CLIPSIBLINGS | WS_CAPTION
 CAPTION "Log"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    PUSHBUTTON      "&Save as",IDC_BUTTON_LOG_SAVE,0,248,126,19
-    PUSHBUTTON      "&Close",IDC_BUTTON_LOG_CLOSE,157,250,121,17
-    CONTROL         "",IDC_EDIT_LOG1,"RICHEDIT",TCS_HOTTRACK | TCS_VERTICAL | TCS_BUTTONS | TCS_RAGGEDRIGHT | TCS_MULTISELECT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,0,5,278,247
+    PUSHBUTTON      "&Save as",IDC_BUTTON_LOG_SAVE,0,248,51,19
+    PUSHBUTTON      "&Close",IDC_BUTTON_LOG_CLOSE,235,250,43,17
+    CONTROL         "",IDC_EDIT_LOG1,"RICHEDIT",TCS_HOTTRACK | TCS_VERTICAL | TCS_BUTTONS | TCS_RAGGEDRIGHT | TCS_MULTISELECT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,0,5,278,241
+    PUSHBUTTON      "Copy &to clipboard",IDC_BUTTON_LOG_CLIP,90,250,97,17
 END
 
 IDD_TOOLBAR DIALOGEX 0, 0, 193, 97
@@ -1608,7 +1609,7 @@ CHECKPOINT.PNG          BINARY                  "res\\Checkpoint.png"
 
 2                       BINARY                  "res\\target.png"
 
-14			BINARY			"res\\decal.png"
+14                      BINARY                  "res\\decal.png"
 
 13                      BINARY                  "res\\bmp13.png"
 
@@ -1763,12 +1764,6 @@ IDD_OBJLINK AFX_DIALOG_LAYOUT
 BEGIN
     0
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// PNG
-//
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

@@ -445,6 +445,8 @@ extern C_I3D_model_cache_special model_cache;
                               //it's put into frame's user data, by
                               // I3D_frame::SetData()
 
+using C_DataVector = C_vector<dword>;
+
 struct S_frame_info{
    C_smart_ptr<C_v_machine> vm;
    class C_actor *actor;      //NULL if no actor set on frame
@@ -452,6 +454,9 @@ struct S_frame_info{
    // sprite ui rendering
    C_vector<C_smart_ptr<C_sprite_image>> img;
    C_smart_ptr<C_sprite_group> sprites;
+
+   // arrays
+   C_vector<C_DataVector> arrays;
 
    S_frame_info():
       actor(NULL)
@@ -465,6 +470,7 @@ struct S_frame_info{
 };
 
 typedef S_frame_info *PS_frame_info;
+
                               //get existing S_frame_info from frame,
                               // or NULL if not set
 inline PS_frame_info GetFrameInfo(CPI3D_frame frm){

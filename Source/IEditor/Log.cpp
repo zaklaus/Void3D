@@ -199,6 +199,38 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
                }
             }
             break;
+         case IDC_BUTTON_LOG_CLIP:
+         {
+            char buf[MAX_PATH];
+            buf[0] = 0;
+            OPENFILENAME on;
+            memset(&on, 0, sizeof(on));
+            on.lStructSize = sizeof(on);
+            on.hwndOwner = hwnd;
+            on.lpstrFilter = "Text files\0*.txt\0All files\0*.*\0";
+            on.lpstrFile = buf;
+            on.lpstrFileTitle = NULL;
+            on.nMaxFile = MAX_PATH;
+            on.nMaxFileTitle = 0;//MAX_PATH;
+            on.lpstrTitle = "Enter name";
+            on.lpstrDefExt = "txt";
+            on.Flags = OFN_EXPLORER | OFN_NOREADONLYRETURN | OFN_OVERWRITEPROMPT | OFN_NOCHANGEDIR;
+
+            bool b = GetSaveFileName(&on);
+            if (b) {
+               {
+                  FILE* f_out = fopen(buf, "wt");
+                  //S_hlp hlp = {NULL, 0, new ofstream(buf, ios::out | ios::trunc) };
+                  S_hlp hlp = { NULL, 0, f_out };
+                  EDITSTREAM es = { (dword)&hlp, 0, S_hlp::StreamOut };
+                  SendDlgItemMessage(hwnd, IDC_EDIT_LOG1, EM_STREAMOUT, SF_TEXT, (LPARAM)&es);
+                  //SetClipboardData(CF_TEXT, )
+                  //delete hlp.os;
+                  fclose(f_out);
+               }
+            }
+         }
+         break;
          case IDCANCEL:
             SendMessage(GetParent(hwnd), uMsg, wParam, lParam);
             break;

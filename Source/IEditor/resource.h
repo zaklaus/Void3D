@@ -286,6 +286,8 @@
 #define IDC_MODE_SELECT                 1303
 #define IDC_BUTTON1                     1303
 #define IDC_REFRESH                     1303
+#define IDC_BUTTON_SCRIPT_CLIP          1303
+#define IDC_BUTTON_LOG_CLIP             1303
 #define IDC_NEW_MODE                    1304
 #define IDC_DELETE_MODE                 1305
 #define IDC_MASK_NAME                   1306

@@ -1,7 +1,8 @@
 Class TEXTURE
-texture_size_bits 4
+texture_size_bits 2
 life_len 1000 1100
-create_time 1000 1100
+create_time 408 409
+true_color
 init_radius 0.000
 radius_grow 1.000
 shift_speed 1.000
