@@ -7,7 +7,7 @@
 struct S_application_data{
    typedef bool (t_Init)(PI3D_driver);
    typedef class C_editor *(t_EditorCreate)();
-   typedef void (t_Run)();
+   typedef void (t_Run)(bool);
    typedef void (t_Close)();
    typedef class C_str (t_GetCrashInfo)();
 

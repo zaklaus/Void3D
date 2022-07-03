@@ -5,8 +5,8 @@
 static C_command_line cmd_line;
 
 S_application_data init_data = {
-   "Void Player",
-   "Software\\V4 Games\\Void Player\\",
+   "Void Demo",
+   "Software\\V4 Games\\Void Demo\\",
 #ifdef _DEBUG
    "C:\\!Void_Crashes\\",
 #else
@@ -36,11 +36,44 @@ PC_actor GameCreateActor(PI3D_frame in_frm, E_ACTOR_TYPE in_type, const void* da
    return NULL;
 }
 
+class C_tick_demo_class : public C_class_to_be_ticked {
+   C_smart_ptr<I3D_model> model;
+   C_smart_ptr<I3D_scene> scene;
+   C_smart_ptr<I3D_camera> cam;
+public:
+   C_tick_demo_class()
+   {
+      scene = driver->CreateScene();
+    
+      PI3D_model mdl = I3DCAST_MODEL(scene->CreateFrame(FRAME_MODEL));
+      model_cache.Open(mdl, "_duck.i3d", scene);
+      scene->SetFrameSectorPos(mdl, S_vector(0, 0, -5));
+      scene->AddFrame(mdl);
+      mdl->Release();
+      SetModelBrightness(mdl, 1.0f, I3D_VIS_BRIGHTNESS_AMBIENT);
+
+      cam = I3DCAST_CAMERA(scene->CreateFrame(FRAME_CAMERA));
+      scene->AddFrame(cam);
+      scene->SetActiveCamera(cam);
+      cam->Release();
+
+
+   }
+
+   //----------------------------
+
+   virtual dword GetID() const { return 'GMIS'; }
+   virtual void Render() {
+      scene->Render();
+   }
+
+   virtual void Tick(const S_tick_context& tc) {
+   }
+};
+
 //required
 C_class_to_be_ticked* GameGetStartupClass(){
-   //return custom object if you want to handle your own game flow
-   //or leave the game flow to the game framework
-   return NULL;
+   return new C_tick_demo_class;
 }
 
 static void RegisterGameInternals(){
@@ -81,15 +114,9 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
                 return 2;
             }
 
-#ifdef EDITOR
-            if (app_data.EdCreate) {
-                editor = (*app_data.EdCreate)();
-            }
-#endif
-
             RegisterGameInternals();
             
-            AppRun();
+            AppRun(true);
         }
         if (app_data.Close)
             app_data.Close();

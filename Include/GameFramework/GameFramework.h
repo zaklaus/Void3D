@@ -586,7 +586,7 @@ void OpenGameDataEditor();
 
 bool AppInit(PI3D_driver);
 void AppClose();
-void AppRun();
+void AppRun(bool force_custom = false);
 
 bool InitSystem(const C_command_line& cmd_line);
 void CloseSystem();
@@ -598,11 +598,6 @@ void __stdcall CrashCallback();
 C_editor* EdCreate();
 
 bool ReadConfigUntilOkCancel(const char* language);
-
-extern PC_table game_data_table;
-
-void OpenGameDataEditor();
-bool SetupGameData(S_application_data& app_data, bool first_try = true);
 
 //required methods that need to be implemented in game executable
 

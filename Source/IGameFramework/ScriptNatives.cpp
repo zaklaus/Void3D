@@ -545,8 +545,9 @@ dword __stdcall ArrayGet(dword arr, int idx) {
    }
    else {
       ErrReport("ArrayGet: Array is empty!", editor);
-      return 0xcececece;
    }
+
+   return 0xcececece;
 }
 void __stdcall ArrayDelete(dword arr, int idx) {
    C_DataVector* data = GetArrayPointer(arr);

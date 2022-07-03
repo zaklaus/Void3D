@@ -941,7 +941,7 @@ C_str AppCrashInfo() {
 
 //----------------------------
 
-void AppRun() {
+void AppRun(bool force_custom) {
 
     //apply tables
     ApplySoundEnvTable();
@@ -950,12 +950,14 @@ void AppRun() {
     {
         C_class_to_be_ticked* init_tc = NULL;
 #if defined EDITOR
-        {
+        if (!force_custom){
             init_tc = new C_tick_class_begin(cmd_line);
+        }else{
+           init_tc = GameGetStartupClass();
         }
 #else
         init_tc = GameGetStartupClass();
-        if (!init_tc && cmd_line.cmdline_mission.Size()) {
+        if (!init_tc && !force_custom && cmd_line.cmdline_mission.Size()) {
             PC_game_mission mission = CreateGameMission();
             E_MISSION_IO mio = mission->Open(cmd_line.cmdline_mission, 0);
             if (mio == MIO_OK) {

@@ -85,6 +85,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameFramework", "GameFramew
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IGameFramework", "..\..\Source\IGameFramework\IGameFramework.vcxproj", "{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IMinimalDemo", "..\..\Source\IMinimalDemo\IMinimalDemo.vcxproj", "{9AC187AF-39CA-4189-8858-02851A68A477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (No Editor)|Win32 = Debug (No Editor)|Win32
@@ -747,6 +749,34 @@ Global
 		{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}.Release|Win32.Build.0 = Release|Win32
 		{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}.Release|x64.ActiveCfg = Release|Win32
 		{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}.Release|x64.Build.0 = Release|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug (No Editor)|Win32.ActiveCfg = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug (No Editor)|Win32.Build.0 = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug (No Editor)|x64.ActiveCfg = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug (No Editor)|x64.Build.0 = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug 4|Win32.ActiveCfg = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug 4|Win32.Build.0 = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug 4|x64.ActiveCfg = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug 4|x64.Build.0 = Debug (No Editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug GL|Win32.ActiveCfg = Debug GL|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug GL|Win32.Build.0 = Debug GL|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug GL|x64.ActiveCfg = Debug GL|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug GL|x64.Build.0 = Debug GL|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug|Win32.Build.0 = Debug|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug|x64.ActiveCfg = Debug|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Debug|x64.Build.0 = Debug|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release (No editor)|Win32.ActiveCfg = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release (No editor)|Win32.Build.0 = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release (No editor)|x64.ActiveCfg = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release (No editor)|x64.Build.0 = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release 4|Win32.ActiveCfg = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release 4|Win32.Build.0 = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release 4|x64.ActiveCfg = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release 4|x64.Build.0 = Release (No editor)|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release|Win32.ActiveCfg = Release|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release|Win32.Build.0 = Release|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release|x64.ActiveCfg = Release|Win32
+		{9AC187AF-39CA-4189-8858-02851A68A477}.Release|x64.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -775,6 +805,7 @@ Global
 		{9E803C12-B83A-4086-8C58-0DA7F7B97DB1} = {305DEF9B-2906-48FD-9401-CFEBB616659C}
 		{0B25DA44-F6AA-4DFE-8431-96911B9B6E93} = {305DEF9B-2906-48FD-9401-CFEBB616659C}
 		{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71} = {01575419-41BB-40B4-83F1-BAD471967AE7}
+		{9AC187AF-39CA-4189-8858-02851A68A477} = {122AF036-A6BB-46EA-99C6-07DC963205B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6B7CC13-C974-4AD9-9AC6-3B18FE25C3E7}
