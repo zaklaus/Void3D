@@ -326,7 +326,6 @@
     <Image Include="..\..\Source\IEditor\res\target.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\Source\IEditor\res\decal.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\GameFramework\GameMission.h">

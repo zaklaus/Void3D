@@ -22,17 +22,17 @@
                               // and debugging may continue after FPU gets invalidated
 extern void FPUReset();
 void FPUReset(){
-   __asm{
+   /*__asm{
       push eax
       push ecx
       push edx                                         
-   }
+   }*/
    _fpreset();
-   __asm{
+   /*__asm{
       pop edx
       pop ecx
       pop eax
-   }
+   }*/
 }
 
 //----------------------------

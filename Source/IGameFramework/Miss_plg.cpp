@@ -575,7 +575,7 @@ class C_edit_Mission : public C_editor_item_Mission {
                     GetFullDir(hwnd, dir, is_valid);
                     SendDlgItemMessage(hwnd, IDC_STATIC_NEW_DIR, WM_SETTEXT, 0, (LPARAM)(const char*)dir);
 
-                    S_dlg_init* di = (S_dlg_init*)GetWindowLong(hwnd, GWL_USERDATA);
+                    S_dlg_init* di = (S_dlg_init*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     //try to display thumbnail
                     if (curr_thumbnail) {
                         DeleteObject(curr_thumbnail);
@@ -656,8 +656,8 @@ class C_edit_Mission : public C_editor_item_Mission {
     static BOOL CALLBACK dlgSelectThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
-        S_dlg_init* di = (S_dlg_init*)GetWindowLong(hwnd, GWL_USERDATA);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+        S_dlg_init* di = (S_dlg_init*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
         if (!di)
             return 0;
         return di->_this->dlgSelect(hwnd, uMsg, wParam, lParam);
@@ -708,7 +708,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         switch (uMsg) {
         case WM_INITDIALOG:
         {
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
             C_edit_Mission* em = (C_edit_Mission*)lParam;
             OsCenterWindow(hwnd, (HWND)igraph->GetHWND());
 
@@ -748,14 +748,14 @@ class C_edit_Mission : public C_editor_item_Mission {
             switch (LOWORD(wParam)) {
             case IDCANCEL:
             {
-                C_edit_Mission* em = (C_edit_Mission*)GetWindowLong(hwnd, GWL_USERDATA);
+                C_edit_Mission* em = (C_edit_Mission*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                 em->GetDlgButtonState(hwnd);
                 EndDialog(hwnd, 0);
             }
             break;
             case IDOK:
             {
-                C_edit_Mission* em = (C_edit_Mission*)GetWindowLong(hwnd, GWL_USERDATA);
+                C_edit_Mission* em = (C_edit_Mission*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                 em->GetDlgButtonState(hwnd);
                 EndDialog(hwnd, true);
             }
@@ -2059,7 +2059,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                     case WM_INITDIALOG:
                     {
                         S_hlp* hp = (S_hlp*)lParam;
-                        SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                        SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                         OsCenterWindow(hwnd, (HWND)igraph->GetHWND());
                         SetDlgItemText(hwnd, IDC_EDIT, hp->filename);
                         CheckDlgButton(hwnd, IDC_CHECKIN_KEEP, hp->keep);
@@ -2072,7 +2072,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
                             case IDOK:
                             case IDCANCEL:
                             {
-                                S_hlp* hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                                S_hlp* hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                                 hp->keep = IsDlgButtonChecked(hwnd, IDC_CHECKIN_KEEP);
                                 EndDialog(hwnd, LOWORD(wParam));
                             }

@@ -98,7 +98,7 @@ bool SelectName(PIGraph igraph, HWND hwnd_parent, const char *title, C_str &name
                //SetDlgItemText(hwnd, IDC_STATIC_NAME, hlp->title);
                SetDlgItemText(hwnd, IDC_EDIT, hlp->frm_name);
                ShowWindow(hwnd, SW_SHOW);
-               SetWindowLong(hwnd, GWL_USERDATA, lParam);
+               SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                if(hlp->desc)
                   SetDlgItemText(hwnd, IDC_STATIC_NAME, hlp->desc);
             }
@@ -108,7 +108,7 @@ bool SelectName(PIGraph igraph, HWND hwnd_parent, const char *title, C_str &name
             case IDCANCEL: EndDialog(hwnd, 0); break;
             case IDOK:
                {
-                  S_hlp *hlp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                  S_hlp *hlp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   SendDlgItemMessage(hwnd, IDC_EDIT, WM_GETTEXT, 256, (LPARAM)hlp->frm_name);
                   EndDialog(hwnd, 1);
                }

@@ -220,13 +220,13 @@ void __declspec(dllexport) *__cdecl _DebugAlloc(size_t sz){
       header.size = sz;
       if(header.alloc_id == break_alloc_id){
          //break_alloc_id = -2;
-         __asm int 3
+         assert(0);
       }
       header.call_stack = new t_call_stack;
       GetCallStack(*header.call_stack);
       vp = (byte*)vp + sizeof(S_mem_header);
 
-      __asm{
+      /*__asm{
          push ecx
 
          mov eax, FILL_MASK
@@ -252,10 +252,10 @@ void __declspec(dllexport) *__cdecl _DebugAlloc(size_t sz){
          rep stosd
 
          pop ecx
-      }
+      }*/
       vp = (byte*)vp + MEM_GUARD_DWORDS*4;
       if(vp==break_alloc_ptr){
-         __asm int 3
+         assert(0);
       }
       if(!curr_alloc_blocks)
          curr_alloc_blocks = new t_blocks;
@@ -300,46 +300,46 @@ void __declspec(dllexport) __cdecl _DebugFree(void *vp1){
             size_t sz = header.size;
             void *mem = (byte*)vp + sizeof(S_mem_header);
             byte corrupt = 0;
-            __asm{
-               push ecx
+            //__asm{
+            //   push ecx
 
-               mov eax, FILL_MASK
-                                 //check guard bytes
-               mov edi, mem
-               mov ecx, MEM_GUARD_DWORDS
-               rep scasd
-               jz ok_mem1
-               mov corrupt, 1
-               jmp del_no_fill1
+            //   mov eax, FILL_MASK
+            //                     //check guard bytes
+            //   mov edi, mem
+            //   mov ecx, MEM_GUARD_DWORDS
+            //   rep scasd
+            //   jz ok_mem1
+            //   mov corrupt, 1
+            //   jmp del_no_fill1
 
-            ok_mem1:
-               mov ecx, MEM_GUARD_DWORDS
-               mov edi, mem
-               add edi, sz
-               add edi, MEM_GUARD_DWORDS*4
-               rep scasd
-               jz ok_mem2
-               mov corrupt, 2
-               jmp del_no_fill1
+            //ok_mem1:
+            //   mov ecx, MEM_GUARD_DWORDS
+            //   mov edi, mem
+            //   add edi, sz
+            //   add edi, MEM_GUARD_DWORDS*4
+            //   rep scasd
+            //   jz ok_mem2
+            //   mov corrupt, 2
+            //   jmp del_no_fill1
 
-            ok_mem2:
-                                 //fill by garbage again
-               mov edi, vp
-               add edi, MEM_GUARD_DWORDS*4
-               mov ecx, sz
-               shr ecx, 2
-               jz del_no_fill
-               rep stosd
-            del_no_fill:
+            //ok_mem2:
+            //                     //fill by garbage again
+            //   mov edi, vp
+            //   add edi, MEM_GUARD_DWORDS*4
+            //   mov ecx, sz
+            //   shr ecx, 2
+            //   jz del_no_fill
+            //   rep stosd
+            //del_no_fill:
 
-               mov ecx, sz
-               and ecx, 3
-               jz del_no_fill1
-               rep stosb
+            //   mov ecx, sz
+            //   and ecx, 3
+            //   jz del_no_fill1
+            //   rep stosb
 
-            del_no_fill1:
-               pop ecx
-            }
+            //del_no_fill1:
+            //   pop ecx
+            //}
             if(corrupt){
                mem = (byte*)mem + MEM_GUARD_DWORDS*4;
             
@@ -446,8 +446,7 @@ void __declspec(dllexport) __cdecl _DumpMemInfo(dword min_size){
       }
       total += header.size;
    }
-   C_str s(C_xstr("--------------\nMemory blocks: %, total memory: %  (% KB)\n") %curr_alloc_blocks->size()
-      %total %(total/1024));
+   C_str s(C_fstr("--------------\nMemory blocks: %d, total memory: %d  (%d KB)\n", curr_alloc_blocks->size(), total, (total/1024)));
    ck.write((const char*)s, s.Size());
    in_alloc = false;
 }

@@ -353,7 +353,7 @@ void dLDLTRemove(dReal **A, const int *p, dReal *L, dReal *d, int n1, int n2, in
 
 //----------------------------
 
-#if 0
+#if 1
 
 float __stdcall FastDot(const float *a, const float *b, dword n){
    

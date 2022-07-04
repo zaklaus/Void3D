@@ -48,7 +48,7 @@ C_command_line::C_command_line():
    run_config(false),
    debug_profile(false),
 #ifdef _DEBUG
-   debug_use_debug_dlls(true),
+   debug_use_debug_dlls(true)
 #else
    debug_use_debug_dlls(false)
 #endif

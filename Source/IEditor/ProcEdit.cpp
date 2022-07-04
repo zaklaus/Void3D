@@ -757,10 +757,10 @@ class C_edit_ProcEdit: public C_editor_item{
    static BOOL CALLBACK dlgProc_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       switch(uMsg){
       case WM_INITDIALOG:
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          break;
       }
-      C_edit_ProcEdit *ec = (C_edit_ProcEdit*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_edit_ProcEdit *ec = (C_edit_ProcEdit*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(ec)
          return ec->dlgProc(hwnd, uMsg, wParam, lParam);
       return 0;

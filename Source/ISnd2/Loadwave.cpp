@@ -11,8 +11,7 @@ static class C_wave_loader: public C_sound_loader{
    };
 
                               //custom mmio loader for wave files through dta? functions
-   static LRESULT CALLBACK mmioProc(LPSTR lpmmioinfo, UINT uMsg, LONG lParam1, LONG lParam2){
-
+   static LRESULT CALLBACK mmioProc(LPSTR lpmmioinfo, UINT uMsg, LPARAM lParam1, LPARAM lParam2){
       LPMMIOINFO mmi = (LPMMIOINFO)lpmmioinfo;
 
       switch(uMsg){

@@ -972,7 +972,7 @@ public:
                         const char *cp = (const char*)lParam;
                         SetDlgItemText(hwnd, IDC_EDIT, cp);
                         ShowWindow(hwnd, SW_SHOW);
-                        SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                        SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                      }
                      return 1;
                   case WM_COMMAND:
@@ -980,7 +980,7 @@ public:
                      case IDCANCEL: EndDialog(hwnd, 0); break;
                      case IDOK:
                         SendDlgItemMessage(hwnd, IDC_EDIT, WM_GETTEXT,
-                           256, GetWindowLong(hwnd, GWL_USERDATA));
+                           256, GetWindowLongPtr(hwnd, GWLP_USERDATA));
                         EndDialog(hwnd, 1);
                         break;
                      }

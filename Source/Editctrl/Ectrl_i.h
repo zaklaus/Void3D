@@ -370,7 +370,7 @@ class C_edit_control: public C_edit_control_pure{
    E_state state;
    C_str state_message;
 
-   static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+   static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
    void ProcessInput(UINT uMsg, dword wParam, dword lParam);
 
    C_str cfg_file;
@@ -406,7 +406,7 @@ public:
                               //user data
    dword user_data;
 
-   static long CALLBACK dlgECProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+   static INT_PTR CALLBACK dlgECProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
    E_state CheckState();
    void SetState(E_state s, const char *msg = NULL);
    void MakeCaret();

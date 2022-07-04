@@ -932,11 +932,11 @@ private:
 
    static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
-      C_edit_ShaderStudio *ei = (C_edit_ShaderStudio*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_edit_ShaderStudio *ei = (C_edit_ShaderStudio*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){
          if(uMsg!=WM_INITDIALOG)
             return 0;
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          ei = (C_edit_ShaderStudio*)lParam;
          assert(ei);
       }
@@ -1182,10 +1182,10 @@ private:
                      switch(uMsg){
                      case WM_INITDIALOG:
                         {
-                           const S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                           const S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
                            OsCenterWindow(hwnd, hp->hwnd_parent);
-                           SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                           SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
 
                            SetDlgItemText(hwnd, IDC_EDIT1, hp->str);
                            CheckDlgButton(hwnd, IDC_SEARCH_WHOLE, hp->whole ? BST_CHECKED : BST_UNCHECKED);
@@ -1197,7 +1197,7 @@ private:
                         switch(LOWORD(wParam)){
                         case IDOK:
                            {
-                              S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                              S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                               char buf[256];
                               if(GetDlgItemText(hwnd, IDC_EDIT1, buf, sizeof(buf))){
                                  hp->str = buf;

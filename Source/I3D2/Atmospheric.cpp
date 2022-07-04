@@ -167,7 +167,7 @@ class I3D_atmos: public I3D_visual{
 
    bool __cdecl CheckPointInVF(const S_vector &p, const S_plane clip_planes[5], float thresh) const{
 
-#if 1
+#if 0
       bool rtn = false;
 
       __asm{

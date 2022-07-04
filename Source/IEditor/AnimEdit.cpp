@@ -3691,7 +3691,7 @@ class C_edit_AnimEdit: public C_editor_item{
          break;
       case WM_INITDIALOG:
          {
-            SetWindowLong(hDlg, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
             S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)lParam;
             assert(hlp.ae);
             InitDlg(hlp.ae->ed->GetIGraph(), hDlg);
@@ -3728,7 +3728,7 @@ class C_edit_AnimEdit: public C_editor_item{
          switch(LOWORD(wParam)){
          case IDCANCEL:
             {
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.ae->LoadModes();
                EndDialog(hDlg, 0);
@@ -3736,7 +3736,7 @@ class C_edit_AnimEdit: public C_editor_item{
             break;
          case IDOK:
             {
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.select_id = SendDlgItemMessage(hDlg, IDC_MODE_SELECT, CB_GETITEMDATA, SendDlgItemMessage(hDlg, IDC_MODE_SELECT, CB_GETCURSEL, 0, 0), 0);
                               //save before exit
@@ -3749,7 +3749,7 @@ class C_edit_AnimEdit: public C_editor_item{
          case IDC_MODE_SELECT:
             switch(HIWORD(wParam)){
             case CBN_SELCHANGE:
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                //hlp.ae->UpdateAddDelButtons(hDlg);
                hlp.ae->UpdateMaskFrames(hDlg, hlp.cust_mask);
@@ -3760,7 +3760,7 @@ class C_edit_AnimEdit: public C_editor_item{
          case IDC_NEW_MODE:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
 
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.ae->NewMaskMode(hDlg);
                hlp.ae->InitMaskDialog(hDlg, hlp.ae->NumMasks()-1, hlp.cust_mask);
@@ -3768,7 +3768,7 @@ class C_edit_AnimEdit: public C_editor_item{
             break;
          case IDC_DELETE_MODE:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                dword sel_id = SendDlgItemMessage(hDlg, IDC_MODE_SELECT, CB_GETITEMDATA, SendDlgItemMessage(hDlg, IDC_MODE_SELECT, CB_GETCURSEL, 0, 0), 0);
                if(hlp.ae->DeleteMaskMode(hDlg, sel_id))
@@ -3778,7 +3778,7 @@ class C_edit_AnimEdit: public C_editor_item{
          case IDC_TRANS_ALL:
          case IDC_TRANS_CLEAR:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                byte new_mask = byte((LOWORD(wParam) == IDC_TRANS_ALL) ? (TR_POS | TR_ROT | TR_POW) : 0);
                hlp.ae->SetFramesMask(new_mask, hDlg, TR_POS|TR_ROT|TR_POW, hlp.cust_mask);
@@ -3787,14 +3787,14 @@ class C_edit_AnimEdit: public C_editor_item{
             break;
          case IDC_ADD_FRAME:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.ae->AddFramesToMask(hDlg, hlp.cust_mask);
             }
             break;
          case IDC_REMOVE_FRAME:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.ae->RemoveFramesFromMask(hDlg, hlp.cust_mask);
             }
@@ -3804,7 +3804,7 @@ class C_edit_AnimEdit: public C_editor_item{
          case IDC_POW_CHECK:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
 
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                dword pos_check = SendDlgItemMessage(hDlg, IDC_POS_CHECK, BM_GETCHECK, 0, 0);
                dword rot_check = SendDlgItemMessage(hDlg, IDC_ROT_CHECK, BM_GETCHECK, 0, 0);
@@ -3830,7 +3830,7 @@ class C_edit_AnimEdit: public C_editor_item{
             break;
          case IDC_RELOAD:
             {
-               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                hlp.ae->LoadModes();
                hlp.ae->InitMaskDialog(hDlg, hlp.select_id, hlp.cust_mask);
@@ -3849,7 +3849,7 @@ class C_edit_AnimEdit: public C_editor_item{
                      case LVN_ITEMCHANGED:
                         {
                            //LPNMLISTVIEW pnmv = (LPNMLISTVIEW) lParam;
-                           S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+                           S_anim_mask_hlp &hlp = *(S_anim_mask_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                            assert(hlp.ae);
                            hlp.ae->UpdateMaskBitsMulti(hDlg, hlp.cust_mask);
                         }
@@ -4843,7 +4843,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 	   switch(message){
       case WM_INITDIALOG:
          {
-            SetWindowLong(hDlg, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
             S_select_anim_hlp &hlp = *(S_select_anim_hlp*)lParam;
             assert(hlp.ae);
             InitDlg(hlp.ae->ed->GetIGraph(),hDlg);
@@ -4871,7 +4871,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                   {
                      int indx = GetDlgSelectedAnim(hDlg, true);
                      if(indx!=-1){
-                        S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+                        S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                         hlp.curr_id = indx;
                         EndDialog(hDlg, 1);
                      }
@@ -4892,7 +4892,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
             {
                int indx = GetDlgSelectedAnim(hDlg, true);
                if(indx!=-1){
-                  S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+                  S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                   hlp.curr_id = indx;
                   EndDialog(hDlg, 1);
                }
@@ -4901,7 +4901,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 
          case IDC_NEW:
             if(HIWORD(wParam) == (WORD)BN_CLICKED){
-               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                assert(hlp.ae);
                bool created = hlp.ae->ActionAnimCreate(hDlg);
                if(created)
@@ -4913,7 +4913,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                int indx = GetDlgSelectedAnim(hDlg);
                if(indx==-1)
                   break;
-               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                bool created = hlp.ae->ActionDuplicateAnim(hDlg, indx);
                if(created)
                   EndDialog(hDlg, 0);
@@ -4924,7 +4924,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                int indx = GetDlgSelectedAnim(hDlg);
                if(indx==-1)
                   break;
-               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLong(hDlg, GWL_USERDATA);
+               S_select_anim_hlp &hlp = *(S_select_anim_hlp*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
 
                int new_sel = -1;
                HWND hwnd_tv = GetDlgItem(hDlg, IDC_ANIMS_TREE);
@@ -4963,8 +4963,8 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
    static BOOL CALLBACK AnimEditCbProc_Thunk(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
 	   if(message==WM_INITDIALOG)
-         SetWindowLong(hDlg, GWL_USERDATA, lParam);
-      C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLong(hDlg, GWL_USERDATA);
+         SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+      C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
       if(ea)
          return ea->AnimEditCbProc(hDlg, message, wParam, lParam);
       return 0;
@@ -5225,7 +5225,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 
    static BOOL CALLBACK cbAnimFrames(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
-      C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLong(hDlg, GWL_USERDATA);
+      C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
 
 	   switch(message){
       case WM_INITDIALOG:
@@ -5234,7 +5234,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
             const int PRS_W = 12;
             const int WEIGHT_W = 27;
             const int LAST_COL_ADD_W = 14; //tolerance vertical scrollbar
-            SetWindowLong(hDlg, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
                               //set checklistbox style
             HWND hwnd_lc = GetDlgItem(hDlg, IDC_ANIM_FRM_LIST);
 
@@ -5276,7 +5276,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
             case IDC_COPY:
             case IDC_WEIGHT:
                {
-                  C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLong(hDlg, GWL_USERDATA);
+                  C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                   if(HIWORD(wParam) == (WORD)BN_CLICKED){
                      assert(ea);
                      ea->Action(GetIDCAction2(idc), NULL);
@@ -5940,7 +5940,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                   InitDlg(hlp->igraph, hwnd);
                   SetDlgItemText(hwnd, IDC_NAME_EDIT, (const char*)hlp->ai.name);
                   ShowWindow(hwnd, SW_SHOW);
-                  SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                  SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                   hlp->ae->FillMaskCB(GetDlgItem(hwnd, IDC_SELECT_MASK));
                   SendDlgItemMessage(hwnd, IDC_SELECT_MASK, CB_SETCURSEL, 0, 0);
                }
@@ -5953,7 +5953,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                   break;
                case IDOK:
                   {
-                     S_hlp *hlp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                     S_hlp *hlp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                      char buf[256];
                      SendDlgItemMessage(hwnd, IDC_NAME_EDIT, WM_GETTEXT, 256, (LPARAM)buf);
                      hlp->ai.name = buf;
@@ -5964,7 +5964,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
                   break;
                case IDC_NEW_MASK:
                   {
-                     S_hlp *hlp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                     S_hlp *hlp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                      int new_id = hlp->ae->SelectMaskIdDlg(hwnd, &hlp->ai.cust_mask);
                                  //update lb for case some mask was added/removed
                      hlp->ae->FillMaskCB(GetDlgItem(hwnd, IDC_SELECT_MASK));
@@ -7519,7 +7519,7 @@ public:
          {
             S_weight_get *wg = (S_weight_get*)lParam;
             float w = *wg->weight;
-            SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)wg->weight);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)wg->weight);
             SetDlgItemText(hwnd, IDC_EDIT_WEIGHT, FloatStrip(C_fstr("%f", w)));
             SendDlgItemMessage(hwnd, IDC_SLIDER1, TBM_SETRANGE, false, MAKELONG(0, 10));
             SendDlgItemMessage(hwnd, IDC_SLIDER1, TBM_SETPAGESIZE, 0, 1);
@@ -7536,7 +7536,7 @@ public:
             {
                char buf[256];
                if(GetDlgItemText(hwnd, IDC_EDIT_WEIGHT, buf, sizeof(buf))){
-                  float &w = *(float*)GetWindowLong(hwnd, GWL_USERDATA);
+                  float &w = *(float*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   sscanf(buf, "%f", &w);
                }
             }

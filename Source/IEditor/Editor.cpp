@@ -1867,7 +1867,7 @@ static BOOL CALLBACK dlgSplash(HWND hwnd,  // handle to dialog box
     {
         //center window
         PIGraph igraph = (PIGraph)lParam;
-        SetWindowLong(hwnd, GWL_USERDATA, lParam);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
         igraph->EnableSuspend(false);
 
         RECT rc;
@@ -1903,7 +1903,7 @@ static BOOL CALLBACK dlgSplash(HWND hwnd,  // handle to dialog box
         break;
     case WM_DESTROY:
     {
-        PIGraph igraph = (PIGraph)GetWindowLong(hwnd, GWL_USERDATA);
+        PIGraph igraph = (PIGraph)GetWindowLongPtr(hwnd, GWLP_USERDATA);
         igraph->EnableSuspend(true);
         igraph->RemoveDlgHWND(hwnd);
         igraph->Release();

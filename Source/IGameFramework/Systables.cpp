@@ -534,11 +534,11 @@ class C_edit_SysConfig: public C_editor_item{
 
    static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
-      C_edit_SysConfig *ei = (C_edit_SysConfig*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_edit_SysConfig *ei = (C_edit_SysConfig*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){
          if(uMsg!=WM_INITDIALOG)
             return 0;
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          ei = (C_edit_SysConfig*)lParam;
          assert(ei);
       }

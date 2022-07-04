@@ -14,11 +14,7 @@ bool SaveJPG(C_cache *ck, dword size_x, dword size_y, const void *area, byte bpp
 //----------------------------
 
 dword __cdecl ror(dword val, byte count){
-   __asm{
-      mov cl, count;
-      ror val, cl;
-   }
-   return val;
+   return _rotr(val, count);
 }
 
 static const byte CODE_C1 = 0xc1;
@@ -53,16 +49,21 @@ inline byte pixel_to_color(dword rm, dword gm, dword bm, dword rp, dword gp, dwo
 //----------------------------
 
 inline int FindLastBit(dword val){
-   dword rtn;
-   __asm{
-      mov eax, val
-      bsr eax, eax
-      jnz ok
-      mov eax, -1
-ok:
-      mov rtn, eax
+   int base = 0;
+   if (val & 0xffff0000) {
+      base = 16;
+      val >>= 16;
    }
-   return rtn;
+   if (val & 0x0000ff00) {
+      base += 8;
+      val >>= 8;
+   }
+   if (val & 0x000000f0) {
+      base += 4;
+      val >>= 4;
+   }
+   static const int lut[] = { -1, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
+   return base + lut[val];
 }
 
 //----------------------------

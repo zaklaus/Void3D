@@ -435,11 +435,11 @@ private:
 
    static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
-      C_physics_studio *ei = (C_physics_studio*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_physics_studio *ei = (C_physics_studio*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){
          if(uMsg!=WM_INITDIALOG)
             return 0;
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          ei = (C_physics_studio*)lParam;
          assert(ei);
       }

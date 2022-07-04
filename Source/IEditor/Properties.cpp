@@ -263,7 +263,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
       case WM_INITDIALOG:
          {
             LPCHOOSECOLOR cc = (LPCHOOSECOLOR)lParam;
-            SetWindowLong(hwnd, GWL_USERDATA, cc->lCustData);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, cc->lCustData);
          }
          break;
       case WM_COMMAND:
@@ -272,7 +272,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                               //hook RGB edit controlls
             switch(HIWORD(wParam)){
             case EN_CHANGE:
-               C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+               C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                if(ep){
                   const C_vector<PI3D_frame> &sel_list = ep->e_slct->GetCurSel();
                   S_vector v(GetDlgItemInt(hwnd, 706, NULL, false)/255.0f, 
@@ -799,7 +799,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
             SendDlgItemMessage(hwnd, IDC_COMBO_LIGHT_TYPE, CB_SETCURSEL, lti, 0);
          }
                               //color (force redraw button)
-         SetWindowLong(GetDlgItem(hwnd, IDC_BUTTON_LIGHT_COLOR), GWL_USERDATA, 
+         SetWindowLongPtr(GetDlgItem(hwnd, IDC_BUTTON_LIGHT_COLOR), GWLP_USERDATA, 
             !valid[1] ? GetSysColor(COLOR_BTNFACE) :
             RGB(color[0]*255.0f, color[1]*255.0f, color[2]*255.0f));
          ShowWindow(GetDlgItem(hwnd, IDC_BUTTON_LIGHT_COLOR), SW_HIDE);
@@ -1104,7 +1104,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
             MapDlgUnits(hwnd_dlg, &pos_x, NULL);
             sx -= pos_x;
             HWND hwnd_ground = GetDlgItem(hwnd, IDC_VIS_PROP_GROUP);
-            SetWindowLong(hwnd_ground, GWL_USERDATA, 0);
+            SetWindowLongPtr(hwnd_ground, GWLP_USERDATA, 0);
 
             for(dword pi=0; pi<num_props; pi++){
                I3D_PROPERTYTYPE ptype = ed->GetDriver()->GetPropertyType(vtype, pi);
@@ -1182,7 +1182,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                      NULL,
                      NULL);
                   SendMessage(h1, WM_SETFONT, SendMessage(hwnd_dlg, WM_GETFONT, 0, 0), 0);
-                  SetWindowLong(h1, GWL_USERDATA, (LPARAM)ptype);
+                  SetWindowLongPtr(h1, GWLP_USERDATA, (LPARAM)ptype);
 
                   C_property_control *ec = new C_property_control(h1, x, pos_y);
                   prop_controls.push_back(ec);
@@ -1280,7 +1280,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
             }else{
                vis_prop_scroll_y = 0;
             }
-            SetWindowLong(hwnd_ground, GWL_USERDATA, (LPARAM)this);
+            SetWindowLongPtr(hwnd_ground, GWLP_USERDATA, (LPARAM)this);
          }
                      //set 'no shadow' checkbox
          CheckDlgButton(hwnd, IDC_CHECK_NO_SHADOW, !valid[7] ? BST_INDETERMINATE : no_shadow ? BST_CHECKED : BST_UNCHECKED);
@@ -1348,7 +1348,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
       HWND hwnd = hwnd_sheet[index];
 
                               //set temporaly user data to NULL, so that we're not called recursively
-      SetWindowLong(hwnd, GWL_USERDATA, 0);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
 
       dword i;
 
@@ -1504,7 +1504,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
          }
          break;
       }
-      SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)this);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)this);
    }
 
 //----------------------------
@@ -1512,9 +1512,9 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
    static BOOL CALLBACK dlgSheet_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG){
          S_sheet_init *si = (S_sheet_init*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)si->ep);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)si->ep);
       }
-      C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ep)
          return 0;
       return ep->dlgSheet(hwnd, uMsg, wParam, lParam);
@@ -1601,7 +1601,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                break;
 
             }
-            SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)si->ep);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)si->ep);
          }
          return 1;
 
@@ -1668,7 +1668,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
          //case IDC_BUTTON_LIGHT_SPECULAR:
             {                 //draw colored button
                LPDRAWITEMSTRUCT di = (LPDRAWITEMSTRUCT)lParam;
-               HBRUSH hbr = CreateSolidBrush(GetWindowLong(GetDlgItem(hwnd, wParam), GWL_USERDATA));
+               HBRUSH hbr = CreateSolidBrush(GetWindowLongPtr(GetDlgItem(hwnd, wParam), GWLP_USERDATA));
                SelectObject(di->hDC, hbr);
                Rectangle(di->hDC, di->rcItem.left, di->rcItem.top, di->rcItem.right, di->rcItem.bottom);
                DeleteObject(hbr);
@@ -2186,7 +2186,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                      C_str str = GetDlgItemText(hwnd, id);
                      dword value = 0;
                               //get type of fiels
-                     I3D_PROPERTYTYPE ptype = (I3D_PROPERTYTYPE)GetWindowLong(hwnd_ctrl, GWL_USERDATA);
+                     I3D_PROPERTYTYPE ptype = (I3D_PROPERTYTYPE)GetWindowLongPtr(hwnd_ctrl, GWLP_USERDATA);
                      switch(ptype){
                      case I3DPROP_INT:
                         sscanf(str, "%i", &value);
@@ -2441,7 +2441,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                dword ctrl_id = LOWORD(wParam);
                switch(ctrl_id){
                case IDC_RESET_TRAN: {
-                   SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)0);
+                   SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)0);
                    if (ed->CanModify()) {
                        if (MessageBox((HWND)ed->GetIGraph()->GetHWND(),
                            "Are you sure to reset transform on the selected frames?",
@@ -2464,13 +2464,13 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                            }
                        }
                    }
-                   SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)this);
+                   SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)this);
                }break;
                case IDC_RESET_POS: case IDC_RESET_ROT: case IDC_RESET_SCL: case IDC_RESET_LINK:
                case IDC_RESET_VOL_TYPE: case IDC_RESET_COL_MAT: case IDC_RESET_NU_SCL: case IDC_RESET_FRM_FLAGS:
                case IDC_RESET_LIGHT: case IDC_RESET_BRIGHTNESS:
                   {
-                     SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)0);
+                     SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)0);
                      if(ed->CanModify()){
                               //confirm action
                         dword reset_flags;
@@ -2490,7 +2490,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
                            }
                         }
                      }
-                     SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)this);
+                     SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)this);
                   }
                   break;
 
@@ -3236,8 +3236,8 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
 
    static BOOL CALLBACK dlgProp_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG)
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
-      C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+      C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ep)
          return 0;
       return ep->dlgProp(hwnd, uMsg, wParam, lParam);
@@ -3979,15 +3979,15 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
 
       HWND hwnd_sh = (HWND)hwnd_in;
 
-      dword ws = GetWindowLong(hwnd_sh, GWL_STYLE);
+      dword ws = GetWindowLongPtr(hwnd_sh, GWL_STYLE);
       ws &= ~(WS_POPUP | WS_BORDER | WS_CAPTION | WS_DLGFRAME | WS_SYSMENU | WS_THICKFRAME);
       ws |= WS_CHILD | WS_CLIPSIBLINGS;
-      SetWindowLong(hwnd_sh, GWL_STYLE, ws);
+      SetWindowLongPtr(hwnd_sh, GWL_STYLE, ws);
 
-      dword wsex = GetWindowLong(hwnd_sh, GWL_EXSTYLE);
+      dword wsex = GetWindowLongPtr(hwnd_sh, GWL_EXSTYLE);
       wsex &= ~WS_EX_WINDOWEDGE;
       wsex |= WS_EX_CONTROLPARENT;
-      SetWindowLong(hwnd_sh, GWL_EXSTYLE, wsex);
+      SetWindowLongPtr(hwnd_sh, GWL_EXSTYLE, wsex);
 
       SetParent(hwnd_sh, hwnd);
       SetActiveWindow((HWND)ed->GetIGraph()->GetHWND());
@@ -4145,7 +4145,7 @@ public:
             hwnd_pg = hwnd_sheet[SHEET_VISUAL_PROPERTY];
             
             SetParent(hwnd_pg, hwnd_sheet[SHEET_VISUAL]);
-            SetWindowLong(hwnd_pg, GWL_ID, IDC_VIS_PROP_GROUP);
+            SetWindowLongPtr(hwnd_pg, GWL_ID, IDC_VIS_PROP_GROUP);
             SetWindowPos(hwnd_pg, NULL, vis_property_ground_pos[0], vis_property_ground_pos[1],
                vis_property_ground_size[0], vis_property_ground_size[1],
                SWP_SHOWWINDOW);

@@ -5,7 +5,7 @@
 
 //----------------------------
 
-#define OVERRIDE_F_TO_L       //override calls to _ftol with our (faster) version, or detect usage
+//#define OVERRIDE_F_TO_L       //override calls to _ftol with our (faster) version, or detect usage
 
 //----------------------------
                               //linear interpolator for conversion of linear time

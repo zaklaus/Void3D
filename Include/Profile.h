@@ -80,29 +80,15 @@ public:
    {
       if(prof){
                               //get beginning time
-         __asm{
-            rdtsc
-            mov ebx, this
-            lea ebx, [ebx].prof_beg_time
-            mov [ebx+0], eax
-            mov [ebx+4], edx
-         }
+         prof_beg_time = __rdtsc();
          prof->Begin(blk_index);
       }
    }
    ~C_block_profiler_entry(){
       if(prof){
                               //get time delta
-         __int64 t;
-         __asm{
-            rdtsc
-            mov ebx, this
-            lea ebx, [ebx].prof_beg_time
-            sub eax, [ebx+0]
-            sbb edx, [ebx+4]
-            mov dword ptr t, eax
-            mov dword ptr t+4, edx
-         }
+         __int64 c = __rdtsc();
+         __int64 t = c - prof_beg_time;
          prof->End(blk_index, t);
       }
    }

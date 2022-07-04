@@ -32,22 +32,9 @@ extern const C_ease_interpolator ease_in_out, ease_in, ease_out;
 
 //----------------------------
 // Implicit conversion if float to int, with rounding to nearest.
-#if defined _MSC_VER
-inline int FloatToInt(float f){
-   __asm{
-      fld f
-      fistp f 
-   }
-   return *reinterpret_cast<int*>(&f);  // NOLINT(clang-diagnostic-undefined-reinterpret-cast)
-}
-
-#else
-
 inline int FloatToInt(float f){
    return (int)f;
 }
-
-#endif
 
 //----------------------------
 // From relative mouse movement, adjust current aim C_vector. The default points to

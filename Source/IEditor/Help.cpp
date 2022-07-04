@@ -23,7 +23,7 @@ class C_edit_Help: public C_editor_item{
             C_edit_Help *eh = (C_edit_Help*)lParam;
             InitDlg(eh->ed->GetIGraph(), hwnd);
             ShowWindow(hwnd, SW_SHOW);
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          }
          break;
 

@@ -39,16 +39,16 @@ static int PaintText(HWND hwnd, const char *txt){
 
 //----------------------------
 
-static BOOL CALLBACK dlgHelp(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK dlgHelp(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:
       {
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          const S_help_init *hi = (S_help_init*)lParam;
 
-         SetWindowLong(hwnd, GWL_EXSTYLE, WS_EX_TOOLWINDOW | WS_EX_STATICEDGE);
-         SetWindowLong(hwnd, GWL_STYLE, WS_BORDER | WS_POPUP);
+         SetWindowLongPtr(hwnd, GWL_EXSTYLE, WS_EX_TOOLWINDOW | WS_EX_STATICEDGE);
+         SetWindowLongPtr(hwnd, GWL_STYLE, WS_BORDER | WS_POPUP);
                               //position window properly
          POINT pos, size;
          size.x = hi->width;
@@ -88,7 +88,7 @@ static BOOL CALLBACK dlgHelp(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
    case WM_PAINT:
       {
-         const S_help_init *hi = (S_help_init*)GetWindowLong(hwnd, GWL_USERDATA);
+         const S_help_init *hi = (S_help_init*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          PaintText(hwnd, hi->txt);
          return 0;
       }

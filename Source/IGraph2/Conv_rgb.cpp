@@ -16,39 +16,37 @@ struct S_rgbi{
 static const word alpha_and_mask[4] = {0, 0xf, 0xff, 0xfff};
 
 //----------------------------
+
+#pragma intrinsic(_BitScanReverse)
+#pragma intrinsic(_rotl)
+#pragma intrinsic(_rotr)
+
                               //help functions
 inline int FindLastBit(dword val){
-   dword rtn;
-   __asm{
-      mov eax, val
-      bsr eax, eax
-      jnz ok
-      mov eax,-1
-ok:
-      mov rtn, eax
+   int base = 0;
+   if (val & 0xffff0000) {
+      base = 16;
+      val >>= 16;
    }
-   return rtn;
+   if (val & 0x0000ff00) {
+      base += 8;
+      val >>= 8;
+   }
+   if (val & 0x000000f0) {
+      base += 4;
+      val >>= 4;
+   }
+   static const int lut[] = { -1, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
+   return base + lut[val];
 }
 
 #ifdef _MSC_VER
 
 inline dword Rol(dword dw, byte b){
-   __asm{
-      push ecx
-      mov cl, b
-      rol dw, cl
-      pop ecx
-   }
-   return dw;
+   return _rotl(dw, b);
 }
 inline dword Ror(dword dw, byte b){
-   __asm{
-      push ecx
-      mov cl, b
-      ror dw, cl
-      pop ecx
-   }
-   return dw;
+   return _rotr(dw, b);
 }
 #endif
 
@@ -1273,7 +1271,7 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                               //compute min and max colors
                               // - add all participants on both sides of histogram medium value
                               // - scale by distance from medium, in order to achieve better contrast
-#if 0
+#if 1
             for(i=0; i<16; i++){
                if(num_trans && transp[i])
                   continue;
@@ -1282,15 +1280,15 @@ bool C_rgb_conversion_i::Convert(const void *src, void *dst, dword sx, dword sy,
                if(br_delta >= 0){
                   dword k = (256 + br_delta) >> 8;
                   num_min += k;
-                  sum_min[0] += px.r * k;
-                  sum_min[1] += px.g * k;
-                  sum_min[2] += px.b * k;
+                  sum_min[0] += px.element.r * k;
+                  sum_min[1] += px.element.g * k;
+                  sum_min[2] += px.element.b * k;
                }else{
                   dword k = (256 - br_delta) >> 8;
                   num_max += k;
-                  sum_max[0] += px.r * k;
-                  sum_max[1] += px.g * k;
-                  sum_max[2] += px.b * k;
+                  sum_max[0] += px.element.r * k;
+                  sum_max[1] += px.element.g * k;
+                  sum_max[2] += px.element.b * k;
                }
             }
 #else

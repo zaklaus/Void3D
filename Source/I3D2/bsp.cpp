@@ -92,7 +92,7 @@ public:
       code[2] = ((byte*)&dw)[2];
    }
    inline operator dword() const{
-#if 1
+#if 0
       __asm{
          mov ecx, this
          mov al, [ecx+2]

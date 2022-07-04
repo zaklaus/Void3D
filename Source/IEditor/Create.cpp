@@ -106,7 +106,7 @@ class C_edit_Create: public C_editor_item_Create{
             InitDlg(hlp->igraph, hwnd);
             SetDlgItemText(hwnd, IDC_EDIT, hlp->frm_name);
             ShowWindow(hwnd, SW_SHOW);
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          }
          return 1;
       case WM_COMMAND:
@@ -114,7 +114,7 @@ class C_edit_Create: public C_editor_item_Create{
          case IDCANCEL: EndDialog(hwnd, 0); break;
          case IDOK:
             {
-               S_dlg_name *hlp = (S_dlg_name*)GetWindowLong(hwnd, GWL_USERDATA);
+               S_dlg_name *hlp = (S_dlg_name*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                SendDlgItemMessage(hwnd, IDC_EDIT, WM_GETTEXT, 256, (LPARAM)hlp->frm_name);
                EndDialog(hwnd, 1);
             }
@@ -187,9 +187,9 @@ class C_edit_Create: public C_editor_item_Create{
 
       switch(uMsg){
       case WM_INITDIALOG:
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       }
-      C_edit_Create *ec = (C_edit_Create*)GetWindowLong(hwnd, GWL_USERDATA);
+      C_edit_Create *ec = (C_edit_Create*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(ec)
          return ec->dlgColType(hwnd, uMsg, wParam, lParam);
       return 0;
@@ -204,7 +204,7 @@ class C_edit_Create: public C_editor_item_Create{
       case WM_INITDIALOG:
          {
             C_edit_Create *ec = (C_edit_Create*)lParam;
-            //SetWindowLong(hwnd, GWL_USERDATA, lParam);
+            //SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
 
             InitDlg(ec->ed->GetIGraph(), hwnd);
             CheckDlgButton(hwnd, IDC_RADIO_OCCMESH, true);
@@ -475,7 +475,7 @@ class C_edit_Create: public C_editor_item_Create{
                {
                   OPENFILENAME *ofn = (OPENFILENAME*)lParam;
                   S_hlp *hp = (S_hlp*)ofn->lCustData;
-                  SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)hp);
+                  SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)hp);
                   InitDlg(hp->igraph, hwnd);
 
                   switch(hp->mode){
@@ -513,7 +513,7 @@ class C_edit_Create: public C_editor_item_Create{
                case IDC_CHECK_SND_PRV_SHOW:
                case IDC_CHECK_SND_PRV_LOOP:
                   {
-                     S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                     S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                      switch(LOWORD(wParam)){
                      case IDC_CHECK_PRV_SHOW:
                         hp->ec->mod_show_prv = IsDlgButtonChecked(hwnd, LOWORD(wParam));
@@ -562,7 +562,7 @@ class C_edit_Create: public C_editor_item_Create{
 
                case IDC_MODEL_MISSION:
                   {
-                     S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                     S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                      //strcpy(hp->buf, hp->last_mission_path);
                      C_str mission_name = hp->last_mission_path;
                      if(hp->e_mission->BrowseMission(hwnd, mission_name)){
@@ -732,7 +732,7 @@ class C_edit_Create: public C_editor_item_Create{
 
             case WM_TIMER:
                {
-                  S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                  S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   if(hp->timer_on && !hp->in){
                      hp->in = true;
                      hp->cam_orbit_angle -= PI*.025f;

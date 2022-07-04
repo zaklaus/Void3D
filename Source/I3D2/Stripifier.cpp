@@ -37,7 +37,7 @@ public:
 
       inline bool InCache(word entry) const{
 
-#if 1
+#if 0
          bool rtn = false;
          dword buf_size = buf.size();
          const word *buf_ptr = buf.begin();

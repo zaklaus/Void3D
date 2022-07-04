@@ -100,7 +100,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
 
       switch(uMsg){
       case WM_INITDIALOG:
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          return 1;
 
       case WM_APP + 100:
@@ -150,7 +150,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
          switch(LOWORD(wParam)){
          case IDC_BUTTON_LOG_CLOSE:
             {
-               C_editor_item_Log_imp *el = (C_editor_item_Log_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+               C_editor_item_Log_imp *el = (C_editor_item_Log_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                el->e_props->RemoveSheet(el->hwnd_log);
                el->log_visible = false;
 
@@ -160,7 +160,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
 
          case IDC_BUTTON_DUMP_CLOSE:
             {
-               C_editor_item_Log_imp *el = (C_editor_item_Log_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+               C_editor_item_Log_imp *el = (C_editor_item_Log_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                el->e_props->RemoveSheet(el->hwnd_dump);
                el->dump_visible = false;
 

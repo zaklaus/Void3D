@@ -16,7 +16,7 @@ public:
 
    C_document_line(char *text1, int t_len, int a_len);
    C_document_line(C_document_line *line, int alloc_l);
-   void *operator new(unsigned int len, int strlen){
+   void *operator new(size_t len, int strlen){
       return malloc(len-1+strlen);
    }
    void operator delete(void *mem){

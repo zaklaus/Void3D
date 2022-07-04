@@ -108,7 +108,7 @@ class C_edit_View: public C_editor_item{
 	   switch(message){
       case WM_INITDIALOG:
          {
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
             C_edit_View *ei = (C_edit_View*)lParam;
                               //setup slider
             HWND hwnd_sld = GetDlgItem(hwnd, IDC_SLIDER_LOD);
@@ -132,7 +132,7 @@ class C_edit_View: public C_editor_item{
       case WM_HSCROLL:
          {
             HWND hwnd_sld = (HWND)lParam;
-            C_edit_View *ei = (C_edit_View*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_View *ei = (C_edit_View*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             int i = SendMessage(hwnd_sld, TBM_GETPOS, 0, 0);
             if(hwnd_sld==GetDlgItem(hwnd, IDC_SLIDER_LOD)){
                ei->ed->GetDriver()->SetState(RS_LOD_INDEX, i);
@@ -153,7 +153,7 @@ class C_edit_View: public C_editor_item{
          switch(LOWORD(wParam)){
          case IDCLOSE:
             {
-               C_edit_View *ei = (C_edit_View*)GetWindowLong(hwnd, GWL_USERDATA);
+               C_edit_View *ei = (C_edit_View*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                ei->Action(VIEW_LOD_TOOLBAR, 0);
             }
             break;
@@ -162,7 +162,7 @@ class C_edit_View: public C_editor_item{
             switch(HIWORD(wParam)){
             case EN_CHANGE:
                {
-                  C_edit_View *ei = (C_edit_View*)GetWindowLong(hwnd, GWL_USERDATA);
+                  C_edit_View *ei = (C_edit_View*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   int i = GetDlgItemInt(hwnd, LOWORD(wParam), NULL, true);
                   switch(LOWORD(wParam)){
                   case IDC_EDIT_LOD_RANGE:
@@ -184,7 +184,7 @@ class C_edit_View: public C_editor_item{
             break;
          case IDC_LOD_SET_DEFAULT:
             {
-               C_edit_View *ei = (C_edit_View*)GetWindowLong(hwnd, GWL_USERDATA);
+               C_edit_View *ei = (C_edit_View*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                ei->lod_scale = 1.0f;
                SetDlgItemText(hwnd, IDC_LOD_SCALE, "1.00");
                SendDlgItemMessage(hwnd, IDC_SLIDER_LOD_SCALE, TBM_SETPOS, true, FloatToInt(ei->lod_scale * 10.0f));

@@ -101,26 +101,9 @@ extern int debug_count[4];
 #endif
 
 //----------------------------
-
-#if defined _MSC_VER && 1
-
-inline int FloatToInt(float f){
-   __asm{
-      fld f
-      fistp f 
-   }
-   return *(int*)&f;
-}
-
-#else
-
 inline int FloatToInt(float f){
    return (int)f;
 }
-
-#endif
-
-
                               //fast float cheats
 #define CHECK_ZERO_GREATER(f) (!((*(dword*)&(f)) & 0x80000000))
 #define CHECK_ZERO_LESS(f) ((*(dword*)&(f)) & 0x80000000)
@@ -392,19 +375,6 @@ inline bool SphereCollide(const I3D_bsphere &vf_bs, const I3D_bsphere &bs2){
 // Get index of the most significant bit in the mask,
 // or -1 if such bit doesn't exist.
 inline int FindLastBit(dword val){
-
-#ifdef _MSC_VER
-   dword rtn;
-   __asm{
-      mov eax, val
-      bsr eax, eax
-      jnz ok
-      mov eax, -1
-ok:
-      mov rtn, eax
-   }
-   return rtn;
-#else
    int base = 0;
    if(val&0xffff0000){
       base = 16;
@@ -420,30 +390,12 @@ ok:
    }
    static const int lut[] = {-1, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3};
    return base + lut[val];
-#endif
 }
 
 //----------------------------
 // Rotate 64-bit value to left, wrapping bits around.
 inline __int64 __cdecl Rotl(const __int64 &i, int count){
-
-   __asm{
-      mov ecx, count
-      and ecx, 0x3f
-      mov esi, i
-      mov edx, [esi+4]
-      mov eax, [esi+0]
-      mov ebx, eax
-      shld eax, edx, cl
-      shld edx, ebx, cl
-      cmp ecx, 0x20
-      jb l1
-      xchg eax, edx
-   l1:
-      mov [esi+0], eax
-      mov [esi+4], edx
-   }
-   return i;
+   return _rotl64(i, count);
 }
 
 //----------------------------
@@ -580,35 +532,10 @@ int GetVertexUvOffset(dword fvf_flags);
 // Find specified 32-bit pointer in array of pointers,
 // return index of pointer, or -1 if pointer not found
 //----------------------------
-#ifdef _MSC_VER
-
-#pragma warning(disable:4035)
-inline int FindPointerInArray(const void * const*vp, int array_len, const void *what){
-   __asm{
-      push ecx
-      mov edi, vp
-      mov ecx, array_len
-      mov eax, what
-      mov edx, ecx
-      repne scasd
-      jz ok
-      mov edx, ecx
-   ok:
-      sub edx, ecx
-      lea eax, [edx-1]
-      pop ecx
-   }
-}
-#pragma warning(default:4035)
-
-#else
-
 inline int FindPointerInArray(const void * const*vp, int array_len, const void *what){
    for(int i(array_len); i--; ) if(vp[i]==what) break;
    return i;
 }
-
-#endif
 
 //----------------------------
                               //enumeration - internal

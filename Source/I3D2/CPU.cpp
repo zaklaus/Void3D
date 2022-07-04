@@ -6,45 +6,45 @@
 
 static void InitCPU(int &init, dword &features, dword &ext_features, dword &processor){
       
-   __asm{
-      pushad
-      pushfd                  //save EFLAGS to stack
-      pop     eax             //store EFLAGS in EAX
-      mov     edx, eax        //save for testing later
-      xor     eax, 0x200000   //switch bit 21
-      push    eax             //copy "changed" value to stack
-      popfd                   //save "changed" EAX to EFLAGS
-      pushfd
-      pop     eax
-      xor     eax, edx        //see if bit changeable
-      jnz     short foundit   //if so, mark 
-      mov     eax, -1
-      jmp     short around
+  // __asm{
+  //    pushad
+  //    pushfd                  //save EFLAGS to stack
+  //    pop     eax             //store EFLAGS in EAX
+  //    mov     edx, eax        //save for testing later
+  //    xor     eax, 0x200000   //switch bit 21
+  //    push    eax             //copy "changed" value to stack
+  //    popfd                   //save "changed" EAX to EFLAGS
+  //    pushfd
+  //    pop     eax
+  //    xor     eax, edx        //see if bit changeable
+  //    jnz     short foundit   //if so, mark 
+  //    mov     eax, -1
+  //    jmp     short around
 
-      ALIGN   4
-  foundit:
-      // Load up the features and (where appropriate) extended features flags
-      mov     eax, 1          //check for processor features
-      CPUID
-      mov edi, features
-      mov     [edi], edx //store features bits
-      mov     eax, 0x80000000 //check for support of extended functions.
-      CPUID
-      cmp     eax, 0x80000001 //make sure function 0x80000001 supported.
-      jb      short around
-      mov     eax, 0x80000001 //select function 0x80000001
-      CPUID
-      mov edi, processor
-      mov     [edi], eax   //store processor family/model/step
-      mov edi, ext_features
-      mov     [edi], edx//store extende features bits
-      mov     eax, 1             //set "Has CPUID" flag to true
+  //    ALIGN   4
+  //foundit:
+  //    // Load up the features and (where appropriate) extended features flags
+  //    mov     eax, 1          //check for processor features
+  //    CPUID
+  //    mov edi, features
+  //    mov     [edi], edx //store features bits
+  //    mov     eax, 0x80000000 //check for support of extended functions.
+  //    CPUID
+  //    cmp     eax, 0x80000001 //make sure function 0x80000001 supported.
+  //    jb      short around
+  //    mov     eax, 0x80000001 //select function 0x80000001
+  //    CPUID
+  //    mov edi, processor
+  //    mov     [edi], eax   //store processor family/model/step
+  //    mov edi, ext_features
+  //    mov     [edi], edx//store extende features bits
+  //    mov     eax, 1             //set "Has CPUID" flag to true
 
-  around:
-      mov edi, init
-      mov     [edi], eax
-      popad
-   }
+  //around:
+  //    mov edi, init
+  //    mov     [edi], eax
+  //    popad
+  // }
 }
 
 //----------------------------
@@ -52,6 +52,8 @@ static void InitCPU(int &init, dword &features, dword &ext_features, dword &proc
 static dword GetCPUManufacturer(){
 
    dword res;
+   
+#if 0
    __asm{
       push ecx
                         //wuery manufacturer string
@@ -114,6 +116,9 @@ static dword GetCPUManufacturer(){
 
       pop ecx
    }
+#else
+   res = 0;
+#endif
    return res;
 }
 
@@ -249,17 +254,17 @@ dword GetCPUCaps(CPUCAPS cap){
       case HAS_SIMD:
          {
                               //bit 25 = SIMD
-            res = (features&0x2000000);
-            if(res){
-               _asm{
-                              //check OS support for SIMD
-                              // execute a SIMD instruction (xorps xmm0, xmm0)
-                              // if it fails, exception is thrown and zero is returned
-                  __emit 0x0f
-                  __emit 0x57
-                  __emit 0xc0
-               }
-            }
+            //res = (features&0x2000000);
+            //if(res){
+            //   _asm{
+            //                  //check OS support for SIMD
+            //                  // execute a SIMD instruction (xorps xmm0, xmm0)
+            //                  // if it fails, exception is thrown and zero is returned
+            //      __emit 0x0f
+            //      __emit 0x57
+            //      __emit 0xc0
+            //   }
+            //}
             break;
          }
          break;

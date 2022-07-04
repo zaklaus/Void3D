@@ -481,13 +481,13 @@ class C_edit_checkpoint: public C_editor_item{
 
       struct S_hlp{
          dword cp_type;
-         static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+         static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
             switch(uMsg){
             case WM_INITDIALOG:
                {
                   OsCenterWindow(hwnd, GetParent(hwnd));
-                  SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                  SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                   S_hlp *hp = (S_hlp*)lParam;
                   dword t = hp->cp_type;
                   if(t&CPT_DEFAULT) CheckDlgButton(hwnd, IDC_CT_NORMAL, true);
@@ -499,7 +499,7 @@ class C_edit_checkpoint: public C_editor_item{
                switch(LOWORD(wParam)){
                case IDOK:
                   {
-                     S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);;
+                     S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);;
                      dword &t = hp->cp_type;
                      t = 0;
                      if(IsDlgButtonChecked(hwnd, IDC_CT_NORMAL)) t |= CPT_DEFAULT;

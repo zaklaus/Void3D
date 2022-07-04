@@ -594,91 +594,91 @@ static void SaveChanges(C_Enum *dde){
 
 //----------------------------
 
-static BOOL CALLBACK DlgSheet(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK DlgSheet(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:
       {
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
-      }
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+   }
       break;
 
    case WM_COMMAND:
-      switch(LOWORD(wParam)){
+      switch (LOWORD(wParam)) {
 
       case IDC_COMBO_MODES:
-         switch(HIWORD(wParam)){
+         switch (HIWORD(wParam)) {
          case CBN_SELCHANGE:
-            {
-               C_Enum *dde = (C_Enum*)GetWindowLong(hwnd, GWL_USERDATA);
-               int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
-               C_Adapter *dp = &(*dde)[i];
-               i = SendDlgItemMessage(hwnd, LOWORD(wParam), CB_GETCURSEL, 0, 0);
-               SelectMode(dp, i);
-               SelectMode(hwnd, dp, dde);
-               EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-            }
-            break;
+         {
+            C_Enum* dde = (C_Enum*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+            int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
+            C_Adapter* dp = &(*dde)[i];
+            i = SendDlgItemMessage(hwnd, LOWORD(wParam), CB_GETCURSEL, 0, 0);
+            SelectMode(dp, i);
+            SelectMode(hwnd, dp, dde);
+            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+         }
+         break;
          }
          break;
 
       case IDC_COMBO_DEPTHS:
-         switch(HIWORD(wParam)){
+         switch (HIWORD(wParam)) {
          case CBN_SELCHANGE:
-            {
-               C_Enum *dde = (C_Enum*)GetWindowLong(hwnd, GWL_USERDATA);
-               int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
-               C_Adapter *dp = &(*dde)[i];
-               int res_i = SendDlgItemMessage(hwnd, IDC_COMBO_MODES, CB_GETCURSEL, 0, 0);
-               int dep_i = SendDlgItemMessage(hwnd, LOWORD(wParam), CB_GETCURSEL, 0, 0);
-               SelectDepth(res_i, dep_i, dp);
-               EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-            }
-            break;
+         {
+            C_Enum* dde = (C_Enum*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+            int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
+            C_Adapter* dp = &(*dde)[i];
+            int res_i = SendDlgItemMessage(hwnd, IDC_COMBO_MODES, CB_GETCURSEL, 0, 0);
+            int dep_i = SendDlgItemMessage(hwnd, LOWORD(wParam), CB_GETCURSEL, 0, 0);
+            SelectDepth(res_i, dep_i, dp);
+            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+         }
+         break;
          }
          break;
 
       case IDC_CHECK_FULLSCREEN:
-         {
-            bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_FULLSCREEN);
-            EnableWindow(GetDlgItem(hwnd, IDC_CHECK_TRIPPLEBUF), b);
-            EnableWindow(GetDlgItem(hwnd, IDC_COMBO_DEPTHS), b);
+      {
+         bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_FULLSCREEN);
+         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_TRIPPLEBUF), b);
+         EnableWindow(GetDlgItem(hwnd, IDC_COMBO_DEPTHS), b);
 
-            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-         }
-         break;
+         EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+      }
+      break;
 
       case IDC_CHECK_SOUNDS:
-         {
-            bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_SOUNDS);
-            EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_SOUND_HW), b);
-            if(b)
-               b = IsDlgButtonChecked(hwnd, IDC_CHECK_USE_SOUND_HW);
-            EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_EAX), b);
+      {
+         bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_SOUNDS);
+         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_SOUND_HW), b);
+         if (b)
+            b = IsDlgButtonChecked(hwnd, IDC_CHECK_USE_SOUND_HW);
+         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_EAX), b);
 
-            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-         }
-         break;
+         EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+      }
+      break;
 
       case IDC_CHECK_USE_SOUND_HW:
-         {
-            bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_USE_SOUND_HW);
-            EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_EAX), b);
+      {
+         bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_USE_SOUND_HW);
+         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_USE_EAX), b);
 
-            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-         }
-         break;
+         EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+      }
+      break;
 
       case IDC_CHECK_NO_VSHADER:
-         {
-            bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_NO_VSHADER);
-            EnableWindow(GetDlgItem(hwnd, IDC_CHECK_NO_PSHADER), !b);
-            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
-         }
-         break;
+      {
+         bool b = IsDlgButtonChecked(hwnd, IDC_CHECK_NO_VSHADER);
+         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_NO_PSHADER), !b);
+         EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+      }
+      break;
 
       case IDC_ANTIALIAS:
-         switch(HIWORD(wParam)){
+         switch (HIWORD(wParam)) {
          case CBN_SELCHANGE:
             EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
             break;
@@ -686,25 +686,25 @@ static BOOL CALLBACK DlgSheet(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
          break;
 
       case IDC_COMBO_DEVICES:
-         switch(HIWORD(wParam)){
+         switch (HIWORD(wParam)) {
          case CBN_SELCHANGE:
-            {
-               C_Enum *dde = (C_Enum*)GetWindowLong(hwnd, GWL_USERDATA);
-               int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
-               C_Adapter *dp = &(*dde)[i];
-                              //save dd device
-               config.adapter_identifier = dp->adapter_identifier;
+         {
+            C_Enum* dde = (C_Enum*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+            int i = SendDlgItemMessage(hwnd, IDC_COMBO_DEVICES, CB_GETCURSEL, 0, 0);
+            C_Adapter* dp = &(*dde)[i];
+            //save dd device
+            config.adapter_identifier = dp->adapter_identifier;
 
-               //SetDevices(hwnd, dp);
-               //i = SelectDevice(hwnd, dp, dde);
-               //if(i != -1)
-               {
-                  SetModes(hwnd, dp);
-                  SelectMode(hwnd, dp, dde);
-               }
-               EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+            //SetDevices(hwnd, dp);
+            //i = SelectDevice(hwnd, dp, dde);
+            //if(i != -1)
+            {
+               SetModes(hwnd, dp);
+               SelectMode(hwnd, dp, dde);
             }
-            break;
+            EnableWindow(GetDlgItem(hwnd_dlg, ID_APPLY), true);
+         }
+         break;
          }
          break;
 
@@ -719,148 +719,150 @@ static BOOL CALLBACK DlgSheet(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
 //----------------------------
 
-static BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
-   switch(uMsg){
+   switch (uMsg) {
    case WM_INITDIALOG:
+   {
+      InitDlg(hwnd);
+      hwnd_dlg = hwnd;
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+      C_Enum* dde = (C_Enum*)lParam;
+
       {
-         InitDlg(hwnd);
-         hwnd_dlg = hwnd;
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
-         C_Enum *dde = (C_Enum*)lParam;
+         hwnd_tc = GetDlgItem(hwnd, IDC_TAB_MAIN);
+         assert(hwnd_tc);
 
+         POINT tc_pos, tc_size;
+         dword tab_height;
          {
-            hwnd_tc = GetDlgItem(hwnd, IDC_TAB_MAIN);
-            assert(hwnd_tc);
+            RECT rc;
+            GetWindowRect(hwnd_tc, &rc);
+            tc_size.x = rc.right - rc.left;
+            tc_size.y = rc.bottom - rc.top;
 
-            POINT tc_pos, tc_size;
-            dword tab_height;
+            tc_pos.x = rc.left;
+            tc_pos.y = rc.top;
+            ScreenToClient(hwnd, &tc_pos);
+
+            SendMessage(hwnd_tc, TCM_GETITEMRECT, 0, (LPARAM)&rc);
+            tab_height = (rc.bottom - rc.top);
+         }
+
+         for (dword i = 0; i < SHEET_LAST; i++) {
+            if (i == SHEET_ADVANCED && !all_features)
+               break;
+            HWND hsht = CreateDialogParam(hInstance, sheet_data[i].dlg_name, hwnd, DlgSheet, lParam);
+            assert(hsht);
+            hwnd_sheet[i] = hsht;
+            SetParent(hsht, hwnd);
+            TCITEM tci;
+            memset(&tci, 0, sizeof(tci));
+            tci.mask = TCIF_TEXT;
+            //tci.pszText = (char*)sheet_data[i].sheet_name;
+            tci.pszText = (char*)(const char*)all_txt[27 + i];
+            tci.lParam = (LPARAM)hsht;
+
+            SendMessage(hwnd_tc, TCM_INSERTITEM, i, (LPARAM)&tci);
+
+            SetWindowPos(hsht, NULL, tc_pos.x + 10, tc_pos.y + tab_height + 6, 0, 0, SWP_NOSIZE);
+
+            switch (i) {
+            case SHEET_VIDEO:
             {
-               RECT rc;
-               GetWindowRect(hwnd_tc, &rc);
-               tc_size.x = rc.right - rc.left;
-               tc_size.y = rc.bottom - rc.top;
+               CheckDlgButton(hsht, IDC_CHECK_TXT_COMPR, config.compress_textures);
+               //CheckDlgButton(hwnd, IDC_RADIO_LINEAR, (config.filter==S_game_configuration::FILTER_LINEAR));
+               //CheckDlgButton(hwnd, IDC_RADIO_ANISO, (config.filter==S_game_configuration::FILTER_ANISO));
 
-               tc_pos.x = rc.left;
-               tc_pos.y = rc.top;
-               ScreenToClient(hwnd, &tc_pos);
+               CheckDlgButton(hsht, IDC_CHECK_TRIPPLEBUF, config.tripple_buffering);
+               CheckDlgButton(hsht, IDC_CHECK_FULLSCREEN, config.fullscreen);
 
-               SendMessage(hwnd_tc, TCM_GETITEMRECT, 0, (LPARAM)&rc);
-               tab_height = (rc.bottom - rc.top);
-            }
+               if (!config.fullscreen) {
+                  EnableWindow(GetDlgItem(hsht, IDC_CHECK_TRIPPLEBUF), false);
+                  EnableWindow(GetDlgItem(hsht, IDC_COMBO_DEPTHS), false);
+               }
 
-            for(dword i=0; i<SHEET_LAST; i++){
-               if(i==SHEET_ADVANCED && !all_features)
-                  break;
-               HWND hsht = CreateDialogParam(hInstance, sheet_data[i].dlg_name, hwnd, DlgSheet, lParam);
-               assert(hsht);
-               hwnd_sheet[i] = hsht;
-               SetParent(hsht, hwnd);
-               TCITEM tci;
-               memset(&tci, 0, sizeof(tci));
-               tci.mask = TCIF_TEXT;
-               //tci.pszText = (char*)sheet_data[i].sheet_name;
-               tci.pszText = (char*)(const char*)all_txt[27+i];
-               tci.lParam = (LPARAM)hsht;
+               //feed all devices
+               for (int ii = 0; ii < dde->Size(); ii++) {
+                  C_Adapter* ddp = &(*dde)[ii];
+                  SendDlgItemMessage(hsht, IDC_COMBO_DEVICES, CB_ADDSTRING,
+                     0, (LPARAM)(const char*)ddp->Name());
+               }
+               ii = SelectAdapter(hsht, dde);
+               C_Adapter* dp = &(*dde)[ii];
 
-               SendMessage(hwnd_tc, TCM_INSERTITEM, i, (LPARAM)&tci);
+               //SetDevices(hwnd, dp);
+               //ii = SelectDevice(hsht, dp, dde);
+               //if(ii != -1)
+               {
+                  SetModes(hsht, dp);
+                  SelectMode(hsht, dp, dde);
+               }
 
-               SetWindowPos(hsht, NULL, tc_pos.x + 10, tc_pos.y + tab_height + 6, 0, 0, SWP_NOSIZE);
-
-               switch(i){
-               case SHEET_VIDEO:
-                  {
-                     CheckDlgButton(hsht, IDC_CHECK_TXT_COMPR, config.compress_textures);
-                     //CheckDlgButton(hwnd, IDC_RADIO_LINEAR, (config.filter==S_game_configuration::FILTER_LINEAR));
-                     //CheckDlgButton(hwnd, IDC_RADIO_ANISO, (config.filter==S_game_configuration::FILTER_ANISO));
-
-                     CheckDlgButton(hsht, IDC_CHECK_TRIPPLEBUF, config.tripple_buffering);
-                     CheckDlgButton(hsht, IDC_CHECK_FULLSCREEN, config.fullscreen);
-
-                     if(!config.fullscreen){
-                        EnableWindow(GetDlgItem(hsht, IDC_CHECK_TRIPPLEBUF), false);
-                        EnableWindow(GetDlgItem(hsht, IDC_COMBO_DEPTHS), false);
-                     }
-
-                                          //feed all devices
-                     for(int ii=0; ii<dde->Size(); ii++){
-                        C_Adapter *ddp=&(*dde)[ii];
-                        SendDlgItemMessage(hsht, IDC_COMBO_DEVICES, CB_ADDSTRING,
-                           0, (LPARAM)(const char*)ddp->Name());
-                     }
-                     ii = SelectAdapter(hsht, dde);
-                     C_Adapter *dp = &(*dde)[ii];
-
-                     //SetDevices(hwnd, dp);
-                     //ii = SelectDevice(hsht, dp, dde);
-                     //if(ii != -1)
-                     {
-                        SetModes(hsht, dp);
-                        SelectMode(hsht, dp, dde);
-                     }
-
-                                          //feed antialias mode
-                     {
-                        for(int i=0; i<3; i++){
-                           SendDlgItemMessage(hsht, IDC_ANTIALIAS, CB_ADDSTRING, 0, (LPARAM)(const char*)all_txt[21+i]);
-                        }
-                        SendDlgItemMessage(hsht, IDC_ANTIALIAS, CB_SETCURSEL, config.antialias_mode, 0);
-                     }
+               //feed antialias mode
+               {
+                  for (int i = 0; i < 3; i++) {
+                     SendDlgItemMessage(hsht, IDC_ANTIALIAS, CB_ADDSTRING, 0, (LPARAM)(const char*)all_txt[21 + i]);
                   }
-                  break;
-
-               case SHEET_SOUND:
-                  {
-                     CheckDlgButton(hsht, IDC_CHECK_SOUNDS, config.use_sounds);
-                     CheckDlgButton(hsht, IDC_CHECK_USE_SOUND_HW, config.sounds_use_3D_hw);
-                     CheckDlgButton(hsht, IDC_CHECK_USE_EAX, config.sounds_use_EAX);
-
-                     if(!config.use_sounds){
-                        EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_SOUND_HW), false);
-                        EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
-                     }else
-                     if(!config.sounds_use_3D_hw)
-                        EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
-
-                     struct S_hlp{
-                        static BOOL CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext){
-                           if(!lpGuid){
-                              C_str &str = *(C_str*)lpContext;
-                              str = lpcstrDescription;
-                              return false;
-                           }
-                           return true;
-                        }
-                     };
-                     C_str str;
-                     DirectSoundEnumerate(S_hlp::cbEnum, &str);
-                     if(str.Size()){
-                        SetDlgItemText(hsht, IDC_SND_DEVICE_NAME, str);
-                     }else{
-                        ShowWindow(GetDlgItem(hsht, IDC_SOUND_DEV_TXT), SW_HIDE);
-                        ShowWindow(GetDlgItem(hsht, IDC_SND_DEVICE_NAME), SW_HIDE);
-                     }
-                  }
-                  break;
-
-               case SHEET_ADVANCED:
-                  {
-                     CheckDlgButton(hsht, IDC_CHECK_DBASE, config.use_dbase);
-                     CheckDlgButton(hsht, IDC_CHECK_REF_DEVICE, config.use_reference_device);
-                     CheckDlgButton(hsht, IDC_CHECK_NO_VSHADER, config.disable_vshader);
-                     CheckDlgButton(hsht, IDC_CHECK_NO_PSHADER, config.disable_pshader);
-
-                     EnableWindow(GetDlgItem(hsht, IDC_CHECK_NO_PSHADER), !config.disable_vshader);
-                  }
-                  break;
+                  SendDlgItemMessage(hsht, IDC_ANTIALIAS, CB_SETCURSEL, config.antialias_mode, 0);
                }
             }
-            ShowWindow(hwnd_sheet[0], SW_SHOW);
-            SendMessage(hwnd_tc, TCM_SETCURSEL, 0, 0);
+            break;
+
+            case SHEET_SOUND:
+            {
+               CheckDlgButton(hsht, IDC_CHECK_SOUNDS, config.use_sounds);
+               CheckDlgButton(hsht, IDC_CHECK_USE_SOUND_HW, config.sounds_use_3D_hw);
+               CheckDlgButton(hsht, IDC_CHECK_USE_EAX, config.sounds_use_EAX);
+
+               if (!config.use_sounds) {
+                  EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_SOUND_HW), false);
+                  EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
+               }
+               else
+                  if (!config.sounds_use_3D_hw)
+                     EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
+
+               struct S_hlp {
+                  static BOOL CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext) {
+                     if (!lpGuid) {
+                        C_str& str = *(C_str*)lpContext;
+                        str = lpcstrDescription;
+                        return false;
+                     }
+                     return true;
+                  }
+               };
+               C_str str;
+               DirectSoundEnumerate(S_hlp::cbEnum, &str);
+               if (str.Size()) {
+                  SetDlgItemText(hsht, IDC_SND_DEVICE_NAME, str);
+               }
+               else {
+                  ShowWindow(GetDlgItem(hsht, IDC_SOUND_DEV_TXT), SW_HIDE);
+                  ShowWindow(GetDlgItem(hsht, IDC_SND_DEVICE_NAME), SW_HIDE);
+               }
+            }
+            break;
+
+            case SHEET_ADVANCED:
+            {
+               CheckDlgButton(hsht, IDC_CHECK_DBASE, config.use_dbase);
+               CheckDlgButton(hsht, IDC_CHECK_REF_DEVICE, config.use_reference_device);
+               CheckDlgButton(hsht, IDC_CHECK_NO_VSHADER, config.disable_vshader);
+               CheckDlgButton(hsht, IDC_CHECK_NO_PSHADER, config.disable_pshader);
+
+               EnableWindow(GetDlgItem(hsht, IDC_CHECK_NO_PSHADER), !config.disable_vshader);
+            }
+            break;
+            }
+         }
+         ShowWindow(hwnd_sheet[0], SW_SHOW);
+         SendMessage(hwnd_tc, TCM_SETCURSEL, 0, 0);
 
          //*
                               //init controls' texts
-         struct S_ctrl_text{
+         struct S_ctrl_text {
             int ctrl_id;
             int text_id;
             int sheet_i;
@@ -886,58 +888,59 @@ static BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             { IDC_CHECK_USE_EAX, 26, 1},
             0
          };
-         for(i=0; ctrl_texts[i].ctrl_id; i++){
+         for (i = 0; ctrl_texts[i].ctrl_id; i++) {
             int tid = ctrl_texts[i].text_id;
             bool wide = all_txt.IsWide(tid);
             int id = ctrl_texts[i].ctrl_id;
             int si = ctrl_texts[i].sheet_i;
-            HWND hw = si==-1 ? hwnd : hwnd_sheet[si];
-            if(!wide){
+            HWND hw = si == -1 ? hwnd : hwnd_sheet[si];
+            if (!wide) {
                SetDlgItemText(hw, id, all_txt[tid]);
-            }else{
+            }
+            else {
                HFONT hfnt = japCreateFontJ(12, 12);
                SendDlgItemMessage(hw, id, WM_SETFONT, (WPARAM)hfnt, true);
                SetDlgItemTextW(hw, id, (wchar_t*)(const char*)all_txt[tid]);
             }
          }
          /**/
-         }
-         {
-            HICON hc = LoadIcon(dde->hi_dll, MAKEINTRESOURCE(1));
-            SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hc);
-            SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hc);
-         }
-
-         EnableWindow(GetDlgItem(hwnd, ID_APPLY), first_adapter_init);
-
-         ShowWindow(hwnd, SW_SHOW);
-         UpdateWindow(hwnd);
       }
-      return 1;
-
-      /*
-   case WM_HELP:
       {
-         LPHELPINFO hi = (LPHELPINFO)lParam;
-         DisplayHelp((HWND)hi->hItemHandle, (word)hi->iCtrlId, help_data);
+         HICON hc = LoadIcon(dde->hi_dll, MAKEINTRESOURCE(1));
+         SendMessage(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hc);
+         SendMessage(hwnd, WM_SETICON, ICON_BIG, (LPARAM)hc);
       }
-      break;
-      */
+
+      EnableWindow(GetDlgItem(hwnd, ID_APPLY), first_adapter_init);
+
+      ShowWindow(hwnd, SW_SHOW);
+      UpdateWindow(hwnd);
+   }
+   return 1;
+
+   /*
+case WM_HELP:
+   {
+      LPHELPINFO hi = (LPHELPINFO)lParam;
+      DisplayHelp((HWND)hi->hItemHandle, (word)hi->iCtrlId, help_data);
+   }
+   break;
+   */
 
    case WM_COMMAND:
-      switch(LOWORD(wParam)){
+      switch (LOWORD(wParam)) {
       case ID_APPLY:
-         {
-            C_Enum *dde = (C_Enum*)GetWindowLong(hwnd, GWL_USERDATA);
-            SaveChanges(dde);
-            EnableWindow(GetDlgItem(hwnd, LOWORD(wParam)), 0);
-            SetFocus(GetDlgItem(hwnd, IDOK));
-         }
-         break;
+      {
+         C_Enum* dde = (C_Enum*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+         SaveChanges(dde);
+         EnableWindow(GetDlgItem(hwnd, LOWORD(wParam)), 0);
+         SetFocus(GetDlgItem(hwnd, IDOK));
+      }
+      break;
 
       case IDOK:
-         if(HIWORD(wParam)==BN_CLICKED){
-            C_Enum *dde = (C_Enum*)GetWindowLong(hwnd, GWL_USERDATA);
+         if (HIWORD(wParam) == BN_CLICKED) {
+            C_Enum* dde = (C_Enum*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             SaveChanges(dde);
             EndDialog(hwnd, 1);
          }

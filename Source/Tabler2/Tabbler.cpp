@@ -976,12 +976,12 @@ public:
 //#define AF_RESET        0x10  //reset default value
 #define AF_BROWSE       0x20
                               //ChooseColor hook
-   static UINT APIENTRY ccHook(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam){
+   static UINT_PTR APIENTRY ccHook(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam){
       switch(uiMsg){
       case WM_INITDIALOG:
          {
             LPCHOOSECOLOR cc=(LPCHOOSECOLOR)lParam;
-            SetWindowLong(hwnd, GWL_USERDATA, cc->lCustData);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, cc->lCustData);
          }
          break;
       case WM_COMMAND:
@@ -990,7 +990,7 @@ public:
                               //hook RGB edit controlls
             switch(HIWORD(wParam)){
             case EN_CHANGE:
-               S_db_data *dd=(S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+               S_db_data *dd=(S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                if(dd){
                   int i=SendDlgItemMessage(dd->hwnd_dlg, IDC_STUFF, LB_GETCURSEL, 0, 0);
                   if(i==-1) break;
@@ -1481,13 +1481,12 @@ static void DrawButton(LPDRAWITEMSTRUCT lpdis){
 }
 
 //----------------------------
-typedef long __stdcall std_proc(HWND, unsigned int, unsigned int, long);
-                              //sublassing functions for various controlls
+#define std_proc WNDPROC
 
-static BOOL CALLBACK WndProcLBox(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK WndProcLBox(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    int i;
-   S_db_data *dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+   S_db_data *dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
    assert(dd);
 
    switch(uMsg){
@@ -1558,15 +1557,15 @@ static BOOL CALLBACK WndProcLBox(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
       }
       break;
    }
-   return CallWindowProc((std_proc*)dd->orig_proc_lb, hwnd, uMsg, wParam, lParam);
+   return CallWindowProc((std_proc)dd->orig_proc_lb, hwnd, uMsg, wParam, lParam);
 }
 
 //----------------------------
 
-static BOOL CALLBACK WndProcEdit(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK WndProcEdit(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    HWND hwnd_dlg = GetParent(hwnd);
-   S_db_data *dd = (S_db_data*)GetWindowLong(hwnd_dlg, GWL_USERDATA);
+   S_db_data *dd = (S_db_data*)GetWindowLongPtr(hwnd_dlg, GWLP_USERDATA);
 
    switch(uMsg){
    case WM_GETDLGCODE: return DLGC_WANTCHARS | DLGC_WANTARROWS | DLGC_WANTTAB;
@@ -1598,15 +1597,15 @@ static BOOL CALLBACK WndProcEdit(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
       }
       break;
    }
-   return CallWindowProc((std_proc*)dd->orig_proc_edn, hwnd, uMsg, wParam, lParam);
+   return CallWindowProc((std_proc)dd->orig_proc_edn, hwnd, uMsg, wParam, lParam);
 }
 
 //----------------------------
 
-static BOOL CALLBACK WndProcCheck(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK WndProcCheck(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    HWND hwnd_dlg = GetParent(hwnd);
-   S_db_data *dd=(S_db_data*)GetWindowLong(hwnd_dlg, GWL_USERDATA);
+   S_db_data *dd=(S_db_data*)GetWindowLongPtr(hwnd_dlg, GWLP_USERDATA);
 
    switch(uMsg){
    case WM_GETDLGCODE:
@@ -1637,16 +1636,16 @@ static BOOL CALLBACK WndProcCheck(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
       }
       break;
    }
-   return CallWindowProc((std_proc*)dd->orig_proc_chk, hwnd, uMsg, wParam, lParam);
+   return CallWindowProc((std_proc)dd->orig_proc_chk, hwnd, uMsg, wParam, lParam);
 }
 
 //----------------------------
 
-static BOOL CALLBACK WndProcSld(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK WndProcSld(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    int i;
    HWND hwnd_dlg = GetParent(hwnd);
-   S_db_data *dd=(S_db_data*)GetWindowLong(hwnd_dlg, GWL_USERDATA);
+   S_db_data *dd=(S_db_data*)GetWindowLongPtr(hwnd_dlg, GWLP_USERDATA);
 
    switch(uMsg){
    case WM_GETDLGCODE: return DLGC_WANTARROWS | DLGC_WANTTAB;
@@ -1701,16 +1700,16 @@ static BOOL CALLBACK WndProcSld(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
       }
       break;
    }
-   return CallWindowProc((std_proc*)dd->orig_proc_sld, hwnd, uMsg, wParam, lParam);
+   return CallWindowProc((std_proc)dd->orig_proc_sld, hwnd, uMsg, wParam, lParam);
 }
 
 //----------------------------
 
-static BOOL CALLBACK WndProcChoose(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK WndProcChoose(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    int i;
    HWND hwnd_dlg = GetParent(hwnd);
-   S_db_data *dd=(S_db_data*)GetWindowLong(hwnd_dlg, GWL_USERDATA);
+   S_db_data *dd=(S_db_data*)GetWindowLongPtr(hwnd_dlg, GWLP_USERDATA);
 
    switch(uMsg){
    case WM_KEYDOWN:
@@ -1734,12 +1733,12 @@ static BOOL CALLBACK WndProcChoose(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
       }
       break;
    }
-   return CallWindowProc((std_proc*)dd->orig_proc_cmb, hwnd, uMsg, wParam, lParam);
+   return CallWindowProc((std_proc)dd->orig_proc_cmb, hwnd, uMsg, wParam, lParam);
 }
 
 //----------------------------
 
-static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    S_db_data *dd;
    RECT rc;
@@ -1750,9 +1749,9 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
       {
          dd = new S_db_data;
          *dd = *(S_db_data*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, (long)dd);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (long)dd);
 
-         dword ws = GetWindowLong(hwnd, GWL_STYLE);
+         dword ws = GetWindowLongPtr(hwnd, GWL_STYLE);
          if(!(dd->create_flags&TABEDIT_CONTROL)){
             ws |= WS_CAPTION | WS_SYSMENU;
             ws &= ~DS_CONTROL;
@@ -1760,7 +1759,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
             ws |= DS_CONTROL;
             
          }
-         SetWindowLong(hwnd, GWL_STYLE, ws);
+         SetWindowLongPtr(hwnd, GWL_STYLE, ws);
 
          dd->table_break = (dd->create_flags&TABEDIT_EXACTHEIGHT) ? TABLE_BREAK2 : TABLE_BREAK1;
          MapDlgUnits(hwnd, &dd->table_break, NULL);
@@ -1780,16 +1779,16 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
          dd->hwnd_dlg = hwnd;
          dd->hwnd_lbox = GetDlgItem(hwnd, IDC_STUFF);
-         SetWindowLong(dd->hwnd_lbox, GWL_USERDATA, (long)dd);
-         SetWindowLong(dd->hwnd_lbox, GWL_STYLE, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | GetWindowLong(dd->hwnd_lbox, GWL_STYLE));
+         SetWindowLongPtr(dd->hwnd_lbox, GWLP_USERDATA, (long)dd);
+         SetWindowLongPtr(dd->hwnd_lbox, GWL_STYLE, WS_CLIPSIBLINGS | WS_CLIPCHILDREN | GetWindowLongPtr(dd->hwnd_lbox, GWL_STYLE));
                               //subclass list-box
-         dd->orig_proc_lb = (WNDPROC)SetWindowLong(dd->hwnd_lbox, GWL_WNDPROC, (dword)WndProcLBox);
+         dd->orig_proc_lb = (WNDPROC)SetWindowLongPtr(dd->hwnd_lbox, GWLP_WNDPROC, (dword)WndProcLBox);
 
                               //init edit controlls
                               //CHECK
          dd->hwnd_check = GetDlgItem(hwnd, IDC_CHECK);
          SetParent(dd->hwnd_check, dd->hwnd_lbox);
-         dd->orig_proc_chk = (WNDPROC)SetWindowLong(dd->hwnd_check, GWL_WNDPROC, (dword)WndProcCheck);
+         dd->orig_proc_chk = (WNDPROC)SetWindowLongPtr(dd->hwnd_check, GWLP_WNDPROC, (dword)WndProcCheck);
          int sx = 20;
          int sy = SendMessage(dd->hwnd_lbox, LB_GETITEMHEIGHT, 0, 0) - 5;
          MapDlgUnits(hwnd, &sx, 0);
@@ -1797,17 +1796,17 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
                               //EDIT
          dd->hwnd_edit = GetDlgItem(hwnd, IDC_EDIT);
          SetParent(dd->hwnd_edit, dd->hwnd_lbox);
-         dd->orig_proc_edn = (WNDPROC)SetWindowLong(dd->hwnd_edit, GWL_WNDPROC, (dword)WndProcEdit);
+         dd->orig_proc_edn = (WNDPROC)SetWindowLongPtr(dd->hwnd_edit, GWLP_WNDPROC, (dword)WndProcEdit);
          dd->table_value_sx = (dd->create_flags&TABEDIT_EXACTHEIGHT) ? TABLE_VALUE_SX2 : TABLE_VALUE_SX1;
          MapDlgUnits(hwnd, &dd->table_value_sx, NULL);
                               //SLIDER
          dd->hwnd_slider=GetDlgItem(hwnd, IDC_SLIDER);
          SetParent(dd->hwnd_slider, dd->hwnd_lbox);
-         dd->orig_proc_sld = (WNDPROC)SetWindowLong(dd->hwnd_slider, GWL_WNDPROC, (dword)WndProcSld);
+         dd->orig_proc_sld = (WNDPROC)SetWindowLongPtr(dd->hwnd_slider, GWLP_WNDPROC, (dword)WndProcSld);
                               //CHOOSE
          dd->hwnd_choose=GetDlgItem(hwnd, IDC_CHOOSE);
          SetParent(dd->hwnd_choose, dd->hwnd_lbox);
-         dd->orig_proc_cmb = (WNDPROC)SetWindowLong(dd->hwnd_choose, GWL_WNDPROC, (dword)WndProcChoose);
+         dd->orig_proc_cmb = (WNDPROC)SetWindowLongPtr(dd->hwnd_choose, GWLP_WNDPROC, (dword)WndProcChoose);
                               //BROWSE
          dd->hwnd_browse=GetDlgItem(hwnd, IDC_BROWSE);
          SetParent(dd->hwnd_browse, dd->hwnd_lbox);
@@ -1870,7 +1869,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
    case WM_DRAWITEM:
       {
-         dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+         dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          LPDRAWITEMSTRUCT lpdis = (LPDRAWITEMSTRUCT)lParam;
          switch(lpdis->CtlType){
          case ODT_BUTTON:
@@ -1911,7 +1910,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
                const S_element_data *ed = (S_element_data*)SendDlgItemMessage(hwnd, IDC_STUFF, LB_GETITEMDATA, cs, 0);
                if(ed->te->help_string){
                   int height = SendDlgItemMessage(hwnd, IDC_STUFF, LB_GETITEMHEIGHT, cs, 0);
-                  dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+                  dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   cs -= SendDlgItemMessage(hwnd, IDC_STUFF, LB_GETTOPINDEX, 0, 0);
                   OsDisplayHelpWindow(ed->te->help_string, hwnd, height/2, height * cs + height);
                }
@@ -1920,7 +1919,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
          break;
       case VK_F12:
          {
-            dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+            dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             if(dd->hwnd_main)
                SetFocus(dd->hwnd_main);
          }
@@ -1930,7 +1929,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
    case WM_ACTIVATE:
       {
-         dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+         dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          if(!dd)
             break;
          dd->active = (LOWORD(wParam)!=WA_INACTIVE);
@@ -1942,7 +1941,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
       break;
 
    case WM_HSCROLL:
-      dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+      dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if((HWND)lParam==dd->hwnd_slider){
          i=SendDlgItemMessage(hwnd, IDC_STUFF, LB_GETCURSEL, 0, 0);
          if(i==-1) break;
@@ -1954,7 +1953,7 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
 
    case WM_COMMAND:
 
-      dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+      dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
       switch(LOWORD(wParam)){
          /*
@@ -2101,12 +2100,12 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
       break;
 
    case WM_SIZE:
-      SizeWindow((S_db_data*)GetWindowLong(hwnd, GWL_USERDATA));
+      SizeWindow((S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA));
       break;
 
    case WM_GETMINMAXINFO:
       {
-         dd=(S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+         dd=(S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          if(!(dd->create_flags&TABEDIT_EXACTHEIGHT)){
             LPMINMAXINFO mmi=(LPMINMAXINFO)lParam;
             mmi->ptMinTrackSize.x = dd->table_break + dd->table_value_sx*2;
@@ -2119,15 +2118,15 @@ static BOOL CALLBACK dlgProperties(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM l
       return 0;
 
    case WM_DESTROY:
-      dd = (S_db_data*)GetWindowLong(hwnd, GWL_USERDATA);
+      dd = (S_db_data*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(dd){
          DestroyAllTable(dd);
                               //remove subclassing
-         SetWindowLong(dd->hwnd_lbox, GWL_WNDPROC, (dword)dd->orig_proc_lb);
-         SetWindowLong(dd->hwnd_check, GWL_WNDPROC, (dword)dd->orig_proc_chk);
-         SetWindowLong(dd->hwnd_edit, GWL_WNDPROC, (dword)dd->orig_proc_edn);
-         SetWindowLong(dd->hwnd_slider, GWL_WNDPROC, (dword)dd->orig_proc_sld);
-         SetWindowLong(dd->hwnd_choose, GWL_WNDPROC, (dword)dd->orig_proc_cmb);
+         SetWindowLongPtr(dd->hwnd_lbox, GWLP_WNDPROC, (dword)dd->orig_proc_lb);
+         SetWindowLongPtr(dd->hwnd_check, GWLP_WNDPROC, (dword)dd->orig_proc_chk);
+         SetWindowLongPtr(dd->hwnd_edit, GWLP_WNDPROC, (dword)dd->orig_proc_edn);
+         SetWindowLongPtr(dd->hwnd_slider, GWLP_WNDPROC, (dword)dd->orig_proc_sld);
+         SetWindowLongPtr(dd->hwnd_choose, GWLP_WNDPROC, (dword)dd->orig_proc_cmb);
 
          GetWindowRect(hwnd, &rc);
          rc.right -= rc.left;
@@ -2192,8 +2191,8 @@ void *C_table::Edit(const C_table_template *templ, void *hwnd_parent,
          hwnd = CreateDialogParam(hinst, "DLG_PROPERTIES", NULL,
             dlgProperties, (LPARAM)&dd);
 
-         dword ws = GetWindowLong(hwnd, GWL_STYLE);
-         dword wes = GetWindowLong(hwnd, GWL_EXSTYLE);
+         dword ws = GetWindowLongPtr(hwnd, GWL_STYLE);
+         dword wes = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
 
          ws &= ~(WS_POPUP | WS_BORDER | WS_CAPTION | WS_DLGFRAME |
             WS_MAXIMIZEBOX | WS_MINIMIZEBOX | WS_OVERLAPPED | WS_SYSMENU |
@@ -2204,8 +2203,8 @@ void *C_table::Edit(const C_table_template *templ, void *hwnd_parent,
             WS_EX_WINDOWEDGE);
          wes |= WS_EX_NOPARENTNOTIFY;
 
-         SetWindowLong(hwnd, GWL_STYLE, ws);
-         SetWindowLong(hwnd, GWL_EXSTYLE, wes);
+         SetWindowLongPtr(hwnd, GWL_STYLE, ws);
+         SetWindowLongPtr(hwnd, GWL_EXSTYLE, wes);
       }else{
          hwnd = CreateDialogParam(hinst, "DLG_PROPERTIES", (HWND)hwnd_parent,
             dlgProperties, (LPARAM)&dd);
@@ -2224,9 +2223,7 @@ void *C_table::Edit(const C_table_template *templ, void *hwnd_parent,
 void FatalError(const char *msg){
 
    OsMessageBox(NULL, msg, "Tabler.dll exception", MBOX_OK);
-   const char *__f__ = __FILE__; int __l__ = __LINE__; __asm push msg __asm push __l__ __asm push __f__ __asm push 0x12345678
-   __asm int 3
-   __asm add esp, 16
+   assert(0);
 }
 
 #else

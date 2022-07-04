@@ -25,7 +25,7 @@ static const char *dll_name = "iexcpt.dll";   //name of this DLL for resource lo
 
 #define MAX_RECURSE 30         //maximal number of function to recurse up the stack
 
-//#define USE_WIN_STACKWALK     //use StackWalk from Win32 API
+#define USE_WIN_STACKWALK     //use StackWalk from Win32 API
 
 #ifdef _DEBUG
 //#define DEBUG_CRASH_TEST
@@ -126,7 +126,7 @@ struct S_module_info{
 
 //----------------------------
 
-   static BOOL CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, ULONG SymbolAddress, ULONG SymbolSize, PVOID UserContext){
+   static BOOL CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, DWORD64 SymbolAddress, ULONG SymbolSize, PVOID UserContext){
 
       list<S_function> &func_list = *(list<S_function>*)UserContext;
       func_list.push_back(S_function());
@@ -646,9 +646,9 @@ void GetCallStack(LPEXCEPTION_POINTERS ep, t_call_stack &call_stack){
 
    CONTEXT *cp = ep->ContextRecord;
 #ifndef USE_WIN_STACKWALK
-   dword *reg_ebp = (dword*)cp->Ebp;
+   dword *reg_ebp = (dword*)cp->Rbp;
 #endif
-   dword *reg_esp = (dword*)cp->Esp;
+   dword *reg_esp = (dword*)cp->Rsp;
 
    C_str str_path;
 
@@ -664,11 +664,11 @@ void GetCallStack(LPEXCEPTION_POINTERS ep, t_call_stack &call_stack){
    sf.AddrPC.Segment = 0;
    sf.AddrPC.Mode = AddrModeFlat;
 
-   sf.AddrFrame.Offset = cp->Ebp;
+   sf.AddrFrame.Offset = cp->Rbp;
    sf.AddrFrame.Segment = 0;
    sf.AddrFrame.Mode = AddrModeFlat;
 
-   sf.AddrStack.Offset = cp->Esp;
+   sf.AddrStack.Offset = cp->Rsp;
    sf.AddrStack.Segment = 0;
    sf.AddrStack.Mode = AddrModeFlat;
 
@@ -782,7 +782,7 @@ void GetCallStack(LPEXCEPTION_POINTERS ep, t_call_stack &call_stack){
 
 //----------------------------
 
-static BOOL CALLBACK dlgWait(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK dlgWait(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:
@@ -793,7 +793,7 @@ static BOOL CALLBACK dlgWait(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
          int y = (GetSystemMetrics(SM_CYSCREEN)-(rc.bottom-rc.top))/2;
          SetWindowPos(hwnd, NULL, x, y, 0, 0, SWP_NOSIZE | SWP_SHOWWINDOW);
 
-         SetWindowLong(hwnd, GWL_USERDATA, 0);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
          //SetTimer(hwnd, 1, 400, NULL);
       }
       return 1;
@@ -801,7 +801,7 @@ static BOOL CALLBACK dlgWait(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
       /*
    case WM_TIMER:
       {
-         dword i = GetWindowLong(hwnd, GWL_USERDATA);
+         dword i = GetWindowLongPtr(hwnd, GWLP_USERDATA);
          const dword MAX_I = 5;
          if(++i == 5)
             i = 0;
@@ -810,7 +810,7 @@ static BOOL CALLBACK dlgWait(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
          buf[i] = 0;
          SetDlgItemText(hwnd, IDC_DOTS, buf);
 
-         SetWindowLong(hwnd, GWL_USERDATA, i);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, i);
       }
       break;
       */
@@ -890,24 +890,24 @@ void FormatCrashInfo(const t_call_stack &call_stack, LPEXCEPTION_POINTERS ep, co
       code_name = C_fstr(
          "Address: %x:%.8x, Exception code: %.8x (%s)\r\n"
          "Registers:\r\n"
-         "eax = %.8x, "
-         "ebx = %.8x, "
-         "ecx = %.8x, "
-         "edx = %.8x\r\n"
-         "esi = %.8x, "
-         "edi = %.8x, "
-         "ebp = %.8x, "
-         "esp = %.8x"
+         "rax = %.8x, "
+         "rbx = %.8x, "
+         "rcx = %.8x, "
+         "rdx = %.8x\r\n"
+         "rsi = %.8x, "
+         "rdi = %.8x, "
+         "rbp = %.8x, "
+         "rsp = %.8x"
          ,
-         cp->SegCs, cp->Eip, ep->ExceptionRecord->ExceptionCode, except_code[code_indx].name,
-         cp->Eax,
-         cp->Ebx,
-         cp->Ecx,
-         cp->Edx,
-         cp->Esi,
-         cp->Edi,
-         cp->Ebp,
-         cp->Esp
+         cp->SegCs, cp->Rip, ep->ExceptionRecord->ExceptionCode, except_code[code_indx].name,
+         cp->Rax,
+         cp->Rbx,
+         cp->Rcx,
+         cp->Rdx,
+         cp->Rsi,
+         cp->Rdi,
+         cp->Rbp,
+         cp->Rsp
          );
    }else{
       code_name = user_message;
@@ -1124,10 +1124,10 @@ static long __stdcall ExceptHandle(LPEXCEPTION_POINTERS ep){
    if(nest_count){            //this is our fault
 #ifndef USE_WIN_STACKWALK
       CONTEXT *cp = ep->ContextRecord;
-      if(*(byte*)cp->Eip == 0x8b){
+      if(*(byte*)cp->Rip == 0x8b){
          static int dummy[2];
                               //that's probably mov eax, [mem]
-         cp->Eax = (dword)&dummy;
+         cp->Rax = (dword)&dummy;
          return EXCEPTION_CONTINUE_EXECUTION;
       }
 #endif
@@ -1152,15 +1152,15 @@ static long __stdcall ExceptHandle(LPEXCEPTION_POINTERS ep){
    C_str tmp;
    bool allow_ignore = false;
    if(ep->ExceptionRecord->ExceptionCode==EXCEPTION_BREAKPOINT){
-      dword *code = (dword*)ep->ContextRecord->Esp;
+      dword *code = (dword*)ep->ContextRecord->Rsp;
       if(code[0]==0x12345678){
          title = "Assertion failed";
          tmp = C_fstr("\r\nAssertion failed: %s\r\nfile: %s\r\nline: %i", (const char*)code[3], (const char*)code[1], code[2]);
          msg = tmp;
          allow_ignore = true;
                               //skip beyond the int 3 instruction
-         ep->ContextRecord->Eip += 1;
-         ep->ExceptionRecord->ExceptionAddress = (void*)ep->ContextRecord->Eip;
+         ep->ContextRecord->Rip += 1;
+         ep->ExceptionRecord->ExceptionAddress = (void*)ep->ContextRecord->Rip;
       }
    }
    EXCPT_RETURN_CODE ret = ExceptHandle(ep, title, msg, true, allow_ignore);
@@ -1242,7 +1242,7 @@ EXCPT_RETURN_CODE __declspec(dllexport) __stdcall UserException(const char *titl
    ep.ExceptionRecord = &er;
    ep.ContextRecord = &cr;
    er.ExceptionAddress = InitializeExceptions;
-   __asm{
+   /*__asm{
       mov eax, [ebp+0]
       mov cr.Ebp, eax
       mov eax, [ebp+4]
@@ -1250,11 +1250,11 @@ EXCPT_RETURN_CODE __declspec(dllexport) __stdcall UserException(const char *titl
       mov eax, [ebp+4]
       lea edi, er
       mov [edi]er.ExceptionAddress, eax
-   }
+   }*/
    EXCPT_RETURN_CODE rtn = ExceptHandle(&ep, title, msg, true, true);
    if(rtn == EXCPT_DEBUG){
       rtn = EXCPT_CLOSE;
-      __asm int 3
+      assert(0);
    }
    return rtn;
 }
@@ -1272,7 +1272,7 @@ void __declspec(dllexport) __stdcall GetCallStack(t_call_stack &call_stack){
    ep.ExceptionRecord = &er;
    ep.ContextRecord = &cr;
    er.ExceptionAddress = InitializeExceptions;
-   __asm{
+   /*__asm{
       mov eax, [ebp+0]
       mov cr.Ebp, eax
       mov eax, [ebp+4]
@@ -1280,7 +1280,7 @@ void __declspec(dllexport) __stdcall GetCallStack(t_call_stack &call_stack){
       mov eax, [ebp+4]
       lea edi, er
       mov [edi]er.ExceptionAddress, eax
-   }
+   }*/
    t_call_stack cs_tmp;
    GetCallStack(&ep, cs_tmp);
    call_stack = cs_tmp;

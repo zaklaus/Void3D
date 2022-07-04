@@ -59,8 +59,8 @@ class C_edit_VideoGrab: public C_editor_item{
    static BOOL CALLBACK dlgThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       if(uMsg==WM_INITDIALOG)
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
-      C_edit_VideoGrab *ep = (C_edit_VideoGrab*)GetWindowLong(hwnd, GWL_USERDATA);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+      C_edit_VideoGrab *ep = (C_edit_VideoGrab*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(ep)
          return ep->dlgProc(hwnd, uMsg, wParam, lParam);
       return 0;

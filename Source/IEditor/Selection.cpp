@@ -288,8 +288,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     void AddObjsToList_Tree(HWND hwnd, C_vector<C_smart_ptr<I3D_frame> >* in_list,
         const C_vector<C_smart_ptr<I3D_frame> >& curr_sel) {
 
-        dword save_gwl = GetWindowLong(hwnd, GWL_USERDATA);
-        SetWindowLong(hwnd, GWL_USERDATA, 0);
+        dword save_gwl = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
 
         PI3D_scene scene = ed->GetScene();
 
@@ -326,7 +326,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         }
         if (focused != -1)
             SendDlgItemMessage(hwnd, IDC_TREE1, TVM_ENSUREVISIBLE, focused, false);
-        SetWindowLong(hwnd, GWL_USERDATA, save_gwl);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, save_gwl);
     }
 
     //----------------------------
@@ -442,8 +442,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     static BOOL CALLBACK dlgTreeView_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
-        auto* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+        auto* es = (C_edit_Selection_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
         if (es)
             return es->dlgTreeView(hwnd, uMsg, wParam, lParam);
         return 0;
@@ -641,8 +641,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     void AddObjsToList(HWND hwnd, C_vector<C_smart_ptr<I3D_frame> >* in_list,
         const C_vector<C_smart_ptr<I3D_frame> >& curr_sel) {
 
-        dword save_gwl = GetWindowLong(hwnd, GWL_USERDATA);
-        SetWindowLong(hwnd, GWL_USERDATA, 0);
+        dword save_gwl = GetWindowLongPtr(hwnd, GWLP_USERDATA);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
 
         PI3D_scene scene = ed->GetScene();
         SendDlgItemMessage(hwnd, IDC_LIST, LVM_DELETEALLITEMS, 0, 0);
@@ -668,7 +668,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         }
         if (focused != -1)
             SendDlgItemMessage(hwnd, IDC_LIST, LVM_ENSUREVISIBLE, focused, false);
-        SetWindowLong(hwnd, GWL_USERDATA, save_gwl);
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, save_gwl);
     }
 
     //----------------------------
@@ -738,7 +738,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
             ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
 
             C_vector<C_smart_ptr<I3D_frame> >* sel_list = hlp->out_list;
-            SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)hlp);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)hlp);
 
             InitCommonControls();
             HIMAGELIST il;
@@ -903,11 +903,11 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                     } hlp1;
                     auto* nml = (NMLISTVIEW*)lParam;
                     if (nml->iSubItem == 1) {   //sort by frame
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     else {
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp1.sort_type = nml->iSubItem;
                         hlp1.e_slct = hlp->e_slct;
                         hlp1.PGetFrameScript = hlp->e_slct->PGetFrameScript;
@@ -945,7 +945,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                         buf[len++] = '*';
                     bool model_search = (buf[0] == '.');
                     //change contents of selection
-                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
                     LVITEM lvi;
@@ -1000,7 +1000,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_GRP_ALL:
                 {
                     for (int i = 0; i < LM_HIERARCHY; i++) list_mode[i] = true;
-                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
                     hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                 }
@@ -1009,7 +1009,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_GRP_NONE:
                 {
                     for (int i = 0; i < LM_HIERARCHY; i++) list_mode[i] = false;
-                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     ShowGroupButtons(hwnd, (hlp->in_list == nullptr));
                     hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                 }
@@ -1019,7 +1019,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_BUTTON_SEL_NONE:
                 case IDC_BUTTON_SEL_INV:
                 {
-                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
                     LVITEM lvi;
@@ -1052,35 +1052,35 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_CHECK_VIS:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VISUAL] = IsDlgButtonChecked(hwnd, IDC_CHECK_VIS);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_VIS2:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VIS_LM] = IsDlgButtonChecked(hwnd, IDC_CHECK_VIS2);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_LIGHT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_LIGHT] = IsDlgButtonChecked(hwnd, IDC_CHECK_LIGHT);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_MODEL:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_MODEL] = IsDlgButtonChecked(hwnd, IDC_CHECK_MODEL);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_SND:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_SOUND] = IsDlgButtonChecked(hwnd, IDC_CHECK_SND);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
@@ -1088,61 +1088,61 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
                 case IDC_CHECK_OCC:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_OCCLUDER] = IsDlgButtonChecked(hwnd, IDC_CHECK_OCC);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_VOL:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_VOLUME] = IsDlgButtonChecked(hwnd, IDC_CHECK_VOL);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_DUM:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_DUMMY] = IsDlgButtonChecked(hwnd, IDC_CHECK_DUM);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_SCT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_SECTOR] = IsDlgButtonChecked(hwnd, IDC_CHECK_SCT);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_CAM:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_CAMERA] = IsDlgButtonChecked(hwnd, IDC_CHECK_CAM);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_JOINT:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_JOINT] = IsDlgButtonChecked(hwnd, IDC_CHECK_JOINT);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_USER:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_USER] = IsDlgButtonChecked(hwnd, IDC_CHECK_USER);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                 case IDC_CHECK_HIER:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_HIERARCHY] = IsDlgButtonChecked(hwnd, IDC_CHECK_HIER);
                         EnableWindow(GetDlgItem(hwnd, IDC_CHECK_HIDE), list_mode[LM_HIERARCHY]);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
                 case IDC_CHECK_HIDE:
                     if (HIWORD(wParam) == BN_CLICKED) {
                         list_mode[LM_HIDE] = IsDlgButtonChecked(hwnd, IDC_CHECK_HIDE);
-                        auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                        auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                         hlp->e_slct->AddObjsToList(hwnd, hlp->in_list, *hlp->out_list);
                     }
                     break;
@@ -1154,7 +1154,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
                 case IDOK:
                 {
-                    auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+                    auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                     //collect selection and select
                     hlp->out_list->clear();
                     int count = SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETITEMCOUNT, 0, 0);
@@ -1178,7 +1178,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
         case WM_DESTROY:
         {
-            auto* hlp = (S_sel_help*)GetWindowLong(hwnd, GWL_USERDATA);
+            auto* hlp = (S_sel_help*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             for (int i = 0; i < (sizeof(objsel_list) / sizeof(S_objsel_column)); i++) {
                 hlp->e_slct->objsel_list_width[i] =
                     SendDlgItemMessage(hwnd, IDC_LIST, LVM_GETCOLUMNWIDTH, i, 0);
@@ -1558,8 +1558,8 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
     static BOOL CALLBACK dlgObjSelModeless_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
-            SetWindowLong(hwnd, GWL_USERDATA, lParam);
-        auto* es = (C_edit_Selection_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+        auto* es = (C_edit_Selection_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
         if (es)
             return es->dlgObjSelModeless(hwnd, uMsg, wParam, lParam);
         return 0;

@@ -423,13 +423,13 @@ void C_edit_control::SizeWindow(){
 
 //----------------------------
 
-static unsigned int CALLBACK FontChooseHook(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static UINT_PTR CALLBACK FontChooseHook(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:
       {
          CHOOSEFONT *cf = (CHOOSEFONT*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, cf->lCustData);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, cf->lCustData);
       }
       break;
    case WM_COMMAND:
@@ -437,7 +437,7 @@ static unsigned int CALLBACK FontChooseHook(HWND hwnd, UINT uMsg, WPARAM wParam,
       switch(LOWORD(wParam)){
       case 0x402:
          {
-            C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             ec->font_sy = -1;
             if(ec->fnt){
                DeleteObject(ec->fnt);
@@ -481,7 +481,7 @@ static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
    case WM_INITDIALOG:
       {
          C_edit_control *ec = (C_edit_control*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)ec);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)ec);
                                        //center
          RECT rc, rc1;
          GetWindowRect(ec->hwnd, &rc1);
@@ -583,7 +583,7 @@ static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       case ID_COLOR_EDIT_FORE:
       case ID_COLOR_EDIT_BACK:
          {
-            C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             bool fore;
             fore = LOWORD(wParam)==ID_COLOR_EDIT_FORE;
             i = SendDlgItemMessage(hwnd, fore ? IDC_COMBO_COLOR_FORE : IDC_COMBO_COLOR_BACK,
@@ -612,7 +612,7 @@ static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
          break;
       case IDAPPLY:
          {
-            C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             memcpy(ec->rgb_values, s_rgb_values, sizeof(ec->rgb_values));
             memcpy(ec->config.colors, s_colors, CLR_LAST);
             PostMessage(ec->win.hwnd, WM_USER_PAINTWHOLE, 0, 0);
@@ -620,7 +620,7 @@ static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
          break;
       case IDOK:
          {
-            C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             memcpy(ec->rgb_values, s_rgb_values, sizeof(ec->rgb_values));
             memcpy(ec->config.colors, s_colors, CLR_LAST);
             ec->config_changed = true;
@@ -655,7 +655,7 @@ static BOOL CALLBACK DlgConfig(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
    case WM_INITDIALOG:
       {
          C_edit_control *ec = (C_edit_control*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)ec);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)ec);
                               //center
          RECT rc, rc1;
          GetWindowRect(ec->hwnd, &rc1);
@@ -746,7 +746,7 @@ static BOOL CALLBACK DlgConfig(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
       case IDOK:
          {
-            C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+            C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
             ec->config.tab_width= GetDlgItemInt (hwnd, IDC_EDIT_TABWIDTH, NULL, 0);
             ec->config.string_len=    GetDlgItemText(hwnd, IDC_EDIT_STRING, ec->config.string, 7);
@@ -807,14 +807,14 @@ static BOOL CALLBACK DlgAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam
 
 //----------------------------
 
-BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+INT_PTR CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
 
    case WM_INITDIALOG:
       {
          C_edit_control *ec = (C_edit_control*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
          SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOSIZE | SWP_NOZORDER);
                            //init status bar
          ec->hwnd_sb = CreateStatusWindow(
@@ -835,7 +835,7 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 
    case WM_ACTIVATE:
       {
-         C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+         C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          C_window *wp = &ec->win;
          switch(LOWORD(wParam)){
          case WA_INACTIVE:
@@ -852,7 +852,7 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 
    case WM_SIZE:
       {
-         C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+         C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          //C_window *wp = &ec->win;
          ec->SizeWindow();
          if(ec->hwnd_sb) SendMessage(ec->hwnd_sb, uMsg, wParam, lParam);
@@ -861,7 +861,7 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 
    case WM_COMMAND:
       {
-         C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+         C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          C_window *wp = &ec->win;
          short wID = LOWORD(wParam);
          switch(wID){
@@ -945,7 +945,7 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
       break;
    case WM_CLOSE:
       {
-         C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+         C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          if(ec){
             C_window *wp = &ec->win;
             if(!SavePrompt(wp, hwnd)) return 0;
@@ -960,12 +960,12 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
       break;
    case WM_DESTROY:
       {
-         C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+         C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
          if(ec){
             ec->AddRef();
             if(ec->cb_proc) (*ec->cb_proc)("close", ec->cb_context);
             ec->hwnd = NULL;
-            SetWindowLong(hwnd, GWL_USERDATA, 0);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
             ec->Release();
          }
       }
@@ -976,9 +976,9 @@ BOOL CALLBACK C_edit_control::dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 
 //----------------------------
 
-long CALLBACK C_edit_control::dlgECProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+INT_PTR CALLBACK C_edit_control::dlgECProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
-   C_edit_control *ec = (C_edit_control*)GetWindowLong(hwnd, GWL_USERDATA);
+   C_edit_control *ec = (C_edit_control*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
    static bool hwnd_lbut_down;
 
    switch(uMsg){
@@ -986,8 +986,8 @@ long CALLBACK C_edit_control::dlgECProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
    case WM_CREATE:
       {
          CREATESTRUCT *cs = (CREATESTRUCT*)lParam;
-         SetWindowLong(hwnd, GWL_ID, 1);
-         SetWindowLong(hwnd, GWL_USERDATA, (long)cs->lpCreateParams);
+         SetWindowLongPtr(hwnd, GWL_ID, 1);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (long)cs->lpCreateParams);
       }
       break;
 
@@ -1294,7 +1294,7 @@ ECTRL_RESULT C_edit_control::Close(bool save_cfg){
       ck.close();
    }
    if(hwnd){
-      SetWindowLong(hwnd, GWL_USERDATA, 0);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
       DestroyWindow(hwnd);
       hwnd = NULL;
    }

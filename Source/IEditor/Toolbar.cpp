@@ -174,7 +174,7 @@ class C_toolbar_imp: public C_toolbar_special{
             NULL,
             NULL);
          assert(hwnd);
-         SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)this);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)this);
       }
       ~C_button(){
          bool b;
@@ -234,7 +234,7 @@ class C_toolbar_imp: public C_toolbar_special{
                      break;
                   in_action = true;
                   HWND hwnd_but = (HWND)lParam;
-                  PC_button but = (PC_button)GetWindowLong(hwnd_but, GWL_USERDATA);
+                  PC_button but = (PC_button)GetWindowLongPtr(hwnd_but, GWLP_USERDATA);
                   assert(but);
                   but->owner->Action(but->action_id, (void*)but->pressed);
 #if 0
@@ -256,7 +256,7 @@ class C_toolbar_imp: public C_toolbar_special{
             bool b;
             DRAWITEMSTRUCT *di = (DRAWITEMSTRUCT*)lParam;
             HWND hwnd_but = di->hwndItem;
-            PC_button but = (PC_button)GetWindowLong(hwnd_but, GWL_USERDATA);
+            PC_button but = (PC_button)GetWindowLongPtr(hwnd_but, GWLP_USERDATA);
             assert(but);
             HDC hdc = di->hDC;
             RECT &rc = di->rcItem;
@@ -347,7 +347,7 @@ class C_toolbar_imp: public C_toolbar_special{
             {
                               //get delta of window relative to client area
                RECT rc_delta = {0, 0, 0, 0};
-               AdjustWindowRectEx(&rc_delta, GetWindowLong(hwnd, GWL_STYLE), false, GetWindowLong(hwnd, GWL_EXSTYLE));
+               AdjustWindowRectEx(&rc_delta, GetWindowLongPtr(hwnd, GWL_STYLE), false, GetWindowLongPtr(hwnd, GWL_EXSTYLE));
                pt_delta.x = (rc_delta.right - rc_delta.left);
                pt_delta.y = (rc_delta.bottom - rc_delta.top);
             }
@@ -471,8 +471,8 @@ class C_toolbar_imp: public C_toolbar_special{
    static BOOL CALLBACK DlgProcThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       if(uMsg==WM_INITDIALOG)
-         SetWindowLong(hwnd, GWL_USERDATA, lParam);
-      C_toolbar_imp *tb = (C_toolbar_imp*)GetWindowLong(hwnd, GWL_USERDATA);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
+      C_toolbar_imp *tb = (C_toolbar_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(tb)
          return tb->DlgProc(hwnd, uMsg, wParam, lParam);
       return 0;
@@ -598,7 +598,7 @@ class C_toolbar_imp: public C_toolbar_special{
    void SetWindowSizeByClientSize(dword sx, dword sy){
 
       RECT rc = {0, 0, sx, sy};
-      AdjustWindowRectEx(&rc, GetWindowLong(hwnd, GWL_STYLE), false, GetWindowLong(hwnd, GWL_EXSTYLE));
+      AdjustWindowRectEx(&rc, GetWindowLongPtr(hwnd, GWL_STYLE), false, GetWindowLongPtr(hwnd, GWL_EXSTYLE));
       dword wsx = rc.right - rc.left;
       dword wsy = rc.bottom - rc.top;
       SetWindowPos(hwnd, NULL, 0, 0, wsx, wsy, SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOOWNERZORDER | SWP_NOZORDER);

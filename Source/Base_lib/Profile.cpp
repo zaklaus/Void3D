@@ -3,20 +3,9 @@
 
 //----------------------------
 
-#if defined _MSC_VER && 1
-
-inline int FloatToInt(float f){
-   __asm{
-      fld f
-      fistp f 
-   }
-   return *(int*)&f;
-}
-#else
 inline int FloatToInt(float f){
    return (int)f;
 }
-#endif
 
 //----------------------------
                               //block profiling

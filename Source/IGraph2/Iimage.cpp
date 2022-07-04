@@ -1026,37 +1026,37 @@ static void ShrinkMipmap(S_argb_signed *area, dword sx1, dword sy){
 
 //----------------------------
 
-inline int __cdecl FindLastBit(dword val){
-   dword rtn;
-   __asm{
-      mov eax, val
-      bsr eax, eax
-      jnz ok
-      mov eax, -1
-ok:
-      mov rtn, eax
+#pragma intrinsic(_rotl)
+#pragma intrinsic(_rotr)
+
+                              //help functions
+inline int FindLastBit(dword val) {
+   int base = 0;
+   if (val & 0xffff0000) {
+      base = 16;
+      val >>= 16;
    }
-   return rtn;
+   if (val & 0x0000ff00) {
+      base += 8;
+      val >>= 8;
+   }
+   if (val & 0x000000f0) {
+      base += 4;
+      val >>= 4;
+   }
+   static const int lut[] = { -1, 0, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3 };
+   return base + lut[val];
 }
 
-inline dword __cdecl Rol(dword dw, byte b){
-   __asm{
-      push ecx
-      mov cl, b
-      rol dw, cl
-      pop ecx
-   }
-   return dw;
+#ifdef _MSC_VER
+
+inline dword Rol(dword dw, byte b) {
+   return _rotl(dw, b);
 }
-inline dword __cdecl Ror(dword dw, byte b){
-   __asm{
-      push ecx
-      mov cl, b
-      ror dw, cl
-      pop ecx
-   }
-   return dw;
+inline dword Ror(dword dw, byte b) {
+   return _rotr(dw, b);
 }
+#endif
 
 //----------------------------
 
@@ -1103,7 +1103,7 @@ static void ConvertToARGB(S_argb *dst, const void *src, dword pitch, const S_pix
          byte g_pos = byte((FindLastBit(pf->g_mask)-7) & 31);
          byte b_pos = byte((FindLastBit(pf->b_mask)-7) & 31);
          byte a_pos = byte((FindLastBit(pf->a_mask)-7) & 31);
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
          if(!(size_x&1)){
             dword r_mask = pf->r_mask;
             dword g_mask = pf->g_mask;

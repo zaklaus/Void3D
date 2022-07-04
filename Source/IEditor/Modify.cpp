@@ -442,7 +442,7 @@ class C_edit_Modify: public C_editor_item_Modify{
                         GetWindowText(hwnd, win_name, sizeof(win_name));
                         SetWindowText(hwnd, C_fstr("%s - %s", win_name, hp->frm_name));
 
-                        SetWindowLong(hwnd, GWL_USERDATA, lParam);
+                        SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                      }
                      return 1;
                   case WM_COMMAND:
@@ -452,7 +452,7 @@ class C_edit_Modify: public C_editor_item_Modify{
                         break;
                      case IDOK:
                         {
-                           S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                           S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                                                       //collect results
                            hp->default_reset_flags &= 
                               ~(E_MODIFY_FLG_POSITION|E_MODIFY_FLG_ROTATION|E_MODIFY_FLG_SCALE|E_MODIFY_FLG_NU_SCALE|E_MODIFY_FLG_LINK);

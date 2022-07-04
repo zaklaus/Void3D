@@ -1189,7 +1189,7 @@ void I3D_procedural_texture::Tick(int time){
                case 1:
                   break;
                case 2:
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
                                        //optimize - most common case
                   __asm{
                      push ecx
@@ -1239,7 +1239,7 @@ void I3D_procedural_texture::Tick(int time){
                   break;
 
                case 4:
-#if defined _MSC_VER && 1
+#if defined _MSC_VER && 0
                                        //optimize - most common case
                   __asm{
                      push ecx

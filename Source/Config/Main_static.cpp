@@ -8,22 +8,9 @@
 
 //----------------------------
 // Implicit conversion if float to int, with rounding to nearest.
-#if defined _MSC_VER
-inline int FloatToInt(float f){
-   __asm{
-      fld f
-      fistp f 
-   }
-   return *(int*)&f;
-}
-
-#else
-
 inline int FloatToInt(float f){
    return (int)f;
 }
-
-#endif
 
 //----------------------------
 

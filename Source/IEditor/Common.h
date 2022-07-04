@@ -12,20 +12,9 @@ C_str GetDlgItemText(HWND hwnd, int dlg_id);
 
 //----------------------------
 
-#if defined _MSC_VER && 1
-
-inline int FloatToInt(float f){
-   __asm{
-      fld f
-      fistp f 
-   }
-   return *(int*)&f;
-}
-#else
 inline int FloatToInt(float f){
    return (int)f;
 }
-#endif
 
 //----------------------------
 // Check if name is already used on some frame in scene.
@@ -148,7 +137,7 @@ inline bool AddOrSplitEdge(C_vector<I3D_edge> &edge_list, const I3D_edge &e){
 
 //----------------------------
                               //find specified pointer in array of 32-bit pointers (asm optimized)
-#ifdef _MSC_VER
+#if 0
 
 inline int FindPointerIndex(void **vp, int array_len, void *what){
    int rtn;

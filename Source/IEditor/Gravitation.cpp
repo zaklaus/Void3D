@@ -90,8 +90,8 @@ class C_edit_Gravitation: public C_editor_item{
 	   switch(message){
       case WM_INITDIALOG:
          {
-            SetWindowLong(hDlg, GWL_USERDATA, lParam);
-            //C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLong(hDlg, GWL_USERDATA);
+            SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
+            //C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
 
                               //setup speed track-bar
             SendMessage(GetDlgItem(hDlg, IDC_SPEEDSLIDER), TBM_SETRANGEMIN, true, SPEED_SLIDER_MIN);
@@ -106,7 +106,7 @@ class C_edit_Gravitation: public C_editor_item{
 
       case WM_HSCROLL:
          {
-            C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLong(hDlg, GWL_USERDATA);
+            C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
             dword value = SendMessage(GetDlgItem(hDlg, IDC_SPEEDSLIDER), TBM_GETPOS, (WPARAM) 0, (LPARAM) 0);
             if(value<SPEED_SLIDER_MIN) value = SPEED_SLIDER_MIN;
             if(value>SPEED_SLIDER_MAX) value = SPEED_SLIDER_MAX;
@@ -119,7 +119,7 @@ class C_edit_Gravitation: public C_editor_item{
          switch(LOWORD(wParam)){
          case IDC_HIDE:
             {
-               C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLong(hDlg, GWL_USERDATA);
+               C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
                if(HIWORD(wParam) == (WORD)BN_CLICKED)
                   if(eg->hWndGrav)
                      eg->Action(E_GRAV_TOGGLE_DIALOG, NULL);
@@ -138,7 +138,7 @@ class C_edit_Gravitation: public C_editor_item{
       }
       if(changed){
 
-         C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLong(hDlg, GWL_USERDATA);
+         C_edit_Gravitation *eg = (C_edit_Gravitation*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
 
          eg->link_falled = (SendDlgItemMessage(hDlg, IDC_LINK, BM_GETCHECK, 0, 0) == BST_CHECKED);
          eg->fall_mode =

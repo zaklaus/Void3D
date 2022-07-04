@@ -20,7 +20,7 @@ static BOOL CALLBACK DlgSysCMD(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
    case WM_INITDIALOG:
       {
          S_sys_dlg_param *sp = (S_sys_dlg_param*)lParam;
-         SetWindowLong(hwnd, GWL_USERDATA, (LPARAM)sp);
+         SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)sp);
                               //center
          HWND hwnd1 = sp->hwnd_parent;
          RECT rc, rc1;
@@ -91,7 +91,7 @@ static BOOL CALLBACK DlgSysCMD(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
       case IDOK:
          i = 1;
          {
-            S_sys_dlg_param *sp = (S_sys_dlg_param*)GetWindowLong(hwnd, GWL_USERDATA);
+            S_sys_dlg_param *sp = (S_sys_dlg_param*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
             if(sp){
                i = sp->close_proc(hwnd);
             }

@@ -201,16 +201,7 @@ void C_block_profiler_imp::Clear(){
    in_block.reserve(16);
                            //get beginning time
    beg_msec = igraph->ReadTimer();
-
-   __int64 &bgt = beg_time;
-   __asm{
-      rdtsc
-      mov ebx, this
-      //lea ebx, [ebx].beg_time
-      mov ebx, bgt
-      mov [ebx+0], eax
-      mov [ebx+4], edx
-   }
+   beg_time = __rdtsc();
 }
 
 //----------------------------
@@ -219,16 +210,7 @@ void C_block_profiler_imp::PrepareForRender(){
 
    if(mode!=MODE_NO){
                               //get rdtsc delta
-      __int64 rdtsc_frame;
-      __asm{
-         rdtsc
-         mov ebx, this
-         lea ebx, [ebx].beg_time
-         sub eax, [ebx+0]
-         sbb edx, [ebx+4]
-         mov dword ptr rdtsc_frame, eax
-         mov dword ptr rdtsc_frame+4, edx
-      }
+      __int64 rdtsc_frame = __rdtsc() - beg_time;
       dword msec = igraph->ReadTimer() - beg_msec;
                               //get all non-counted time
       blocks[num_blocks-1].time = rdtsc_frame - blocks[num_blocks-1].time;

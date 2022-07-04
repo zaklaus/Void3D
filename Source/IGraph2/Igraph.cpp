@@ -1103,7 +1103,7 @@ LRESULT IGraph::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
 LRESULT CALLBACK WndProc_thunk(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
 
                               //get interface
-   PIGraph igraph = (PIGraph)GetWindowLong(hwnd, GWL_USERDATA);
+   PIGraph igraph = (PIGraph)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
    if(!igraph || process_done)
       return DefWindowProc(hwnd, message, wParam, lParam);
@@ -1194,10 +1194,10 @@ bool IGraph::InitWindow(int posx, int posy){
 
       if(!hwnd) return false;
                               //store this into window data
-      SetWindowLong(hwnd, GWL_USERDATA, (LONG)this);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG)this);
    }else{
-      SetWindowLong(hwnd, GWL_EXSTYLE, 0);
-      SetWindowLong(hwnd, GWL_STYLE, wstyle);
+      SetWindowLongPtr(hwnd, GWL_EXSTYLE, 0);
+      SetWindowLongPtr(hwnd, GWL_STYLE, wstyle);
       SetWindowPos(hwnd,
 #ifndef _DEBUG
          (create_flags&IG_FULLSCREEN) ? HWND_TOPMOST : 
@@ -1226,7 +1226,7 @@ void IGraph::DestroyWindow(){
    init_ok = false;
    if(hwnd){
       GrabKeys(false);
-      SetWindowLong(hwnd, GWL_USERDATA, 0);
+      SetWindowLongPtr(hwnd, GWLP_USERDATA, 0);
       ::DestroyWindow(hwnd);
       hwnd = NULL;
    }
@@ -3139,7 +3139,7 @@ bool IGraph::UpdateParams(dword sx, dword sy, dword bits_per_pixel, dword flg, d
       */
 
       if(!recreate){
-         dword wstyle = GetWindowLong(hwnd, GWL_STYLE);
+         dword wstyle = GetWindowLongPtr(hwnd, GWL_STYLE);
          create_flags ^= flags_change;
                               //update window flags directly
          bool wl_change = false;
@@ -3192,7 +3192,7 @@ bool IGraph::UpdateParams(dword sx, dword sy, dword bits_per_pixel, dword flg, d
          }
 
          if(wl_change){
-            SetWindowLong(hwnd, GWL_STYLE, wstyle);
+            SetWindowLongPtr(hwnd, GWL_STYLE, wstyle);
 
             if(flags_change&IG_HIDDEN){
                UpdateWindow(hwnd);

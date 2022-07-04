@@ -104,7 +104,7 @@ bool WinGetName(const char *title, C_str &str, void *hwnd){
          case WM_INITDIALOG:
             {
                S_hlp *hp = (S_hlp*)lParam;
-               SetWindowLong(hwnd, GWL_USERDATA, lParam);
+               SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
                OsCenterWindow(hwnd, GetParent(hwnd));
                SetWindowText(hwnd, hp->title);
                SetDlgItemText(hwnd, IDC_EDIT, *hp->str);
@@ -115,7 +115,7 @@ bool WinGetName(const char *title, C_str &str, void *hwnd){
             switch(LOWORD(wParam)){
             case IDOK:
                {
-                  S_hlp *hp = (S_hlp*)GetWindowLong(hwnd, GWL_USERDATA);
+                  S_hlp *hp = (S_hlp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
                   char buf[512];
                   GetDlgItemText(hwnd, IDC_EDIT, buf, sizeof(buf));
                   *hp->str = buf;
