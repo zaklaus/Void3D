@@ -383,7 +383,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bitwise.c" />
-    <ClCompile Include="DebugAlloc.cpp" />
+    <ClCompile Include="DebugAlloc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="framing.c" />
   </ItemGroup>
   <ItemGroup>

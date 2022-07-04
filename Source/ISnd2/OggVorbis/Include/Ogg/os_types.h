@@ -20,7 +20,7 @@
 /* make it easy on the folks that want to compile the libs with a
    different malloc than stdlib */
 
-#ifdef _DEBUG
+#if 0
 
 #ifndef _SIZE_T_DEFINED
 #define _SIZE_T_DEFINED

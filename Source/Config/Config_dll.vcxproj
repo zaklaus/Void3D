@@ -226,7 +226,6 @@
       <TypeLibraryName>.\_Debug_dll/Config_dll.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include; ..\..\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CONFIG_DLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -251,7 +250,7 @@
       <AdditionalDependencies>base_lib_d.lib;dsound.lib;Dta_read_d.lib;Zlib.lib;Insanity_d.lib;%(AdditionalDependencies);Advapi32.lib</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config_d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>i3d2_math;i3d2_thunk;igraph2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Debug_dll/Config_d.pdb</ProgramDatabaseFile>
@@ -316,7 +315,6 @@
       <TypeLibraryName>.\_Debug_dll/Config_dll.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include; ..\..\DirectX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CONFIG_DLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -342,7 +340,7 @@
       <AdditionalDependencies>base_lib_d.lib;dsound.lib;Dta_read_d.lib;Zlib.lib;Insanity_d.lib;%(AdditionalDependencies);Advapi32.lib</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config_d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>i3d2_math;i3d2_thunk;igraph2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Debug_dll/Config_d.pdb</ProgramDatabaseFile>
@@ -450,7 +448,7 @@
       <AdditionalDependencies>dsound.lib;Dta_read.lib;Zlib.lib;Insanity.lib;%(AdditionalDependencies);Advapi32.lib</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>i3d2_math;i3d2_thunk;igraph2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
@@ -557,7 +555,7 @@
       <AdditionalDependencies>dsound.lib;Dta_read.lib;Zlib.lib;Insanity.lib;%(AdditionalDependencies);Advapi32.lib</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>i3d2_math;i3d2_thunk;igraph2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>

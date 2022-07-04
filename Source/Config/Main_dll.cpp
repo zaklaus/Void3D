@@ -824,7 +824,7 @@ static INT_PTR CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
                      EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
 
                struct S_hlp {
-                  static INT_PTR CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext) {
+                  static BOOL CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext) {
                      if (!lpGuid) {
                         C_str& str = *(C_str*)lpContext;
                         str = lpcstrDescription;

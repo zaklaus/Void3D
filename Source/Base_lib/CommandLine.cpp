@@ -105,7 +105,7 @@ bool C_command_line_base::Scan(const char *cl, const char *app_name){
       dword op = sdp->operation;
       void *ptr = (void*)sdp->data_offset;
       if(!(op&CMD_GLOBAL_PTR))
-         ((byte*&)ptr) += (dword)this;
+         ((byte*&)ptr) += (size_t)this;
 
       switch(op&0xffff){
       case CMD_NOP: break;

@@ -1541,7 +1541,7 @@ class C_edit_MouseEdit: public C_editor_item_MouseEdit{
    void SetCursor(int id){
       if(last_set_cursor!=id){
          ::SetCursor(cursors[id]);
-         SetClassLong((HWND)ed->GetIGraph()->GetHWND(), GCL_HCURSOR, (long)cursors[id]);
+         SetClassLongPtr((HWND)ed->GetIGraph()->GetHWND(), GCLP_HCURSOR, (long)cursors[id]);
          last_set_cursor = id;
       }
    }

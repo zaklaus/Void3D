@@ -13,16 +13,19 @@
 using namespace std;
 
 #pragma warning(disable:4073)
-#pragma init_seg(lib)
+//#pragma init_seg(lib)
 
 #pragma optimize("y", off)
 
 //----------------------------
 
-#define USE_LEAK_AND_CHECK_MODE  //use mode for checking memory leaks and corruption
+//#define USE_LEAK_AND_CHECK_MODE  //use mode for checking memory leaks and corruption
 //#define USE_GUARD_PAGES_BEGIN
 //#define USE_GUARD_PAGES_END   //use mode for guarding ends of blocks by non-access pages
 
+void __declspec(dllexport) foo_xyz(){
+   
+}
 
 #ifdef USE_LEAK_AND_CHECK_MODE
 
@@ -42,7 +45,7 @@ void __cdecl AssertDialog(void*, void*, unsigned){
    assert(0);
 }
 */
-void __fastcall SetBreakAlloc(dword){}
+//void __fastcall SetBreakAlloc(dword){}
 
 //----------------------------
 

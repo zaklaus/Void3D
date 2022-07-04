@@ -334,7 +334,6 @@
       <TypeLibraryName>.\_output/iscript.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;SCRIPT_COMPILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -394,7 +393,6 @@
       <TypeLibraryName>.\_output/iscript.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;SCRIPT_COMPILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>

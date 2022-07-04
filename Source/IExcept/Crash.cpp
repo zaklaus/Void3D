@@ -126,7 +126,7 @@ struct S_module_info{
 
 //----------------------------
 
-   static INT_PTR CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, DWORD64 SymbolAddress, ULONG SymbolSize, PVOID UserContext){
+   static BOOL CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, DWORD64 SymbolAddress, ULONG SymbolSize, PVOID UserContext){
 
       list<S_function> &func_list = *(list<S_function>*)UserContext;
       func_list.push_back(S_function());

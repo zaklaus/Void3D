@@ -317,7 +317,6 @@
       <TypeLibraryName>.\_Debug/IPhysics.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;PHYS_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -377,7 +376,6 @@
       <TypeLibraryName>.\_Debug/IPhysics.tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;PHYS_INTERNAL;%(PreprocessorDefinitions)</PreprocessorDefinitions>

@@ -252,7 +252,6 @@
       </HeaderFileName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../include;../../include/GameFramework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;EDITOR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -273,10 +272,10 @@
       <AdditionalIncludeDirectories>..\..\Source\IEditor\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>IGameFramework_d.lib;base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_output/test.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -364,7 +363,6 @@
       </HeaderFileName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../include;../../include/GameFramework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -389,7 +387,7 @@
       <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_output/test.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -474,7 +472,6 @@
       </HeaderFileName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include;../../include/GameFramework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -508,7 +505,7 @@
       <AdditionalDependencies>IGameFramework.lib;legacy_stdio_definitions.lib;base_lib.lib;Dta_read.lib;Physics.lib;IGraph.lib;Script.lib;comctl32.lib;Msimg32.lib;Zlib.lib;winmm.lib;DXGuid.lib;PNG.lib;DInput.lib;D3DX9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Release/test.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -593,7 +590,6 @@
       </HeaderFileName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <AdditionalIncludeDirectories>../../include;../../include/GameFramework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -626,7 +622,7 @@
       <AdditionalDependencies>legacy_stdio_definitions.lib;base_lib.lib;Dta_read.lib;Physics.lib;IGraph.lib;Script.lib;comctl32.lib;Msimg32.lib;Zlib.lib;winmm.lib;DXGuid.lib;PNG.lib;DInput.lib;D3DX9.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_Release/test.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -702,7 +698,6 @@
       </HeaderFileName>
     </Midl>
     <ClCompile>
-      <AdditionalOptions>/Gh  %(AdditionalOptions)</AdditionalOptions>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>../../include;../../include/GameFramework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;EDITOR;GL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -723,7 +718,7 @@
       <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;I3D2_gl_d.lib;IGraph_gl_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;D3DX9d.lib;DXGuid.lib;PNG_d.lib;libGLESv2.lib;libEGL.lib;Msimg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib; ..\..\OpenGL_ES_2.0\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib\x64; ..\..\OpenGL_ES_2.0\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\_output/test.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -789,9 +784,18 @@
       <Project>{9138bbb5-83d6-4bdb-840f-7935f442d15c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\..\Source\IGameFramework\IGameFramework.vcxproj">
+      <Project>{f929db3d-6a52-475a-bd51-f1d2dee0ec71}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\IGraph2\igraph2.vcxproj">
+      <Project>{e50d4d68-d202-415a-aa63-9c36fa0bb7a0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\Source\Insanity\Insanity.vcxproj">
       <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
       <Name>Insanity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Physics\IPhysics.vcxproj">
+      <Project>{65450deb-8a11-44ba-8cec-f1a953c0263b}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

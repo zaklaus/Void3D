@@ -276,9 +276,9 @@ public:
             b = SetThreadPriority(h_thread, THREAD_PRIORITY_IDLE);
             assert(b);
                               //show hourglass
-            long save_cursor = GetClassLong((HWND)ed->GetIGraph()->GetHWND(), GCL_HCURSOR);
+            long save_cursor = GetClassLongPtr((HWND)ed->GetIGraph()->GetHWND(), GCLP_HCURSOR);
             SetCursor(LoadCursor(NULL, IDC_WAIT));
-            SetClassLong((HWND)ed->GetIGraph()->GetHWND(), GCL_HCURSOR, (long)LoadCursor(NULL, IDC_WAIT));
+            SetClassLongPtr((HWND)ed->GetIGraph()->GetHWND(), GCLP_HCURSOR, (long)LoadCursor(NULL, IDC_WAIT));
                               //count time
             dword start_time = ed->GetIGraph()->ReadTimer();
 
@@ -310,7 +310,7 @@ public:
 
                               //restore cursor
             SetCursor((HCURSOR)save_cursor);
-            SetClassLong((HWND)ed->GetIGraph()->GetHWND(), GCL_HCURSOR, save_cursor);
+            SetClassLongPtr((HWND)ed->GetIGraph()->GetHWND(), GCLP_HCURSOR, save_cursor);
 
             ed->GetIGraph()->EnableSuspend(true);
             b = SetThreadPriority(h_thread, curr_priority);

@@ -550,7 +550,7 @@ void __stdcall CrashCallback() {
     }
     //disable leak warning
 #ifdef _DEBUG
-    SetBreakAlloc((dword)-2);
+    //SetBreakAlloc((dword)-2);
 #endif
 
     TablesCloseAll();

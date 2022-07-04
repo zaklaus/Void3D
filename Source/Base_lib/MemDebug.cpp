@@ -20,21 +20,21 @@ int force_debug_alloc_include;
 
 //----------------------------
 
-void *__cdecl operator new(size_t sz){
-
-   if(!sz)
-      return NULL;
-   return _DebugAlloc(sz);
-}
-
-//----------------------------
-
-void __cdecl operator delete(void *vp){
-
-   if(!vp)
-      return;
-   _DebugFree(vp);
-}
+//void *__cdecl operator new(size_t sz){
+//
+//   if(!sz)
+//      return NULL;
+//   return _DebugAlloc(sz);
+//}
+//
+////----------------------------
+//
+//void __cdecl operator delete(void *vp){
+//
+//   if(!vp)
+//      return;
+//   _DebugFree(vp);
+//}
 
 //----------------------------
 

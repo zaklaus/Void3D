@@ -65,7 +65,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
       int len;
       FILE *f_out;
 
-      static DWORD CALLBACK StreamIn(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb){
+      static DWORD CALLBACK StreamIn(DWORD_PTR dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb){
 
          S_hlp *hp = (S_hlp*)dwCookie;
          int trans = Min((int)cb, hp->len);
@@ -75,7 +75,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
          *pcb = trans;
          return 0;
       }
-      static DWORD CALLBACK StreamOut(DWORD dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb){
+      static DWORD CALLBACK StreamOut(DWORD_PTR dwCookie, LPBYTE pbBuff, LONG cb, LONG *pcb){
 
          S_hlp *hp = (S_hlp*)dwCookie;
          assert(hp->f_out);

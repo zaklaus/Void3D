@@ -257,7 +257,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
 
 //----------------------------
 
-   static UINT APIENTRY ccHookColor(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam){
+   static UINT_PTR APIENTRY ccHookColor(HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam){
 
       switch(uiMsg){
       case WM_INITDIALOG:

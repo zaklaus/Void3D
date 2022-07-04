@@ -20,9 +20,6 @@
     <ClCompile Include="MemAutoInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemDebug.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Profile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,6 +30,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="win_res.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MemDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

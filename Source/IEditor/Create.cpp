@@ -469,7 +469,7 @@ class C_edit_Create: public C_editor_item_Create{
             err += "\r\n";
          }
 
-         static UINT CALLBACK cbOpen(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+         static UINT_PTR CALLBACK cbOpen(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
             switch(uMsg){
             case WM_INITDIALOG:
                {

@@ -202,8 +202,6 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
       <OmitFramePointers>true</OmitFramePointers>
       <DebugInformationFormat>None</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -217,7 +215,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 </AdditionalOptions>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libucrt.lib;libcmt.lib;odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read.lib;Zlib.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\iexcpt.dll</OutputFile>
       <AdditionalLibraryDirectories>..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>iexcpt;i3d2_math;i3d2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -225,6 +223,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <ImportLibrary>.\_output/iexcpt.lib</ImportLibrary>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Message>Copy library</Message>
@@ -310,8 +310,6 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
       <OmitFramePointers>true</OmitFramePointers>
       <DebugInformationFormat>None</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -324,7 +322,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 </AdditionalOptions>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libucrt.lib;odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read.lib;Zlib.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\iexcpt.dll</OutputFile>
       <AdditionalLibraryDirectories>..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>iexcpt;i3d2_math;i3d2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -332,6 +330,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <ImportLibrary>.\_output/iexcpt.lib</ImportLibrary>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Message>Copy library</Message>
@@ -403,7 +403,7 @@
       <AdditionalOptions>/Zl %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
       <PrecompiledHeaderOutputFile>.\_Release/Crash.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>.\_Release/</AssemblerListingLocation>
@@ -417,8 +417,6 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
       <OmitFramePointers>true</OmitFramePointers>
       <DebugInformationFormat>None</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -431,7 +429,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:x64 </AdditionalOptions>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libucrtd.lib;libvcruntimed.lib;libcmtd.lib;odbc32.lib;odbccp32.lib;imagehlp.lib;dta_read_d.lib;Zlib.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\iexcpt.dll</OutputFile>
       <AdditionalLibraryDirectories>..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>iexcpt;i3d2_math;i3d2_thunk;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -439,6 +437,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <ImportLibrary>.\_output/iexcpt.lib</ImportLibrary>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
       <Message>Copy library</Message>
@@ -454,6 +454,11 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="crash.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base_lib\base_lib.vcxproj">
+      <Project>{c21ddacc-6ee6-4269-a09e-3fded9397119}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
