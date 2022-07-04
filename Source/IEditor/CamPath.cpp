@@ -385,7 +385,7 @@ class C_edit_camerapath: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgPathSelectThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgPathSelectThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       C_edit_camerapath *pd = (C_edit_camerapath*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
@@ -743,7 +743,7 @@ class C_edit_camerapath: public C_editor_item{
       return 0;
    }
 
-   static BOOL CALLBACK dlgProc_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgProc_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);

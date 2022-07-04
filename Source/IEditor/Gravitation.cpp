@@ -84,7 +84,7 @@ class C_edit_Gravitation: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK GravCallbackProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK GravCallbackProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
       bool changed = false;
 	   switch(message){

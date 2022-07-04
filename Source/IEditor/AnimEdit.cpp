@@ -3679,7 +3679,7 @@ class C_edit_AnimEdit: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK cbMaskAnim(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK cbMaskAnim(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
 	   switch(message){
       case WM_HELP:
@@ -4838,7 +4838,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 
 //----------------------------
 
-   static BOOL CALLBACK cbSelectAnim(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK cbSelectAnim(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
 	   switch(message){
       case WM_INITDIALOG:
@@ -4960,7 +4960,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 
 //----------------------------
 
-   static BOOL CALLBACK AnimEditCbProc_Thunk(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK AnimEditCbProc_Thunk(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
 	   if(message==WM_INITDIALOG)
          SetWindowLongPtr(hDlg, GWLP_USERDATA, lParam);
@@ -5223,7 +5223,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
 
 //----------------------------
 
-   static BOOL CALLBACK cbAnimFrames(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK cbAnimFrames(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 
       C_edit_AnimEdit *ea = (C_edit_AnimEdit*)GetWindowLongPtr(hDlg, GWLP_USERDATA);
 
@@ -5931,7 +5931,7 @@ void ApplyChangedMaskToAnims(dword changed_mask_id){
             ae(ae1)
          {}
 
-         static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+         static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
             switch(uMsg){
             case WM_INITDIALOG:
@@ -7513,7 +7513,7 @@ public:
       float *weight;
    };
 
-   static BOOL CALLBACK dlgGetWeight(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgGetWeight(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       switch(uMsg){
       case WM_INITDIALOG:
          {

@@ -754,7 +754,7 @@ class C_edit_ProcEdit: public C_editor_item{
       return 0;
    }
 
-   static BOOL CALLBACK dlgProc_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgProc_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       switch(uMsg){
       case WM_INITDIALOG:
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);

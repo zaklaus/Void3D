@@ -653,7 +653,7 @@ class C_edit_Mission : public C_editor_item_Mission {
         return 0;
     }
 
-    static BOOL CALLBACK dlgSelectThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static INT_PTR CALLBACK dlgSelectThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
             SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
@@ -703,7 +703,7 @@ class C_edit_Mission : public C_editor_item_Mission {
 
     //----------------------------
 
-    static BOOL CALLBACK dlgMerge(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static INT_PTR CALLBACK dlgMerge(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         switch (uMsg) {
         case WM_INITDIALOG:
@@ -1976,7 +1976,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
             struct S_hlp {
                 const char* filename;
                 bool can_make_wr;
-                static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+                static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
                     switch (uMsg) {
                     case WM_INITDIALOG:
@@ -2053,7 +2053,7 @@ PC_toolbar tb = ed->GetToolbar("File", x_pos, y_pos, is_vss ? 2 : 1);
             struct S_hlp {
                 const char* filename;
                 bool keep;
-                static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+                static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
                     switch (uMsg) {
                     case WM_INITDIALOG:

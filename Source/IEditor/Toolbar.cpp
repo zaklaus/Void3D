@@ -468,7 +468,7 @@ class C_toolbar_imp: public C_toolbar_special{
 
 //----------------------------
 
-   static BOOL CALLBACK DlgProcThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK DlgProcThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);

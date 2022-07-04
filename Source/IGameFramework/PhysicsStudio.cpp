@@ -433,7 +433,7 @@ private:
 
 //----------------------------
 
-   static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       C_physics_studio *ei = (C_physics_studio*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){

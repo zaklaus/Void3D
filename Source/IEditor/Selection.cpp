@@ -439,7 +439,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
         return 0;
     }
 
-    static BOOL CALLBACK dlgTreeView_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static INT_PTR CALLBACK dlgTreeView_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
             SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
@@ -728,7 +728,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
     //----------------------------
 
-    static BOOL CALLBACK dlgObjSel(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static INT_PTR CALLBACK dlgObjSel(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         switch (uMsg) {
         case WM_INITDIALOG:
@@ -1555,7 +1555,7 @@ class C_edit_Selection_imp : public C_editor_item_Selection {
 
     //----------------------------
 
-    static BOOL CALLBACK dlgObjSelModeless_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+    static INT_PTR CALLBACK dlgObjSelModeless_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         if (uMsg == WM_INITDIALOG)
             SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);

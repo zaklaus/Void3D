@@ -457,7 +457,7 @@ static UINT_PTR CALLBACK FontChooseHook(HWND hwnd, UINT uMsg, WPARAM wParam, LPA
 
 //----------------------------
 
-static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    static char COLOR_TEXT[] = {
       "Default\0"
@@ -642,7 +642,7 @@ static BOOL CALLBACK DlgColors(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
 //----------------------------
 
-static BOOL CALLBACK DlgConfig(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK DlgConfig(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    char line[128];
    int i, j;
@@ -780,7 +780,7 @@ static BOOL CALLBACK DlgConfig(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 
 //----------------------------
 
-static BOOL CALLBACK DlgAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK DlgAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:

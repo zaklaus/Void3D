@@ -930,7 +930,7 @@ private:
 
 //----------------------------
 
-   static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       C_edit_ShaderStudio *ei = (C_edit_ShaderStudio*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){
@@ -1177,7 +1177,7 @@ private:
                   bool case_sens;
                   HWND hwnd_parent;
 
-                  static BOOL CALLBACK DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+                  static INT_PTR CALLBACK DialogProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
                      switch(uMsg){
                      case WM_INITDIALOG:

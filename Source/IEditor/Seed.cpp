@@ -451,7 +451,7 @@ class C_edit_Seed: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgProc_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgProc_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       C_edit_Seed *_this = (C_edit_Seed*)GetWindowLongPtr(hwnd, GWLP_USERDATA);

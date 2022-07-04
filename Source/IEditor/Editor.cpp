@@ -1856,7 +1856,7 @@ void C_editor_imp::SetActive(bool b) {
 //----------------------------
 //----------------------------
 
-static BOOL CALLBACK dlgSplash(HWND hwnd,  // handle to dialog box
+static INT_PTR CALLBACK dlgSplash(HWND hwnd,  // handle to dialog box
     UINT uMsg,     // message  
     WPARAM wParam, // first message parameter
     LPARAM lParam  // second message parameter

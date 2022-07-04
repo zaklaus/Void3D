@@ -52,7 +52,7 @@ int WinSelectItem(const char *title, const char *item_list, int curr_sel){
       const char *title;
       const char *item_list;
       int curr_sel;
-      static BOOL CALLBACK dlgListSelect(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+      static INT_PTR CALLBACK dlgListSelect(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
          switch(uMsg){
          case WM_INITDIALOG:
@@ -98,7 +98,7 @@ bool WinGetName(const char *title, C_str &str, void *hwnd){
    struct S_hlp{
       const char *title;
       C_str *str;
-      static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+      static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
          switch(uMsg){
          case WM_INITDIALOG:

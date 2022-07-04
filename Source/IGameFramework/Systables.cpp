@@ -532,7 +532,7 @@ class C_edit_SysConfig: public C_editor_item{
       return 0;
    }
 
-   static BOOL CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgSheet_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       C_edit_SysConfig *ei = (C_edit_SysConfig*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
       if(!ei){

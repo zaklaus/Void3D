@@ -1509,7 +1509,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgSheet_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgSheet_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG){
          S_sheet_init *si = (S_sheet_init*)lParam;
          SetWindowLongPtr(hwnd, GWLP_USERDATA, (LPARAM)si->ep);
@@ -3234,7 +3234,7 @@ class C_edit_Properties_imp: public C_edit_Properties_ed{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgProp_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgProp_Thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);
       C_edit_Properties_imp *ep = (C_edit_Properties_imp*)GetWindowLongPtr(hwnd, GWLP_USERDATA);

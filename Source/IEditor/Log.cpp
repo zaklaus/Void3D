@@ -96,7 +96,7 @@ class C_editor_item_Log_imp: public C_editor_item_Log{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgLog(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgLog(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       switch(uMsg){
       case WM_INITDIALOG:

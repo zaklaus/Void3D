@@ -15,7 +15,7 @@ class C_edit_Help: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgAbout(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       switch(uMsg){
       case WM_INITDIALOG:

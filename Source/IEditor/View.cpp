@@ -103,7 +103,7 @@ class C_edit_View: public C_editor_item{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgProcLod(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgProcLod(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
 
 	   switch(message){
       case WM_INITDIALOG:

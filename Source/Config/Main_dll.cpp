@@ -719,7 +719,7 @@ static INT_PTR CALLBACK DlgSheet(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 //----------------------------
 
-static BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+static INT_PTR CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
    switch (uMsg) {
    case WM_INITDIALOG:
@@ -824,7 +824,7 @@ static BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                      EnableWindow(GetDlgItem(hsht, IDC_CHECK_USE_EAX), false);
 
                struct S_hlp {
-                  static BOOL CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext) {
+                  static INT_PTR CALLBACK cbEnum(LPGUID lpGuid, LPCSTR lpcstrDescription, LPCSTR lpcstrModule, LPVOID lpContext) {
                      if (!lpGuid) {
                         C_str& str = *(C_str*)lpContext;
                         str = lpcstrDescription;

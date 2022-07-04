@@ -964,7 +964,7 @@ public:
             if(!e_log) break;
 
             struct S_hlp2{
-               static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+               static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
                   switch(uMsg){
                   case WM_INITDIALOG:

@@ -56,7 +56,7 @@ class C_edit_VideoGrab: public C_editor_item{
       return 0;
    }
 
-   static BOOL CALLBACK dlgThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgThunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       if(uMsg==WM_INITDIALOG)
          SetWindowLongPtr(hwnd, GWLP_USERDATA, lParam);

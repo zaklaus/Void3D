@@ -421,7 +421,7 @@ class C_edit_Modify: public C_editor_item_Modify{
                PIGraph igraph;
                const char *frm_name;
 
-               static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+               static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
                   switch(uMsg){
                   case WM_INITDIALOG:

@@ -2331,7 +2331,7 @@ public:
             /*
                               //ask for axis
             struct S_hlp{
-               static BOOL CALLBACK cbDlg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+               static INT_PTR CALLBACK cbDlg(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
                   static const dword axis_ctrls[3] = {IDC_ALIGN_X, IDC_ALIGN_Y, IDC_ALIGN_Z};
                   switch(uMsg){

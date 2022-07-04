@@ -87,7 +87,7 @@ bool SelectName(PIGraph igraph, HWND hwnd_parent, const char *title, C_str &name
       const char *frm_name;
       const char *title;
       const char *desc;
-      static BOOL CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+      static INT_PTR CALLBACK dlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
          switch(uMsg){
          case WM_INITDIALOG:
@@ -431,14 +431,14 @@ bool CheckFrustumIntersection(const S_plane *planes, dword num_planes, const S_v
 void MakeVertexMapping(const S_vector *vp, dword pitch, int numv, word *v_map, float thresh){
 
    if(!numv) return;
-#ifndef _MSC_VER
+#if 1
 //#if 1
 
    for(int i=0; i<numv; i++){
       const S_vector &v1 = *(S_vector*)(((byte*)vp) + pitch * i);
       for(int j=0; j<i; j++){
          const S_vector &v2 = *(S_vector*)(((byte*)vp) + pitch * j);
-         if((Fabs(v1.x-v2.x) + Fabs(v1.y-v2.y) + Fabs(v1.z-v2.z)) < thresh)
+         if((abs(v1.x-v2.x) + abs(v1.y-v2.y) + abs(v1.z-v2.z)) < thresh)
             break;
       }
       v_map[i] = j;
@@ -599,7 +599,7 @@ int ChooseItemFromList(PIGraph igraph, HWND hwnd_parent, const char *title, cons
       int curr_sel;
       PIGraph igraph;
 
-      static BOOL CALLBACK dlgListSelect(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+      static INT_PTR CALLBACK dlgListSelect(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
          switch(uMsg){
          case WM_INITDIALOG:

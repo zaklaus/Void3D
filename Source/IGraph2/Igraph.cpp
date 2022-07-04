@@ -1042,7 +1042,7 @@ LRESULT IGraph::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam){
          GetClientRect(hwnd, &rc);
                               //consider status window and other helping windows
          struct S_hlp{
-            static BOOL CALLBACK cbEnum(HWND hwnd, LPARAM lParam){
+            static INT_PTR CALLBACK cbEnum(HWND hwnd, LPARAM lParam){
                char buf[256];
                if(GetClassName(hwnd, buf, sizeof(buf))){
                   if(!strcmp(buf, "msctls_statusbar32")){

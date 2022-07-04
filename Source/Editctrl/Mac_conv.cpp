@@ -45,7 +45,7 @@ static char CheckChar(char *cp){
 
 //-------------------------------------
 
-static BOOL CALLBACK DlgCompErr(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK DlgCompErr(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
 

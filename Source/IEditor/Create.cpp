@@ -97,7 +97,7 @@ class C_edit_Create: public C_editor_item_Create{
       const char *frm_name;
    };
 
-   static BOOL CALLBACK dlgName(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgName(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       switch(uMsg){
       case WM_INITDIALOG:
@@ -183,7 +183,7 @@ class C_edit_Create: public C_editor_item_Create{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgColType_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgColType_thunk(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
       switch(uMsg){
       case WM_INITDIALOG:
@@ -197,7 +197,7 @@ class C_edit_Create: public C_editor_item_Create{
 
 //----------------------------
 
-   static BOOL CALLBACK dlgOccType(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+   static INT_PTR CALLBACK dlgOccType(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
       int i;
 
       switch(uMsg){

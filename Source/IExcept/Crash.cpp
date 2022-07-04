@@ -56,7 +56,7 @@ struct S_dlg_init{
 
 //----------------------------
 
-static BOOL CALLBACK dlgCrash(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
+static INT_PTR CALLBACK dlgCrash(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
    switch(uMsg){
    case WM_INITDIALOG:
@@ -126,7 +126,7 @@ struct S_module_info{
 
 //----------------------------
 
-   static BOOL CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, DWORD64 SymbolAddress, ULONG SymbolSize, PVOID UserContext){
+   static INT_PTR CALLBACK SymEnumSymbolsCallback(PCSTR SymbolName, DWORD64 SymbolAddress, ULONG SymbolSize, PVOID UserContext){
 
       list<S_function> &func_list = *(list<S_function>*)UserContext;
       func_list.push_back(S_function());
