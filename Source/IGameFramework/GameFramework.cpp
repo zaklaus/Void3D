@@ -164,6 +164,12 @@ bool InitSystem(const C_command_line& cmd_line) {
         (game_configuration.tripple_buffering ? IG_TRIPPLEBUF : 0) |
         (game_configuration.fullscreen ? IG_FULLSCREEN : 0);
 
+    if (game_configuration.disable_vshader)
+       ig.flags |= IG_NO_VSHADER;
+    /*if (game_configuration.disable_pshader)
+       ig.flags |= IG_NO_PSHADER;*/
+    
+
 #if defined EDITOR || defined _DEBUG
     ig.log_func = LogFunc;
 #endif

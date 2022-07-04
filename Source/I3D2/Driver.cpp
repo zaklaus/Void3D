@@ -1055,6 +1055,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
       ir = I3DERR_INVALIDPARAMS;
       goto out;
    }
+#if 0
    {
       h_nvlinker = LoadLibrary("nvlinker.dll");
       if(!h_nvlinker){
@@ -1281,6 +1282,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
       }
 //#endif
    }
+#endif
 
    drv_flags = 0;
    drv_flags2 = 0;

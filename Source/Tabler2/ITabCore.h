@@ -71,6 +71,9 @@ public:
    float GetDefaultVal(dword index) const{
       return te[index].flt_default;
    }
+   char *GetDefaultValS(dword index) const {
+      return te[index].string_default;
+   }
    void *operator new(size_t sz, int i){
       return new byte[sz + sizeof(C_table_element)*(i-1)];
    }

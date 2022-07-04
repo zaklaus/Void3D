@@ -130,8 +130,7 @@ int C_table::InsertItem(PC_table_template tt, dword templ_indx, int &storage,
    case TE_STRING:
       {
          int ii = 0;
-         float def = tt->GetDefaultVal(templ_indx);
-         const char *cp = *(const char**)&def;
+         const char *cp = tt->GetDefaultValS(templ_indx);
          if(cp){
             ii = Min((int)strlen(cp), size_of);
             for(int i=0; i<ii; i++){

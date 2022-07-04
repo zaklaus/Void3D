@@ -2028,7 +2028,7 @@ public:
     void CreateTreeView() {
         if (!hwnd_treeview) {
             hwnd_treeview = CreateDialogParam(GetHInstance(), "IDD_TREE", (HWND)ed->GetIGraph()->GetHWND(),
-                dlgTreeView_thunk, (LPARAM)this);
+                dlgTreeView_thunk, (size_t)this);
             ed->GetIGraph()->AddDlgHWND(hwnd_treeview);
         }
 
