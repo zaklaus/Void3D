@@ -86,6 +86,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IGameFramework", "..\..\Source\IGameFramework\IGameFramework.vcxproj", "{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IMinimalDemo", "..\..\Source\IMinimalDemo\IMinimalDemo.vcxproj", "{9AC187AF-39CA-4189-8858-02851A68A477}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F929DB3D-6A52-475A-BD51-F1D2DEE0EC71} = {F929DB3D-6A52-475A-BD51-F1D2DEE0EC71}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
