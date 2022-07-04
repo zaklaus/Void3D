@@ -97,9 +97,6 @@ int GameRun(const S_application_data& app_data, const char* cp_cmd_line) {
         *language = 0;
 
         if (cmd_line.run_config) {
-            return !RunGameConfiguration(reg_base, true, language);
-        }
-        if (cmd_line.run_config) {
             E_CONFIG_STATUS st = RunGameConfiguration(reg_base, true, language);
             if (st != CONFIG_OK)
                 return 0;

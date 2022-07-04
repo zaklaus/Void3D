@@ -6,7 +6,7 @@
 /**************************************************************************
 * Copyright (c) Lonely Cat Games  All rights reserved.
 *  File: editctrl.h
-*  Content: HighWare text editor - include file
+*  Content: Void text editor - include file
 **************************************************************************/
 
 #pragma comment (lib,"i_ectrl")

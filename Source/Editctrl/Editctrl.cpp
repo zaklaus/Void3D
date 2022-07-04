@@ -149,7 +149,7 @@ static bool SavePrompt(C_window *wp, HWND hwnd_main){
    if(wp->doc.modified){
                               //prompt for saving changes
       switch(MessageBox(hwnd_main, 
-         C_fstr("Save changes to %s?", (const char*)wp->doc.title), "HighWare editor", MB_YESNOCANCEL)){
+         C_fstr("Save changes to %s?", (const char*)wp->doc.title), "Void editor", MB_YESNOCANCEL)){
       case IDYES:
          if(!wp->Save()) return false;
       case IDNO:

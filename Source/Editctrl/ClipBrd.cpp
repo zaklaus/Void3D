@@ -5,7 +5,7 @@
 
 C_clipboard::C_clipboard(): handle(NULL)
 {
-   cf = RegisterClipboardFormat("Highware_Text");
+   cf = RegisterClipboardFormat("Void_Text");
 }
 
 //-------------------------------------

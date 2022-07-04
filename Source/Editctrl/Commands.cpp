@@ -1468,7 +1468,7 @@ static bool CloseFile(C_window *wp){
    if(wp->doc.modified){
                               //prompt for saving changes
       switch(MessageBox(wp->ec->hwnd, 
-         C_fstr("Save changes to %s?", (const char*)wp->doc.title), "HighWare editor", MB_YESNOCANCEL)){
+         C_fstr("Save changes to %s?", (const char*)wp->doc.title), "Void editor", MB_YESNOCANCEL)){
       case IDYES:
          if(!wp->Save()) return false;
       case IDNO:
@@ -1497,7 +1497,7 @@ bool OpenFile(C_window *wp){
    of.nMaxFile = sizeof(buf)-1;
    of.lpstrInitialDir = NULL;
    of.Flags = OFN_CREATEPROMPT;
-   of.lpstrTitle = "HighWare Editor - Open";
+   of.lpstrTitle = "Void Editor - Open";
    if(!GetOpenFileName(&of)) return false;
    if(!CloseFile(wp)) return false;
 
@@ -1559,7 +1559,7 @@ static bool ReloadFile(C_window *wp){
                               //warning message
    if(MessageBox(wp->hwnd, 
       C_fstr("Are you sure to reload file '%s'?", (const char*)wp->doc.filename),
-      "HighWare Text Editor", MB_YESNO | MB_ICONQUESTION)!=IDYES) return false;
+      "Void Text Editor", MB_YESNO | MB_ICONQUESTION)!=IDYES) return false;
 
    wp->doc.Close();
    wp->doc.Open(wp->doc.filename, &wp->ec->config);
@@ -1593,7 +1593,7 @@ static bool ReadBlock(C_window *wp){
    of.lpstrFileTitle = buf;
    of.nMaxFileTitle = sizeof(buf)-1;
    of.lpstrInitialDir = NULL;
-   of.lpstrTitle = "HighWare Text Editor - Read Block";
+   of.lpstrTitle = "Void Text Editor - Read Block";
    of.Flags = OFN_FILEMUSTEXIST;
    if(!GetOpenFileName(&of)) return false;
                               //open
@@ -1655,7 +1655,7 @@ static bool WriteBlock(C_window *wp){
    of.lpstrFileTitle = buf;
    of.nMaxFileTitle = sizeof(buf)-1;
    of.lpstrInitialDir = NULL;
-   of.lpstrTitle = "HighWare Text Editor - Write Block";
+   of.lpstrTitle = "Void Text Editor - Write Block";
    of.Flags = OFN_OVERWRITEPROMPT | OFN_NOREADONLYRETURN;
    if(!GetSaveFileName(&of)) return false;
                               //open
