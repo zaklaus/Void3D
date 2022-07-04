@@ -192,7 +192,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;Dta_read_d.lib;Zlib_d.lib;Insanity_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\itabler2.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -314,7 +314,7 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>comctl32.lib;Dta_read.lib;Zlib.lib;Insanity.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\itabler2.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -348,6 +348,17 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Main.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base_lib\base_lib.vcxproj">
+      <Project>{c21ddacc-6ee6-4269-a09e-3fded9397119}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Dta_read\dta_read.vcxproj">
+      <Project>{d83cbf70-d43f-476d-9f4b-bf2aa934bedb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Insanity\Insanity.vcxproj">
+      <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

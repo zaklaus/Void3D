@@ -14,11 +14,11 @@
 #define ISNDMETHOD_(type,method) virtual type ISNDAPI method
 #define ISNDMETHOD(method) virtual ISND_RESULT ISNDAPI method
 
-#ifdef _DEBUG
-#pragma comment (lib,"isound2_thunk_d")
-#else
-#pragma comment (lib,"isound2_thunk")
-#endif
+//#ifdef _DEBUG
+//#pragma comment (lib,"isound2_thunk_d")
+//#else
+//#pragma comment (lib,"isound2_thunk")
+//#endif
 
 //----------------------------
 

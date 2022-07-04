@@ -122,7 +122,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib_d.lib;odbc32.lib;odbccp32.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\i_ectrl.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -331,6 +331,14 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base_lib\base_lib.vcxproj">
+      <Project>{c21ddacc-6ee6-4269-a09e-3fded9397119}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Dta_read\dta_read.vcxproj">
+      <Project>{d83cbf70-d43f-476d-9f4b-bf2aa934bedb}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

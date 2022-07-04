@@ -137,6 +137,7 @@
     <Lib>
       <OutputFile>..\..\lib\base_lib_d.lib</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreSpecificDefaultLibraries>Libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

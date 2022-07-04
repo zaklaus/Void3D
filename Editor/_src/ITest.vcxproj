@@ -139,7 +139,7 @@
       <AdditionalIncludeDirectories>..\..\Source\IEditor\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>IGameFramework_d.lib;base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -197,7 +197,7 @@
       <AdditionalIncludeDirectories>..\..\Source\IEditor\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Dta_read_d.lib;Zlib.lib;Physics_d.lib;IGraph_d.lib;Script_d.lib;winmm.lib;DInput.lib;DXErr9.lib;DXGuid.lib;PNG_d.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_lib_d.lib;comctl32.lib;Msimg32.lib;D3DX9.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\bin\player.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../../lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -206,7 +206,7 @@
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <IgnoreSpecificDefaultLibraries>isound_thunk;isound_thunk_d</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>isound_thunk;isound_thunk_d;Libcmtd</IgnoreSpecificDefaultLibraries>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -437,9 +437,14 @@
       <Project>{9138bbb5-83d6-4bdb-840f-7935f442d15c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\Source\Insanity\Insanity.vcxproj">
-      <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
-      <Name>Insanity</Name>
+    <ProjectReference Include="..\..\Source\IGameFramework\IGameFramework.vcxproj">
+      <Project>{f929db3d-6a52-475a-bd51-f1d2dee0ec71}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ISnd2\Thunk\ISound_thunk.vcxproj">
+      <Project>{41249001-f34d-4d64-a3ea-515937bb36a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\ZLib\ZLib.vcxproj">
+      <Project>{0b25da44-f6aa-4dfe-8431-96911b9b6e93}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

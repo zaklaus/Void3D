@@ -393,6 +393,60 @@
     <Text Include="BBox.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Base_lib\base_lib.vcxproj">
+      <Project>{c21ddacc-6ee6-4269-a09e-3fded9397119}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Config\Config_dll.vcxproj">
+      <Project>{a5347006-0153-4ba5-8750-49975a12f765}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Config\Config_static.vcxproj">
+      <Project>{52e9dd7c-acaf-4c38-978d-9036475c314b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\DebugMem\DebugMem.vcxproj">
+      <Project>{6c6e952c-f051-4cdb-869d-b3b7b3a75db7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Dta_read\dta_read.vcxproj">
+      <Project>{d83cbf70-d43f-476d-9f4b-bf2aa934bedb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Editctrl\editctrl.vcxproj">
+      <Project>{aafcf850-bc61-441f-b275-8b8bdd24ae7d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\IExcept\Crash.vcxproj">
+      <Project>{a4f282a0-ae98-4fac-a0e0-97eaab4dad90}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\IGraph2\igraph2.vcxproj">
+      <Project>{e50d4d68-d202-415a-aa63-9c36fa0bb7a0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\IGraph2\PNG\PNG.vcxproj">
+      <Project>{9e803c12-b83a-4086-8c58-0da7f7b97db1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Insanity\Insanity.vcxproj">
+      <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ISnd2\isnd2.vcxproj">
+      <Project>{103b845a-5ec7-4c70-9957-4d97ce49797b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ISnd2\OggVorbis\Lib\Ogg\ogg.vcxproj">
+      <Project>{886a42a5-4d9b-4592-a0e2-c547e4e3014f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ISnd2\OggVorbis\Lib\Vorbis\vorbis.vcxproj">
+      <Project>{7f4d8623-718e-4ada-9b3a-a372371f0b20}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ISnd2\Thunk\ISound_thunk.vcxproj">
+      <Project>{41249001-f34d-4d64-a3ea-515937bb36a5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Physics\IPhysics.vcxproj">
+      <Project>{65450deb-8a11-44ba-8cec-f1a953c0263b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Script\iscript.vcxproj">
+      <Project>{ef7005e4-30fb-4c8d-8165-6e18dd6ee3be}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Tabler2\tabler2.vcxproj">
+      <Project>{3c312668-91a2-435e-8ff3-1c9a4ff85a37}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ZLib\ZLib.vcxproj">
+      <Project>{0b25da44-f6aa-4dfe-8431-96911b9b6e93}</Project>
+    </ProjectReference>
     <ProjectReference Include="qhull2002\src\QH2002.vcxproj">
       <Project>{2037c7b3-75c5-4e0c-a01c-3f078a1afb06}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

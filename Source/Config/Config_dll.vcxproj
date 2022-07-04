@@ -130,7 +130,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib_d.lib;dsound.lib;Dta_read_d.lib;Zlib.lib;Insanity_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dsound.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config_d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -175,7 +175,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib_d.lib;dsound.lib;Dta_read_d.lib;Zlib.lib;Insanity_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_lib_d.lib;dsound.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\Config_d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -320,6 +320,12 @@
     <Text Include="Resources\spanish.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dta_read\dta_read.vcxproj">
+      <Project>{d83cbf70-d43f-476d-9f4b-bf2aa934bedb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Insanity\Insanity.vcxproj">
+      <Project>{42e8fa28-85ee-4ff7-8a11-c0cb0095ef2b}</Project>
+    </ProjectReference>
     <ProjectReference Include="Config_static.vcxproj">
       <Project>{52e9dd7c-acaf-4c38-978d-9036475c314b}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>

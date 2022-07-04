@@ -128,7 +128,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib_d.lib;winmm.lib;dxguid.lib;dta_read_d.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_lib_d.lib;winmm.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\isound2d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -173,7 +173,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>base_lib_d.lib;winmm.lib;dxguid.lib;dta_read_d.lib;Zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base_lib_d.lib;winmm.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\..\Editor\bin\isound2d.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\Lib; ..\..\DirectX\Lib;oggvorbis\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -343,6 +343,9 @@
     <ClInclude Include="Sound_i.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dta_read\dta_read.vcxproj">
+      <Project>{d83cbf70-d43f-476d-9f4b-bf2aa934bedb}</Project>
+    </ProjectReference>
     <ProjectReference Include="OggVorbis\Lib\Ogg\ogg.vcxproj">
       <Project>{886a42a5-4d9b-4592-a0e2-c547e4e3014f}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
