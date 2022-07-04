@@ -21,7 +21,6 @@
 #pragma warning(pop)
 
 #include "c_stack.hpp"
-#include "opcode.h"
 
 using namespace std;
 

@@ -287,71 +287,73 @@ public:
 
       assert(frm && scriptname);
 
-      C_v_machine *vm = CreateVM();
+      return SR_RUN_ERROR;
 
-      S_frame_info *fi = CreateFrameInfo(frm);
-      fi->vm = vm;
-      SetFrameInfo(frm, fi);
+   //   C_v_machine *vm = NULL;
 
-      C_script_manager::E_SCRIPT_RESULT ret = SR_OK;
+   //   S_frame_info *fi = CreateFrameInfo(frm);
+   //   fi->vm = vm;
+   //   SetFrameInfo(frm, fi);
 
-      C_str orig_name = scriptname;
-      orig_name.ToLower();
-                                 //check if we have the script already cached
-      t_script_map::iterator it = script_map.find(orig_name);
-      S_script_source *ss;
-      if(it!=script_map.end()){
-                                 //cached version found, use this
-         ss = &(*it).second;
-      }else{
-         ss = &(*script_map.insert(pair<C_str, S_script_source>(orig_name, S_script_source())).first).second;
-                                 //load script now
-         C_fstr filename("%s\\%s.scr", SCRIPT_DIR, scriptname);
-         if (!OsIsDirExist(filename)){
-            C_fstr missions_filename("Missions\\%s.scr", scriptname);
-            if (OsIsDirExist(missions_filename)){
-               filename = missions_filename;
-            }
-         }
-         PC_script scr = CreateScript();
+   //   C_script_manager::E_SCRIPT_RESULT ret = SR_OK;
 
-         scr->SetName(orig_name);
-         ss->load_result = scr->Compile(filename,
-   #if defined EDITOR && 1
-            ISLCOMP_PRECOMPILE | ISLCOMP_PRECOMPILE_HIDDEN,
-   #else
-            ISLCOMP_FORCE_PRECOMPILED,
-   #endif
-            //0,
-            SCRIPT_CMDLINE,
-            CompileErr);
-         ss->scr = scr;
-         scr->Release();
-      }
-      ++ss->use_count;
-   
-      if(ISL_SUCCESS(ss->load_result)){
-         ISL_RESULT ir = vm->Load(ss->scr, GetLinkSymbols());
-         if(ISL_FAIL(ir)){
-            ret = SR_LINK_ERROR;
-         }
-      }else{
-         //vm->SetScript(ss->scr);
-         vm->Load(ss->scr, NULL);
-         ret = SR_LOAD_ERROR;
-      }
-      vm->Release();
+   //   C_str orig_name = scriptname;
+   //   orig_name.ToLower();
+   //                              //check if we have the script already cached
+   //   t_script_map::iterator it = script_map.find(orig_name);
+   //   S_script_source *ss;
+   //   if(it!=script_map.end()){
+   //                              //cached version found, use this
+   //      ss = &(*it).second;
+   //   }else{
+   //      ss = &(*script_map.insert(pair<C_str, S_script_source>(orig_name, S_script_source())).first).second;
+   //                              //load script now
+   //      C_fstr filename("%s\\%s.scr", SCRIPT_DIR, scriptname);
+   //      if (!OsIsDirExist(filename)){
+   //         C_fstr missions_filename("Missions\\%s.scr", scriptname);
+   //         if (OsIsDirExist(missions_filename)){
+   //            filename = missions_filename;
+   //         }
+   //      }
+   //      PC_script scr = CreateScript();
 
-      //init sprite data
-      fi->img.clear();
-      fi->sprites = CreateSpriteGroup();
+   //      scr->SetName(orig_name);
+   //      ss->load_result = scr->Compile(filename,
+   //#if defined EDITOR && 1
+   //         ISLCOMP_PRECOMPILE | ISLCOMP_PRECOMPILE_HIDDEN,
+   //#else
+   //         ISLCOMP_FORCE_PRECOMPILED,
+   //#endif
+   //         //0,
+   //         SCRIPT_CMDLINE,
+   //         CompileErr);
+   //      ss->scr = scr;
+   //      scr->Release();
+   //   }
+   //   ++ss->use_count;
+   //
+   //   if(ISL_SUCCESS(ss->load_result)){
+   //      ISL_RESULT ir = vm->Load(ss->scr, GetLinkSymbols());
+   //      if(ISL_FAIL(ir)){
+   //         ret = SR_LINK_ERROR;
+   //      }
+   //   }else{
+   //      //vm->SetScript(ss->scr);
+   //      vm->Load(ss->scr, NULL);
+   //      ret = SR_LOAD_ERROR;
+   //   }
+   //   vm->Release();
 
-      if(ret)
-         return ret;
+   //   //init sprite data
+   //   fi->img.clear();
+   //   fi->sprites = CreateSpriteGroup();
 
-      if(!run_main)
-         return SR_OK;
-      return RunFunction(frm, "Main", gm);
+   //   if(ret)
+   //      return ret;
+
+   //   if(!run_main)
+   //      return SR_OK;
+   //   return RunFunction(frm, "Main", gm);
    }
 
 //----------------------------

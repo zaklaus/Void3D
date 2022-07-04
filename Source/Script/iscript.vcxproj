@@ -226,26 +226,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Compile.cpp" />
-    <CustomBuild Include="C_gram.cpp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compiling language rules %(FullPath)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">Compiling language rules %(FullPath)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">mb.bat
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">mb.bat
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">a;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">a;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compiling language rules %(FullPath)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">Compiling language rules %(FullPath)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">mb.bat
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">mb.bat
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">a;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">a;%(Outputs)</Outputs>
-    </CustomBuild>
-    <ClCompile Include="Lex.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">Create</PrecompiledHeader>
@@ -253,30 +233,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="test.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Vmachine.cpp" />
-    <ClCompile Include="Yacc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Include\Iscript.h" />
     <ClInclude Include="all.h" />
     <ClInclude Include="C_stack.hpp" />
     <ClInclude Include="iscrpt_i.h" />
-    <ClInclude Include="Opcode.h" />
-    <ClInclude Include="test.h" />
-    <ClInclude Include="yacc.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Docs\BUGS.TXT" />
-    <Text Include="Docs\Use.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Docs\Language.xls" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

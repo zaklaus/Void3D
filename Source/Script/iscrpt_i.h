@@ -162,29 +162,6 @@ public:
    typedef void (ISLAPI T_report_err)(const char *msg, void *context, int l, int r, bool warn);
 private:
 
-//----------------------------
-// Preprocess commandline options.
-   ISL_RESULT ProcessCommandLine(const char *cmd_line, dword flags,
-      class C_compile_process &compile_process, class C_scope &yyscope,
-      C_vector<byte> &tmp_code, C_vector<byte> &tmp_data, C_vector<S_symbol_info> &tmp_reloc,
-      C_vector<S_symbol_info> &tmp_symbols, C_vector<byte> &table_templ);
-
-//----------------------------
-// Compile single file.
-   ISL_RESULT ProcessFile(const char *fname, dword flags,
-      C_compile_process &compile_process, C_scope &yyscope,
-      C_vector<byte> &tmp_code, C_vector<byte> &tmp_data, C_vector<S_symbol_info> &tmp_reloc,
-      C_vector<S_symbol_info> &tmp_symbols, C_vector<byte> &table_templ, t_debug_info *debug_info);
-
-//----------------------------
-// Handle all process of compilation.
-   ISL_RESULT CompileInternal(const char *fname, dword flags,
-      const char *cmd_line,
-      T_report_err *err_fnc1, void *cb_context);
-
-   void RelocateTableTemplate();
-
-   friend class C_v_machine;
    friend PC_script ISLAPI CreateScript();
 public:
    ISLMETHOD_(dword,AddRef)(){ return ++ref; }
@@ -206,7 +183,6 @@ public:
          return NULL;
       return (C_table_template*)table_templ.begin();
    }
-   ISLMETHOD_(bool,Dump)(void(ISLAPI *func)(const char*, void *context), void *context) const;
 };
 
 //----------------------------

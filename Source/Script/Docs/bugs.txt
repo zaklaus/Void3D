@@ -1,1 +1,0 @@
-- return float values in st(0)
