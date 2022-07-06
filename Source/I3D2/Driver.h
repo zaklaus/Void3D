@@ -150,9 +150,26 @@ enum E_VS_FRAGMENT{
    VSF_LAST
 };
 
+enum E_VS_FIXED_CONSTANT {
+    VSC_CONSTANTS = 0,         //constants: [0.0, 0.5, 1.0, 2.0]
+    VSC_MAT_TRANSFORM_0 = 1,   //transposed transformation matrix (4 slots!)
+    VSC_FOGPARAMS = 5,         //distance fog parameters: [fog_start, fog_end, 1.0/fog_range, 0.0]
+    VSC_AMBIENT = 6,           //ambient light
+    VSC_DEBUG = 7,             //value used for debugging
+    VSC_TEXKILL = 7,           //texkill plane
+    VSC_UV_SHIFT_SCALE = 8,    //uv shifting/scaling value
+    VSC_PARTICLE_MATRIX_BASE = 8, //base matrix for particle rendering
+    VSC_MAT_TRANSFORM_1 = 9,   //second matrix used for geometry blending (4 slots!)
+    VSC_MAT_BLEND_BASE = 9,    //base for matrix palette blending, each matrix consumes 3 slots
+    VSC_MAT_BLEND_END = VSC_MAT_BLEND_BASE + MAX_VS_BLEND_MATRICES * 3 - 1,
+
+    //last value, until this, constants are reserved (NVLink can't use them)
+    VSC_FIXED_LAST
+};
+
                            //VS constant registers
 enum E_VS_CONSTANT{
-   VSC_CAM_LOC_POS,        //camera local position (xyz), plus uv shift scale (w)
+   VSC_CAM_LOC_POS = VSC_FIXED_LAST,        //camera local position (xyz), plus uv shift scale (w)
    VSC_LIGHT_DIR_NORMAL,   //directional light, normal
    VSC_LIGHT_DIR_DIFFUSE,  //directional light, diffuse color
    VSC_LIGHT_POINT_POS_FR, //point light, position + far range
@@ -171,22 +188,7 @@ enum E_VS_CONSTANT{
    //VSC_TEXKILL_PLANE,      //plane for texkill coord generator
    VSC_LAST
 };
-enum E_VS_FIXED_CONSTANT{
-   VSC_CONSTANTS = 0,         //constants: [0.0, 0.5, 1.0, 2.0]
-   VSC_MAT_TRANSFORM_0 = 1,   //transposed transformation matrix (4 slots!)
-   VSC_FOGPARAMS = 5,         //distance fog parameters: [fog_start, fog_end, 1.0/fog_range, 0.0]
-   VSC_AMBIENT = 6,           //ambient light
-   VSC_DEBUG = 7,             //value used for debugging
-   VSC_TEXKILL = 7,           //texkill plane
-   VSC_UV_SHIFT_SCALE = 8,    //uv shifting/scaling value
-   VSC_PARTICLE_MATRIX_BASE = 8, //base matrix for particle rendering
-   VSC_MAT_TRANSFORM_1 = 9,   //second matrix used for geometry blending (4 slots!)
-   VSC_MAT_BLEND_BASE = 9,    //base for matrix palette blending, each matrix consumes 3 slots
-   VSC_MAT_BLEND_END = VSC_MAT_BLEND_BASE + MAX_VS_BLEND_MATRICES*3 - 1,
 
-                           //last value, until this, constants are reserved (NVLink can't use them)
-   VSC_FIXED_LAST          
-};
 
 
 #define MAX_PS_FRAGMENTS 8    //max # of fragments in ps program
@@ -401,6 +403,7 @@ public:
 //----------------------------
 // Check if devide has support for pixel shader.
    inline bool CanUsePixelShader() const{
+       return false;
       return (drv_flags2&DRVF2_USE_PS);
    }
 
@@ -415,14 +418,21 @@ public:
       VSDECL_NORMAL,          //v2
       VSDECL_DIFFUSE,         //v2
       VSDECL_SPECULAR,        //v5
-      VSDECL_TEXCOORD01,      //v1.xyzw   (tex0 + tex1)
-      VSDECL_TEXCOORD23,      //v3.xyzw   (tex0 + tex1)
+      //VSDECL_TEXCOORD01,      //v1.xyzw   (tex0 + tex1)
+      //VSDECL_TEXCOORD23,      //v3.xyzw   (tex0 + tex1)
+      VSDECL_TEXCOORD0, 
+      VSDECL_TEXCOORD1,
+      VSDECL_TEXCOORD2, 
+      VSDECL_TEXCOORD3, 
+
       VSDECL_BLENDWEIGHT,     //v4
       VSDECL_TXSPACE_S,       //v5
       VSDECL_TXSPACE_T,       //v6
       VSDECL_TXSPACE_SxT,     //v7
       VSDECL_LAST,
    };
+
+
    typedef dword t_vsdecl[3];
    t_vsdecl vsdecls[2][VSDECL_LAST];   //[shader version - 1.1 | 3.0]
 
@@ -471,6 +481,8 @@ public:
 
    struct S_vs_shader_entry: public S_shader_entry_base{
       C_smart_ptr<IDirect3DVertexShader9> vs;
+      C_smart_ptr<ID3DXConstantTable> constant_table;
+
       dword last_render_time; //value used for caching
                               //slots for constants:
       dword vscs_cam_loc_pos; //valid only if VSF_GENERATE_ENV_UV is present
@@ -491,7 +503,7 @@ public:
                               //vertex-shader cache
    typedef set<S_vs_shader_entry> vs_set;
    vs_set vs_cache;
-
+   C_smart_ptr<ID3DXConstantTable> last_constant_table;
 //----------------------------
 // Get vertex shader from provided fragment code. The input entry must have initialized
 // 'shd_decl' and 'num_fragments'.
@@ -724,6 +736,20 @@ public:
       assert(index+num <= 96);
       HRESULT hr;
       hr = d3d_dev->SetVertexShaderConstantF(index, (const float*)data, num);
+    /*  
+      if (last_constant_table == NULL)
+          return;
+
+      assert(last_constant_table);
+      if (!last_constant_table) {
+          MessageBoxA(NULL, "yako", "yako", MB_OK);
+      }
+
+      D3DXHANDLE uniform = last_constant_table->GetConstantByName(0, (const char*)C_fstr("c%d", index));
+
+
+      last_constant_table->SetValue(d3d_dev, uniform, data, sizeof(float) * 4);*/
+
       CHECK_D3D_RESULT("SetVertexShaderConstantF", hr);
    }
 

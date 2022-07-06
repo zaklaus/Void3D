@@ -22,8 +22,8 @@
 #include "texture.h"
 #include "Cpu.h"
 #include "anim.h"
-#include <integer.h>
 
+#include <integer.h>
 #include <d3dx9effect.h>
 
 #ifdef _DEBUG
@@ -1336,7 +1336,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          }
       }
    }
-
+    
    ir = InitD3DResources();
    if(I3D_FAIL(ir))
       return ir;
@@ -1551,8 +1551,146 @@ static dword Bin2Text(char *buf, dword len){
 }
 
 //----------------------------
+#include <unordered_map>
+
+C_str findSegmentContent(char* fileBuffer, const char* fragmentName) {
+    const char* needle = (const char*)C_fstr("#beginfragment %s", fragmentName);
+    char* occ = strstr(fileBuffer, needle);
+    if (!occ) return "";
+
+    occ += strlen(needle);
+    char* endBuffPtr = strstr(occ, "#endfragment");
+    if (!endBuffPtr) return "";
+
+    size_t segmentLength = (size_t)(endBuffPtr - occ);
+    char* segmentContent = (char*)malloc(segmentLength + 1);
+    if (!segmentContent) return "";
+
+    memcpy(segmentContent, occ, segmentLength);
+    segmentContent[segmentLength] = '\0';
+
+    C_str returnString = segmentContent;
+    free(segmentContent);
+
+    return returnString;
+}
 
 I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_in &se){
+
+    struct InputDefine {
+        const char* inputName;
+        const char* inputDatatype;
+        const char* vsDeclType;
+    };
+
+    unordered_map<E_VS_DECLARATION, InputDefine> inputDefines;
+    inputDefines[VSDECL_POSITION] = { "INPUT_POSITION",             "float4",   "POSITION", };
+    inputDefines[VSDECL_TEXCOORD0] = { "INPUT_TEXTURE0",             "float2",   "TEXCOORD0"     };
+    inputDefines[VSDECL_TEXCOORD1] = { "INPUT_TEXTURE1",             "float2",   "TEXCOORD1"     };
+    inputDefines[VSDECL_TEXCOORD2] = { "INPUT_TEXTURE2",             "float2",   "TEXCOORD2"     };
+    inputDefines[VSDECL_TEXCOORD3] = { "INPUT_TEXTURE3",             "float2",   "TEXCOORD3"     };
+    inputDefines[VSDECL_NORMAL] = { "INPUT_NORMAL",               "float4",   "NORMAL0"       };
+    inputDefines[VSDECL_DIFFUSE] = { "INPUT_DIFFUSE",              "float4",   "COLOR0"        };
+    //inputDefines[VSDECL_POSITION] = { "INPUT_WEIGHT",               "float4",   "TANGENT"       };
+    //inputDefines[VSDECL_ALPHA] = { "INPUT_ALPHA",                "float",    "PSIZE0"        };
+    inputDefines[VSDECL_BLENDWEIGHT] = { "INPUT_BLENDWEIGHT",          "float",    "BLENDWEIGHT"   };
+    inputDefines[VSDECL_TXSPACE_S] = { "INPUT_TEXTURE_SPACE_S",      "float4",   "NORMAL1"       };
+    inputDefines[VSDECL_TXSPACE_T] = { "INPUT_TEXTURE_SPACE_T",      "float4",   "NORMAL2"       };
+    inputDefines[VSDECL_TXSPACE_SxT] = { "INPUT_TEXTURE_SPACE_SxT",    "float4",   "NORMAL3"       };
+    
+    static const char* vs_fragment_names[VSF_LAST] = {
+         "transform",
+         "mul_transform",
+         "transform_matrix_palette",
+         "transform_matrix_palette_pos_only",
+         "transform_weighted_morph1_os",
+         "transform_weighted_morph1_ws",
+         "transform_weighted_morph2_os",
+         "transform_weighted_morph2_ws",
+         "transform_discharge",
+         "transform_particle",
+         "test",
+         "pick_uv_0",
+         "pick_uv_1",
+         "pick_uv_2",
+         "pick_uv_3",
+         "store_uv_0",
+         "store_uv_1",
+         "store_uv_2",
+         "store_uv_3",
+         "store_uvw_0",
+         "store_uvw_1",
+         "store_uvw_2",
+         "store_uvw_3",
+         "generate_envmap_uv_os",
+         "generate_envmap_uv_ws",
+         "generate_envmap_cube_uv_os",
+         "generate_envmap_cube_uv_ws",
+         "shift_uv",
+         "multiply_uv_by_xy",
+         "multiply_uv_by_z",
+         "transform_uv0",
+         "texture_project",
+         "make_rect_uv",
+         "fog_simple_os",
+         "fog_simple_ws",
+         "fog_begin",
+         "fog_end",
+         "fog_height",
+         "fog_height_ws",
+         "fog_layered_os",
+         "fog_layered_ws",
+         "fog_point_os",
+         "fog_point_ws",
+         "light_begin",
+         "light_end",
+         "light_end_alpha",
+         "specular_begin",
+         "specular_end",
+         "light_directional_os",
+         "light_directional_ws",
+         //NULL,
+         "light_point_os",
+         "light_point_ws",
+         "light_spot_os",
+         "light_spot_ws",
+         //NULL,
+         "light_point_ambient_os",
+         "light_point_ambient_ws",
+         "diffuse_copy",
+         "diffuse_mul_alpha",
+         "copy_alpha",
+         "simple_dir_light",
+         "texkill_project_os",
+         "texkill_project_ws",
+         "bump_os",
+         "bump_ws",
+
+    }, *constant_names[] = {
+         "c_cam_loc_pos",
+         "c_light_dir_normal",
+         "c_light_dir_diffuse",
+         "c_light_point_pos_fr",
+         "c_light_point_diffuse_rrd",
+         "c_light_spot_dir_cos",
+         "c_light_layered_plane",
+         "c_light_layered_color_r",
+         "c_light_layered_pos",
+         "c_light_pfog_conetop_rcca",
+         "c_light_pfog_conedir_mult",
+         "c_light_pfog_color_power",
+         "c_txt_clip",
+         "c_uv_transform",
+         "c_mat_frame",
+         "c_uv_shift",
+         NULL
+    };
+
+    C_str constantDefines;
+    for (dword i = 0; constant_names[i]; i++) {
+        vs_constant_ids[i] = VSC_FIXED_LAST + i;// ->GetConstantID(constant_names[i], &vs_constant_ids[i]);
+        constantDefines += C_fstr("#define %s c%d\n", constant_names[i], vs_constant_ids[i]);
+    };
 
                               //find shader in cache
                               //a little trick here - pass in S_vs_shader_entry_in&
@@ -1562,6 +1700,7 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
    vs_set::iterator it = vs_cache.find(*(const S_vs_shader_entry*)&se);
    if(it != vs_cache.end()){
       ((S_vs_shader_entry*)&(*it))->last_render_time = render_time;
+      last_constant_table = ((S_vs_shader_entry*)&(*it))->constant_table;
       return (I3D_driver::S_vs_shader_entry * )&(*it);
    }
 
@@ -1584,25 +1723,56 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          vs_cache.erase(it_oldest);
    }
 
-   C_vector<dword> shd_code;
-   shd_code.reserve(se.num_fragments + 18);
-   bool use_3_0_version = false;
+   //C_vector<dword> shd_code;
+   //shd_code.reserve(se.num_fragments + 18);
+   //bool use_3_0_version = false;
                               //inser code for "vs_1_1"
-   shd_code.push_back(!use_3_0_version ? 0xfffe0101 : 0xfffe0300);
+   //shd_code.push_back(!use_3_0_version ? 0xfffe0101 : 0xfffe0300);
 
                               //convert internal fragment IDs into NVLinker IDs
                               // also include "dcl_usage" opcodes into compiled shader code
-   dword *nv_fragment_ids = (dword*)alloca((se.num_fragments + 1) * sizeof(dword));
+
+   //dword *nv_fragment_ids = (dword*)alloca((se.num_fragments + 1) * sizeof(dword));
    bool dcl_used[VSDECL_LAST];
    memset(dcl_used, false, sizeof(dcl_used));
 
                               //position is always present
    dcl_used[VSDECL_POSITION] = true;
-   shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][VSDECL_POSITION], vsdecls[use_3_0_version][VSDECL_POSITION+1]);
+   
+   FILE* inputFile = fopen("Bin\\vertexp.hlsl", "rb");
+   assert(inputFile);
+  
+   fseek(inputFile, 0, SEEK_END);
+   size_t fileSize = ftell(inputFile);
+   fseek(inputFile, 0, SEEK_SET);
+   assert(fileSize > 0);
+
+   char* fileContent = (char*)malloc(fileSize + 1);
+   fread(fileContent, 1, fileSize, inputFile);
+   fileContent[fileSize] = '\0';
+   fclose(inputFile);
+   inputFile = NULL;
+
+   C_str vertexUniforms;
+   for (size_t i = 0; i < 97; i++) {
+       vertexUniforms += C_fstr("uniform float4 c%d : register(c%d);\n", i, i);
+   }
+
+   C_str vertexMacros = findSegmentContent(fileContent, "macrodefs");
+   assert(vertexMacros.Size());
+
+   C_str vertexInputDecls;
+   const InputDefine& def0 = inputDefines[VSDECL_POSITION];
+   vertexInputDecls += C_fstr("\t%s %s : %s;\n", def0.inputDatatype, def0.inputName, def0.vsDeclType);
+    
+   //shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][VSDECL_POSITION], vsdecls[use_3_0_version][VSDECL_POSITION+1]);
+   C_str vertexIstructions;
+
 
    for(dword i=0; i<se.num_fragments; i++){
       E_VS_FRAGMENT vsf = se.fragment_code[i];
-      nv_fragment_ids[i] = vs_fragment_ids[vsf];
+      //nv_fragment_ids[i] = vs_fragment_ids[vsf];
+      
       E_VS_DECLARATION vsd = VSDECL_LAST,
          vsd1 = VSDECL_LAST,
          vsd2 = VSDECL_LAST;
@@ -1623,15 +1793,19 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          vsd = VSDECL_NORMAL;
          break;
       case VSF_PICK_UV_0:
-      case VSF_PICK_UV_1:
       case VSF_TEXT_PROJECT:
       case VSF_SHIFT_UV:
       case VSF_TRANSFORM_DISCHARGE:
-         vsd = VSDECL_TEXCOORD01;
+         vsd = VSDECL_TEXCOORD0;
+         break;
+      case VSF_PICK_UV_1:
+         vsd = VSDECL_TEXCOORD1;
          break;
       case VSF_PICK_UV_2:
+        vsd = VSDECL_TEXCOORD2;
+        break;
       case VSF_PICK_UV_3:
-         vsd = VSDECL_TEXCOORD23;
+         vsd = VSDECL_TEXCOORD3;
          break;
       case VSF_M_PALETTE_TRANSFORM:
          vsd1 = VSDECL_NORMAL;
@@ -1662,35 +1836,113 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          break;
       //default: assert(0);
       }
+
       if(vsd != VSDECL_LAST){
          if(!dcl_used[vsd]){
-            dcl_used[vsd] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd], vsdecls[use_3_0_version][vsd+1]);
+            dcl_used[vsd] = true;  
+            const InputDefine& def0 = inputDefines[vsd];
+            vertexInputDecls += C_fstr("\t%s %s : %s;\n", def0.inputDatatype, def0.inputName, def0.vsDeclType);
          }
       }
+
       if(vsd1 != VSDECL_LAST){
          if(!dcl_used[vsd1]){
             dcl_used[vsd1] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd1], vsdecls[use_3_0_version][vsd1+1]);
+            const InputDefine& def1 = inputDefines[vsd1];
+            vertexInputDecls += C_fstr("\t%s %s : %s;\n", def1.inputDatatype, def1.inputName, def1.vsDeclType);
          }
       }
+
       if(vsd2 != VSDECL_LAST){
          if(!dcl_used[vsd2]){
             dcl_used[vsd2] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd2], vsdecls[use_3_0_version][vsd2+1]);
+            const InputDefine& def2 = inputDefines[vsd2];
+            vertexInputDecls += C_fstr("\t%s %s : %s;\n", def2.inputDatatype, def2.inputName, def2.vsDeclType);
          }
       }
-   }
-   nv_fragment_ids[se.num_fragments] = 0; //terminator
 
-   C_smart_ptr<INVLinkBuffer> nv_shader;
+      C_str fragmentContent = findSegmentContent(fileContent, vs_fragment_names[vsf]);
+      assert(fragmentContent.Size());
+
+      vertexIstructions += fragmentContent;
+   }
+
+   free(fileContent);
+   fileContent = NULL;
+    
+   C_str vertexShader = C_fstr(R"(
+struct VS_INPUT
+{
+%s
+};
+    
+struct VS_OUTPUT 
+{
+    float4 oPos     : POSITION0;
+    float4 oD0      : COLOR0;
+    float2 oT0      : TEXCOORD0;
+    float2 oT1      : TEXCOORD1;
+    float2 oT2      : TEXCOORD2;
+/*  float2 oT3      : TEXCOORD3;
+    float2 oT4      : TEXCOORD4;
+    float2 oT5      : TEXCOORD5;
+    float2 oT6      : TEXCOORD6;
+    float2 oT7      : TEXCOORD7;
+*/
+};
+
+%s  
+%s
+%s
+
+float4x4 GetMatrix(float4 row1, float4 row2, float4 row3, float4 row4) {
+    return float4x4(
+        row1.x, row2.x, row3.x, row4.x,
+        row1.y, row2.y, row3.y, row4.y,
+        row1.z, row2.z, row3.z, row4.z,
+        row1.w, row2.w, row3.w, row4.w
+    );
+}
+
+VS_OUTPUT main(VS_INPUT vsIn)
+{
+    /*
+        Forward decl of variables 
+    */
+    float2 r_uv = float2(0, 0);
+    float4 r_src = float4(0, 0, 0, 0);
+    float r_intensity = 0;
+
+    VS_OUTPUT vsOut;
+    vsOut.oD0 = float4(0, 0, 0, 0);
+    vsOut.oT0 = float2(0, 0);
+    vsOut.oT1 = float2(0, 0);
+    vsOut.oT2 = float2(0, 0);
+    
+    %s
+    return vsOut;
+})",
+       (const char*)vertexInputDecls,
+       (const char*)constantDefines,
+       (const char*)vertexUniforms, 
+       (const char*)vertexMacros, 
+       (const char*)vertexIstructions);
+
+   FILE* outfile = fopen("Bin\\vertex.hlsl", "w");
+   assert(outfile);
+   fwrite((const char*)vertexShader, 1, vertexShader.Size(), outfile);
+   fclose(outfile);
+
+   //nv_fragment_ids[se.num_fragments] = 0; //terminator
+
+ /*  C_smart_ptr<INVLinkBuffer> nv_shader;
    hr = nv_linker[0]->CreateBinaryShader(nv_fragment_ids, (INVLinkBuffer**)&nv_shader, 0);
    assert(SUCCEEDED(hr));
    if(FAILED(hr))
-      return NULL;
+      return NULL;*/
 
 #ifdef DEBUG_DUMP_SHADERS
-   if(1){
+   if(/*1*/ false){
       C_smart_ptr<INVLinkBuffer> src;
       nv_linker[0]->GetShaderSource((INVLinkBuffer**)&src);
       char *cp = (char*)src->GetPointer();
@@ -1703,11 +1955,21 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
 #endif
    IDirect3DVertexShader9 *vs;
 
-   const dword *shd_ptr = (dword*)nv_shader->GetPointer();
-   dword shd_size = nv_shader->GetBufferSize();
-   shd_code.insert(shd_code.end(), shd_ptr+1, shd_ptr + shd_size/4);
+   //const dword *shd_ptr = (dword*)nv_shader->GetPointer();
+   //dword shd_size = nv_shader->GetBufferSize();
+   //shd_code.insert(shd_code.end(), shd_ptr+1, shd_ptr + shd_size/4);
+   LPD3DXBUFFER vsBuffer;
+   LPD3DXBUFFER errorBuffer;
+   ID3DXConstantTable* constantTable;
+   
+   hr = D3DXCompileShader((const char*)vertexShader, vertexShader.Size(), NULL, NULL, "main", "vs_3_0", NULL, &vsBuffer, &errorBuffer, &constantTable);
+   if(FAILED(hr)) {
+       MessageBox(NULL, (const char*)errorBuffer->GetBufferPointer(), "kek", MB_OK);
+       CHECK_D3D_RESULT("CreateVertexShader", hr);
+       return NULL;
+   }
 
-   hr = d3d_dev->CreateVertexShader(&shd_code.front(), &vs);
+   hr = d3d_dev->CreateVertexShader((const DWORD*)vsBuffer->GetBufferPointer(), &vs);
    if(FAILED(hr)){
       C_smart_ptr<INVLinkBuffer> src;
       nv_linker[0]->GetShaderSource((INVLinkBuffer**)&src);
@@ -1722,15 +1984,17 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
       return NULL;
    }
 
+    
    pair<vs_set::iterator, bool> pit = vs_cache.insert(se);
    assert(pit.second);
                               //save values
    S_vs_shader_entry &se_out = (S_vs_shader_entry&)(*pit.first);
    se_out.vs = vs;
+   se_out.constant_table = constantTable;
    se_out.last_render_time = render_time;
-
+   last_constant_table = se_out.constant_table;
    vs->Release();
-   {
+   if (true) {
                               //parse fragments, get slots of constants which are used
       dword dir_light_count = 0;
       dword pnt_light_count = 0;
@@ -1744,20 +2008,23 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          switch(vsf){
          case VSF_GENERATE_ENVUV_OS: case VSF_GENERATE_ENVUV_WS:
          case VSF_GENERATE_ENVUV_CUBE_OS: case VSF_GENERATE_ENVUV_CUBE_WS:
-            hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_CAM_LOC_POS], 0, &se_out.vscs_cam_loc_pos);
-            assert(SUCCEEDED(hr) && se_out.vscs_cam_loc_pos<96);
+            //hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_CAM_LOC_POS], 0, &se_out.vscs_cam_loc_pos);
+            se_out.vscs_cam_loc_pos = VSC_CAM_LOC_POS;
+            //assert(SUCCEEDED(hr) && se_out.vscs_cam_loc_pos<96);
             break;
 
          case VSF_LIGHT_DIR_OS:
          case VSF_LIGHT_DIR_WS:
             {
                assert(dir_light_count < MAX_VS_LIGHTS);
-               dword &c0 = se_out.vscs_light_param[constant_count++],
-                  &c1 = se_out.vscs_light_param[constant_count++];
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_DIR_NORMAL], dir_light_count, &c0);
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_DIR_NORMAL;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_DIR_DIFFUSE;
+               /*hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_DIR_NORMAL], dir_light_count, &c0);
                assert(SUCCEEDED(hr) && c0<96);
+               
                hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_DIR_DIFFUSE], dir_light_count, &c1);
-               assert(SUCCEEDED(hr) && c1<96);
+               assert(SUCCEEDED(hr) && c1<96);*/
+
                ++dir_light_count;
             }
             break;
@@ -1770,18 +2037,18 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          case VSF_LIGHT_SPOT_WS:
             {
                assert(pnt_light_count < MAX_VS_LIGHTS);
-               dword &c0 = se_out.vscs_light_param[constant_count++],
-                  &c1 = se_out.vscs_light_param[constant_count++];
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_POINT_POS_FR], pnt_light_count, &c0);
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_POINT_POS_FR;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_POINT_DIFFUSE_RRD;
+             /*  hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_POINT_POS_FR], pnt_light_count, &c0);
                assert(SUCCEEDED(hr) && c0<96);
                hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_POINT_DIFFUSE_RRD], pnt_light_count, &c1);
-               assert(SUCCEEDED(hr) && c1<96);
+               assert(SUCCEEDED(hr) && c1<96);*/
                ++pnt_light_count;
 
                if(vsf==VSF_LIGHT_SPOT_OS || vsf==VSF_LIGHT_SPOT_WS){
-                  dword &c2 = se_out.vscs_light_param[constant_count++];
-                  hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_SPOT_DIR_COS], spt_light_count, &c2);
-                  assert(SUCCEEDED(hr) && c2<96);
+                  se_out.vscs_light_param[constant_count++] = VSC_LIGHT_SPOT_DIR_COS;
+                  //hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_SPOT_DIR_COS], spt_light_count, &c2);
+                  //assert(SUCCEEDED(hr) && c2<96);
                   ++spt_light_count;
                }
             }
@@ -1791,15 +2058,9 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          case VSF_FOG_LAYERED_WS:
             {
                assert(lfog_light_count < MAX_VS_LIGHTS);
-               dword &c0 = se_out.vscs_light_param[constant_count++],
-                  &c1 = se_out.vscs_light_param[constant_count++],
-                  &c2 = se_out.vscs_light_param[constant_count++];
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_LAYERED_PLANE], lfog_light_count, &c0);
-               assert(SUCCEEDED(hr) && c0<96);
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_LAYERED_COL_R], lfog_light_count, &c1);
-               assert(SUCCEEDED(hr) && c1<96);
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_LAYERED_POS], lfog_light_count, &c2);
-               assert(SUCCEEDED(hr) && c2<96);
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_LAYERED_PLANE;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_LAYERED_COL_R;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_LAYERED_POS;
                ++lfog_light_count;
             }
             break;
@@ -1808,34 +2069,25 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          case VSF_FOG_POINT_WS:
             {
                assert(pfog_light_count < MAX_VS_LIGHTS);
-               dword &c0 = se_out.vscs_light_param[constant_count++],
-                  &c1 = se_out.vscs_light_param[constant_count++],
-                  &c2 = se_out.vscs_light_param[constant_count++];
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_PFOG_CONE_TOP], pfog_light_count, &c0);
-               assert(SUCCEEDED(hr) && c0<96);
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_PFOG_CONE_DIR], pfog_light_count, &c1);
-               assert(SUCCEEDED(hr) && c1<96);
-               hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_LIGHT_PFOG_COLOR], pfog_light_count, &c2);
-               assert(SUCCEEDED(hr) && c2<96);
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_PFOG_CONE_TOP;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_PFOG_CONE_DIR;
+               se_out.vscs_light_param[constant_count++] = VSC_LIGHT_PFOG_COLOR;
                ++pfog_light_count;
             }
             break;
 
-         case VSF_TRANSFORM_DISCHARGE:
-            hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_MATRIX_FRAME], 0, &se_out.vscs_mat_frame);
-            assert(SUCCEEDED(hr) && se_out.vscs_mat_frame<96);
-            hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_CAM_LOC_POS], 0, &se_out.vscs_cam_loc_pos);
-            assert(SUCCEEDED(hr) && se_out.vscs_cam_loc_pos<96);
+         case VSF_TRANSFORM_DISCHARGE: {
+             se_out.vscs_mat_frame = VSC_MATRIX_FRAME;
+             se_out.vscs_cam_loc_pos = VSC_CAM_LOC_POS;
+         }
             break;
 
          case VSF_TRANSFORM_UV0:
-            hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_UV_TRANSFORM], 0, &se_out.vscs_uv_transform);
-            assert(SUCCEEDED(hr) && se_out.vscs_uv_transform<96);
+            se_out.vscs_uv_transform = VSC_UV_TRANSFORM;
             break;
 
          case VSF_SHIFT_UV:
-            hr = nv_linker[0]->GetConstantSlot(vs_constant_ids[VSC_UV_SHIFT], 0, &se_out.vscs_uv_shift);
-            assert(SUCCEEDED(hr) && se_out.vscs_uv_shift<96);
+            se_out.vscs_uv_shift = VSC_UV_SHIFT;
             break;
          }
       }
