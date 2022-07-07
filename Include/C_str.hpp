@@ -30,7 +30,7 @@ Revision 17 feb 2003 by Michal : added C_xstr (type-safe formatted string, repla
 #include <stddef.h>
 #include <exception>          //can't use C_except, because it uses C_str
 
-#define CFSTRING_MAX_FMT_BUFFER 1024  //size of formatting buffer, in characters
+#define CFSTRING_MAX_FMT_BUFFER 8192  //size of formatting buffer, in characters
 
 #pragma warning(disable:4996)
 

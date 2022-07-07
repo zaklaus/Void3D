@@ -8,6 +8,8 @@
 #include "common.h"
 #include "i3d/i3d2.h"
 
+#include "I3D/ShaderLinker.h"
+
 //define type for nvlinker compatibility with DX8
 typedef struct IDirect3DDevice9 *LPDIRECT3DDEVICE8;
 
@@ -60,6 +62,7 @@ class C_LM_surface;
 #define MAX_VS_BLEND_MATRICES 17
 
 enum E_VS_FRAGMENT{
+   VSF_INCLUDES,
    VSF_TRANSFORM,          //simple transformation by world-view-proj matrix
    VSF_MUL_TRANSFORM,      //simple multiplication of input pos by C_vector
    VSF_M_PALETTE_TRANSFORM,//transformation using matrix palette blending (up to 2 matrices per verex, 1 weight)
@@ -192,6 +195,7 @@ enum E_VS_FIXED_CONSTANT{
 #define MAX_PS_FRAGMENTS 8    //max # of fragments in ps program
 
 enum E_PS_FRAGMENT{
+   PSF_INCLUDES,
    PSF_TEX_0,                 //texture declarators for n textures
    PSF_TEX_1,
    PSF_TEX_2,
@@ -407,7 +411,7 @@ public:
    inline const D3DCAPS9 *GetCaps() const{ return &d3d_caps; }
 
    HINSTANCE h_nvlinker;      //HINSTANCE of nvlinker
-   INVLink *nv_linker[2];     //[vertex_shading|pixel_shading]
+   C_smart_ptr<C_shader_linker> nv_linker[2];     //[vertex_shading|pixel_shading]
 
                               //vertex shader opcodes for dcl_usage instructions for particular input registers
    enum E_VS_DECLARATION{
@@ -424,7 +428,7 @@ public:
       VSDECL_LAST,
    };
    typedef dword t_vsdecl[3];
-   t_vsdecl vsdecls[2][VSDECL_LAST];   //[shader version - 1.1 | 3.0]
+   C_str vsdecls[2][VSDECL_LAST];   //[shader version - 1.1 | 3.0]
 
    dword vs_fragment_ids[VSF_LAST];
    dword vs_constant_ids[VSC_LAST];

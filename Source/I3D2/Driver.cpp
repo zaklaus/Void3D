@@ -23,6 +23,7 @@
 #include "Cpu.h"
 #include "anim.h"
 #include <integer.h>
+#include "I3D/ShaderLinker.h"
 
 #include <d3dx9effect.h>
 
@@ -67,7 +68,7 @@ static const dword BREAK_ALLOC_VERTEX_ID = 0; //id of vertex in vb
 
 //#define DEBUG_NO_MODULATE2X   //disable support for MODULATE2X
 //#define DEBUG_NO_REAL_CLIP_PLANES   //do not use clip planes, only try to use clip textures
-#define DEBUG_DUMP_SHADERS
+//#define DEBUG_DUMP_SHADERS
 //#define DEBUG_DISABLE_ANISOTROPY //no anisotropic filtering
 
 #endif
@@ -1056,55 +1057,34 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
       goto out;
    }
    {
-      h_nvlinker = LoadLibrary("nvlinker.dll");
-      if(!h_nvlinker){
-         DEBUG_LOG("Cannot load nvlinker.dll");
-         assert(0);
-         ir = I3DERR_GENERIC;
-         goto out;
-      }
-      LPCREATELINKER pCreate = (LPCREATELINKER)GetProcAddress(h_nvlinker, "CreateLinker");
-      if(!pCreate){
-         DEBUG_LOG("CreateLinker failed");
-         assert(0);
-         ir = I3DERR_GENERIC;
-         goto out;
-      }
-      eOPTIMIZERLEVEL nv_create_flags = OPTIMIZERLEVEL_BASIC;
+      E_SHADER_LINKER_FLAGS nv_create_flags = E_SHADER_LINKER_FLAGS::OPTIMIZERLEVEL_BASIC;
 #ifdef DEBUG_NO_NVLINK_OPTIM
-      nv_create_flags = OPTIMIZERLEVEL_NONE;
+      nv_create_flags = E_SHADER_LINKER_FLAGS::OPTIMIZERLEVEL_NONE;
 #endif
-                              //create 2 linkers, for both vertex and pixel shaders
+      //create 2 linkers, for both vertex and pixel shaders
       for(int i=0; i<2; i++){
-         nv_linker[i] = (*pCreate)(0, i==0 ? nv_create_flags : OPTIMIZERLEVEL_NONE);
-         nv_linker[i]->ReserveConstantRange(0, VSC_FIXED_LAST - 1);
+         nv_linker[i] = CreateShaderLinker(nv_create_flags);
+         nv_linker[i]->ReserveConstantRange(VSC_FIXED_LAST+1, 96);
       }
-                              //find and open shader file
+      //find and open shader file
       HRESULT hr;
       bool ok = false;
       {
          {
-            HMODULE hi = GetModuleHandle(NULL);
-            char fn[MAX_PATH];
-            GetModuleFileName(hi, fn, sizeof(fn));
-            for(int i=strlen(fn); i--; ){
-               if(fn[i]=='\\'){
-                  ++i;
-                  break;
-               }
-            }
             for(int j=2; j--; ){
-               strcpy(fn+i, !j ? "vertex.shd" : "pixel.shd");
-               PC_dta_stream dta = DtaCreateStream(fn);
+               C_str filePath = C_fstr("Shaders\\%s", (!j ? "vertex.f" : "pixel.f"));
+               PC_dta_stream dta = DtaCreateStream((const char*)filePath);
                if(!dta)
-                     break;
-                  int sz = dta->GetSize();
-                  char *buf = new char[sz];
-                  dta->Read(buf, sz);
-                  dta->Release();
+                  break;
+               int sz = dta->GetSize();
+               char *buf = new char[sz+1];
+               dta->Read(buf, sz);
+               dta->Release();
 
-                  hr = nv_linker[j]->AddFragments(buf, sz);
-                  delete[] buf;
+               buf[sz] = 0;
+
+               hr = nv_linker[j]->AddFragments(buf, sz);
+               delete[] buf;
                CHECK_D3D_RESULT("AddFragments", hr);
                if(FAILED(hr))
                   break;
@@ -1119,6 +1099,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          goto out;
       }
       static const char *vs_fragment_names[VSF_LAST] = {
+         "includes",
          "transform",
          "mul_transform",
          "transform_matrix_palette",
@@ -1218,6 +1199,7 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
 //#ifdef _DEBUG
 
       static const char *ps_fragment_names[PSF_LAST] = {
+         "includes",
          "tex_0",
          "tex_1",
          "tex_2",
@@ -1314,23 +1296,8 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
          "dcl_normal3 v7",
       };
       for(int sv=0; sv<2; sv++){
-         LPD3DXBUFFER buf_shd;
          for(dword i=0; i<VSDECL_LAST; i++){
-            C_fstr src("%s\n%s\nmov oPos.xyzw,c0.xxxx\n", !sv ? "vs_1_1" : "vs_1_1", decl_srcs[i]);
-            buf_shd = NULL;
-            HRESULT hr = D3DXAssembleShader(src, src.Size(), NULL, NULL,
-               0,//D3DXSHADER_SKIPVALIDATION,
-               &buf_shd, NULL);
-            CHECK_D3D_RESULT("D3DXCompileShader", hr);
-            if(SUCCEEDED(hr)){
-               dword sz;
-               sz = buf_shd->GetBufferSize();
-               assert(sz == (2 + 3 + 3) * 4);
-               const dword *dwp = (dword*)buf_shd->GetBufferPointer();
-               memcpy(&vsdecls[sv][i], dwp+1, sizeof(t_vsdecl));
-            }
-            if(buf_shd)
-               buf_shd->Release();
+            vsdecls[sv][i] = decl_srcs[i];
          }
       }
    }
@@ -1435,7 +1402,6 @@ void I3D_driver::Close(){
             nv_linker[i] = NULL;
          }
       }
-      FreeLibrary(h_nvlinker);
       h_nvlinker = NULL;
    }
 
@@ -1582,21 +1548,20 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
          vs_cache.erase(it_oldest);
    }
 
-   C_vector<dword> shd_code;
-   shd_code.reserve(se.num_fragments + 18);
    bool use_3_0_version = false;
-                              //inser code for "vs_1_1"
-   shd_code.push_back(!use_3_0_version ? 0xfffe0101 : 0xfffe0300);
+   nv_linker[0]->SetVersion(!use_3_0_version ? "vs_1_1" : "vs_3_0");
+   nv_linker[0]->ClearHeaderCode();
+   
 
                               //convert internal fragment IDs into NVLinker IDs
                               // also include "dcl_usage" opcodes into compiled shader code
-   dword *nv_fragment_ids = (dword*)alloca((se.num_fragments + 1) * sizeof(dword));
+   dword *nv_fragment_ids = (dword*)alloca((se.num_fragments + 2) * sizeof(dword));
    bool dcl_used[VSDECL_LAST];
    memset(dcl_used, false, sizeof(dcl_used));
 
                               //position is always present
    dcl_used[VSDECL_POSITION] = true;
-   shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][VSDECL_POSITION], vsdecls[use_3_0_version][VSDECL_POSITION+1]);
+   nv_linker[0]->AddHeaderCode(vsdecls[use_3_0_version][VSDECL_POSITION]);
 
    for(dword i=0; i<se.num_fragments; i++){
       E_VS_FRAGMENT vsf = se.fragment_code[i];
@@ -1663,26 +1628,28 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
       if(vsd != VSDECL_LAST){
          if(!dcl_used[vsd]){
             dcl_used[vsd] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd], vsdecls[use_3_0_version][vsd+1]);
+            nv_linker[0]->AddHeaderCode(vsdecls[use_3_0_version][vsd]);
          }
       }
       if(vsd1 != VSDECL_LAST){
          if(!dcl_used[vsd1]){
             dcl_used[vsd1] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd1], vsdecls[use_3_0_version][vsd1+1]);
+            nv_linker[0]->AddHeaderCode(vsdecls[use_3_0_version][vsd1]);
          }
       }
       if(vsd2 != VSDECL_LAST){
          if(!dcl_used[vsd2]){
             dcl_used[vsd2] = true;
-            shd_code.insert(shd_code.end(), vsdecls[use_3_0_version][vsd2], vsdecls[use_3_0_version][vsd2+1]);
+            nv_linker[0]->AddHeaderCode(vsdecls[use_3_0_version][vsd2]);
          }
       }
    }
    nv_fragment_ids[se.num_fragments] = 0; //terminator
 
-   C_smart_ptr<INVLinkBuffer> nv_shader;
-   hr = nv_linker[0]->CreateBinaryShader(nv_fragment_ids, (INVLinkBuffer**)&nv_shader, 0);
+   nv_linker[0]->AddHeaderCode("\nmov oPos.xyzw, c0.xxxx\n");
+
+   LPD3DXBUFFER nv_shader;
+   hr = nv_linker[0]->CreateBinaryShader(nv_fragment_ids, &nv_shader);
    assert(SUCCEEDED(hr));
    if(FAILED(hr))
       return NULL;
@@ -1701,20 +1668,16 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
 #endif
    IDirect3DVertexShader9 *vs;
 
-   const dword *shd_ptr = (dword*)nv_shader->GetPointer();
-   dword shd_size = nv_shader->GetBufferSize();
-   shd_code.insert(shd_code.end(), shd_ptr+1, shd_ptr + shd_size/4);
-
-   hr = d3d_dev->CreateVertexShader(&shd_code.front(), &vs);
+   hr = d3d_dev->CreateVertexShader((const DWORD*)nv_shader->GetBufferPointer(), &vs);
    if(FAILED(hr)){
-      C_smart_ptr<INVLinkBuffer> src;
+      /*C_smart_ptr<INVLinkBuffer> src;
       nv_linker[0]->GetShaderSource((INVLinkBuffer**)&src);
       char *cp = (char*)src->GetPointer();
       int len = src->GetBufferSize();
       len = Bin2Text(cp, len);
       cp[len] = 0;
       if(init_data.log_func)
-         init_data.log_func(cp);
+         init_data.log_func(cp);*/
 
       CHECK_D3D_RESULT("CreateVertexShader", hr);
       return NULL;
@@ -1896,8 +1859,10 @@ I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se)
    }
    nv_fragment_ids[se.num_fragments] = 0; //terminator
 
-   C_smart_ptr<INVLinkBuffer> nv_shader;
-   hr = nv_linker[1]->CreateBinaryShader(nv_fragment_ids, (INVLinkBuffer**)&nv_shader, 0);
+   nv_linker[1]->SetVersion("ps_1_3");
+
+   LPD3DXBUFFER nv_shader;
+   hr = nv_linker[1]->CreateBinaryShader(nv_fragment_ids, &nv_shader);
    assert(SUCCEEDED(hr));
    if(FAILED(hr))
       return NULL;
@@ -1916,7 +1881,7 @@ I3D_driver::S_ps_shader_entry *I3D_driver::GetPSHandle(S_ps_shader_entry_in &se)
 #endif
    IDirect3DPixelShader9 *ps;
 
-   hr = d3d_dev->CreatePixelShader((const dword*)nv_shader->GetPointer(), &ps);
+   hr = d3d_dev->CreatePixelShader((const dword*)nv_shader->GetBufferPointer(), &ps);
    CHECK_D3D_RESULT("CreatePixelShader", hr);
    if(FAILED(hr))
       return NULL;

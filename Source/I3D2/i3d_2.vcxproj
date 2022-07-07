@@ -235,20 +235,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Editor\Bin\gl_visual.ps.c">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\Editor\Bin\gl_visual.vs.c">
-      <FileType>Document</FileType>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Anim_3d.cpp" />
     <ClCompile Include="Atmospheric.cpp" />
     <ClCompile Include="billbrd.cpp" />
@@ -301,6 +287,7 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sector.cpp" />
+    <ClCompile Include="ShaderLinker.cpp" />
     <ClCompile Include="Sng_mesh.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Stripifier.cpp" />
@@ -315,6 +302,7 @@
     <ClInclude Include="..\..\Include\I3D\I3D2.h" />
     <ClInclude Include="..\..\Include\I3D\I3D_format.h" />
     <ClInclude Include="..\..\Include\I3D\I3D_math.h" />
+    <ClInclude Include="..\..\Include\I3D\ShaderLinker.h" />
     <ClInclude Include="All.h" />
     <ClInclude Include="Anim.h" />
     <ClInclude Include="bsp.h" />
@@ -337,7 +325,6 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Occluder.h" />
     <ClInclude Include="Particle.h" />
-    <ClInclude Include="pixel.h" />
     <ClInclude Include="Procedural.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sector.h" />
@@ -347,47 +334,8 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Vb_mgr.h" />
-    <ClInclude Include="vertex.h" />
     <ClInclude Include="Visual.h" />
     <ClInclude Include="Volume.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="pixel.f">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-    </CustomBuild>
-    <CustomBuild Include="vertex.f">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug (No Editor)|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">Compiling shader %(Filename)%(Extension)</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">nvidia\nvasm\nvasm -b -d -f %(FullPath) ..\..\Editor\bin\%(Filename).shd
-</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release (No editor)|Win32'">..\..\Editor\bin\%(Filename).shd;%(Outputs)</Outputs>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Text Include="BBox.txt" />
@@ -451,6 +399,10 @@
       <Project>{2037c7b3-75c5-4e0c-a01c-3f078a1afb06}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Editor\Shaders\pixel.f" />
+    <None Include="..\..\Editor\Shaders\vertex.f" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
