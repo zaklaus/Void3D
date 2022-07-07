@@ -141,6 +141,16 @@ public:
          code[size] = 0;
          strncpy(code, macroCode, size);
 
+         char* cp = code;
+         while (*cp) {
+            if (*cp == ';') {
+               do {
+                  *cp++ = ' ';
+               } while (*cp && *cp != '\n');
+            }
+            ++cp;
+         }
+
          macros.push_back(S_macro{ macroName, code, args });
          delete[] code;
       }
@@ -332,6 +342,7 @@ public:
       current_constant_id = range_start;
       used_constants.clear();
       tempvars.clear();
+      temp_var_id = 0;
 
       //push used fragments
       for (int i = 0; ids[i]; ++i){
@@ -351,7 +362,6 @@ public:
          frag.code = ExpandAndAllocateConstants(frag.code);
          //MessageBoxA(NULL, (const char*)frag.code, "dump", MB_OK);
       }
-      temp_var_id = 0;
 
       //replace temp variables
       for (auto& frag : final_fragments) {

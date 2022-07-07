@@ -21,12 +21,11 @@
 ps.1.3
 
 ;----------------------------
-#beginfragment tex_1
-tex t1
-#endfragment
-
 #beginfragment tex_0
 tex t0
+#endfragment
+#beginfragment tex_1
+tex t1
 #endfragment
 
 #beginfragment tex_2
