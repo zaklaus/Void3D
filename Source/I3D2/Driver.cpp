@@ -64,7 +64,9 @@ static const dword BREAK_ALLOC_VERTEX_ID = 0; //id of vertex in vb
 
 #define DEBUG_FORCE_DIRECT_TRANSFORM   //direct transfrormations, force inclusion of DRVF2_DIRECT_TRANSFORM
 
-//#define DEBUG_NO_NVLINK_OPTIM //disable shader optimizations of VN Linker
+#ifdef _DEBUG
+#define DEBUG_NO_NVLINK_OPTIM //disable shader optimizations of VN Linker
+#endif
 
 //#define DEBUG_NO_MODULATE2X   //disable support for MODULATE2X
 //#define DEBUG_NO_REAL_CLIP_PLANES   //do not use clip planes, only try to use clip textures
@@ -946,14 +948,17 @@ I3D_RESULT I3D_driver::Init(CPI3DINIT isp){
       goto out;
    }
    {
-      E_SHADER_LINKER_FLAGS nv_create_flags = E_SHADER_LINKER_FLAGS::OPTIMIZERLEVEL_BASIC;
+      E_SHADER_LINKER_FLAGS nv_create_flags = E_SHADER_LINKER_FLAGS::SHADERLINKER_REL;
 #ifdef DEBUG_NO_NVLINK_OPTIM
-      nv_create_flags = E_SHADER_LINKER_FLAGS::OPTIMIZERLEVEL_NONE;
+      nv_create_flags = E_SHADER_LINKER_FLAGS::SHADERLINKER_DEB;
 #endif
       //create 2 linkers, for both vertex and pixel shaders
       for(int i=0; i<2; i++){
          nv_linker[i] = CreateShaderLinker(nv_create_flags);
-         nv_linker[i]->ReserveConstantRange(VSC_FIXED_LAST+1, 96);
+
+         if (i == 0) {
+            nv_linker[i]->ReserveConstantRange(VSC_FIXED_LAST + 1, 256 /* D3DCAPS9.MaxVertexShaderConst */);
+         }
       }
       //find and open shader file
       HRESULT hr;
@@ -1437,7 +1442,7 @@ I3D_driver::S_vs_shader_entry *I3D_driver::GetVSHandle(const S_vs_shader_entry_i
    }
 
    bool use_3_0_version = false;
-   nv_linker[0]->SetVersion(!use_3_0_version ? "vs_1_1" : "vs_3_0");
+   nv_linker[0]->SetVersion(!use_3_0_version ? "vs_2_x" : "vs_3_0");
    nv_linker[0]->ClearHeaderCode();
    
 

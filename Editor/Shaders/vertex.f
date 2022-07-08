@@ -72,7 +72,7 @@
 ;----------------------------
 #endfragment
 
-vs.1.1
+vs.2.x
 
 ;--------------------------------------------------------
 ; Transformations.
@@ -187,14 +187,14 @@ mad %OUT_NORMAL.xyz, %IN_NORMAL.xyz, r_coef.x, %OUT_NORMAL.xyz
 #beginfragment transform_matrix_palette
 
 ; transform pos and normal by matrix 0
-mov a0.x, INPUT_BLENDWEIGHT.x
+mova a0.x, INPUT_BLENDWEIGHT.x
 m4x3 r_v0.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 m3x3 r_n0.xyz, INPUT_NORMAL, c[a0.x + CV_MAT_PALETTE_BASE]
 
 ;multiply_pos_normal_by_quaternion INPUT_POSITION INPUT_NORMAL r_v0 r_n0 c[a0.x+CV_MAT_PALETTE_BASE] c[a0.x+CV_MAT_PALETTE_BASE+1]
 
 ; transform pos and normal by matrix 1
-mov a0.x, INPUT_BLENDWEIGHT.y
+mova a0.x, INPUT_BLENDWEIGHT.y
 m4x3 r_v1.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 m3x3 r_n1.xyz, INPUT_NORMAL, c[a0.x + CV_MAT_PALETTE_BASE]
 
@@ -221,10 +221,10 @@ normalize_vector r_world_normal
 #beginfragment transform_matrix_palette_pos_only
 
 ; transform by matrix 0
-mov a0.x, INPUT_BLENDWEIGHT.x
+mova a0.x, INPUT_BLENDWEIGHT.x
 m4x3 r_v0.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 ; transform by matrix 1
-mov a0.x, INPUT_BLENDWEIGHT.y
+mova a0.x, INPUT_BLENDWEIGHT.y
 m4x3 r_v1.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 ; linear blend by weight
 mul r_world_pos.xyz, r_v0.xyz, INPUT_BLENDWEIGHT.z
@@ -242,17 +242,17 @@ m4x4 oPos, r_world_pos, CV_MAT_TRANSFORM
 #beginfragment transform_matrix_index_blend
 
 ; transform by matrix 0
-;mov a0.x, INPUT_BLENDWEIGHT.x
+;mova a0.x, INPUT_BLENDWEIGHT.x
 ;m4x3 r_v0.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 ;m3x3 r_n0.xyz, INPUT_NORMAL,   c[a0.x + CV_MAT_PALETTE_BASE]
 
 ; transform by matrix 1
-;mov a0.x, INPUT_BLENDWEIGHT.y
+;mova a0.x, INPUT_BLENDWEIGHT.y
 ;m4x3 r_v1.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 ;m3x3 r_n1.xyz, INPUT_NORMAL,   c[a0.x + CV_MAT_PALETTE_BASE]
 
 ; transform by matrix 2
-;mov a0.x, INPUT_BLENDWEIGHT.z
+;mova a0.x, INPUT_BLENDWEIGHT.z
 ;m4x3 r_v2.xyz, INPUT_POSITION, c[a0.x + CV_MAT_PALETTE_BASE]
 ;m3x3 r_n2.xyz, INPUT_NORMAL,   c[a0.x + CV_MAT_PALETTE_BASE]
 
@@ -314,7 +314,7 @@ m4x4 oPos, r_world_pos, CV_MAT_TRANSFORM
 ; Transform using weighted morphing and index into morphing matrix.
 #beginfragment transform_weighted_morph2_os
 
-mov a0.x, INPUT_BLENDWEIGHT.y
+mova a0.x, INPUT_BLENDWEIGHT.y
 mov r_src, INPUT_POSITION
 mad r_src.xyz, INPUT_BLENDWEIGHT.x, c[a0.x + CV_MORPH_REGIONS_BASE].xyz, r_src
 m4x4 oPos, r_src, CV_MAT_TRANSFORM
@@ -325,7 +325,7 @@ m4x4 oPos, r_src, CV_MAT_TRANSFORM
 
 #beginfragment transform_weighted_morph2_ws
 
-mov a0.x, INPUT_BLENDWEIGHT.y
+mova a0.x, INPUT_BLENDWEIGHT.y
 mov r_src, INPUT_POSITION
 mad r_src.xyz, INPUT_BLENDWEIGHT.x, c[a0.x + CV_MORPH_REGIONS_BASE].xyz, r_src
 
@@ -345,7 +345,7 @@ m4x4 oPos, r_world_pos, CV_MAT_TRANSFORM
 ; Transform discharge - align vertices to look at the camera
 #beginfragment transform_discharge
 
-mov a0.x, INPUT_POSITION.y
+mova a0.x, INPUT_POSITION.y
 
 mov r_p.xyz, c[CV_MAT_PALETTE_BASE+0+a0.x].xyz
 mov r_dir, c[CV_MAT_PALETTE_BASE+1+a0.x].xyz
@@ -361,10 +361,7 @@ mul r_add.xyz, r_right, INPUT_POSITION.x
 add r_loc_pos.xyz, r_p.xyz, r_add.xyz
 mov r_loc_pos.w, CV_ONE
 
-                              //compute world position (note: do not use m4x3, nvlink allocates same src and dest regs, which causes bugs
-dp4 r_world_pos.x, r_loc_pos, c_mat_frame++
-dp4 r_world_pos.y, r_loc_pos, c_mat_frame++
-dp4 r_world_pos.z, r_loc_pos, c_mat_frame
+m4x3 r_world_pos.xyz, r_loc_pos, c_mat_frame
 mov r_world_pos.w, CV_ONE
 
 m4x4 oPos, r_world_pos, CV_MAT_TRANSFORM
@@ -385,15 +382,12 @@ mov oD0, r_diffuse
 #beginfragment transform_particle
 
                               //transform using index
-;mov a0.x, v1.z
-mov a0.x, INPUT_POSITION.z
+;mova a0.x, v1.z
+mova a0.x, INPUT_POSITION.z
 mov r_pos.xy, INPUT_POSITION.xy
 mov r_pos.z, CV_ZERO
 mov r_pos.w, CV_ONE
-;m4x3 r_world_pos.xyz, r0, c[CV_PARTICLE_MATRIX_BASE + a0.x]
-dp4 r_world_pos.x, r_pos, c[CV_PARTICLE_MATRIX_BASE + 0 + a0.x]
-dp4 r_world_pos.y, r_pos, c[CV_PARTICLE_MATRIX_BASE + 1 + a0.x]
-dp4 r_world_pos.z, r_pos, c[CV_PARTICLE_MATRIX_BASE + 2 + a0.x]
+m4x3 r_world_pos.xyz, r0, c[CV_PARTICLE_MATRIX_BASE + a0.x]
 mov r_world_pos.w, CV_ONE
 m4x4 oPos, r_world_pos, CV_MAT_TRANSFORM
                               //copy diffuse
@@ -407,10 +401,10 @@ mov oD0, c[CV_PARTICLE_MATRIX_BASE+3+a0.x]
 #beginfragment test_fire
 
                               //get rectangle index (0 ... 3)
-mov a0.x, INPUT_BLENDWEIGHT.x
+mova a0.x, INPUT_BLENDWEIGHT.x
 mov r_uv_off, c[CV_PARTICLE_MATRIX_BASE+a0.x]
                               //compute world position
-mov a0.x, INPUT_BLENDWEIGHT.y
+mova a0.x, INPUT_BLENDWEIGHT.y
 mul r_world_pos, c[CV_PARTICLE_MATRIX_BASE+4+a0.x], r_uv_off.z
 mad r_world_pos.xyz, c[CV_PARTICLE_MATRIX_BASE+5+a0.x], r_uv_off.w, r_world_pos
 mul r_scale.x, v1.x, CV_SHORT2FLOAT

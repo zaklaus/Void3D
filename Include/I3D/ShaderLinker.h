@@ -3,8 +3,8 @@
 #include "C_unknwn.hpp"
 
 enum class E_SHADER_LINKER_FLAGS{
-   OPTIMIZERLEVEL_NONE,
-   OPTIMIZERLEVEL_BASIC
+   SHADERLINKER_REL,
+   SHADERLINKER_DEB,
 };
 
 class C_shader_linker: public C_unknown{

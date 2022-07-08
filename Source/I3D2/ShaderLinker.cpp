@@ -374,14 +374,14 @@ public:
       
       int j = 0;
       for (auto& frag : final_fragments) {
-         shd_code += C_fstr("// Fragment: %s (%d)\n", (const char*)frag.name, j++);
+         shd_code += C_fstr("// Fragment: %s (%d)\n", (const char*)frag.name, ids[j]++);
          shd_code += frag.code;
       }
       
       //MessageBoxA(NULL, (const char*)shd_code, "dump", MB_OK);
 
       LPD3DXBUFFER errorBuf;
-      hr = D3DXAssembleShader(shd_code, shd_code.Size(), NULL, NULL, 0, buf, &errorBuf);
+      hr = D3DXAssembleShader(shd_code, shd_code.Size(), NULL, NULL, flags == E_SHADER_LINKER_FLAGS::SHADERLINKER_DEB ? D3DXSHADER_DEBUG : 0, buf, &errorBuf);
       if (FAILED(hr)){
          char* cp = (char*)errorBuf->GetBufferPointer();
          int len = errorBuf->GetBufferSize();
