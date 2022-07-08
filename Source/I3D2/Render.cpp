@@ -893,6 +893,9 @@ static void GetBestShadowMatrix(const S_vector &normal, const S_vector *projecte
 
 void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
     PROFILE(drv, PROF_DECALS);
+    auto d3d_dev = drv->GetDevice1();
+
+    HRESULT hr;
 
     for (int dci = pc.decal_casters.size(); dci--;) {
         PI3D_visual vis_dc = pc.decal_casters[dci];
@@ -1042,10 +1045,15 @@ void I3D_scene::RenderDecals(const S_preprocess_context& pc) {
             vc.radius = Max(vc.radius, contour_points[i].DistanceToLine(vc.pos, vc.dir));
 
         drv->SetFogColor(0);
-        auto d3d_dev = drv->GetDevice1();
-        HRESULT hr;
         auto mat = vis_dc->GetMaterial();
         drv->SetTexture1(0, mat->GetTexture1(MTI_DIFFUSE));
+        drv->SetRenderMat(mat, 0, (float)1.0f * R_255);
+
+        I3D_driver::S_ps_shader_entry_in ps;
+        ps.Tex(0);
+        ps.TexKill(1);
+        ps.AddFragment(PSF_MODX2_t0_v0);
+        d3d_dev->SetPixelShader(drv->GetPSHandle(ps)->ps);
 
         drv->SetupBlend(mat->IsAddMode() ? I3DBLEND_ADD : I3DBLEND_ALPHABLEND);
         drv->DisableTextureStage(1);
@@ -1414,7 +1422,7 @@ void I3D_scene::RenderShadows(const S_preprocess_context &pc){
       pc_shd.shadow_opacity = opacity;
       drv->SetupAlphaTest(false);
 
-      if(drv->CanUsePixelShader() && 1){
+      if(drv->CanUsePixelShader()){
          int shd_tp_index = 0;
 
          drv->SetupBlend(I3DBLEND_OPAQUE);
