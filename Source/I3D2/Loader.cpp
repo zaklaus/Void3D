@@ -34,6 +34,7 @@ I3D_RESULT I3D_animation_set::Open(const char* fname, dword flags, PI3D_LOAD_CB_
 
    C_chunk ck;
    C_smart_ptr<C_loader> loader(CreateLoaderI3D(drv, ck));
+   loader->Release();
    I3D_RESULT ir = I3DERR_FILECORRUPTED;
    try {
       if (!ck.ROpen(fname))
