@@ -1398,7 +1398,6 @@ void I3D_driver::Close(){
    if(h_nvlinker){
       for(i=0; i<2; i++){
          if(nv_linker[i]){
-            nv_linker[i]->Release();
             nv_linker[i] = NULL;
          }
       }
