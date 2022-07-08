@@ -8,7 +8,6 @@ enum class E_SHADER_LINKER_FLAGS{
 };
 
 class C_shader_linker: public C_unknown{
-   dword ref;
 public:
    virtual void ReserveConstantRange(dword start, dword end) = 0;
    virtual void ClearConstantRange() = 0;
@@ -23,9 +22,6 @@ public:
    virtual void AddHeaderCode(C_str code) = 0;
    virtual void ClearHeaderCode() = 0;
    virtual void SetVersion(C_str ver) = 0;
-
-   dword AddRef() { return ++ref; }
-   dword Release() { if (--ref) return ref; delete this; return 0; }
 };
 
 C_shader_linker *CreateShaderLinker(E_SHADER_LINKER_FLAGS flags);
