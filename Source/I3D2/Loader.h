@@ -157,6 +157,8 @@ public:
       driver(d),
       ck(ck_in),
       load_flags(0),
+      file_length(0),
+      file_time_(0),
       tab(0),
       scene(NULL),
       root_frame(NULL),
