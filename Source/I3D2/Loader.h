@@ -82,8 +82,9 @@ struct S_mat_info{
 
 //----------------------------
 
-class C_loader{
+class C_loader: public C_unknown{
                               //id-based array of frames
+protected:
    C_vector<PI3D_frame> frame_id_list;
 
 public:
@@ -107,7 +108,6 @@ public:
    C_str user_comments;       //read from the loaded file
 
    int tab;                   //tab for log
-   bool mafia;
    typedef map<PI3D_frame, C_str> t_frm_properties;
    t_frm_properties frm_properties;
 
@@ -162,15 +162,8 @@ public:
       root_frame(NULL),
       container(NULL),
       anim_set(NULL),
-      load_cb_proc(NULL), load_cb_context(NULL),
-      anim_length(0),
-      num_mats(0),
-	  mafia(false)
+      load_cb_proc(NULL), load_cb_context(NULL)
    {}
-
-//----------------------------
-// If this function returns true, it is treated as a request to interrupt loading.
-   I3D_RESULT ShowProgress();
 
    void REPORT_ERR(const char *cp) const{
       if((load_flags&I3DLOAD_ERRORS) && load_cb_proc){
@@ -212,180 +205,17 @@ public:
          num_parts(-1)
       {}
    };
-private:
-   struct S_vertex{
-      S_vector xyz;
-      S_vector normal;
-      I3D_text_coor tex;
-   };
-   struct S_vertex_st: public S_vertex{
-      S_texture_space ts;
-   };
-
-   struct S_normals_vertex_info{
-                              //keep list of faces where this vertex is used
-      struct S_face{
-         word index;          //index of face
-         float angle;         //angle of face corner in this vertex
-         S_face(){}
-         S_face(word i, float a): index(i), angle(a){}
-      };
-      C_vector<S_face> faces;
-      S_normals_vertex_info(){
-         faces.reserve(4);
-      }
-   };
-
-   dword anim_length;         //length of loaded animation
-
-                              //err reporting - visually displaying geometry
-   struct S_triangle{
-      S_vector v[3];
-   };
-   typedef map<C_smart_ptr<I3D_frame>, C_vector<S_triangle> > t_visual_err_report;
-   t_visual_err_report visual_err_report;
-
-//----------------------------
-// Read single material from chunk.
-   I3D_RESULT ReadMaterial();
-
-// Read all materials from 4ds file
-   I3D_RESULT ReadMaterials_4DS();
-
-   bool ReadTrackPos(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
-   bool ReadTrackRot(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
-   bool ReadTrackScl(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp, S_vector &nu_scale);
-   bool ReadTrackVis(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
-   bool ReadTrackNote(PI3D_frame frm, const char *frm_name, PI3D_keyframe_anim *animp);
-
-   dword num_mats;            //helper for displaying progress
-   C_vector<C_smart_ptr<I3D_material> > materials;
-
-   enum{
-      MAT_SRC_TRUECOLOR = 1,
-      MAT_SRC_NOMIPMAP = 2,
-      MAT_SRC_PROCEDURAL = 4,
-      MAT_SRC_NOCOMPRESS = 8,
-      MAT_SRC_ANIMATED = 0x10,
-   };
-   struct S_mat_src: public C_str{
-      dword flags;            //combination of MAT_SRC_??? flags
-      S_vector2 uv_offset;
-      S_vector2 uv_scale;
-      float power;
-      dword anim_speed;
-
-      S_mat_src():
-         flags(0),
-         power(1.0f),
-         anim_speed(0),
-         uv_offset(0, 0),
-         uv_scale(1, 1)
-      {
-      }
-   };
-
-                              //blend map info, kept during loading
-   typedef map<C_str, S_mat_src> t_blend_maps;
-   t_blend_maps blend_maps;
-
-//----------------------------
-   I3D_RESULT CreateTexture(dword ct_flags, const S_mat_src &mat_src, const char *mat_name,
-      PI3D_material mat, I3D_MATERIAL_TEXTURE_INDEX, const C_str *opt_name = NULL);
-
-//----------------------------
-   /*
-   class I3D_animated_texture *CreateAnimatedTexture(const char *fname0, const char *fname1,
-      const S_load_context &lc, PI3D_texture tp_last,
-      dword ct_flags, int anim_speed);
-      */
-
-//----------------------------
-   I3D_RESULT SetupMaterial(PI3D_material, dword ct_flags, dword txt_flags,
-      const S_mat_src &diff, const S_mat_src &opt, const S_mat_src &env, const C_str &proc, const S_mat_src &embm,
-      const S_mat_src &detail, const S_mat_src &normalmap, const S_mat_src &bump_level, const S_mat_src &specular,
-      const S_mat_src &secondmap, const char *mat_name);
-
-   void CleanMesh(PI3D_frame frm, C_vector<S_vector> &verts, C_vector<I3D_triface> &faces,
-      C_vector<I3D_triface> uv_faces[], C_vector<byte> &smooth_groups,
-      C_vector<I3D_face_group> &face_groups, const char *name, bool &allow_cache);
-   I3D_RESULT ReadMesh(PI3D_frame frm, class I3D_mesh_base*, const char *name, bool &allow_cache);
-
-//----------------------------
-// Assigns uv coordinates to vertices (from uv-map faces), duplicates vertices as necessary.
-   bool AssignUVCoordinates(C_vector<word> &vertex_map, C_vector<S_vertex> &verts, C_vector<I3D_triface> &faces,
-      const C_vector<I3D_text_coor> uv_verts[], const C_vector<I3D_triface> uv_faces[], const char *err_name) const;
-
-//----------------------------
-   bool GenerateTextureSpace(const C_vector<S_vertex> &verts, const C_vector<I3D_triface> &faces,
-      C_buffer<S_texture_space> &texture_space,
-      const char *err_name, bool &allow_cache) const;
-
-//----------------------------
-// Put all UV coors into near zero range, graphics hardware don't like too big float numbers
-// in texture coordinates.
-   bool UV_Check(C_vector<I3D_text_coor> &uv_verts, const char *err_name);
-
-//----------------------------
-// Generate normals on set of vertices, using info from smooth groups.
-// May add new vertices.
-   void MakeVertexNormals(int num_orig_verts, C_vector<word> &vertex_map,
-      C_vector<S_vertex> &verts, C_vector<I3D_triface> &faces, const C_vector<byte> &smooth_groups) const;
-
-   struct S_buildsectors{
-      C_loader *ld;
-      PI3D_scene scene;
-      PI3D_model model;      //if !NULL, it's considered to be owner of frames
-   };
-   I3DENUMRET BuildSectors(PI3D_frame frm, PI3D_scene scene, PI3D_model model);
-   void AddSectorWalls(PI3D_frame root, C_vector<C_smart_ptr<I3D_frame> > &walls,
-      C_vector<C_smart_ptr<I3D_visual> > &portal_defs, bool root_help, PI3D_sector sct);
-
-   static I3DENUMRET I3DAPI cbBuildSectors(PI3D_frame frm, dword c){
-      S_buildsectors *bs = (S_buildsectors*)c;
-      return bs->ld->BuildSectors(frm, bs->scene, bs->model);
-   }
-
-   struct S_smooth_info{
-      C_smart_ptr<I3D_frame> vis;
-      bool need_this;         //true if this visual needs to be shaded, false if read from cache
-      S_smooth_info():
-         need_this(true)
-      {}
-   };
-//----------------------------
-// Smooth normals of imported selected objects. 
-   void SmoothSceneNormals(PI3D_scene scene, C_vector<S_smooth_info> &smooth_list);
-public:
-
-   struct S_SM_data{
-      S_auto_lod_data al;
-      bool mesh_ok;
-      bool allow_cache;
-
-      S_SM_data():
-         mesh_ok(false),
-         allow_cache(false)
-      {}
-   };
-
-//----------------------------
 
 public:
-   I3D_RESULT Open(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
-      void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container);
+   virtual I3D_RESULT Open(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
+      void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container) = 0;
+  
+   //virtual void Close() = 0;
    
-
-   I3D_RESULT Open4DS(const char* fname, dword flags, PI3D_LOAD_CB_PROC cb_proc,
-      void *cb_context, PI3D_frame root, PI3D_scene scene, PI3D_animation_set, PI3D_container);
-
-   I3D_RESULT ReadBillboard_4DS(PI3D_visual vis);
-   I3D_RESULT ReadVisual_4DS(PI3D_visual vis);
-   I3D_RESULT ReadSector_4DS(PI3D_sector sec);
-   I3D_RESULT ReadDummy_4DS(PI3D_dummy dummy);
-
-   void Close();
+   virtual I3DENUMRET BuildSectors(PI3D_frame frm, PI3D_scene scene, PI3D_model model) = 0;
 };
+
+C_loader* CreateLoaderI3D(PI3D_driver d, C_chunk& ck);
 
 //----------------------------
 #endif
