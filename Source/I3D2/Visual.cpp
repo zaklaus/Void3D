@@ -1252,7 +1252,6 @@ void I3D_visual::SetupSpecialMappingPS(CPI3D_material mat, I3D_driver::S_ps_shad
         se_ps.PopFragment();
         if (stage == 2) {
             se_ps.PopFragment();
-            se_ps.PopFragment();
         }
         stage = 0;
         se_ps.Tex(stage);

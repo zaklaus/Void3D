@@ -624,34 +624,6 @@ mul r_uv.xy, r_uv.xy, CV_UV_SHIFT_SCALE.z
 #endfragment
 
 ;----------------------------
-; <backup>
-;#beginfragment texture_project
-
-; transform UV set 0 - used for projected texture
-;dp4 oT0.x, INPUT_POSITION, c[CV_MAT_TEXTURE+0]
-;dp4 oT0.y, INPUT_POSITION, c[CV_MAT_TEXTURE+1]
-
-; don't project on vertices pointing away of source
-; (commented out, this test already done in RenderSolidMesh)
-;dp3 r_tmp.x, -INPUT_NORMAL, c[CV_MAT_TEXTURE+3]
-;sge r_tmp.y, r_tmp.x, CV_ZERO
-
-; transform 1D set 1 - used for shadow intensity and clamping
-;mov oT1.y, CV_ZERO
-; compute distance from shadow source
-;dp4 r_tmp.z, INPUT_POSITION, c[CV_MAT_TEXTURE+2]
-;add r_tmp.z, CV_ONE, -r_tmp.z
-;add oT1.x, CV_ONE, -r_tmp.z
-
-; combine intensity (r_tmp.x) with bool status (r_tmp.y)
-;mul r_tmp.z, r_tmp.x, r_tmp.z
-; (commented out, this test already done in RenderSolidMesh)
-;mul oT1.x, r_tmp.y, r_tmp.z
-
-;#endfragment
-
-
-;----------------------------
 ; Shadow projection - texture UV0 computation.
 #beginfragment texture_project
 
